@@ -1,0 +1,26 @@
+# Basic browser safety headers.
+
+<IfModule mod_headers.c>
+
+    # Still needed while a few older pages use inline styles.
+    Header set Content-Security-Policy "\
+default-src 'self'; \
+script-src 'self' 'unsafe-inline'; \
+style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; \
+font-src 'self' https://fonts.gstatic.com; \
+img-src 'self' data:; \
+connect-src 'self'; \
+frame-src 'none'; \
+object-src 'none'; \
+base-uri 'self'; \
+form-action 'self'; \
+frame-ancestors 'none'; \
+upgrade-insecure-requests"
+
+    Header set X-Frame-Options "DENY"
+    Header set X-Content-Type-Options "nosniff"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+    Header set Strict-Transport-Security "max-age=15768000; includeSubDomains" env=HTTPS
+
+</IfModule>

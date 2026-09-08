@@ -1,0 +1,13 @@
+{
+    "require": {
+        "phpmailer/phpmailer": "^7.0"
+    },
+    "config": {
+        "platform-check": false
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\Src\\": "app/src/"
+        }
+    }
+}

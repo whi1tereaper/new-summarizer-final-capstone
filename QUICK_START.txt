@@ -1,0 +1,30 @@
+AI SUMMARIZER - QUICK START
+=============================
+
+TRANSFER & SETUP IN 5 STEPS:
+
+1. COPY FILES
+   Transfer the entire "ai-summarizer-123 - quality upg" folder to your device.
+
+2. INSTALL PYTHON PACKAGES
+   cd ai-summarizer-123 - quality upg/python-engine
+   pip install -r requirements-local.txt
+
+3. SETUP DATABASE
+   cd ..
+   php tools/import_schema.php
+
+4. VERIFY SETUP
+   php tools/check_native_environment.php
+
+5. START APPLICATION
+   php -S localhost:8000 -t app/public
+
+ACCESS: http://localhost:8000
+
+REQUIREMENTS:
+- PHP 8.1+ with MySQL extensions
+- Python 3.8+ with pip
+- MySQL/MariaDB running
+
+That's it! The system is portable and runs without external dependencies.

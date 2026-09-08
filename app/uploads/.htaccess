@@ -1,0 +1,7 @@
+# uploads should never execute as code
+php_flag engine off
+Options -ExecCGI -Indexes
+AddHandler cgi-script .php .pl .py .jsp .asp .sh .cgi .phtml .php5 .php7 .php8
+
+# uploaded source documents stay private
+Deny from all

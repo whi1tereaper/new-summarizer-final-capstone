@@ -1,0 +1,152 @@
+AI SUMMARIZER - SETUP GUIDE
+============================
+
+OVERVIEW
+--------
+The AI Summarizer is a web-based application that uses PHP, Python, and MySQL to provide
+article summarization, translation, and text-to-speech capabilities. The system is designed
+to be portable and will work on any device with the required runtimes installed.
+
+SYSTEM REQUIREMENTS
+-------------------
+
+MINIMUM HARDWARE:
+- 2GB RAM (4GB recommended)
+- 1GB free disk space
+- x64 processor
+
+REQUIRED SOFTWARE:
+- PHP 8.1 or higher
+- Python 3.8 or higher
+- MySQL/MariaDB 5.7 or higher
+- Composer (PHP dependency manager)
+
+REQUIRED PHP EXTENSIONS:
+- curl
+- dom
+- fileinfo
+- json
+- mbstring
+- openssl
+- pdo
+- pdo_mysql
+- proc_open (for Python integration)
+
+PYTHON DEPENDENCIES (auto-installed):
+- nltk==3.8.1
+- sumy==0.11.0
+- pypdf==4.2.0
+- python-docx>=1.1.2
+- numpy>=1.26.4
+- scipy>=1.11.4
+- scikit-learn>=1.4.2
+- piper-tts==1.4.2
+- deep-translator>=1.11.4
+- requests>=2.31.0
+- beautifulsoup4>=4.12.0
+
+INSTALLATION STEPS
+------------------
+
+1. TRANSFER FILES
+   Copy the entire project folder (ai-summarizer-123 - quality upg) to your target device.
+
+2. INSTALL PHP DEPENDENCIES (if using Composer)
+   cd ai-summarizer-123 - quality upg
+   composer install
+
+3. INSTALL PYTHON DEPENDENCIES
+   cd python-engine
+   pip install -r requirements-local.txt
+
+4. SETUP DATABASE
+   - Ensure MySQL/MariaDB is running
+   - Update database credentials in app/config/config.php if needed
+   - Run: php tools/import_schema.php
+
+5. VERIFY ENVIRONMENT
+   Run: php tools/check_native_environment.php
+   All checks should pass.
+
+6. START THE APPLICATION
+   php -S localhost:8000 -t app/public
+
+   Access at: http://localhost:8000
+
+CONFIGURATION
+-------------
+
+DATABASE CONFIGURATION (app/config/config.php):
+- Default: MySQL on localhost:3306
+- Database: ai_summarizer
+- Username: root
+- Password: (empty for local development)
+
+PYTHON CONFIGURATION:
+- Auto-detects Python installation
+- Can be overridden with LOCAL_PYTHON_BIN environment variable
+
+PORTS:
+- Web server: Any available port (default: 8000)
+- Database: Standard MySQL port (3306)
+- No external port dependencies required
+
+DIRECTORY STRUCTURE
+-------------------
+ai-summarizer-123 - quality upg/
+├── app/
+│   ├── config/
+│   ├── public/          # Web root
+│   ├── src/             # PHP source code
+│   └── storage/         # File uploads, logs, audio
+├── database/
+│   └── schema.sql       # Database structure
+├── python-engine/       # Python scripts and models
+├── tools/               # Setup and maintenance scripts
+└── vendor/              # Composer dependencies
+
+FEATURES
+--------
+- Article summarization (PDF, DOCX, text input)
+- Multiple summary styles (Paragraph, Bullet Points, Hybrid)
+- Text-to-speech (TTS) with Piper
+- Translation support
+- User authentication and guest sessions
+- History tracking
+- Admin dashboard
+- Feedback system
+
+TROUBLESHOOTING
+---------------
+
+COMMON ISSUES:
+1. "Python was not found" - Install Python 3.8+ and ensure it's in PATH
+2. "Database connection failed" - Check MySQL is running and credentials are correct
+3. "PHP extension missing" - Install required PHP extensions
+4. "Permission denied" - Check file permissions for storage directories
+
+USEFUL COMMANDS:
+- Check environment: php tools/check_native_environment.php
+- Import database: php tools/import_schema.php
+- Start server: php -S localhost:8000 -t app/public
+- Test Python: cd python-engine && python local_cli.py self-test
+
+PORTABILITY NOTES
+-----------------
+- System uses localhost connections only
+- No external service dependencies
+- Database is self-contained
+- Python scripts run locally
+- All dependencies are included or auto-installed
+- Works on Windows, Linux, and macOS with required runtimes
+
+SUPPORT
+-------
+For issues, check:
+1. PHP error logs
+2. Python execution errors
+3. Database connection issues
+4. File permission problems
+
+The system is designed for easy deployment and should work on any compatible device
+after following the installation steps above.

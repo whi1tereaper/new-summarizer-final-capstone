@@ -1,0 +1,8 @@
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteRule ^app/public/ - [L]
+    RewriteRule ^(app/(?!public/)|database/|docker/|docs/|python-engine/|scratch/|storage/|tools/|vendor/|\.venv(?:311|312)?/|\.tmp/|composer\.(json|lock)|README\.md|DEPLOYMENT\.md|XAMPP_SETUP\.md|vercel\.json|docker-compose.*|\.env(?:\.example)?|\.git).* - [F,L,NC]
+</IfModule>
