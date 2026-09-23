@@ -19,6 +19,11 @@ class HistoryHandler
         return self::service()->getSummaryById($id, $userId, $guestToken, $shareToken);
     }
 
+    public static function getNutshellHistory($userId = null, ?string $guestToken = null, int $limit = 20): array
+    {
+        return self::service()->getNutshellHistory($userId, $guestToken, $limit);
+    }
+
     private static function service(): HistoryService
     {
         return self::$service ??= new HistoryService();

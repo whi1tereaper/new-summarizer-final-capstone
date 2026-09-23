@@ -47,9 +47,9 @@ $username = $_SESSION['username'] ?? 'GUEST';
         <section class="hero-panel" aria-labelledby="hero-title">
             <div class="hero-panel__content">
                 <div class="hero-copy">
-                    <p class="hero-copy__eyebrow">Academic Article Summaries</p>
-                    <h1 id="hero-title">Research in Focus<br>Clarity in<br>Every Summary</h1>
-                    <p class="hero-copy__lead">
+
+                    <h1 class="font-brand-heading" id="hero-title">Research in Focus<br>Clarity in<br>Every Summary</h1>
+                    <p class="hero-copy__lead font-ui-body">
                         Upload a source file or paste article text, then generate a summary with the structure
                         and length that fits your workflow.
                     </p>
@@ -59,19 +59,16 @@ $username = $_SESSION['username'] ?? 'GUEST';
                 </div>
 
                 <div class="hero-art" aria-hidden="true">
-                    <span class="hero-art__watermark">SUMMARY</span>
                     <div class="hero-art__frame">
-                        <div class="hero-art__halo"></div>
                         <div class="hero-art__shape hero-art__shape--back"></div>
                         <div class="hero-art__shape hero-art__shape--front"></div>
-                        <img src="assets/images/poc-neust-logo.png" alt="" class="hero-art__logo">
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-
+    <?php require __DIR__ . '/partials/site-footer.php'; ?>
 
 <script src="assets/js/landing-analytics.js" async></script>
 <script src="assets/js/index.js"></script>

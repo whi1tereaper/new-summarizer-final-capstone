@@ -88,9 +88,10 @@ def normalize_language_code(language: str | None) -> str:
     return "en"
 
 
-MAX_TTS_TEXT_LENGTH = int(
-    env_value("TTS_MAX_CHARS", "PIPER_MAX_TEXT_LENGTH", "TTS_MAX_TEXT_LENGTH", "BARK_MAX_TEXT_LENGTH", default="3000")
+_configured_tts_text_length = int(
+    env_value("TTS_MAX_CHARS", "PIPER_MAX_TEXT_LENGTH", "TTS_MAX_TEXT_LENGTH", "BARK_MAX_TEXT_LENGTH", default="0")
 )
+MAX_TTS_TEXT_LENGTH = _configured_tts_text_length if _configured_tts_text_length > 0 else None
 MAX_TTS_CHUNK_CHARS = int(
     env_value("PIPER_MAX_CHUNK_CHARS", "TTS_MAX_CHUNK_CHARS", "BARK_MAX_CHUNK_CHARS", default="350")
 )
@@ -158,7 +159,7 @@ def validate_text(text: str) -> str:
     if not normalized:
         raise PiperTtsValidationError("Text is required for audio generation.")
 
-    if len(normalized) > MAX_TTS_TEXT_LENGTH:
+    if MAX_TTS_TEXT_LENGTH is not None and len(normalized) > MAX_TTS_TEXT_LENGTH:
         raise PiperTtsValidationError(
             f"Text exceeds the {MAX_TTS_TEXT_LENGTH}-character TTS limit."
         )

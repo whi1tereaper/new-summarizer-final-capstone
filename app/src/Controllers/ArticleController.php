@@ -64,10 +64,13 @@ class ArticleController
         $summaryCount = $pending['sentence_count'] ?? 8;
         $summaryLength = $pending['summary_length'] ?? 'balanced';
         $summaryStyle = $pending['summary_style'];
+        $documentTitle = $pending['document_title'] ?? '';
+        $selectionMode = $pending['selection_mode'] ?? '';
 
         $resolvedSource = null;
         $summaryInputText = $originalText;
         $inputType = $filePath === '' ? 'text' : pathinfo($filePath, PATHINFO_EXTENSION);
+        $processingStartedAt = microtime(true);
 
         try {
             // Convert pasted URLs into extracted article text before the worker sees the request.
@@ -78,6 +81,7 @@ class ArticleController
         } catch (\RuntimeException $exception) {
             // Clean up early when source preparation fails so temporary files do not linger.
             $this->articleService->cleanupTemporaryArtifacts($filePath, null);
+            $this->recordFailure($userId, $guestToken, $inputType, $summaryStyle, $summaryLength, $processingStartedAt);
             http_response_code(400);
             echo json_encode(['error' => $exception->getMessage()]);
             exit;
@@ -97,11 +101,14 @@ class ArticleController
                 $filePath,
                 $summaryCount,
                 $summaryStyle,
-                $summaryLength
+                $summaryLength,
+                $documentTitle,
+                $selectionMode
             );
         } catch (\RuntimeException $exception) {
             // If summarization fails, remove request artifacts and return a worker-safe error.
             $this->articleService->cleanupTemporaryArtifacts($filePath, $resolvedSource);
+            $this->recordFailure($userId, $guestToken, $inputType, $summaryStyle, $summaryLength, $processingStartedAt);
             http_response_code(500);
             echo json_encode(['error' => $exception->getMessage()]);
             exit;
@@ -109,17 +116,23 @@ class ArticleController
 
         try {
             // Persist the finished summary before the browser leaves the processing page.
+            // Keep the original user source for the result-page reference; use extracted text only
+            // when an uploaded file did not provide a separate text field.
+            $sourceReference = trim($originalText) !== '' ? $originalText : $summaryInputText;
             $summaryId = $this->articleService->storeSummary(
                 $userId,
                 $guestToken,
                 $summaryResult,
                 $inputType,
                 $summaryStyle,
-                $summaryInputText
+                $sourceReference,
+                $summaryLength,
+                microtime(true) - $processingStartedAt
             );
         } catch (\RuntimeException $exception) {
             // Failed saves should not leave uploads or downloaded sources behind.
             $this->articleService->cleanupTemporaryArtifacts($filePath, $resolvedSource);
+            error_log('[ArticleController] Failed to persist summary: ' . $exception->getMessage());
             http_response_code(500);
             echo json_encode(['error' => 'Could not save summary. Please try again.']);
             exit;
@@ -202,6 +215,15 @@ class ArticleController
         $_SESSION['flash_error'] = $message;
         header('Location: summarizer.php');
         exit;
+    }
+
+    private function recordFailure(?int $userId, ?string $guestToken, string $inputType, string $summaryStyle, string $summaryLength, float $startedAt): void
+    {
+        try {
+            $this->articleService->recordFailedSummary($userId, $guestToken, $inputType, $summaryStyle, $summaryLength, microtime(true) - $startedAt);
+        } catch (\Throwable $exception) {
+            error_log('[ArticleController] Failed to record analytics failure: ' . $exception->getMessage());
+        }
     }
 }
 

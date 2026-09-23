@@ -1,6 +1,5 @@
-from .pipeline import SummarizationPipeline
+from .pipeline import SummarizationPipeline, summarize_document
 from .models import PreprocessingOptions, SummarizationRequest, SummarizationResult
-from .pipeline import summarize_document
 
 __all__ = [
     "PreprocessingOptions",

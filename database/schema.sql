@@ -129,11 +129,39 @@ CREATE TABLE `summaries` (
   `input_type` enum('text','pdf','docx','url') NOT NULL,
   `original_text` longtext NOT NULL,
   `generated_summary` longtext NOT NULL,
+  `nutshell_text` text DEFAULT NULL,
+  `nutshell_word_count` int(10) unsigned DEFAULT NULL,
+  `nutshell_generated_at` timestamp NULL DEFAULT NULL,
   `summary_style` enum('standard_paragraph','bullet_points','hybrid','academic_summary','simple_summary') DEFAULT 'standard_paragraph',
+  `summary_length` varchar(32) DEFAULT NULL,
+  `article_category` varchar(100) DEFAULT NULL,
+  `original_word_count` int(10) unsigned DEFAULT NULL,
+  `summary_word_count` int(10) unsigned DEFAULT NULL,
+  `processing_time` decimal(10,3) DEFAULT NULL,
   `status` enum('pending','processing','completed','failed') NOT NULL DEFAULT 'completed',
   `error_message` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+--
+-- Table structure for table `nutshell_generations`
+--
+
+CREATE TABLE `nutshell_generations` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `summary_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `guest_token` varchar(64) DEFAULT NULL,
+  `input_type` varchar(20) NOT NULL DEFAULT 'text',
+  `word_count` int(10) unsigned NOT NULL DEFAULT 0,
+  `source_word_count` int(10) unsigned NOT NULL DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `idx_ng_created` (`created_at`),
+  KEY `idx_ng_user_created` (`user_id`, `created_at`),
+  KEY `idx_ng_summary` (`summary_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `summaries`

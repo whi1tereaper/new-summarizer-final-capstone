@@ -20,13 +20,7 @@ $csrf_token = generateCsrfToken();
         <div class="auth-site-header__inner">
             <a href="index.php" class="auth-site-header__label"></a>
 
-            <a href="index.php" class="auth-site-header__brand" aria-label="Article Summarizer home">
-                <img
-                    src="assets/images/poc-neust-logo.png"
-                    alt="Off-Campus POC N.E.U.S.T. logo"
-                    class="auth-site-header__brand-logo"
-                >
-            </a>
+            <div class="auth-site-header__brand" aria-hidden="true"></div>
 
             <nav class="auth-site-header__nav" aria-label="Authentication navigation">
                 <a href="index.php">Home</a>

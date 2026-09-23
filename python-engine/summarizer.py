@@ -17,6 +17,7 @@ from summarizer_core import (
     summarize_document,
 )
 from summarizer_core.text_utils import extract_pdf_text, load_source_text
+from pure_nlp import summarize_to_contract
 
 # Legacy aliases for backward compatibility
 Summarizer = SummarizationPipeline
@@ -30,4 +31,5 @@ __all__ = [
     "extract_pdf_text",
     "load_source_text",
     "summarize_document",
+    "summarize_to_contract",
 ]

@@ -11,7 +11,6 @@ class BarkTtsService
     private const FALLBACK_CACHE_DIR = 'ai-summarizer-tts';
     private const AUDIO_TOKEN_SEPARATOR = '|';
 
-    private int $maxTextLength;
     private int $requestTimeoutSeconds;
     private string $audioOutputDir;
     private string $audioPublicUrl;
@@ -19,10 +18,6 @@ class BarkTtsService
 
     public function __construct()
     {
-        $this->maxTextLength = max(
-            1,
-            (int)config('tts.max_text_length', 3000)
-        );
         $this->requestTimeoutSeconds = max(
             30,
             (int)config('tts.timeout_seconds', 600)
@@ -78,10 +73,6 @@ class BarkTtsService
     {
         if ($text === '') {
             return 'Summary text is required for audio generation.';
-        }
-
-        if (mb_strlen($text) > $this->maxTextLength) {
-            return 'Summary is too long to convert into audio in a single request.';
         }
 
         return null;

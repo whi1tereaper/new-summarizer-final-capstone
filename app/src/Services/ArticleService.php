@@ -20,9 +20,11 @@ final class ArticleService
         'standard_paragraph',
         'bullet_points',
         'hybrid',
+        'executive_summary',
         'academic_summary',
         'simple_summary',
-        'executive_summary',
+        'technical_summary',
+        'news_summary',
     ];
     public const MIN_SUMMARY_COUNT = 3;
     public const MAX_SUMMARY_COUNT = 15;
@@ -50,10 +52,19 @@ final class ArticleService
         // Normalize raw form input once so later steps can trust the session payload shape.
         $originalText = $this->normalizeOriginalText($request['original_text'] ?? '');
         $filePath = $this->resolveUploadedFilePath($files['pdf_file'] ?? null);
+        // A document upload is an explicit source choice. Do not retain a pasted
+        // source alongside it, since the worker correctly treats the file as
+        // authoritative and retaining both makes the saved source ambiguous.
+        if ($filePath !== '') {
+            $originalText = '';
+        }
         $summaryLength = $this->normalizeSummaryLength(
             $request['summary_length'] ?? null,
             $request['sentence_count'] ?? null
         );
+
+        $documentTitle = trim(preg_replace('/\s+/u', ' ', (string)($request['document_title'] ?? '')) ?? '');
+        $selectionMode = trim((string)($request['selection_mode'] ?? ''));
 
         return [
             'original_text' => $originalText,
@@ -61,6 +72,8 @@ final class ArticleService
             'sentence_count' => $this->normalizeSummaryCount($request['sentence_count'] ?? 8),
             'summary_length' => $summaryLength,
             'summary_style' => $this->normalizeSummaryStyle($request['summary_style'] ?? 'standard_paragraph'),
+            'document_title' => $documentTitle,
+            'selection_mode' => $selectionMode,
             'user_id' => $userId,
             'guest_token' => $guestToken,
             'csrf_token' => $request['csrf_token'] ?? '',
@@ -91,17 +104,22 @@ final class ArticleService
         string $filePath,
         int $sentenceCount,
         string $summaryStyle,
-        string $summaryLength = 'balanced'
+        string $summaryLength = 'balanced',
+        string $documentTitle = '',
+        string $selectionMode = ''
     ): array {
         try {
             // Send only the worker-facing data contract; preprocessing flags stay server-owned.
+            $preprocessing = $this->summaryPreprocessingOptions($selectionMode);
             return $this->pythonBridge->summarize([
                 'text' => $originalText,
                 'file_path' => $filePath,
                 'sentence_count' => $sentenceCount,
                 'summary_length' => $this->normalizeSummaryLength($summaryLength, $sentenceCount),
                 'summary_style' => $summaryStyle,
-                'preprocessing' => $this->summaryPreprocessingOptions(),
+                'selection_mode' => $selectionMode !== '' ? $selectionMode : $summaryStyle,
+                'document_title' => $documentTitle,
+                'preprocessing' => $preprocessing,
             ], 60);
         } catch (\RuntimeException $exception) {
             // Preserve the detailed worker failure in logs while giving controllers a cleaner message.
@@ -116,8 +134,12 @@ final class ArticleService
         array $summaryResult,
         string $inputType,
         string $summaryStyle,
-        string $originalText
+        string $originalText,
+        string $summaryLength = 'balanced',
+        ?float $processingTime = null
     ): string {
+        $summaryResult = $this->normalizeContractSummaryResult($summaryResult);
+
         // Normalize every optional worker field before storing anything in JSON or the database.
         $summaryBlocks = $this->normalizeSummaryBlocks($summaryResult['sentences'] ?? []);
         $overview = $this->normalizeTextList($summaryResult['overview'] ?? []);
@@ -142,6 +164,8 @@ final class ArticleService
         $storedSourceText = Privacy::maskSensitiveText((string)$rawText);
         $title = trim((string)($summaryResult['title'] ?? 'Generated Summary')) ?: 'Generated Summary';
         $excludedSections = $this->normalizeTextList($summaryResult['excluded_sections'] ?? []);
+        $originalWordCount = $this->countWords($originalText);
+        $summaryWordCount = $this->countWords($plainSummary);
 
         // Store one structured payload so the result page can render richer views without extra tables.
         $summaryJson = json_encode([
@@ -161,6 +185,14 @@ final class ArticleService
             'readability' => $readability,
             'summary_method' => $summaryMethod,
             'source_metadata' => $sourceMetadata,
+            'selection_mode' => (string)($summaryResult['selection_mode'] ?? ''),
+            'profile_label' => (string)($summaryResult['profile_label'] ?? ''),
+            'active_profile_weights' => (array)($summaryResult['active_profile_weights'] ?? []),
+            'validation_passed' => (bool)($summaryResult['validation_passed'] ?? true),
+            'validation_notes' => (array)($summaryResult['validation_notes'] ?? []),
+            'original_word_count' => $originalWordCount,
+            'summary_word_count' => $summaryWordCount,
+            'processing_time' => $processingTime,
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
         if ($summaryJson === false) {
@@ -172,7 +204,7 @@ final class ArticleService
             $this->db->beginTransaction();
 
             $statement = $this->db->prepare(
-                'INSERT INTO summaries (user_id, guest_token, share_token, article_title, input_type, summary_style) VALUES (?, ?, ?, ?, ?, ?)'
+                'INSERT INTO summaries (user_id, guest_token, share_token, article_title, input_type, summary_style, summary_length, article_category, original_word_count, summary_word_count, processing_time, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
             );
 
             // Share tokens let the app expose a stable public identifier without leaking numeric IDs.
@@ -183,7 +215,13 @@ final class ArticleService
                 $shareToken,
                 $title,
                 $inputType,
-                $summaryStyle
+                $summaryStyle,
+                $this->normalizeSummaryLength($summaryLength),
+                $articleType !== '' ? $articleType : null,
+                $originalWordCount,
+                $summaryWordCount,
+                $processingTime,
+                'completed'
             ]);
 
             $summaryId = $this->db->lastInsertId();
@@ -200,9 +238,74 @@ final class ArticleService
             $this->db->commit();
             return (string)$summaryId;
         } catch (\Exception $e) {
-            $this->db->rollBack();
+            if ($this->db->inTransaction()) {
+                $this->db->rollBack();
+            }
+            error_log('[ArticleService] Failed to store summary: ' . $e->getMessage());
             throw new \RuntimeException('Failed to store summary: ' . $e->getMessage(), 0, $e);
         }
+    }
+
+    private function normalizeContractSummaryResult(array $summaryResult): array
+    {
+        if (!isset($summaryResult['thematic_paragraphs']) || !is_array($summaryResult['thematic_paragraphs'])) {
+            return $summaryResult;
+        }
+
+        $meta = is_array($summaryResult['summary_meta'] ?? null)
+            ? $summaryResult['summary_meta']
+            : [];
+        $overview = trim((string)($summaryResult['executive_overview'] ?? ''));
+        $paragraphs = [];
+        $sentences = [];
+
+        foreach ($summaryResult['thematic_paragraphs'] as $paragraph) {
+            if (!is_array($paragraph)) {
+                continue;
+            }
+
+            $content = trim((string)($paragraph['content'] ?? ''));
+            if ($content === '') {
+                continue;
+            }
+
+            $paragraphs[] = [
+                'paragraph_number' => (int)($paragraph['paragraph_id'] ?? count($paragraphs) + 1),
+                'section' => trim((string)($paragraph['tag'] ?? '')),
+                'purpose' => trim((string)($paragraph['headline'] ?? '')),
+                'main_idea' => $content,
+                'supporting_details' => [],
+                'keywords' => [],
+                'summary' => $content,
+            ];
+            $sentences[] = $content;
+        }
+
+        $keyPoints = [];
+        foreach ($summaryResult['key_findings'] ?? [] as $finding) {
+            if (!is_array($finding)) {
+                continue;
+            }
+
+            $value = trim((string)($finding['value'] ?? ''));
+            $context = trim((string)($finding['context'] ?? ''));
+            if ($value !== '' && $context !== '') {
+                $keyPoints[] = $value . ': ' . $context;
+            } elseif ($context !== '') {
+                $keyPoints[] = $context;
+            }
+        }
+
+        return array_merge($summaryResult, [
+            'title' => trim((string)($meta['title'] ?? '')) ?: 'Generated Summary',
+            'article_type' => trim((string)($meta['doc_type'] ?? 'academic')),
+            'sentences' => $sentences,
+            'overview' => $overview === '' ? [] : [$overview],
+            'plain_summary' => $overview !== '' ? $overview : implode(' ', $sentences),
+            'key_points' => $keyPoints,
+            'conclusion' => $sentences !== [] ? end($sentences) : '',
+            'paragraph_summaries' => $paragraphs,
+        ]);
     }
 
     public function cleanupTemporaryArtifacts(string $filePath, ?SourceResolution $resolvedSource): void
@@ -210,6 +313,35 @@ final class ArticleService
         // Always clean both upload-backed files and URL-download leftovers from the same exit point.
         $this->uploadService->removeUploadedFile($filePath);
         $resolvedSource?->cleanup();
+    }
+
+    public function recordFailedSummary(?int $userId, ?string $guestToken, string $inputType, string $summaryStyle, string $summaryLength, float $processingTime): void
+    {
+        $statement = $this->db->prepare(
+            'INSERT INTO summaries (user_id, guest_token, share_token, article_title, input_type, summary_style, summary_length, processing_time, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        );
+        $statement->execute([
+            $userId,
+            $guestToken,
+            bin2hex(random_bytes(32)),
+            'Unsuccessful summary request',
+            in_array($inputType, ['text', 'pdf', 'docx', 'url'], true) ? $inputType : 'text',
+            $summaryStyle,
+            $this->normalizeSummaryLength($summaryLength),
+            $processingTime,
+            'failed',
+        ]);
+    }
+
+    private function countWords(string $text): int
+    {
+        $text = trim(strip_tags($text));
+        if ($text === '') {
+            return 0;
+        }
+
+        preg_match_all('/[\p{L}\p{N}]+(?:[\x27-][\p{L}\p{N}]+)*/u', $text, $matches);
+        return count($matches[0] ?? []);
     }
 
     private function resolveUploadedFilePath(?array $uploadedFile): string
@@ -281,19 +413,45 @@ final class ArticleService
         return $normalized !== '' ? $normalized : 'Summarization failed. Please try again later.';
     }
 
-    private function summaryPreprocessingOptions(): array
+    private function summaryPreprocessingOptions(string $selectionMode = ''): array
     {
-        // Keep these flags explicit so text cleanup stays predictable across worker updates.
+        // Derive mode-appropriate preprocessing flags from the selection profile.
+        // The profile resolution logic lives in the Python pipeline; here we apply
+        // a lightweight mapping so that different summarization modes get
+        // genuinely different text-cleaning behaviour (not just different
+        # scoring weights).
+        $mode = $selectionMode ?: 'general';
+
+        $lowercase = in_array($mode, [
+            'academic_summary', 'executive_summary', 'technical_summary',
+            'news_summary', 'simple_summary',
+        ], true);
+
+        $removeStopwords = in_array($mode, [
+            'academic_summary', 'executive_summary', 'technical_summary',
+            'simple_summary',
+        ], true);
+
+        $removePunctuation = in_array($mode, [
+            'academic_summary', 'executive_summary', 'technical_summary',
+            'news_summary',
+        ], true);
+
+        // Bullet points and hybrid keep stopwords/punctuation to preserve
+        # quoted key phrases and natural reading flow.
+        $tokenize = false;
+        $lemmatize = false;
+
         return [
             'remove_visual_artifacts' => true,
             'remove_email_addresses' => true,
             'remove_known_noise' => true,
             'normalize_whitespace' => true,
-            'lowercase' => false,
-            'remove_punctuation' => false,
-            'remove_stopwords' => false,
-            'tokenize' => false,
-            'lemmatize' => false,
+            'lowercase' => $lowercase,
+            'remove_punctuation' => $removePunctuation,
+            'remove_stopwords' => $removeStopwords,
+            'tokenize' => $tokenize,
+            'lemmatize' => $lemmatize,
         ];
     }
 

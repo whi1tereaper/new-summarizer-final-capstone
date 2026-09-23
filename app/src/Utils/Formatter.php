@@ -32,6 +32,8 @@ class Formatter
             case 'hybrid':
                 return self::renderHybrid($blocks, $preserveParagraphs);
 
+            case 'technical_summary':
+            case 'news_summary':
             case 'academic_summary':
             case 'simple_summary':
             case 'standard_paragraph':
@@ -138,6 +140,24 @@ class Formatter
         }
 
         return trim((string)($decoded['article_type'] ?? ''));
+    }
+
+    public static function extractProfileDataFromStoredSummary(string $storedSummary): array
+    {
+        $decoded = json_decode($storedSummary, true);
+        if (!is_array($decoded)) {
+            return [];
+        }
+
+        return [
+            'selection_mode' => trim((string)($decoded['selection_mode'] ?? '')),
+            'profile_label' => trim((string)($decoded['profile_label'] ?? '')),
+            'active_profile_weights' => is_array($decoded['active_profile_weights'] ?? null) ? $decoded['active_profile_weights'] : [],
+            'validation_passed' => (bool)($decoded['validation_passed'] ?? true),
+            'validation_notes' => is_array($decoded['validation_notes'] ?? null) ? $decoded['validation_notes'] : [],
+            'structured_summary' => is_array($decoded['structured_summary'] ?? null) ? $decoded['structured_summary'] : [],
+            'article_type' => trim((string)($decoded['article_type'] ?? '')),
+        ];
     }
 
     public static function extractConclusionFromStoredSummary(string $storedSummary): string

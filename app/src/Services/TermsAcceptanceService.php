@@ -114,7 +114,7 @@ class TermsAcceptanceService
     public static function currentUserNeedsAcceptance(): bool
     {
         if (empty($_SESSION['user_id'])) {
-            return false;
+            return empty($_SESSION['guest_terms_reviewed']);
         }
 
         return (int)($_SESSION['terms_accepted'] ?? 0) !== 1;
@@ -129,9 +129,12 @@ class TermsAcceptanceService
         $script = basename((string)($_SERVER['SCRIPT_NAME'] ?? ''));
         $action = (string)($_GET['action'] ?? '');
         $allowedScripts = [
-            'accept_terms.php',
-            'summarizer.php',
             'terms.php',
+            'accept_terms.php',
+            'index.php',
+            'login.php',
+            'register.php',
+            'auth.php',
             'logout.php',
             'nutshell_generate.php',
             'tts_generate.php',
@@ -139,6 +142,7 @@ class TermsAcceptanceService
             'translate_proxy.php',
             'feedback_submit.php',
             'check_status.php',
+            'summarizer.php',
         ];
 
         if (in_array($script, $allowedScripts, true)) {
@@ -150,10 +154,14 @@ class TermsAcceptanceService
         }
 
         if ($script !== '') {
-            $_SESSION['terms_redirect_after_accept'] = $script;
+            if ($script === 'summarize.php') {
+                $_SESSION['terms_redirect_after_accept'] = 'summarizer.php';
+            } else {
+                $_SESSION['terms_redirect_after_accept'] = $script;
+            }
         }
 
-        header('Location: accept_terms.php');
+        header('Location: terms.php');
         exit;
     }
 
@@ -162,12 +170,17 @@ class TermsAcceptanceService
         $requestedTarget = (string)($_SESSION['terms_redirect_after_accept'] ?? '');
         unset($_SESSION['terms_redirect_after_accept']);
 
-        if ($requestedTarget === 'admin_dashboard.php' && (($_SESSION['role'] ?? 'user') === 'admin')) {
+        $allowedTargets = ['index.php', 'summarizer.php', 'history.php', 'analytics.php'];
+
+        if (($_SESSION['role'] ?? 'user') === 'admin') {
+            if ($requestedTarget === 'admin_dashboard.php' || in_array($requestedTarget, $allowedTargets, true)) {
+                return $requestedTarget;
+            }
             return 'admin_dashboard.php';
         }
 
-        if (($_SESSION['role'] ?? 'user') === 'admin') {
-            return 'admin_dashboard.php';
+        if (in_array($requestedTarget, $allowedTargets, true)) {
+            return $requestedTarget;
         }
 
         return 'index.php';

@@ -9,13 +9,14 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from summarizer_core.models import PreprocessingOptions, SourceDocument, SummarizationPipeline, SummarizationRequest
+from summarizer_core.models import PreprocessingOptions, SentenceCandidate, SourceDocument, SummarizationPipeline, SummarizationRequest
 from summarizer_core.text_utils import (
     clean_pdf_extracted_text,
     contains_article_noise,
     extract_valid_paragraphs,
     load_source_document,
 )
+from pure_nlp import summarize_to_contract
 
 
 NOISY_ACADEMIC_TEXT = """
@@ -92,6 +93,79 @@ hat does the journey of data packets mainly show?
 
 class SummarizerQualityTests(unittest.TestCase):
     maxDiff = None
+
+    def test_selection_prefers_distinct_evidence_over_overlapping_high_scores(self) -> None:
+        pipeline = SummarizationPipeline()
+        candidates = [
+            SentenceCandidate(0, 0, 0, 1, "results", "The trial reduced latency by 45 percent.", "The trial reduced latency by 45 percent.", "trial reduced latency 45 percent", 5),
+            SentenceCandidate(1, 1, 0, 1, "results", "The trial reduced latency by 45 percent during peak traffic.", "The trial reduced latency by 45 percent during peak traffic.", "trial reduced latency 45 percent peak traffic", 7),
+            SentenceCandidate(2, 2, 0, 1, "conclusion", "The authors recommend multi-tier caching for high-demand services.", "The authors recommend multi-tier caching for high-demand services.", "authors recommend multi tier caching high demand services", 8),
+        ]
+
+        selected = pipeline._select_candidate_indices(candidates, [0.99, 0.98, 0.74], "general_article", 2, {}, 0.0)
+
+        self.assertEqual(selected, [0, 2])
+
+    def test_sentence_compression_preserves_qualifying_result_clause(self) -> None:
+        pipeline = SummarizationPipeline()
+        sentence = "The intervention improved attendance, although it did not improve final examination scores."
+
+        self.assertEqual(pipeline._compress_sentence(sentence, max_words=30), sentence)
+
+    def test_output_style_controls_the_serialized_summary_structure(self) -> None:
+        sentences = [
+            "The report identifies a rising demand for reliable digital services.",
+            "It recommends phased infrastructure improvements to reduce risk.",
+            "Leaders should monitor the rollout with measurable service targets.",
+            "The approach prioritizes continuity while controlling implementation costs.",
+        ]
+        pipeline = SummarizationPipeline()
+
+        paragraph, paragraph_bullets = pipeline._build_plain_summary(sentences, "standard_paragraph")
+        bullets_text, bullets = pipeline._build_plain_summary(sentences, "bullet_points")
+        executive, executive_bullets = pipeline._build_plain_summary(sentences, "executive_summary")
+
+        self.assertEqual(paragraph, " ".join(sentences))
+        self.assertEqual(paragraph_bullets, [])
+        self.assertEqual(bullets_text, " ".join(sentences))
+        self.assertEqual(bullets, sentences)
+        self.assertEqual(executive, " ".join(sentences[:2]))
+        self.assertEqual(executive_bullets, sentences[2:])
+
+    def test_pure_nlp_contract_extracts_title_purges_sections_and_groups_metrics(self) -> None:
+        text = """
+        International Journal of Sample Research
+        IJSRED
+        Volume 9, Issue 2
+        The Impact of Artificial Intelligence Tools on the Coding Proficiency and Skill Development of IT Students
+        JOHN AUSTRIA*
+        Nueva Ecija University of Science and Technology
+        ISSN 2581-7175
+
+        Abstract
+        This study examined artificial intelligence use among information technology students and its relationship to coding proficiency.
+        Results showed that 70% used AI for research, 39% for debugging, and 33% for code generation.
+        The findings suggest guided use may support learning while preserving independent reasoning.
+
+        Acknowledgment
+        Foremost, profound gratitude is extended to every person who helped complete this study.
+
+        References
+        Author, A. (2026). A Review of Generative AI in Computer Science Education.
+        """
+
+        result = summarize_to_contract(text)
+        self.assertTrue(result["summary_meta"]["title"].startswith("The Impact of Artificial Intelligence Tools"))
+        content = " ".join(item["content"] for item in result["thematic_paragraphs"])
+        self.assertNotIn("Foremost, profound gratitude", content)
+        self.assertNotIn("A Review of Generative AI", content)
+        metric_contexts = [
+            item["context"]
+            for item in result["key_findings"]
+            if "70%" in item["context"]
+        ]
+        self.assertEqual(len(metric_contexts), 1)
+        self.assertTrue(all(item["content"].rstrip()[-1] in ".!?" for item in result["thematic_paragraphs"]))
 
     def test_clean_pdf_extracted_text_removes_publication_noise(self) -> None:
         cleaned = clean_pdf_extracted_text(NOISY_ACADEMIC_TEXT)
@@ -357,9 +431,39 @@ class SummarizerQualityTests(unittest.TestCase):
         )
         self.assertNotIn("terraform", nutshell.lower())
 
+    def test_generate_nutshell_covers_whole_document_in_coherent_language(self) -> None:
+        from summarizer_core.nutshell import generate_nutshell
+
+        brand_text = """
+        Brand Strategy Overview
+
+        The brand is built around a bold, rebellious identity anchored by the three-claw logo, black-and-neon-green palette, and aggressive gothic type. These elements create a distinctive visual system that appeals to extreme-sports and counter-cultural communities.
+
+        Tone and Personality
+        The tone is intense, confident, and high-energy. The company presents itself as authentic, fearless, and culturally charged, which strengthens recognition across digital channels.
+
+        Target Audience
+        The primary audience includes action sports participants, young men, and fans of adrenaline-driven lifestyles. The brand positions itself as more than a beverage; it embodies a lifestyle and a sense of belonging.
+
+        Digital Platforms
+        On Instagram and YouTube, the content adapts to each platform while keeping the same rebellious visual identity. Short-form videos, athlete partnerships, and high-impact imagery support engagement, but the platform strategy needs more flexibility for broader audiences.
+
+        Brand Evaluation
+        The evaluation concludes that the core identity remains strong because it is recognizable and memorable. However, the company should simplify some visual elements, refine typography for more modern product lines, and maintain a consistent brand voice while expanding to health-conscious audiences.
+        """
+
+        result = generate_nutshell(text=brand_text)
+        nutshell = result["nutshell"]
+        words = nutshell.split()
+
+        self.assertGreaterEqual(len(words), 80)
+        self.assertLessEqual(len(words), 160)
+        self.assertIn("brand", nutshell.lower())
+        self.assertIn("logo", nutshell.lower())
+        self.assertIn("audience", nutshell.lower())
+        self.assertNotIn("ultimately balanced update maintain adrenaline-fueled spirit brand", nutshell.lower())
+        self.assertNotIn("the piece highlights that", nutshell.lower())
+
 
 if __name__ == "__main__":
     unittest.main()
-
-
-

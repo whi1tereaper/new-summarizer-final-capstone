@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Syne:wght@700;800&display=swap');
 
 @keyframes glitch {
   25% {
@@ -31,6 +31,9 @@
 
 /* base layout and shared look */
 :root {
+    --font-display: 'Syne', 'Unbounded', sans-serif;
+    --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-heading: var(--font-display);
     --color-primary: #977DFF;
     --color-primary-dark: #7F63F4;
     --color-primary-soft: #B8A8FF;
@@ -57,7 +60,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     color: var(--color-text);
     background: var(--gradient-page-background);
     line-height: 1.6;
@@ -65,8 +68,8 @@ body {
 }
 
 h1, h2, h3 {
-    font-family: 'Merriweather', serif;
-    font-weight: 700;
+    font-family: var(--font-display);
+    font-weight: 800;
     margin-top: 0;
 }
 
@@ -74,6 +77,27 @@ h1 {
     font-size: 2.5em;
     line-height: 1.1;
     letter-spacing: -0.5px;
+}
+
+/* Shared typography primitives for brand, navigation, and UI copy. */
+.font-brand-heading {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+}
+
+.font-ui-label {
+    font-family: var(--font-body);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.font-ui-body {
+    font-family: var(--font-body);
+    font-weight: 400;
+    letter-spacing: normal;
 }
 
 a {
@@ -137,9 +161,9 @@ select:focus-visible {
 }
 
 .auth-card h2 {
-    font-family: 'Outfit', 'Inter', sans-serif;
+    font-family: var(--font-display);
     font-size: 2.2em;
-    font-weight: 900;
+    font-weight: 800;
     letter-spacing: -0.06em;
     line-height: 0.95;
     margin-bottom: 40px;
@@ -154,7 +178,7 @@ select:focus-visible {
 
 label {
     display: block;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     font-size: 0.75em;
     font-weight: 600;
     text-transform: uppercase;
@@ -169,7 +193,7 @@ input[type="email"],
 textarea {
     width: 100%;
     padding: 12px 0;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     font-size: 1em;
     border: none;
     border-bottom: 1px solid var(--color-border-strong);
@@ -201,7 +225,7 @@ textarea:focus {
     color: #fff;
     cursor: pointer;
     display: inline-flex;
-    font-family: 'Outfit', 'Inter', sans-serif;
+    font-family: var(--font-display);
     font-size: 1rem;
     font-weight: 700;
     letter-spacing: 0.05em;
@@ -233,6 +257,19 @@ textarea:focus {
     animation: none;
 }
 
+.btn-auth-secondary {
+    background: transparent;
+    border-color: var(--color-border);
+    color: var(--color-text);
+}
+
+.btn-auth-secondary:hover,
+.btn-auth-secondary:focus {
+    background: var(--color-danger-soft);
+    border-color: var(--color-danger);
+    color: var(--color-danger);
+}
+
 .auth-nav-links {
     margin-top: 30px;
     font-size: 0.85em;
@@ -256,7 +293,7 @@ textarea:focus {
     padding: 15px;
     font-size: 0.85em;
     margin-bottom: 30px;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     border-left: 3px solid;
     background: rgba(255, 255, 255, 0.8);
 }
@@ -356,7 +393,7 @@ textarea:focus {
 .auth-site-header__label,
 .auth-site-header__nav a {
     color: #101828;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     font-size: 0.98rem;
     font-weight: 700;
     letter-spacing: -0.02em;
@@ -436,7 +473,7 @@ textarea:focus {
 
 .auth-hero-panel__eyebrow {
     color: #6f7c8f;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.18em;
@@ -446,9 +483,9 @@ textarea:focus {
 
 .page-auth-layout h1 {
     color: #06080d;
-    font-family: 'Naori', 'Outfit', 'Inter', sans-serif;
+    font-family: var(--font-display);
     font-size: clamp(3.6rem, 8vw, 6.8rem);
-    font-weight: 900;
+    font-weight: 800;
     letter-spacing: -0.08em;
     line-height: 0.92;
     margin: 0;
@@ -456,7 +493,7 @@ textarea:focus {
 
 .auth-hero-panel__copy {
     color: #475467;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     font-size: 1rem;
     line-height: 1.75;
     margin: 28px 0 0;
@@ -467,7 +504,7 @@ textarea:focus {
     align-self: flex-start;
     border-bottom: 1px solid rgba(143, 63, 224, 0.46);
     color: #8f3fe0;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     font-size: 0.82rem;
     font-weight: 700;
     letter-spacing: 0.12em;
@@ -524,7 +561,7 @@ textarea:focus {
 .auth-brand-copy__eyebrow {
     color: #8f3fe0;
     display: block;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     font-size: 0.74rem;
     font-weight: 700;
     letter-spacing: 0.16em;
@@ -535,9 +572,9 @@ textarea:focus {
 .page-auth-layout .auth-card h2 {
     border-bottom: 0;
     color: #06080d;
-    font-family: 'Outfit', 'Inter', sans-serif;
+    font-family: var(--font-display);
     font-size: clamp(2rem, 4vw, 2.8rem);
-    font-weight: 900;
+    font-weight: 800;
     letter-spacing: -0.05em;
     line-height: 0.95;
     margin: 0;
@@ -663,7 +700,7 @@ textarea:focus {
 
 .terms-nav a {
     color: var(--color-muted);
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     font-size: 0.8em;
     letter-spacing: 1px;
     text-decoration: none;
@@ -715,7 +752,7 @@ textarea:focus {
 
 .privacy-note {
     color: var(--color-muted);
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     font-size: 0.84em;
     margin: 12px 0 0;
 }
@@ -756,7 +793,7 @@ body.modal-open {
 
 .confirmation-modal__eyebrow {
     color: var(--color-primary-dark);
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     font-size: 0.74em;
     font-weight: 700;
     letter-spacing: 1.8px;
@@ -792,7 +829,7 @@ body.modal-open {
     color: #fff;
     cursor: pointer;
     display: inline-flex;
-    font-family: 'Outfit', 'Inter', sans-serif;
+    font-family: var(--font-display);
     font-size: 0.9rem;
     font-weight: 700;
     letter-spacing: 0.05em;
@@ -840,7 +877,7 @@ body.modal-open {
 }
 
 .pw-forgot-link {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     font-size: 0.75em;
     color: var(--color-primary-dark);
     text-decoration: none;
@@ -939,7 +976,7 @@ body.modal-open {
 }
 
 .pw-strength__label {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     font-size: 0.72em;
     font-weight: 600;
     color: var(--color-muted);

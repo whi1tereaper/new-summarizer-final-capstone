@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $termsAcceptanceService->storeTermsStateInSession($user);
 
                 if (\App\Src\Services\TermsAcceptanceService::currentUserNeedsAcceptance()) {
-                    header('Location: accept_terms.php');
+                    header('Location: terms.php');
                     exit;
                 }
 

@@ -1,15 +1,11 @@
 <?php
 require_once __DIR__ . '/../src/whitereaper.php';
-use App\Src\Services\TermsAcceptanceService;
 
 // Build the page state first so the template can branch cleanly for guests, users, and admins.
 $userId = $_SESSION['user_id'] ?? null;
 $username = $_SESSION['username'] ?? 'GUEST';
 $isAdmin = ($_SESSION['role'] ?? 'user') === 'admin';
-$guestTermsAccepted = !empty($_SESSION['guest_terms_accepted']);
-$guestTermsReviewed = !empty($_SESSION['guest_terms_reviewed']);
-$guestNeedsTermsReview = $userId === null && !$guestTermsReviewed;
-$termsLink = 'terms.php?return=summarizer.php';
+
 
 require_once '../src/Utils/validation.php';
 require_once __DIR__ . '/../../vendor/autoload.php';
@@ -23,6 +19,7 @@ $csrf_token = generateCsrfToken();
 // Load analytics data based on role. Always graceful: any DB failure → null.
 $sidebarData   = null;
 $sidebarMode   = null; // 'admin' | 'user'
+$analyticsData = null;
 
 if ($userId) {
     try {
@@ -34,6 +31,12 @@ if ($userId) {
             $sidebarData = $ac->getUserSidebarStats((int)$userId);
             $sidebarMode = 'user';
         }
+        $analyticsData = $ac->getDashboardData(
+            (int)$userId,
+            $isAdmin,
+            '1970-01-01',
+            date('Y-m-d')
+        );
     } catch (\Throwable $e) {
         error_log('[summarizer sidebar] ' . $e->getMessage());
         // Non-fatal: sidebar stays null, layout stays single-column.
@@ -62,8 +65,8 @@ if ($userId) {
                 <?php if ($userId): ?>
                     <?php if ($isAdmin): ?>
                         <a href="admin_dashboard.php" class="site-actions__link">Admin</a>
-                        <a href="admin_analytics.php" class="site-actions__link">Analytics</a>
                     <?php endif; ?>
+                    <a href="analytics.php" class="site-actions__link">Analytics</a>
                     <a href="history.php" class="site-actions__link">History</a>
                     <a href="auth.php?action=logout" class="site-actions__button js-logout-link">Logout</a>
                 <?php else: ?>
@@ -103,20 +106,29 @@ if ($userId) {
                     </div>
 
                     <div class="summary-grid">
+                        <section class="summary-card summary-card--full" id="document-title-card">
+                            <label for="document_title">Document Title <span class="label-hint">(Optional — guides topic focus &amp; key section identification)</span></label>
+                            <input type="text" id="document_title" name="document_title" placeholder="e.g., Impact of Quantum Computing on Modern Cryptography" value="<?= htmlspecialchars($_POST['document_title'] ?? '') ?>" autocomplete="off">
+                        </section>
+
                         <section class="summary-card" id="source-file">
                             <label for="pdf">Source File</label>
-                            <input type="file" id="pdf" name="pdf_file" accept=".pdf,.docx">
+                            <input type="file" id="pdf" name="pdf_file" accept=".pdf,.docx" aria-describedby="source-selection-note">
                         </section>
 
                         <section class="summary-card" id="output-style">
-                            <label for="summary_style">Output Style</label>
+                            <label for="summary_style">Output Style &amp; Intelligence Mode</label>
                             <select id="summary_style" name="summary_style">
                                 <option value="standard_paragraph" <?= ($_POST['summary_style'] ?? '') === 'standard_paragraph' ? 'selected' : '' ?>>Paragraph Summary</option>
                                 <option value="bullet_points" <?= ($_POST['summary_style'] ?? '') === 'bullet_points' ? 'selected' : '' ?>>Bullet Points</option>
-                                <option value="hybrid" <?= ($_POST['summary_style'] ?? '') === 'hybrid' ? 'selected' : '' ?>>Hybrid</option>
+                                <option value="hybrid" <?= ($_POST['summary_style'] ?? '') === 'hybrid' ? 'selected' : '' ?>>Hybrid (Overview + Bullets)</option>
                                 <option value="executive_summary" <?= ($_POST['summary_style'] ?? '') === 'executive_summary' ? 'selected' : '' ?>>Executive Summary</option>
-
+                                <option value="academic_summary" <?= ($_POST['summary_style'] ?? '') === 'academic_summary' ? 'selected' : '' ?>>Academic / Research Summary</option>
+                                <option value="simple_summary" <?= ($_POST['summary_style'] ?? '') === 'simple_summary' ? 'selected' : '' ?>>Study / Conceptual Summary</option>
+                                <option value="technical_summary" <?= ($_POST['summary_style'] ?? '') === 'technical_summary' ? 'selected' : '' ?>>Technical / Architecture Summary</option>
+                                <option value="news_summary" <?= ($_POST['summary_style'] ?? '') === 'news_summary' ? 'selected' : '' ?>>News / Events Summary</option>
                             </select>
+                            <p class="style-description" id="style_description" aria-live="polite"></p>
                         </section>
 
                         <section class="summary-card summary-card--full" id="summary-length">
@@ -160,7 +172,10 @@ if ($userId) {
 
                         <section class="summary-card summary-card--full" id="source-text">
                             <label for="text">Source</label>
-                            <textarea id="text" name="original_text" placeholder="Paste article text/url here..."></textarea>
+                            <textarea id="text" name="original_text" placeholder="Paste article text/url here..." aria-describedby="source-selection-note"></textarea>
+                            <p class="privacy-note" id="source-selection-note" aria-live="polite">
+                                Choose one source: a file or pasted text/URL. Selecting a file uses that file for the summary.
+                            </p>
                             <p class="privacy-note">
                                 Please do not submit private, sensitive, or confidential information unless you are allowed to do so.
                                 Your submitted content will be processed to generate a summary.
@@ -169,40 +184,12 @@ if ($userId) {
                     </div>
 
                     <div class="summary-panel__footer">
-                        <?php 
-                        // Guests and users with pending terms must clear consent before the submit button becomes useful.
-                        $needsAcceptance = !$userId || TermsAcceptanceService::currentUserNeedsAcceptance();
-                        if ($needsAcceptance): 
-                        ?>
-                            <?php if ($guestNeedsTermsReview && !$userId): ?>
-                                <div class="summary-gate">
-                                    <p class="summary-gate__note">
-                                        You must read the full Terms and Conditions before you can continue to the consent step.
-                                    </p>
-                                    <a href="<?= htmlspecialchars($termsLink) ?>" class="btn-submit summary-gate__button">Read Terms and Conditions</a>
-                                </div>
-                            <?php else: ?>
-                                <label class="consent-box consent-box-inline">
-                                    <input
-                                        type="checkbox"
-                                        id="guest_terms_accept"
-                                        name="guest_terms_accept"
-                                        value="1"
-                                        <?= !$userId && $guestTermsAccepted ? 'checked' : '' ?>
-                                        required
-                                    >
-                                    <span class="consent-copy">
-                                        I agree to the <a href="<?= htmlspecialchars($termsLink) ?>">Terms and Conditions</a>
-                                        and understand that my submitted text will be processed to generate a summary.
-                                    </span>
-                                </label>
-                            <?php endif; ?>
-                        <?php endif; ?>
+
                         <div class="summary-actions-group">
-                            <button type="submit" class="summary-submit-button" <?= (!$userId && $guestNeedsTermsReview) ? 'disabled' : '' ?>>
+                            <button type="submit" class="summary-submit-button">
                                 SUMMARIZE
                             </button>
-                            <button type="button" id="btn-nutshell-action" class="summary-nutshell-button" <?= (!$userId && $guestNeedsTermsReview) ? 'disabled' : '' ?>>
+                            <button type="button" id="btn-nutshell-action" class="summary-nutshell-button">
                                 NUTSHELL
                             </button>
                         </div>
@@ -257,114 +244,63 @@ if ($userId) {
             </section>
 
         <?php if ($sidebarData): ?>
-        <aside class="workspace-sidebar" aria-label="Analytics Overview">
-
-            <?php if ($sidebarMode === 'admin'): ?>
-            <!-- ── ADMIN SIDEBAR ─────────────────────────────────────────── -->
-            <div class="sidebar-header">
-                <span class="sidebar-header__eyebrow">Live Overview</span>
-                <h2 class="sidebar-header__title">System Metrics</h2>
+        <aside class="workspace-sidebar analytics-sidebar" aria-label="Analytics and graphs">
+            <div class="analytics-sidebar__header">
+                <div><span class="sidebar-header__eyebrow"><?= $isAdmin ? 'System Overview' : 'Your Activity' ?></span><h2 class="sidebar-header__title">Analytics &amp; Graphs</h2></div>
+                <a href="analytics.php" class="analytics-sidebar__open" aria-label="Open full analytics dashboard" title="Open full analytics dashboard">↗</a>
             </div>
-
-            <div class="sidebar-section">
-                <span class="sidebar-section__label">Summarizer Activity</span>
-                <div class="sidebar-kpi-grid">
-                    <div class="sidebar-kpi">
-                        <span class="sidebar-kpi__value"><?= number_format($sidebarData['total_summaries']) ?></span>
-                        <span class="sidebar-kpi__label">Total Summaries</span>
-                    </div>
-                    <div class="sidebar-kpi">
-                        <span class="sidebar-kpi__value"><?= $sidebarData['summaries_today'] ?></span>
-                        <span class="sidebar-kpi__label">Today</span>
-                    </div>
-                    <div class="sidebar-kpi">
-                        <span class="sidebar-kpi__value"><?= number_format($sidebarData['registered_users']) ?></span>
-                        <span class="sidebar-kpi__label">Registered Users</span>
-                    </div>
-                </div>
+            <?php if ($analyticsData): ?>
+            <div class="analytics-sidebar__filters" role="group" aria-label="Analytics range">
+                <button type="button" class="analytics-range is-active" data-range="30">30d</button><button type="button" class="analytics-range" data-range="7">7d</button><button type="button" class="analytics-range" data-range="90">90d</button><button type="button" class="analytics-range" data-range="all">All</button>
             </div>
-
-            <div class="sidebar-section">
-                <span class="sidebar-section__label">Traffic (7 Days)</span>
-                <div class="sidebar-kpi-grid">
-                    <div class="sidebar-kpi">
-                        <span class="sidebar-kpi__value"><?= $sidebarData['sessions_today'] ?></span>
-                        <span class="sidebar-kpi__label">Sessions Today</span>
-                    </div>
-                    <div class="sidebar-kpi">
-                        <span class="sidebar-kpi__value"><?= $sidebarData['sessions_7d'] ?></span>
-                        <span class="sidebar-kpi__label">7-Day Sessions</span>
-                    </div>
-                    <div class="sidebar-kpi sidebar-kpi--<?= $sidebarData['conversion_rate_7d'] >= 10 ? 'good' : ($sidebarData['conversion_rate_7d'] >= 5 ? 'warn' : 'neutral') ?>">
-                        <span class="sidebar-kpi__value"><?= $sidebarData['conversion_rate_7d'] ?>%</span>
-                        <span class="sidebar-kpi__label">Conversion</span>
-                    </div>
-                    <div class="sidebar-kpi sidebar-kpi--<?= $sidebarData['bounce_rate_7d'] > 70 ? 'bad' : ($sidebarData['bounce_rate_7d'] > 40 ? 'warn' : 'good') ?>">
-                        <span class="sidebar-kpi__value"><?= $sidebarData['bounce_rate_7d'] ?>%</span>
-                        <span class="sidebar-kpi__label">Bounce Rate</span>
-                    </div>
-                </div>
+            <div class="analytics-sidebar__metrics" aria-live="polite">
+                <div><strong data-analytics="articles">0</strong><span>Total Articles</span></div><div><strong data-analytics="summaries">0</strong><span>Summaries</span></div><div><strong data-analytics="original_avg">N/A</strong><span>Avg Original Words</span></div><div><strong data-analytics="summary_avg">N/A</strong><span>Avg Summary Words</span></div><div><strong data-analytics="reduction">N/A</strong><span>Compression Ratio</span></div><div><strong data-analytics="method">N/A</strong><span>Top Method</span></div>
             </div>
-
-            <div class="sidebar-section">
-                <span class="sidebar-section__label">Device Split</span>
-                <?php
-                $deviceLabels = ['desktop' => 'Desktop', 'mobile' => 'Mobile', 'tablet' => 'Tablet'];
-                foreach ($sidebarData['devices'] as $dev => $pct):
-                    if ($pct === 0) continue;
-                ?>
-                <div class="sidebar-device-bar">
-                    <span class="sidebar-device-bar__label"><?= $deviceLabels[$dev] ?? ucfirst($dev) ?></span>
-                    <div class="sidebar-device-bar__track">
-                        <div class="sidebar-device-bar__fill" style="width:<?= max(2, $pct) ?>%"></div>
-                    </div>
-                    <span class="sidebar-device-bar__pct"><?= $pct ?>%</span>
-                </div>
-                <?php endforeach; ?>
-            </div>
-
-            <a href="admin_analytics.php" class="sidebar-link">Full Analytics &rarr;</a>
-
-            <?php else: ?>
-            <!-- ── USER SIDEBAR ──────────────────────────────────────────── -->
-            <div class="sidebar-header">
-                <span class="sidebar-header__eyebrow">Your Activity</span>
-                <h2 class="sidebar-header__title">Summary Stats</h2>
-            </div>
-
-            <div class="sidebar-section">
-                <span class="sidebar-section__label">Your Summaries</span>
-                <div class="sidebar-kpi-grid">
-                    <div class="sidebar-kpi">
-                        <span class="sidebar-kpi__value"><?= $sidebarData['my_summaries'] ?></span>
-                        <span class="sidebar-kpi__label">Total Generated</span>
-                    </div>
-                    <div class="sidebar-kpi">
-                        <span class="sidebar-kpi__value"><?= $sidebarData['my_today'] ?></span>
-                        <span class="sidebar-kpi__label">Today</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="sidebar-section">
-                <span class="sidebar-section__label">Platform</span>
-                <div class="sidebar-kpi-grid">
-                    <div class="sidebar-kpi">
-                        <span class="sidebar-kpi__value"><?= number_format($sidebarData['total_summaries']) ?></span>
-                        <span class="sidebar-kpi__label">Total Summaries</span>
-                    </div>
-                </div>
-            </div>
-
+            <div class="analytics-sidebar__chart"><h3>Summaries Over Time</h3><div><canvas id="sidebarActivityChart"></canvas></div></div>
+            <div class="analytics-sidebar__chart"><h3>Original vs Summary Length</h3><div><canvas id="sidebarWordsChart"></canvas></div></div>
+            <div class="analytics-sidebar__chart"><h3>Articles by Category</h3><div><canvas id="sidebarCategoryChart"></canvas></div></div>
+            <div class="analytics-sidebar__chart"><h3>Method Usage</h3><div><canvas id="sidebarMethodChart"></canvas></div></div>
+            <p class="analytics-sidebar__empty" hidden>No analytics yet. Summarize your first article to start tracking your activity.</p>
+            <script>window.sidebarAnalyticsData = <?= json_encode($analyticsData, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
             <?php endif; ?>
-
         </aside>
         <?php endif; ?>
 
         </section>
     </main>
 
+    <?php require __DIR__ . '/partials/site-footer.php'; ?>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script src="assets/js/index.js"></script>
+<script>
+(function() {
+    var styleDescriptions = {
+        'standard_paragraph': 'Balanced narrative summary capturing key thematic points in fluent paragraph form.',
+        'bullet_points': 'High-impact key takeaways formatted as clean, standalone bullet points.',
+        'hybrid': 'Executive narrative overview paired with structured bullet points for quick scanning.',
+        'executive_summary': 'Tailored for leadership: prioritizes strategic decisions, core findings, metrics, and recommendations.',
+        'academic_summary': 'Tailored for research: prioritizes methodology, experimental setup, numerical findings, and conclusions.',
+        'simple_summary': 'Tailored for study & learning: highlights definitions, fundamental concepts, and explanatory analogies.',
+        'technical_summary': 'Tailored for engineers: highlights architecture, components, constraints, dependencies, and operational details.',
+        'news_summary': 'Tailored for journalism: focuses on who, what, when, where, breaking facts, and reported outcomes.'
+    };
+
+    var styleSelect = document.getElementById('summary_style');
+    var styleDesc = document.getElementById('style_description');
+
+    function updateStyleDescription() {
+        if (!styleSelect || !styleDesc) return;
+        var val = styleSelect.value;
+        styleDesc.textContent = styleDescriptions[val] || '';
+    }
+
+    if (styleSelect) {
+        styleSelect.addEventListener('change', updateStyleDescription);
+        updateStyleDescription();
+    }
+})();
+</script>
 
 </body>
 </html>

@@ -1,0 +1,14 @@
+(function () {
+    const data = window.analyticsData;
+    if (!data || typeof Chart === 'undefined') return;
+    const colors = ['#6250c8', '#8b7cf0', '#3b82f6', '#14b8a6', '#f59e0b', '#64748b'];
+    const labels = (rows, map) => rows.map(row => map[row.label] || (row.label ? row.label.charAt(0).toUpperCase() + row.label.slice(1) : 'Other'));
+    const values = rows => rows.map(row => Number(row.total));
+    const base = { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { usePointStyle: true, boxWidth: 8 } } } };
+    new Chart(document.getElementById('activityChart'), { type: 'line', data: { labels: data.trend.map(row => row.bucket), datasets: [{ label: 'Summaries', data: values(data.trend), borderColor: '#6250c8', backgroundColor: 'rgba(98,80,200,.1)', fill: true, tension: .3 }] }, options: { ...base, scales: { y: { beginAtZero: true, ticks: { precision: 0 } } } } });
+    new Chart(document.getElementById('nutshellChart'), { type: 'line', data: { labels: data.nutshellTrend.map(row => row.bucket), datasets: [{ label: 'Nutshells Generated', data: values(data.nutshellTrend), borderColor: '#14b8a6', backgroundColor: 'rgba(20,184,166,.1)', fill: true, tension: .3 }] }, options: { ...base, scales: { y: { beginAtZero: true, ticks: { precision: 0 } } } } });
+    new Chart(document.getElementById('styleChart'), { type: 'doughnut', data: { labels: labels(data.styles, data.styleLabels), datasets: [{ data: values(data.styles), backgroundColor: colors }] }, options: { ...base, cutout: '62%' } });
+    new Chart(document.getElementById('lengthChart'), { type: 'bar', data: { labels: labels(data.lengths, {}), datasets: [{ label: 'Summaries', data: values(data.lengths), backgroundColor: '#8b7cf0', borderRadius: 4 }] }, options: { ...base, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { precision: 0 } } } } });
+    new Chart(document.getElementById('wordsChart'), { type: 'bar', data: { labels: ['Words'], datasets: [{ label: 'Original Words', data: [Number(data.words.original_words || 0)], backgroundColor: '#3b82f6' }, { label: 'Summary Words', data: [Number(data.words.summary_words || 0)], backgroundColor: '#6250c8' }] }, options: { ...base, scales: { y: { beginAtZero: true } } } });
+    new Chart(document.getElementById('typeChart'), { type: 'bar', data: { labels: labels(data.types, data.typeLabels), datasets: [{ label: 'Processed', data: values(data.types), backgroundColor: '#14b8a6', borderRadius: 4 }] }, options: { ...base, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, ticks: { precision: 0 } } } } });
+}());

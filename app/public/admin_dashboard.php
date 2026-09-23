@@ -35,6 +35,12 @@ require_once __DIR__ . '/../src/Utils/validation.php';
 $csrf_token = generateCsrfToken();
 
 // Landing page analytics — gracefully degrade if tables haven't been migrated yet.
+$analyticsAvailable = false;
+$analyticsKpis      = [];
+$analyticsDevices   = [];
+$analyticsFunnel    = [];
+$analyticsTrend     = [];
+$analyticsReferrers = [];
 try {
     $analytics = new AnalyticsController();
     $analyticsKpis      = $analytics->getKpis();
@@ -259,7 +265,6 @@ try {
     <div class="editorial-layout">
         <nav style="margin-bottom: 40px; display:flex; gap:20px; flex-wrap:wrap;">
             <a href="index.php" style="text-decoration:none; font-size:0.8em; color:var(--color-muted); font-family:'Inter'; text-transform:uppercase; letter-spacing:1px;">&larr; Dashboard</a>
-            <a href="admin_analytics.php" style="text-decoration:none; font-size:0.8em; color:var(--color-primary-dark); font-family:'Inter'; text-transform:uppercase; letter-spacing:1px;">Analytics</a>
             <a href="admin_audit_logs.php" style="text-decoration:none; font-size:0.8em; color:var(--color-primary-dark); font-family:'Inter'; text-transform:uppercase; letter-spacing:1px;">Audit Logs</a>
             <a href="admin_challenge_change.php" style="text-decoration:none; font-size:0.8em; color:var(--color-primary-dark); font-family:'Inter'; text-transform:uppercase; letter-spacing:1px;">Update Security Challenge</a>
             <a href="auth.php?action=logout" class="js-logout-link" style="text-decoration:none; font-size:0.8em; color:var(--color-danger); font-family:'Inter'; text-transform:uppercase; letter-spacing:1px;">Logout</a>

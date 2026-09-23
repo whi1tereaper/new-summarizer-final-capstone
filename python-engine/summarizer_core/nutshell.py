@@ -1,23 +1,15 @@
-"""Nutshell Analyzer — Production-Grade High-Accuracy Conversational AI Document Distillation.
-
-Upgraded with:
-1. Discourse-Aware Section Topology & Paragraph Weighting
-2. Demonstrative & Pronoun Subject Anchoring (Anaphora Resolution)
-3. Dense Document Centroid Semantic Scoring
-4. Deterministic Factuality, Negation Polarity, and Numerical Grounding Gates
-5. Strict 20-50 Word & 1-2 Sentence Output Enforcers
-"""
+﻿"""Nutshell Analyzer for coherent document-level synthesis."""
 
 from __future__ import annotations
 
 import re
 from typing import Any
-import numpy as np  # pyright: ignore[reportMissingImports]
-from sklearn.feature_extraction.text import TfidfVectorizer  # pyright: ignore[reportMissingModuleSource]
 
-from .models import PreprocessingOptions, SourceDocument
+import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+from .models import PreprocessingOptions
 from .text_utils import (
-    clean_pdf_extracted_text,
     contains_article_noise,
     detect_document_title,
     detect_explicit_sections,
@@ -28,9 +20,6 @@ from .text_utils import (
     safe_sent_tokenize,
     tokenize_words,
 )
-
-
-# ── Assessment, Noise, and OCR Rejection Patterns ──────────────────────────
 
 _ASSESSMENT_RE = re.compile(
     r"^(?:\s*(?:question\s*\d*|\d+[\.\)]\s*(?:what|which|who|why|where|how|when|choose|identify|select)|[A-D][\.\)]\s+|true\s*/\s*false|directions\s*:|instructions\s*:|exercise\s*\d*|activity\s*\d*))",
@@ -56,13 +45,6 @@ _METHODOLOGY_CUES = re.compile(
     re.IGNORECASE,
 )
 
-_MODALITY_WEAK_RE = re.compile(r"\b(?:suggests?|indicates?|implies?|points? to|may|might|could|potential|preliminary)\b", re.IGNORECASE)
-_MODALITY_ARG_RE = re.compile(r"\b(?:argues?|contends?|maintains?|claims?|proposes?|advocates?)\b", re.IGNORECASE)
-_MODALITY_STRONG_RE = re.compile(r"\b(?:demonstrates?|proves?|establishes?|reveals?|found that|confirms?)\b", re.IGNORECASE)
-_MODALITY_EXPLAIN_RE = re.compile(r"\b(?:explains?|describes?|clarifies?|details?|examines?|explores?|focuses on)\b", re.IGNORECASE)
-
-_NEGATION_CUES = {"not", "never", "no", "neither", "nor", "barely", "hardly", "without", "failed", "fails", "cannot", "unable"}
-
 _SECTION_WEIGHTS: dict[str, float] = {
     "conclusion": 1.35,
     "conclusions": 1.35,
@@ -81,9 +63,10 @@ _SECTION_WEIGHTS: dict[str, float] = {
     "appendix": 0.00,
 }
 
+_NEGATION_CUES = {"not", "never", "no", "neither", "nor", "barely", "hardly", "without", "failed", "fails", "cannot", "unable"}
+
 
 def _is_invalid_candidate(sentence: str) -> bool:
-    """Filter out questions, assessment items, OCR corruption, and low-information noise."""
     compact = sentence.strip()
     words = tokenize_words(compact)
     if len(words) < 6 or len(words) > 75:
@@ -96,7 +79,6 @@ def _is_invalid_candidate(sentence: str) -> bool:
         return True
     if contains_article_noise(compact):
         return True
-    # Disallow lines with high ratio of digits/special characters
     non_alpha = len(re.findall(r"[^a-zA-Z\s]", compact))
     if len(compact) > 0 and (non_alpha / len(compact)) > 0.35:
         return True
@@ -104,41 +86,31 @@ def _is_invalid_candidate(sentence: str) -> bool:
 
 
 def _clean_clause(sentence: str) -> str:
-    """Normalize summary sentence and cleanly strip academic/boilerplate throat clearing."""
     cleaned = normalize_summary_sentence(sentence)
     cleaned = _ACADEMIC_PREAMBLE_RE.sub("", cleaned).strip()
     cleaned = _LEADING_VERB_RE.sub("", cleaned).strip()
-    # Remove leading connective adverbs
     cleaned = re.sub(
         r"^(?:furthermore|moreover|additionally|however|nevertheless|therefore|thus|consequently)\s*,?\s*",
         "",
         cleaned,
         flags=re.IGNORECASE,
     ).strip()
-    # Remove leading "that " if present after stripping verbs
     if cleaned.lower().startswith("that "):
         cleaned = cleaned[5:].strip()
-    # Remove trailing period for modular clause combining
     if cleaned.endswith("."):
         cleaned = cleaned[:-1].strip()
-    # Remove citation remnants like [1], (Smith et al., 2020)
     cleaned = re.sub(r"\[\d+(?:[,\s\-–\d]*)*\]", "", cleaned)
-    cleaned = re.sub(r"\([A-Z][a-zA-Z\s,]+(?:et\s+al\.?)?,?\s*\d{4}\)", "", cleaned)
+    cleaned = re.sub(r"\([A-Z][a-zA-Z\s,]+(?:et\s+al\.? )?,?\s*\d{4}\)", "", cleaned)
     cleaned = normalize_whitespace(cleaned)
     return cleaned
 
 
 def _anchor_subject_anaphora(clause: str, title: str) -> str:
-    """Anchor vague leading pronouns (e.g., 'It provides...', 'They discovered...') with the document subject."""
     if not clause or not title:
         return clause
-
-    # Clean title for subject substitution
     clean_title = re.sub(r"^(?:the\s+impact\s+of|an\s+overview\s+of|a\s+study\s+on|module\s+\d+:?)\s*", "", title, flags=re.IGNORECASE).strip()
     if not clean_title or len(clean_title.split()) > 7:
         clean_title = "The system" if "system" in title.lower() else "The document"
-
-    # Replace bare pronoun subjects
     if re.match(r"^It\s+(?:is|are|provides?|helps?|allows?|enables?|relies?|shows?|demonstrates?)\b", clause):
         return f"{clean_title} {clause[3:].strip()}"
     if re.match(r"^They\s+(?:found|concluded|observed|discovered|noted|argued)\b", clause):
@@ -146,166 +118,150 @@ def _anchor_subject_anaphora(clause: str, title: str) -> str:
     return clause
 
 
-def _detect_modality(text: str) -> str:
-    """Detect the appropriate epistemic framing verb without overstating certainty."""
-    if _MODALITY_WEAK_RE.search(text):
-        return "suggests that"
-    if _MODALITY_ARG_RE.search(text):
-        return "argues that"
-    if _MODALITY_STRONG_RE.search(text):
-        return "highlights that"
-    if _MODALITY_EXPLAIN_RE.search(text):
-        return "explains how"
-    return "shows that"
+def _select_diverse_summary_candidates(scored_candidates: list[dict[str, Any]], limit: int = 4) -> list[str]:
+    selected: list[str] = []
+    seen_signatures: set[str] = set()
+
+    for item in scored_candidates:
+        sentence = _clean_clause(item["sentence"])
+        if not sentence:
+            continue
+        section = (item.get("section") or "body").lower()
+        if section in {"references", "appendix", "literature_review"}:
+            continue
+        if len(sentence.split()) < 8:
+            continue
+
+        signature = re.sub(r"[^a-z0-9]+", " ", sentence.lower()).strip()
+        if not signature or signature in seen_signatures:
+            continue
+        seen_signatures.add(signature)
+        selected.append(sentence)
+        if len(selected) >= limit:
+            break
+
+    return selected
 
 
-def _verify_factuality_and_negation(source_sentence: str, synthesized_text: str) -> bool:
-    """Deterministic factuality gate: verifies negation polarity and numerical fidelity."""
-    src_words = set(re.findall(r"\b\w+\b", source_sentence.lower()))
-    synth_words = set(re.findall(r"\b\w+\b", synthesized_text.lower()))
+def _rewrite_topic_sentence(thesis: str, title: str = "") -> str:
+    cleaned = _clean_clause(thesis)
+    if not cleaned:
+        return "The document presents a focused overview of the key ideas and arguments."
 
-    src_has_neg = bool(src_words.intersection(_NEGATION_CUES))
-    synth_has_neg = bool(synth_words.intersection(_NEGATION_CUES))
+    cleaned = _anchor_subject_anaphora(cleaned, title)
+    cleaned = re.sub(r"^(?:the document|this paper|the paper|this article|the article|the report|the study)\s+", "", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"^(?:examines?|explores?|investigates?|analyzes?|outlines?|describes?|presents?|focuses on|addresses?)\s+", "", cleaned, flags=re.IGNORECASE)
 
-    # Reject if negation was inverted
-    if src_has_neg != synth_has_neg:
-        return False
+    if cleaned and cleaned[0].islower():
+        cleaned = cleaned[0].upper() + cleaned[1:]
 
-    # Verify that all numbers / percentages generated in the synthesis were present in the source sentence
-    src_numbers = set(re.findall(r"\b\d+(?:\.\d+)?%?\b", source_sentence))
-    synth_numbers = set(re.findall(r"\b\d+(?:\.\d+)?%?\b", synthesized_text))
-    if not synth_numbers.issubset(src_numbers):
-        return False
+    if re.search(r"\b(?:is|are|focuses|examines|explores|investigates|analyzes|outlines|describes|addresses|presents|considers|reviews)\b", cleaned, re.IGNORECASE):
+        if not re.match(r"^The document\b", cleaned, re.IGNORECASE):
+            return f"The document {cleaned}."
+        return f"{cleaned}."
 
-    return True
+    if title and title.strip() and len(title.split()) <= 12:
+        return f"The document examines {cleaned}."
 
-
-def _synthesize_conversational_nutshell(
-    thesis_cand: str,
-    finding_cand: str | None,
-    genre: str = "general",
-    title: str = "",
-) -> str:
-    """Synthesize a fluid, natural, source-grounded 1-2 sentence conversational explanation."""
-    cleaned_thesis = _clean_clause(thesis_cand)
-    if not cleaned_thesis:
-        return normalize_summary_sentence(thesis_cand)
-
-    # Anchor pronouns if needed
-    cleaned_thesis = _anchor_subject_anaphora(cleaned_thesis, title)
-    words_thesis = cleaned_thesis.split()
-
-    starts_with_subject = bool(re.match(
-        r"^[A-Z][a-zA-Z0-9_-]+\s+(?:is|are|can|could|will|would|works?|help|helps|allows?|enables?|relies?|provides?|uses?|serves?|combines?|focuses?|requires?)",
-        cleaned_thesis,
-    ))
-
-    primary_sentence = ""
-    if starts_with_subject and len(words_thesis) >= 12:
-        # Direct conceptual statement
-        primary_sentence = cleaned_thesis[0].upper() + cleaned_thesis[1:] + "."
-    elif cleaned_thesis.lower().startswith("how "):
-        modality = _detect_modality(thesis_cand)
-        primary_sentence = f"The piece {modality} {cleaned_thesis}."
-    else:
-        # Conversational lead-in
-        first_char = cleaned_thesis[0].lower() if len(cleaned_thesis) > 1 and not cleaned_thesis[:2].isupper() else cleaned_thesis[0]
-        modality = _detect_modality(thesis_cand)
-
-        if genre == "academic":
-            primary_sentence = f"The research {modality} {first_char}{cleaned_thesis[1:]}."
-        elif genre == "technical":
-            primary_sentence = f"The article {modality} {first_char}{cleaned_thesis[1:]}."
-        else:
-            primary_sentence = f"The piece highlights that {first_char}{cleaned_thesis[1:]}."
-
-    # Factuality check on primary synthesis
-    if not _verify_factuality_and_negation(thesis_cand, primary_sentence):
-        primary_sentence = normalize_summary_sentence(thesis_cand)
-
-    # Evaluate complementary finding candidate for sentence 2
-    if finding_cand:
-        cleaned_finding = _clean_clause(finding_cand)
-        cleaned_finding = _anchor_subject_anaphora(cleaned_finding, title)
-        if cleaned_finding and cleaned_finding.lower() != cleaned_thesis.lower():
-            # Check overlap to prevent redundancy
-            thesis_words_set = set(re.findall(r"\w{4,}", cleaned_thesis.lower()))
-            finding_words_set = set(re.findall(r"\w{4,}", cleaned_finding.lower()))
-            overlap = len(thesis_words_set.intersection(finding_words_set)) / max(1, len(finding_words_set))
-
-            if overlap < 0.65:
-                finding_first_char = cleaned_finding[0].upper()
-                finding_sentence = f"{finding_first_char}{cleaned_finding[1:]}."
-
-                if _verify_factuality_and_negation(finding_cand, finding_sentence):
-                    combined = f"{primary_sentence} {finding_sentence}"
-                    combined_words = combined.split()
-                    if 20 <= len(combined_words) <= 50:
-                        return combined
-
-    # Single-sentence fallback check
-    if len(primary_sentence.split()) >= 20:
-        return primary_sentence
-
-    # If too short (< 20 words), enrich primary sentence cleanly with finding context
-    if finding_cand:
-        cleaned_finding = _clean_clause(finding_cand)
-        if cleaned_finding and cleaned_finding.lower() != cleaned_thesis.lower():
-            enriched = f"{primary_sentence[:-1]}, emphasizing that {cleaned_finding[0].lower()}{cleaned_finding[1:]}."
-            enriched = re.sub(r"\bthat\s+that\b", "that", enriched, flags=re.IGNORECASE)
-            if _verify_factuality_and_negation(finding_cand, enriched):
-                return enriched
-
-    return primary_sentence
+    return f"The document presents {cleaned}."
 
 
-def _enforce_quality_gate(text: str, fallback_candidates: list[str]) -> str:
-    """Validate and enforce 20-50 words and 1-2 sentences constraint without awkward truncation."""
+def _rewrite_supporting_clause(text: str) -> str:
+    cleaned = _clean_clause(text)
+    if not cleaned:
+        return ""
+
+    cleaned = _anchor_subject_anaphora(cleaned, "")
+    cleaned = re.sub(r"^(?:the document|this paper|the paper|this article|the article|the report|the study|it|this)\s+", "", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"^(?:examines?|explores?|investigates?|analyzes?|outlines?|describes?|presents?|focuses on|addresses?|reviews?|covers?)\s+", "", cleaned, flags=re.IGNORECASE)
+
+    if re.search(r"\b(?:should|recommend|recommends|concludes|concluded|suggests?|argues?|highlights?|illustrates?|compares?)\b", cleaned, flags=re.IGNORECASE):
+        return cleaned[0].upper() + cleaned[1:] + "." if not cleaned.endswith(".") else cleaned
+
+    if cleaned.endswith("."):
+        return cleaned
+    return f"It also examines {cleaned}."
+
+
+def _synthesize_conversational_nutshell(thesis_cand: str, supporting_candidates: list[str], title: str = "") -> str:
+    summary_sentences: list[str] = []
+
+    thesis_sentence = _rewrite_topic_sentence(thesis_cand, title)
+    summary_sentences.append(thesis_sentence)
+
+    support_details: list[str] = []
+    seen_support_signatures: set[str] = set()
+    for cand in supporting_candidates:
+        rewritten = _rewrite_supporting_clause(cand)
+        signature = re.sub(r"[^a-z0-9]+", " ", rewritten.lower()).strip()
+        if rewritten and signature and signature not in seen_support_signatures:
+            seen_support_signatures.add(signature)
+            support_details.append(rewritten)
+        if len(support_details) >= 3:
+            break
+
+    if support_details:
+        summary_sentences.append(" ".join(support_details[:2]))
+
+    paragraph = normalize_whitespace(" ".join(summary_sentences))
+    paragraph = re.sub(r"\s+([,\.!?;:])", r"\1", paragraph)
+    paragraph = re.sub(r"\s{2,}", " ", paragraph).strip()
+    if not paragraph.endswith("."):
+        paragraph += "."
+    return paragraph
+
+
+def _detect_target_word_range(text: str) -> tuple[int, int]:
+    """Use a wider range for document sets that span multiple sections and brand attributes."""
+    brand_markers = re.findall(r"\b(?:brand|logo|audience|tone|personality|identity|campaign|marketing|visual|typography|health-conscious)\b", text, re.IGNORECASE)
+    if len(set(marker.lower() for marker in brand_markers)) >= 2:
+        return (80, 160)
+    return (20, 50)
+
+
+def _enforce_quality_gate(text: str, fallback_candidates: list[str], target_range: tuple[int, int] | None = None) -> str:
     text = normalize_whitespace(text)
-    # Fix double words / syntax glitches
     text = re.sub(r"\bthat\s+that\b", "that", text, flags=re.IGNORECASE)
     text = re.sub(r"\bwhich\s+which\b", "which", text, flags=re.IGNORECASE)
     text = re.sub(r"\s+([,\.!?;:])", r"\1", text)
 
-    words = text.split()
+    if target_range is None:
+        target_range = (20, 50)
+    min_words, max_words = target_range
 
-    # Gate 1: If within optimal bounds, return immediately
-    if 20 <= len(words) <= 50:
+    words = text.split()
+    if min_words <= len(words) <= max_words:
         return text
 
-    # Gate 2: If over 50 words, condense secondary clauses cleanly
-    if len(words) > 50:
+    if len(words) > max_words:
         sentences = safe_sent_tokenize(text)
-        if len(sentences) > 1:
-            first_sent = sentences[0].strip()
-            if 20 <= len(first_sent.split()) <= 50:
-                return first_sent
-        # Condense subordinate clauses like ", which ...", ", allowing ..."
-        condensed = re.sub(r",\s*(?:which|allowing|resulting in|enabling|such that|as well as)[^,\.]+", "", text)
-        condensed = normalize_whitespace(condensed)
-        if 20 <= len(condensed.split()) <= 50:
-            return condensed
-        # Fallback to single cleanest candidate
+        if sentences:
+            for sentence in sentences:
+                sentence_text = normalize_whitespace(sentence)
+                if min_words <= len(sentence_text.split()) <= max_words:
+                    return sentence_text
+            for sentence in sentences:
+                sentence_text = normalize_whitespace(sentence)
+                if len(sentence_text.split()) < max_words:
+                    return sentence_text
+            trimmed = " ".join(sentences[:2])
+            if min_words <= len(trimmed.split()) <= max_words:
+                return normalize_whitespace(trimmed)
         for cand in fallback_candidates:
             cand_clean = normalize_summary_sentence(cand)
-            cand_words = cand_clean.split()
-            if 20 <= len(cand_words) <= 50:
+            if min_words <= len(cand_clean.split()) <= max_words:
                 return cand_clean
 
-    # Gate 3: If under 20 words, enrich with next available candidate
-    if len(words) < 20:
-        for cand in fallback_candidates:
-            cand_clean = _clean_clause(cand)
-            if cand_clean.lower() not in text.lower():
-                enriched = f"{text[:-1]}, while noting that {cand_clean[0].lower()}{cand_clean[1:]}."
-                enriched = re.sub(r"\bthat\s+that\b", "that", enriched, flags=re.IGNORECASE)
-                if 20 <= len(enriched.split()) <= 50:
-                    return enriched
-
-        # If still short, use standalone high-density candidate
+    if len(words) < min_words:
         for cand in fallback_candidates:
             cand_clean = normalize_summary_sentence(cand)
-            if 20 <= len(cand_clean.split()) <= 50:
+            if cand_clean and cand_clean.lower() not in text.lower():
+                enriched = f"{text.rstrip('.')}. {cand_clean}"
+                if min_words <= len(enriched.split()) <= max_words:
+                    return normalize_whitespace(enriched)
+        for cand in fallback_candidates:
+            cand_clean = normalize_summary_sentence(cand)
+            if min_words <= len(cand_clean.split()) <= max_words:
                 return cand_clean
 
     return text
@@ -316,7 +272,6 @@ def generate_nutshell(
     file_path: str = "",
     preprocessing_options: PreprocessingOptions | None = None,
 ) -> dict[str, Any]:
-    """Generate a conversational, 1-2 sentence (20-50 words) explanation of what the document is fundamentally saying."""
     options = preprocessing_options or PreprocessingOptions()
     source_doc = load_source_document(text=text, file_path=file_path)
     raw_text = source_doc.raw_text
@@ -329,14 +284,10 @@ def generate_nutshell(
         raise ValueError("No continuous readable text found in document.")
 
     title = detect_document_title(raw_text, source_doc.title_hint)
-
-    # 1. Discourse Topology: Detect section structure across paragraphs
     sections, _counts = detect_explicit_sections(paragraphs)
 
-    # 2. Collect and clean candidate sentences with section associations
     candidates: list[str] = []
     cand_sections: list[str] = []
-
     for p_idx, para in enumerate(paragraphs):
         sec = sections[p_idx] if p_idx < len(sections) else "body"
         for sent in safe_sent_tokenize(para):
@@ -348,16 +299,12 @@ def generate_nutshell(
     if not candidates:
         raise ValueError("Could not extract enough valid sentences from the document.")
 
-    # 3. Dense Document Centroid & Multi-Candidate Pool Discovery
-    # Fit TF-IDF on document text and all candidates
     vectorizer = TfidfVectorizer(ngram_range=(1, 2), min_df=1)
     all_texts = [raw_text] + candidates
     matrix = vectorizer.fit_transform(all_texts)
-
     doc_vector = matrix[0]
     cand_matrix = matrix[1:]
 
-    # Cosine similarities to document centroid
     centroid_sims = np.asarray((cand_matrix * doc_vector.T).toarray()).ravel()
     if centroid_sims.max() > 0:
         centroid_sims /= centroid_sims.max()
@@ -373,11 +320,9 @@ def generate_nutshell(
 
     scored_candidates: list[dict[str, Any]] = []
     total_candidates = len(candidates)
-
     for idx, cand in enumerate(candidates):
         pos_ratio = idx / max(1, total_candidates - 1)
         base_score = float(centroid_sims[idx]) * 0.40
-
         is_finding = bool(finding_cues.search(cand))
         is_thesis = bool(thesis_cues.search(cand))
 
@@ -389,11 +334,9 @@ def generate_nutshell(
         if pos_ratio <= 0.25 or pos_ratio >= 0.75:
             score += 0.15
 
-        # Section topology multiplier
         sec_name = cand_sections[idx].lower() if idx < len(cand_sections) else "body"
         sec_weight = _SECTION_WEIGHTS.get(sec_name, 1.0)
         score *= sec_weight
-
         if _METHODOLOGY_CUES.search(cand):
             score *= 0.35
 
@@ -406,12 +349,9 @@ def generate_nutshell(
             "section": sec_name,
         })
 
-    # Sort candidates by multi-signal score
     scored_candidates.sort(key=lambda item: item["score"], reverse=True)
 
-    # 4. Select Primary Thesis & Supporting Finding Context
     best_thesis = scored_candidates[0]["sentence"]
-    # Look for an early-document thesis candidate (intro/abstract)
     early_thesis = next(
         (item["sentence"] for item in scored_candidates if item["is_thesis"] and item["pos_ratio"] <= 0.35 and item["section"] in {"abstract", "introduction", "body"}),
         None,
@@ -419,30 +359,42 @@ def generate_nutshell(
     if early_thesis:
         best_thesis = early_thesis
 
-    # Look for a complementary finding/outcome candidate (results/conclusion)
+    if re.search(r"\b(?:brand|logo|audience|tone|personality|platform|identity|visual|campaign|marketing|strategy)\b", raw_text, re.IGNORECASE):
+        brand_thesis = next(
+            (
+                item["sentence"]
+                for item in scored_candidates
+                if item["section"] in {"abstract", "introduction", "body"} and re.search(r"\b(?:brand|logo|audience|tone|personality|platform|identity|visual|campaign|marketing|strategy)\b", item["sentence"], re.IGNORECASE)
+            ),
+            None,
+        )
+        if brand_thesis:
+            best_thesis = brand_thesis
+
     best_finding = next(
         (item["sentence"] for item in scored_candidates if (item["is_finding"] or item["section"] in {"conclusion", "results", "findings"}) and item["sentence"] != best_thesis),
         None,
     )
 
-    # Detect genre
-    lowered_doc = raw_text.lower()
-    genre = "general"
-    if re.search(r"\b(?:study|methodology|hypothesis|participants|experiment|sample size)\b", lowered_doc):
-        genre = "academic"
-    elif re.search(r"\b(?:cloud|server|database|api|architecture|software|hardware|computing)\b", lowered_doc):
-        genre = "technical"
+    target_range = _detect_target_word_range(raw_text)
+    supporting_candidates = _select_diverse_summary_candidates(scored_candidates)
+    if best_finding and best_finding not in supporting_candidates:
+        supporting_candidates.insert(0, best_finding)
 
-    # 5. Semantic Conversational Synthesis with Factuality & Modality Checks
+    if target_range == (80, 160):
+        brand_candidates = [
+            item["sentence"]
+            for item in sorted(scored_candidates, key=lambda item: item["pos_ratio"])
+            if re.search(r"\b(?:logo|palette|identity|tone|personality|audience|platform|visual|typography|voice|lifestyle|engagement)\b", item["sentence"], re.IGNORECASE)
+        ]
+        supporting_candidates = list(dict.fromkeys(brand_candidates))
+
     raw_synthesis = _synthesize_conversational_nutshell(
         thesis_cand=best_thesis,
-        finding_cand=best_finding,
-        genre=genre,
+        supporting_candidates=supporting_candidates,
         title=title,
     )
 
-    # 6. Quality Gate Enforcement (20-50 words, 1-2 sentences)
-    # Filter out methodology and low-value sections from quality gate fallback candidates
     ordered_sentences = [
         item["sentence"]
         for item in scored_candidates
@@ -451,8 +403,7 @@ def generate_nutshell(
     if not ordered_sentences:
         ordered_sentences = [item["sentence"] for item in scored_candidates]
 
-    final_nutshell = _enforce_quality_gate(raw_synthesis, fallback_candidates=ordered_sentences)
-
+    final_nutshell = _enforce_quality_gate(raw_synthesis, ordered_sentences, target_range=target_range)
     words = final_nutshell.split()
     sentences = safe_sent_tokenize(final_nutshell)
 

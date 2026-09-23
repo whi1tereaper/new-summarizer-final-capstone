@@ -4,6 +4,7 @@ ob_start();
 require_once __DIR__ . '/../src/whitereaper.php';
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../src/Controllers/HistoryHandler.php';
+require_once __DIR__ . '/../src/Database.php';
 require_once __DIR__ . '/../src/Services/LocalPythonBridge.php';
 require_once __DIR__ . '/../src/Services/FileUploadService.php';
 require_once __DIR__ . '/../src/Services/SourceResolver.php';
@@ -11,6 +12,7 @@ require_once __DIR__ . '/../src/Utils/Formatter.php';
 require_once __DIR__ . '/../src/Utils/validation.php';
 
 use App\Src\Controllers\HistoryHandler;
+use App\Src\Database;
 use App\Src\Services\LocalPythonBridge;
 use App\Src\Services\FileUploadService;
 use App\Src\Services\SourceResolver;
@@ -27,10 +29,39 @@ function sendNutshellJsonResponse(int $statusCode, array $data): void
     exit;
 }
 
+function ensureNutshellGenerationsTable(PDO $db): void
+{
+    $db->exec(
+        'CREATE TABLE IF NOT EXISTS nutshell_generations (
+            id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+            summary_id INT(11) DEFAULT NULL,
+            user_id INT(11) DEFAULT NULL,
+            guest_token VARCHAR(64) DEFAULT NULL,
+            input_type VARCHAR(20) NOT NULL DEFAULT \'text\',
+            nutshell_text TEXT DEFAULT NULL,
+            word_count INT UNSIGNED NOT NULL DEFAULT 0,
+            source_word_count INT UNSIGNED NOT NULL DEFAULT 0,
+            created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (id),
+            KEY idx_ng_created (created_at),
+            KEY idx_ng_user_created (user_id, created_at),
+            KEY idx_ng_summary (summary_id)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci'
+    );
+}
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     sendNutshellJsonResponse(405, [
         'success' => false,
         'message' => 'POST request required.',
+    ]);
+}
+
+require_once __DIR__ . '/../src/Services/TermsAcceptanceService.php';
+if (\App\Src\Services\TermsAcceptanceService::currentUserNeedsAcceptance()) {
+    sendNutshellJsonResponse(403, [
+        'success' => false,
+        'message' => 'You must accept the Terms and Conditions before using the summarizer.',
     ]);
 }
 
@@ -77,6 +108,7 @@ if (!verifyCsrfToken($csrfToken)) {
 
 $textToAnalyze = '';
 $temporaryFilePathToClean = $filePath;
+$resolvedSource = null;
 
 try {
     if ($summaryId !== null && (int)$summaryId > 0) {
@@ -99,8 +131,8 @@ try {
         // If it's a URL, resolve it
         if (preg_match('~^https?://~i', $directText)) {
             $sourceResolver = new SourceResolver();
-            $resolved = $sourceResolver->resolve($directText);
-            $textToAnalyze = $resolved['text'];
+            $resolvedSource = $sourceResolver->resolve($directText);
+            $textToAnalyze = $resolvedSource->getText();
         } else {
             $textToAnalyze = $directText;
         }
@@ -120,6 +152,43 @@ try {
     ];
 
     $result = $bridge->nutshell($payload, 45);
+    $nutshellText = trim((string)($result['nutshell'] ?? ''));
+
+    if ($nutshellText !== '') {
+        $db = Database::getInstance()->getConnection();
+        ensureNutshellGenerationsTable($db);
+        $statement = $db->prepare(
+            'INSERT INTO nutshell_generations (summary_id, user_id, guest_token, input_type, nutshell_text, word_count, source_word_count) VALUES (:summary_id, :user_id, :guest_token, :input_type, :nutshell_text, :word_count, :source_word_count)'
+        );
+        $statement->execute([
+            'summary_id' => $summaryId !== null && (int)$summaryId > 0 ? (int)$summaryId : null,
+            'user_id' => $userId,
+            'guest_token' => $guestToken,
+            'input_type' => $filePath !== '' ? strtolower((string)pathinfo($filePath, PATHINFO_EXTENSION)) : (preg_match('~^https?://~i', $directText) ? 'url' : 'text'),
+            'nutshell_text' => $nutshellText,
+            'word_count' => str_word_count($nutshellText),
+            'source_word_count' => str_word_count($textToAnalyze),
+        ]);
+    }
+
+    // Persist Nutshell only for an existing, authorized summary record.
+    if ($summaryId !== null && (int)$summaryId > 0) {
+        if ($nutshellText !== '') {
+            try {
+                $statement = Database::getInstance()->getConnection()->prepare(
+                    'UPDATE summaries SET nutshell_text = :text, nutshell_word_count = :word_count, nutshell_generated_at = CURRENT_TIMESTAMP WHERE id = :id'
+                );
+                $statement->execute([
+                    'text' => $nutshellText,
+                    'word_count' => str_word_count($nutshellText),
+                    'id' => (int)$summaryId,
+                ]);
+            } catch (\Throwable $exception) {
+                // The generation ledger remains valid when migration 005 is not installed yet.
+                error_log('[Nutshell] Could not update legacy summary columns: ' . $exception->getMessage());
+            }
+        }
+    }
 
     sendNutshellJsonResponse(200, [
         'success' => true,
@@ -136,5 +205,6 @@ try {
     if ($temporaryFilePathToClean !== '' && file_exists($temporaryFilePathToClean)) {
         @unlink($temporaryFilePathToClean);
     }
+    $resolvedSource?->cleanup();
 }
 

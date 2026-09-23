@@ -1,4 +1,45 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const sidebarData = window.sidebarAnalyticsData;
+    const sidebar = document.querySelector('.analytics-sidebar');
+    if (sidebarData && sidebar && typeof Chart !== 'undefined') {
+        const chartInstances = [];
+        const chartColors = ['#6250c8', '#8b7cf0', '#3b82f6', '#14b8a6', '#f59e0b', '#64748b'];
+        const chartLabels = rows => rows.map(row => row.label || 'Other');
+        const chartValues = rows => rows.map(row => Number(row.total));
+        const formatMetric = value => value === null || value === undefined ? 'N/A' : Number(value).toLocaleString();
+        const renderSidebar = data => {
+            const empty = Number(data.kpis?.summaries || 0) === 0;
+            sidebar.querySelector('.analytics-sidebar__empty').hidden = !empty;
+            sidebar.querySelectorAll('.analytics-sidebar__chart').forEach(node => { node.hidden = empty; });
+            sidebar.querySelectorAll('[data-analytics]').forEach(node => {
+                const key = node.dataset.analytics;
+                node.textContent = key === 'reduction' && data.kpis[key] !== null ? `${data.kpis[key]}%` : key === 'method' ? (data.kpis[key] || 'N/A') : formatMetric(data.kpis[key]);
+            });
+            chartInstances.splice(0).forEach(chart => chart.destroy());
+            if (empty) return;
+            const base = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { enabled: true } } };
+            chartInstances.push(new Chart(document.getElementById('sidebarActivityChart'), { type: 'line', data: { labels: data.trend.map(row => row.bucket), datasets: [{ data: chartValues(data.trend), borderColor: '#6250c8', backgroundColor: 'rgba(98,80,200,.12)', fill: true, tension: .3 }] }, options: { ...base, scales: { y: { beginAtZero: true, ticks: { precision: 0 } } } } }));
+            chartInstances.push(new Chart(document.getElementById('sidebarWordsChart'), { type: 'bar', data: { labels: ['Words'], datasets: [{ label: 'Original', data: [Number(data.words_comparison.original_words || 0)], backgroundColor: '#3b82f6' }, { label: 'Summary', data: [Number(data.words_comparison.summary_words || 0)], backgroundColor: '#6250c8' }] }, options: { ...base, plugins: { legend: { display: true, labels: { boxWidth: 8 } } }, scales: { y: { beginAtZero: true } } } }));
+            chartInstances.push(new Chart(document.getElementById('sidebarCategoryChart'), { type: 'doughnut', data: { labels: chartLabels(data.categories), datasets: [{ data: chartValues(data.categories), backgroundColor: chartColors }] }, options: { ...base, cutout: '60%' } }));
+            chartInstances.push(new Chart(document.getElementById('sidebarMethodChart'), { type: 'bar', data: { labels: chartLabels(data.styles), datasets: [{ data: chartValues(data.styles), backgroundColor: '#8b7cf0', borderRadius: 3 }] }, options: { ...base, indexAxis: 'y', scales: { x: { beginAtZero: true, ticks: { precision: 0 } } } } }));
+        };
+        renderSidebar(sidebarData);
+        sidebar.querySelectorAll('.analytics-range').forEach(button => button.addEventListener('click', async () => {
+            sidebar.querySelectorAll('.analytics-range').forEach(item => item.classList.remove('is-active'));
+            button.classList.add('is-active');
+            sidebar.classList.add('is-loading');
+            try {
+                const response = await fetch(`analytics.php?action=data&range=${encodeURIComponent(button.dataset.range)}`, { headers: { Accept: 'application/json' } });
+                const data = await response.json();
+                if (!response.ok || data.error) throw new Error(data.error || 'Analytics unavailable');
+                renderSidebar(data);
+            } catch (error) {
+                sidebar.querySelector('.analytics-sidebar__empty').textContent = 'Analytics data could not be loaded. Please try again.';
+                sidebar.querySelector('.analytics-sidebar__empty').hidden = false;
+            } finally { sidebar.classList.remove('is-loading'); }
+        }));
+    }
+
     // ── Segmented length picker ──────────────────────────────────────────────
     const segContainer = document.querySelector('.length-segmented');
     const hiddenCount  = document.getElementById('sentence_count');
@@ -22,6 +63,33 @@ document.addEventListener('DOMContentLoaded', () => {
             if (hiddenLength && btn.dataset.length) {
                 hiddenLength.value = btn.dataset.length;
             }
+        });
+    }
+
+    // Keep the two source inputs mutually exclusive. This prevents a file from
+    // silently taking precedence over pasted text, while preserving the pasted
+    // value if the user changes their mind and removes the selected file.
+    const sourceFileInput = document.getElementById('pdf');
+    const sourceTextInput = document.getElementById('text');
+    const sourceSelectionNote = document.getElementById('source-selection-note');
+    let savedSourceText = '';
+
+    if (sourceFileInput && sourceTextInput) {
+        sourceFileInput.addEventListener('change', () => {
+            const hasFile = sourceFileInput.files && sourceFileInput.files.length > 0;
+            if (hasFile) {
+                savedSourceText = sourceTextInput.value;
+                sourceTextInput.value = '';
+                sourceTextInput.disabled = true;
+                sourceTextInput.placeholder = 'Remove the selected file to paste text or a URL.';
+                if (sourceSelectionNote) sourceSelectionNote.textContent = `Using ${sourceFileInput.files[0].name} as the source.`;
+                return;
+            }
+
+            sourceTextInput.disabled = false;
+            sourceTextInput.value = savedSourceText;
+            sourceTextInput.placeholder = 'Paste article text/url here...';
+            if (sourceSelectionNote) sourceSelectionNote.textContent = 'Choose one source: a file or pasted text/URL.';
         });
     }
 

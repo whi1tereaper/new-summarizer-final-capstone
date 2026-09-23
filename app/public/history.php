@@ -21,6 +21,7 @@ if ($userId === null && $guestToken === null) {
 
 $page    = max(1, (int)($_GET['page'] ?? 1));
 $history = HistoryHandler::getSummaryHistory($userId, $guestToken, $page);
+$nutshellHistory = HistoryHandler::getNutshellHistory($userId, $guestToken);
 
 // Analytics — only loaded for admins, silently skipped otherwise.
 $analyticsAvailable = false;
@@ -382,6 +383,33 @@ if ($isAdmin) {
             <?php endforeach; ?>
         </div>
     <?php endif; ?>
+
+    <?php if (!isset($nutshellHistory['error']) && !empty($nutshellHistory)): ?>
+        <h2 style="margin-top: 70px; border-bottom: 2px solid var(--color-primary-dark); padding-bottom: 15px;">Nutshell History</h2>
+        <div class="history-list">
+            <?php foreach ($nutshellHistory as $nutshell): ?>
+                <div class="history-item">
+                    <h2 class="article-title">
+                        <?php if (!empty($nutshell['summary_id'])): ?>
+                            <a href="result.php?id=<?php echo (int)$nutshell['summary_id']; ?>&amp;share=<?php echo urlencode((string)($nutshell['share_token'] ?? '')); ?>">
+                                <?php echo htmlspecialchars((string)($nutshell['article_title'] ?? 'Document')); ?>
+                            </a>
+                        <?php else: ?>
+                            <?php echo htmlspecialchars((string)($nutshell['input_type'] ?? 'Document')); ?>
+                        <?php endif; ?>
+                    </h2>
+                    <div class="meta-line">
+                        <span>NUTSHELL</span>
+                        <span><?php echo date('F d, Y', strtotime($nutshell['created_at'])); ?></span>
+                        <span><?php echo (int)$nutshell['word_count']; ?> WORDS</span>
+                    </div>
+                    <?php if (!empty($nutshell['nutshell_text'])): ?>
+                        <div class="summary-preview"><?php echo htmlspecialchars((string)$nutshell['nutshell_text'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); ?></div>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 </main>
 
 <?php if ($isAdmin && $analyticsAvailable):
@@ -542,9 +570,6 @@ if ($isAdmin) {
         <?php endif; ?>
     </div>
 
-    <p style="font-family:'Inter'; font-size:0.7em; color:var(--color-muted); margin-top:12px; text-align:right;">
-        <a href="admin_analytics.php" style="color:var(--color-primary-dark); font-weight:600; text-decoration:underline; text-transform:uppercase; letter-spacing:1px;">Open Full Analytics Dashboard &rarr;</a>
-    </p>
 </section>
 <?php endif; ?>
 

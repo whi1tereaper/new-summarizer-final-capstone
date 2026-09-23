@@ -25,23 +25,7 @@ $isAdminLoginContext = (string)($_GET['context'] ?? '') === 'admin';
                 <a href="index.php" class="auth-site-header__label"></a>
             <?php endif; ?>
 
-            <?php if ($isAdminLoginContext): ?>
-                <div class="auth-site-header__brand" aria-hidden="true">
-                    <img
-                        src="assets/images/poc-neust-logo.png"
-                        alt="Off-Campus POC N.E.U.S.T. logo"
-                        class="auth-site-header__brand-logo"
-                    >
-                </div>
-            <?php else: ?>
-                <a href="index.php" class="auth-site-header__brand" aria-label="Article Summarizer home">
-                    <img
-                        src="assets/images/poc-neust-logo.png"
-                        alt="Off-Campus POC N.E.U.S.T. logo"
-                        class="auth-site-header__brand-logo"
-                    >
-                </a>
-            <?php endif; ?>
+            <div class="auth-site-header__brand" aria-hidden="true"></div>
 
             <nav class="auth-site-header__nav" aria-label="Authentication navigation">
                 <?php if (!$isAdminLoginContext): ?>

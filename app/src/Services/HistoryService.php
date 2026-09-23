@@ -56,6 +56,41 @@ final class HistoryService
         }
     }
 
+    public function getNutshellHistory(?int $userId = null, ?string $guestToken = null, int $limit = 20): array
+    {
+        try {
+            $db = Database::getInstance()->getConnection();
+            $query = 'SELECT n.*, s.article_title, s.share_token
+                      FROM nutshell_generations n
+                      LEFT JOIN summaries s ON s.id = n.summary_id
+                      WHERE ';
+            $params = [];
+
+            if ($userId !== null) {
+                $query .= 'n.user_id = :userId';
+                $params['userId'] = $userId;
+            } elseif ($this->isValidGuestToken($guestToken)) {
+                $query .= 'n.user_id IS NULL AND n.guest_token = :guestToken';
+                $params['guestToken'] = $guestToken;
+            } else {
+                return [];
+            }
+
+            $query .= ' ORDER BY n.created_at DESC LIMIT :limit';
+            $statement = $db->prepare($query);
+            foreach ($params as $key => $value) {
+                $statement->bindValue(':' . $key, $value);
+            }
+            $statement->bindValue(':limit', max(1, min(50, $limit)), PDO::PARAM_INT);
+            $statement->execute();
+
+            return $statement->fetchAll();
+        } catch (\Throwable $exception) {
+            error_log('[HistoryService] getNutshellHistory error: ' . $exception->getMessage());
+            return ['error' => 'Database error.'];
+        }
+    }
+
     private function normalizePagination(int $page, int $limit): array
     {
         $pageNumber = max(1, $page);

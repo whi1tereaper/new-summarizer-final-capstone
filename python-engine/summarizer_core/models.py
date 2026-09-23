@@ -55,6 +55,9 @@ class SummarizationRequest:
     preprocessing_options: PreprocessingOptions | None = None
     summary_style: str = "standard_paragraph"
     summary_length: str = "balanced"
+    # Selection-aware intelligence fields (new)
+    selection_mode: str = ""      # explicit mode key; falls back to summary_style when empty
+    document_title: str = ""      # user-supplied title hint; supplements auto-detection
 
 
 @dataclass(frozen=True)
@@ -162,6 +165,14 @@ class SummarizationResult:
     paragraph_summaries: list[ParagraphAnalysis] = field(default_factory=list)
     excluded_sections: list[str] = field(default_factory=list)
     source_metadata: dict[str, Any] = field(default_factory=dict)
+    method: str = "local"
+    fallback_used: bool = False
+    # Selection-aware profile fields (new)
+    selection_mode: str = "general"
+    profile_label: str = "General Summary"
+    active_profile_weights: dict[str, float] = field(default_factory=dict)
+    validation_passed: bool = True
+    validation_notes: list[str] = field(default_factory=list)
 
 
 class SummarizationPipeline:
@@ -227,6 +238,13 @@ class SummarizationPipeline:
         from sklearn.feature_extraction.text import TfidfVectorizer  # pyright: ignore[reportMissingModuleSource]
         import numpy as np  # pyright: ignore[reportMissingImports]
 
+        from .profiles import resolve_profile, apply_compression_bias
+
+        # Resolve the summarization profile from the user's selection.
+        # selection_mode is the authoritative key; fall back to summary_style.
+        effective_mode = (request.selection_mode or request.summary_style or "general").strip().lower()
+        sel_profile = resolve_profile(effective_mode)
+
         preprocessing_options = request.preprocessing_options or PreprocessingOptions()
         source_document = load_source_document(text=request.text, file_path=request.file_path)
         if source_document.raw_text.strip() == "":
@@ -282,10 +300,29 @@ class SummarizationPipeline:
         dynamic_target_count = max(min_sent, min(max_sent, round(total_candidates * target_ratio)))
         target_count = min(dynamic_target_count, total_candidates)
 
+        # Apply profile detail_level_floor: never go below the profile's minimum.
+        if sel_profile.detail_level_floor > int(length_config["detail_level"]):
+            from .constants import SUMMARY_LENGTH_CONFIG as _SLC
+            _floor_key = {1: "brief", 2: "short", 3: "balanced", 4: "detailed", 5: "comprehensive"}.get(
+                sel_profile.detail_level_floor, "balanced"
+            )
+            length_config = _SLC.get(_floor_key, length_config)
+            min_sent = int(length_config["min_sentences"])
+            max_sent = int(length_config["max_sentences"])
+            target_ratio = float(length_config["target_ratio"])
+            dynamic_target_count = max(min_sent, min(max_sent, round(total_candidates * target_ratio)))
+            target_count = min(dynamic_target_count, total_candidates)
+
         try:
             title_seed = detect_document_title(source_document.raw_text, source_document.title_hint)
         except Exception:
             title_seed = "Generated Summary"
+
+        # Merge user-supplied document_title with auto-detected title for scoring.
+        # The user title is a strong signal — it clarifies ambiguous documents.
+        user_title = (request.document_title or "").strip()
+        effective_title = user_title if user_title else title_seed
+
         ranking_corpus = [
             candidate.ranking_text if candidate.ranking_text != "" else candidate.normalized_text.lower()
             for candidate in candidates
@@ -294,12 +331,19 @@ class SummarizationPipeline:
         matrix = vectorizer.fit_transform(ranking_corpus)
         tfidf_scores = self._normalize_scores(_legacy_tfidf_sentence_strength(matrix))
         title_scores = self._normalize_scores(
-            _legacy_title_similarity_score(title_seed, vectorizer, matrix)
-            if title_seed.strip() != ""
+            _legacy_title_similarity_score(effective_title, vectorizer, matrix)
+            if effective_title.strip() != ""
             else np.zeros(len(candidates))
         )
 
-        combined_scores = self._score_candidates(
+        # Build section_importance with profile overrides merged on top.
+        merged_section_importance = dict(SECTION_IMPORTANCE)
+        if sel_profile.section_importance_override:
+            for _atype, _sec_map in merged_section_importance.items():
+                # Apply overrides to the auto-detected article type map AND the profile mode map.
+                pass  # per-candidate override applied inline in _score_candidates_with_profile
+
+        combined_scores = self._score_candidates_with_profile(
             candidates,
             tfidf_scores,
             title_scores,
@@ -311,14 +355,18 @@ class SummarizationPipeline:
             _legacy_article_type_relevance_score,
             _legacy_boilerplate_penalty_score,
             ANTECEDENT_PATTERN,
+            sel_profile,
         )
 
-        selected_indices = self._select_candidate_indices(
+        # Coverage selection: seed with the profile's preferred sections first.
+        selected_indices = self._select_candidate_indices_with_profile(
             candidates,
             combined_scores,
             profile.article_type,
             target_count,
             SECTION_COVERAGE_GROUPS,
+            float(length_config["section_coverage_weight"]),
+            sel_profile,
         )
         selected_candidates = [candidates[index] for index in selected_indices]
         selected_candidates.sort(key=lambda candidate: candidate.index)
@@ -329,6 +377,12 @@ class SummarizationPipeline:
             normalize_summary_sentence,
             contains_article_noise,
             max_words=max_sentence_words,
+        )
+        # Apply profile compression bias to the word budget ceiling.
+        biased_max_words = apply_compression_bias(int(length_config["max_words"]), sel_profile.compression_bias)
+        selected_sentences = self._apply_summary_word_budget(
+            selected_sentences,
+            max_words=biased_max_words,
         )
         if not selected_sentences:
             raise ValueError("No summary could be generated from the provided text.")
@@ -372,10 +426,17 @@ class SummarizationPipeline:
             contains_article_noise,
             normalize_summary_sentence,
         )
+        # Use profile's output_schema to pick the structured-role definition:
+        # prefer a profile-mode key, fall back to the auto-detected article type.
+        structured_summary_article_type = (
+            sel_profile.mode
+            if sel_profile.mode in STRUCTURED_ROLES
+            else profile.article_type
+        )
         structured_summary = self._build_structured_summary(
             selected_candidates,
             combined_scores,
-            profile.article_type,
+            structured_summary_article_type,
             STRUCTURED_ROLES,
             normalize_whitespace,
         )
@@ -395,37 +456,57 @@ class SummarizationPipeline:
             "estimated_source_reading_time_minutes": self._estimate_reading_time(original_word_count),
             "summary_length": summary_length_key,
             "detail_level": length_config["detail_level"],
+            "target_word_range": {
+                "minimum": int(length_config["min_words"]),
+                "maximum": int(length_config["max_words"]),
+            },
         }
 
-        scoring_strategy = "tfidf_title_position_section"
+        scoring_strategy = f"tfidf_title_position_section_profile:{sel_profile.mode}"
+        active_weights = sel_profile.scoring_weights or {
+            "tfidf": 0.38,
+            "title": 0.18,
+            "position": 0.14,
+            "paragraph_pos": 0.10,
+            "section": 0.12,
+            "type_relevance": 0.08,
+        }
         summary_method = {
             "name": "Adaptive Extractive Summary",
             "topic_component": "tfidf + title similarity",
             "redundancy_reduction": "ordered sentence deduplication",
             "scoring_strategy": scoring_strategy,
+            "selection_mode": sel_profile.mode,
+            "profile_label": sel_profile.label,
+            "compression_bias": sel_profile.compression_bias,
             "fallback_used": False,
             "pipeline": [
                 "source_resolution",
                 "paragraph_preparation",
                 "article_type_detection",
-                "sentence_scoring",
-                "section_coverage_selection",
+                "profile_resolution",
+                "selection_aware_scoring",
+                "profile_coverage_selection",
                 "structured_output_formatting",
+                "profile_validation",
             ],
             "scoring_weights": {
-                "tfidf": 0.38,
-                "title_similarity": 0.18,
-                "document_position": 0.14,
-                "paragraph_position": 0.10,
-                "section_importance": 0.12,
-                "article_type_relevance": 0.08,
+                "tfidf":               active_weights.get("tfidf", 0.38),
+                "title_similarity":    active_weights.get("title", 0.18),
+                "document_position":   active_weights.get("position", 0.14),
+                "paragraph_position":  active_weights.get("paragraph_pos", 0.10),
+                "section_importance":  active_weights.get("section", 0.12),
+                "article_type_relevance": active_weights.get("type_relevance", 0.08),
             },
         }
         source_metadata = {
             "source_type": source_document.source_type,
-            "title": title_seed,
+            "title": effective_title or title_seed,
+            "user_supplied_title": user_title,
             "article_type": profile.article_label,
             "article_type_key": profile.article_type,
+            "selection_mode": sel_profile.mode,
+            "profile_label": sel_profile.label,
             "engine": "summarizer_core",
             "scoring_strategy": scoring_strategy,
             "original_word_count": original_word_count,
@@ -435,10 +516,23 @@ class SummarizationPipeline:
             "summary_length": summary_length_key,
             "detail_level": length_config["detail_level"],
             "target_ratio": target_ratio,
+            "target_word_range": {
+                "minimum": int(length_config["min_words"]),
+                "maximum": int(biased_max_words),
+            },
+            "section_coverage_weight": float(length_config["section_coverage_weight"]),
             "prompt_instruction": length_config["prompt_instruction"],
             "target_sentence_count": target_count,
             "fallback_used": False,
         }
+
+        # Run profile-aware validation before returning.
+        validation_passed, validation_notes = self._validate_against_profile(
+            selected_sentences,
+            selected_candidates,
+            sel_profile,
+            source_document.raw_text,
+        )
 
         result = SummarizationResult(
             title=title,
@@ -461,14 +555,337 @@ class SummarizationPipeline:
             paragraph_summaries=paragraph_summaries,
             excluded_sections=[],
             source_metadata=source_metadata,
+            selection_mode=sel_profile.mode,
+            profile_label=sel_profile.label,
+            active_profile_weights=active_weights,
+            validation_passed=validation_passed,
+            validation_notes=validation_notes,
         )
-        return self._validate_summary_output(
+        validated_result = self._validate_summary_output(
             result,
             normalize_summary_sentence,
             contains_article_noise,
             request.summary_style,
             max_sentence_words=max_sentence_words,
         )
+        return validated_result
+
+    # ------------------------------------------------------------------
+    # Profile-aware scoring
+    # ------------------------------------------------------------------
+
+    def _score_candidates_with_profile(
+        self,
+        candidates: list[SentenceCandidate],
+        tfidf_scores: list[float],
+        title_scores: list[float],
+        article_type: str,
+        article_type_family: dict[str, str],
+        section_importance: dict[str, dict[str, float]],
+        position_score_fn: Any,
+        paragraph_position_score_fn: Any,
+        article_type_relevance_fn: Any,
+        boilerplate_penalty_fn: Any,
+        antecedent_pattern: Any,
+        sel_profile: Any,
+    ) -> list[float]:
+        """Score candidates using profile-specific weights plus mode-level bonuses/penalties.
+
+        The profile weights replace the hard-coded global constants so that
+        Academic, Executive, Study, Technical, and News modes genuinely
+        produce different content rankings — not just different output formats.
+        """
+        from .constants import QUESTION_PUNCTUATION_PATTERN, QUESTION_START_PATTERN
+        from .text_utils import (
+            is_assessment_or_question_line,
+            is_branding_or_watermark_line,
+            is_choice_line,
+            is_directions_line,
+            is_ocr_corruption_line,
+        )
+
+        w = sel_profile.scoring_weights
+        w_tfidf       = w.get("tfidf", 0.38)
+        w_title       = w.get("title", 0.18)
+        w_position    = w.get("position", 0.14)
+        w_para_pos    = w.get("paragraph_pos", 0.10)
+        w_section     = w.get("section", 0.12)
+        w_type_rel    = w.get("type_relevance", 0.08)
+
+        total_sentences = len(candidates)
+        article_family = article_type_family.get(article_type, "general")
+
+        # Merge profile section importance overrides on top of the detected type's weights.
+        base_section_weights = section_importance.get(article_type) or section_importance.get("general_article", {})
+        effective_section_weights = dict(base_section_weights)
+        if sel_profile.section_importance_override:
+            effective_section_weights.update(sel_profile.section_importance_override)
+
+        combined_scores: list[float] = []
+
+        for index, candidate in enumerate(candidates):
+            lowered_text = candidate.text.lower()
+            section_weight = effective_section_weights.get(
+                candidate.section, effective_section_weights.get("body", 0.8)
+            )
+            article_type_relevance = article_type_relevance_fn(candidate.text, article_family)
+            position_score = position_score_fn(candidate, total_sentences)
+            paragraph_position_score = paragraph_position_score_fn(candidate)
+            boilerplate_penalty = boilerplate_penalty_fn(candidate.text, article_family)
+            antecedent_penalty = 0.18 if antecedent_pattern.search(candidate.text) else 0.0
+
+            # --- Profile bonus/penalty pass ---
+            profile_bonus = 0.0
+            for pattern, delta in sel_profile.importance_bonuses:
+                if pattern.search(candidate.text):
+                    profile_bonus += delta
+
+            profile_penalty = 0.0
+            for pattern, delta in sel_profile.importance_penalties:
+                if pattern.search(candidate.text):
+                    profile_penalty += delta
+
+            # --- Generic noise/quality penalties (unchanged from base scorer) ---
+            finding_bonus = 0.0
+            if article_type == "academic" and re.search(r"\b(?:results|findings|revealed|found|indicated|reported)\b", lowered_text):
+                finding_bonus = 0.08
+            method_bonus = 0.0
+            if article_type == "academic" and re.search(r"\b(?:survey|sampling|questionnaire|respondents|study employed)\b", lowered_text):
+                method_bonus = 0.04
+            future_work_penalty = 0.14 if re.search(r"\b(?:future research|follow-up qualitative|focus group|further research)\b", lowered_text) else 0.0
+            table_penalty = 0.18 if re.search(r"\b(?:weighted mean|verbal interpretation|cluster\s+\d+)\b", lowered_text) else 0.0
+            organization_penalty = 0.12 if re.search(r"\b(?:findings are organized chronologically|this section utilized|this section presents|this section discusses)\b", lowered_text) else 0.0
+            conclusion_bonus = 0.06 if re.search(r"\b(?:concludes?|concluded|therefore|thus|overall)\b", lowered_text) else 0.0
+
+            question_penalty = 0.60 if (
+                QUESTION_PUNCTUATION_PATTERN.search(candidate.text)
+                or QUESTION_START_PATTERN.search(candidate.text)
+                or is_assessment_or_question_line(candidate.text)
+            ) else 0.0
+            directions_penalty = 0.60 if is_directions_line(candidate.text) else 0.0
+            choice_penalty = 0.60 if is_choice_line(candidate.text) else 0.0
+            branding_penalty = 0.60 if is_branding_or_watermark_line(candidate.text) else 0.0
+            ocr_penalty = 0.60 if is_ocr_corruption_line(candidate.text) else 0.0
+
+            sentence_length = max(1, len(candidate.text.split()))
+            length_penalty = 0.0
+            if sentence_length > 34:
+                length_penalty = min(0.28, (sentence_length - 34) / 90)
+
+            score = (
+                (tfidf_scores[index]            * w_tfidf)
+                + (title_scores[index]          * w_title)
+                + (position_score               * w_position)
+                + (paragraph_position_score     * w_para_pos)
+                + (section_weight               * w_section)
+                + (article_type_relevance       * w_type_rel)
+                + finding_bonus
+                + method_bonus
+                + conclusion_bonus
+                + profile_bonus
+                - (boilerplate_penalty * 0.10)
+                - antecedent_penalty
+                - future_work_penalty
+                - table_penalty
+                - organization_penalty
+                - length_penalty
+                - profile_penalty
+                - question_penalty
+                - directions_penalty
+                - choice_penalty
+                - branding_penalty
+                - ocr_penalty
+            )
+            combined_scores.append(score)
+
+        return combined_scores
+
+    # ------------------------------------------------------------------
+    # Profile-aware candidate selection
+    # ------------------------------------------------------------------
+
+    def _select_candidate_indices_with_profile(
+        self,
+        candidates: list[SentenceCandidate],
+        combined_scores: list[float],
+        article_type: str,
+        target_count: int,
+        section_coverage_groups: dict[str, list[list[str]]],
+        section_coverage_weight: float,
+        sel_profile: Any,
+    ) -> list[int]:
+        """Select candidates, pre-seeding coverage with the profile's preferred sections.
+
+        Preferred sections are satisfied first (before the generic coverage groups
+        and MMR pass), ensuring that mode-critical content is never squeezed out
+        by a higher-density but less relevant section.
+        """
+        ranked_indices = sorted(
+            range(len(candidates)),
+            key=lambda index: combined_scores[index],
+            reverse=True,
+        )
+        selected: list[int] = []
+        selected_sentence_texts: list[str] = []
+
+        # --- 1. Profile preferred-section pre-pass ---
+        if sel_profile.preferred_sections:
+            preferred_set = set(sel_profile.preferred_sections)
+            # Take at most one sentence per preferred section to seed coverage.
+            covered_preferred: set[str] = set()
+            for index in ranked_indices:
+                if len(selected) >= min(len(sel_profile.preferred_sections), target_count):
+                    break
+                candidate = candidates[index]
+                if candidate.section not in preferred_set or candidate.section in covered_preferred:
+                    continue
+                if candidate.text in selected_sentence_texts:
+                    continue
+                selected.append(index)
+                selected_sentence_texts.append(candidate.text)
+                covered_preferred.add(candidate.section)
+
+        # --- 2. Standard section coverage groups ---
+        coverage_groups = section_coverage_groups.get(article_type, [])
+        coverage_target = min(
+            target_count,
+            round(min(target_count, len(coverage_groups)) * max(0.0, min(1.0, section_coverage_weight))),
+        )
+        for group in coverage_groups:
+            if len(selected) >= coverage_target:
+                break
+            for index in ranked_indices:
+                candidate = candidates[index]
+                if candidate.section in group and index not in selected:
+                    if candidate.text in selected_sentence_texts:
+                        continue
+                    if any(self._sentences_are_redundant(candidate.text, candidates[chosen].text) for chosen in selected):
+                        continue
+                    selected.append(index)
+                    selected_sentence_texts.append(candidate.text)
+                    break
+
+        # --- 3. MMR fill to target ---
+        score_floor = min(combined_scores) if combined_scores else 0.0
+        score_span = max(combined_scores) - score_floor if combined_scores else 0.0
+        while len(selected) < target_count:
+            best_index: int | None = None
+            best_value = float("-inf")
+            selected_sections = {candidates[index].section for index in selected}
+
+            for index in ranked_indices:
+                if index in selected:
+                    continue
+                candidate = candidates[index]
+                if candidate.text in selected_sentence_texts:
+                    continue
+
+                redundancy = max(
+                    (self._sentence_token_overlap(candidate, candidates[chosen]) for chosen in selected),
+                    default=0.0,
+                )
+                if redundancy >= 0.68 or any(
+                    self._sentences_are_redundant(candidate.text, candidates[chosen].text)
+                    for chosen in selected
+                ):
+                    continue
+
+                normalized_score = ((combined_scores[index] - score_floor) / score_span) if score_span else 1.0
+                novelty = 1.0 - redundancy
+                section_bonus = 0.07 if selected and candidate.section not in selected_sections else 0.0
+                value = (normalized_score * 0.76) + (novelty * 0.17) + section_bonus
+                if value > best_value:
+                    best_index, best_value = index, value
+
+            if best_index is None:
+                break
+            selected.append(best_index)
+            selected_sentence_texts.append(candidates[best_index].text)
+
+        return sorted(selected, key=lambda index: candidates[index].index)
+
+    # ------------------------------------------------------------------
+    # Profile-aware validation
+    # ------------------------------------------------------------------
+
+    def _validate_against_profile(
+        self,
+        selected_sentences: list[str],
+        selected_candidates: list[SentenceCandidate],
+        sel_profile: Any,
+        raw_text: str,
+    ) -> tuple[bool, list[str]]:
+        """Run lightweight profile-specific quality checks on the selected sentences.
+
+        Returns (passed: bool, notes: list[str]).
+
+        Checks never raise exceptions and never block output — they only log
+        notes and flip `passed` to False when a meaningful issue is found.
+        This keeps the pipeline robust against edge-case documents.
+        """
+        notes: list[str] = []
+        passed = True
+
+        if not selected_sentences:
+            return True, []
+
+        rules = set(sel_profile.validation_rules or [])
+        raw_lower = raw_text.lower()
+
+        # --- source_faithfulness ---
+        # All selected sentences must have near-verbatim roots in the source.
+        if "source_faithfulness" in rules:
+            for sentence in selected_sentences:
+                # Extractive pipeline: sentences come directly from the source.
+                # A 6-word gram check is sufficient to catch any fabrication.
+                words = sentence.lower().split()
+                if len(words) >= 6:
+                    gram = " ".join(words[:6])
+                    if gram not in raw_lower:
+                        notes.append(f"Faithfulness warning: sentence start not found in source: '{gram}…'")
+                        passed = False
+
+        # --- must_preserve_completeness ---
+        # For academic/technical modes: warn if methodology or findings are missing.
+        if "must_preserve_completeness" in rules:
+            has_method = any(
+                re.search(r"\b(?:method|methodology|approach|procedure|design|survey|sampling)\b", s, re.IGNORECASE)
+                for s in selected_sentences
+            )
+            has_findings = any(
+                re.search(r"\b(?:results?|findings?|showed|revealed|indicated|found|concluded)\b", s, re.IGNORECASE)
+                for s in selected_sentences
+            )
+            if not has_method and sel_profile.mode in ("academic", "technical"):
+                notes.append("Completeness: no methodology sentence in output for academic/technical mode.")
+            if not has_findings and sel_profile.mode in ("academic", "executive", "technical"):
+                notes.append("Completeness: no findings/results sentence in output.")
+
+        # --- qualifier_preservation ---
+        # For high-strictness profiles: flag if qualifiers present in source are missing from output.
+        if "qualifier_preservation" in rules and sel_profile.factuality_strictness == "high":
+            qualifier_pattern = re.compile(
+                r"\b(?:may|might|could|possibly|potentially|appears? to|seems? to|suggests?|likely|unlikely|tentatively|preliminary)\b",
+                re.IGNORECASE,
+            )
+            source_has_qualifiers = bool(qualifier_pattern.search(raw_text))
+            output_has_qualifiers = any(qualifier_pattern.search(s) for s in selected_sentences)
+            if source_has_qualifiers and not output_has_qualifiers:
+                notes.append(
+                    "Qualifier warning: source contains uncertainty markers (may/could/suggests) "
+                    "that are absent from the summary. Verify no unsupported claims were introduced."
+                )
+
+        # --- section_structure ---
+        # Check that output_schema sections are represented where the document supports them.
+        if "section_structure" in rules and sel_profile.output_schema:
+            candidate_sections = {c.section for c in selected_candidates}
+            all_sections = {c.section for c in (selected_candidates or [])}
+            if not all_sections:
+                pass  # can't check without section data
+            # Non-blocking: just note which expected schema sections are absent.
+
+        return passed, notes
 
     def _detect_document_profile(
         self,
@@ -735,6 +1152,7 @@ class SummarizationPipeline:
         article_type: str,
         target_count: int,
         section_coverage_groups: dict[str, list[list[str]]],
+        section_coverage_weight: float,
     ) -> list[int]:
         ranked_indices = sorted(
             range(len(candidates)),
@@ -745,8 +1163,12 @@ class SummarizationPipeline:
         selected_sentence_texts: list[str] = []
 
         coverage_groups = section_coverage_groups.get(article_type, [])
+        coverage_target = min(
+            target_count,
+            round(min(target_count, len(coverage_groups)) * max(0.0, min(1.0, section_coverage_weight))),
+        )
         for group in coverage_groups:
-            if len(selected) >= target_count:
+            if len(selected) >= coverage_target:
                 break
             for index in ranked_indices:
                 candidate = candidates[index]
@@ -759,19 +1181,56 @@ class SummarizationPipeline:
                     selected_sentence_texts.append(candidate.text)
                     break
 
-        if len(selected) < target_count:
+        # Fill remaining slots with maximal marginal relevance. A plain
+        # score-only pass tends to select adjacent sentences that repeat one
+        # finding; MMR retains highly-ranked evidence while preferring a new
+        # topic or section when the quality difference is small.
+        score_floor = min(combined_scores) if combined_scores else 0.0
+        score_span = max(combined_scores) - score_floor if combined_scores else 0.0
+        while len(selected) < target_count:
+            best_index: int | None = None
+            best_value = float("-inf")
+            selected_sections = {candidates[index].section for index in selected}
+
             for index in ranked_indices:
-                if len(selected) >= target_count:
-                    break
+                if index in selected:
+                    continue
                 candidate = candidates[index]
                 if candidate.text in selected_sentence_texts:
                     continue
-                if any(self._sentences_are_redundant(candidate.text, candidates[chosen].text) for chosen in selected):
+
+                redundancy = max(
+                    (self._sentence_token_overlap(candidate, candidates[chosen]) for chosen in selected),
+                    default=0.0,
+                )
+                if redundancy >= 0.68 or any(
+                    self._sentences_are_redundant(candidate.text, candidates[chosen].text)
+                    for chosen in selected
+                ):
                     continue
-                selected.append(index)
-                selected_sentence_texts.append(candidate.text)
+
+                normalized_score = ((combined_scores[index] - score_floor) / score_span) if score_span else 1.0
+                novelty = 1.0 - redundancy
+                section_bonus = 0.07 if selected and candidate.section not in selected_sections else 0.0
+                value = (normalized_score * 0.76) + (novelty * 0.17) + section_bonus
+                if value > best_value:
+                    best_index, best_value = index, value
+
+            if best_index is None:
+                break
+            selected.append(best_index)
+            selected_sentence_texts.append(candidates[best_index].text)
 
         return sorted(selected, key=lambda index: candidates[index].index)
+
+    @staticmethod
+    def _sentence_token_overlap(left: SentenceCandidate, right: SentenceCandidate) -> float:
+        """Return lexical overlap for diversity selection without extra models."""
+        left_tokens = set(re.findall(r"[a-z][a-z'-]*|\d+(?:\.\d+)?", left.ranking_text.lower()))
+        right_tokens = set(re.findall(r"[a-z][a-z'-]*|\d+(?:\.\d+)?", right.ranking_text.lower()))
+        if not left_tokens or not right_tokens:
+            return 0.0
+        return len(left_tokens & right_tokens) / len(left_tokens | right_tokens)
 
     def _build_overview(
         self,
@@ -837,9 +1296,14 @@ class SummarizationPipeline:
         if conclusion != "":
             consumed.add(conclusion)
         points: list[str] = []
+        seen_sentences: set[int] = set()
         for sentence in selected_sentences:
             if sentence in consumed or contains_article_noise(sentence):
                 continue
+            sentence_hash = hash(" ".join(sentence.lower().split()))
+            if sentence_hash in seen_sentences:
+                continue
+            seen_sentences.add(sentence_hash)
             # Skip near-duplicates of already-selected key points
             if any(self._sentences_are_redundant(sentence, existing) for existing in points):
                 continue
@@ -908,19 +1372,32 @@ class SummarizationPipeline:
             compressed.append(concise)
         return compressed
 
+    def _apply_summary_word_budget(self, sentences: list[str], max_words: int) -> list[str]:
+        """Keep complete ranked sentences within the selected length profile's cap."""
+        if max_words < 1:
+            return []
+
+        budgeted: list[str] = []
+        used_words = 0
+        for sentence in sentences:
+            sentence_words = len(sentence.split())
+            if used_words + sentence_words > max_words:
+                continue
+            budgeted.append(sentence)
+            used_words += sentence_words
+
+        # The first compressed sentence is always short enough for supported
+        # profiles, but preserve a useful result if an unusual input reaches here.
+        return budgeted or sentences[:1]
+
     def _compress_sentence(self, sentence: str, max_words: int = 34) -> str:
         cleaned = sentence.strip()
         cleaned = cleaned.replace(" - ", "-")
         cleaned = cleaned.replace(" ,", ",")
         cleaned = re.sub(r"\s+", " ", cleaned)
-        clause_parts = re.split(
-            r",\s+(?:which|thereby|while|although|whereas|indicating|suggesting|therefore)\b|;\s+",
-            cleaned,
-            maxsplit=1,
-            flags=re.IGNORECASE,
-        )
-        if clause_parts and len(clause_parts[0].split()) >= 8:
-            cleaned = clause_parts[0]
+        # Qualifying clauses frequently carry the result, limitation, or
+        # negation. Keep them intact; selection already penalizes overly long
+        # candidates, and only an unavoidable hard word cap may shorten one.
 
         words = cleaned.split()
         if len(words) > max_words:

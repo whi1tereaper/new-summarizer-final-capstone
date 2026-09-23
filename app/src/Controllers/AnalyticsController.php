@@ -279,6 +279,103 @@ class AnalyticsController
         ];
     }
 
+    public function getDashboardData(?int $userId, bool $isAdmin, string $from, string $to): array
+    {
+        $where = 'created_at >= :from AND created_at < DATE_ADD(:to, INTERVAL 1 DAY)';
+        $params = ['from' => $from, 'to' => $to];
+        if (!$isAdmin) {
+            $where .= ' AND user_id = :user_id';
+            $params['user_id'] = $userId;
+        }
+
+        $completedWhere = $where . " AND status = 'completed'";
+        $monthlyTrend = (strtotime($to) - strtotime($from)) > (90 * 86400);
+        $trendBucket = $monthlyTrend ? "DATE_FORMAT(created_at, '%Y-%m')" : 'DATE(created_at)';
+        $nutshellWhere = 'nutshell_generated_at >= :from AND nutshell_generated_at < DATE_ADD(:to, INTERVAL 1 DAY)';
+        if (!$isAdmin) {
+            $nutshellWhere .= ' AND user_id = :user_id';
+        }
+        $nutshellTrendBucket = $monthlyTrend
+            ? "DATE_FORMAT(nutshell_generated_at, '%Y-%m')"
+            : 'DATE(nutshell_generated_at)';
+        $query = function (string $sql) use ($params): array {
+            $statement = $this->db->prepare($sql);
+            $statement->execute($params);
+            return $statement->fetchAll();
+        };
+
+        $kpiRows = $query("SELECT COUNT(*) AS articles, COALESCE(SUM(original_word_count), 0) AS words,
+            AVG(NULLIF(original_word_count, 0)) AS original_avg, AVG(NULLIF(summary_word_count, 0)) AS summary_avg,
+                COALESCE(AVG(CASE WHEN original_word_count > 0 THEN
+                    (original_word_count - summary_word_count) / original_word_count * 100 END), NULL) AS reduction
+            FROM summaries WHERE {$completedWhere}");
+        $kpis = $kpiRows[0] ?? [];
+
+        $summaryCount = (int)($kpis['articles'] ?? 0);
+        $trend = $query("SELECT {$trendBucket} AS bucket, COUNT(*) AS total
+            FROM summaries WHERE {$completedWhere} GROUP BY {$trendBucket} ORDER BY bucket");
+        $styles = $query("SELECT summary_style AS label, COUNT(*) AS total
+            FROM summaries WHERE {$completedWhere} GROUP BY summary_style ORDER BY total DESC");
+        $lengths = $query("SELECT summary_length AS label, COUNT(*) AS total
+            FROM summaries WHERE {$completedWhere} AND summary_length IS NOT NULL
+            GROUP BY summary_length ORDER BY FIELD(summary_length, 'brief', 'short', 'balanced', 'detailed', 'comprehensive')");
+        $words = $query("SELECT COALESCE(SUM(original_word_count), 0) AS original_words,
+                COALESCE(SUM(summary_word_count), 0) AS summary_words
+            FROM summaries WHERE {$completedWhere}");
+        $types = $query("SELECT input_type AS label, COUNT(*) AS total
+            FROM summaries WHERE {$completedWhere} GROUP BY input_type ORDER BY total DESC");
+        $categories = $query("SELECT COALESCE(NULLIF(article_category, ''), 'Uncategorized') AS label, COUNT(*) AS total
+            FROM summaries WHERE {$completedWhere} GROUP BY COALESCE(NULLIF(article_category, ''), 'Uncategorized') ORDER BY total DESC");
+        $nutshellQuery = function (string $sql) use ($params): array {
+            $statement = $this->db->prepare($sql);
+            $statement->execute($params);
+            return $statement->fetchAll();
+        };
+        $nutshell = $nutshellQuery("SELECT COUNT(*) AS generated, AVG(NULLIF(word_count, 0)) AS average_words,
+                COUNT(*) AS stored
+            FROM nutshell_generations
+            WHERE {$nutshellWhere}");
+        $nutshellTrend = $nutshellQuery("SELECT {$nutshellTrendBucket} AS bucket, COUNT(*) AS total
+            FROM nutshell_generations
+            WHERE {$nutshellWhere}
+            GROUP BY {$nutshellTrendBucket} ORDER BY bucket");
+        $recent = $query("SELECT article_title, input_type, summary_style, summary_length, created_at
+            FROM summaries WHERE {$completedWhere} ORDER BY created_at DESC LIMIT 10");
+        $performance = $query("SELECT AVG(processing_time) AS average_time, MIN(processing_time) AS fastest_time,
+                MAX(processing_time) AS slowest_time, SUM(status = 'completed') AS successful,
+                SUM(status = 'failed') AS failed FROM summaries WHERE {$where}");
+
+        $result = [
+            'kpis' => [
+                'articles' => $summaryCount,
+                'summaries' => $summaryCount,
+                'words' => (int)($kpis['words'] ?? 0),
+                'original_avg' => $kpis['original_avg'] === null ? null : round((float)$kpis['original_avg']),
+                'summary_avg' => $kpis['summary_avg'] === null ? null : round((float)$kpis['summary_avg']),
+                'reduction' => $kpis['reduction'] === null ? null : round((float)$kpis['reduction'], 1),
+                'method' => $styles[0]['label'] ?? null,
+            ],
+            'trend' => $trend,
+            'styles' => $styles,
+            'lengths' => $lengths,
+            'words_comparison' => $words[0] ?? ['original_words' => 0, 'summary_words' => 0],
+            'types' => $types,
+            'categories' => $categories,
+            'nutshell' => $nutshell[0] ?? ['generated' => 0, 'stored' => 0, 'average_words' => null],
+            'nutshell_trend' => $nutshellTrend,
+            'recent' => $recent,
+            'performance' => $performance[0] ?? [],
+        ];
+
+        if ($isAdmin) {
+            $userStatement = $this->db->prepare('SELECT COUNT(*) FROM users WHERE role = \'user\'');
+            $userStatement->execute();
+            $result['total_users'] = (int)$userStatement->fetchColumn();
+        }
+
+        return $result;
+    }
+
     /**
      * Top 5 referrer domains by session count.
      *

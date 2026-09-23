@@ -1015,6 +1015,34 @@ STRUCTURED_ROLES = {
         ("Key Discussion", {"discussion"}, ("noted", "discussed", "raised", "pointed out")),
         ("Decisions Made", {"decision"}, ("decided", "approved", "agreed", "resolved")),
         ("Action Items", {"action item"}, ("assigned", "will", "deadline", "task", "follow up")),
+        ("Conclusion", {"conclusion"}, ("conclusion",)),
+    ],
+    # --- Profile mode keys (used by selection-aware pipeline) ---
+    "study": [
+        ("Overview", {"introduction", "overview", "background"}, ("topic", "lesson", "subject", "concept", "about")),
+        ("Core Concepts", {"body", "discussion", "background"}, ("defined", "definition", "refers to", "means", "concept", "principle")),
+        ("Examples", {"body", "discussion"}, ("example", "for instance", "such as", "illustrate", "consider")),
+        ("Key Takeaways", {"conclusion", "recommendations", "body"}, ("important", "remember", "key point", "takeaway", "therefore")),
+    ],
+    "executive": [
+        ("Summary", {"executive_summary", "introduction", "overview"}, ("summary", "overview", "report", "purpose")),
+        ("Key Findings", {"results", "discussion", "body"}, ("finding", "data", "result", "outcome", "showed", "revealed")),
+        ("Risks & Implications", {"body", "discussion", "conclusion"}, ("risk", "impact", "implication", "consequence", "affect")),
+        ("Recommendation", {"recommendations", "conclusion"}, ("recommend", "should", "action", "next step", "strategy", "priority")),
+    ],
+    "technical": [
+        ("Overview", {"overview", "introduction", "system_description"}, ("purpose", "provides", "used for", "enables", "designed")),
+        ("Architecture", {"body", "system_description"}, ("architecture", "component", "module", "service", "layer", "interface", "api")),
+        ("Implementation Steps", {"body"}, ("step", "configure", "install", "run", "deploy", "endpoint", "function", "parameter")),
+        ("Constraints & Errors", {"body", "conclusion"}, ("requires", "constraint", "limitation", "error", "exception", "warning", "fail")),
+        ("Expected Result", {"conclusion", "body"}, ("result", "output", "response", "expected", "final", "should see")),
+    ],
+    "news": [
+        ("Who / What", {"lead", "body"}, ()),
+        ("When / Where", {"lead", "body"}, ("today", "yesterday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday")),
+        ("Key Developments", {"body", "outcome"}, ("announced", "confirmed", "declared", "launched", "released", "signed")),
+        ("Why It Matters", {"body", "outcome", "conclusion"}, ("impact", "affect", "consequence", "aftermath", "because", "result")),
+        ("Outcome / Status", {"outcome", "conclusion", "body"}, ("ongoing", "status", "confirmed", "remain", "resolved", "update")),
     ],
 }
 

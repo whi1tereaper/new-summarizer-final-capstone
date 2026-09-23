@@ -26,6 +26,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $errorMessage === '') {
     if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
         $errorMessage = 'Unauthorized request.';
         http_response_code(403);
+    } elseif (isset($_POST['decline_terms'])) {
+        require_once __DIR__ . '/../src/Services/RememberMeService.php';
+        require_once __DIR__ . '/../src/Services/GuestSessionService.php';
+        \App\Src\Services\RememberMeService::clearCookie();
+        (new \App\Src\Services\GuestSessionService())->clearGuestIdentity();
+        \App\Src\Utils\SessionManager::destroy();
+        \App\Src\Utils\SessionManager::start();
+        $_SESSION['error'] = 'You must accept the Terms and Conditions before using the summarizer.';
+        header('Location: login.php');
+        exit;
     } elseif (!isAcceptedCheckboxValue($_POST['accept_terms'] ?? null)) {
         $errorMessage = 'You must accept the Terms and Conditions before using the summarizer.';
     } else {
@@ -87,15 +97,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $errorMessage === '') {
             <form method="POST" action="accept_terms.php" class="terms-actions">
                 <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
                 <label class="consent-box consent-box-standalone">
-                    <input type="checkbox" name="accept_terms" value="1" required>
+                    <input type="checkbox" name="accept_terms" value="1" required data-terms-checkbox>
                     <span class="consent-copy">
                         I have read and agree to the Terms and Conditions.
                     </span>
                 </label>
-                <button type="submit" class="btn-auth">Accept and Continue</button>
+                <button type="submit" class="btn-auth" disabled data-terms-accept>Accept and Continue</button>
+                <button type="submit" name="decline_terms" value="1" class="btn-auth btn-auth-secondary" formnovalidate>No, I Don't Accept</button>
             </form>
         <?php endif; ?>
     </main>
     <script src="assets/js/index.js"></script>
+    <script>
+        const termsCheckbox = document.querySelector('[data-terms-checkbox]');
+        const acceptButton = document.querySelector('[data-terms-accept]');
+        if (termsCheckbox && acceptButton) {
+            termsCheckbox.addEventListener('change', () => {
+                acceptButton.disabled = !termsCheckbox.checked;
+            });
+        }
+    </script>
 </body>
 </html>

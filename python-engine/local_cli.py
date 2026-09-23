@@ -7,6 +7,7 @@ This replaces the need for the PHP app to call the Python runtime over HTTP.
 from __future__ import annotations
 
 from contextlib import contextmanager
+from dataclasses import asdict
 import json
 import os
 from pathlib import Path
@@ -52,8 +53,8 @@ try:
         generate_cached_audio,
         normalize_language_code,
     )
-    from nlp_pipeline import PreprocessingOptions
-    from summarizer import extract_pdf_text, summarize_document
+    from summarizer import extract_pdf_text
+    from summarizer_core.models import PreprocessingOptions, SummarizationPipeline, SummarizationRequest
 except ImportError as exc:
     import sys
     sys.stderr.write(f"Import Error: {str(exc)}\n")
@@ -215,50 +216,29 @@ def translate_text(text: str, target_lang: str) -> str:
 
 
 def handle_summarize(request: dict) -> dict:
-    preprocessing_options = PreprocessingOptions.from_mapping(request.get("preprocessing"))
-    summary_length = str(request.get("summary_length", request.get("length", "")) or "").strip().lower()
-    summary_result = summarize_document(
+    """Run the single structured pipeline used by every output style.
+
+    The previous compatibility path ignored the requested length and style,
+    leaving the UI selection disconnected from the generated result.
+    """
+    raw_preprocessing = request.get("preprocessing")
+    preprocessing = PreprocessingOptions.from_mapping(raw_preprocessing)
+    try:
+        sentence_count = int(request.get("sentence_count", 8))
+    except (TypeError, ValueError):
+        sentence_count = 8
+
+    result = SummarizationPipeline().summarize(SummarizationRequest(
         text=str(request.get("text", "")),
         file_path=str(request.get("file_path", "")),
-        sentence_count=int(request.get("sentence_count", 5) or 5),
-        preprocessing_options=preprocessing_options,
-        summary_style=str(request.get("summary_style", "standard_paragraph") or "standard_paragraph"),
-        summary_length=summary_length if summary_length else "balanced",
-    )
-    return {
-        "title": summary_result.title or "Generated Summary",
-        "sentences": summary_result.sentences,
-        "overview": summary_result.overview,
-        "plain_summary": summary_result.plain_summary,
-        "overall_summary_bullets": summary_result.overall_summary_bullets,
-        "raw_text": summary_result.raw_text,
-        "cleaned_text": summary_result.cleaned_text,
-        "sentence_count": summary_result.sentence_count,
-        "summary_length": getattr(summary_result, "summary_length", summary_length or "balanced"),
-        "preprocessing": summary_result.preprocessing,
-        "readability": summary_result.readability,
-        "summary_method": summary_result.summary_method,
-        "keywords": summary_result.keywords,
-        "important_terms": summary_result.important_terms,
-        "article_type": summary_result.article_type,
-        "key_points": summary_result.key_points,
-        "conclusion": summary_result.conclusion,
-        "structured_summary": summary_result.structured_summary,
-        "source_metadata": summary_result.source_metadata,
-        "paragraph_summaries": [
-            {
-                "paragraph_number": pa.paragraph_number,
-                "section": pa.section,
-                "purpose": pa.purpose,
-                "main_idea": pa.main_idea,
-                "supporting_details": pa.supporting_details,
-                "keywords": pa.keywords,
-                "summary": pa.summary,
-            }
-            for pa in summary_result.paragraph_summaries
-        ],
-        "excluded_sections": summary_result.excluded_sections,
-    }
+        sentence_count=max(3, min(15, sentence_count)),
+        preprocessing_options=preprocessing,
+        summary_style=str(request.get("summary_style", "standard_paragraph")),
+        summary_length=str(request.get("summary_length", "balanced")),
+        selection_mode=str(request.get("selection_mode", request.get("summary_style", "general"))),
+        document_title=str(request.get("document_title", "")),
+    ))
+    return asdict(result)
 
 
 def handle_extract_pdf(request: dict) -> dict:
