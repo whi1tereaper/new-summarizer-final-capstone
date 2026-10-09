@@ -3,19 +3,18 @@ require_once __DIR__ . '/../src/whitereaper.php';
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once '../src/Controllers/HistoryHandler.php';
 require_once '../src/Utils/Formatter.php';
-require_once __DIR__ . '/../src/Controllers/AnalyticsController.php';
 
 use App\Src\Controllers\HistoryHandler;
 use App\Src\Utils\Formatter;
-use App\Src\Controllers\AnalyticsController;
 
-$userId       = $_SESSION['user_id'] ?? null;
+$userId       = isset($_SESSION['user_id']) ? (int)$_SESSION['user_id'] : null;
 $guestToken   = $_SESSION['guest_token'] ?? null;
 $isGuestViewer = $userId === null;
 $isAdmin      = ($_SESSION['role'] ?? 'user') === 'admin';
 
-if ($userId === null && $guestToken === null) {
-    header('Location: login.php');
+if ($userId === null || $userId < 1) {
+    $_SESSION['error'] = 'Create an account to access your history.';
+    header('Location: register.php');
     exit;
 }
 
@@ -23,95 +22,102 @@ $page    = max(1, (int)($_GET['page'] ?? 1));
 $history = HistoryHandler::getSummaryHistory($userId, $guestToken, $page);
 $nutshellHistory = HistoryHandler::getNutshellHistory($userId, $guestToken);
 
-// Analytics — only loaded for admins, silently skipped otherwise.
-$analyticsAvailable = false;
-$anKpis = $anDevices = $anFunnel = $anTrend = $anReferrers = [];
-if ($isAdmin) {
-    try {
-        $ac = new AnalyticsController();
-        $anKpis      = $ac->getKpis();
-        $anDevices   = $ac->getDeviceBreakdown();
-        $anFunnel    = $ac->getScrollFunnel();
-        $anTrend     = $ac->getDailyTrend();
-        $anReferrers = $ac->getTopReferrers();
-        $analyticsAvailable = true;
-    } catch (Throwable $e) {
-        // Tables not yet migrated — fail silently
-    }
-}
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $isGuestViewer ? 'Guest Summary History' : 'Article Insights History' ?></title>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600&family=Outfit:wght@600;700;800&family=VT323&display=swap" rel="stylesheet">
+    <title><?= $isGuestViewer ? 'Guest Summary History' : 'History — LIGHT' ?></title>
+    <link rel="preload" href="assets/fonts/satoshi-900.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/satoshi-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/images/poc-neust-logo.png">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/design-tokens.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=navbar-3">
+    <link rel="stylesheet" href="assets/css/site-nav.css?v=3">
+    <link rel="stylesheet" href="assets/css/site-footer.css?v=nex-8">
+    <link rel="stylesheet" href="assets/css/global-button-effects.css?v=2">
     <style>
-        nav { margin-bottom: 50px; display:flex; gap: 30px; border-bottom: 1px solid var(--color-border); padding-bottom: 20px;}
-        nav a { color: var(--color-muted); font-size: 0.8em; text-decoration:none; font-family:'Inter'; text-transform:uppercase;}
-        nav a:hover { color: var(--color-primary-dark); }
-
+        body { 
+            background: var(--color-bg, #EEEDEA); 
+            color: var(--color-text, #080808); 
+            font-family: var(--font-body, 'Inter', system-ui, sans-serif); 
+            -webkit-font-smoothing: antialiased;
+        }
+        main.editorial-layout { max-width: 960px; margin: 48px auto; padding: 0 clamp(20px, 4vw, 48px); }
         h1 { 
-            font-size: 2.5em; 
-            margin: 0 0 50px 0; 
-            border-bottom: 2px solid var(--color-primary-dark);
-            padding-bottom: 15px;
-            font-family: 'Outfit', 'Inter', sans-serif;
-            font-weight: 800;
+            font-size: clamp(2.2rem, 5vw, 3.2rem); 
+            margin: 0 0 40px 0; 
+            border-bottom: 1px solid var(--color-border, rgba(8, 8, 8, 0.14));
+            padding-bottom: 18px;
+            font-family: var(--font-editorial, 'Satoshi', 'Outfit', 'Inter', sans-serif);
+            font-weight: 900;
             letter-spacing: -0.04em;
-            line-height: 0.98;
+            line-height: 1;
+            color: var(--color-text, #080808);
         }
 
-        .history-list { display: flex; flex-direction: column; gap: 60px; }
-        .history-item { border-bottom: 1px solid var(--color-border-strong); padding-bottom: 40px; }
+        .history-list { display: flex; flex-direction: column; gap: 48px; }
+        .history-item { border-bottom: 1px solid var(--color-border, rgba(8, 8, 8, 0.12)); padding-bottom: 36px; }
         .history-item:last-child { border-bottom: none; }
 
         .article-title { 
-            font-family: 'Merriweather', serif; 
-            font-size: 1.8em; 
+            font-family: var(--font-editorial, 'Satoshi', 'Outfit', 'Inter', system-ui, sans-serif); 
+            font-size: clamp(1.4rem, 2.5vw, 1.85rem); 
+            font-weight: 800;
+            letter-spacing: -0.03em;
             margin: 0 0 10px 0; 
-            line-height: 1.2;
+            line-height: 1.18;
+            color: var(--color-text, #080808);
         }
-        .article-title a { text-decoration: none; color: inherit; }
-        .article-title a:hover { color: var(--color-primary-dark); text-decoration: underline; }
+        .article-title a { text-decoration: none; color: var(--color-text, #080808); transition: color 200ms ease; }
+        .article-title a:hover { color: var(--color-accent, #7F00FF); text-decoration: none; }
 
         .meta-line { 
-            font-size: 0.75em; 
-            color: var(--color-muted); 
+            font-size: 0.72rem; 
+            color: var(--color-text-muted, rgba(8, 8, 8, 0.48)); 
             text-transform: uppercase; 
-            letter-spacing: 1.2px; 
-            margin-bottom: 20px;
+            letter-spacing: 0.08em; 
+            margin-bottom: 16px;
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
-            font-family: 'Inter', sans-serif;
+            gap: 16px;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-weight: 500;
         }
-        .meta-line strong { color: var(--color-text); }
+        .meta-line span:first-child { color: var(--color-accent, #7F00FF); font-weight: 700; }
+        .meta-line strong { color: var(--color-text, #080808); }
 
         .summary-preview { 
-            font-family: 'Merriweather', serif;
-            font-size: 1.1em; 
-            color: #2A2436; 
-            margin-top: 20px;
+            font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+            font-size: 1.02rem; 
+            color: var(--color-text-secondary, rgba(8, 8, 8, 0.72)); 
+            margin-top: 14px;
+            line-height: 1.7;
+            letter-spacing: -0.005em;
+            max-width: 78ch;
         }
 
         .btn-view {
-            display: inline-block;
-            margin-top: 20px;
-            font-size: 0.8em;
-            font-weight: 600;
-            color: var(--color-primary-dark);
-            text-decoration: underline;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 18px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--color-accent, #7F00FF);
+            text-decoration: none;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-family: 'Inter';
+            letter-spacing: 0.08em;
+            font-family: var(--font-display, 'Satoshi', 'Outfit', sans-serif);
+            transition: color 200ms ease, transform 200ms ease;
         }
 
-        .btn-view:hover { color: var(--color-primary); }
+        .btn-view:hover { color: var(--color-accent-hover, #6a00d8); transform: translateX(3px); }
 
-        .empty-state { text-align: left; margin: 60px 0; color: var(--color-muted); font-style: italic; }
+        .empty-state { text-align: left; margin: 60px 0; color: var(--color-text-muted); font-style: italic; }
 
         /* ─── History Responsive ─── */
         @media (max-width: 768px) {
@@ -173,7 +179,7 @@ if ($isAdmin) {
         .an-divider {
             margin: 70px 0 0;
             border: none;
-            border-top: 2px solid var(--color-primary-dark);
+            border-top: 2px solid var(--color-accent);
         }
 
         .an-section-eyebrow {
@@ -182,7 +188,7 @@ if ($isAdmin) {
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: var(--color-primary-dark);
+            color: var(--color-accent);
             margin: 28px 0 6px;
         }
 
@@ -204,7 +210,7 @@ if ($isAdmin) {
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: var(--color-muted);
+            color: var(--color-text-muted);
             margin: 36px 0 14px;
             display: flex;
             align-items: center;
@@ -229,10 +235,10 @@ if ($isAdmin) {
         @media (max-width: 540px) { .an-kpi-row { grid-template-columns: repeat(2, 1fr); } }
 
         .an-kpi {
-            background: rgba(255,255,255,0.82);
+            background: var(--color-bg-secondary);
             border: 1px solid var(--color-border);
             padding: 18px 16px 14px;
-            box-shadow: var(--shadow-soft);
+            box-shadow: var(--shadow-sm);
             position: relative;
             overflow: hidden;
         }
@@ -242,7 +248,7 @@ if ($isAdmin) {
             position: absolute;
             top: 0; left: 0;
             width: 3px; height: 100%;
-            background: var(--gradient-button);
+            background: var(--color-accent);
             opacity: 0;
             transition: opacity 0.2s;
         }
@@ -255,26 +261,27 @@ if ($isAdmin) {
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: var(--color-muted);
+            color: var(--color-text-muted);
             margin-bottom: 8px;
         }
 
         .an-kpi__val {
-            font-family: 'Merriweather', serif;
+            font-family: var(--font-editorial, 'Satoshi', 'Outfit', 'Inter', sans-serif);
             font-size: 1.8em;
-            font-weight: 700;
+            font-weight: 800;
+            letter-spacing: -0.03em;
             line-height: 1;
             color: var(--color-text);
         }
 
-        .an-kpi__val.kpi-good { color: #166534; }
-        .an-kpi__val.kpi-warn { color: #92400e; }
+        .an-kpi__val.kpi-good { color: var(--color-success); }
+        .an-kpi__val.kpi-warn { color: var(--color-warning); }
         .an-kpi__val.kpi-bad  { color: var(--color-danger); }
 
         .an-kpi__sub {
             font-family: 'Inter', sans-serif;
             font-size: 0.65em;
-            color: var(--color-muted);
+            color: var(--color-text-muted);
             margin-top: 5px;
         }
 
@@ -289,10 +296,10 @@ if ($isAdmin) {
         @media (max-width: 680px) { .an-two-col { grid-template-columns: 1fr; } }
 
         .an-panel {
-            background: rgba(255,255,255,0.82);
+            background: var(--color-bg-secondary);
             border: 1px solid var(--color-border);
             padding: 20px 22px;
-            box-shadow: var(--shadow-soft);
+            box-shadow: var(--shadow-sm);
         }
 
         .an-panel__title {
@@ -301,7 +308,7 @@ if ($isAdmin) {
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: var(--color-muted);
+            color: var(--color-text-muted);
             margin: 0 0 16px;
         }
 
@@ -309,42 +316,40 @@ if ($isAdmin) {
         .dv-row { display: grid; grid-template-columns: 58px 1fr 36px; align-items: center; gap: 8px; margin-bottom: 12px; }
         .dv-row:last-child { margin-bottom: 0; }
         .dv-label { font-family: 'Inter', sans-serif; font-size: 0.7em; font-weight: 600; color: var(--color-text); text-transform: uppercase; letter-spacing: 0.5px; }
-        .dv-track { background: var(--color-soft-bg); height: 7px; overflow: hidden; }
-        .dv-fill  { height: 100%; background: var(--gradient-button); transition: width 0.5s ease; }
-        .dv-pct   { font-family: 'Inter', sans-serif; font-size: 0.7em; font-weight: 600; color: var(--color-primary-dark); text-align: right; }
+        .dv-track { background: var(--color-bg-tertiary); height: 7px; overflow: hidden; }
+        .dv-fill  { height: 100%; background: var(--color-accent); transition: width 0.5s ease; }
+        .dv-pct   { font-family: 'Inter', sans-serif; font-size: 0.7em; font-weight: 600; color: var(--color-accent); text-align: right; }
 
         /* Funnel */
         .fn-grid { display: flex; align-items: flex-end; gap: 10px; height: 110px; }
         .fn-col   { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; }
-        .fn-track { width: 100%; background: var(--color-soft-bg); height: 70px; display: flex; align-items: flex-end; overflow: hidden; }
-        .fn-bar   { width: 100%; background: var(--gradient-button); min-height: 3px; transition: height 0.5s ease; }
-        .fn-pct   { font-family: 'Merriweather', serif; font-size: 0.78em; font-weight: 700; color: var(--color-primary-dark); margin-top: 6px; }
-        .fn-lbl   { font-family: 'Inter', sans-serif; font-size: 0.56em; text-transform: uppercase; letter-spacing: 0.5px; color: var(--color-muted); margin-top: 3px; text-align: center; }
+        .fn-track { width: 100%; background: var(--color-bg-tertiary); height: 70px; display: flex; align-items: flex-end; overflow: hidden; }
+        .fn-bar   { width: 100%; background: var(--color-accent); min-height: 3px; transition: height 0.5s ease; }
+        .fn-pct   { font-family: var(--font-editorial, 'Satoshi', 'Outfit', 'Inter', sans-serif); font-size: 0.78em; font-weight: 700; color: var(--color-accent); margin-top: 6px; }
+        .fn-lbl   { font-family: 'Inter', sans-serif; font-size: 0.56em; text-transform: uppercase; letter-spacing: 0.5px; color: var(--color-text-muted); margin-top: 3px; text-align: center; }
 
         /* Sparkline */
-        .sp-wrap  { background: rgba(255,255,255,0.82); border: 1px solid var(--color-border); padding: 20px 22px; box-shadow: var(--shadow-soft); margin-bottom: 18px; }
+        .sp-wrap  { background: var(--color-bg-secondary); border: 1px solid var(--color-border); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 18px; }
         .sp-hdr   { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
-        .sp-peak  { font-family: 'Inter', sans-serif; font-size: 0.7em; color: var(--color-muted); }
+        .sp-peak  { font-family: 'Inter', sans-serif; font-size: 0.7em; color: var(--color-text-muted); }
         .sp-svg   { width: 100%; height: 80px; display: block; overflow: visible; }
-        .sp-axis  { display: flex; justify-content: space-between; font-family: 'Inter', sans-serif; font-size: 0.65em; color: var(--color-muted); margin-top: 5px; }
+        .sp-axis  { display: flex; justify-content: space-between; font-family: 'Inter', sans-serif; font-size: 0.65em; color: var(--color-text-muted); margin-top: 5px; }
 
         /* Referrer table */
         .ref-tbl  { width: 100%; border-collapse: collapse; font-family: 'Inter', sans-serif; font-size: 0.78em; }
-        .ref-tbl th { font-size: 0.65em; text-transform: uppercase; letter-spacing: 1px; color: var(--color-muted); font-weight: 600; border-bottom: 1px solid var(--color-border); padding: 0 6px 7px; text-align: left; }
-        .ref-tbl td { padding: 8px 6px; border-bottom: 1px solid rgba(151,125,255,0.10); color: var(--color-text); }
+        .ref-tbl th { font-size: 0.65em; text-transform: uppercase; letter-spacing: 1px; color: var(--color-text-muted); font-weight: 600; border-bottom: 1px solid var(--color-border); padding: 0 6px 7px; text-align: left; }
+        .ref-tbl td { padding: 8px 6px; border-bottom: 1px solid var(--color-border); color: var(--color-text); }
         .ref-tbl tr:last-child td { border-bottom: none; }
-        .ref-tbl tr:hover td { background: rgba(242,230,238,0.5); }
-        .ref-domain { font-family: monospace; font-size: 0.88em; }
-        .an-empty { font-family: 'Inter', sans-serif; font-size: 0.8em; color: var(--color-muted); text-align: center; padding: 16px 0; }
+        .ref-tbl tr:hover td { background: var(--color-bg-tertiary); }
+        .ref-domain { font-family: var(--font-mono); font-size: 0.88em; }
+        .an-empty { font-family: 'Inter', sans-serif; font-size: 0.8em; color: var(--color-text-muted); text-align: center; padding: 16px 0; }
     </style>
 </head>
-<body>
+<body class="history-page">
 
+<?php $showLightBrand = true; ?>
+<?php require __DIR__ . '/partials/site-nav.php'; ?>
 <main class="editorial-layout">
-    <nav>
-        <a href="index.php">← BACK</a>
-    </nav>
-
     <h1><?= $isGuestViewer ? 'Guest Summary History' : 'History' ?></h1>
 
     <?php if (isset($history['error'])): ?>
@@ -412,166 +417,6 @@ if ($isAdmin) {
     <?php endif; ?>
 </main>
 
-<?php if ($isAdmin && $analyticsAvailable):
-    // ── Pre-compute display values ─────────────────────────────────────
-    $lcpMs   = $anKpis['median_lcp_ms'] ?? null;
-    $lcpLbl  = $lcpMs === null ? '—' : number_format($lcpMs) . ' ms';
-    $lcpCls  = $lcpMs === null ? '' : ($lcpMs <= 2500 ? 'kpi-good' : ($lcpMs <= 4000 ? 'kpi-warn' : 'kpi-bad'));
-    $conv    = $anKpis['conversion_rate'] ?? 0;
-    $bounce  = $anKpis['bounce_rate']     ?? 0;
-    $dwell   = $anKpis['avg_dwell_seconds'] ?? 0;
-    $dwFmt   = $dwell > 0 ? gmdate('i:s', (int)$dwell) : '0:00';
-
-    // Sparkline geometry
-    $vals  = array_column($anTrend, 'sessions');
-    $vmax  = max(array_merge([1], $vals));
-    $svgW  = 700; $svgH = 80;
-    $bw    = $svgW / max(1, count($vals));
-    $pts   = [];
-    foreach ($vals as $i => $v) {
-        $pts[] = round($i * $bw + $bw / 2, 1) . ',' . round($svgH - ($v / $vmax) * ($svgH - 12) - 3, 1);
-    }
-    $poly  = implode(' ', $pts);
-    $area  = '';
-    if ($pts) {
-        $area  = 'M ' . $pts[0];
-        foreach (array_slice($pts, 1) as $p) $area .= ' L ' . $p;
-        [$lx]  = explode(',', end($pts));
-        [$fx]  = explode(',', reset($pts));
-        $area .= " L {$lx},{$svgH} L {$fx},{$svgH} Z";
-    }
-    $tStart = $anTrend ? date('M j', strtotime($anTrend[0]['date']))          : '';
-    $tEnd   = $anTrend ? date('M j', strtotime(end($anTrend)['date']))        : '';
-?>
-<section class="editorial-layout" id="landing-analytics" aria-label="Landing Page Analytics">
-    <hr class="an-divider">
-    <p class="an-section-eyebrow">Admin Only</p>
-    <h2 class="an-section-title">Landing Page Analytics</h2>
-
-    <!-- KPIs -->
-    <p class="an-section-label">Key Metrics</p>
-    <div class="an-kpi-row">
-        <div class="an-kpi">
-            <div class="an-kpi__label">Sessions Today</div>
-            <div class="an-kpi__val"><?= $anKpis['sessions_today'] ?></div>
-            <div class="an-kpi__sub"><?= $anKpis['sessions_7d'] ?> this week</div>
-        </div>
-        <div class="an-kpi">
-            <div class="an-kpi__label">Total Sessions</div>
-            <div class="an-kpi__val"><?= number_format($anKpis['total_sessions']) ?></div>
-            <div class="an-kpi__sub">All time</div>
-        </div>
-        <div class="an-kpi">
-            <div class="an-kpi__label">CTA Conversion</div>
-            <div class="an-kpi__val <?= $conv >= 10 ? 'kpi-good' : ($conv >= 5 ? 'kpi-warn' : 'kpi-bad') ?>"><?= $conv ?>%</div>
-            <div class="an-kpi__sub">Get Started / Register</div>
-        </div>
-        <div class="an-kpi">
-            <div class="an-kpi__label">Avg Dwell</div>
-            <div class="an-kpi__val"><?= $dwFmt ?></div>
-            <div class="an-kpi__sub">Active time (m:ss)</div>
-        </div>
-        <div class="an-kpi">
-            <div class="an-kpi__label">Median LCP</div>
-            <div class="an-kpi__val <?= $lcpCls ?>"><?= $lcpLbl ?></div>
-            <div class="an-kpi__sub">Good &lt; 2,500 ms</div>
-        </div>
-        <div class="an-kpi">
-            <div class="an-kpi__label">Bounce Rate</div>
-            <div class="an-kpi__val <?= $bounce > 70 ? 'kpi-bad' : ($bounce > 40 ? 'kpi-warn' : 'kpi-good') ?>"><?= $bounce ?>%</div>
-            <div class="an-kpi__sub">&lt;25% scroll &amp; &lt;5s</div>
-        </div>
-    </div>
-
-    <!-- Device + Funnel -->
-    <p class="an-section-label">Visitor Behaviour</p>
-    <div class="an-two-col">
-        <div class="an-panel">
-            <h3 class="an-panel__title">Device Breakdown</h3>
-            <?php foreach ($anDevices as $dev => $pct): ?>
-            <div class="dv-row">
-                <span class="dv-label"><?= ucfirst($dev) ?></span>
-                <div class="dv-track"><div class="dv-fill" style="width:<?= $pct ?>%"></div></div>
-                <span class="dv-pct"><?= $pct ?>%</span>
-            </div>
-            <?php endforeach; ?>
-        </div>
-        <div class="an-panel">
-            <h3 class="an-panel__title">Scroll Depth Funnel</h3>
-            <div class="fn-grid">
-                <?php $fnLabels = [25=>'25%',50=>'50%',75=>'75%',100=>'Full'];
-                foreach ($anFunnel as $ms => $pct): ?>
-                <div class="fn-col">
-                    <div class="fn-track"><div class="fn-bar" style="height:<?= max(3,$pct) ?>%"></div></div>
-                    <div class="fn-pct"><?= $pct ?>%</div>
-                    <div class="fn-lbl"><?= $fnLabels[$ms] ?></div>
-                </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-    </div>
-
-    <!-- Sparkline -->
-    <p class="an-section-label">Session Trend</p>
-    <div class="sp-wrap">
-        <div class="sp-hdr">
-            <span class="an-panel__title" style="margin:0;">Daily Sessions — Last 14 Days</span>
-            <span class="sp-peak">Peak: <?= $vmax ?> sessions</span>
-        </div>
-        <?php if ($pts): ?>
-        <svg viewBox="0 0 <?= $svgW ?> <?= $svgH ?>" preserveAspectRatio="none"
-             xmlns="http://www.w3.org/2000/svg" class="sp-svg" aria-hidden="true">
-            <defs>
-                <linearGradient id="hGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%"   stop-color="#977DFF" stop-opacity="0.22"/>
-                    <stop offset="100%" stop-color="#977DFF" stop-opacity="0"/>
-                </linearGradient>
-            </defs>
-            <line x1="0" y1="<?= $svgH-1 ?>" x2="<?= $svgW ?>" y2="<?= $svgH-1 ?>"
-                  stroke="var(--color-border)" stroke-width="1"/>
-            <path d="<?= $area ?>" fill="url(#hGrad)"/>
-            <polyline points="<?= $poly ?>" fill="none"
-                      stroke="#7F63F4" stroke-width="2.5"
-                      stroke-linejoin="round" stroke-linecap="round"/>
-            <?php foreach ($pts as $i => $pt): [$px,$py] = explode(',',$pt); if ($vals[$i] > 0): ?>
-            <circle cx="<?= $px ?>" cy="<?= $py ?>" r="3"
-                    fill="#7F63F4" stroke="#fff" stroke-width="1.5"/>
-            <?php endif; endforeach; ?>
-        </svg>
-        <div class="sp-axis">
-            <span><?= $tStart ?></span>
-            <?php if (count($anTrend) >= 7) echo '<span>' . date('M j', strtotime($anTrend[(int)floor(count($anTrend)/2)]['date'])) . '</span>'; ?>
-            <span><?= $tEnd ?></span>
-        </div>
-        <?php else: ?>
-        <p class="an-empty">No session data in the last 14 days.</p>
-        <?php endif; ?>
-    </div>
-
-    <!-- Referrers -->
-    <p class="an-section-label">Top Referrers</p>
-    <div class="an-panel">
-        <h3 class="an-panel__title" style="margin-bottom:14px;">Traffic Sources</h3>
-        <?php if (empty($anReferrers)): ?>
-        <p class="an-empty">No referrer data yet — most traffic is direct.</p>
-        <?php else: ?>
-        <table class="ref-tbl">
-            <thead><tr><th>Domain</th><th>Sessions</th><th>Conv. Rate</th></tr></thead>
-            <tbody>
-                <?php foreach ($anReferrers as $ref): ?>
-                <tr>
-                    <td class="ref-domain"><?= $ref['domain'] ?></td>
-                    <td><?= $ref['sessions'] ?></td>
-                    <td><?= $ref['sessions'] > 0 ? round($ref['conversions']/$ref['sessions']*100).'%' : '—' ?></td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <?php endif; ?>
-    </div>
-
-</section>
-<?php endif; ?>
-
+<?php require __DIR__ . '/partials/site-footer.php'; ?>
 </body>
 </html>

@@ -22,6 +22,15 @@ class LocalPythonBridge
         return $this->run('summarize', $payload, $timeoutSeconds);
     }
 
+    public function generateSummary(string $sourceText, string $profile, string $length, int $timeoutSeconds = 60): array
+    {
+        return $this->run('generate-summary', [
+            'text' => $sourceText,
+            'profile' => $profile,
+            'length' => $length,
+        ], $timeoutSeconds);
+    }
+
     public function nutshell(array $payload, int $timeoutSeconds = 60): array
     {
         return $this->run('nutshell', $payload, $timeoutSeconds);

@@ -8,7 +8,6 @@ use PDO;
 
 class TermsAcceptanceService
 {
-    private static bool $schemaVerified = false;
     private PDO $db;
 
     public function __construct()
@@ -18,31 +17,7 @@ class TermsAcceptanceService
 
     public function ensureSchema(): void
     {
-        if (self::$schemaVerified) {
-            return;
-        }
-
-        if (!$this->columnExists('terms_accepted')) {
-            $stmt = $this->db->prepare(
-                'ALTER TABLE users
-                 ADD COLUMN terms_accepted TINYINT(1) NOT NULL DEFAULT 0
-                 AFTER active'
-            );
-            $stmt->execute();
-        }
-
-        if (!$this->columnExists('terms_accepted_at')) {
-            $stmt = $this->db->prepare(
-                'ALTER TABLE users
-                 ADD COLUMN terms_accepted_at DATETIME NULL
-                 AFTER terms_accepted'
-            );
-            $stmt->execute();
-        }
-
-        $this->backfillLegacyUsersAsAccepted();
-
-        self::$schemaVerified = true;
+        // Schema is managed via database/migrations/008_terms_acceptance.sql
     }
 
     public function bootstrapCurrentUserSession(): void
@@ -111,10 +86,29 @@ class TermsAcceptanceService
         return true;
     }
 
+    public function currentAuthenticatedUserHasAccepted(): bool
+    {
+        $userId = filter_var($_SESSION['user_id'] ?? null, FILTER_VALIDATE_INT);
+        if (!$userId) {
+            return false;
+        }
+
+        $this->ensureSchema();
+        $statement = $this->db->prepare(
+            'SELECT terms_accepted
+             FROM users
+             WHERE id = :id
+             LIMIT 1'
+        );
+        $statement->execute(['id' => $userId]);
+
+        return (int)$statement->fetchColumn() === 1;
+    }
+
     public static function currentUserNeedsAcceptance(): bool
     {
         if (empty($_SESSION['user_id'])) {
-            return empty($_SESSION['guest_terms_reviewed']);
+            return false;
         }
 
         return (int)($_SESSION['terms_accepted'] ?? 0) !== 1;
@@ -141,8 +135,12 @@ class TermsAcceptanceService
             'tts_audio.php',
             'translate_proxy.php',
             'feedback_submit.php',
+            'track_landing.php',
             'check_status.php',
             'summarizer.php',
+            'summarize.php',
+            'processing.php',
+            'result.php',
         ];
 
         if (in_array($script, $allowedScripts, true)) {
@@ -154,11 +152,7 @@ class TermsAcceptanceService
         }
 
         if ($script !== '') {
-            if ($script === 'summarize.php') {
-                $_SESSION['terms_redirect_after_accept'] = 'summarizer.php';
-            } else {
-                $_SESSION['terms_redirect_after_accept'] = $script;
-            }
+            $_SESSION['terms_redirect_after_accept'] = $script;
         }
 
         header('Location: terms.php');
@@ -184,37 +178,5 @@ class TermsAcceptanceService
         }
 
         return 'index.php';
-    }
-
-    private function columnExists(string $columnName): bool
-    {
-        $statement = $this->db->prepare(
-            'SELECT COUNT(*) AS matches
-             FROM INFORMATION_SCHEMA.COLUMNS
-             WHERE TABLE_SCHEMA = DATABASE()
-               AND TABLE_NAME = :table_name
-               AND COLUMN_NAME = :column_name'
-        );
-        $statement->execute([
-            'table_name' => 'users',
-            'column_name' => $columnName,
-        ]);
-
-        return (int)$statement->fetchColumn() > 0;
-    }
-
-    private function backfillLegacyUsersAsAccepted(): void
-    {
-        // ASSUMPTION: any account still at 0/NULL after this feature was introduced
-        // is a legacy record created before the Terms checkbox existed.
-        $statement = $this->db->prepare(
-            'UPDATE users
-             SET terms_accepted = 1,
-                 terms_accepted_at = COALESCE(terms_accepted_at, created_at, NOW())
-             WHERE COALESCE(terms_accepted, 0) = 0
-               AND terms_accepted_at IS NULL
-               AND created_at < "2026-05-05 00:00:00"'
-        );
-        $statement->execute();
     }
 }

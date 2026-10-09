@@ -1,11 +1,11 @@
 <?php
 // admin-only page
 require_once __DIR__ . '/../src/whitereaper.php';
+require_once __DIR__ . '/../src/Services/AdminSecurityService.php';
 
-if (empty($_SESSION['user_id']) || ($_SESSION['role'] ?? 'user') !== 'admin') {
-    header('Location: login.php?context=admin');
-    exit;
-}
+use App\Src\Services\AdminSecurityService;
+
+AdminSecurityService::requireVerifiedAdmin('login.php?context=admin');
 
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Cache-Control: post-check=0, pre-check=0', false);
@@ -20,21 +20,129 @@ if (($_GET['refresh'] ?? '') === '1') {
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../src/Controllers/AdminController.php';
 require_once __DIR__ . '/../src/Controllers/AnalyticsController.php';
+require_once __DIR__ . '/../src/Utils/validation.php';
 
 use App\Src\Controllers\AdminController;
 use App\Src\Controllers\AnalyticsController;
 use App\Src\Controllers\FeedbackHandler;
+
+// Explicit admin action dispatcher
+$action = $_GET['action'] ?? ($_POST['action'] ?? null);
+if ($action !== null) {
+    $auditSvc = new AdminSecurityService();
+    $callerAdminId = isset($_SESSION['user_id']) ? (int)$_SESSION['user_id'] : null;
+
+    // Gate 1: POST only for state-modifying admin actions
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        http_response_code(405);
+        die('Method not allowed.');
+    }
+
+    // Gate 2: Authenticated administrator role
+    if (!AdminSecurityService::isVerifiedAdmin()) {
+        $auditSvc->auditLog(
+            $callerAdminId,
+            'admin_action_denied',
+            'Unauthorized session attempted admin action: ' . htmlspecialchars((string)$action),
+            null,
+            null
+        );
+        http_response_code(403);
+        die('Access denied.');
+    }
+
+    // Gate 3: CSRF token validation
+    $csrfToken = $_POST['csrf_token'] ?? '';
+    if (!verifyCsrfToken($csrfToken)) {
+        $auditSvc->auditLog(
+            $callerAdminId,
+            'admin_action_denied',
+            'Invalid CSRF token for action: ' . htmlspecialchars((string)$action),
+            null,
+            null
+        );
+        http_response_code(403);
+        die('Invalid CSRF token.');
+    }
+
+    $admin = new AdminController();
+    switch ($action) {
+        case 'toggle_status':
+            $userId = filter_var($_POST['user_id'] ?? null, FILTER_VALIDATE_INT);
+            $status = filter_var($_POST['status'] ?? null, FILTER_VALIDATE_INT);
+            if ($userId === false || $userId === null || $userId < 1 || !in_array($status, [0, 1], true)) {
+                $_SESSION['flash_error'] = 'Invalid input for status toggle.';
+                header('Location: admin_dashboard.php');
+                exit;
+            }
+            $admin->toggleUserStatus($userId, $status);
+            rotateCsrfToken();
+            header('Location: admin_dashboard.php');
+            exit;
+
+        case 'clean_files':
+            $admin->cleanOrphanedFiles();
+            rotateCsrfToken();
+            header('Location: admin_dashboard.php');
+            exit;
+
+        case 'delete_files':
+            $admin->deleteAllFiles();
+            rotateCsrfToken();
+            header('Location: admin_dashboard.php');
+            exit;
+
+        case 'delete_user':
+            $userId = filter_var($_POST['user_id'] ?? null, FILTER_VALIDATE_INT);
+            if ($userId === false || $userId === null || $userId < 1) {
+                $auditSvc->auditLog($callerAdminId, 'admin_delete_failed', 'Invalid user ID submitted', 'user', null);
+                $_SESSION['flash_error'] = 'Invalid user ID.';
+                header('Location: admin_dashboard.php');
+                exit;
+            }
+            $admin->hardDeleteUser($userId);
+            rotateCsrfToken();
+            header('Location: admin_dashboard.php');
+            exit;
+
+        case 'deactivate_user':
+            $userId = filter_var($_POST['user_id'] ?? null, FILTER_VALIDATE_INT);
+            if ($userId === false || $userId === null || $userId < 1) {
+                $auditSvc->auditLog($callerAdminId, 'admin_delete_failed', 'Invalid user ID for deactivation', 'user', null);
+                $_SESSION['flash_error'] = 'Invalid user ID.';
+                header('Location: admin_dashboard.php');
+                exit;
+            }
+            $admin->deactivateUser($userId);
+            rotateCsrfToken();
+            header('Location: admin_dashboard.php');
+            exit;
+
+        default:
+            http_response_code(400);
+            die('Invalid admin action.');
+    }
+}
 
 $admin = new AdminController();
 $users = $admin->getAllUsers();
 $stats = $admin->getSystemStats();
 $orphanStats = $admin->getUploadOrphanStats();
 $feedbackStats = $admin->getFeedbackStats();
-$allFeedback = FeedbackHandler::getAllFeedbackForAdmin();
-require_once __DIR__ . '/../src/Utils/validation.php';
+$fbFilterRating  = isset($_GET['fb_rating']) && is_numeric($_GET['fb_rating']) ? (int)$_GET['fb_rating'] : null;
+$fbFilterComment = isset($_GET['fb_comment']) && $_GET['fb_comment'] !== '' ? ($_GET['fb_comment'] === '1') : null;
+$fbFilterSort    = isset($_GET['fb_sort']) && in_array($_GET['fb_sort'], ['newest', 'lowest_rated', 'highest_rated'], true) ? $_GET['fb_sort'] : 'newest';
+
+$feedbackFilters = [
+    'rating'      => $fbFilterRating,
+    'has_comment' => $fbFilterComment,
+    'sort'        => $fbFilterSort,
+];
+$allFeedback       = FeedbackHandler::getAllFeedbackForAdmin($feedbackFilters);
+$feedbackTelemetry = FeedbackHandler::getFeedbackTelemetryBreakdown();
 $csrf_token = generateCsrfToken();
 
-// Landing page analytics — gracefully degrade if tables haven't been migrated yet.
+// Landing page analytics - gracefully degrade if tables haven't been migrated yet.
 $analyticsAvailable = false;
 $analyticsKpis      = [];
 $analyticsDevices   = [];
@@ -50,8 +158,10 @@ try {
     $analyticsReferrers = $analytics->getTopReferrers();
     $analyticsAvailable = true;
 } catch (Throwable $e) {
+    error_log('[admin_dashboard analytics] Failed to load landing analytics: ' . $e->getMessage());
     $analyticsAvailable = false;
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +171,7 @@ try {
     <title>Admin Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600&family=VT323&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/images/poc-neust-logo.png">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=navbar-3">
     <style>
         .admin-section { margin-bottom: 60px; }
         .admin-section h2 {
@@ -120,16 +230,16 @@ try {
             font-size: 0.75em;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: var(--color-muted);
-            border-bottom: 2px solid var(--color-primary-dark);
+            color: var(--color-text-muted);
+            border-bottom: 2px solid var(--color-accent);
             padding: 10px 12px;
         }
         td {
             padding: 12px;
             border-bottom: 1px solid var(--color-border);
-            color: #2A2436;
+            color: var(--color-text);
         }
-        tr:hover td { background: rgba(242, 230, 238, 0.66); }
+        tr:hover td { background: var(--color-bg-tertiary); }
 
         .role-badge {
             display: inline-block;
@@ -139,10 +249,10 @@ try {
             letter-spacing: 1px;
             font-weight: 600;
         }
-        .role-admin { background: var(--gradient-button); color: #fff; }
-        .role-user { background: rgba(230, 218, 255, 0.88); color: var(--color-primary-dark); }
+        .role-admin { background: var(--color-accent); color: var(--color-bg); }
+        .role-user { background: var(--color-accent-soft); color: var(--color-accent); }
 
-        .status-active { color: var(--color-primary-dark); }
+        .status-active { color: var(--color-accent); }
         .status-inactive { color: var(--color-danger); }
 
         .admin-toolbar {
@@ -150,7 +260,7 @@ try {
             justify-content: space-between;
             align-items: center;
             gap: 20px;
-            border-bottom: 2px solid var(--color-primary-dark);
+            border-bottom: 2px solid var(--color-accent);
             margin-bottom: 50px;
             padding-bottom: 15px;
         }
@@ -261,12 +371,13 @@ try {
         }
     </style>
 </head>
-<body>
+<body class="admin-dashboard-page">
+<?php $showLightBrand = true; ?>
+<?php require __DIR__ . '/partials/site-nav.php'; ?>
     <div class="editorial-layout">
         <nav style="margin-bottom: 40px; display:flex; gap:20px; flex-wrap:wrap;">
             <a href="index.php" style="text-decoration:none; font-size:0.8em; color:var(--color-muted); font-family:'Inter'; text-transform:uppercase; letter-spacing:1px;">&larr; Dashboard</a>
             <a href="admin_audit_logs.php" style="text-decoration:none; font-size:0.8em; color:var(--color-primary-dark); font-family:'Inter'; text-transform:uppercase; letter-spacing:1px;">Audit Logs</a>
-            <a href="admin_challenge_change.php" style="text-decoration:none; font-size:0.8em; color:var(--color-primary-dark); font-family:'Inter'; text-transform:uppercase; letter-spacing:1px;">Update Security Challenge</a>
             <a href="auth.php?action=logout" class="js-logout-link" style="text-decoration:none; font-size:0.8em; color:var(--color-danger); font-family:'Inter'; text-transform:uppercase; letter-spacing:1px;">Logout</a>
         </nav>
 
@@ -398,65 +509,184 @@ try {
             </div>
         </div>
 
-        <div class="admin-section">
-            <h2>User Feedback</h2>
+        <!-- Telemetry & Quality Overview -->
+        <div class="admin-section" id="feedback-telemetry-section">
+            <h2>Summarizer Quality Telemetry</h2>
+            <p style="font-size: 0.85em; color: var(--color-muted); margin-bottom: 20px;">
+                Direct correlation between user ratings, reported issues, and summarization engine parameters.
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 25px;">
+                <!-- Telemetry by Analysis Mode -->
+                <div style="background: #fff; border: 1px solid var(--color-border); padding: 16px;">
+                    <strong style="display: block; font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text); margin-bottom: 10px;">By Analysis Mode</strong>
+                    <?php if (!empty($feedbackTelemetry['by_style'])): ?>
+                    <table style="width: 100%; font-size: 0.82em;">
+                        <tbody>
+                            <?php foreach ($feedbackTelemetry['by_style'] as $st): ?>
+                            <tr>
+                                <td style="padding: 4px 0; font-weight: 500;"><?= htmlspecialchars(str_replace('_', ' ', $st['analysis_mode'])) ?></td>
+                                <td style="padding: 4px 0; text-align: right; color: var(--color-primary-dark); font-weight: 600;">★ <?= $st['avg_rating'] ?? 'N/A' ?></td>
+                                <td style="padding: 4px 0; text-align: right; color: var(--color-muted);">(<?= (int)$st['count'] ?>)</td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                    <?php else: ?>
+                    <p style="font-size: 0.8em; color: var(--color-muted); margin: 0;">No mode data yet.</p>
+                    <?php endif; ?>
+                </div>
+
+                <!-- Telemetry by Depth -->
+                <div style="background: #fff; border: 1px solid var(--color-border); padding: 16px;">
+                    <strong style="display: block; font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text); margin-bottom: 10px;">By Summary Depth</strong>
+                    <?php if (!empty($feedbackTelemetry['by_length'])): ?>
+                    <table style="width: 100%; font-size: 0.82em;">
+                        <tbody>
+                            <?php foreach ($feedbackTelemetry['by_length'] as $len): ?>
+                            <tr>
+                                <td style="padding: 4px 0; font-weight: 500; text-transform: capitalize;"><?= htmlspecialchars($len['summary_depth']) ?></td>
+                                <td style="padding: 4px 0; text-align: right; color: var(--color-primary-dark); font-weight: 600;">★ <?= $len['avg_rating'] ?? 'N/A' ?></td>
+                                <td style="padding: 4px 0; text-align: right; color: var(--color-muted);">(<?= (int)$len['count'] ?>)</td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                    <?php else: ?>
+                    <p style="font-size: 0.8em; color: var(--color-muted); margin: 0;">No depth data yet.</p>
+                    <?php endif; ?>
+                </div>
+
+                <!-- Reported Issue Reasons -->
+                <div style="background: #fff; border: 1px solid var(--color-border); padding: 16px;">
+                    <strong style="display: block; font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text); margin-bottom: 10px;">Reported Issue Reasons</strong>
+                    <?php if (!empty($feedbackTelemetry['reasons_counts'])): 
+                        $allowedLabels = \App\Src\Services\FeedbackService::ALLOWED_REASONS;
+                    ?>
+                    <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.82em;">
+                        <?php foreach ($feedbackTelemetry['reasons_counts'] as $rKey => $rCount): ?>
+                        <li style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid rgba(0,0,0,0.04);">
+                            <span style="color: var(--color-text);"><?= htmlspecialchars($allowedLabels[$rKey] ?? $rKey) ?></span>
+                            <span style="font-weight: 600; color: var(--color-danger);"><?= (int)$rCount ?> report<?= $rCount > 1 ? 's' : '' ?></span>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <?php else: ?>
+                    <p style="font-size: 0.8em; color: var(--color-muted); margin: 0;">No negative issue tags reported.</p>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-section" id="admin-feedback-section">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+                <h2 style="margin: 0;">User Feedback (Anonymous Repository)</h2>
+                
+                <!-- Feedback Filters Bar -->
+                <form method="GET" action="admin_dashboard.php" style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                    <label style="font-size: 0.8em; color: var(--color-muted);">Rating:
+                        <select name="fb_rating" style="padding: 4px 8px; font-size: 0.85em; border: 1px solid var(--color-border);">
+                            <option value="">All ratings</option>
+                            <option value="5" <?= $fbFilterRating === 5 ? 'selected' : '' ?>>5 Stars</option>
+                            <option value="4" <?= $fbFilterRating === 4 ? 'selected' : '' ?>>4 Stars</option>
+                            <option value="3" <?= $fbFilterRating === 3 ? 'selected' : '' ?>>3 Stars</option>
+                            <option value="2" <?= $fbFilterRating === 2 ? 'selected' : '' ?>>2 Stars</option>
+                            <option value="1" <?= $fbFilterRating === 1 ? 'selected' : '' ?>>1 Star</option>
+                        </select>
+                    </label>
+
+                    <label style="font-size: 0.8em; color: var(--color-muted);">Comments:
+                        <select name="fb_comment" style="padding: 4px 8px; font-size: 0.85em; border: 1px solid var(--color-border);">
+                            <option value="">All</option>
+                            <option value="1" <?= $fbFilterComment === true ? 'selected' : '' ?>>With comment</option>
+                            <option value="0" <?= $fbFilterComment === false ? 'selected' : '' ?>>No comment</option>
+                        </select>
+                    </label>
+
+                    <label style="font-size: 0.8em; color: var(--color-muted);">Sort:
+                        <select name="fb_sort" style="padding: 4px 8px; font-size: 0.85em; border: 1px solid var(--color-border);">
+                            <option value="newest" <?= $fbFilterSort === 'newest' ? 'selected' : '' ?>>Newest First</option>
+                            <option value="lowest_rated" <?= $fbFilterSort === 'lowest_rated' ? 'selected' : '' ?>>Lowest Rated</option>
+                            <option value="highest_rated" <?= $fbFilterSort === 'highest_rated' ? 'selected' : '' ?>>Highest Rated</option>
+                        </select>
+                    </label>
+
+                    <button type="submit" style="padding: 4px 10px; font-size: 0.8em; background: var(--color-primary-dark); color: #fff; border: none; cursor: pointer;">Filter</button>
+                    <a href="admin_dashboard.php#admin-feedback-section" style="font-size: 0.8em; color: var(--color-muted); text-decoration: underline;">Reset</a>
+                </form>
+            </div>
+
             <div class="table-responsive">
             <table>
                 <thead>
                     <tr>
                         <th>Summary ID</th>
                         <th>Summary Title</th>
-                        <th>Identifier</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Impression</th>
+                        <th>Rating</th>
+                        <th>Reported Reasons</th>
                         <th>Comment</th>
+                        <th>Configuration Telemetry</th>
                         <th>Submitted</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($allFeedback as $fb): 
-                        $identifier = $fb['user_id'] ? 'User #' . $fb['user_id'] : 'Guest';
-                        $impressionMap = [
-                            'very_satisfied' => 'Very Satisfied',
-                            'satisfied' => 'Satisfied',
-                            'unsatisfied' => 'Unsatisfied',
-                            'very_unsatisfied' => 'Very Unsatisfied'
-                        ];
+                    <?php 
+                    $allowedLabels = \App\Src\Services\FeedbackService::ALLOWED_REASONS;
+                    foreach ($allFeedback as $fb): 
+                        $ratingVal = (int)($fb['rating'] ?? 0);
+                        $reasonsList = [];
+                        if (!empty($fb['reasons'])) {
+                            $decoded = json_decode($fb['reasons'], true);
+                            if (is_array($decoded)) {
+                                foreach ($decoded as $rk) {
+                                    $reasonsList[] = $allowedLabels[$rk] ?? $rk;
+                                }
+                            }
+                        }
                     ?>
                     <tr>
-                        <td><?= $fb['summary_id'] ?></td>
+                        <td><?= (int)$fb['summary_id'] ?></td>
                         <td title="<?= htmlspecialchars($fb['article_title'] ?? 'Deleted Summary') ?>">
                             <?php if (!empty($fb['article_title'])): ?>
-                                <a href="result.php?id=<?= $fb['summary_id'] ?>" target="_blank" style="color:var(--color-primary-dark); font-weight:600;">
+                                <a href="result.php?id=<?= (int)$fb['summary_id'] ?>" target="_blank" style="color:var(--color-primary-dark); font-weight:600;">
                                     <?= htmlspecialchars(mb_strimwidth($fb['article_title'], 0, 30, "...")) ?>
                                 </a>
                             <?php else: ?>
                                 <span style="color:var(--color-muted); font-style:italic;">Deleted Summary</span>
                             <?php endif; ?>
                         </td>
-                        <td><?= $identifier ?></td>
-                        <td><?= htmlspecialchars(($fb['name'] ?? '') ?: ($fb['account_username'] ?? '-')) ?></td>
-                        <td><?= htmlspecialchars(($fb['email'] ?? '') ?: ($fb['account_email'] ?? '-')) ?></td>
                         <td>
-                            <?php 
-                                $fbImpression = $fb['impression'] ?? '';
-                                $isUnsatisfied = str_contains($fbImpression, 'unsatisfied');
-                                $displayText = $impressionMap[$fbImpression] ?? (($fb['rating'] ?? null) ? $fb['rating'] . ' Stars' : '-');
-                            ?>
-                            <span style="font-size:0.8em; font-weight:600; text-transform:uppercase; color:<?= $isUnsatisfied ? 'var(--color-danger)' : 'var(--color-primary-dark)' ?>">
-                                <?= $displayText ?>
+                            <span style="font-weight: 700; color: <?= $ratingVal <= 2 ? 'var(--color-danger)' : ($ratingVal >= 4 ? '#059669' : '#d97706') ?>;">
+                                ★ <?= $ratingVal > 0 ? $ratingVal : '-' ?>
                             </span>
                         </td>
+                        <td>
+                            <?php if (!empty($reasonsList)): ?>
+                                <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                                    <?php foreach ($reasonsList as $rl): ?>
+                                    <span style="font-size: 0.72em; background: rgba(220, 38, 38, 0.08); color: var(--color-danger); border: 1px solid rgba(220, 38, 38, 0.2); padding: 2px 6px; border-radius: 999px;">
+                                        <?= htmlspecialchars($rl) ?>
+                                    </span>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php else: ?>
+                                <span style="color: var(--color-muted); font-size: 0.8em;">-</span>
+                            <?php endif; ?>
+                        </td>
                         <td title="<?= htmlspecialchars($fb['comment'] ?? '') ?>">
-                            <?= htmlspecialchars(mb_strimwidth($fb['comment'] ?? '', 0, 50, "...")) ?>
+                            <?= !empty($fb['comment']) ? htmlspecialchars(mb_strimwidth($fb['comment'], 0, 60, "...")) : '<span style="color:var(--color-muted); font-style:italic;">None</span>' ?>
+                        </td>
+                        <td style="font-size: 0.78em; color: var(--color-muted);">
+                            <?= htmlspecialchars(($fb['analysis_mode'] ?? 'standard') . ' · ' . ($fb['summary_depth'] ?? 'balanced')) ?>
+                            <?php if (!empty($fb['processing_time'])): ?>
+                                <br><span><?= number_format((float)$fb['processing_time'], 2) ?>s</span>
+                            <?php endif; ?>
                         </td>
                         <td><?= date('M d, Y', strtotime($fb['created_at'] ?? 'now')) ?></td>
                     </tr>
                     <?php endforeach; ?>
                     <?php if (empty($allFeedback)): ?>
                         <tr>
-                            <td colspan="8" style="text-align:center; color:var(--color-muted);">No feedback submitted yet.</td>
+                            <td colspan="7" style="text-align:center; color:var(--color-muted);">No feedback matching current filters.</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -465,33 +695,65 @@ try {
         </div>
 
         <div class="admin-section">
-            <h2>Feedback Comments Repository</h2>
-            <div class="comments-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            <h2>Feedback Comments Repository (Anonymous)</h2>
+            <div class="comments-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
                 <?php 
+                $allowedLabels = \App\Src\Services\FeedbackService::ALLOWED_REASONS;
                 foreach ($allFeedback as $fb): 
-                    $userName = ($fb['name'] ?? '') ?: ($fb['account_username'] ?? 'Anonymous');
                     $commentText = trim($fb['comment'] ?? '');
+                    $ratingVal = (int)($fb['rating'] ?? 0);
+                    $reasonsList = [];
+                    if (!empty($fb['reasons'])) {
+                        $decoded = json_decode($fb['reasons'], true);
+                        if (is_array($decoded)) {
+                            foreach ($decoded as $rk) {
+                                $reasonsList[] = $allowedLabels[$rk] ?? $rk;
+                            }
+                        }
+                    }
                 ?>
                     <div class="comment-card" style="background: #fff; border: 1px solid var(--color-border); padding: 20px; border-radius: 0; position: relative;">
                         <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
                             <div>
-                                <strong style="display: block; font-size: 1.1em; color: var(--color-text);"><?= htmlspecialchars($userName) ?></strong>
+                                <strong style="display: block; font-size: 1em; color: var(--color-text);">Anonymous User</strong>
                                 <span style="font-size: 0.75em; color: var(--color-muted); text-transform: uppercase;"><?= date('M d, Y', strtotime($fb['created_at'])) ?></span>
                             </div>
-                            <span style="font-size: 0.7em; background: rgba(143, 63, 224, 0.1); color: var(--color-primary-dark); padding: 4px 8px; border-radius: 0; font-weight: 600; text-transform: uppercase;">
-                                <?= $fb['impression'] ? str_replace('_', ' ', $fb['impression']) : (($fb['rating'] ?? null) ? $fb['rating'] . ' Stars' : 'Rating Only') ?>
+                            <span style="font-size: 0.75em; font-weight: 700; color: <?= $ratingVal <= 2 ? 'var(--color-danger)' : ($ratingVal >= 4 ? '#059669' : '#d97706') ?>; background: rgba(0,0,0,0.04); padding: 4px 8px; border-radius: 4px;">
+                                ★ <?= $ratingVal > 0 ? $ratingVal . ' / 5' : 'No rating' ?>
                             </span>
                         </div>
-                        <p style="font-size: 0.9em; line-height: 1.6; color: <?= $commentText ? '#4b5563' : '#9ca3af' ?>; margin: 0; font-style: italic;">
+
+                        <?php if (!empty($reasonsList)): ?>
+                        <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px;">
+                            <?php foreach ($reasonsList as $rl): ?>
+                            <span style="font-size: 0.7em; background: rgba(220, 38, 38, 0.08); color: var(--color-danger); border: 1px solid rgba(220, 38, 38, 0.15); padding: 2px 6px; border-radius: 999px;">
+                                <?= htmlspecialchars($rl) ?>
+                            </span>
+                            <?php endforeach; ?>
+                        </div>
+                        <?php endif; ?>
+
+                        <p style="font-size: 0.9em; line-height: 1.6; color: <?= $commentText ? '#1f2937' : '#9ca3af' ?>; margin: 0 0 12px 0; font-style: <?= $commentText ? 'normal' : 'italic' ?>;">
                             <?= $commentText ? '"' . htmlspecialchars($commentText) . '"' : '(No detailed comment provided)' ?>
                         </p>
-                        <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #f3f4f6; font-size: 0.8em; color: var(--color-muted);">
-                            Refers to Summary: 
-                            <?php if (!empty($fb['article_title'])): ?>
-                                <a href="result.php?id=<?= $fb['summary_id'] ?>" target="_blank" style="color: var(--color-primary-dark); text-decoration: underline;"><?= htmlspecialchars(mb_strimwidth($fb['article_title'], 0, 40, "...")) ?></a>
-                            <?php else: ?>
-                                <span style="font-style:italic;">(Deleted Summary)</span>
-                            <?php endif; ?>
+
+                        <!-- Telemetry metadata footer -->
+                        <div style="padding-top: 10px; border-top: 1px solid #f3f4f6; font-size: 0.75em; color: var(--color-muted); display: flex; flex-direction: column; gap: 3px;">
+                            <div>
+                                <strong>Summary:</strong> 
+                                <?php if (!empty($fb['article_title'])): ?>
+                                    <a href="result.php?id=<?= (int)$fb['summary_id'] ?>" target="_blank" style="color: var(--color-primary-dark); text-decoration: underline;"><?= htmlspecialchars(mb_strimwidth($fb['article_title'], 0, 35, "...")) ?></a>
+                                <?php else: ?>
+                                    <span style="font-style:italic;">(Deleted Summary)</span>
+                                <?php endif; ?>
+                            </div>
+                            <div>
+                                <strong>Engine Configuration:</strong> 
+                                <?= htmlspecialchars(($fb['analysis_mode'] ?? 'general') . ' · ' . ($fb['summary_depth'] ?? 'balanced') . ' · ' . ($fb['source_type'] ?? 'text')) ?>
+                                <?php if (!empty($fb['summary_word_count'])): ?>
+                                    <span>(<?= (int)$fb['summary_word_count'] ?> words)</span>
+                                <?php endif; ?>
+                            </div>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -520,7 +782,7 @@ try {
             <?php
             // ── KPI helpers ──────────────────────────────────────────────────
             $lcpMs       = $analyticsKpis['median_lcp_ms'];
-            $lcpLabel    = $lcpMs === null ? '—' : number_format($lcpMs) . ' ms';
+            $lcpLabel    = $lcpMs === null ? 'N/A' : number_format($lcpMs) . ' ms';
             $lcpStatus   = 'lcp-good';
             if ($lcpMs !== null) {
                 if ($lcpMs > 4000)      $lcpStatus = 'lcp-poor';
@@ -606,7 +868,7 @@ try {
 
             <!-- ── Daily Sessions Sparkline ── -->
             <div class="analytics-panel" style="margin-bottom:30px;">
-                <h3 class="analytics-panel__title">Daily Sessions — Last 14 Days</h3>
+                <h3 class="analytics-panel__title">Daily Sessions (Last 14 Days)</h3>
                 <?php
                 $trendValues = array_column($analyticsTrend, 'sessions');
                 $trendMax    = max(array_merge([1], $trendValues)); // avoid div-by-zero
@@ -650,7 +912,7 @@ try {
             <div class="analytics-panel">
                 <h3 class="analytics-panel__title">Top Referrers</h3>
                 <?php if (empty($analyticsReferrers)): ?>
-                    <p style="font-size:0.85em; color:var(--color-muted); margin:0;">No referrer data yet — most traffic is direct.</p>
+                    <p style="font-size:0.85em; color:var(--color-muted); margin:0;">No referrer data yet. Most traffic is direct.</p>
                 <?php else: ?>
                 <div class="table-responsive">
                 <table>
@@ -668,7 +930,7 @@ try {
                             <td style="font-family:monospace; font-size:0.88em;"><?= $ref['domain'] ?></td>
                             <td><?= $ref['sessions'] ?></td>
                             <td><?= $ref['conversions'] ?></td>
-                            <td><?= $ref['sessions'] > 0 ? round($ref['conversions'] / $ref['sessions'] * 100, 1) . '%' : '—' ?></td>
+                            <td><?= $ref['sessions'] > 0 ? round($ref['conversions'] / $ref['sessions'] * 100, 1) . '%' : 'N/A' ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -816,5 +1078,6 @@ try {
         </div>
     </div>
     <script src="assets/js/index.js"></script>
+<?php require __DIR__ . '/partials/site-footer.php'; ?>
 </body>
 </html>

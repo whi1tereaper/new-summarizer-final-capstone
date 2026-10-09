@@ -1,14 +1,12 @@
 <?php
 require_once __DIR__ . '/../src/whitereaper.php';
+require_once __DIR__ . '/../src/Services/AdminSecurityService.php';
 require_once __DIR__ . '/../src/Controllers/FeedbackHandler.php';
 
-if (empty($_SESSION['user_id']) || ($_SESSION['role'] ?? '') !== 'admin') {
-    http_response_code(403);
-    echo json_encode(['error' => 'Forbidden']);
-    exit;
-}
-
+use App\Src\Services\AdminSecurityService;
 use App\Src\Controllers\FeedbackHandler;
+
+AdminSecurityService::requireVerifiedAdminApi();
 
 header('Content-Type: application/json');
 

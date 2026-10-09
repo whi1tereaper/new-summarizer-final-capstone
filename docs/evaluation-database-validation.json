@@ -1,0 +1,230 @@
+{
+    "recorded_date": "2026-10-02",
+    "purpose": "Engineering validation only. All counts and timings below derived from persisted database run records; not a final research experiment.",
+    "excluded_runs": {
+        "4": "Invalidated after source files changed during its execution; all outputs retained.",
+        "7": "Cancelled before generation to separate real and synthetic validation corpora."
+    },
+    "runs": [
+        {
+            "run_id": 10,
+            "name": "EVAL-VALIDATION-2026-real-v1 validation",
+            "dataset_version": "EVAL-VALIDATION-2026-real-v1",
+            "split": "validation",
+            "status": "completed",
+            "documents": 4,
+            "generated": 64,
+            "failed": 0,
+            "configuration_hash": "6f4df8485598f88a2459165e5ddac003fafa24515616e4e071c1cb9977833b12",
+            "summarizer_version": "adaptive-extractive-eval-hooks-1+bb70b7d06721",
+            "source_fingerprint_matches_current": true,
+            "metric_status_counts": {
+                "compression_ratio": {
+                    "ok": 64
+                },
+                "compression_percentage": {
+                    "ok": 64
+                },
+                "rouge_1": {
+                    "not_applicable": 64
+                },
+                "rouge_2": {
+                    "not_applicable": 64
+                },
+                "rouge_l": {
+                    "not_applicable": 64
+                },
+                "redundancy": {
+                    "ok": 64
+                },
+                "critical_fact_preservation": {
+                    "ok": 64
+                },
+                "factual_consistency": {
+                    "ok": 64
+                },
+                "content_unit_coverage": {
+                    "not_applicable": 64
+                },
+                "challenge": {
+                    "not_applicable": 64
+                },
+                "bertscore": {
+                    "not_applicable": 64
+                }
+            },
+            "challenge_outputs_checked": 0,
+            "challenge_outputs_all_cases_passed": 0,
+            "human_assessments": 0,
+            "mean_total_evaluation_seconds": 0.32549075625001206,
+            "recorded_error_classifications": 4,
+            "report_pending": false,
+            "report_error": null
+        },
+        {
+            "run_id": 11,
+            "name": "EVAL-VALIDATION-2026-stress-v1 validation",
+            "dataset_version": "EVAL-VALIDATION-2026-stress-v1",
+            "split": "validation",
+            "status": "completed",
+            "documents": 2,
+            "generated": 32,
+            "failed": 0,
+            "configuration_hash": "6f4df8485598f88a2459165e5ddac003fafa24515616e4e071c1cb9977833b12",
+            "summarizer_version": "adaptive-extractive-eval-hooks-1+bb70b7d06721",
+            "source_fingerprint_matches_current": true,
+            "metric_status_counts": {
+                "compression_ratio": {
+                    "ok": 32
+                },
+                "compression_percentage": {
+                    "ok": 32
+                },
+                "rouge_1": {
+                    "not_applicable": 32
+                },
+                "rouge_2": {
+                    "not_applicable": 32
+                },
+                "rouge_l": {
+                    "not_applicable": 32
+                },
+                "redundancy": {
+                    "ok": 32
+                },
+                "critical_fact_preservation": {
+                    "ok": 32
+                },
+                "factual_consistency": {
+                    "ok": 32
+                },
+                "content_unit_coverage": {
+                    "not_applicable": 32
+                },
+                "challenge": {
+                    "not_applicable": 32
+                },
+                "bertscore": {
+                    "not_applicable": 32
+                }
+            },
+            "challenge_outputs_checked": 0,
+            "challenge_outputs_all_cases_passed": 0,
+            "human_assessments": 0,
+            "mean_total_evaluation_seconds": 0.15784778749997438,
+            "recorded_error_classifications": 1,
+            "report_pending": false,
+            "report_error": null
+        },
+        {
+            "run_id": 12,
+            "name": "Controlled synthetic factual challenges",
+            "dataset_version": "EVAL-CHALLENGE-2026-v1",
+            "split": "development",
+            "status": "completed",
+            "documents": 24,
+            "generated": 96,
+            "failed": 0,
+            "configuration_hash": "288b400e4e17706301b20a5c441ba30d34e92a21e81c25cf86d67da70d92958a",
+            "summarizer_version": "adaptive-extractive-eval-hooks-1+bb70b7d06721",
+            "source_fingerprint_matches_current": true,
+            "metric_status_counts": {
+                "compression_ratio": {
+                    "ok": 96
+                },
+                "compression_percentage": {
+                    "ok": 96
+                },
+                "rouge_1": {
+                    "not_applicable": 96
+                },
+                "rouge_2": {
+                    "not_applicable": 96
+                },
+                "rouge_l": {
+                    "not_applicable": 96
+                },
+                "redundancy": {
+                    "ok": 96
+                },
+                "critical_fact_preservation": {
+                    "ok": 96
+                },
+                "factual_consistency": {
+                    "ok": 96
+                },
+                "content_unit_coverage": {
+                    "not_applicable": 96
+                },
+                "challenge": {
+                    "ok": 96
+                },
+                "bertscore": {
+                    "not_applicable": 96
+                }
+            },
+            "challenge_outputs_checked": 96,
+            "challenge_outputs_all_cases_passed": 96,
+            "human_assessments": 0,
+            "mean_total_evaluation_seconds": 0.05735181874998815,
+            "recorded_error_classifications": 0,
+            "report_pending": false,
+            "report_error": null
+        },
+        {
+            "run_id": 13,
+            "name": "Engineering ablation validation — four real sources",
+            "dataset_version": "EVAL-VALIDATION-2026-real-v1",
+            "split": "validation",
+            "status": "completed",
+            "documents": 4,
+            "generated": 44,
+            "failed": 0,
+            "configuration_hash": "92b3d0cd38a5c4ab2de8c43a1988a048e54b2536e576f81ce7ca1e8a4ed127fa",
+            "summarizer_version": "adaptive-extractive-eval-hooks-1+bb70b7d06721",
+            "source_fingerprint_matches_current": true,
+            "metric_status_counts": {
+                "compression_ratio": {
+                    "ok": 44
+                },
+                "compression_percentage": {
+                    "ok": 44
+                },
+                "rouge_1": {
+                    "not_applicable": 44
+                },
+                "rouge_2": {
+                    "not_applicable": 44
+                },
+                "rouge_l": {
+                    "not_applicable": 44
+                },
+                "redundancy": {
+                    "ok": 44
+                },
+                "critical_fact_preservation": {
+                    "ok": 44
+                },
+                "factual_consistency": {
+                    "ok": 44
+                },
+                "content_unit_coverage": {
+                    "not_applicable": 44
+                },
+                "challenge": {
+                    "not_applicable": 44
+                },
+                "bertscore": {
+                    "not_applicable": 44
+                }
+            },
+            "challenge_outputs_checked": 0,
+            "challenge_outputs_all_cases_passed": 0,
+            "human_assessments": 0,
+            "mean_total_evaluation_seconds": 0.4941690363636196,
+            "recorded_error_classifications": 0,
+            "report_pending": false,
+            "report_error": null
+        }
+    ]
+}

@@ -15,3 +15,7 @@ piper-tts==1.4.2
 deep-translator>=1.11.4
 requests>=2.31.0
 beautifulsoup4>=4.12.0
+# Optional offline semantic retrieval backend. Prepare the model separately;
+# summarization requests never download model files.
+sentence-transformers==6.1.0
+torch==2.14.0

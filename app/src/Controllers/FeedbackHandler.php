@@ -14,9 +14,11 @@ class FeedbackHandler
         int $rating,
         ?int $userId,
         ?string $guestToken,
-        ?string $shareToken = null
+        ?string $shareToken = null,
+        ?string $comment = null,
+        ?array $reasons = null
     ): array {
-        return self::service()->submitFeedback($summaryId, $rating, $userId, $guestToken, $shareToken);
+        return self::service()->submitFeedback($summaryId, $rating, $userId, $guestToken, $shareToken, $comment, $reasons);
     }
 
     public static function submitFullFeedback(
@@ -49,14 +51,24 @@ class FeedbackHandler
         return self::service()->getSummaryRatingStats($summaryId);
     }
 
+    public static function getCommentsForSummary(int $summaryId, int $limit = 20): array
+    {
+        return self::service()->getCommentsForSummary($summaryId, $limit);
+    }
+
     public static function getSystemFeedbackStats(): array
     {
         return self::service()->getSystemFeedbackStats();
     }
 
-    public static function getAllFeedbackForAdmin(): array
+    public static function getAllFeedbackForAdmin(array $filters = []): array
     {
-        return self::service()->getAllFeedbackForAdmin();
+        return self::service()->getAllFeedbackForAdmin($filters);
+    }
+
+    public static function getFeedbackTelemetryBreakdown(): array
+    {
+        return self::service()->getFeedbackTelemetryBreakdown();
     }
 
     public static function getFeedbackHistoryForViewer(

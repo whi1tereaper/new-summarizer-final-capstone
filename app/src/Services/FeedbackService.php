@@ -9,14 +9,26 @@ use PDO;
 
 final class FeedbackService
 {
-    private static bool $schemaVerified = false;
+    public const ALLOWED_REASONS = [
+        'missing_info'       => 'Missing important information',
+        'too_long'           => 'Too long',
+        'too_short'          => 'Too short',
+        'incorrect_info'     => 'Incorrect information',
+        'repetitive'         => 'Repetitive',
+        'hard_to_understand' => 'Hard to understand',
+        'format_mismatch'    => "Format didn't match selection",
+        'mode_mismatch'      => "Analysis mode didn't behave as expected",
+        'other'              => 'Other',
+    ];
 
     public function submitFeedback(
         int $summaryId,
         int $rating,
         ?int $userId,
         ?string $guestToken,
-        ?string $shareToken = null
+        ?string $shareToken = null,
+        ?string $comment = null,
+        ?array $reasons = null
     ): array {
         $this->ensureTable();
 
@@ -28,6 +40,32 @@ final class FeedbackService
             return ['error' => 'No valid identity for feedback.'];
         }
 
+        if ($comment !== null) {
+            $comment = trim($comment);
+            if (mb_strlen($comment, 'UTF-8') > 500) {
+                return ['error' => 'Comment cannot exceed 500 characters.'];
+            }
+            if ($comment === '') {
+                $comment = null;
+            }
+        }
+
+        $reasonsJson = null;
+        if ($reasons !== null) {
+            $cleanReasons = [];
+            foreach ($reasons as $r) {
+                if (is_string($r) && isset(self::ALLOWED_REASONS[$r])) {
+                    $cleanReasons[] = $r;
+                }
+            }
+            if (!empty($cleanReasons)) {
+                if ($rating > 3) {
+                    return ['error' => 'Improvement reason tags are only permitted for ratings of 3 stars or below.'];
+                }
+                $reasonsJson = json_encode(array_values(array_unique($cleanReasons)), JSON_UNESCAPED_UNICODE);
+            }
+        }
+
         $summary = $this->getSummaryHandler()->getSummaryById($summaryId, $userId, $guestToken, $shareToken);
         if (!$summary || isset($summary['error'])) {
             return ['error' => 'Summary not found or access denied.'];
@@ -35,33 +73,64 @@ final class FeedbackService
 
         try {
             $db = Database::getInstance()->getConnection();
+            $db->beginTransaction();
 
             if ($userId !== null) {
                 $stmt = $db->prepare(
-                    "INSERT INTO feedback (summary_id, user_id, rating)
-                     VALUES (:sid, :uid, :rating)
-                     ON DUPLICATE KEY UPDATE rating = VALUES(rating), updated_at = CURRENT_TIMESTAMP"
+                    "INSERT INTO feedback (summary_id, user_id, rating, reasons, comment)
+                     VALUES (:sid, :uid, :rating, :reasons, :comment)
+                     ON DUPLICATE KEY UPDATE 
+                        rating = VALUES(rating), 
+                        reasons = VALUES(reasons), 
+                        comment = VALUES(comment), 
+                        updated_at = CURRENT_TIMESTAMP"
                 );
                 $stmt->execute([
-                    'sid' => $summaryId,
-                    'uid' => $userId,
-                    'rating' => $rating,
+                    'sid'     => $summaryId,
+                    'uid'     => $userId,
+                    'rating'  => $rating,
+                    'reasons' => $reasonsJson,
+                    'comment' => $comment,
                 ]);
             } else {
                 $stmt = $db->prepare(
-                    "INSERT INTO feedback (summary_id, guest_token, rating)
-                     VALUES (:sid, :token, :rating)
-                     ON DUPLICATE KEY UPDATE rating = VALUES(rating), updated_at = CURRENT_TIMESTAMP"
+                    "INSERT INTO feedback (summary_id, guest_token, rating, reasons, comment)
+                     VALUES (:sid, :token, :rating, :reasons, :comment)
+                     ON DUPLICATE KEY UPDATE 
+                        rating = VALUES(rating), 
+                        reasons = VALUES(reasons), 
+                        comment = VALUES(comment), 
+                        updated_at = CURRENT_TIMESTAMP"
                 );
                 $stmt->execute([
-                    'sid' => $summaryId,
-                    'token' => $guestToken,
-                    'rating' => $rating,
+                    'sid'     => $summaryId,
+                    'token'   => $guestToken,
+                    'rating'  => $rating,
+                    'reasons' => $reasonsJson,
+                    'comment' => $comment,
                 ]);
             }
 
+            // Record feedback comment event in feedback_comments ledger (identity-hidden presentation; no user/guest/ip identifiers, keyed by summary_id for evaluation telemetry)
+            if ($comment !== null || $reasonsJson !== null) {
+                $fcStmt = $db->prepare(
+                    "INSERT INTO feedback_comments (summary_id, rating, reasons, comment)
+                     VALUES (:sid, :rating, :reasons, :comment)"
+                );
+                $fcStmt->execute([
+                    'sid'     => $summaryId,
+                    'rating'  => $rating,
+                    'reasons' => $reasonsJson,
+                    'comment' => $comment ?? '',
+                ]);
+            }
+
+            $db->commit();
             return ['success' => true];
         } catch (\Throwable $exception) {
+            if (isset($db) && $db->inTransaction()) {
+                $db->rollBack();
+            }
             error_log('[FeedbackService] submitFeedback error: ' . $exception->getMessage());
             return ['error' => 'Database error. Please try again.'];
         }
@@ -217,6 +286,35 @@ final class FeedbackService
         }
     }
 
+    /**
+     * Retrieve anonymous feedback comments for a specific summary.
+     *
+     * @param int $summaryId
+     * @param int $limit
+     * @return array
+     */
+    public function getCommentsForSummary(int $summaryId, int $limit = 20): array
+    {
+        $this->ensureTable();
+        try {
+            $db = Database::getInstance()->getConnection();
+            $stmt = $db->prepare(
+                'SELECT id, summary_id, rating, reasons, comment, created_at
+                 FROM feedback_comments
+                 WHERE summary_id = :sid AND comment IS NOT NULL AND TRIM(comment) != ""
+                 ORDER BY created_at DESC, id DESC
+                 LIMIT :limit'
+            );
+            $stmt->bindValue(':sid', $summaryId, PDO::PARAM_INT);
+            $stmt->bindValue(':limit', max(1, min(100, $limit)), PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (\Throwable $exception) {
+            error_log('[FeedbackService] getCommentsForSummary error: ' . $exception->getMessage());
+            return [];
+        }
+    }
+
     public function getSystemFeedbackStats(): array
     {
         $this->ensureTable();
@@ -237,23 +335,160 @@ final class FeedbackService
         }
     }
 
-    public function getAllFeedbackForAdmin(): array
+    public function getAllFeedbackForAdmin(array $filters = []): array
     {
         $this->ensureTable();
         try {
             $db = Database::getInstance()->getConnection();
-            $stmt = $db->query(
-                'SELECT f.*, s.article_title, u.username as account_username, u.email as account_email
-                 FROM feedback f
-                 LEFT JOIN summaries s ON f.summary_id = s.id
-                 LEFT JOIN users u ON f.user_id = u.id
-                 ORDER BY f.rating DESC, f.updated_at DESC
-                 LIMIT 50'
-            );
-            return $stmt->fetchAll();
+
+            $rating = isset($filters['rating']) && is_numeric($filters['rating']) ? (int)$filters['rating'] : null;
+            $hasComment = isset($filters['has_comment']) && $filters['has_comment'] !== null ? (bool)$filters['has_comment'] : null;
+            $sort = $filters['sort'] ?? 'newest';
+
+            $where = [];
+            $params = [];
+
+            if ($rating !== null && $rating >= 1 && $rating <= 5) {
+                $where[] = 'f.rating = :rating';
+                $params['rating'] = $rating;
+            }
+
+            if ($hasComment === true) {
+                $where[] = "(f.comment IS NOT NULL AND TRIM(f.comment) != '')";
+            } elseif ($hasComment === false) {
+                $where[] = "(f.comment IS NULL OR TRIM(f.comment) = '')";
+            }
+
+            $whereSql = !empty($where) ? 'WHERE ' . implode(' AND ', $where) : '';
+
+            switch ($sort) {
+                case 'lowest_rated':
+                    $orderSql = 'ORDER BY f.rating ASC, f.updated_at DESC';
+                    break;
+                case 'highest_rated':
+                    $orderSql = 'ORDER BY f.rating DESC, f.updated_at DESC';
+                    break;
+                case 'newest':
+                default:
+                    $orderSql = 'ORDER BY f.updated_at DESC, f.created_at DESC';
+                    break;
+            }
+
+            $sql = "SELECT 
+                        f.id,
+                        f.summary_id,
+                        f.rating,
+                        'Anonymous' as name,
+                        NULL as email,
+                        f.impression,
+                        f.reasons,
+                        f.comment,
+                        f.created_at,
+                        f.updated_at,
+                        s.article_title,
+                        s.input_type as source_type,
+                        s.summary_style as analysis_mode,
+                        s.summary_length as summary_depth,
+                        s.original_word_count,
+                        s.summary_word_count,
+                        ROUND(s.summary_word_count / NULLIF(s.original_word_count, 0), 2) as compression_ratio,
+                        s.processing_time,
+                        NULL as account_username,
+                        NULL as account_email
+                    FROM feedback f
+                    LEFT JOIN summaries s ON f.summary_id = s.id
+                    {$whereSql}
+                    {$orderSql}
+                    LIMIT 100";
+
+            $stmt = $db->prepare($sql);
+            $stmt->execute($params);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (\Throwable $exception) {
             error_log('[FeedbackService] getAllFeedbackForAdmin error: ' . $exception->getMessage());
             return [];
+        }
+    }
+
+    public function getFeedbackTelemetryBreakdown(): array
+    {
+        $this->ensureTable();
+        try {
+            $db = Database::getInstance()->getConnection();
+
+            // Aggregates by summary style (analysis mode)
+            $styleStmt = $db->query(
+                "SELECT 
+                    COALESCE(s.summary_style, 'unspecified') as analysis_mode,
+                    COUNT(*) as count,
+                    ROUND(AVG(f.rating), 2) as avg_rating,
+                    SUM(CASE WHEN f.rating <= 2 THEN 1 ELSE 0 END) as low_rating_count
+                 FROM feedback f
+                 LEFT JOIN summaries s ON f.summary_id = s.id
+                 WHERE f.rating IS NOT NULL
+                 GROUP BY s.summary_style
+                 ORDER BY count DESC"
+            );
+            $byStyle = $styleStmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Aggregates by summary length (depth)
+            $lengthStmt = $db->query(
+                "SELECT 
+                    COALESCE(s.summary_length, 'unspecified') as summary_depth,
+                    COUNT(*) as count,
+                    ROUND(AVG(f.rating), 2) as avg_rating,
+                    SUM(CASE WHEN f.rating <= 2 THEN 1 ELSE 0 END) as low_rating_count
+                 FROM feedback f
+                 LEFT JOIN summaries s ON f.summary_id = s.id
+                 WHERE f.rating IS NOT NULL
+                 GROUP BY s.summary_length
+                 ORDER BY count DESC"
+            );
+            $byLength = $lengthStmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Aggregates by input type (source type)
+            $sourceStmt = $db->query(
+                "SELECT 
+                    COALESCE(s.input_type, 'unspecified') as source_type,
+                    COUNT(*) as count,
+                    ROUND(AVG(f.rating), 2) as avg_rating
+                 FROM feedback f
+                 LEFT JOIN summaries s ON f.summary_id = s.id
+                 WHERE f.rating IS NOT NULL
+                 GROUP BY s.input_type
+                 ORDER BY count DESC"
+            );
+            $bySource = $sourceStmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Top reported reasons
+            $reasonsStmt = $db->query(
+                "SELECT reasons FROM feedback WHERE reasons IS NOT NULL AND reasons != ''"
+            );
+            $reasonCounts = [];
+            while ($row = $reasonsStmt->fetch(PDO::FETCH_ASSOC)) {
+                $decoded = json_decode($row['reasons'] ?? '[]', true);
+                if (is_array($decoded)) {
+                    foreach ($decoded as $tag) {
+                        $reasonCounts[$tag] = ($reasonCounts[$tag] ?? 0) + 1;
+                    }
+                }
+            }
+            arsort($reasonCounts);
+
+            return [
+                'by_style'        => $byStyle,
+                'by_length'       => $byLength,
+                'by_source'       => $bySource,
+                'reasons_counts'  => $reasonCounts,
+            ];
+        } catch (\Throwable $exception) {
+            error_log('[FeedbackService] getFeedbackTelemetryBreakdown error: ' . $exception->getMessage());
+            return [
+                'by_style'        => [],
+                'by_length'       => [],
+                'by_source'       => [],
+                'reasons_counts'  => [],
+            ];
         }
     }
 
@@ -299,54 +534,36 @@ final class FeedbackService
         }
     }
 
-    private function ensureTable(): void
+    /**
+     * Prunes historical feedback comment events older than a given retention threshold.
+     * feedback_comments behaves as an append-only historical feedback event ledger.
+     *
+     * @param int $days Retention threshold in days (must be > 0).
+     * @return int Number of pruned event rows.
+     */
+    public function pruneFeedbackEvents(int $days = 90): int
     {
-        if (self::$schemaVerified) {
-            return;
+        if ($days <= 0) {
+            throw new \InvalidArgumentException('Retention days must be greater than zero.');
         }
 
         try {
             $db = Database::getInstance()->getConnection();
-            $db->exec(
-                "CREATE TABLE IF NOT EXISTS feedback (
-                    id INT AUTO_INCREMENT PRIMARY KEY,
-                    summary_id INT NOT NULL,
-                    user_id INT NULL,
-                    guest_token VARCHAR(64) NULL,
-                    rating TINYINT NULL,
-                    name VARCHAR(100) NULL,
-                    email VARCHAR(150) NULL,
-                    impression VARCHAR(50) NULL,
-                    comment TEXT NULL,
-                    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                    updated_at DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
-                    UNIQUE KEY uk_summary_user (summary_id, user_id),
-                    UNIQUE KEY uk_summary_guest (summary_id, guest_token),
-                    INDEX idx_summary (summary_id),
-                    INDEX idx_user (user_id),
-                    INDEX idx_guest (guest_token)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci"
+            $stmt = $db->prepare(
+                'DELETE FROM feedback_comments WHERE created_at < DATE_SUB(NOW(), INTERVAL :days DAY)'
             );
-
-            $cols = $db->query('SHOW COLUMNS FROM feedback')->fetchAll(PDO::FETCH_COLUMN);
-            $required = [
-                'name' => 'VARCHAR(100) NULL AFTER rating',
-                'email' => 'VARCHAR(150) NULL AFTER name',
-                'impression' => 'VARCHAR(50) NULL AFTER email',
-                'comment' => 'TEXT NULL AFTER impression',
-                'updated_at' => 'DATETIME NULL ON UPDATE CURRENT_TIMESTAMP AFTER created_at',
-            ];
-
-            foreach ($required as $col => $definition) {
-                if (!in_array($col, $cols, true)) {
-                    $db->exec("ALTER TABLE feedback ADD COLUMN $col $definition");
-                }
-            }
-
-            self::$schemaVerified = true;
+            $stmt->bindValue(':days', $days, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->rowCount();
         } catch (\Throwable $exception) {
-            error_log('[FeedbackService] ensureTable error: ' . $exception->getMessage());
+            error_log('[FeedbackService] pruneFeedbackEvents error: ' . $exception->getMessage());
+            return 0;
         }
+    }
+
+    private function ensureTable(): void
+    {
+        // Schema is managed via database/schema.sql
     }
 
     private function getSummaryHandler(): HistoryService

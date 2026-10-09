@@ -1,0 +1,59 @@
+/* ====================================================================
+   mesh-text-hover.css — High-Performance WebGL2 Mesh Text Hover
+   Scoped styling for interactive deformed typography
+   ==================================================================== */
+
+.nex-mesh-text {
+  position: relative;
+  display: inline-block;
+  vertical-align: baseline;
+  line-height: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+  touch-action: manipulation;
+}
+
+.nex-mesh-text:active {
+  cursor: grabbing;
+}
+
+/* Sizing spacer: occupies the exact natural inline layout footprint */
+.nex-mesh-text__measure {
+  display: inline-block;
+  visibility: hidden;
+  pointer-events: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  color: inherit;
+  opacity: 0;
+}
+
+/* GPU / Canvas: overlaid with expansion padding for elastic stretch without clipping */
+.nex-mesh-text__canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140%;
+  height: 160%;
+  pointer-events: auto;
+  z-index: 2;
+  display: block;
+}
+
+/* Hard error fallback only if all canvas contexts fail */
+.nex-mesh-text.is-hard-error .nex-mesh-text__measure {
+  visibility: visible !important;
+  color: var(--nex-light-text, #080808) !important;
+}
+
+.nex-mesh-text.is-hard-error .nex-mesh-text__canvas {
+  display: none !important;
+}

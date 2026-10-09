@@ -56,6 +56,16 @@ class SummarizationProfile:
     factuality_strictness: str = "medium"   # "high" | "medium"
     validation_rules: list[str] = field(default_factory=list)
 
+    # --- Phase 1/2 Faithfulness & Coherence weights ---
+    # Multiplier for faithfulness checks (qualifier, negation, numeric)
+    faithfulness_weight: float = 1.0
+    # Toggle for negation preservation
+    negation_preservation: bool = True
+    # Toggle for numeric fact protection
+    numeric_fact_protection: bool = True
+    # Multiplier for discourse coherence bonuses
+    coherence_weight: float = 1.0
+
 
 # ---------------------------------------------------------------------------
 # Helper: compile a pattern once and store alongside its delta
@@ -92,6 +102,10 @@ GENERAL_PROFILE = SummarizationProfile(
     output_schema=["Overview", "Key Points", "Conclusion"],
     factuality_strictness="medium",
     validation_rules=["source_faithfulness"],
+    faithfulness_weight=1.0,
+    negation_preservation=True,
+    numeric_fact_protection=True,
+    coherence_weight=1.0,
 )
 
 GENERAL_BULLETS_PROFILE = SummarizationProfile(
@@ -111,6 +125,10 @@ GENERAL_BULLETS_PROFILE = SummarizationProfile(
     output_schema=["Key Points"],
     factuality_strictness="medium",
     validation_rules=["source_faithfulness"],
+    faithfulness_weight=1.0,
+    negation_preservation=True,
+    numeric_fact_protection=True,
+    coherence_weight=1.0,
 )
 
 GENERAL_HYBRID_PROFILE = SummarizationProfile(
@@ -130,6 +148,10 @@ GENERAL_HYBRID_PROFILE = SummarizationProfile(
     output_schema=["Overview", "Key Points"],
     factuality_strictness="medium",
     validation_rules=["source_faithfulness"],
+    faithfulness_weight=1.0,
+    negation_preservation=True,
+    numeric_fact_protection=True,
+    coherence_weight=1.0,
 )
 
 ACADEMIC_PROFILE = SummarizationProfile(
@@ -186,6 +208,10 @@ ACADEMIC_PROFILE = SummarizationProfile(
         "qualifier_preservation",
         "section_structure",
     ],
+    faithfulness_weight=1.5,
+    negation_preservation=True,
+    numeric_fact_protection=True,
+    coherence_weight=1.3,
 )
 
 EXECUTIVE_PROFILE = SummarizationProfile(
@@ -239,6 +265,10 @@ EXECUTIVE_PROFILE = SummarizationProfile(
         "qualifier_preservation",
         "section_structure",
     ],
+    faithfulness_weight=1.3,
+    negation_preservation=True,
+    numeric_fact_protection=True,
+    coherence_weight=1.2,
 )
 
 STUDY_PROFILE = SummarizationProfile(
@@ -285,6 +315,10 @@ STUDY_PROFILE = SummarizationProfile(
         "source_faithfulness",
         "qualifier_preservation",
     ],
+    faithfulness_weight=1.0,
+    negation_preservation=True,
+    numeric_fact_protection=True,
+    coherence_weight=1.1,
 )
 
 TECHNICAL_PROFILE = SummarizationProfile(
@@ -333,6 +367,10 @@ TECHNICAL_PROFILE = SummarizationProfile(
         "must_preserve_completeness",
         "section_structure",
     ],
+    faithfulness_weight=1.4,
+    negation_preservation=True,
+    numeric_fact_protection=True,
+    coherence_weight=1.2,
 )
 
 NEWS_PROFILE = SummarizationProfile(
@@ -378,6 +416,10 @@ NEWS_PROFILE = SummarizationProfile(
         "qualifier_preservation",
         "section_structure",
     ],
+    faithfulness_weight=1.2,
+    negation_preservation=True,
+    numeric_fact_protection=True,
+    coherence_weight=1.1,
 )
 
 

@@ -24,3 +24,10 @@ upgrade-insecure-requests"
     Header set Strict-Transport-Security "max-age=15768000; includeSubDomains" env=HTTPS
 
 </IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^api(?:/.*)?$ api/router.php [QSA,L]
+</IfModule>

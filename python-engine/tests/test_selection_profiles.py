@@ -122,6 +122,34 @@ class TestSelectionProfiles(unittest.TestCase):
         plain = result_news.plain_summary.lower()
         self.assertTrue("regulator" in plain or "compliance" in plain or "mandatory" in plain)
 
+    def test_analysis_modes_prioritize_different_content(self):
+        text = """
+        The research study evaluated a treatment with 120 participants and found a 24 percent improvement.
+        The deployment architecture requires Kubernetes and 32GB VRAM for production operation.
+        Executives approved a $1.8M budget and requested a risk review before rollout.
+        Yesterday regulators announced new compliance criteria affecting diagnostic systems.
+        The historical background explains how the field developed over the last decade.
+        The implementation team documented routine maintenance procedures for operators.
+        The project timeline includes training, procurement, and reporting milestones.
+        The organization maintains a public archive of related publications.
+        A separate team is reviewing user feedback from earlier deployments.
+        The document also lists general terminology and introductory definitions.
+        """
+        outputs = {}
+        for mode in ("academic", "technical", "executive", "news"):
+            result = self.pipeline.summarize(SummarizationRequest(
+                text=text,
+                summary_length="brief",
+                analysis_mode=mode,
+                output_format="paragraph",
+            ))
+            outputs[mode] = result.plain_summary
+
+        self.assertIn("research", outputs["academic"].lower())
+        self.assertIn("Kubernetes", outputs["technical"])
+        self.assertIn("budget", outputs["executive"])
+        self.assertIn("Yesterday", outputs["news"])
+
 
 if __name__ == "__main__":
     unittest.main()

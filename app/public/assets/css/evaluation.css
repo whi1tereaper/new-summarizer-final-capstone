@@ -1,0 +1,60 @@
+/* Evaluation adapts Analytics surfaces and the shared LIGHT form controls. */
+.evaluation-page .evaluation-tabs { display: flex; flex-wrap: wrap; gap: var(--space-5); border-bottom: 1px solid var(--color-border); padding-bottom: var(--space-4); margin-bottom: var(--space-6); }
+.evaluation-tabs a { font-weight: var(--weight-semibold); color: var(--color-text-secondary); text-decoration: none; padding-block: var(--space-2); }
+.evaluation-tabs a[aria-current="page"] { color: var(--color-accent); text-decoration: underline; text-underline-offset: var(--space-2); }
+.evaluation-page .evaluation-section { margin-block: var(--space-6); }
+.evaluation-page .evaluation-section > h2 { font-size: var(--fs-heading-md); }
+.evaluation-page .evaluation-form { max-width: var(--container-form); }
+.evaluation-page .evaluation-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); }
+.evaluation-page .evaluation-fields .form-group { margin: 0; }
+.evaluation-page .evaluation-wide { grid-column: 1 / -1; }
+.evaluation-page select { width: 100%; min-height: var(--touch-min); padding: var(--space-3) var(--space-4); background: var(--color-bg-secondary); color: var(--color-text); border: 1px solid var(--color-border); border-radius: var(--radius-control); font: inherit; }
+.evaluation-page textarea { min-height: 9rem; resize: vertical; }
+.evaluation-page fieldset { border: 1px solid var(--color-border); padding: var(--space-4); margin: var(--space-4) 0; border-radius: var(--radius-control); }
+.evaluation-page legend { font-weight: var(--weight-semibold); padding-inline: var(--space-2); }
+.evaluation-page .evaluation-checks { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-5); }
+.evaluation-page .evaluation-check { display: inline-flex; align-items: center; gap: var(--space-2); margin: 0; text-transform: none; letter-spacing: normal; font: inherit; min-height: var(--touch-min); }
+.evaluation-page input[type="checkbox"], .evaluation-page input[type="radio"] { accent-color: var(--color-accent); width: 1.1rem; height: 1.1rem; flex-shrink: 0; }
+.evaluation-page .evaluation-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); margin-block: var(--space-4); }
+.evaluation-page .evaluation-actions .btn-auth { width: auto; margin: 0; }
+.evaluation-page table { width: 100%; border-collapse: collapse; font-size: .875rem; }
+.evaluation-page caption { text-align: left; font-weight: var(--weight-semibold); padding-block: var(--space-3); }
+.evaluation-page th, .evaluation-page td { text-align: left; vertical-align: top; padding: var(--space-3); border-bottom: 1px solid var(--color-border); }
+.evaluation-page th { font-weight: var(--weight-semibold); color: var(--color-text-secondary); }
+.evaluation-page td.numeric { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.evaluation-page .evaluation-note { color: var(--color-text-secondary); font-size: .875rem; }
+.evaluation-page .evaluation-notice { padding: var(--space-4); border-left: 2px solid var(--color-accent); background: var(--color-accent-soft); margin-block: var(--space-4); }
+.evaluation-page .evaluation-prose { white-space: pre-wrap; overflow-wrap: anywhere; max-width: var(--prose-width); line-height: 1.8; }
+.evaluation-page .evaluation-reading { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6); }
+.evaluation-page .evaluation-reading > section { min-width: 0; }
+.evaluation-page .evaluation-reading h2 { font-size: var(--fs-heading-md); }
+.evaluation-page details { margin-block: var(--space-4); }
+.evaluation-page summary { cursor: pointer; font-weight: var(--weight-semibold); padding-block: var(--space-3); }
+.evaluation-page .evaluation-meta { display: grid; grid-template-columns: minmax(8rem, 1fr) 3fr; gap: var(--space-2) var(--space-4); }
+.evaluation-page .evaluation-meta dt { font-weight: var(--weight-semibold); }
+.evaluation-page .evaluation-meta dd { margin: 0; overflow-wrap: anywhere; }
+.evaluation-page .evaluation-rubric p { margin-block: var(--space-2); }
+.evaluation-page .evaluation-rating { margin-block: var(--space-6); }
+.evaluation-page .evaluation-rating p { margin: 0 0 var(--space-3); }
+.evaluation-page progress { width: 100%; accent-color: var(--color-accent); }
+.evaluation-page .evaluation-chart { height: 18rem; position: relative; }
+.evaluation-page .evaluation-inline-form { display: inline; }
+@media (max-width: 800px) {
+  .evaluation-page .evaluation-reading { grid-template-columns: 1fr; }
+  .evaluation-page .evaluation-fields { grid-template-columns: 1fr; }
+  .evaluation-page .evaluation-wide { grid-column: auto; }
+}
+@media (max-width: 560px) {
+  .evaluation-page .evaluation-meta { grid-template-columns: 1fr; }
+  .evaluation-page .evaluation-actions .btn-auth { width: 100%; }
+  .evaluation-page .evaluation-tabs { gap: var(--space-3); }
+}
+@media print {
+  .evaluation-page .site-header, .evaluation-page .nex-footer, .evaluation-page .evaluation-tabs,
+  .evaluation-page .evaluation-actions, .evaluation-page form, .evaluation-page .evaluation-chart { display: none !important; }
+  .evaluation-page, .evaluation-page .chart-card { background: white; color: black; box-shadow: none; }
+  .evaluation-page .analytics-shell { max-width: none; padding: 0; }
+  .evaluation-page .table-wrap { overflow: visible; }
+  .evaluation-page table { font-size: 9pt; }
+  .evaluation-page tr { break-inside: avoid; }
+}

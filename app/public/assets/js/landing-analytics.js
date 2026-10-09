@@ -30,6 +30,10 @@
     var queue      = [];
     var pageStart  = Date.now();
     var scrollMilestonesHit = {};
+    var exitSent = false;
+    var latestLcp = null;
+    var latestInp = null;
+    var latestCls = 0;
 
     // ── Event queue helpers ──────────────────────────────────────────────────────
     function enqueue(type, label, value) {
@@ -62,20 +66,19 @@
     enqueue('pageview', 'landing_init', null);
 
     // ── 2. Core Web Vitals ───────────────────────────────────────────────────────
-    // LCP — Largest Contentful Paint (target: < 2500 ms = Good)
+    // LCP - Largest Contentful Paint (target: < 2500 ms = Good)
     if ('PerformanceObserver' in window) {
         try {
             var lcpObs = new PerformanceObserver(function (list) {
                 var entries = list.getEntries();
                 if (entries.length) {
-                    var lcp = entries[entries.length - 1];
-                    enqueue('web_vitals', 'LCP', Math.round(lcp.startTime));
+                    latestLcp = Math.round(entries[entries.length - 1].startTime);
                 }
             });
             lcpObs.observe({ type: 'largest-contentful-paint', buffered: true });
         } catch (e) {}
 
-        // FID — First Input Delay (target: < 100 ms = Good)
+        // FID - First Input Delay (target: < 100 ms = Good)
         try {
             var fidObs = new PerformanceObserver(function (list) {
                 var entries = list.getEntries();
@@ -85,6 +88,26 @@
                 }
             });
             fidObs.observe({ type: 'first-input', buffered: true });
+        } catch (e) {}
+
+        try {
+            var clsValue = 0;
+            var clsObs = new PerformanceObserver(function (list) {
+                list.getEntries().forEach(function (entry) {
+                    if (!entry.hadRecentInput) clsValue += entry.value;
+                });
+                latestCls = Math.round(Math.min(1, clsValue) * 10000);
+            });
+            clsObs.observe({ type: 'layout-shift', buffered: true });
+        } catch (e) {}
+
+        try {
+            var inpObs = new PerformanceObserver(function (list) {
+                list.getEntries().forEach(function (entry) {
+                    latestInp = Math.max(latestInp || 0, Math.round(entry.duration));
+                });
+            });
+            inpObs.observe({ type: 'event', buffered: true, durationThreshold: 40 });
         } catch (e) {}
     }
 
@@ -143,16 +166,24 @@
     // visibilitychange fires when the tab is backgrounded or closed.
     document.addEventListener('visibilitychange', function () {
         if (document.visibilityState === 'hidden') {
-            enqueue('page_exit', 'dwell_time', Math.round((Date.now() - pageStart) / 1000));
-            flush();
+            sendExit();
         }
     });
 
     // pagehide covers browsers that don't fire visibilitychange reliably on close.
     window.addEventListener('pagehide', function () {
+        sendExit();
+    });
+
+    function sendExit() {
+        if (exitSent) return;
+        exitSent = true;
+        if (latestLcp !== null) enqueue('web_vitals', 'LCP', latestLcp);
+        if (latestInp !== null) enqueue('web_vitals', 'INP', latestInp);
+        enqueue('web_vitals', 'CLS', latestCls);
         enqueue('page_exit', 'dwell_time', Math.round((Date.now() - pageStart) / 1000));
         flush();
-    });
+    }
 
     // ── 6. Periodic Flush ────────────────────────────────────────────────────────
     setInterval(flush, FLUSH_INTERVAL_MS);

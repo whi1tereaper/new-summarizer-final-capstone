@@ -60,10 +60,10 @@ final class HistoryService
     {
         try {
             $db = Database::getInstance()->getConnection();
-            $query = 'SELECT n.*, s.article_title, s.share_token
+            $query = "SELECT n.*, s.article_title, s.share_token
                       FROM nutshell_generations n
                       LEFT JOIN summaries s ON s.id = n.summary_id
-                      WHERE ';
+                      WHERE n.status = 'completed' AND ";
             $params = [];
 
             if ($userId !== null) {

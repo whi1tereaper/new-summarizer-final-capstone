@@ -33,8 +33,6 @@ class AuthController
             ? new PasswordResetService($this->db)
             : null;
         $this->termsAcceptanceService = new TermsAcceptanceService();
-        $this->termsAcceptanceService->ensureSchema();
-        RememberMeService::ensureSchema();
     }
 
     public function login(): void
@@ -74,12 +72,14 @@ class AuthController
 
             \App\Src\Utils\SessionManager::regenerate();
 
+            // Password authentication establishes the session for both users and admins.
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['role'] = $user['role'];
             $_SESSION['username'] = $user['username'];
-            if ($user['role'] === 'admin') {
-                $_SESSION['admin_challenge_verified'] = true;
-            }
+            unset($_SESSION['admin_challenge_verified']);
+            unset($_SESSION['pending_admin_user_id']);
+            unset($_SESSION['pending_admin_remember_me']);
+
             $this->termsAcceptanceService->storeTermsStateInSession($user);
 
             try {
@@ -101,11 +101,7 @@ class AuthController
                 $this->redirect('accept_terms.php');
             }
 
-            if ($user['role'] === 'admin') {
-                $this->redirect('admin_dashboard.php');
-            }
-
-            $this->redirect('index.php');
+            $this->redirect($user['role'] === 'admin' ? 'admin_dashboard.php' : 'index.php');
         }
 
         $limiter->recordAttempt('login', $ip);
@@ -170,6 +166,7 @@ class AuthController
         $guestSessionService->clearGuestIdentity();
 
         unset($_SESSION['pending_admin_user_id']);
+        unset($_SESSION['pending_admin_remember_me']);
         unset($_SESSION['admin_challenge_verified']);
 
         \App\Src\Utils\SessionManager::destroy();
@@ -279,7 +276,9 @@ class AuthController
     private function checkCsrf(): void
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            return;
+            http_response_code(405);
+            header('Allow: POST');
+            die('Method not allowed.');
         }
 
         $token = $_POST['csrf_token'] ?? '';
@@ -392,27 +391,5 @@ class AuthController
     {
         header("Location: {$location}");
         exit;
-    }
-}
-
-if (isset($_GET['action'])) {
-    $auth = new AuthController();
-
-    switch ($_GET['action']) {
-        case 'login':
-            $auth->login();
-            break;
-        case 'register':
-            $auth->register();
-            break;
-        case 'logout':
-            $auth->logout();
-            break;
-        case 'forgotPassword':
-            $auth->forgotPassword();
-            break;
-        case 'resetPassword':
-            $auth->resetPassword();
-            break;
     }
 }

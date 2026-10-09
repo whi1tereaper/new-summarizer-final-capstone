@@ -9,13 +9,11 @@ use PDO;
 class GuestSessionService
 {
     public const GUEST_TTL_SECONDS = 86400;
-    private static bool $tableVerified = false;
     private PDO $db;
 
     public function __construct()
     {
         $this->db = Database::getInstance()->getConnection();
-        $this->ensureTable();
     }
 
     public function bootstrapCurrentVisitor(): void
@@ -190,22 +188,7 @@ class GuestSessionService
 
     private function ensureTable(): void
     {
-        if (self::$tableVerified) {
-            return;
-        }
-
-        $this->db->exec(
-            'CREATE TABLE IF NOT EXISTS guest_sessions (
-                guest_token VARCHAR(64) PRIMARY KEY,
-                created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                last_activity DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                expires_at DATETIME NOT NULL,
-                INDEX idx_guest_sessions_activity (last_activity),
-                INDEX idx_guest_sessions_expires (expires_at)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci'
-        );
-
-        self::$tableVerified = true;
+        // Schema is managed via database/schema.sql
     }
 
     private function touchGuest(string $guestToken): void

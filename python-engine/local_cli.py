@@ -45,7 +45,7 @@ except Exception:
     pass
 
 try:
-    from deep_translator import GoogleTranslator
+    from deep_translator import GoogleTranslator, MyMemoryTranslator
     from requests import exceptions as requests_exceptions
     from piper_tts import (
         PiperTtsUnavailable,
@@ -54,7 +54,8 @@ try:
         normalize_language_code,
     )
     from summarizer import extract_pdf_text
-    from summarizer_core.models import PreprocessingOptions, SummarizationPipeline, SummarizationRequest
+    from summarizer_core.pipeline import SummarizationPipeline
+    from summarizer_core.models import PreprocessingOptions, SummarizationRequest
 except ImportError as exc:
     import sys
     sys.stderr.write(f"Import Error: {str(exc)}\n")
@@ -69,7 +70,11 @@ _configured_translation_lang = (os.getenv("TRANSLATION_TARGET_LANG", "tl") or "t
 DEFAULT_TARGET_LANGUAGE = "tl" if _configured_translation_lang in {"tl", "fil", "filipino", "tagalog"} else "en"
 TRANSLATION_PROVIDER = (os.getenv("TRANSLATION_PROVIDER", "deep-translator") or "deep-translator").strip().lower()
 SUPPORTED_TARGET_LANGUAGES = {"tl", "en"}
-TRANSLATION_CHUNK_SIZE = 4500
+TRANSLATION_CHUNK_SIZE = 500
+TRANSLATION_PLACEHOLDER_PREFIX = "ZXQKEEP"
+TRANSLATION_PLACEHOLDER_PATTERN = re.compile(
+    re.escape(TRANSLATION_PLACEHOLDER_PREFIX) + r"\d+TOKEN"
+)
 PROXY_ENV_KEYS = (
     "ALL_PROXY",
     "HTTP_PROXY",
@@ -80,7 +85,6 @@ PROXY_ENV_KEYS = (
     "https_proxy",
     "no_proxy",
 )
-TRANSLATION_PLACEHOLDER_PREFIX = "ZXQKEEP"
 PROGRAMMING_KEYWORDS = {
     "class", "const", "continue", "def", "echo", "else", "elseif", "false",
     "for", "foreach", "from", "function", "if", "import", "interface", "null",
@@ -180,6 +184,48 @@ def restore_translation_segments(text: str, replacements: dict[str, str]) -> str
     return restored
 
 
+def chunk_translation_text(text: str, max_size: int = TRANSLATION_CHUNK_SIZE) -> list[str]:
+    """Split protected text without breaking placeholder tokens."""
+    if max_size < 1:
+        raise ValueError("Translation chunk size must be positive.")
+
+    chunks: list[str] = []
+    current = ""
+
+    def append_fragment(fragment: str, *, atomic: bool = False) -> None:
+        nonlocal current
+        if atomic and len(fragment) > max_size:
+            raise ValueError("Translation placeholder exceeds the provider chunk limit.")
+
+        while fragment:
+            available = max_size - len(current)
+            if available == 0 or (atomic and len(fragment) > available):
+                if current:
+                    chunks.append(current)
+                    current = ""
+                    available = max_size
+                else:
+                    raise ValueError("Translation placeholder exceeds the provider chunk limit.")
+
+            piece = fragment[:available]
+            current += piece
+            fragment = fragment[len(piece):]
+            if len(current) == max_size:
+                chunks.append(current)
+                current = ""
+
+    position = 0
+    for match in TRANSLATION_PLACEHOLDER_PATTERN.finditer(text):
+        append_fragment(text[position:match.start()])
+        append_fragment(match.group(0), atomic=True)
+        position = match.end()
+    append_fragment(text[position:])
+
+    if current:
+        chunks.append(current)
+    return chunks
+
+
 def translate_text(text: str, target_lang: str) -> str:
     normalized = (text or "").strip()
     if normalized == "":
@@ -191,18 +237,30 @@ def translate_text(text: str, target_lang: str) -> str:
     protected_text, replacements = protect_translation_segments(normalized)
 
     try:
-        # use the same provider so Filipino translation stays consistent
         with temporary_proxy_bypass():
-            translator = GoogleTranslator(source="auto", target=target_lang)
-            translated_chunks = [
-                translator.translate(protected_text[index:index + TRANSLATION_CHUNK_SIZE])
-                for index in range(0, len(protected_text), TRANSLATION_CHUNK_SIZE)
-            ]
-        translated = " ".join(chunk for chunk in translated_chunks if chunk)
-        restored = restore_translation_segments(translated, replacements).strip()
-        if restored == "":
+            translators = (
+                GoogleTranslator(source="auto", target=target_lang),
+                MyMemoryTranslator(
+                    source="english",
+                    target="filipino" if target_lang == "tl" else target_lang,
+                ),
+            )
+            last_error = None
+            for translator in translators:
+                try:
+                    translated_chunks = [
+                        translator.translate(chunk)
+                        for chunk in chunk_translation_text(protected_text)
+                    ]
+                    translated = " ".join(chunk for chunk in translated_chunks if chunk)
+                    restored = restore_translation_segments(translated, replacements).strip()
+                    if restored != "":
+                        return restored
+                except Exception as exc:
+                    last_error = exc
+            if last_error is not None:
+                raise last_error
             raise TranslationServiceError("Translation returned empty text.")
-        return restored
     except requests_exceptions.ProxyError as exc:
         raise TranslationServiceError(
             "Translation failed because the configured proxy is unreachable."
@@ -235,8 +293,18 @@ def handle_summarize(request: dict) -> dict:
         preprocessing_options=preprocessing,
         summary_style=str(request.get("summary_style", "standard_paragraph")),
         summary_length=str(request.get("summary_length", "balanced")),
+        summary_depth=str(request.get("summary_depth", request.get("summary_length", "balanced"))),
         selection_mode=str(request.get("selection_mode", request.get("summary_style", "general"))),
         document_title=str(request.get("document_title", "")),
+        analysis_mode=str(request.get("analysis_mode", request.get("selection_mode", ""))),
+        output_format=str(request.get("output_format", "")),
+        use_llm_synthesis=request.get("use_llm_synthesis") is True,
+        target_word_budget=(
+            int(request.get("target_word_budget", 0))
+            if isinstance(request.get("target_word_budget", 0), int)
+            and not isinstance(request.get("target_word_budget", 0), bool)
+            else 0
+        ),
     ))
     return asdict(result)
 
@@ -289,6 +357,17 @@ def handle_nutshell(request: dict) -> dict:
         text=str(request.get("text", "")),
         file_path=str(request.get("file_path", "")),
         preprocessing_options=preprocessing_options,
+        analysis_mode=str(request.get("analysis_mode", "general")),
+        primary_summary_word_count=int(request.get("primary_summary_word_count", 0) or 0),
+    )
+
+
+def handle_generate_summary(request: dict) -> dict:
+    from summarizer import generate_summary
+    return generate_summary(
+        source_text=str(request.get("text", "")),
+        profile=str(request.get("profile", request.get("selection_mode", "general"))),
+        length=str(request.get("length", request.get("summary_length", "balanced"))),
     )
 
 
@@ -302,6 +381,9 @@ def main() -> int:
     try:
         if action == "summarize":
             emit_json(handle_summarize(request))
+            return 0
+        if action == "generate-summary":
+            emit_json(handle_generate_summary(request))
             return 0
         if action == "nutshell":
             emit_json(handle_nutshell(request))

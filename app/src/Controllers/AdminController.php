@@ -22,12 +22,11 @@ class AdminController {
     public function __construct() {
         $this->db = Database::getInstance()->getConnection();
         $this->auditSvc = new AdminSecurityService();
-        (new TermsAcceptanceService())->ensureSchema();
         $this->ensureAdmin();
     }
 
     private function ensureAdmin() {
-        if (($_SESSION['role'] ?? '') !== 'admin') {
+        if (!AdminSecurityService::isVerifiedAdmin()) {
             http_response_code(403);
             die('Access Denied: Administrative privileges required.');
         }
@@ -288,97 +287,5 @@ class AdminController {
     {
         return FeedbackHandler::getSystemFeedbackStats();
     }
-
 }
 
-// Admin actions: POST-only, CSRF-validated, verified-admin-only.
-if (isset($_GET['action'])) {
-    $auditSvc = new AdminSecurityService();
-    $callerAdminId = isset($_SESSION['user_id']) ? (int)$_SESSION['user_id'] : null;
-
-    // Gate 1: POST only
-    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        http_response_code(405);
-        die('Method not allowed.');
-    }
-
-    // Gate 2: Full admin verification (role)
-    if (
-        empty($_SESSION['user_id']) ||
-        ($_SESSION['role'] ?? '') !== 'admin'
-    ) {
-        $auditSvc->auditLog(
-            $callerAdminId,
-            'admin_delete_denied',
-            'Unverified session attempted admin action: ' . htmlspecialchars($_GET['action']),
-            null,
-            null
-        );
-        http_response_code(403);
-        die('Access denied.');
-    }
-
-    // Gate 3: CSRF token
-    $csrfToken = $_POST['csrf_token'] ?? '';
-    if (!verifyCsrfToken($csrfToken)) {
-        $auditSvc->auditLog(
-            $callerAdminId,
-            'admin_delete_denied',
-            'Invalid CSRF token for action: ' . htmlspecialchars($_GET['action']),
-            null,
-            null
-        );
-        http_response_code(403);
-        die('Invalid CSRF token.');
-    }
-
-    $admin = new AdminController();
-    switch ($_GET['action']) {
-        case 'toggle_status':
-            $userId = filter_input(INPUT_POST, 'user_id', FILTER_VALIDATE_INT);
-            $status = filter_input(INPUT_POST, 'status', FILTER_VALIDATE_INT);
-            if (!$userId || $userId < 1 || !in_array($status, [0, 1], true)) {
-                $_SESSION['flash_error'] = 'Invalid input for status toggle.';
-                header('Location: admin_dashboard.php');
-                exit;
-            }
-            $admin->toggleUserStatus($userId, $status);
-            rotateCsrfToken();
-            header('Location: admin_dashboard.php');
-            break;
-        case 'clean_files':
-            $admin->cleanOrphanedFiles();
-            rotateCsrfToken();
-            header('Location: admin_dashboard.php');
-            break;
-        case 'delete_files':
-            $admin->deleteAllFiles();
-            rotateCsrfToken();
-            header('Location: admin_dashboard.php');
-            break;
-        case 'delete_user':
-            $userId = filter_input(INPUT_POST, 'user_id', FILTER_VALIDATE_INT);
-            if (!$userId || $userId < 1) {
-                $auditSvc->auditLog($callerAdminId, 'admin_delete_failed', 'Invalid user ID submitted', 'user', null);
-                $_SESSION['flash_error'] = 'Invalid user ID.';
-                header('Location: admin_dashboard.php');
-                exit;
-            }
-            $admin->hardDeleteUser($userId);
-            rotateCsrfToken();
-            header('Location: admin_dashboard.php');
-            break;
-        case 'deactivate_user':
-            $userId = filter_input(INPUT_POST, 'user_id', FILTER_VALIDATE_INT);
-            if (!$userId || $userId < 1) {
-                $auditSvc->auditLog($callerAdminId, 'admin_delete_failed', 'Invalid user ID for deactivation', 'user', null);
-                $_SESSION['flash_error'] = 'Invalid user ID.';
-                header('Location: admin_dashboard.php');
-                exit;
-            }
-            $admin->deactivateUser($userId);
-            rotateCsrfToken();
-            header('Location: admin_dashboard.php');
-            break;
-    }
-}

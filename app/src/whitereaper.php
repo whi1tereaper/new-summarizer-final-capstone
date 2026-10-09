@@ -35,6 +35,37 @@ if (PHP_SAPI !== 'cli') {
     // Attempt auto-login if the user has a valid remember-me cookie
     RememberMeService::loginFromCookie();
 
+    // Verify authenticated user identity against the database
+    if (!empty($_SESSION['user_id'])) {
+        $validUser = false;
+        try {
+            require_once __DIR__ . '/Database.php';
+            $db = \App\Src\Database::getInstance()->getConnection();
+            $stmt = $db->prepare('SELECT id, username, role, active FROM users WHERE id = :id LIMIT 1');
+            $stmt->execute(['id' => (int)$_SESSION['user_id']]);
+            $userRow = $stmt->fetch(\PDO::FETCH_ASSOC);
+            if ($userRow && (int)($userRow['active'] ?? 1) === 1) {
+                $validUser = true;
+                $_SESSION['role'] = $userRow['role'];
+                $_SESSION['username'] = $userRow['username'];
+            }
+        } catch (\Throwable $e) {
+            error_log('[whitereaper] User verification error: ' . $e->getMessage());
+        }
+
+        if (!$validUser) {
+            unset(
+                $_SESSION['user_id'],
+                $_SESSION['role'],
+                $_SESSION['username'],
+                $_SESSION['terms_accepted'],
+                $_SESSION['terms_accepted_at'],
+                $_SESSION['admin_challenge_verified'],
+                $_SESSION['pending_admin_user_id']
+            );
+        }
+    }
+
     // Guests and logged-in users share the same public pages, so bootstrap both contexts up front.
     (new GuestSessionService())->bootstrapCurrentVisitor();
 

@@ -7,8 +7,30 @@ $storageUploads = Env::requirePath('STORAGE_UPLOADS');
 $storageAudio = Env::requirePath('STORAGE_AUDIO');
 $storageLogs = Env::requirePath('STORAGE_LOGS');
 $storageTmp = Env::requirePath('STORAGE_TMP');
+$llmEnabled = Env::bool('SUMMARIZER_LLM_ENABLED', false);
+$llmProvider = strtolower(Env::string('SUMMARIZER_LLM_PROVIDER', 'openai_compatible'));
+$llmModel = Env::string('SUMMARIZER_LLM_MODEL', '');
+$llmBaseUrl = Env::string('SUMMARIZER_LLM_BASE_URL', 'http://127.0.0.1:11434/v1');
+$llmAllowRemote = Env::bool('SUMMARIZER_LLM_ALLOW_REMOTE', false);
+$llmEndpoint = parse_url($llmBaseUrl);
+$llmScheme = is_array($llmEndpoint) ? strtolower((string)($llmEndpoint['scheme'] ?? '')) : '';
+$llmHost = is_array($llmEndpoint) ? strtolower(trim((string)($llmEndpoint['host'] ?? ''), '[]')) : '';
+$llmEndpointShapeValid = is_array($llmEndpoint)
+    && $llmHost !== ''
+    && !array_key_exists('user', $llmEndpoint)
+    && !array_key_exists('pass', $llmEndpoint)
+    && !isset($llmEndpoint['query'])
+    && !isset($llmEndpoint['fragment']);
+$llmIsLocal = in_array($llmHost, ['localhost', '127.0.0.1', '::1'], true);
+$llmEndpointAllowed = $llmEndpointShapeValid && ($llmIsLocal
+    ? in_array($llmScheme, ['http', 'https'], true)
+    : ($llmAllowRemote && $llmScheme === 'https'));
 
 return [
+    'session' => [
+        'name' => Env::string('SESSION_NAME', 'LIGHT_SESSID'),
+    ],
+
     'app' => [
         'name' => Env::requireString('APP_NAME'),
         'env' => Env::requireString('APP_ENV'),
@@ -32,6 +54,16 @@ return [
         'nltk_data' => Env::requireString('NLTK_DATA'),
         'tesseract_cmd' => Env::requireString('TESSERACT_CMD'),
         'poppler_path' => Env::requireString('POPPLER_PATH'),
+    ],
+
+    'summarizer' => [
+        'llm_enabled' => $llmEnabled,
+        'llm_provider' => $llmProvider,
+        'llm_model' => $llmModel,
+        'llm_available' => $llmEnabled
+            && $llmModel !== ''
+            && $llmProvider === 'openai_compatible'
+            && $llmEndpointAllowed,
     ],
 
     'storage' => [

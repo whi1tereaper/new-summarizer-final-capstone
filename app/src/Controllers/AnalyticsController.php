@@ -49,19 +49,8 @@ class AnalyticsController
             FROM landing_page_sessions
         ")->fetch();
 
-        // Median LCP: cheap approximation — sort and pick midpoint.
-        $lcpRow = $this->db->query("
-            SELECT lcp_ms
-            FROM landing_page_sessions
-            WHERE lcp_ms IS NOT NULL
-            ORDER BY lcp_ms
-            LIMIT 1
-            OFFSET (
-                SELECT FLOOR(COUNT(*) / 2)
-                FROM landing_page_sessions
-                WHERE lcp_ms IS NOT NULL
-            )
-        ")->fetch();
+        // Median LCP: MariaDB/MySQL compatible 2-step calculation
+        $medianLcp = $this->calculateMedianLcp();
 
         return [
             'total_sessions'    => (int)($row['total_sessions']    ?? 0),
@@ -69,10 +58,64 @@ class AnalyticsController
             'sessions_today'    => (int)($row['sessions_today']    ?? 0),
             'conversion_rate'   => (float)($row['conversion_rate'] ?? 0.0),
             'avg_dwell_seconds' => (float)($row['avg_dwell_seconds'] ?? 0.0),
-            'median_lcp_ms'     => $lcpRow ? (int)$lcpRow['lcp_ms'] : null,
+            'median_lcp_ms'     => $medianLcp,
             'bounce_rate'       => (float)($row['bounce_rate']     ?? 0.0),
         ];
     }
+
+    /**
+     * Calculates the median LCP in milliseconds across non-null session records.
+     *
+     * Compatible with MariaDB and MySQL by avoiding subqueries inside LIMIT/OFFSET clauses.
+     * Handles 0 rows (returns null), single rows, odd counts (exact midpoint), and even
+     * counts (average of the two middle values).
+     */
+    private function calculateMedianLcp(): ?int
+    {
+        $countStmt = $this->db->query("
+            SELECT COUNT(*) FROM landing_page_sessions WHERE lcp_ms IS NOT NULL
+        ");
+        $count = (int)$countStmt->fetchColumn();
+
+        if ($count === 0) {
+            return null;
+        }
+
+        if ($count % 2 === 1) {
+            $offset = intdiv($count, 2);
+            $stmt = $this->db->prepare("
+                SELECT lcp_ms
+                FROM landing_page_sessions
+                WHERE lcp_ms IS NOT NULL
+                ORDER BY lcp_ms ASC
+                LIMIT 1 OFFSET :offset
+            ");
+            $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+            $stmt->execute();
+            $val = $stmt->fetchColumn();
+            return $val !== false ? (int)$val : null;
+        }
+
+        // Even row count: mathematically sound average of the two middle elements
+        $offset = intdiv($count, 2) - 1;
+        $stmt = $this->db->prepare("
+            SELECT lcp_ms
+            FROM landing_page_sessions
+            WHERE lcp_ms IS NOT NULL
+            ORDER BY lcp_ms ASC
+            LIMIT 2 OFFSET :offset
+        ");
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+        if (count($rows) === 2) {
+            return (int)round(((int)$rows[0] + (int)$rows[1]) / 2);
+        }
+
+        return isset($rows[0]) ? (int)$rows[0] : null;
+    }
+
 
     /**
      * Device category breakdown as percentages.
@@ -256,16 +299,21 @@ class AnalyticsController
      *   total_summaries: int,
      * }
      */
-    public function getUserSidebarStats(int $userId): array
+    public function getUserSidebarStats(int $userId, ?string $guestToken = null): array
     {
+        $identityColumn = $userId > 0 ? 'user_id' : 'guest_token';
+        $identityValue = $userId > 0 ? $userId : $guestToken;
+        if ($identityValue === null || $identityValue === '') {
+            return ['my_summaries' => 0, 'my_today' => 0, 'total_summaries' => 0];
+        }
         $myRow = $this->db->prepare("
             SELECT
                 COUNT(*)                              AS my_summaries,
                 SUM(DATE(created_at) = CURDATE())     AS my_today
             FROM summaries
-            WHERE user_id = :uid
+            WHERE {$identityColumn} = :uid
         ");
-        $myRow->execute(['uid' => $userId]);
+        $myRow->execute(['uid' => $identityValue]);
         $my = $myRow->fetch();
 
         $totalRow = $this->db->query("
@@ -279,25 +327,33 @@ class AnalyticsController
         ];
     }
 
-    public function getDashboardData(?int $userId, bool $isAdmin, string $from, string $to): array
+    public function getDashboardData(?int $userId, bool $isAdmin, string $from, string $to, ?string $guestToken = null): array
     {
+        [$from, $to] = $this->normalizeDateRange($from, $to);
         $where = 'created_at >= :from AND created_at < DATE_ADD(:to, INTERVAL 1 DAY)';
         $params = ['from' => $from, 'to' => $to];
         if (!$isAdmin) {
-            $where .= ' AND user_id = :user_id';
-            $params['user_id'] = $userId;
+            if ($userId !== null && $userId > 0) {
+                $where .= ' AND user_id = :user_id';
+                $params['user_id'] = $userId;
+            } else {
+                $where .= ' AND guest_token = :guest_token';
+                $params['guest_token'] = $guestToken;
+            }
         }
 
         $completedWhere = $where . " AND status = 'completed'";
         $monthlyTrend = (strtotime($to) - strtotime($from)) > (90 * 86400);
         $trendBucket = $monthlyTrend ? "DATE_FORMAT(created_at, '%Y-%m')" : 'DATE(created_at)';
-        $nutshellWhere = 'nutshell_generated_at >= :from AND nutshell_generated_at < DATE_ADD(:to, INTERVAL 1 DAY)';
+        $nutshellWhere = "status = 'completed' AND created_at >= :from AND created_at < DATE_ADD(:to, INTERVAL 1 DAY)";
         if (!$isAdmin) {
-            $nutshellWhere .= ' AND user_id = :user_id';
+            $nutshellWhere .= $userId !== null && $userId > 0
+                ? ' AND user_id = :user_id'
+                : ' AND guest_token = :guest_token';
         }
         $nutshellTrendBucket = $monthlyTrend
-            ? "DATE_FORMAT(nutshell_generated_at, '%Y-%m')"
-            : 'DATE(nutshell_generated_at)';
+            ? "DATE_FORMAT(created_at, '%Y-%m')"
+            : 'DATE(created_at)';
         $query = function (string $sql) use ($params): array {
             $statement = $this->db->prepare($sql);
             $statement->execute($params);
@@ -312,8 +368,8 @@ class AnalyticsController
         $kpis = $kpiRows[0] ?? [];
 
         $summaryCount = (int)($kpis['articles'] ?? 0);
-        $trend = $query("SELECT {$trendBucket} AS bucket, COUNT(*) AS total
-            FROM summaries WHERE {$completedWhere} GROUP BY {$trendBucket} ORDER BY bucket");
+        $trend = $this->fillTimeBuckets($query("SELECT {$trendBucket} AS bucket, COUNT(*) AS total
+            FROM summaries WHERE {$completedWhere} GROUP BY {$trendBucket} ORDER BY bucket"), $from, $to, $monthlyTrend);
         $styles = $query("SELECT summary_style AS label, COUNT(*) AS total
             FROM summaries WHERE {$completedWhere} GROUP BY summary_style ORDER BY total DESC");
         $lengths = $query("SELECT summary_length AS label, COUNT(*) AS total
@@ -331,14 +387,20 @@ class AnalyticsController
             $statement->execute($params);
             return $statement->fetchAll();
         };
-        $nutshell = $nutshellQuery("SELECT COUNT(*) AS generated, AVG(NULLIF(word_count, 0)) AS average_words,
-                COUNT(*) AS stored
-            FROM nutshell_generations
-            WHERE {$nutshellWhere}");
-        $nutshellTrend = $nutshellQuery("SELECT {$nutshellTrendBucket} AS bucket, COUNT(*) AS total
-            FROM nutshell_generations
-            WHERE {$nutshellWhere}
-            GROUP BY {$nutshellTrendBucket} ORDER BY bucket");
+        $nutshell = ['generated' => 0, 'stored' => 0, 'average_words' => null];
+        $nutshellTrend = [];
+        try {
+            $nutshell = $nutshellQuery("SELECT COUNT(*) AS generated, AVG(NULLIF(word_count, 0)) AS average_words,
+                    COUNT(*) AS stored
+                FROM nutshell_generations
+                WHERE {$nutshellWhere}")[0] ?? $nutshell;
+            $nutshellTrend = $this->fillTimeBuckets($nutshellQuery("SELECT {$nutshellTrendBucket} AS bucket, COUNT(*) AS total
+                FROM nutshell_generations
+                WHERE {$nutshellWhere}
+                GROUP BY {$nutshellTrendBucket} ORDER BY bucket"), $from, $to, $monthlyTrend);
+        } catch (\Throwable $exception) {
+            error_log('[analytics] Optional Nutshell analytics unavailable: ' . $exception->getMessage());
+        }
         $recent = $query("SELECT article_title, input_type, summary_style, summary_length, created_at
             FROM summaries WHERE {$completedWhere} ORDER BY created_at DESC LIMIT 10");
         $performance = $query("SELECT AVG(processing_time) AS average_time, MIN(processing_time) AS fastest_time,
@@ -361,7 +423,7 @@ class AnalyticsController
             'words_comparison' => $words[0] ?? ['original_words' => 0, 'summary_words' => 0],
             'types' => $types,
             'categories' => $categories,
-            'nutshell' => $nutshell[0] ?? ['generated' => 0, 'stored' => 0, 'average_words' => null],
+            'nutshell' => $nutshell,
             'nutshell_trend' => $nutshellTrend,
             'recent' => $recent,
             'performance' => $performance[0] ?? [],
@@ -377,6 +439,52 @@ class AnalyticsController
     }
 
     /**
+     * Keep date boundaries in the application's configured timezone and reject
+     * malformed or inverted ranges before they reach SQL.
+     *
+     * @return array{0: string, 1: string}
+     */
+    private function normalizeDateRange(string $from, string $to): array
+    {
+        $timezone = new \DateTimeZone(date_default_timezone_get());
+        $fromDate = \DateTimeImmutable::createFromFormat('!Y-m-d', $from, $timezone);
+        $toDate = \DateTimeImmutable::createFromFormat('!Y-m-d', $to, $timezone);
+        if (!$fromDate || !$toDate || $fromDate->format('Y-m-d') !== $from || $toDate->format('Y-m-d') !== $to) {
+            throw new \InvalidArgumentException('Invalid analytics date range.');
+        }
+        if ($fromDate > $toDate) {
+            [$fromDate, $toDate] = [$toDate, $fromDate];
+        }
+        return [$fromDate->format('Y-m-d'), $toDate->format('Y-m-d')];
+    }
+
+    /**
+     * Return every logical bucket in the selected range, without inventing
+     * activity for periods absent from the database.
+     *
+     * @param array<int, array{bucket: string, total: int|string}> $rows
+     * @return array<int, array{bucket: string, total: int}>
+     */
+    private function fillTimeBuckets(array $rows, string $from, string $to, bool $monthly): array
+    {
+        $indexed = [];
+        foreach ($rows as $row) {
+            $indexed[(string)$row['bucket']] = (int)$row['total'];
+        }
+
+        $result = [];
+        $timezone = new \DateTimeZone(date_default_timezone_get());
+        $cursor = new \DateTimeImmutable($monthly ? substr($from, 0, 7) . '-01' : $from, $timezone);
+        $end = new \DateTimeImmutable($monthly ? substr($to, 0, 7) . '-01' : $to, $timezone);
+        while ($cursor <= $end) {
+            $bucket = $monthly ? $cursor->format('Y-m') : $cursor->format('Y-m-d');
+            $result[] = ['bucket' => $bucket, 'total' => $indexed[$bucket] ?? 0];
+            $cursor = $monthly ? $cursor->modify('+1 month') : $cursor->modify('+1 day');
+        }
+        return $result;
+    }
+
+    /**
      * Top 5 referrer domains by session count.
      *
      * @return array<array{domain: string, sessions: int, conversions: int}>
@@ -385,23 +493,20 @@ class AnalyticsController
     {
         $rows = $this->db->query("
             SELECT
-                referrer,
+                LOWER(SUBSTRING_INDEX(SUBSTRING_INDEX(referrer, '://', -1), '/', 1)) AS domain,
                 COUNT(*)        AS sessions,
                 SUM(converted)  AS conversions
             FROM landing_page_sessions
             WHERE referrer IS NOT NULL AND referrer <> ''
-            GROUP BY referrer
+            GROUP BY domain
             ORDER BY sessions DESC
             LIMIT 5
         ")->fetchAll();
 
         $result = [];
         foreach ($rows as $row) {
-            // Extract just the host to keep the table readable.
-            $parsed = @parse_url((string)$row['referrer']);
-            $domain = $parsed['host'] ?? $row['referrer'];
             $result[] = [
-                'domain'      => htmlspecialchars($domain, ENT_QUOTES, 'UTF-8'),
+                'domain'      => htmlspecialchars((string)$row['domain'], ENT_QUOTES, 'UTF-8'),
                 'sessions'    => (int)$row['sessions'],
                 'conversions' => (int)$row['conversions'],
             ];

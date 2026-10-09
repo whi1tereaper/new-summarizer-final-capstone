@@ -8,40 +8,20 @@ use PDO;
 class RateLimiter
 {
     private PDO $db;
-    private static bool $tableVerified = false;
 
     // max attempts and window length per action
     private const LIMITS = [
         'login'         => ['max' => 5,  'window' => 900],   // 5 attempts per 15 min
         'reset_request' => ['max' => 1,  'window' => 60],    // 1 per 1 min
         'otp_verify'    => ['max' => 5,  'window' => 900],   // 5 per 15 min
+        'landing_beacon' => ['max' => 30, 'window' => 60],   // telemetry batches per minute
+        'nutshell'      => ['max' => 10, 'window' => 3600],  // 10 new generations per hour
+        'feedback'      => ['max' => 10, 'window' => 60],    // 10 feedback submissions per minute
     ];
 
     public function __construct()
     {
         $this->db = Database::getInstance()->getConnection();
-        $this->ensureTable();
-    }
-
-    // create the table on first use for older installs
-    private function ensureTable(): void
-    {
-        if (self::$tableVerified) {
-            return;
-        }
-
-        $this->db->exec("
-            CREATE TABLE IF NOT EXISTS rate_limits (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                action_type VARCHAR(30) NOT NULL,
-                identifier VARCHAR(255) NOT NULL,
-                attempts INT DEFAULT 0,
-                window_start TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                UNIQUE KEY uq_action_id (action_type, identifier),
-                INDEX idx_window (window_start)
-            ) ENGINE=InnoDB
-        ");
-        self::$tableVerified = true;
     }
 
     // true means this action should be blocked for now

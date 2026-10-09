@@ -6,7 +6,6 @@ require_once __DIR__ . '/../Services/ArticleService.php';
 require_once __DIR__ . '/../Utils/validation.php';
 
 use App\Src\Services\ArticleService;
-use App\Src\Services\TermsAcceptanceService;
 
 class ArticleController
 {
@@ -25,13 +24,13 @@ class ArticleController
 
         // Resolve who owns the summary before any upload or worker work starts.
         [$userId, $guestToken] = $this->resolveViewerContext();
-        $this->validateTermsConsentForRequest($userId);
 
         $pending = null;
         try {
             // Normalize the incoming form into one session payload the processing page can resume later.
             $pending = $this->articleService->buildPendingSummary($_POST, $_FILES, $userId, $guestToken);
         } catch (\RuntimeException $exception) {
+            $this->preserveFormState($_POST);
             $this->redirectWithFlashError($exception->getMessage());
         }
 
@@ -40,6 +39,7 @@ class ArticleController
         }
 
         // Store the request before redirecting so the next page can execute the heavy work asynchronously.
+        $this->preserveFormState($pending);
         $_SESSION['pending_summary'] = $pending;
         header('Location: processing.php');
         exit;
@@ -59,13 +59,26 @@ class ArticleController
         $pending = $_SESSION['pending_summary'];
         $userId = $pending['user_id'];
         $guestToken = $pending['guest_token'];
+
+        // If the staged user was deleted or invalid, gracefully normalize to guest context
+        if ($userId !== null && !$this->articleService->userExists((int)$userId)) {
+            error_log("[ArticleController] Staged user_id {$userId} does not exist in database; normalizing to guest.");
+            $userId = null;
+            if ($guestToken === null || $guestToken === '') {
+                $guestSessionService = new \App\Src\Services\GuestSessionService();
+                $guestToken = $guestSessionService->getCurrentGuestToken();
+            }
+        }
         $originalText = $pending['original_text'];
         $filePath = $pending['file_path'];
         $summaryCount = $pending['sentence_count'] ?? 8;
-        $summaryLength = $pending['summary_length'] ?? 'balanced';
+        $summaryLength = $pending['summary_depth'] ?? ($pending['summary_length'] ?? 'balanced');
         $summaryStyle = $pending['summary_style'];
         $documentTitle = $pending['document_title'] ?? '';
         $selectionMode = $pending['selection_mode'] ?? '';
+        $analysisMode = $pending['analysis_mode'] ?? '';
+        $outputFormat = $pending['output_format'] ?? '';
+        $useLlmSynthesis = ($pending['use_llm_synthesis'] ?? false) === true;
 
         $resolvedSource = null;
         $summaryInputText = $originalText;
@@ -81,6 +94,7 @@ class ArticleController
         } catch (\RuntimeException $exception) {
             // Clean up early when source preparation fails so temporary files do not linger.
             $this->articleService->cleanupTemporaryArtifacts($filePath, null);
+            $this->preserveFormState($pending);
             $this->recordFailure($userId, $guestToken, $inputType, $summaryStyle, $summaryLength, $processingStartedAt);
             http_response_code(400);
             echo json_encode(['error' => $exception->getMessage()]);
@@ -103,11 +117,15 @@ class ArticleController
                 $summaryStyle,
                 $summaryLength,
                 $documentTitle,
-                $selectionMode
+                $selectionMode,
+                $analysisMode,
+                $outputFormat,
+                $useLlmSynthesis
             );
         } catch (\RuntimeException $exception) {
             // If summarization fails, remove request artifacts and return a worker-safe error.
             $this->articleService->cleanupTemporaryArtifacts($filePath, $resolvedSource);
+            $this->preserveFormState($pending);
             $this->recordFailure($userId, $guestToken, $inputType, $summaryStyle, $summaryLength, $processingStartedAt);
             http_response_code(500);
             echo json_encode(['error' => $exception->getMessage()]);
@@ -140,6 +158,7 @@ class ArticleController
 
         // Success path: clear staged state, rotate the form token, then send the result redirect back to JS.
         $this->articleService->cleanupTemporaryArtifacts($filePath, $resolvedSource);
+        $this->preserveFormState($pending);
         unset($_SESSION['pending_summary']);
         rotateCsrfToken();
 
@@ -173,40 +192,17 @@ class ArticleController
         // Logged-in users and guests save history differently, so resolve that identity once here.
         $userId = $_SESSION['user_id'] ?? null;
         if ($userId !== null) {
-            return [$userId, null];
+            $userIdInt = filter_var($userId, FILTER_VALIDATE_INT);
+            if ($userIdInt !== false && $userIdInt > 0) {
+                if ($this->articleService->userExists((int)$userIdInt)) {
+                    return [(int)$userIdInt, null];
+                }
+            }
+            // Invalid or deleted user ID in session: purge auth fields and fallback to guest
+            unset($_SESSION['user_id'], $_SESSION['role'], $_SESSION['username']);
         }
 
         return [null, $_SESSION['guest_token'] ?? null];
-    }
-
-    private function validateTermsConsentForRequest(int|string|null $userId): void
-    {
-        // Logged-in users can be forced through a new terms version even if they already have accounts.
-        if ($userId !== null) {
-            if (TermsAcceptanceService::currentUserNeedsAcceptance()) {
-                $acceptedInRequest = isAcceptedCheckboxValue($_POST['guest_terms_accept'] ?? null);
-                if (!$acceptedInRequest) {
-                    $this->redirectWithFlashError('You must accept the Terms and Conditions before using the summarizer.');
-                }
-                (new TermsAcceptanceService())->acceptCurrentUserTerms();
-            }
-
-            return;
-        }
-
-        // Guests must both review the full page and actively accept before they can send content.
-        if (empty($_SESSION['guest_terms_reviewed'])) {
-            $this->redirectWithFlashError('You must read the full Terms and Conditions before using the summarizer.');
-        }
-
-        $acceptedInRequest = isAcceptedCheckboxValue($_POST['guest_terms_accept'] ?? null);
-        $acceptedInSession = !empty($_SESSION['guest_terms_accepted']);
-        if (!$acceptedInRequest && !$acceptedInSession) {
-            $this->redirectWithFlashError('You must accept the Terms and Conditions before using the summarizer.');
-        }
-
-        $_SESSION['guest_terms_accepted'] = true;
-        $_SESSION['guest_terms_accepted_at'] = date('Y-m-d H:i:s');
     }
 
     private function redirectWithFlashError(string $message): void
@@ -217,6 +213,21 @@ class ArticleController
         exit;
     }
 
+    private function preserveFormState(array $values): void
+    {
+        // Keep retryable options and safe text/URL input across errors; uploaded temp files cannot survive cleanup.
+        $state = [];
+        foreach (['document_title', 'source_type', 'original_text', 'source_url', 'output_format', 'analysis_mode', 'summary_depth', 'summary_length', 'use_llm_synthesis'] as $key) {
+            if (is_string($values[$key] ?? null) && strlen($values[$key]) <= 200000) {
+                $state[$key] = $values[$key];
+            }
+        }
+        if (($values['use_llm_synthesis'] ?? false) === true) {
+            $state['use_llm_synthesis'] = '1';
+        }
+        $_SESSION['summarizer_form_state'] = $state;
+    }
+
     private function recordFailure(?int $userId, ?string $guestToken, string $inputType, string $summaryStyle, string $summaryLength, float $startedAt): void
     {
         try {
@@ -224,15 +235,5 @@ class ArticleController
         } catch (\Throwable $exception) {
             error_log('[ArticleController] Failed to record analytics failure: ' . $exception->getMessage());
         }
-    }
-}
-
-if (PHP_SAPI !== 'cli') {
-    // Public route entry: create one controller and branch between stage-one form handling and stage-two execution.
-    $controller = new ArticleController();
-    if (isset($_GET['action']) && $_GET['action'] === 'execute') {
-        $controller->execute();
-    } else {
-        $controller->process();
     }
 }

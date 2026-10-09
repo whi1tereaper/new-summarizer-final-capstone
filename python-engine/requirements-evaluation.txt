@@ -1,0 +1,7 @@
+# Core evaluation uses the existing numpy/scikit-learn runtime. Statistics use
+# scipy already required by requirements-local.txt. No transformer dependency is
+# imported by ordinary summarization or by disabled semantic metrics.
+# Install this optional file only on an offline evaluation worker environment:
+bert-score==0.3.13
+# Prepare/cache the chosen model explicitly before offline execution. The worker
+# sets HF_HUB_OFFLINE=1 and TRANSFORMERS_OFFLINE=1 and never downloads per item.

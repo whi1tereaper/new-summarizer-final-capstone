@@ -3,20 +3,22 @@ declare(strict_types=1);
 
 // Bootstrap provides session, DB, and security headers.
 require_once __DIR__ . '/../../src/whitereaper.php';
+require_once __DIR__ . '/../../src/Services/RateLimiter.php';
 
 use App\Src\Database;
+use App\Src\Services\RateLimiter;
 
 // Only JSON responses from this endpoint.
 header('Content-Type: application/json; charset=utf-8');
 
-// Only POST is valid — sendBeacon always POSTs.
+// Only POST is valid - sendBeacon always POSTs.
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['error' => 'Method not allowed']);
     exit;
 }
 
-// Read raw body — sendBeacon sends Content-Type: text/plain or application/json.
+// Read raw body - sendBeacon sends Content-Type: text/plain or application/json.
 $rawInput = file_get_contents('php://input');
 if (empty($rawInput) || strlen($rawInput) > 32768) {
     // Ignore empty or suspiciously oversized payloads silently (beacon fire-and-forget).
@@ -30,12 +32,20 @@ if (!is_array($data) || !isset($data['session_id'], $data['events']) || !is_arra
     exit;
 }
 
-// Validate session_id: alphanumeric + _ - only, 16–64 chars.
+// Validate session_id: alphanumeric + _ - only, 16-64 chars.
 $sessionId = (string)($data['session_id'] ?? '');
 if (!preg_match('/^[a-zA-Z0-9_\-]{16,64}$/', $sessionId)) {
     http_response_code(204);
     exit;
 }
+
+$clientIp = RateLimiter::getClientIp();
+$rateLimiter = new RateLimiter();
+if ($rateLimiter->isLimited('landing_beacon', hash('sha256', $clientIp))) {
+    http_response_code(429);
+    exit;
+}
+$rateLimiter->recordAttempt('landing_beacon', hash('sha256', $clientIp));
 
 // Hard cap: ignore batches with absurd event counts (bot guard).
 if (count($data['events']) > 25) {
@@ -47,15 +57,23 @@ if (count($data['events']) > 25) {
 $userId     = isset($_SESSION['user_id']) ? (int)$_SESSION['user_id'] : null;
 $guestToken = isset($_SESSION['guest_token']) ? (string)$_SESSION['guest_token'] : null;
 
-// Never store the raw IP — salted SHA-256 gives a stable unique-visitor key
+// Never store the raw IP - salted SHA-256 gives a stable unique-visitor key
 // that cannot be reversed to an identity.
 $rawIp  = $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
 $ipHash = hash('sha256', $rawIp . 'LP_ANALYTICS_SALT_v1');
 
 $userAgent = mb_substr((string)($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 255);
-$referrer  = mb_substr((string)($data['referrer'] ?? ''), 0, 512);
+$referrer = '';
+$rawReferrer = trim((string)($data['referrer'] ?? ''));
+if ($rawReferrer !== '') {
+    $parsedReferrer = parse_url($rawReferrer);
+    $host = is_array($parsedReferrer) ? strtolower((string)($parsedReferrer['host'] ?? '')) : '';
+    if ($host !== '' && preg_match('/^[a-z0-9.-]+$/', $host)) {
+        $referrer = mb_substr($host, 0, 255);
+    }
+}
 
-// Simple device detection — good enough for dashboard segmentation.
+// Simple device detection - good enough for dashboard segmentation.
 $deviceCategory = 'desktop';
 if (preg_match('/(tablet|ipad|playbook)|(android(?!.*mobile))/i', $userAgent)) {
     $deviceCategory = 'tablet';
@@ -66,6 +84,7 @@ if (preg_match('/(tablet|ipad|playbook)|(android(?!.*mobile))/i', $userAgent)) {
 // ── Aggregate event data before hitting the DB ────────────────────────────────
 $lcpMs       = null;
 $fidMs       = null;
+$inpMs       = null;
 $clsScore    = null;
 $maxScroll   = 0;
 $dwellSec    = 0;
@@ -74,6 +93,7 @@ $converted   = 0;
 $validEventTypes = ['pageview', 'cta_click', 'scroll_milestone', 'web_vitals', 'page_exit'];
 
 $cleanEvents = [];
+$exitEventSeen = false;
 foreach ($data['events'] as $evt) {
     if (!is_array($evt) || !isset($evt['type'])) {
         continue;
@@ -81,23 +101,30 @@ foreach ($data['events'] as $evt) {
 
     $type  = preg_replace('/[^a-z0-9_]/', '', strtolower((string)$evt['type']));
     $label = isset($evt['label']) ? mb_substr(preg_replace('/[^a-zA-Z0-9_\-]/', '', (string)$evt['label']), 0, 100) : null;
-    $value = isset($evt['value']) ? (int)$evt['value'] : null;
+    $value = isset($evt['value']) && is_numeric($evt['value']) ? (int)$evt['value'] : null;
 
     if (!in_array($type, $validEventTypes, true)) {
         continue;
+    }
+    if ($type === 'page_exit') {
+        if ($exitEventSeen) {
+            continue;
+        }
+        $exitEventSeen = true;
     }
 
     $cleanEvents[] = ['type' => $type, 'label' => $label, 'value' => $value];
 
     // Accumulate session-level aggregates so we can UPDATE in a single query.
     if ($type === 'web_vitals') {
-        if ($label === 'LCP' && $value !== null) $lcpMs    = $value;
-        if ($label === 'FID' && $value !== null) $fidMs    = $value;
-        if ($label === 'CLS' && $value !== null) $clsScore = round($value / 10000.0, 4);
+        if ($label === 'LCP' && $value !== null) $lcpMs = max(0, min(60000, $value));
+        if ($label === 'FID' && $value !== null) $fidMs = max(0, min(60000, $value));
+        if ($label === 'INP' && $value !== null) $inpMs = max(0, min(60000, $value));
+        if ($label === 'CLS' && $value !== null) $clsScore = round(max(0, min(10000, $value)) / 10000.0, 4);
     } elseif ($type === 'scroll_milestone' && $value !== null) {
-        $maxScroll = max($maxScroll, $value);
+        $maxScroll = max($maxScroll, min(100, $value));
     } elseif ($type === 'page_exit' && $value !== null) {
-        $dwellSec = max($dwellSec, $value);
+        $dwellSec = max($dwellSec, min(65535, $value));
     } elseif ($type === 'cta_click' && in_array($label, ['hero_get_started', 'nav_register'], true)) {
         $converted = 1;
     }
@@ -111,6 +138,14 @@ if (empty($cleanEvents)) {
 // ── Persist to DB ─────────────────────────────────────────────────────────────
 try {
     $pdo = Database::getInstance()->getConnection();
+    $eventCountStatement = $pdo->prepare(
+        'SELECT COUNT(*) FROM landing_page_events WHERE session_id = :session_id'
+    );
+    $eventCountStatement->execute([':session_id' => $sessionId]);
+    if ((int)$eventCountStatement->fetchColumn() >= 500) {
+        http_response_code(429);
+        exit;
+    }
     $pdo->beginTransaction();
 
     // Upsert the session record. Ignore fields already set on duplicate.
@@ -147,12 +182,13 @@ try {
         ]);
     }
 
-    // Update aggregated session metrics — always take the max/latest values.
+    // Update aggregated session metrics - always take the max/latest values.
     $updateStmt = $pdo->prepare("
         UPDATE landing_page_sessions SET
             lcp_ms             = CASE WHEN :lcp IS NOT NULL    THEN COALESCE(lcp_ms,  :lcp2)  ELSE lcp_ms  END,
             fid_ms             = CASE WHEN :fid IS NOT NULL    THEN COALESCE(fid_ms,  :fid2)  ELSE fid_ms  END,
             cls_score          = CASE WHEN :cls IS NOT NULL    THEN COALESCE(cls_score,:cls2)  ELSE cls_score END,
+            inp_ms             = CASE WHEN :inp IS NOT NULL    THEN COALESCE(inp_ms, :inp2) ELSE inp_ms END,
             max_scroll_percent = GREATEST(max_scroll_percent, :scroll),
             dwell_time_seconds = GREATEST(dwell_time_seconds, :dwell),
             converted          = CASE WHEN :conv = 1 THEN 1 ELSE converted END
@@ -165,6 +201,8 @@ try {
         ':fid2'       => $fidMs,
         ':cls'        => $clsScore,
         ':cls2'       => $clsScore,
+        ':inp'        => $inpMs ?? null,
+        ':inp2'       => $inpMs ?? null,
         ':scroll'     => $maxScroll,
         ':dwell'      => $dwellSec,
         ':conv'       => $converted,
@@ -178,5 +216,5 @@ try {
         $pdo->rollBack();
     }
     error_log('[track_landing.php] ' . $e->getMessage());
-    http_response_code(204); // Still 204 — client should not retry analytics beacons
+    http_response_code(204); // Still 204 - client should not retry analytics beacons
 }

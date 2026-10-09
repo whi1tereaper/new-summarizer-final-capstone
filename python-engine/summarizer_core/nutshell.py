@@ -44,6 +44,10 @@ _METHODOLOGY_CUES = re.compile(
     r"\b(?:we configured|we deployed|we implemented|we installed|we measured|we surveyed|participants were|materials and methods|experimental setup|configuration scripts|were recruited|was administered)\b",
     re.IGNORECASE,
 )
+_LOW_PRIORITY_CUES = re.compile(
+    r"\b(?:public consultation|meetings? (?:in|across)|online survey|survey responses?|earlier products?|clinic locations?|staff training|recruitment process|historical background|will review|reviews? .* after)\b",
+    re.IGNORECASE,
+)
 
 _SECTION_WEIGHTS: dict[str, float] = {
     "conclusion": 1.35,
@@ -64,6 +68,19 @@ _SECTION_WEIGHTS: dict[str, float] = {
 }
 
 _NEGATION_CUES = {"not", "never", "no", "neither", "nor", "barely", "hardly", "without", "failed", "fails", "cannot", "unable"}
+
+ALGORITHM_VERSION = "nutshell-extractive-v2"
+SUPPORTED_ANALYSIS_MODES = {"general", "academic", "executive", "technical", "study", "news"}
+_MODE_CUES: dict[str, re.Pattern[str]] = {
+    "general": re.compile(r"\b(?:main|central|overall|key|result|finding|conclusion|because|therefore)\b", re.I),
+    "academic": re.compile(r"\b(?:research question|hypothesis|evidence|findings?|results?|conclusion|implications?|significant|significance)\b", re.I),
+    "executive": re.compile(r"\b(?:decision|recommend(?:s|ed|ation)?|risk|cost|revenue|impact|action|next step|outcome|priority)\b", re.I),
+    "technical": re.compile(r"\b(?:architecture|architectures|system|implementation|parameter|constraint|latency|throughput|performance|failure|protocol|algorithm|cloud)\b", re.I),
+    "study": re.compile(r"\b(?:defines?|definition|concept|principle|means|refers to|relationship|causes?|key idea|demonstrates?)\b", re.I),
+    "news": re.compile(r"\b(?:announced|reported|according to|officials?|company|government|today|yesterday|on \w+ \d{1,2}|\d{4})\b", re.I),
+}
+_QUALIFIER_CUES = re.compile(r"\b(?:not|never|no|neither|nor|failed|without|may|might|could|possibly|likely|unlikely|approximately|about|at least|up to|only|statistically significant|not significant)\b", re.I)
+_NUMBER_CUES = re.compile(r"(?:\b\d+(?:\.\d+)?\s*(?:%|percent|percentage points|years?|months?|days?|participants?|patients?|cases?|units?|mg|kg|km|\$|million|billion)?\b|\b(?:19|20)\d{2}\b)", re.I)
 
 
 def _is_invalid_candidate(sentence: str) -> bool:
@@ -271,23 +288,36 @@ def generate_nutshell(
     text: str = "",
     file_path: str = "",
     preprocessing_options: PreprocessingOptions | None = None,
+    analysis_mode: str = "general",
+    primary_summary_word_count: int = 0,
 ) -> dict[str, Any]:
     options = preprocessing_options or PreprocessingOptions()
     source_doc = load_source_document(text=text, file_path=file_path)
     raw_text = source_doc.raw_text
 
     if not raw_text.strip():
-        raise ValueError("No readable content provided.")
+        return {"status": "insufficient_content", "reason": "empty_source", "nutshell": "", "word_count": 0, "source_word_count": 0, "primary_summary_word_count": max(0, int(primary_summary_word_count)), "compression_ratio": 0.0, "analysis_mode": _normalize_analysis_mode(analysis_mode), "format": "paragraph", "algorithm_version": ALGORITHM_VERSION}
+
+    primary_words = max(0, int(primary_summary_word_count))
+    if primary_words and primary_words <= 20:
+        return {"status": "not_needed", "reason": "primary_summary_already_concise", "nutshell": "", "word_count": 0, "source_word_count": len(tokenize_words(raw_text)), "primary_summary_word_count": primary_words, "compression_ratio": 0.0, "analysis_mode": _normalize_analysis_mode(analysis_mode), "format": "paragraph", "algorithm_version": ALGORITHM_VERSION}
 
     paragraphs = prepare_document_paragraphs(raw_text, options)
     if not paragraphs:
-        raise ValueError("No continuous readable text found in document.")
+        return {"status": "insufficient_content", "reason": "no_readable_content", "nutshell": "", "word_count": 0, "source_word_count": 0, "primary_summary_word_count": max(0, int(primary_summary_word_count)), "compression_ratio": 0.0, "analysis_mode": _normalize_analysis_mode(analysis_mode), "format": "paragraph", "algorithm_version": ALGORITHM_VERSION}
 
     title = detect_document_title(raw_text, source_doc.title_hint)
     sections, _counts = detect_explicit_sections(paragraphs)
 
     candidates: list[str] = []
     cand_sections: list[str] = []
+    # The title detector can mistake a complete lead sentence for a title.
+    # Keep a sentence-shaped lead available as a candidate instead of silently
+    # dropping the document's central proposition.
+    title_lead = normalize_whitespace(title)
+    if title_lead.endswith((".", "!", "?")) and not _is_invalid_candidate(title_lead):
+        candidates.append(title_lead)
+        cand_sections.append("abstract")
     for p_idx, para in enumerate(paragraphs):
         sec = sections[p_idx] if p_idx < len(sections) else "body"
         for sent in safe_sent_tokenize(para):
@@ -297,7 +327,7 @@ def generate_nutshell(
                 cand_sections.append(sec)
 
     if not candidates:
-        raise ValueError("Could not extract enough valid sentences from the document.")
+        return {"status": "insufficient_content", "reason": "no_complete_sentences", "nutshell": "", "word_count": 0, "source_word_count": len(tokenize_words(raw_text)), "primary_summary_word_count": max(0, int(primary_summary_word_count)), "compression_ratio": 0.0, "analysis_mode": _normalize_analysis_mode(analysis_mode), "format": "paragraph", "algorithm_version": ALGORITHM_VERSION}
 
     vectorizer = TfidfVectorizer(ngram_range=(1, 2), min_df=1)
     all_texts = [raw_text] + candidates
@@ -309,12 +339,13 @@ def generate_nutshell(
     if centroid_sims.max() > 0:
         centroid_sims /= centroid_sims.max()
 
+    mode = _normalize_analysis_mode(analysis_mode)
     finding_cues = re.compile(
-        r"\b(?:results?|findings?|revealed|found|indicated|concludes?|concluded|suggests?|argues?|shows?|demonstrates?|crucially|overall|significantly)\b",
+        r"\b(?:results?|findings?|revealed|found|indicated|concludes?|concluded|suggests?|argues?|shows?|demonstrates?|crucially|overall|significantly|fund(?:s|ed|ing)?|provide(?:s|d)?|deliver(?:s|ed)?|increase|decrease|raise|reduce|delay|cancel|approve|reject)\b",
         flags=re.IGNORECASE,
     )
     thesis_cues = re.compile(
-        r"\b(?:aims?|examines?|explores?|investigates?|focuses? on|purpose|essential|fundamental|key role|crucial|maintains?)\b",
+        r"\b(?:aims?|examines?|explores?|investigates?|focuses? on|purpose|essential|fundamental|key role|crucial|maintains?|enables?|provides?|allows?|supports?)\b",
         flags=re.IGNORECASE,
     )
 
@@ -332,12 +363,26 @@ def generate_nutshell(
         if is_thesis:
             score += 0.25
         if pos_ratio <= 0.25 or pos_ratio >= 0.75:
+            score += 0.04
+        if pos_ratio <= 0.10:
             score += 0.15
+
+        # Preserve central facts and meaning-changing qualifiers through compression.
+        if _NUMBER_CUES.search(cand):
+            score += 0.22
+        if _QUALIFIER_CUES.search(cand):
+            score += 0.42
+        if _QUALIFIER_CUES.search(cand) and finding_cues.search(cand):
+            score += 0.38
+        if _MODE_CUES[mode].search(cand):
+            score += 0.48
 
         sec_name = cand_sections[idx].lower() if idx < len(cand_sections) else "body"
         sec_weight = _SECTION_WEIGHTS.get(sec_name, 1.0)
         score *= sec_weight
         if _METHODOLOGY_CUES.search(cand):
+            score *= 0.35
+        if _LOW_PRIORITY_CUES.search(cand):
             score *= 0.35
 
         scored_candidates.append({
@@ -359,53 +404,74 @@ def generate_nutshell(
     if early_thesis:
         best_thesis = early_thesis
 
-    if re.search(r"\b(?:brand|logo|audience|tone|personality|platform|identity|visual|campaign|marketing|strategy)\b", raw_text, re.IGNORECASE):
-        brand_thesis = next(
-            (
-                item["sentence"]
-                for item in scored_candidates
-                if item["section"] in {"abstract", "introduction", "body"} and re.search(r"\b(?:brand|logo|audience|tone|personality|platform|identity|visual|campaign|marketing|strategy)\b", item["sentence"], re.IGNORECASE)
-            ),
-            None,
-        )
-        if brand_thesis:
-            best_thesis = brand_thesis
-
     best_finding = next(
         (item["sentence"] for item in scored_candidates if (item["is_finding"] or item["section"] in {"conclusion", "results", "findings"}) and item["sentence"] != best_thesis),
         None,
     )
 
-    target_range = _detect_target_word_range(raw_text)
-    supporting_candidates = _select_diverse_summary_candidates(scored_candidates)
-    if best_finding and best_finding not in supporting_candidates:
-        supporting_candidates.insert(0, best_finding)
+    source_word_count = len(tokenize_words(raw_text))
+    density = min(1.0, (len(set(re.findall(r"\b\d+(?:\.\d+)?%?\b", raw_text))) + len(re.findall(r"\b(?:however|although|because|therefore|resulted|increased|decreased|significant)\b", raw_text, re.I))) / 16)
+    category_factor = 1.12 if mode in {"academic", "technical"} else (0.92 if mode == "executive" else 1.0)
+    target_words = min(50, max(36, round(source_word_count * (0.14 + 0.04 * density) * category_factor)))
+    if source_word_count <= 40:
+        target_words = max(8, min(target_words, round(source_word_count * 0.65)))
+    if primary_words:
+        target_words = max(8, min(target_words, primary_words - 1))
 
-    if target_range == (80, 160):
-        brand_candidates = [
-            item["sentence"]
-            for item in sorted(scored_candidates, key=lambda item: item["pos_ratio"])
-            if re.search(r"\b(?:logo|palette|identity|tone|personality|audience|platform|visual|typography|voice|lifestyle|engagement)\b", item["sentence"], re.IGNORECASE)
-        ]
-        supporting_candidates = list(dict.fromkeys(brand_candidates))
+    selected: list[str] = []
+    selected_signatures: set[str] = set()
+    used_words = 0
+    for item in scored_candidates:
+        sentence = normalize_whitespace(item["sentence"])
+        if item["section"] in {"references", "appendix", "literature_review"}:
+            continue
+        count = len(tokenize_words(sentence))
+        signature = re.sub(r"[^a-z0-9]+", " ", sentence.lower()).strip()
+        if not signature or signature in selected_signatures or count < 6:
+            continue
+        if used_words + count > target_words and selected:
+            continue
+        if count > 50:
+            continue
+        selected.append(sentence)
+        selected_signatures.add(signature)
+        used_words += count
+        if len(selected) >= 3:
+            break
 
-    raw_synthesis = _synthesize_conversational_nutshell(
-        thesis_cand=best_thesis,
-        supporting_candidates=supporting_candidates,
-        title=title,
-    )
+    # Meaning-changing qualifiers outrank the nominal budget when they fit
+    # within the absolute compact-output ceiling.
+    if used_words < 50 and not _QUALIFIER_CUES.search(" ".join(selected)):
+        for item in scored_candidates:
+            candidate = normalize_whitespace(item["sentence"])
+            count = len(tokenize_words(candidate))
+            if _QUALIFIER_CUES.search(candidate) and candidate not in selected and used_words + count <= 50:
+                selected.append(candidate)
+                used_words += count
+                break
 
-    ordered_sentences = [
-        item["sentence"]
-        for item in scored_candidates
-        if item["section"] not in {"methodology", "methods", "references", "appendix", "literature_review"}
-    ]
-    if not ordered_sentences:
-        ordered_sentences = [item["sentence"] for item in scored_candidates]
+    # Keep an essential cohort-size fact alongside an outcome when the source
+    # states it explicitly and the concise budget has room.
+    if used_words < 50 and not re.search(r"\b(?:\d[\d,.]*\s*(?:participants?|patients?|adults?|children|people|subjects?))\b", " ".join(selected), re.I):
+        for item in scored_candidates:
+            candidate = normalize_whitespace(item["sentence"])
+            count = len(tokenize_words(candidate))
+            if (re.search(r"\b\d[\d,.]*\s*(?:participants?|patients?|adults?|children|people|subjects?)\b", candidate, re.I)
+                    and candidate not in selected and used_words + count <= 50):
+                selected.append(candidate)
+                used_words += count
+                break
 
-    final_nutshell = _enforce_quality_gate(raw_synthesis, ordered_sentences, target_range=target_range)
-    words = final_nutshell.split()
+    if not selected:
+        return {"status": "insufficient_content", "reason": "no_complete_sentence_fits_meaningful_budget", "nutshell": "", "word_count": 0, "source_word_count": source_word_count, "primary_summary_word_count": primary_words, "compression_ratio": 0.0, "analysis_mode": mode, "format": "paragraph", "algorithm_version": ALGORITHM_VERSION}
+
+    final_nutshell = normalize_whitespace(" ".join(selected))
+    words = tokenize_words(final_nutshell)
     sentences = safe_sent_tokenize(final_nutshell)
+    if not final_nutshell or re.search(r"<\s*/?\s*[a-z][^>]*>", final_nutshell, re.I) or len(words) >= source_word_count:
+        return {"status": "insufficient_content", "reason": "quality_validation_failed", "nutshell": "", "word_count": 0, "source_word_count": source_word_count, "primary_summary_word_count": primary_words, "compression_ratio": 0.0, "analysis_mode": mode, "format": "paragraph", "algorithm_version": ALGORITHM_VERSION}
+    if primary_words and len(words) >= primary_words:
+        return {"status": "not_needed", "reason": "not_shorter_than_primary_summary", "nutshell": "", "word_count": 0, "source_word_count": source_word_count, "primary_summary_word_count": primary_words, "compression_ratio": 0.0, "analysis_mode": mode, "format": "paragraph", "algorithm_version": ALGORITHM_VERSION}
 
     return {
         "nutshell": final_nutshell,
@@ -413,4 +479,16 @@ def generate_nutshell(
         "sentence_count": len(sentences),
         "title": title,
         "source_type": source_doc.source_type,
+        "status": "completed",
+        "source_word_count": source_word_count,
+        "primary_summary_word_count": primary_words,
+        "compression_ratio": round(len(words) / max(1, source_word_count), 4),
+        "analysis_mode": mode,
+        "format": "paragraph",
+        "algorithm_version": ALGORITHM_VERSION,
     }
+
+
+def _normalize_analysis_mode(value: str) -> str:
+    normalized = str(value or "general").strip().lower()
+    return normalized if normalized in SUPPORTED_ANALYSIS_MODES else "general"

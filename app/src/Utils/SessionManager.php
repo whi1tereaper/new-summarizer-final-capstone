@@ -9,6 +9,15 @@ class SessionManager
             return;
         }
 
+        $sessionName = 'LIGHT_SESSID';
+        if (function_exists('config')) {
+            $configured = config('session.name');
+            if (is_string($configured) && $configured !== '') {
+                $sessionName = $configured;
+            }
+        }
+        session_name($sessionName);
+
         ini_set('session.cookie_httponly', '1');
         ini_set('session.cookie_samesite', 'Lax');
         ini_set('session.use_strict_mode', '1');

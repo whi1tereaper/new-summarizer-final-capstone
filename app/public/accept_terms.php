@@ -55,16 +55,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $errorMessage === '') {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accept Terms and Conditions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <title>Accept Terms and Conditions — LIGHT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/images/poc-neust-logo.png">
+    <link rel="stylesheet" href="assets/css/design-tokens.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/site-footer.css?v=nex-8">
 </head>
 <body>
+    <?php require __DIR__ . '/partials/site-nav.php'; ?>
     <main class="editorial-layout terms-shell">
         <nav class="terms-nav">
             <a href="auth.php?action=logout" class="js-logout-link">Logout</a>
@@ -84,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $errorMessage === '') {
             </div>
         <?php endif; ?>
 
-        <section class="terms-card">
+        <section class="terms-card terms-scroll-container" aria-label="Terms and Conditions">
             <?php foreach ($sections as $index => $section): ?>
                 <article class="terms-section">
                     <h2><?= (int)($index + 1) ?>. <?= htmlspecialchars($section['heading']) ?></h2>
@@ -96,26 +101,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $errorMessage === '') {
         <?php if ($errorMessage !== 'Unauthorized request.'): ?>
             <form method="POST" action="accept_terms.php" class="terms-actions">
                 <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
-                <label class="consent-box consent-box-standalone">
-                    <input type="checkbox" name="accept_terms" value="1" required data-terms-checkbox>
+                <div class="consent-box consent-box-standalone">
+                    <input type="checkbox" id="accept_terms_checkbox" name="accept_terms" value="1" required data-terms-checkbox>
                     <span class="consent-copy">
-                        I have read and agree to the Terms and Conditions.
+                        <label for="accept_terms_checkbox">I have read, understood, and agree to the Terms and Conditions.</label>
                     </span>
-                </label>
-                <button type="submit" class="btn-auth" disabled data-terms-accept>Accept and Continue</button>
-                <button type="submit" name="decline_terms" value="1" class="btn-auth btn-auth-secondary" formnovalidate>No, I Don't Accept</button>
+                </div>
+                <div class="terms-action-buttons">
+                    <button id="btn_accept_terms" type="submit" class="btn-auth" disabled data-terms-accept>Accept &amp; Continue</button>
+                    <button id="btn_decline_terms" type="button" class="btn-auth btn-auth-secondary">No, I Don't Accept</button>
+                </div>
+                <div id="decline_terms_notice" class="message message-error" role="alert" hidden>
+                    You must accept the terms to use the summarization feature.
+                </div>
             </form>
         <?php endif; ?>
     </main>
     <script src="assets/js/index.js"></script>
     <script>
-        const termsCheckbox = document.querySelector('[data-terms-checkbox]');
-        const acceptButton = document.querySelector('[data-terms-accept]');
-        if (termsCheckbox && acceptButton) {
-            termsCheckbox.addEventListener('change', () => {
+        document.addEventListener('DOMContentLoaded', () => {
+            const termsCheckbox = document.querySelector('[data-terms-checkbox]');
+            const acceptButton = document.querySelector('[data-terms-accept]');
+            if (termsCheckbox && acceptButton) {
                 acceptButton.disabled = !termsCheckbox.checked;
-            });
-        }
+                termsCheckbox.addEventListener('change', (event) => {
+                    acceptButton.disabled = !event.target.checked;
+                    acceptButton.classList.toggle('opacity-50', !event.target.checked);
+                    acceptButton.classList.toggle('cursor-not-allowed', !event.target.checked);
+                });
+            }
+            const declineButton = document.getElementById('btn_decline_terms');
+            const declineNotice = document.getElementById('decline_terms_notice');
+            if (declineButton && declineNotice) {
+                declineButton.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    declineNotice.hidden = false;
+                    declineButton.disabled = true;
+                    window.setTimeout(() => {
+                        window.location.href = 'index.php';
+                    }, 1200);
+                });
+            }
+        });
     </script>
+<?php require __DIR__ . '/partials/site-footer.php'; ?>
 </body>
 </html>

@@ -1,0 +1,43 @@
+# Environment & Secrets
+.env
+.env.*
+!.env.example
+
+# Test artifacts & debug dumps
+cookies.txt
+/h
+
+# Storage runtime artifacts (keep directories via .gitkeep)
+storage/uploads/*
+!storage/uploads/.gitkeep
+storage/audio/*
+!storage/audio/.gitkeep
+storage/logs/*
+!storage/logs/.gitkeep
+storage/tmp/*
+!storage/tmp/.gitkeep
+
+# Python cache & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+.venv*/
+venv/
+ENV/
+
+# Temporary files & logs
+*.log
+.tmp/
+scratch/
+
+# IDE & OS files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+Thumbs.db
+Desktop.ini
+.DS_Store

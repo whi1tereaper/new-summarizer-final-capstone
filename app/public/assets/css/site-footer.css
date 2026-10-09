@@ -1,0 +1,311 @@
+/* ====================================================================
+   site-footer.css – Shared Editorial Footer (LIGHT Aesthetic)
+   NexStudio-style minimalist typography, open 3-column metadata,
+   generous uppercase wordmark, fine hairlines, and purple hover accents.
+   Fully scoped and self-contained to render identically on all pages.
+   ==================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap');
+
+/* Display font preloads / definitions */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('../fonts/satoshi-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('../fonts/satoshi-900.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Universal Footer Surface ────────────────────────────────────── */
+.nex-footer,
+.site-footer {
+  background: #EEEDEA !important;
+  color: #080808 !important;
+  border-top: 1px solid rgba(8, 8, 8, 0.14) !important;
+  padding: clamp(64px, 8vw, 112px) clamp(24px, 4vw, 64px) 36px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  font-family: 'Outfit', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+.nex-footer *,
+.site-footer * {
+  box-sizing: border-box;
+}
+
+/* ── Inner Constrained Container ─────────────────────────────────── */
+.nex-footer__inner,
+.site-footer__inner {
+  max-width: none !important;
+  margin: 0 !important;
+  width: 100% !important;
+  padding: 0 !important;
+  display: block !important;
+}
+
+/* ── 3-Column Editorial Grid ─────────────────────────────────────── */
+.nex-footer__grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.8fr) repeat(2, minmax(0, 1fr)) !important;
+  gap: clamp(32px, 6vw, 112px) !important;
+  align-items: start !important;
+}
+
+@media (max-width: 860px) {
+  .nex-footer__grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+}
+
+.nex-footer__col {
+  display: flex !important;
+  flex-direction: column !important;
+  min-width: 0 !important;
+}
+
+/* ── Column Headers (Clean hairline divider ABOVE title) ─────────── */
+.nex-footer__col-head {
+  border-top: 1px solid rgba(8, 8, 8, 0.14) !important;
+  border-bottom: none !important;
+  padding-top: 14px !important;
+  padding-bottom: 0 !important;
+  margin-bottom: 22px !important;
+}
+
+.nex-footer__col-title {
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif !important;
+  font-size: 0.6875rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: rgba(8, 8, 8, 0.45) !important;
+  display: block !important;
+  line-height: 1.2 !important;
+}
+
+/* ── Column 1: Email & Tagline ───────────────────────────────────── */
+.nex-footer__email {
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif !important;
+  font-size: clamp(1.0625rem, 1.35vw, 1.375rem) !important;
+  font-weight: 600 !important;
+  color: #080808 !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  letter-spacing: -0.01em !important;
+  margin-bottom: 20px !important;
+  transition: color 200ms ease, transform 200ms ease !important;
+}
+
+.nex-footer__email:hover,
+.nex-footer__email:focus-visible {
+  color: #7F00FF !important;
+  transform: translateX(4px) !important;
+  outline: none !important;
+}
+
+.nex-footer__tagline {
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif !important;
+  font-size: clamp(1.125rem, 1.45vw, 1.375rem) !important;
+  font-weight: 500 !important;
+  line-height: 1.4 !important;
+  color: rgba(8, 8, 8, 0.86) !important;
+  max-width: 500px !important;
+  margin: 0 !important;
+}
+
+.nex-footer__tagline strong {
+  font-weight: 800 !important;
+  color: #7F00FF !important;
+}
+
+/* ── Column 2 & 3: Link Lists (Never bulleted) ───────────────────── */
+.nex-footer__links {
+  list-style: none !important;
+  list-style-type: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+}
+
+.nex-footer__links li {
+  list-style: none !important;
+  list-style-type: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.nex-footer__link {
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif !important;
+  font-size: 0.9375rem !important;
+  font-weight: 500 !important;
+  color: #080808 !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  min-height: 28px !important;
+  transition: color 200ms ease, transform 200ms ease !important;
+}
+
+.nex-footer__link:hover,
+.nex-footer__link:focus-visible {
+  color: #7F00FF !important;
+  transform: translateX(4px) !important;
+  outline: none !important;
+}
+
+/* ── Giant Brand Typography ("LIGHT") ────────────────────────────── */
+.nex-footer__brand-wrap {
+  margin-top: clamp(48px, 6vw, 96px) !important;
+  margin-bottom: clamp(28px, 4vw, 48px) !important;
+  line-height: 0.8 !important;
+  overflow: hidden !important;
+  text-align: left !important;
+}
+
+.nex-footer__giant-brand,
+#footer-light-brand {
+  display: inline-block !important;
+  width: -moz-fit-content !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  position: relative !important;
+  font-family: 'Satoshi', 'Outfit', 'Inter', system-ui, -apple-system, sans-serif !important;
+  font-size: clamp(5.5rem, 24vw, 24rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.05em !important;
+  line-height: 0.8 !important;
+  text-transform: uppercase !important;
+  color: #080808 !important;
+  cursor: default !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  isolation: isolate !important;
+  touch-action: pan-y !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  /* Custom property defaults for spring / mesh text physics */
+  --mesh-origin-x: 50%;
+  --mesh-origin-y: 50%;
+  --mesh-tx: 0px;
+  --mesh-ty: 0px;
+  --mesh-scale-x: 1;
+  --mesh-scale-y: 1;
+  --mesh-skew-x: 0deg;
+  --mesh-skew-y: 0deg;
+  --mesh-cx: 0px;
+  --mesh-cy: 0px;
+  --mesh-ca: 0;
+
+  transform-origin: var(--mesh-origin-x) var(--mesh-origin-y);
+  -webkit-transform-origin: var(--mesh-origin-x) var(--mesh-origin-y);
+  transform: translate3d(var(--mesh-tx), var(--mesh-ty), 0)
+             scale(var(--mesh-scale-x), var(--mesh-scale-y))
+             skew(var(--mesh-skew-x), var(--mesh-skew-y));
+  -webkit-transform: translate3d(var(--mesh-tx), var(--mesh-ty), 0)
+                     scale(var(--mesh-scale-x), var(--mesh-scale-y))
+                     skew(var(--mesh-skew-x), var(--mesh-skew-y));
+  will-change: transform;
+}
+
+/* Individual letter spans for localized spring hover deformation */
+.nex-footer__giant-brand .mesh-letter,
+#footer-light-brand .mesh-letter {
+  display: inline-block !important;
+  position: relative !important;
+  will-change: transform;
+  transform-origin: 50% 65%;
+  -webkit-transform-origin: 50% 65%;
+
+  --letter-dx: 0px;
+  --letter-dy: 0px;
+  --letter-scale: 1;
+  --letter-skew: 0deg;
+
+  transform: translate3d(var(--letter-dx), var(--letter-dy), 0)
+             scale(var(--letter-scale))
+             skewX(var(--letter-skew));
+  -webkit-transform: translate3d(var(--letter-dx), var(--letter-dy), 0)
+                     scale(var(--letter-scale))
+                     skewX(var(--letter-skew));
+}
+
+.nex-footer__giant-brand::before,
+.nex-footer__giant-brand::after,
+#footer-light-brand::before,
+#footer-light-brand::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* ── Bottom Bar: Copyright & Back To Top ─────────────────────────── */
+.nex-footer__bottom {
+  border-top: 1px solid rgba(8, 8, 8, 0.14) !important;
+  padding-top: 24px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 16px !important;
+  flex-wrap: wrap !important;
+}
+
+.nex-footer__copyright {
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif !important;
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  color: rgba(8, 8, 8, 0.45) !important;
+  margin: 0 !important;
+  letter-spacing: 0.02em !important;
+}
+
+.nex-footer__back {
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #080808 !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  transition: color 200ms ease, transform 200ms ease !important;
+  cursor: pointer !important;
+}
+
+.nex-footer__back:hover,
+.nex-footer__back:focus-visible {
+  color: #7F00FF !important;
+  transform: translateY(-2px) !important;
+  outline: none !important;
+}
+
+/* ── Accessibility & Reduced Motion ──────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .nex-footer__email,
+  .nex-footer__link,
+  .nex-footer__back {
+    transition: none !important;
+    transform: none !important;
+  }
+  .nex-footer__giant-brand,
+  #footer-light-brand,
+  .nex-footer__giant-brand .mesh-letter,
+  #footer-light-brand .mesh-letter {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}

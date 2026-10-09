@@ -40,6 +40,7 @@ if (
 $existingRating = null;
 $existingFeedback = null;
 $ratingStats = ['avg' => null, 'count' => 0];
+$summaryComments = [];
 $csrfToken = generateCsrfToken();
 $currentUserName = $_SESSION['username'] ?? '';
 $currentUserEmail = $_SESSION['email'] ?? '';
@@ -59,23 +60,35 @@ $overallSummaryBullets = [];
 $paragraphSummaries = [];
 $readabilityStats = [];
 $sourceMetadata = [];
+$documentAnalysis = [];
+$synthesisMetadata = [];
+$factValidationMetadata = [];
+$retrievalMetadata = [];
+$evidenceItems = [];
+$coverageItems = [];
 $excludedSections = [];
 $summaryFormatLabel = '';
 $summaryLengthLabel = '';
+$summaryDepthLabel = '';
+$analysisModeLabel = '';
 $summaryOutputHeading = '';
+$structuredSummary = [];
+$validationPassed = true;
+$validationNotes = [];
 
 if (!isset($error)) {
     $existingRating = FeedbackHandler::getFeedbackForViewer($id, $userId, $guestToken);
     $existingFeedback = FeedbackHandler::getFullFeedbackForViewer($id, $userId, $guestToken);
-    
+
     if ($existingFeedback) {
         $currentUserName = $existingFeedback['name'] ?? $currentUserName;
         $currentUserEmail = $existingFeedback['email'] ?? $currentUserEmail;
     }
-    
+
     $ratingStats = FeedbackHandler::getSummaryRatingStats($id);
+    $summaryComments = FeedbackHandler::getCommentsForSummary($id);
     $summaryStatus = is_array($summaryData) ? ($summaryData['status'] ?? 'completed') : 'completed';
-    
+
     $storedSummaryStyle = $summaryData['summary_style'] ?? 'standard_paragraph';
     if (
         is_string($storedSummaryStyle)
@@ -89,25 +102,52 @@ if (!isset($error)) {
     }
     $summaryFormatMap = [
         'standard_paragraph' => 'Paragraph Summary',
-        'bullet_points' => 'Bullet Points',
-        'hybrid' => 'Hybrid',
-        'executive_summary' => 'Executive Summary',
-        'academic_summary' => 'Academic Summary',
-        'simple_summary' => 'Simple Summary',
-        'technical_summary' => 'Technical Summary',
-        'news_summary' => 'News / Events Summary',
+        'bullet_points'      => 'Bullet Points',
+        'hybrid'             => 'Hybrid',
+        'executive_summary'  => 'Executive Summary',
+        'academic_summary'   => 'Academic Summary',
+        'simple_summary'     => 'Simple Summary',
+        'technical_summary'  => 'Technical Summary',
+        'news_summary'       => 'News / Events Summary',
     ];
     $summaryFormatLabel = $summaryFormatMap[$summaryRenderStyle] ?? 'Paragraph Summary';
-    $summaryOutputHeading = $summaryRenderStyle === 'executive_summary'
-        ? 'Executive Summary'
-        : ($summaryRenderStyle === 'bullet_points' ? 'Key Points Summary' : 'Overall Summary');
+    $storedOutputFormat = strtolower((string)($summaryData['output_format'] ?? ''));
     $storedSummary = (string)($summaryData['generated_summary'] ?? '');
     $plainSummaryText = Formatter::toOverallSummaryTextFromStoredSummary($storedSummary);
     $summaryOverview = Formatter::extractOverviewFromStoredSummary($storedSummary);
     $profileData = Formatter::extractProfileDataFromStoredSummary($storedSummary);
+    $storedOutputFormat = strtolower((string)($profileData['output_format'] ?? $storedOutputFormat));
+    $summaryFormatLabel = [
+        'paragraph' => 'Paragraph Summary',
+        'bullets' => 'Bullet Points',
+        'hybrid' => 'Hybrid',
+        'structured' => 'Structured Sections',
+    ][$storedOutputFormat] ?? $summaryFormatLabel;
+    if (in_array($storedOutputFormat, ['paragraph', 'bullets', 'hybrid', 'structured'], true)) {
+        $summaryRenderStyle = [
+            'paragraph' => 'standard_paragraph',
+            'bullets' => 'bullet_points',
+            'hybrid' => 'hybrid',
+            'structured' => 'structured',
+        ][$storedOutputFormat];
+    }
+    $summaryOutputHeading = $summaryRenderStyle === 'structured'
+        ? 'Structured Summary'
+        : ($summaryRenderStyle === 'executive_summary'
+        ? 'Executive Summary'
+        : ($summaryRenderStyle === 'bullet_points' ? 'Key Points Summary' : 'Overall Summary'));
     $profileLabel = $profileData['profile_label'] ?? '';
+    $analysisModeLabels = [
+        'general' => 'General',
+        'academic' => 'Academic / Research',
+        'executive' => 'Executive',
+        'study' => 'Study / Learning',
+        'technical' => 'Technical',
+        'news' => 'News / Events',
+    ];
+    $analysisModeLabel = $analysisModeLabels[strtolower((string)($profileData['analysis_mode'] ?? ''))] ?? $profileLabel;
     $validationPassed = $profileData['validation_passed'] ?? true;
-    $validationNotes = $profileData['validation_notes'] ?? [];
+    $validationNotes = is_array($profileData['validation_notes'] ?? null) ? $profileData['validation_notes'] : [];
     $structuredSummary = $profileData['structured_summary'] ?? [];
     $articleType = $profileData['article_type'] ?? ($summaryData['article_category'] ?? '');
     $summaryKeywords = Formatter::extractKeywordsFromStoredSummary($storedSummary);
@@ -124,391 +164,622 @@ if (!isset($error)) {
     $paragraphSummaries = Formatter::extractParagraphSummariesFromStoredSummary($storedSummary);
     $readabilityStats = Formatter::extractReadabilityFromStoredSummary($storedSummary);
     $sourceMetadata = Formatter::extractSourceMetadataFromStoredSummary($storedSummary);
-    $storedSummaryLength = $summaryData['summary_length'] ?? ($sourceMetadata['summary_length'] ?? '');
+    $documentAnalysis = is_array($sourceMetadata['document_analysis'] ?? null)
+        ? $sourceMetadata['document_analysis']
+        : [];
+    $synthesisMetadata = is_array($sourceMetadata['synthesis'] ?? null) ? $sourceMetadata['synthesis'] : [];
+    $factValidationMetadata = is_array($sourceMetadata['fact_validation'] ?? null) ? $sourceMetadata['fact_validation'] : [];
+    if (($factValidationMetadata['status'] ?? '') === 'checked_with_warnings') {
+        $factIssueCount = count($factValidationMetadata['issues'] ?? []);
+        $flaggedSentenceNumbers = array_values(array_unique(array_map(
+            static fn(array $issue): int => (int)($issue['summary_sentence_id'] ?? -1) + 1,
+            array_filter($factValidationMetadata['issues'] ?? [], static fn($issue): bool => is_array($issue) && isset($issue['summary_sentence_id'])
+        ))));
+        $sentenceNote = $flaggedSentenceNumbers !== []
+            ? ' Summary sentence(s): ' . implode(', ', $flaggedSentenceNumbers) . '.'
+            : '';
+        $validationNotes[] = 'Literal fact-marker checks raised ' . $factIssueCount . ' heuristic warning(s).' . $sentenceNote . ' These checks do not measure factual accuracy.';
+    }
+$validValidationNotes = array_values(array_filter(
+    $validationNotes,
+    static fn($note): bool => is_string($note) && trim($note) !== ''
+));
+$visibleValidationNotes = array_values(array_filter(
+    $validValidationNotes,
+    static fn(string $note): bool => stripos($note, 'Faithfulness warning: sentence start not found in source:') !== 0
+));
+// Hide the enclosing warning panel too when that noisy prefix check was its only content.
+$showValidationNotice = $visibleValidationNotes !== [] || (!$validationPassed && $validValidationNotes === []);
+    $retrievalMetadata = Formatter::extractRetrievalFromStoredSummary($storedSummary);
+    $evidenceItems = Formatter::extractEvidenceFromStoredSummary($storedSummary);
+    $coverageItems = Formatter::extractCoverageFromStoredSummary($storedSummary);
+    $storedSummaryLength = $summaryData['summary_depth']
+        ?? ($sourceMetadata['summary_depth'] ?? ($summaryData['summary_length'] ?? ($sourceMetadata['summary_length'] ?? '')));
     $summaryLengthLabels = [
-        'brief' => 'Brief',
-        'short' => 'Short',
-        'balanced' => 'Balanced',
-        'detailed' => 'Detailed',
+        'brief'         => 'Brief',
+        'short'         => 'Short',
+        'balanced'      => 'Balanced',
+        'detailed'      => 'Detailed',
         'comprehensive' => 'Comprehensive',
     ];
     $summaryLengthLabel = $summaryLengthLabels[strtolower((string)$storedSummaryLength)] ?? '';
+    $summaryDepthLabel = $summaryLengthLabel;
     $excludedSections = Formatter::extractStringListFieldPublic($storedSummary, 'excluded_sections');
     $userFeedbackHistory = FeedbackHandler::getFeedbackHistoryForViewer($userId, $guestToken, 5);
     $canUseSummaryActions = !in_array($summaryStatus, ['pending', 'processing', 'failed'], true)
         && $plainSummaryText !== '';
+
+    // Fix slot mapping: ensure Purpose doesn't mirror Conclusion, and Conclusion isn't a Key Takeaway
+    if ($structuredSummary !== []) {
+        $correctedStructured = [];
+        foreach ($structuredSummary as $block) {
+            $bLabel = trim((string)($block['label'] ?? ''));
+            $bText  = trim((string)($block['text'] ?? ''));
+            if ($bLabel === '' || $bText === '') continue;
+
+            if (strcasecmp($bLabel, 'Purpose') === 0 && $summaryConclusion !== '' && $bText === $summaryConclusion) {
+                $candidatePurpose = !empty($summaryOverview[0]) ? $summaryOverview[0] : (!empty($paragraphSummaries[0]['summary']) ? $paragraphSummaries[0]['summary'] : '');
+                if ($candidatePurpose !== '' && $candidatePurpose !== $summaryConclusion) {
+                    $bText = $candidatePurpose;
+                }
+            }
+
+            if (strcasecmp($bLabel, 'Conclusion') === 0 && $summaryConclusion !== '' && $bText !== $summaryConclusion) {
+                $bText = $summaryConclusion;
+            }
+
+            $correctedStructured[] = [
+                'label' => $bLabel,
+                'text'  => $bText,
+            ];
+        }
+        $structuredSummary = $correctedStructured;
+    }
 }
+
+$displayArticleTitle = trim((string)($summaryData['article_title'] ?? 'Document Summary'));
+$sourceHeading = trim((string)($sourceMetadata['title'] ?? ''));
+if (
+    $displayArticleTitle !== ''
+    && $sourceHeading !== ''
+    && mb_strlen($sourceHeading, 'UTF-8') > mb_strlen($displayArticleTitle, 'UTF-8')
+    && mb_stripos($sourceHeading, $displayArticleTitle, 0, 'UTF-8') === 0
+) {
+    $remainingHeading = mb_substr($sourceHeading, mb_strlen($displayArticleTitle, 'UTF-8'), null, 'UTF-8');
+    $endsAtCutWord = preg_match('/\b(?:of|and|the|for|in|to|with|by|on|at|from|about)$/iu', $displayArticleTitle) === 1;
+    if ($endsAtCutWord && preg_match('/^\s/u', $remainingHeading) === 1) {
+        // Older summaries stored a 12-word title fragment while retaining the full heading here.
+        $displayArticleTitle = $sourceHeading;
+    }
+}
+$documentTitle = isset($error) ? 'Error' : htmlspecialchars($displayArticleTitle, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+$hasAnalysis = (($structuredSummary !== [] && $summaryRenderStyle !== 'structured') || $paragraphSummaries !== []);
+$hasTerms = ($summaryImportantTerms !== [] || $summaryKeywords !== []);
+$hasSource = !isset($error) && ($summaryData['original_text'] ?? '') !== '';
+$hasReadability = isset($readabilityStats['compression_percent']) || isset($readabilityStats['estimated_reading_time_minutes']);
+$hasEvidence = $evidenceItems !== [];
+$hasCoverage = $coverageItems !== [];
+$takeaways = $summaryKeyPoints !== [] ? $summaryKeyPoints : ($overallSummaryBullets !== [] && $summaryRenderStyle !== 'bullet_points' ? $overallSummaryBullets : []);
+$hasContext = $takeaways !== [] || $summaryConclusion !== '' || $hasAnalysis || $summaryKeywords !== [];
+$hasSourceDetails = $hasSource || $hasEvidence || $hasCoverage;
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars(is_array($summaryData) ? ($summaryData['article_title'] ?? 'Document Summary') : 'Document Summary'); ?></title>
-    <!-- Tailwind via Play CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Alpine.js -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        [x-cloak] { display: none !important; }
-    </style>
+    <title><?= $documentTitle ?> - Summary</title>
+    <meta name="description" content="AI-generated document analysis and summary.">
+    <link rel="preload" href="assets/fonts/satoshi-900.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/satoshi-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@600;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/design-tokens.css">
+    <link rel="stylesheet" href="assets/css/result.css?v=<?= filemtime(__DIR__ . '/assets/css/result.css') ?>">
+    <link rel="stylesheet" href="assets/css/global-button-effects.css?v=4">
+    <link rel="stylesheet" href="assets/css/site-footer.css?v=nex-8">
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased" x-data="{ tab: 'executive' }">
+<body class="result-page-body">
 
-<div class="min-h-screen flex flex-col">
-    <!-- Top Header & Action Bar -->
-    <header class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm px-6 py-4 flex items-center justify-between">
-        <div class="flex items-center space-x-4">
-            <a href="summarizer.php" class="text-slate-500 hover:text-slate-800 font-semibold transition-colors flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-                </svg>
-                BACK
-            </a>
-            <div class="h-6 w-px bg-slate-300"></div>
-            <h1 class="text-lg font-bold text-slate-900 line-clamp-1">
-                <?= isset($error) ? 'Error' : htmlspecialchars($summaryData['article_title'] ?? 'Document Summary'); ?>
-            </h1>
-        </div>
-        
-        <?php if (!isset($error) && $canUseSummaryActions): ?>
-        <div class="flex items-center space-x-3">
-            <button id="copy-summary-btn" class="px-4 py-2 bg-white border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 font-semibold text-sm transition-colors shadow-sm flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 012 2v2z" /></svg>
-                Copy
-            </button>
-            <button id="export-pdf-btn" class="px-4 py-2 bg-white border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 font-semibold text-sm transition-colors shadow-sm flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                PDF
-            </button>
-            <?php if ($canUseAudio): ?>
-            <button id="play-audio-btn" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-semibold text-sm transition-colors shadow-sm flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
-                Listen
-            </button>
-            <?php endif; ?>
-        </div>
-        <?php endif; ?>
-    </header>
+<div class="result-shell">
 
-    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full"
+    <!-- ═══════════════════════════════════════
+         RETURN TO WORKSPACE
+    ═══════════════════════════════════════ -->
+    <div class="result-sticky-header">
+        <header class="result-topbar" role="banner">
+            <div class="result-topbar__left">
+                <a href="summarizer.php" class="result-back-btn global-button-effect" aria-label="Back to summarizer">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                    <span>New summary</span>
+                </a>
+                <span class="result-topbar__sep" aria-hidden="true"></span>
+                <span class="result-topbar__label">Summary</span>
+            </div>
+        </header>
+
+
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         MAIN CONTENT - SINGLE CONTINUOUS PAGE
+    ═══════════════════════════════════════ -->
+    <main class="result-content"
           id="summary-page"
           data-summary-id="<?= (int)$id ?>"
           data-summary-text="<?= htmlspecialchars($plainSummaryText, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>"
           data-csrf-token="<?= htmlspecialchars($csrfToken, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>"
           data-current-rating="<?= $existingRating !== null ? (int)$existingRating : '' ?>"
-          data-share-token="<?= htmlspecialchars((string)($summaryData['share_token'] ?? ''), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>"
-    >
+          data-share-token="<?= htmlspecialchars((string)($summaryData['share_token'] ?? ''), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>">
+
         <?php if (isset($error)): ?>
-            <div class="bg-red-50 border border-red-200 text-red-800 rounded-xl p-6 shadow-sm max-w-2xl mx-auto mt-12 text-center">
-                <h2 class="text-xl font-bold mb-4">Notification</h2>
-                <p class="mb-6"><?= htmlspecialchars($error); ?></p>
-                <a href="index.php" class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 font-semibold transition-colors">Return Home</a>
+        <!-- ── Error state ─────────────────────────────── -->
+        <div class="result-error-state">
+            <div class="result-error-box">
+                <p class="result-error-eyebrow">Unable to load</p>
+                <h1 class="result-error-title">Something went wrong</h1>
+                <p class="result-error-msg"><?= htmlspecialchars($error) ?></p>
+                <a href="index.php" class="result-error-link">Return to home</a>
             </div>
+        </div>
+
         <?php else: ?>
-            <div class="grid grid-cols-12 gap-8">
-                
-                <!-- LEFT PANEL (Main Content) -->
-                <div class="col-span-12 lg:col-span-8 space-y-6">
-                    
-                    <!-- Tabs Navigation -->
-                    <div class="border-b border-slate-200">
-                        <nav class="-mb-px flex space-x-8" aria-label="Tabs">
-                            <button @click="tab = 'executive'" 
-                                    :class="tab === 'executive' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'"
-                                    class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">
-                                Executive View
-                            </button>
-                            <button @click="tab = 'structured'" 
-                                    :class="tab === 'structured' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'"
-                                    class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">
-                                Structured Breakdown
-                            </button>
-                            <button @click="tab = 'narrative'" 
-                                    :class="tab === 'narrative' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'"
-                                    class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">
-                                Full Narrative
-                            </button>
-                        </nav>
-                    </div>
 
-                    <!-- Tab Content: Executive View -->
-                    <div x-show="tab === 'executive'" x-cloak class="space-y-6">
-                        <!-- Overview -->
-                        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                            <div class="px-6 py-4 border-b border-slate-100 bg-slate-50">
-                                <h3 class="text-lg font-semibold text-slate-800">Executive Overview</h3>
-                            </div>
-                            <div class="p-6 prose prose-slate max-w-none">
-                                <?php if ($summaryOverview !== []): ?>
-                                    <?php foreach ($summaryOverview as $overviewSentence): ?>
-                                        <p><?= htmlspecialchars($overviewSentence); ?></p>
-                                    <?php endforeach; ?>
-                                <?php else: ?>
-                                    <p><?= htmlspecialchars($plainSummaryText); ?></p>
-                                <?php endif; ?>
-                            </div>
-                        </div>
+        <!-- ── Document Header ────────────────────────── -->
+        <section class="result-doc-header" aria-labelledby="doc-title">
+            <p class="result-doc-eyebrow">Your summary</p>
+            <h1 id="doc-title" class="result-doc-title">
+                <?= htmlspecialchars($displayArticleTitle !== '' ? $displayArticleTitle : 'Document Summary', ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>
+            </h1>
+            <ul class="result-summary-meta" aria-label="Summary at a glance">
+                <?php if ($summaryDepthLabel !== ''): ?><li><?= htmlspecialchars($summaryDepthLabel) ?></li><?php endif; ?>
+                <li><?= htmlspecialchars($summaryFormatLabel) ?></li>
+                <?php if (isset($readabilityStats['estimated_reading_time_minutes']) && $canUseSummaryActions): ?>
+                <li><?= max(1, (int)$readabilityStats['estimated_reading_time_minutes']) ?> min read</li>
+                <?php endif; ?>
+                <?php if ($summaryStatus === 'completed'): ?><li><a href="#result-details">Details</a></li><?php endif; ?>
+            </ul>
+        </section>
 
-                        <!-- Key Findings -->
-                        <?php if ($summaryKeyPoints !== [] || $overallSummaryBullets !== []): ?>
-                        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                            <div class="px-6 py-4 border-b border-slate-100 bg-slate-50">
-                                <h3 class="text-lg font-semibold text-slate-800">Key Findings</h3>
-                            </div>
-                            <div class="p-6">
-                                <ul class="space-y-3">
-                                    <?php 
-                                    $bulletsToRender = $summaryKeyPoints !== [] ? $summaryKeyPoints : $overallSummaryBullets;
-                                    foreach ($bulletsToRender as $point): 
-                                    ?>
-                                        <li class="flex items-start">
-                                            <svg class="h-6 w-6 text-indigo-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                                            <span class="text-slate-700"><?= htmlspecialchars($point); ?></span>
-                                        </li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            </div>
-                        </div>
-                        <?php endif; ?>
+        <?php if ($summaryStatus === 'pending' || $summaryStatus === 'processing'): ?>
+        <!-- Processing state -->
+        <div class="result-processing" data-poll-status="1">
+            <div class="result-processing__spinner" aria-hidden="true"></div>
+            <p class="result-processing__title">Analyzing document…</p>
+            <p class="result-processing__sub">This can take longer when evidence-controlled AI synthesis is selected.</p>
+        </div>
 
-                        <!-- Conclusion -->
-                        <?php if ($summaryConclusion !== ''): ?>
-                        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                            <div class="px-6 py-4 border-b border-slate-100 bg-slate-50">
-                                <h3 class="text-lg font-semibold text-slate-800">Conclusion</h3>
-                            </div>
-                            <div class="p-6 prose prose-slate max-w-none">
-                                <p><?= htmlspecialchars($summaryConclusion); ?></p>
-                            </div>
-                        </div>
-                        <?php endif; ?>
-                    </div>
+        <?php elseif ($summaryStatus === 'failed'): ?>
+        <div class="result-failed-state">
+            <p>Analysis failed. Please try re-submitting the document.</p>
+        </div>
 
-                    <!-- Tab Content: Structured Breakdown -->
-                    <div x-show="tab === 'structured'" x-cloak class="space-y-4">
-                        <?php if ($structuredSummary !== []): ?>
-                            <?php foreach ($structuredSummary as $index => $block): ?>
-                                <?php
-                                    $blockLabel = trim((string)($block['label'] ?? ''));
-                                    $blockText = trim((string)($block['text'] ?? ''));
-                                    if ($blockLabel === '' || $blockText === '') continue;
-                                ?>
-                                <details class="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden" <?= $index === 0 ? 'open' : '' ?>>
-                                    <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5 bg-slate-50 hover:bg-slate-100 transition-colors">
-                                        <div class="flex items-center gap-3">
-                                            <span class="px-2.5 py-1 rounded-md bg-indigo-100 text-indigo-700 text-xs font-bold uppercase tracking-wider">
-                                                Section <?= $index + 1 ?>
-                                            </span>
-                                            <span class="text-slate-800 text-lg font-semibold"><?= htmlspecialchars($blockLabel) ?></span>
-                                        </div>
-                                        <span class="transition group-open:rotate-180">
-                                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
-                                        </span>
-                                    </summary>
-                                    <div class="text-slate-700 p-6 border-t border-slate-100 bg-white">
-                                        <p class="leading-relaxed"><?= htmlspecialchars($blockText) ?></p>
-                                    </div>
-                                </details>
-                            <?php endforeach; ?>
-                        <?php elseif ($paragraphSummaries !== []): ?>
-                            <?php foreach ($paragraphSummaries as $index => $paraSummary): ?>
-                                <details class="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden" <?= $index === 0 ? 'open' : '' ?>>
-                                    <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5 bg-slate-50 hover:bg-slate-100 transition-colors">
-                                        <div class="flex items-center gap-3">
-                                            <span class="px-2.5 py-1 rounded-md bg-indigo-100 text-indigo-700 text-xs font-bold uppercase tracking-wider">
-                                                Para <?= (int)$paraSummary['paragraph_number'] ?>
-                                            </span>
-                                            <span class="text-slate-800 font-semibold"><?= htmlspecialchars($paraSummary['purpose']) ?></span>
-                                        </div>
-                                        <span class="transition group-open:rotate-180">
-                                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
-                                        </span>
-                                    </summary>
-                                    <div class="text-slate-700 p-6 border-t border-slate-100 bg-white">
-                                        <p class="leading-relaxed"><?= htmlspecialchars($paraSummary['summary']) ?></p>
-                                    </div>
-                                </details>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <div class="p-8 text-center bg-white rounded-xl shadow-sm border border-slate-200 text-slate-500">
-                                No structured breakdown available for this document.
-                            </div>
-                        <?php endif; ?>
-                    </div>
+        <?php else: ?>
 
-                    <!-- Tab Content: Full Narrative -->
-                    <div x-show="tab === 'narrative'" x-cloak class="space-y-6">
-                        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                            <div class="px-6 py-4 border-b border-slate-100 bg-slate-50">
-                                <h3 class="text-lg font-semibold text-slate-800"><?= htmlspecialchars($summaryOutputHeading) ?></h3>
-                            </div>
-                            <div class="p-8 prose prose-slate prose-lg max-w-none text-slate-800 leading-relaxed" id="original-summary">
-                                <?php
-                                $isBulletStyle  = $summaryRenderStyle === 'bullet_points';
-                                $isHybridStyle  = in_array($summaryRenderStyle, ['hybrid', 'executive_summary'], true);
-                                $hasBullets = $overallSummaryBullets !== [];
-                                $hasPara    = $plainSummaryText !== '';
-                                ?>
-                                <?php if ($isBulletStyle && $hasBullets): ?>
-                                    <ul class="list-disc pl-5 space-y-2">
-                                        <?php foreach ($overallSummaryBullets as $bullet): ?>
-                                            <li><?= htmlspecialchars($bullet, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></li>
-                                        <?php endforeach; ?>
-                                    </ul>
-                                <?php elseif ($isHybridStyle && ($hasPara || $hasBullets)): ?>
-                                    <?php if ($hasPara): ?>
-                                        <p class="mb-6"><?= htmlspecialchars($plainSummaryText, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></p>
-                                    <?php endif; ?>
-                                    <?php if ($hasBullets): ?>
-                                        <p class="font-semibold mb-3"><?= $summaryRenderStyle === 'executive_summary' ? 'Key decisions and supporting points:' : 'Key supporting points:' ?></p>
-                                        <ul class="list-disc pl-5 space-y-2">
-                                            <?php foreach ($overallSummaryBullets as $bullet): ?>
-                                                <li><?= htmlspecialchars($bullet, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></li>
-                                            <?php endforeach; ?>
-                                        </ul>
-                                    <?php endif; ?>
-                                <?php elseif ($hasPara): ?>
-                                    <p><?= htmlspecialchars($plainSummaryText, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></p>
-                                <?php else: ?>
-                                    <?php
-                                    $jsonSummary = json_decode($summaryData['generated_summary'], true);
-                                    if (is_array($jsonSummary)) {
-                                        echo Formatter::toHtml($jsonSummary, $summaryRenderStyle);
-                                    } else {
-                                        echo nl2br(htmlspecialchars($summaryData['generated_summary']));
-                                    }
-                                    ?>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-slate-100 rounded-xl p-6 border border-slate-200">
-                            <h4 class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">Original Source Text</h4>
-                            <div class="prose prose-sm max-w-none text-slate-600 max-h-64 overflow-y-auto pr-4">
-                                <?= nl2br(htmlspecialchars($summaryData['original_text'] ?? '')); ?>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Audio Panel -->
-                    <div id="audio-panel" class="hidden bg-white rounded-xl shadow-sm border border-slate-200 p-6 mt-6">
-                        <h3 class="text-lg font-semibold text-slate-800 mb-4">Summary Audio</h3>
-                        <audio id="summary-audio-player" controls preload="none" class="w-full"></audio>
-                    </div>
-
-                    <!-- Feedback Widget -->
-                    <div id="feedback-widget" class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 mt-12">
-                        <div class="flex justify-between items-center mb-6">
-                            <h3 class="text-xl font-bold text-slate-800">Rate This Summary</h3>
-                            <?php if ($ratingStats['count'] > 0): ?>
-                                <span class="text-sm font-medium text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
-                                    <?= htmlspecialchars((string)$ratingStats['avg']) ?> avg &middot; <?= (int)$ratingStats['count'] ?> rating<?= $ratingStats['count'] !== 1 ? 's' : '' ?>
-                                </span>
-                            <?php endif; ?>
-                        </div>
-                        <div id="star-row" class="flex gap-2 text-3xl text-slate-300">
-                            <?php for ($s = 1; $s <= 5; $s++): ?>
-                                <button type="button" 
-                                        class="hover:text-yellow-400 transition-colors focus:outline-none <?= ($existingRating !== null && $s <= $existingRating) ? 'text-yellow-400' : '' ?>"
-                                        data-value="<?= $s ?>"
-                                        aria-label="Rate <?= $s ?> star<?= $s > 1 ? 's' : '' ?>"
-                                >&#9733;</button>
-                            <?php endfor; ?>
-                        </div>
-                        <div id="feedback-msg" class="mt-4 text-sm font-medium hidden"></div>
-                    </div>
-                </div>
-
-                <!-- RIGHT PANEL (Sticky Sidebar) -->
-                <div class="col-span-12 lg:col-span-4 relative">
-                    <div class="sticky top-24 space-y-6">
-                        
-                        <!-- Document Details Card -->
-                        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-                            <h3 class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4 pb-2 border-b border-slate-100">Document Details</h3>
-                            <dl class="space-y-4 text-sm">
-                                <div>
-                                    <dt class="text-slate-500 mb-1">Date Processed</dt>
-                                    <dd class="font-medium text-slate-900"><?= date('F d, Y', strtotime($summaryData['created_at'])) ?></dd>
-                                </div>
-                                <?php if ($articleType !== ''): ?>
-                                <div>
-                                    <dt class="text-slate-500 mb-1">Document Type</dt>
-                                    <dd class="font-medium text-slate-900 capitalize"><?= htmlspecialchars($articleType) ?></dd>
-                                </div>
-                                <?php endif; ?>
-                                <?php if (isset($readabilityStats['compression_percent'])): ?>
-                                <div>
-                                    <dt class="text-slate-500 mb-1">Compression Ratio</dt>
-                                    <dd class="font-medium text-slate-900">
-                                        <div class="flex items-center gap-2">
-                                            <div class="w-full bg-slate-200 rounded-full h-2">
-                                                <div class="bg-indigo-600 h-2 rounded-full" style="width: <?= 100 - (float)$readabilityStats['compression_percent'] ?>%"></div>
-                                            </div>
-                                            <span><?= htmlspecialchars((string)$readabilityStats['compression_percent']) ?>%</span>
-                                        </div>
-                                    </dd>
-                                </div>
-                                <?php endif; ?>
-                                <?php if (isset($readabilityStats['estimated_reading_time_minutes'])): ?>
-                                <div>
-                                    <dt class="text-slate-500 mb-1">Est. Reading Time</dt>
-                                    <dd class="font-medium text-slate-900"><?= (int)$readabilityStats['estimated_reading_time_minutes'] ?> min</dd>
-                                </div>
-                                <?php endif; ?>
-                                <?php if (isset($sourceMetadata['paragraph_count'])): ?>
-                                <div>
-                                    <dt class="text-slate-500 mb-1">Original Size</dt>
-                                    <dd class="font-medium text-slate-900"><?= number_format((int)$sourceMetadata['paragraph_count']) ?> paragraphs</dd>
-                                </div>
-                                <?php endif; ?>
-                            </dl>
-                        </div>
-
-                        <!-- Key Terms & Concepts Card -->
-                        <?php if ($summaryImportantTerms !== []): ?>
-                        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-                            <h3 class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4 pb-2 border-b border-slate-100">Key Terms & Concepts</h3>
-                            <ul class="space-y-4">
-                                <?php foreach ($summaryImportantTerms as $termEntry): 
-                                    $term = htmlspecialchars(trim((string)($termEntry['term'] ?? '')), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-                                    $meaning = htmlspecialchars(trim((string)($termEntry['meaning'] ?? '')), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-                                    if ($term === '') continue;
-                                ?>
-                                    <li class="group relative">
-                                        <div class="font-semibold text-slate-800 text-sm mb-1"><?= $term ?></div>
-                                        <?php if ($meaning !== ''): ?>
-                                            <div class="text-xs text-slate-500 leading-relaxed"><?= $meaning ?></div>
-                                        <?php endif; ?>
-                                    </li>
-                                <?php endforeach; ?>
-                            </ul>
-                            
-                            <?php if ($summaryKeywords !== []): ?>
-                            <div class="mt-6 pt-4 border-t border-slate-100">
-                                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Tags</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <?php foreach ($summaryKeywords as $keyword): ?>
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200">
-                                            <?= htmlspecialchars($keyword, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>
-                                        </span>
-                                    <?php endforeach; ?>
-                                </div>
-                            </div>
-                            <?php endif; ?>
-                        </div>
-                        <?php endif; ?>
-
-                    </div>
-                </div>
-            </div>
+        <!-- ══════════════════════════════════════════════
+             OVERVIEW SECTION
+        ══════════════════════════════════════════════ -->
+        <div class="result-reading">
+        <?php if ($showValidationNotice): ?>
+        <aside class="result-validation-notice" role="note" aria-label="Summary validation notes">
+            <strong><?= $validationPassed ? 'Review notes' : 'Validation warning' ?></strong>
+            <?php if ($visibleValidationNotes !== []): ?>
+            <ul><?php foreach ($visibleValidationNotes as $note): ?><li><?= htmlspecialchars($note, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></li><?php endforeach; ?></ul>
+            <?php else: ?>
+            <p>The summary did not pass all automated validation checks. Review it against the source before relying on it.</p>
+            <?php endif; ?>
+        </aside>
         <?php endif; ?>
-    </main>
-</div>
+        <?php if (($documentAnalysis['research_stage'] ?? '') === 'proposal' && empty($documentAnalysis['results_available'])): ?>
+        <aside class="result-validation-notice" role="note" aria-label="Research stage">
+            <strong>Proposal stage detected</strong>
+            <p>The document describes proposed research and does not provide empirical findings in its source text.</p>
+        </aside>
+        <?php endif; ?>
 
-<!-- Ensure logic for tool actions works with legacy JS by keeping IDs but styling them down if needed -->
-<script src="assets/js/result.js"></script>
+        <section class="result-section result-section--overview" aria-labelledby="section-overview-heading">
+            <div class="result-section__header">
+                <h2 class="result-section__heading" id="section-overview-heading">
+                    <?= htmlspecialchars($summaryOutputHeading) ?>
+                </h2>
+                <?php if ($hasSourceDetails): ?>
+                <a href="#result-sources" class="result-source-link">Check source</a>
+                <?php endif; ?>
+            </div>
+
+            <?php if ($canUseSummaryActions): ?>
+            <div class="result-summary-actions" role="group" aria-label="Summary actions">
+                <button id="copy-summary-btn" class="result-tool-btn result-tool-btn--primary global-button-effect" type="button" aria-label="Copy summary to clipboard">
+                            <span class="result-tool-btn__icon" aria-hidden="true">
+                                <svg class="result-tool-btn__icon-copy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                <svg class="result-tool-btn__icon-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            </span>
+                            <span class="result-tool-btn__text">Copy Summary</span>
+                        </button>
+                <button id="export-pdf-btn" class="result-tool-btn result-tool-btn--secondary global-button-effect" type="button" aria-label="Export summary as PDF">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                            <span>Save PDF</span>
+                        </button>
+                <?php if ($canUseAudio): ?>
+                <button id="play-audio-btn" class="result-tool-btn global-button-effect" type="button" aria-controls="audio-panel" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        <span class="result-tool-btn__text">Listen</span>
+                    </button>
+                <?php endif; ?>
+                <button id="translate-btn" class="result-tool-btn global-button-effect" type="button" aria-controls="translation-section" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>
+                        <span class="result-tool-btn__text">Translate to Filipino</span>
+                    </button>
+            </div>
+            <?php endif; ?>
+            <p id="summary-status" class="result-status-line" role="status" aria-live="polite"></p>
+            <div id="audio-panel" class="result-audio-panel hidden">
+                <audio id="summary-audio-player" controls preload="none" class="result-audio-player" aria-label="Summary audio player"></audio>
+            </div>
+            <div class="result-prose" id="original-summary">
+                <?php
+                $isBulletStyle = $summaryRenderStyle === 'bullet_points';
+                $isHybridStyle = in_array($summaryRenderStyle, ['hybrid', 'executive_summary'], true);
+                $isStructuredStyle = $summaryRenderStyle === 'structured';
+                $hasBullets    = $overallSummaryBullets !== [];
+                $hasPara       = $plainSummaryText !== '';
+                $hasOverview   = $summaryOverview !== [];
+                ?>
+                <?php if ($isStructuredStyle && $structuredSummary !== []): ?>
+                    <div class="result-accordion">
+                        <?php foreach ($structuredSummary as $index => $block):
+                            $blockLabel = trim((string)($block['label'] ?? ''));
+                            $blockText = trim((string)($block['text'] ?? ''));
+                            if ($blockLabel === '' || $blockText === '') continue;
+                        ?>
+                        <article class="result-accordion__item">
+                            <div class="result-accordion__summary">
+                                <span class="result-accordion__index" aria-hidden="true"><?= str_pad($index + 1, 2, '0', STR_PAD_LEFT) ?></span>
+                                <span class="result-accordion__label"><?= htmlspecialchars($blockLabel) ?></span>
+                            </div>
+                            <div class="result-accordion__body">
+                                <p><?= htmlspecialchars($blockText, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></p>
+                            </div>
+                        </article>
+                        <?php endforeach; ?>
+                    </div>
+                <?php elseif ($isBulletStyle && $hasBullets): ?>
+                    <ul class="result-prose__bullets">
+                        <?php foreach ($overallSummaryBullets as $bullet): ?>
+                            <li><?= htmlspecialchars($bullet, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php elseif ($isHybridStyle && ($hasPara || $hasBullets)): ?>
+                    <?php if ($hasPara): ?>
+                        <p><?= htmlspecialchars($plainSummaryText, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></p>
+                    <?php endif; ?>
+                    <?php if ($hasBullets): ?>
+                        <p class="result-prose__label"><?= $summaryRenderStyle === 'executive_summary' ? 'Key decisions and supporting points:' : 'Key supporting points:' ?></p>
+                        <ul class="result-prose__bullets">
+                            <?php foreach ($overallSummaryBullets as $bullet): ?>
+                                <li><?= htmlspecialchars($bullet, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
+                <?php elseif ($hasPara): ?>
+                    <p><?= htmlspecialchars($plainSummaryText, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></p>
+                <?php elseif ($hasOverview): ?>
+                    <?php foreach ($summaryOverview as $sentence): ?>
+                        <p><?= htmlspecialchars($sentence) ?></p>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <?php
+                    $jsonSummary = json_decode($summaryData['generated_summary'], true);
+                    if (is_array($jsonSummary)) {
+                        echo Formatter::toHtml($jsonSummary, $summaryRenderStyle);
+                    } else {
+                        echo nl2br(htmlspecialchars($summaryData['generated_summary']));
+                    }
+                    ?>
+                <?php endif; ?>
+            </div>
+            <div id="translation-section" class="result-translation is-hidden" aria-live="polite">
+                <h3 class="result-translation__label">Filipino translation</h3>
+                <div id="translated-text" class="result-translation__body"></div>
+            </div>
+        </section>
+        </div>
+
+        <div class="result-explore" aria-label="More about this summary">
+        <?php if ($hasContext): ?>
+        <details class="result-disclosure" id="result-context">
+            <summary class="result-disclosure__toggle">
+                <span><span class="result-disclosure__title">Key points &amp; context</span><span class="result-disclosure__hint">Takeaways, section breakdown, and keywords</span></span>
+                <svg class="result-disclosure__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m5 7.5 5 5 5-5"/></svg>
+            </summary>
+            <div class="result-disclosure__body">
+        <?php if ($takeaways !== []): ?>
+        <section class="result-section" aria-labelledby="section-takeaways-heading">
+            <div class="result-section__header">
+                <h2 class="result-section__heading" id="section-takeaways-heading">Key Takeaways</h2>
+            </div>
+            <ol class="result-takeaways" aria-label="Key takeaways">
+                <?php foreach ($takeaways as $index => $point): ?>
+                <li class="result-takeaway">
+                    <span class="result-takeaway__num" aria-hidden="true"><?= str_pad($index + 1, 2, '0', STR_PAD_LEFT) ?></span>
+                    <p class="result-takeaway__text"><?= htmlspecialchars($point) ?></p>
+                </li>
+                <?php endforeach; ?>
+            </ol>
+        </section>
+        <?php endif; ?>
+
+        <?php if ($summaryConclusion !== ''): ?>
+        <section class="result-section result-section--conclusion" aria-labelledby="section-conclusion-heading">
+            <div class="result-section__header">
+                <h2 class="result-section__heading" id="section-conclusion-heading">Conclusion</h2>
+            </div>
+            <div class="result-conclusion">
+                <p><?= htmlspecialchars($summaryConclusion) ?></p>
+            </div>
+        </section>
+        <?php endif; ?>
+        <?php if ($hasAnalysis || $hasTerms): ?>
+
+        <!-- Section Breakdown -->
+        <?php if ($hasAnalysis): ?>
+        <section class="result-section" aria-labelledby="section-breakdown-heading">
+            <div class="result-section__header">
+                <h2 class="result-section__heading" id="section-breakdown-heading">Section Analysis</h2>
+            </div>
+
+            <?php if ($structuredSummary !== [] && $summaryRenderStyle !== 'structured'): ?>
+                <div class="result-accordion">
+                    <?php foreach ($structuredSummary as $index => $block):
+                        $blockLabel = trim((string)($block['label'] ?? ''));
+                        $blockText  = trim((string)($block['text'] ?? ''));
+                        if ($blockLabel === '' || $blockText === '') continue;
+                    ?>
+                    <article class="result-accordion__item">
+                        <div class="result-accordion__summary">
+                            <span class="result-accordion__index" aria-hidden="true"><?= str_pad($index + 1, 2, '0', STR_PAD_LEFT) ?></span>
+                            <span class="result-accordion__label"><?= htmlspecialchars($blockLabel) ?></span>
+                        </div>
+                        <div class="result-accordion__body">
+                            <p><?= htmlspecialchars($blockText) ?></p>
+                        </div>
+                    </article>
+                    <?php endforeach; ?>
+                </div>
+
+            <?php elseif ($paragraphSummaries !== []): ?>
+                <div class="result-accordion">
+                    <?php foreach ($paragraphSummaries as $index => $paraSummary): ?>
+                    <article class="result-accordion__item">
+                        <div class="result-accordion__summary">
+                            <span class="result-accordion__index" aria-hidden="true"><?= str_pad((int)$paraSummary['paragraph_number'], 2, '0', STR_PAD_LEFT) ?></span>
+                            <span class="result-accordion__label"><?= htmlspecialchars($paraSummary['purpose']) ?></span>
+                        </div>
+                        <div class="result-accordion__body">
+                            <p><?= htmlspecialchars($paraSummary['summary']) ?></p>
+                        </div>
+                    </article>
+                    <?php endforeach; ?>
+                </div>
+            <?php else: ?>
+                <p class="result-empty-note">No structured breakdown is available for this document.</p>
+            <?php endif; ?>
+        </section>
+        <?php endif; ?>
+
+        <!-- Keywords / Tags -->
+        <?php if ($summaryKeywords !== []): ?>
+        <section class="result-section" aria-labelledby="section-keywords-heading">
+            <div class="result-section__header">
+                <h2 class="result-section__heading" id="section-keywords-heading">Keywords</h2>
+            </div>
+            <div class="result-tags" role="list" aria-label="Document keywords">
+                <?php foreach ($summaryKeywords as $keyword): ?>
+                <span class="result-tag" role="listitem"><?= htmlspecialchars($keyword, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></span>
+                <?php endforeach; ?>
+            </div>
+        </section>
+        <?php endif; ?>
+
+        <?php endif; ?>
+
+
+            </div>
+        </details>
+        <?php endif; ?>
+        <?php if ($hasSourceDetails): ?>
+        <details class="result-disclosure" id="result-sources">
+            <summary class="result-disclosure__toggle">
+                <span><span class="result-disclosure__title">Source &amp; supporting passages</span><span class="result-disclosure__hint">Review the original text and supporting material</span></span>
+                <svg class="result-disclosure__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m5 7.5 5 5 5-5"/></svg>
+            </summary>
+            <div class="result-disclosure__body">
+        <?php if ($hasEvidence): ?>
+        <section class="result-section result-section--evidence" aria-labelledby="section-evidence-heading">
+            <div class="result-section__header">
+                <h2 class="result-section__heading" id="section-evidence-heading">Supporting passages</h2>
+            </div>
+            <p class="result-section__desc">Supporting passages from the source document for the summary above.</p>
+            <div class="result-evidence-list">
+                <?php foreach ($evidenceItems as $index => $evidence):
+                    $section = trim((string)($evidence['section'] ?? 'Source'));
+                    $sectionLabel = strcasecmp($section, 'body') === 0 ? 'Source document' : $section;
+                    $page = trim((string)($evidence['page'] ?? ''));
+                    $excerpt = trim((string)($evidence['excerpt'] ?? ''));
+                    $supports = trim((string)($evidence['supports'] ?? $evidence['summary_sentence'] ?? ''));
+                    $title = $supports !== '' ? $supports : trim((string)($evidence['source_sentence'] ?? ''));
+                    if ($section === '' || $excerpt === '') continue;
+                    $evidenceId = 'result-evidence-' . ($index + 1);
+                ?>
+                <details class="result-evidence-item">
+                    <summary class="result-evidence-item__summary">
+                        <span class="result-evidence-item__index" aria-hidden="true"><?= str_pad($index + 1, 2, '0', STR_PAD_LEFT) ?></span>
+                        <span class="result-evidence-item__source">
+                            <span class="result-evidence-item__title"><?= htmlspecialchars($title !== '' ? $title : $sectionLabel, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></span>
+                            <span class="result-evidence-item__context">
+                                <?= htmlspecialchars($sectionLabel, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>
+                                <?php if ($page !== ''): ?>
+                                    <span class="result-evidence-item__page"> · Page <?= htmlspecialchars($page, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></span>
+                                <?php endif; ?>
+                            </span>
+                        </span>
+                        <span class="result-evidence-item__action">View supporting passage</span>
+                    </summary>
+                    <div class="result-evidence-item__body" id="<?= htmlspecialchars($evidenceId, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>">
+                        <?php if ($supports !== ''): ?>
+                        <p class="result-evidence-item__label">Supports</p>
+                        <p class="result-evidence-item__supports"><?= htmlspecialchars($supports, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></p>
+                        <?php endif; ?>
+                        <p class="result-evidence-item__label">Supporting passage</p>
+                        <blockquote><?= htmlspecialchars($excerpt, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></blockquote>
+                    </div>
+                </details>
+                <?php endforeach; ?>
+            </div>
+        </section>
+        <?php endif; ?>
+
+        <?php if ($hasCoverage): ?>
+        <section class="result-section result-section--coverage" aria-labelledby="section-coverage-heading">
+            <div class="result-section__header">
+                <h2 class="result-section__heading" id="section-coverage-heading">Document Coverage</h2>
+            </div>
+            <p class="result-section__desc">Document areas represented in the source-grounded summary.</p>
+            <ul class="result-coverage-list">
+                <?php foreach ($coverageItems as $coverage):
+                    $coverageSection = trim((string)($coverage['section'] ?? ''));
+                    if ($coverageSection === '') continue;
+                ?>
+                <li class="result-coverage-item">
+                    <span class="result-coverage-item__mark" aria-hidden="true">—</span>
+                    <span><?= htmlspecialchars($coverageSection, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></span>
+                    <?php if (isset($coverage['evidence_count']) && is_numeric($coverage['evidence_count'])): ?>
+                    <span class="result-coverage-item__count"><?= (int)$coverage['evidence_count'] ?> passage<?= (int)$coverage['evidence_count'] === 1 ? '' : 's' ?></span>
+                    <?php endif; ?>
+                </li>
+                <?php endforeach; ?>
+            </ul>
+        </section>
+        <?php endif; ?>
+
+        <?php if ($hasSource): ?>
+        <section class="result-section" aria-labelledby="section-source-heading">
+            <div class="result-section__header">
+                <h2 class="result-section__heading" id="section-source-heading">Original Source Text</h2>
+            </div>
+            <p class="result-section__desc">The original content provided for analysis. Use this to verify summary accuracy.</p>
+
+
+            <details class="result-source-disclosure">
+                <summary class="result-source-toggle global-button-effect">
+                    <span class="result-source-toggle__text">Show full source text</span>
+                    <svg class="result-source-toggle__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </summary>
+                <div class="result-source-viewer result-source-viewer--expanded">
+                    <?= nl2br(htmlspecialchars($summaryData['original_text'] ?? '')) ?>
+                </div>
+            </details>
+        </section>
+        <?php endif; ?>
+
+
+            </div>
+        </details>
+        <?php endif; ?>
+        <details class="result-disclosure" id="result-details">
+            <summary class="result-disclosure__toggle">
+                <span><span class="result-disclosure__title">Summary details</span><span class="result-disclosure__hint">Format, settings, and document information</span></span>
+                <svg class="result-disclosure__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m5 7.5 5 5 5-5"/></svg>
+            </summary>
+            <div class="result-disclosure__body">
+            <dl class="result-meta-strip">
+                <div class="result-meta-item">
+                    <dt>Processed</dt>
+                    <dd><?= date('M d, Y', strtotime($summaryData['created_at'])) ?></dd>
+                </div>
+                <div class="result-meta-item">
+                    <dt>Document type</dt>
+                    <dd><?= htmlspecialchars($articleType !== '' ? $articleType : 'Document') ?></dd>
+                </div>
+                <div class="result-meta-item">
+                    <dt>Format</dt>
+                    <dd><?= htmlspecialchars($summaryFormatLabel) ?></dd>
+                </div>
+                <?php if (isset($readabilityStats['estimated_reading_time_minutes'])): ?>
+                <div class="result-meta-item">
+                    <dt>Read time</dt>
+                    <dd><?= (int)$readabilityStats['estimated_reading_time_minutes'] ?> min</dd>
+                </div>
+                <?php endif; ?>
+                <?php if (isset($readabilityStats['compression_percent'])): ?>
+                <div class="result-meta-item">
+                    <dt>Shorter than source</dt>
+                    <dd>
+                        <?= htmlspecialchars((string)$readabilityStats['compression_percent']) ?>%
+                    </dd>
+                </div>
+                <?php endif; ?>
+                <?php if (!empty($sourceMetadata['source_type'])): ?>
+                <div class="result-meta-item">
+                    <dt>Source</dt>
+                    <dd><?= htmlspecialchars((string)$sourceMetadata['source_type']) ?></dd>
+                </div>
+                <?php endif; ?>
+                <?php if (isset($sourceMetadata['paragraph_count'])): ?>
+                <div class="result-meta-item">
+                    <dt>Source paragraphs</dt>
+                    <dd><?= number_format((int)$sourceMetadata['paragraph_count']) ?></dd>
+                </div>
+                <?php endif; ?>
+                <?php if ($summaryLengthLabel !== ''): ?>
+                <div class="result-meta-item">
+                    <dt>Depth</dt>
+                    <dd><?= htmlspecialchars($summaryDepthLabel) ?></dd>
+                </div>
+                <?php endif; ?>
+                <?php if ($analysisModeLabel !== ''): ?>
+                <div class="result-meta-item">
+                    <dt>Analysis mode</dt>
+                    <dd><?= htmlspecialchars($analysisModeLabel) ?></dd>
+                </div>
+                <?php endif; ?>
+            </dl>
+            <?php if (($synthesisMetadata['status'] ?? '') === 'accepted_heuristic_checks'): ?>
+            <p class="result-grounding-status result-synthesis-status" role="status">
+                <span class="result-grounding-status__dot" aria-hidden="true"></span>
+                AI-assisted summary
+                <span class="result-grounding-status__detail">
+                    Reworded from selected source passages. Automated checks do not establish factual accuracy.
+                </span>
+            </p>
+            <?php elseif (!empty($synthesisMetadata['requested'])): ?>
+            <p class="result-grounding-status result-synthesis-status" role="status">
+                <span class="result-grounding-status__dot" aria-hidden="true"></span>
+                Selected source sentences
+                <span class="result-grounding-status__detail">AI rewriting was unavailable or did not pass the automated checks, so source sentences were used.</span>
+            </p>
+            <?php endif; ?>
+
+            </div>
+        </details>
+        </div>
+
+        <?php require __DIR__ . '/partials/rating-widget.php'; ?>
+
+        <?php endif; /* end completed status */ ?>
+
+
+        <?php endif; /* end !isset($error) */ ?>
+    </main>
+
+</div><!-- /result-shell -->
+
+<script src="assets/js/result.js?v=<?= filemtime(__DIR__ . '/assets/js/result.js') ?>"></script>
+<?php require __DIR__ . '/partials/nex-footer.php'; ?>
 </body>
 </html>

@@ -1,0 +1,26 @@
+/* ====================================================================
+   global-button-effects.css
+   Interactive button hover state — unified purple accent.
+   ==================================================================== */
+
+/* No glitch animation exists in this system. */
+@keyframes glitch {
+  0%, 100% { background: inherit; transform: none; opacity: 1; filter: none; }
+}
+
+.global-button-effect:not(:disabled):not([aria-disabled="true"]):hover,
+.global-button-effect:not(:disabled):not([aria-disabled="true"]):focus-visible {
+  animation: none !important;
+  background: var(--button-hover-bg, var(--accent-purple, var(--color-accent, #7F00FF))) !important;
+  border-color: var(--button-hover-border, var(--accent-purple, var(--color-accent, #7F00FF))) !important;
+  color: var(--button-hover-text, #ffffff) !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .global-button-effect:hover,
+  .global-button-effect:focus-visible {
+    transition: none;
+  }
+}

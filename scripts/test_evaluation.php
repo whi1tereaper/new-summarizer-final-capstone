@@ -1,0 +1,141 @@
+<?php
+declare(strict_types=1);
+/** Integration/security tests create private fixtures in one rolled-back transaction. No research scores are seeded. */
+if (PHP_SAPI!=='cli') { http_response_code(403); exit('CLI only.'); }
+require_once __DIR__.'/../app/src/Support/config.php';
+require_once __DIR__.'/../app/src/Services/EvaluationService.php';
+require_once __DIR__.'/../app/src/Services/EvaluationAccess.php';
+require_once __DIR__.'/../app/src/Services/EvaluationPythonBridge.php';
+use App\Src\Database;
+use App\Src\Services\EvaluationService;
+use App\Src\Services\EvaluationAccess;
+use App\Src\Services\EvaluationPythonBridge;
+
+$passed=0; $failed=0;
+function checkEval(string $name,bool $condition): void { global $passed,$failed; if ($condition) {$passed++; echo "PASS {$name}\n";} else {$failed++; echo "FAIL {$name}\n";} }
+function throwsEval(callable $fn): bool { try {$fn();return false;} catch (Throwable $e) {return true;} }
+$db=Database::getInstance()->getConnection(); $service=new EvaluationService($db); $bridge=new EvaluationPythonBridge();
+$savedSession=$_SESSION ?? []; $savedPost=$_POST; $savedServer=$_SERVER;
+$prefix='eval_test_'.bin2hex(random_bytes(5));
+try {
+    $productionBefore=[];
+    foreach (['summaries','documents','document_summaries','summary_artifacts'] as $table) $productionBefore[$table]=(int)$db->query('SELECT COUNT(*) FROM '.$table)->fetchColumn();
+    $db->beginTransaction();
+    $newUser=function (string $suffix,string $role) use ($db,$prefix): int {
+        $stmt=$db->prepare('INSERT INTO users (username,email,password_hash,role,active) VALUES (?,?,?,?,1)');
+        $stmt->execute([$prefix.$suffix,$prefix.$suffix.'@example.invalid',password_hash(bin2hex(random_bytes(12)),PASSWORD_DEFAULT),$role]); return (int)$db->lastInsertId();
+    };
+    $admin=$newUser('a','admin'); $evaluator=$newUser('b','user'); $other=$newUser('c','user');
+    $_SESSION=[];
+    checkEval('anonymous session cannot manage evaluation',throwsEval(fn()=>EvaluationAccess::requireAdmin()));
+    $_SESSION=['pending_admin_user_id'=>$admin,'admin_challenge_verified'=>true];
+    checkEval('legacy pending-only session cannot manage evaluation',throwsEval(fn()=>EvaluationAccess::requireAdmin()));
+    $_SESSION=['user_id'=>$evaluator,'role'=>'user','admin_challenge_verified'=>true];
+    checkEval('ordinary user cannot pass administrator guard using a legacy flag',throwsEval(fn()=>EvaluationAccess::requireAdmin()));
+    $_SESSION=['user_id'=>$admin,'role'=>'admin','admin_challenge_verified'=>false];
+    checkEval('active administrator can manage evaluation with stale false challenge flag',EvaluationAccess::requireAdmin()===$admin);
+    $_SESSION=['user_id'=>$admin,'role'=>'admin'];
+    checkEval('active administrator can manage evaluation without a challenge flag',EvaluationAccess::requireAdmin()===$admin);
+    $_SERVER['REQUEST_METHOD']='GET'; checkEval('mutations reject GET',throwsEval(fn()=>EvaluationAccess::requirePost()));
+    $_SERVER['REQUEST_METHOD']='POST'; $_POST=['csrf_token'=>'invalid']; $_SESSION['csrf_token']=str_repeat('a',64);
+    checkEval('mutations reject invalid CSRF',throwsEval(fn()=>EvaluationAccess::requirePost()));
+    $_POST=['csrf_token'=>$_SESSION['csrf_token']]; checkEval('valid CSRF accepted',!throwsEval(fn()=>EvaluationAccess::requirePost()));
+    checkEval('canonical hash ignores mapping insertion order',EvaluationService::canonicalHash(['b'=>2,'a'=>['z'=>1,'c'=>3]])===EvaluationService::canonicalHash(['a'=>['c'=>3,'z'=>1],'b'=>2]));
+    checkEval('word counting handles empty and unicode text',EvaluationService::countWords('')===0 && EvaluationService::countWords('Mañana 12.7% study')===3);
+    checkEval('randomization reproducible',EvaluationService::randomizedOrder(range(1,20),'seed')===EvaluationService::randomizedOrder(range(1,20),'seed'));
+    checkEval('randomization differs with independent seeds',EvaluationService::randomizedOrder(range(1,20),'seed')!==EvaluationService::randomizedOrder(range(1,20),'other'));
+    checkEval('incomplete ratings rejected',throwsEval(fn()=>EvaluationService::validateRatings(['relevance'=>3])));
+    $ratings=array_fill_keys(EvaluationService::CRITERIA,3);
+    checkEval('fractional ratings rejected',throwsEval(fn()=>EvaluationService::validateRatings(array_merge($ratings,['coverage'=>3.5]))));
+    checkEval('out-of-range ratings rejected',throwsEval(fn()=>EvaluationService::validateRatings(array_merge($ratings,['coverage'=>6]))));
+    $dataset=$service->createDataset(['version'=>$prefix,'name'=>'Rolled-back integration fixture'],$admin);
+    $source='A controlled engineering validation examined 1,240 participants in March 2024. Treatment did not significantly reduce mortality. The intervention increased retention by 12.7%, compared with 10.2% in the control group. Researchers observed a possible association and did not establish causation. The trial used randomized allocation and independent outcome assessment. Further studies may be needed to understand long-term effects. The investigators warned that the findings apply only to the studied population.';
+    $doc=$service->addDocument($dataset,['title'=>'Synthetic integration fixture','category'=>'academic','source_text'=>$source,'profile'=>'academic','dataset_split'=>'validation','provenance'=>'Synthetic engineering test only; no actual participants.'],$admin);
+    checkEval('empty source rejected',throwsEval(fn()=> $service->addDocument($dataset,['title'=>'Empty','source_text'=>'','provenance'=>'test'],$admin)));
+    $service->addReference($doc,['text'=>'Treatment did not significantly reduce mortality. Retention increased by 12.7%.','version'=>'test-v1','review_status'=>'approved','author_identifier'=>'PRIVATE_TEST_AUTHOR'],$admin);
+    $unit=$service->addContentUnit($doc,['text'=>'Treatment did not significantly reduce mortality.'],$admin);
+    $service->addChallengeCase($doc,['category'=>'negation','expected_facts'=>[['kind'=>'negation','text'=>'did not significantly reduce mortality']],'prohibited_distortions'=>['Treatment reduced mortality.']],$admin);
+    $run=$service->queueRun($dataset,['name'=>'Transaction integration test','dataset_split'=>'validation','modes'=>['brief'],'systems'=>['proposed','lead_n']],$admin);
+    $record=$service->getRun($run);
+    checkEval('run stores immutable snapshot and configuration fingerprints',count($record['snapshot'])===1 && strlen($record['snapshot_hash'])===64 && strlen($record['configuration_hash'])===64 && (int)$record['outputs_total']===2);
+    checkEval('sealed datasets reject changed documents',throwsEval(fn()=> $service->addDocument($dataset,['title'=>'Change','source_text'=>$source,'provenance'=>'test'],$admin)));
+    checkEval('sealed datasets reject changed references',throwsEval(fn()=> $service->addReference($doc,['text'=>'Changed','version'=>'test-v2'],$admin)));
+    checkEval('sealed datasets reject source activation changes',throwsEval(fn()=> $service->setDocumentActive($doc,false,$admin)));
+    checkEval('invalid output IDs safely return no record',$service->getOutputDetail(-1)===null && $service->getRun(-1)===null);
+    $service->startRun($run);
+    $outputs=$service->pendingOutputs($run); $first=(int)$outputs[0]['id'];
+    // Force a real uniqueness violation at the metric insert boundary, then verify atomic rollback.
+    $stmt=$db->prepare("INSERT INTO evaluation_metrics (output_id,metric_name,metric_version,status,metric_value) VALUES (?,'compression_ratio','test','ok',0.5)"); $stmt->execute([$first]);
+    checkEval('database metric insert failure is surfaced',throwsEval(fn()=> $service->persistOutput($first,['status'=>'completed','summary'=>'Temporary failed transaction.','metrics'=>[['name'=>'compression_ratio','version'=>'test','status'=>'ok','value'=>0.5]]])));
+    checkEval('failed metric transaction leaves generated output pending',$service->getOutputDetail($first)['status']==='queued');
+    $stmt=$db->prepare('DELETE FROM evaluation_metrics WHERE output_id=?');$stmt->execute([$first]);
+    foreach ($outputs as $output) {
+        $result=$bridge->request('evaluate-item',$service->workerPayload($record,$output),120);
+        $service->persistOutput((int)$output['id'],$result);
+        checkEval('real Python generation and independent metric persistence: '.$output['system_name'],trim((string)$result['summary'])!=='' && count($service->getMetrics((int)$output['id']))>=11);
+    }
+    $service->finishRun($run);
+    checkEval('finished run counts real generated outputs',(int)$service->getRun($run)['generated_summaries']===2);
+    checkEval('recorded summaries cannot be overwritten',throwsEval(fn()=> $service->persistOutput($first,['status'=>'completed','summary'=>'Overwrite'])));
+    $made=$service->createAssignments($run,[$evaluator],$admin);
+    checkEval('one blinded assignment per valid output created',$made===2);
+    checkEval('duplicate assignment creation is idempotent',$service->createAssignments($run,[$evaluator],$admin)===0);
+    $assignments=$service->listAssignments($evaluator); $token=$assignments[0]['assignment_token'];
+    $blind=$service->getBlindAssignment($token,$evaluator);
+    checkEval('assigned evaluator can read source and summary',$blind && $blind['source_text']===$source && $blind['summary_text']!=='');
+    checkEval('blind response omits condition identifiers and automatic metrics',!array_intersect(['run_id','output_id','system','system_name','ablation','profile','mode','metrics','references','randomization_seed'],array_keys($blind)));
+    checkEval('another evaluator cannot read unauthorized assignment',$service->getBlindAssignment($token,$other)===null);
+    checkEval('malformed assignment token rejected',$service->getBlindAssignment('../'.$token,$evaluator)===null);
+    checkEval('another evaluator cannot submit unauthorized assignment',throwsEval(fn()=> $service->submitRating($token,$other,$ratings)));
+    $disable=$db->prepare('UPDATE users SET active=0 WHERE id=?'); $disable->execute([$evaluator]);
+    checkEval('disabled evaluators cannot read assigned sources',$service->getBlindAssignment($token,$evaluator)===null);
+    checkEval('disabled evaluators cannot submit a rating',throwsEval(fn()=> $service->submitRating($token,$evaluator,$ratings)));
+    $enable=$db->prepare('UPDATE users SET active=1 WHERE id=?'); $enable->execute([$evaluator]);
+    $rating=$service->submitRating($token,$evaluator,$ratings,'Synthetic test submission; rolled back.');
+    checkEval('valid submission locks assignment',$service->getBlindAssignment($token,$evaluator)['status']==='submitted');
+    checkEval('duplicate rating submission rejected',throwsEval(fn()=> $service->submitRating($token,$evaluator,$ratings)));
+    $service->correctRating($rating,array_merge($ratings,['coverage'=>4]),'Explicit administrative test correction',$admin);
+    $audit=$db->prepare("SELECT previous_json,replacement_json FROM evaluation_audit_log WHERE entity_type='rating' AND entity_id=? AND action='rating_admin_correction'");$audit->execute([$rating]);$audit=$audit->fetch(PDO::FETCH_ASSOC);
+    checkEval('administrator correction preserves previous values',EvaluationService::decode($audit['previous_json'])['coverage']==3 && EvaluationService::decode($audit['replacement_json'])['coverage']==4);
+    $service->verifyContentUnit($first,$unit,true,'Manual engineering test annotation',$admin);
+    $service->classifyError($first,'unknown_other','Synthetic reviewer annotation test',$admin);
+    $statsPayload=$service->statisticsPayload($run);
+    checkEval('unsubmitted assignments remain explicit missing rating rows',count(array_filter($statsPayload['rating_rows'],static fn($r)=>$r['rating']===null))>=7);
+    $coverage=array_values(array_filter($statsPayload['metric_rows'],static fn($r)=>$r['metric']==='human_verified_content_coverage' && (int)$r['output_id']===$first));
+    checkEval('complete human content verification produces independent coverage',$coverage[0]['value']===1);
+    $report=$bridge->request('statistics',$statsPayload,120);$service->saveReport($run,$report);
+    checkEval('offline report contains actual automatic and human samples',count($report['automatic'])>0 && count($report['human'])>0 && isset($report['agreement']));
+    $oldPayloadHash=EvaluationService::canonicalHash($service->statisticsPayload($run));
+    $service->correctRating($rating,array_merge($ratings,['coverage'=>5]),'Simulate a correction while offline statistics were running',$admin);
+    $service->saveReport($run,$report,$oldPayloadHash);
+    checkEval('ratings changed during statistics retain pending report refresh',$service->getRunReport($run)['pending']===true);
+    $revisions=$db->prepare("SELECT COUNT(*) FROM evaluation_audit_log WHERE action='offline_report_revision' AND entity_id=?");$revisions->execute([$run]);
+    checkEval('report revisions preserve prior report records',(int)$revisions->fetchColumn()===2);
+    $largeReport=$report; $largeReport['warnings'][]=str_repeat('Lossless report storage validation. ',12000);
+    $service->saveReport($run,$largeReport);
+    checkEval('large reports survive database packet limits without losing JSON content',$service->getRunReport($run)['statistics']===$largeReport);
+    $failureDataset=$service->createDataset(['version'=>$prefix.'_failure','name'=>'Partial failure integration fixtures'],$admin);
+    foreach (['Failure fixture A','Failure fixture B'] as $title) $service->addDocument($failureDataset,['title'=>$title,'source_text'=>$source,'dataset_split'=>'validation','provenance'=>'Synthetic rolled-back failure test.'],$admin);
+    $failedRun=$service->queueRun($failureDataset,['name'=>'Partial failure integration fixture','dataset_split'=>'validation','modes'=>['brief'],'systems'=>['proposed']],$admin);
+    $pending=$service->pendingOutputs($failedRun); $service->startRun($failedRun);
+    $badResult=$bridge->request('evaluate-item',['text'=>'','system'=>'proposed','mode'=>'brief'],120);
+    $service->persistOutput((int)$pending[0]['id'],$badResult);
+    $goodResult=$bridge->request('evaluate-item',$service->workerPayload($service->getRun($failedRun),$pending[1]),120);
+    $service->persistOutput((int)$pending[1]['id'],$goodResult);
+    $service->finishRun($failedRun); $partial=$service->getRun($failedRun);
+    checkEval('malformed document generation failure preserves successful peer output',$partial['status']==='completed_with_errors' && (int)$partial['failed_summaries']===1 && (int)$partial['generated_summaries']===1);
+    $failedMetrics=$service->getMetrics((int)$pending[0]['id']);
+    checkEval('failed summaries retain explicit unavailable metrics',count($failedMetrics)===count(EvaluationService::EXPECTED_METRICS) && count(array_filter($failedMetrics,static fn($m)=>$m['value']!==null))===0);
+    $missingRows=$service->statisticsPayload($failedRun)['metric_rows'];
+    $compressionRows=array_values(array_filter($missingRows,static fn($m)=>$m['metric']==='compression_ratio'));
+    checkEval('failed generation retains the known metric version in attempted N',count(array_unique(array_column($compressionRows,'version')))===1 && count($compressionRows)===2 && count(array_filter($compressionRows,static fn($m)=>$m['value']!==null))===1);
+    $partialReport=$bridge->request('statistics',$service->statisticsPayload($failedRun),120);
+    $partialCompression=array_values(array_filter($partialReport['automatic'],static fn($m)=>$m['metric']==='compression_ratio'));
+    checkEval('partial-failure statistics report N attempted 2 and N valid 1',count($partialCompression)===1 && $partialCompression[0]['n_attempted']===2 && $partialCompression[0]['n_valid']===1);
+    $export=$service->exportRun($run);$encoded=EvaluationService::json($export);
+    checkEval('export excludes evaluator identity and reference author',!str_contains($encoded,'evaluator_user_id') && !str_contains($encoded,'PRIVATE_TEST_AUTHOR') && !str_contains($encoded,'assignment_token') && !str_contains($encoded,'randomization_seed'));
+    foreach ($productionBefore as $table=>$count) checkEval('production table preserved: '.$table,(int)$db->query('SELECT COUNT(*) FROM '.$table)->fetchColumn()===$count);
+} catch (Throwable $e) { $failed++; fwrite(STDERR,'FAIL unexpected exception: '.$e->getMessage().' at '.$e->getFile().':'.$e->getLine()."\n"); }
+finally { $bridge->close(); if ($db->inTransaction()) $db->rollBack(); $_SESSION=$savedSession;$_POST=$savedPost;$_SERVER=$savedServer; }
+echo "Evaluation tests: {$passed} passed, {$failed} failed. All fixtures rolled back.\n";
+exit($failed ? 1 : 0);

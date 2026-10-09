@@ -10,22 +10,11 @@ class RememberMeService
     private const COOKIE_DAYS = 30;
 
     /**
-     * Ensure the user_tokens table exists.
+     * Schema is managed via database/migrations/010_user_tokens.sql.
      */
     public static function ensureSchema(): void
     {
-        $db = Database::getInstance()->getConnection();
-        $db->exec("
-            CREATE TABLE IF NOT EXISTS user_tokens (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                user_id INT NOT NULL,
-                selector VARCHAR(255) NOT NULL,
-                hashed_validator VARCHAR(255) NOT NULL,
-                expires DATETIME NOT NULL,
-                UNIQUE KEY selector_idx (selector),
-                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-        ");
+        // No-op at runtime
     }
 
     /**
@@ -134,6 +123,7 @@ class RememberMeService
             $_SESSION['user_id'] = $record['user_id'];
             $_SESSION['role'] = $record['role'];
             $_SESSION['username'] = $record['username'];
+            unset($_SESSION['pending_admin_user_id'], $_SESSION['pending_admin_remember_me'], $_SESSION['admin_challenge_verified']);
             
             // Set terms state
             $userForTerms = [

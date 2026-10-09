@@ -58,15 +58,35 @@ INSTALLATION STEPS
 3. INSTALL PYTHON DEPENDENCIES
    cd python-engine
    pip install -r requirements-local.txt
+   cd ..
+   python python-engine/scripts/prepare_embedding_model.py
+   (Set SUMMARIZER_LOCAL_EMBEDDING_MODEL to the printed model directory.
+    Requests never download model files; unavailable semantic retrieval
+    falls back to TF-IDF.)
 
 4. SETUP DATABASE
    - Ensure MySQL/MariaDB is running
-   - Update database credentials in app/config/config.php if needed
+   - Configure database credentials in .env (or app/src/Support/config.php)
    - Run: php tools/import_schema.php
+     (This creates the database, imports base schemas, and applies all
+     migrations sequentially via tools/migrate.php)
+   - To check migration status at any time, run:
+     php tools/migrate.php --status
+
+   INITIAL ADMIN SETUP:
+   Register a new account via the web registration page (register.php),
+   then set the user's role to 'admin' in the database:
+   UPDATE users SET role = 'admin' WHERE username = 'your_username';
+   On first admin login, you will be prompted to set your secondary
+   security verification challenge.
 
 5. VERIFY ENVIRONMENT
    Run: php tools/check_native_environment.php
    All checks should pass.
+
+   Landing analytics retention is 90 days by default. Run
+   `php scripts/cleanup_landing_analytics.php` from a scheduled CLI task;
+   set `LANDING_ANALYTICS_RETENTION_DAYS` to override the existing policy.
 
 6. START THE APPLICATION
    php -S localhost:8000 -t app/public

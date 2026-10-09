@@ -1,0 +1,294 @@
+/* About page layout and editorial components. */
+@font-face {
+    font-family: 'Satoshi';
+    src: url('../fonts/satoshi-700.woff2') format('woff2');
+    font-display: swap;
+    font-style: normal;
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'Satoshi';
+    src: url('../fonts/satoshi-900.woff2') format('woff2');
+    font-display: swap;
+    font-style: normal;
+    font-weight: 900;
+}
+
+.about-page {
+    background: var(--color-bg);
+}
+
+.about-page main {
+    overflow: hidden;
+}
+
+.about-hero,
+.about-section {
+    margin: 0 auto;
+    max-width: 1440px;
+    padding-left: clamp(24px, 7vw, 104px);
+    padding-right: clamp(24px, 7vw, 104px);
+}
+
+.about-hero {
+    align-items: center;
+    display: grid;
+    gap: clamp(40px, 8vw, 140px);
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 0.7fr);
+    min-height: min(680px, 72vh);
+    padding-bottom: clamp(72px, 11vw, 140px);
+    padding-top: clamp(76px, 11vw, 150px);
+}
+
+.about-eyebrow {
+    color: var(--color-primary-dark);
+    font-family: var(--font-body);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    line-height: 1.2;
+    margin: 0 0 20px;
+    text-transform: uppercase;
+}
+
+.about-hero h1 {
+    color: var(--color-text);
+    font-family: 'Satoshi', sans-serif;
+    font-size: clamp(3.2rem, 8vw, 7.6rem);
+    font-weight: 800;
+    letter-spacing: -0.075em;
+    line-height: 0.92;
+    margin: 0;
+    max-width: 760px;
+}
+
+.about-hero h1 span {
+    color: var(--color-primary-dark);
+    display: block;
+}
+
+.about-hero__lead {
+    color: var(--color-muted);
+    font-family: var(--font-body);
+    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+    line-height: 1.6;
+    margin: 34px 0 38px;
+    max-width: 560px;
+}
+
+.about-button {
+    align-items: center;
+    background: #000;
+    border: 1px solid #000;
+    color: #fff;
+    display: inline-flex;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 800;
+    justify-content: center;
+    letter-spacing: 0.06em;
+    min-height: 48px;
+    padding: 13px 22px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.about-button:hover,
+.about-button:focus-visible {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-bg);
+}
+
+.about-hero__mark {
+    align-items: center;
+    aspect-ratio: 1;
+    background: #1f1f2e;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    max-width: 460px;
+    min-height: 240px;
+    overflow: hidden;
+    position: relative;
+    transform: rotate(5deg);
+}
+
+.about-hero__mark::before,
+.about-hero__mark::after {
+    border: 1px solid rgba(240, 237, 228, 0.18);
+    content: "";
+    height: 68%;
+    position: absolute;
+    transform: rotate(-18deg);
+    width: 68%;
+}
+
+.about-hero__mark::after {
+    border-color: rgba(240, 237, 228, 0.12);
+    transform: rotate(34deg);
+}
+
+.about-hero__mark span {
+    font-family: 'Satoshi', sans-serif;
+    font-size: clamp(2.8rem, 8vw, 6.2rem);
+    font-weight: 900;
+    letter-spacing: -0.08em;
+    line-height: 1;
+    position: relative;
+    transform: rotate(-5deg);
+    z-index: 1;
+}
+
+.about-hero__mark i {
+    background: var(--color-accent);
+    bottom: 12%;
+    height: 14px;
+    position: absolute;
+    right: 12%;
+    transform: rotate(-5deg);
+    width: 34%;
+}
+
+.about-section {
+    border-top: 1px solid var(--color-border);
+    display: grid;
+    gap: clamp(38px, 8vw, 140px);
+    grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr);
+    padding-bottom: clamp(76px, 10vw, 132px);
+    padding-top: clamp(76px, 10vw, 132px);
+}
+
+.about-section__heading h2 {
+    color: var(--color-text);
+    font-family: 'Satoshi', sans-serif;
+    font-size: clamp(2rem, 4.2vw, 4.3rem);
+    letter-spacing: -0.06em;
+    line-height: 0.98;
+    margin: 0;
+    max-width: 500px;
+}
+
+.about-section__copy {
+    align-self: end;
+    max-width: 680px;
+}
+
+.about-section__copy p,
+.about-process-card p,
+.about-principle p {
+    color: var(--color-muted);
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    margin: 0;
+}
+
+.about-section__copy p + p {
+    margin-top: 22px;
+}
+
+.about-section--process,
+.about-section--principles {
+    grid-template-columns: 1fr;
+}
+
+.about-process-grid,
+.about-principles {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.about-process-card {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    min-height: 260px;
+    padding: 28px;
+}
+
+.about-process-card__number {
+    color: var(--color-primary-dark);
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    margin-bottom: 56px;
+}
+
+.about-process-card h3,
+.about-principle h3 {
+    color: var(--color-text);
+    font-family: 'Satoshi', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin: 0 0 14px;
+}
+
+.about-principle {
+    border-top: 5px solid var(--color-primary-soft);
+    padding-top: 22px;
+}
+
+.about-principle:nth-child(2) {
+    border-color: var(--color-accent);
+}
+
+.about-principle:nth-child(3) {
+    border-color: var(--color-warning);
+}
+
+@media (max-width: 760px) {
+    .about-hero,
+    .about-section {
+        grid-template-columns: 1fr;
+    }
+
+    .about-hero {
+        gap: 54px;
+        min-height: 0;
+    }
+
+    .about-hero__mark {
+        justify-self: end;
+        width: min(78vw, 360px);
+    }
+
+    .about-process-grid,
+    .about-principles {
+        grid-template-columns: 1fr;
+    }
+
+    .about-process-card {
+        min-height: 0;
+    }
+
+    .about-process-card__number {
+        margin-bottom: 34px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-hero {
+        padding-top: 58px;
+    }
+
+    .about-hero h1 {
+        font-size: clamp(2.8rem, 16vw, 4.5rem);
+    }
+
+    .about-hero__mark {
+        justify-self: stretch;
+        width: 100%;
+    }
+
+    .about-section {
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+}

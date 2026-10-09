@@ -151,6 +151,9 @@ class Formatter
 
         return [
             'selection_mode' => trim((string)($decoded['selection_mode'] ?? '')),
+            'analysis_mode' => trim((string)($decoded['analysis_mode'] ?? ($decoded['selection_mode'] ?? ''))),
+            'summary_depth' => trim((string)($decoded['summary_depth'] ?? '')),
+            'output_format' => trim((string)($decoded['output_format'] ?? '')),
             'profile_label' => trim((string)($decoded['profile_label'] ?? '')),
             'active_profile_weights' => is_array($decoded['active_profile_weights'] ?? null) ? $decoded['active_profile_weights'] : [],
             'validation_passed' => (bool)($decoded['validation_passed'] ?? true),
@@ -158,6 +161,34 @@ class Formatter
             'structured_summary' => is_array($decoded['structured_summary'] ?? null) ? $decoded['structured_summary'] : [],
             'article_type' => trim((string)($decoded['article_type'] ?? '')),
         ];
+    }
+
+    public static function extractRetrievalFromStoredSummary(string $storedSummary): array
+    {
+        $decoded = json_decode($storedSummary, true);
+        if (!is_array($decoded)) {
+            return [];
+        }
+
+        return is_array($decoded['retrieval_metadata'] ?? null)
+            ? $decoded['retrieval_metadata']
+            : (is_array($decoded['retrieval'] ?? null) ? $decoded['retrieval'] : []);
+    }
+
+    public static function extractEvidenceFromStoredSummary(string $storedSummary): array
+    {
+        $decoded = json_decode($storedSummary, true);
+        return is_array($decoded) && is_array($decoded['evidence'] ?? null)
+            ? $decoded['evidence']
+            : [];
+    }
+
+    public static function extractCoverageFromStoredSummary(string $storedSummary): array
+    {
+        $decoded = json_decode($storedSummary, true);
+        return is_array($decoded) && is_array($decoded['coverage'] ?? null)
+            ? $decoded['coverage']
+            : [];
     }
 
     public static function extractConclusionFromStoredSummary(string $storedSummary): string
@@ -295,6 +326,60 @@ class Formatter
 
         if (array_key_exists('fallback_used', $metadata)) {
             $normalized['fallback_used'] = (bool)$metadata['fallback_used'];
+        }
+
+        if (is_array($metadata['synthesis'] ?? null)) {
+            $synthesis = [];
+            foreach (['status', 'provider', 'model', 'endpoint_scope', 'verification', 'verification_limit', 'rejection_reason'] as $key) {
+                $value = trim((string)($metadata['synthesis'][$key] ?? ''));
+                if ($value !== '') {
+                    $synthesis[$key] = $value;
+                }
+            }
+            foreach (['requested', 'enabled'] as $key) {
+                if (array_key_exists($key, $metadata['synthesis'])) {
+                    $synthesis[$key] = (bool)$metadata['synthesis'][$key];
+                }
+            }
+            if (isset($metadata['synthesis']['sentences']) && is_numeric($metadata['synthesis']['sentences'])) {
+                $synthesis['sentences'] = max(0, (int)$metadata['synthesis']['sentences']);
+            }
+            if ($synthesis !== []) {
+                $normalized['synthesis'] = $synthesis;
+            }
+        }
+
+        if (is_array($metadata['fact_validation'] ?? null)) {
+            $factValidation = [];
+            foreach (['status', 'method', 'interpretation', 'error'] as $key) {
+                $value = trim((string)($metadata['fact_validation'][$key] ?? ''));
+                if ($value !== '') {
+                    $factValidation[$key] = $value;
+                }
+            }
+            foreach (['sentences_checked', 'ledger_entries'] as $key) {
+                if (isset($metadata['fact_validation'][$key]) && is_numeric($metadata['fact_validation'][$key])) {
+                    $factValidation[$key] = max(0, (int)$metadata['fact_validation'][$key]);
+                }
+            }
+            if (is_array($metadata['fact_validation']['issues'] ?? null)) {
+                $factValidation['issues'] = [];
+                foreach (array_slice($metadata['fact_validation']['issues'], 0, 100) as $issue) {
+                    if (!is_array($issue) || !is_string($issue['issue'] ?? null)) {
+                        continue;
+                    }
+                    $normalizedIssue = ['issue' => trim($issue['issue'])];
+                    foreach (['summary_sentence_id', 'source_sentence_id'] as $key) {
+                        if (array_key_exists($key, $issue) && ($issue[$key] === null || is_numeric($issue[$key]))) {
+                            $normalizedIssue[$key] = $issue[$key] === null ? null : max(0, (int)$issue[$key]);
+                        }
+                    }
+                    $factValidation['issues'][] = $normalizedIssue;
+                }
+            }
+            if ($factValidation !== []) {
+                $normalized['fact_validation'] = $factValidation;
+            }
         }
 
         return $normalized;

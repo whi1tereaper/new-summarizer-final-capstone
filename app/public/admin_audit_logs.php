@@ -1,13 +1,12 @@
 <?php
 require_once __DIR__ . '/../src/whitereaper.php';
 require_once __DIR__ . '/../src/Database.php';
+require_once __DIR__ . '/../src/Services/AdminSecurityService.php';
 
 use App\Src\Database;
+use App\Src\Services\AdminSecurityService;
 
-if (!isset($_SESSION['user_id']) || ($_SESSION['role'] ?? '') !== 'admin') {
-    header('Location: login.php?context=admin');
-    exit;
-}
+AdminSecurityService::requireVerifiedAdmin('login.php?context=admin');
 
 $page = max(1, (int)($_GET['page'] ?? 1));
 $perPage = 50;
@@ -253,5 +252,6 @@ try {
 
         <?php endif; ?>
     </div>
+<?php require __DIR__ . '/partials/site-footer.php'; ?>
 </body>
 </html>

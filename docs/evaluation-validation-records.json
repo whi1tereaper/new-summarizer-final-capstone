@@ -1,0 +1,4694 @@
+{
+  "record_type": "actual offline engineering validation; not a final research experiment",
+  "dataset_version": "EVAL-VALIDATION-2026-v1",
+  "fixture": "python-engine/tests/fixtures/evaluation_validation_documents.json",
+  "recorded_at_utc": "2026-10-02T06:47:56.226940+00:00",
+  "reference_count": 0,
+  "human_rating_count": 0,
+  "provenance": {
+    "code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+    "source_files": {
+      "python-engine/evaluation/__init__.py": "b6a0a930ec1b90afcfd40a89295b574a115178b40d81a94f6884ee3b0ffead58",
+      "python-engine/evaluation/baselines.py": "69b0de50fd631aed168e8b97d87c3cec4dd636df31e96d62eb7ec235e5024645",
+      "python-engine/evaluation/engine.py": "310d9524982d74ce439986b30596e4eed559368e14811ce25f71e3c4b860d52f",
+      "python-engine/evaluation/facts.py": "2584fcf6bd0866d8218029e3cb4021e21499087b5ef12215d11e5c8fdcd54020",
+      "python-engine/evaluation/metrics.py": "e751170787e6c49d42c8e619ae2590d2e5c3d992801e55c5ec99c1e89a8d19e0",
+      "python-engine/evaluation/runner.py": "179c44c20513994f1890c8df499e034f23e213efd52f92f3bcf8681d3b6524d5",
+      "python-engine/evaluation/statistics.py": "a68d98aa1c1490d3d8c9741f5f9ae374bbb1b5508606ba3861380d8d3eb3bda2",
+      "python-engine/evaluation/text.py": "2155e8925a66e6ff613d20ac4b35ea2b737aab74ced6ac844bd79d27501b079b",
+      "python-engine/evaluation_cli.py": "cb3f94fccdeb4692f467c11ca1f93fe8d05d7f4652a6de190946ad8f7c493b41",
+      "python-engine/local_cli.py": "005b64339dd0f8d5289888c99eb97029c9cf0f0035dc3022c9cd81db2d930e90",
+      "python-engine/nlp_pipeline.py": "4825422ece187fde18de76bf55a84cf15f0a0f939db09ed8936df94c4e384904",
+      "python-engine/piper_tts.py": "4f3080d09167974cd3ca90e11f4fc9400a1e2760be842300a7792b342d9e48b4",
+      "python-engine/pure_nlp.py": "727702990dca654063bb401e2309411ce5f8a8e31b34f6aa92edc6470323f9cf",
+      "python-engine/summarizer.py": "8b5bc1438176480d16761cbb52870cf77f186c3bd47a54d373e4da3e089974b6",
+      "python-engine/summarizer_core/__init__.py": "60b471e4d1ac7cd9d295a17ff8d0aec609ecb75c7e52afb7210d1b3912bdce74",
+      "python-engine/summarizer_core/chunking.py": "1f8cba2d404dfbafd1f67f5874afd3420cd237cb3c8686cbcfb76b2409bdda3b",
+      "python-engine/summarizer_core/cleaning.py": "ab6d46d8ffb332250b33d075293696bb1d9d4d7a61fe9a1550abb75d264c43b0",
+      "python-engine/summarizer_core/constants.py": "18f02d19374493ceec740c31f1c08379f8ddddd7992cec122e382a616b70edfd",
+      "python-engine/summarizer_core/embeddings.py": "3b56c2f1f4ec4afc9945cb2325aa7aaecbb2e31e597e7a6e83ea6e240bd38d22",
+      "python-engine/summarizer_core/extraction.py": "cb99936098e7d5ab8272da418ff845c19c7c286cb47cffc9636cdd9e43734882",
+      "python-engine/summarizer_core/models.py": "8f9ff2eea06463bdde436c98a621645939fb68a7319b72c2fe96b95975ac7bab",
+      "python-engine/summarizer_core/normalization.py": "d5e12e119414fd594e92cc83165b72d29838397d02eba189c60b036842296135",
+      "python-engine/summarizer_core/nutshell.py": "9eac26dfba3ffb1acede0f2038de0cf85994b129a00fd76a107f1c652b2694f0",
+      "python-engine/summarizer_core/pipeline.py": "40d30fc74483c91141b8a265ed29b05623ff51bab6e0a3a39c14f20bc20bdc7c",
+      "python-engine/summarizer_core/profiles.py": "0caedd752a21155120c707b8bcb7018969828f32d555c620dfd7894085994662",
+      "python-engine/summarizer_core/prompts.py": "f1ef9b50fc9d14c09131027d27230290c7d9615aeb9888ca711326f076aecb59",
+      "python-engine/summarizer_core/retrieval.py": "b3fdb2389680369a279e98ea17b399e4270c81bb89ba30361551232109e79fa9",
+      "python-engine/summarizer_core/retrieval_models.py": "6765d6080d82cd833629a5beddd9d630207e3b13a239707b28bc74dbefa43471",
+      "python-engine/summarizer_core/scoring.py": "73491b356c0b6f032045da154aa849a2e25e982961327fb005f81477afd8ce39",
+      "python-engine/summarizer_core/selection.py": "d0bf0ea13ecba4de8cddd58d0e66b2a1fc11c18209870444722f2afebde6f9ba",
+      "python-engine/summarizer_core/structure.py": "d0c34557d65d86027d43451141414eb0fe4fbba37eeda568744773c09d32fd7c",
+      "python-engine/summarizer_core/text_utils.py": "426a2de1c32580aaf1f6a8269e00c83b4a5ffae9c55f68ce483d447349d0b48b",
+      "python-engine/summarizer_core/tokenization.py": "17d2c7325477e7093acb984b8eb0f08bd6b331623eb3002ae3bfbfbc5d83080b",
+      "python-engine/summarizer_orig.py": "fe8e57c0593c0848af83e6c486a6e143a0a96fbf3e298369180fb72b3e354e62"
+    },
+    "git_commit": "efd7ee0b1d24214d201a730c9c2185b461787e18",
+    "packages": {
+      "numpy": "2.4.4",
+      "scipy": "1.17.1",
+      "scikit-learn": "1.8.0",
+      "nltk": "3.8.1",
+      "spacy": null,
+      "bert-score": null,
+      "torch": null,
+      "transformers": null,
+      "sentence-transformers": null
+    },
+    "python": "3.14.4",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "tokenizer": "unicode-words-v1",
+    "nlp_resources": {
+      "tokenizers/punkt": {
+        "available": true,
+        "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+        "file_count": 20
+      },
+      "tokenizers/punkt_tab": {
+        "available": false
+      },
+      "corpora/wordnet.zip": {
+        "available": true,
+        "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+        "file_count": 1
+      },
+      "corpora/stopwords": {
+        "available": true,
+        "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+        "file_count": 34
+      },
+      "taggers/averaged_perceptron_tagger": {
+        "available": true,
+        "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+        "file_count": 1
+      },
+      "taggers/averaged_perceptron_tagger_eng": {
+        "available": true,
+        "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+        "file_count": 3
+      },
+      "spacy/en_core_web_sm": {
+        "available": false
+      }
+    },
+    "nlp_resource_policy": "offline; existing deterministic fallback if a resource is missing"
+  },
+  "outputs": [
+    {
+      "document_id": "USGS-SIR-2023-5136",
+      "synthetic": false,
+      "mode": "brief",
+      "profile": "academic",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "In cooperation with the U.S. Army Corps of Engineers. The monitoring study included the collection of discrete and continuous water-quality data and streamflow monitoring at selected sites that integrated and enhanced existing monitoring programs within the study area. The median filtered ammonia concentration at most sites was less than the laboratory reporting level of 0.03 milligram per liter as nitrogen except for the Sheyenne River at Harwood, North Dakota (U.S. The increase in nitrate plus nitrite concentrations could reflect the effect of the wastewater-treatment plant discharge that enters the Red River of the North upstream from the site located downstream from the Fargo-Moorhead metropolitan area and from urban runoff.",
+      "source_sha256": "e7d76c47489247184421b48ecfaeff124322f57f1d14b376a48a4d7602225df0",
+      "source_word_count": 953,
+      "word_count": 109,
+      "target_words": 109,
+      "timings": {
+        "preprocessing_seconds": 1.4475986000002194,
+        "summarization_seconds": 0.06068349999986822,
+        "postprocessing_seconds": 0.137090299999727,
+        "metrics_seconds": 0.01937190000035116,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 1.9156668000000536
+      },
+      "generated_at": "2026-10-02T06:47:46.459335+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "58e5a6d050a2ed9ee4d8b3a442f65e6d1f35dd2b44f27048321cf6e251ef93f8",
+      "configuration": {
+        "system": "proposed",
+        "mode": "brief",
+        "profile": "academic",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.3,
+          "title": 0.16,
+          "position": 0.1,
+          "paragraph_pos": 0.08,
+          "section": 0.22,
+          "type_relevance": 0.14
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Water-quality characteristics of the Red River of the North and tributaries, 2019–22",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 109,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [
+        "Completeness: no methodology sentence in output for academic/technical mode.",
+        "Completeness: no findings/results sentence in output."
+      ],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.11437565582371459,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 88.56243441762854,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 11.764705882352942,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 1.0,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "document_id": "USGS-SIR-2023-5136",
+      "synthetic": false,
+      "mode": "balanced",
+      "profile": "academic",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "In cooperation with the U.S. Army Corps of Engineers. The monitoring study included the collection of discrete and continuous water-quality data and streamflow monitoring at selected sites that integrated and enhanced existing monitoring programs within the study area. Discrete samples collected at 10 sites in the Fargo-Moorhead metropolitan area were analyzed for major ions, trace elements, nutrients, suspended sediment, pesticides, and fecal indicator bacteria. In general, major ion concentrations were higher at sites on the tributaries (Wild Rice, Sheyenne, and Maple Rivers) compared to sites on the Red River of the North. The median filtered ammonia concentration at most sites was less than the laboratory reporting level of 0.03 milligram per liter as nitrogen except for the Sheyenne River at Harwood, North Dakota (U.S. Geological Survey [USGS] station 05060400). The increase in nitrate plus nitrite concentrations could reflect the effect of the wastewater-treatment plant discharge that enters the Red River of the North upstream from the site located downstream from the Fargo-Moorhead metropolitan area and from urban runoff. Suspended-sediment concentrations were generally highest at sites in the Sheyenne River and lowest in the upstream Red River of the North sites. Water-quality measurements continuously recorded at the Red River of the North at Hickson, N. Dak. Dak., when compared to the Red River of the North near Georgetown, Minn. that had higher values than the other two sites. The patterns in turbidity were mostly related to streamflow conditions and were similar among the three sites on the Red River of the North.",
+      "source_sha256": "e7d76c47489247184421b48ecfaeff124322f57f1d14b376a48a4d7602225df0",
+      "source_word_count": 953,
+      "word_count": 251,
+      "target_words": 251,
+      "timings": {
+        "preprocessing_seconds": 0.3213387999999213,
+        "summarization_seconds": 0.07707410000011805,
+        "postprocessing_seconds": 0.21730449999995471,
+        "metrics_seconds": 0.01938220000010915,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 0.636076900000262
+      },
+      "generated_at": "2026-10-02T06:47:48.125720+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "91350f38241e59413498e17a43b07434351663b689abe1a455ceecff5c83e71a",
+      "configuration": {
+        "system": "proposed",
+        "mode": "balanced",
+        "profile": "academic",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.3,
+          "title": 0.16,
+          "position": 0.1,
+          "paragraph_pos": 0.08,
+          "section": 0.22,
+          "type_relevance": 0.14
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Water-quality characteristics of the Red River of the North and tributaries, 2019–22",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 251,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [
+        "Completeness: no findings/results sentence in output."
+      ],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.2633788037775446,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 73.66211962224554,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 30.58823529411765,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 0.9230769230769231,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "document_id": "USGS-SIR-2023-5136",
+      "synthetic": false,
+      "mode": "detailed",
+      "profile": "academic",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "In cooperation with the U.S. Army Corps of Engineers. The monitoring study included the collection of discrete and continuous water-quality data and streamflow monitoring at selected sites that integrated and enhanced existing monitoring programs within the study area. Discrete samples collected at 10 sites in the Fargo-Moorhead metropolitan area were analyzed for major ions, trace elements, nutrients, suspended sediment, pesticides, and fecal indicator bacteria. In general, major ion concentrations were higher at sites on the tributaries (Wild Rice, Sheyenne, and Maple Rivers) compared to sites on the Red River of the North. In general, bicarbonate, calcium, magnesium, and sulfate represented most of the dissolved ions measured in samples collected at the 10 sites. Calcium, chloride, fluoride, potassium, silica, and sodium were also measured in samples, but they represented a smaller portion of the total dissolved ions. Several of the trace elements had concentrations below the laboratory reporting level in all of the samples, including antimony, beryllium, cadmium, chromium, silver, and thallium. Nutrients analyzed in discrete samples included filtered and unfiltered concentrations of ammonia, nitrate plus nitrite, phosphorus, and organic carbon. The median filtered ammonia concentration at most sites was less than the laboratory reporting level of 0.03 milligram per liter as nitrogen except for the Sheyenne River at Harwood, North Dakota (U.S. Geological Survey [USGS] station 05060400), and Red River of the North near Georgetown, Minnesota (USGS station 05062130). The increase in nitrate plus nitrite concentrations could reflect the effect of the wastewater-treatment plant discharge that enters the Red River of the North upstream from the site located downstream from the Fargo-Moorhead metropolitan area and from urban runoff. Suspended-sediment concentrations were generally highest at sites in the Sheyenne River and lowest in the upstream Red River of the North sites. Suspended-sediment concentration was highly variable in samples collected at the 10 sites, mostly influenced by the occurrence of snowmelt and rainfall-runoff events. Dak., 95 percent or more of the suspended sediment had particle diameter sizes less than 0.0625 millimeter in 50 percent of the samples (median). A water year is the 12-month period from October 1 to September 30 and is designated by the calendar year in which it ends. Water-quality measurements continuously recorded at the Red River of the North at Hickson, N. Dak. Specific conductance values were similar for the Red River of the North near Hickson, N. Dak., when compared to the Red River of the North near Georgetown, Minn. that had higher values than the other two sites. The patterns in turbidity were mostly related to streamflow conditions and were similar among the three sites on the Red River of the North.",
+      "source_sha256": "e7d76c47489247184421b48ecfaeff124322f57f1d14b376a48a4d7602225df0",
+      "source_word_count": 953,
+      "word_count": 436,
+      "target_words": 436,
+      "timings": {
+        "preprocessing_seconds": 0.30576590000009674,
+        "summarization_seconds": 0.13460390000000189,
+        "postprocessing_seconds": 0.3584206999998969,
+        "metrics_seconds": 0.020525700000234792,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 0.8203361999999288
+      },
+      "generated_at": "2026-10-02T06:47:48.762465+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "86f65f7cee7b74dd7a8647c331272508d9b5594e138c0cd91423979572402932",
+      "configuration": {
+        "system": "proposed",
+        "mode": "detailed",
+        "profile": "academic",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.3,
+          "title": 0.16,
+          "position": 0.1,
+          "paragraph_pos": 0.08,
+          "section": 0.22,
+          "type_relevance": 0.14
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Water-quality characteristics of the Red River of the North and tributaries, 2019–22",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 436,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [
+        "Completeness: no findings/results sentence in output."
+      ],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.45750262329485836,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 54.249737670514165,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 49.411764705882355,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 0.9523809523809523,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "document_id": "USGS-SIR-2023-5136",
+      "synthetic": false,
+      "mode": "comprehensive",
+      "profile": "academic",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "In cooperation with the U.S. Army Corps of Engineers, the U.S. Geological Survey initiated a water-quality monitoring study to describe the water-quality characteristics of the Red River of the North and its tributaries in the Fargo-Moorhead metropolitan area during the preconstruction period of the Flood Risk Management Project from October 1, 2019, to October 1, 2022. The monitoring study included the collection of discrete and continuous water-quality data and streamflow monitoring at selected sites that integrated and enhanced existing monitoring programs within the study area. Discrete samples collected at 10 sites in the Fargo-Moorhead metropolitan area were analyzed for major ions, trace elements, nutrients, suspended sediment, pesticides, and fecal indicator bacteria. In general, major ion concentrations were higher at sites on the tributaries (Wild Rice, Sheyenne, and Maple Rivers) compared to sites on the Red River of the North. In general, bicarbonate, calcium, magnesium, and sulfate represented most of the dissolved ions measured in samples collected at the 10 sites. Calcium, chloride, fluoride, potassium, silica, and sodium were also measured in samples, but they represented a smaller portion of the total dissolved ions. Sulfate was the most dominant dissolved ion that had the highest concentrations among the major ions measured in samples. Several of the trace elements had concentrations below the laboratory reporting level in all of the samples, including antimony, beryllium, cadmium, chromium, silver, and thallium. Sites on the Wild Rice River generally had the highest concentrations of arsenic, barium, boron, manganese, and nickel compared to the other sites. Nutrients analyzed in discrete samples included filtered and unfiltered concentrations of ammonia, nitrate plus nitrite, phosphorus, and organic carbon. The median filtered ammonia concentration at most sites was less than the laboratory reporting level of 0.03 milligram per liter as nitrogen except for the Sheyenne River at Harwood, North Dakota (U.S. Geological Survey [USGS] station 05060400), and Red River of the North near Georgetown, Minnesota (USGS station 05062130). The increase in nitrate plus nitrite concentrations could reflect the effect of the wastewater-treatment plant discharge that enters the Red River of the North upstream from the site located downstream from the Fargo-Moorhead metropolitan area and from urban runoff. Suspended-sediment concentrations were generally highest at sites in the Sheyenne River and lowest in the upstream Red River of the North sites. Suspended-sediment concentration was highly variable in samples collected at the 10 sites, mostly influenced by the occurrence of snowmelt and rainfall-runoff events. (USGS station 05059000) had the largest range in sediment concentrations in samples collected at the 10 sites. Dak., 95 percent or more of the suspended sediment had particle diameter sizes less than 0.0625 millimeter in 50 percent of the samples (median). Of the 102 pesticides and pesticide degradates analyzed, 45 constituents had no detectable concentrations in any of the 17 samples collected at five sites. The remaining 57 pesticides had at least one detection in the samples collected at the five sites. Dak., USGS station 05053000, and near St. Benedict, N. Dak., had fewer pesticide detections compared to the Maple River below Mapleton, N.Dak. Patterns in annual loads generally followed the same pattern as streamflow at the 10 sites for water years 2020–22. A water year is the 12-month period from October 1 to September 30 and is designated by the calendar year in which it ends. The greatest loads for all constituents were delivered at the two downstream sites on the Red River of the North; sites that also had the highest annual streamflows among the sites and the greatest loads were delivered in water year 2020 when the highest streamflows occurred at the sites. Likewise, the least loads for most constituents were at the Maple River and were least in 2021 compared to the other years because of low-streamflow conditions. Water-quality measurements continuously recorded at the Red River of the North at Hickson, N. Dak. Specific conductance values were similar for the Red River of the North near Hickson, N. Dak., when compared to the Red River of the North near Georgetown, Minn. that had higher values than the other two sites. The patterns in turbidity were mostly related to streamflow conditions and were similar among the three sites on the Red River of the North.",
+      "source_sha256": "e7d76c47489247184421b48ecfaeff124322f57f1d14b376a48a4d7602225df0",
+      "source_word_count": 953,
+      "word_count": 700,
+      "target_words": 700,
+      "timings": {
+        "preprocessing_seconds": 0.30738789999986693,
+        "summarization_seconds": 0.18159220000006826,
+        "postprocessing_seconds": 0.4683665000002293,
+        "metrics_seconds": 0.04874859999972614,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 1.0070795999999973
+      },
+      "generated_at": "2026-10-02T06:47:49.583218+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "d88388b1aaffb302b60b4613dad9bafd65b47340df1a9e4738f97c5702036a21",
+      "configuration": {
+        "system": "proposed",
+        "mode": "comprehensive",
+        "profile": "academic",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.3,
+          "title": 0.16,
+          "position": 0.1,
+          "paragraph_pos": 0.08,
+          "section": 0.22,
+          "type_relevance": 0.14
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Water-quality characteristics of the Red River of the North and tributaries, 2019–22",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 700,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [
+        "Completeness: no findings/results sentence in output."
+      ],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.7345225603357818,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 26.547743966421823,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 83.52941176470588,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 0.9375,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "document_id": "NASA-RELEASE-25-002",
+      "synthetic": false,
+      "mode": "brief",
+      "profile": "general",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "Once again, the temperature record has been shattered — 2024 was the hottest year since record keeping began in 1880,” said NASA Administrator Bill Nelson. We are halfway to Pliocene -level warmth in just 150 years.” Scientists have concluded the warming trend of recent decades is driven by heat-trapping carbon dioxide, methane, and other greenhouse gases. The changes occurring in people’severyday weather experiences have become abundantly clear.” Independent analyses by NOAA, Berkeley Earth. NASA’sfull dataset of global surface temperatures, as well as details of how NASA scientists conducted the analysis, are publicly available from GISS.",
+      "source_sha256": "016cb2dc03c08f47a9f14a1cc1c4e701f5600bbe527afb5e054b0f3cf8b4e127",
+      "source_word_count": 765,
+      "word_count": 94,
+      "target_words": 94,
+      "timings": {
+        "preprocessing_seconds": 0.24154259999977512,
+        "summarization_seconds": 0.03983270000026096,
+        "postprocessing_seconds": 0.10568709999961357,
+        "metrics_seconds": 0.01685540000016772,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 0.40474670000003243
+      },
+      "generated_at": "2026-10-02T06:47:50.591562+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "53ff33572e7e9b678dcc8e4c2d79c965ca0b9e0080685bc6b6b9ddf4e10ecf5a",
+      "configuration": {
+        "system": "proposed",
+        "mode": "brief",
+        "profile": "general",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.38,
+          "title": 0.18,
+          "position": 0.14,
+          "paragraph_pos": 0.1,
+          "section": 0.12,
+          "type_relevance": 0.08
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Temperatures Rising: NASA Confirms 2024 Warmest Year on Record",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 94,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [
+        "Faithfulness warning: sentence start not found in source: '“the changes occurring in people’severyday weather…'",
+        "Faithfulness warning: negation scope 'no' context not verifiable in source",
+        "Faithfulness warning: sentence start not found in source: 'nasa’sfull dataset of global surface temperatures…'"
+      ],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.12287581699346405,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 87.7124183006536,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 9.45945945945946,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 0.5,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "document_id": "NASA-RELEASE-25-002",
+      "synthetic": false,
+      "mode": "balanced",
+      "profile": "general",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "Earth’saverage surface temperature in 2024 was the warmest on record, according to an analysis led by NASA scientists. Global temperatures in 2024 were 2.30 degrees Fahrenheit (1.28 degrees Celsius) above the agency’s 20th-century baseline (1951-1980), which tops the record set in 2023. The new record comes after 15 consecutive months (June 2023 through August 2024) of monthly temperature records — an unprecedented heat streak. Once again, the temperature record has been shattered — 2024 was the hottest year since record keeping began in 1880,” said NASA Administrator Bill Nelson. Between record breaking temperatures and wildfires currently threatening our centers and workforce in California. We are halfway to Pliocene -level warmth in just 150 years.” Scientists have concluded the warming trend of recent decades is driven by heat-trapping carbon dioxide, methane, and other greenhouse gases. Researchers are working to identify contributing factors, including possible climate impacts of the January 2022 Tonga volcanic eruption and reductions in pollution, which may change cloud cover and how solar energy is reflected back into space. A new assessment published earlier this year by scientists at the Colorado School of Mines, National Science Foundation, the National Atmospheric and Oceanic Administration (NOAA), and NASA further increases confidence in the agency’sglobal and regional temperature data. The changes occurring in people’severyday weather experiences have become abundantly clear.” Independent analyses by NOAA, Berkeley Earth. NASA’sfull dataset of global surface temperatures, as well as details of how NASA scientists conducted the analysis, are publicly available from GISS, a NASA laboratory managed by the agency’sGoddard Space Flight Center in Greenbelt, Maryland.",
+      "source_sha256": "016cb2dc03c08f47a9f14a1cc1c4e701f5600bbe527afb5e054b0f3cf8b4e127",
+      "source_word_count": 765,
+      "word_count": 257,
+      "target_words": 257,
+      "timings": {
+        "preprocessing_seconds": 0.20719850000023143,
+        "summarization_seconds": 0.04721299999982875,
+        "postprocessing_seconds": 0.2166323999999804,
+        "metrics_seconds": 0.01360179999983302,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 0.4860896000000139
+      },
+      "generated_at": "2026-10-02T06:47:50.997485+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "2b2c6f42bf8aa9074ed0ec8832ac70ec00c9df172e20318c90edf05eac407b51",
+      "configuration": {
+        "system": "proposed",
+        "mode": "balanced",
+        "profile": "general",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.38,
+          "title": 0.18,
+          "position": 0.14,
+          "paragraph_pos": 0.1,
+          "section": 0.12,
+          "type_relevance": 0.08
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Temperatures Rising: NASA Confirms 2024 Warmest Year on Record",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 257,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [
+        "Faithfulness warning: sentence start not found in source: 'earth’saverage surface temperature in 2024 was…'",
+        "Faithfulness warning: sentence start not found in source: '“the changes occurring in people’severyday weather…'",
+        "Faithfulness warning: negation scope 'no' context not verifiable in source",
+        "Faithfulness warning: sentence start not found in source: 'nasa’sfull dataset of global surface temperatures…'"
+      ],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.3359477124183007,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 66.40522875816993,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 36.486486486486484,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 0.7,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "document_id": "NASA-RELEASE-25-002",
+      "synthetic": false,
+      "mode": "detailed",
+      "profile": "general",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "Earth’saverage surface temperature in 2024 was the warmest on record, according to an analysis led by NASA scientists. Global temperatures in 2024 were 2.30 degrees Fahrenheit (1.28 degrees Celsius) above the agency’s 20th-century baseline (1951-1980), which tops the record set in 2023. The new record comes after 15 consecutive months (June 2023 through August 2024) of monthly temperature records — an unprecedented heat streak. Once again, the temperature record has been shattered — 2024 was the hottest year since record keeping began in 1880,” said NASA Administrator Bill Nelson. Between record breaking temperatures and wildfires currently threatening our centers and workforce in California, it has never been more important to understand our changing planet.” NASA scientists further estimate Earth in 2024 was about 2.65 degrees Fahrenheit (1.47 degrees Celsius) warmer than the mid-19th century average (1850-1900). For more than half of 2024, average temperatures were more than 1.5 degrees Celsius above the baseline, and the annual average, with mathematical uncertainties, may have exceeded the level for the first time. To put that in perspective, temperatures during the warm periods on Earth three million years ago — when sea levels were dozens of feet higher than today — were only around 3 degrees Celsius warmer than pre-industrial levels,” said Gavin Schmidt. We are halfway to Pliocene -level warmth in just 150 years.” Scientists have concluded the warming trend of recent decades is driven by heat-trapping carbon dioxide, methane, and other greenhouse gases. In 2022 and 2023, Earth saw record increases in carbon dioxide emissions from fossil fuels, according to a recent international analysis. The concentration of carbon dioxide in the atmosphere has increased from pre-industrial levels in the 18th century of approximately 278 parts per million to about 420 parts per million today. Exceptional heat trends The temperatures of individual years can be influenced by natural climate fluctuations such as El Niño and La Niña, which alternately warm and cool the tropical Pacific Ocean. Researchers are working to identify contributing factors, including possible climate impacts of the January 2022 Tonga volcanic eruption and reductions in pollution, which may change cloud cover and how solar energy is reflected back into space. Not every year is going to break records, but the long-term trend is clear,” Schmidt said. We’re already seeing the impact in extreme rainfall, heat waves, and increased flood risk, which are going to keep getting worse as long as emissions continue.” Seeing changes locally NASA assembles its temperature record using surface air temperature data collected from tens of thousands of meteorological stations. This data is analyzed using methods that account for the varied spacing of temperature stations around the globe and for urban heating effects that could skew the calculations. A new assessment published earlier this year by scientists at the Colorado School of Mines, National Science Foundation, the National Atmospheric and Oceanic Administration (NOAA), and NASA further increases confidence in the agency’sglobal and regional temperature data. The changes occurring in people’severyday weather experiences have become abundantly clear.” Independent analyses by NOAA, Berkeley Earth. NASA’sfull dataset of global surface temperatures, as well as details of how NASA scientists conducted the analysis, are publicly available from GISS, a NASA laboratory managed by the agency’sGoddard Space Flight Center in Greenbelt, Maryland.",
+      "source_sha256": "016cb2dc03c08f47a9f14a1cc1c4e701f5600bbe527afb5e054b0f3cf8b4e127",
+      "source_word_count": 765,
+      "word_count": 535,
+      "target_words": 535,
+      "timings": {
+        "preprocessing_seconds": 0.2088051999999152,
+        "summarization_seconds": 0.08948230000032709,
+        "postprocessing_seconds": 0.4278127999996286,
+        "metrics_seconds": 0.03006360000017594,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 0.7569680999999946
+      },
+      "generated_at": "2026-10-02T06:47:51.483297+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "82233982b49b1d8242b801026546356ba6e97f6b54a00498f270d1792136b72c",
+      "configuration": {
+        "system": "proposed",
+        "mode": "detailed",
+        "profile": "general",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.38,
+          "title": 0.18,
+          "position": 0.14,
+          "paragraph_pos": 0.1,
+          "section": 0.12,
+          "type_relevance": 0.08
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Temperatures Rising: NASA Confirms 2024 Warmest Year on Record",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 535,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [
+        "Faithfulness warning: sentence start not found in source: 'earth’saverage surface temperature in 2024 was…'",
+        "Faithfulness warning: sentence start not found in source: 'exceptional heat trends the temperatures of…'",
+        "Faithfulness warning: sentence start not found in source: '“the changes occurring in people’severyday weather…'",
+        "Faithfulness warning: negation scope 'no' context not verifiable in source",
+        "Faithfulness warning: sentence start not found in source: 'nasa’sfull dataset of global surface temperatures…'"
+      ],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.6993464052287581,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 30.065359477124186,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 72.97297297297297,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 0.7777777777777778,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "document_id": "NASA-RELEASE-25-002",
+      "synthetic": false,
+      "mode": "comprehensive",
+      "profile": "general",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "Earth’saverage surface temperature in 2024 was the warmest on record, according to an analysis led by NASA scientists. Global temperatures in 2024 were 2.30 degrees Fahrenheit (1.28 degrees Celsius) above the agency’s 20th-century baseline (1951-1980), which tops the record set in 2023. The new record comes after 15 consecutive months (June 2023 through August 2024) of monthly temperature records — an unprecedented heat streak. Once again, the temperature record has been shattered — 2024 was the hottest year since record keeping began in 1880,” said NASA Administrator Bill Nelson. Between record breaking temperatures and wildfires currently threatening our centers and workforce in California, it has never been more important to understand our changing planet.” NASA scientists further estimate Earth in 2024 was about 2.65 degrees Fahrenheit (1.47 degrees Celsius) warmer than the mid-19th century average (1850-1900). For more than half of 2024, average temperatures were more than 1.5 degrees Celsius above the baseline, and the annual average, with mathematical uncertainties, may have exceeded the level for the first time. The Paris Agreement on climate change sets forth efforts to remain below 1.5 degrees Celsius over the long term. To put that in perspective, temperatures during the warm periods on Earth three million years ago — when sea levels were dozens of feet higher than today — were only around 3 degrees Celsius warmer than pre-industrial levels,” said Gavin Schmidt, director of NASA’sGoddard Institute for Space Studies (GISS) in New York. We are halfway to Pliocene -level warmth in just 150 years.” Scientists have concluded the warming trend of recent decades is driven by heat-trapping carbon dioxide, methane, and other greenhouse gases. In 2022 and 2023, Earth saw record increases in carbon dioxide emissions from fossil fuels, according to a recent international analysis. The concentration of carbon dioxide in the atmosphere has increased from pre-industrial levels in the 18th century of approximately 278 parts per million to about 420 parts per million today. Exceptional heat trends The temperatures of individual years can be influenced by natural climate fluctuations such as El Niño and La Niña, which alternately warm and cool the tropical Pacific Ocean. The strong El Niño that began in fall 2023 helped nudge global temperatures above previous records. The heat surge that began in 2023 continued to exceed expectations in 2024, Schmidt said, even though El Niño abated. Researchers are working to identify contributing factors, including possible climate impacts of the January 2022 Tonga volcanic eruption and reductions in pollution, which may change cloud cover and how solar energy is reflected back into space. Not every year is going to break records, but the long-term trend is clear,” Schmidt said. We’re already seeing the impact in extreme rainfall, heat waves, and increased flood risk, which are going to keep getting worse as long as emissions continue.” Seeing changes locally NASA assembles its temperature record using surface air temperature data collected from tens of thousands of meteorological stations, as well as sea surface temperature data acquired by ship- and buoy-based instruments. This data is analyzed using methods that account for the varied spacing of temperature stations around the globe and for urban heating effects that could skew the calculations. A new assessment published earlier this year by scientists at the Colorado School of Mines, National Science Foundation, the National Atmospheric and Oceanic Administration (NOAA), and NASA further increases confidence in the agency’sglobal and regional temperature data. Now, we’re seeing it at the local level,” Schmidt said. The changes occurring in people’severyday weather experiences have become abundantly clear.” Independent analyses by NOAA, Berkeley Earth, the Hadley Centre (part of the United Kingdom’sweather forecasting Met Office) and Copernicus Climate Services in Europe have also concluded that the global surface temperatures for 2024 were the highest since modern record-keeping began. These scientists use much of the same temperature data in their analyses but use different methodologies and models. NASA’sfull dataset of global surface temperatures, as well as details of how NASA scientists conducted the analysis, are publicly available from GISS, a NASA laboratory managed by the agency’sGoddard Space Flight Center in Greenbelt, Maryland.",
+      "source_sha256": "016cb2dc03c08f47a9f14a1cc1c4e701f5600bbe527afb5e054b0f3cf8b4e127",
+      "source_word_count": 765,
+      "word_count": 676,
+      "target_words": 676,
+      "timings": {
+        "preprocessing_seconds": 0.276387600000362,
+        "summarization_seconds": 0.07877359999974942,
+        "postprocessing_seconds": 0.5460819999998421,
+        "metrics_seconds": 0.027060699999765347,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 0.9292694999999185
+      },
+      "generated_at": "2026-10-02T06:47:52.241620+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "69e9218c7da2ca06371b09cc7b8003699c9a6ae805f962047f1cbbba872942af",
+      "configuration": {
+        "system": "proposed",
+        "mode": "comprehensive",
+        "profile": "general",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.38,
+          "title": 0.18,
+          "position": 0.14,
+          "paragraph_pos": 0.1,
+          "section": 0.12,
+          "type_relevance": 0.08
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Temperatures Rising: NASA Confirms 2024 Warmest Year on Record",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 676,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [
+        "Faithfulness warning: sentence start not found in source: 'earth’saverage surface temperature in 2024 was…'",
+        "Faithfulness warning: sentence start not found in source: 'exceptional heat trends the temperatures of…'",
+        "Faithfulness warning: sentence start not found in source: '“the changes occurring in people’severyday weather…'",
+        "Faithfulness warning: negation scope 'no' context not verifiable in source",
+        "Faithfulness warning: sentence start not found in source: 'nasa’sfull dataset of global surface temperatures…'"
+      ],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.8836601307189542,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 11.633986928104578,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 94.5945945945946,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 0.9130434782608696,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "document_id": "NIST-OUTLIERS-INTRO",
+      "synthetic": false,
+      "mode": "brief",
+      "profile": "technical",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "For example, the data may have been coded incorrectly or an experiment may not have been run correctly. However, if the data contains significant outliers, we may need to consider the use of robust statistical techniques.",
+      "source_sha256": "8753c70cce94ea69ec72ce1bfbd77a6ba9abae933237f907fbf4f4d0d0289ae8",
+      "source_word_count": 142,
+      "word_count": 36,
+      "target_words": 36,
+      "timings": {
+        "preprocessing_seconds": 0.04615959999955521,
+        "summarization_seconds": 0.007244800000080431,
+        "postprocessing_seconds": 0.034799800000200776,
+        "metrics_seconds": 0.0027926000002480578,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 0.09173190000001341
+      },
+      "generated_at": "2026-10-02T06:47:53.171975+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "2558a8b56f782126897629008c80e190987e664e47e0f245a31a02c5117a8f8f",
+      "configuration": {
+        "system": "proposed",
+        "mode": "brief",
+        "profile": "technical",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.32,
+          "title": 0.14,
+          "position": 0.12,
+          "paragraph_pos": 0.08,
+          "section": 0.2,
+          "type_relevance": 0.14
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Detection of Outliers — Introduction",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 36,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [
+        "Completeness: no methodology sentence in output for academic/technical mode.",
+        "Completeness: no findings/results sentence in output."
+      ],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.2535211267605634,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 74.64788732394366,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 27.272727272727273,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 1.0,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "document_id": "NIST-OUTLIERS-INTRO",
+      "synthetic": false,
+      "mode": "balanced",
+      "profile": "technical",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "For example, the data may have been coded incorrectly or an experiment may not have been run correctly. If it can be determined that an outlying point is in fact erroneous, then the outlying value should be deleted from the analysis (or corrected if possible). Outliers may be due to random variation or may indicate something scientifically interesting. However, if the data contains significant outliers, we may need to consider the use of robust statistical techniques.",
+      "source_sha256": "8753c70cce94ea69ec72ce1bfbd77a6ba9abae933237f907fbf4f4d0d0289ae8",
+      "source_word_count": 142,
+      "word_count": 76,
+      "target_words": 76,
+      "timings": {
+        "preprocessing_seconds": 0.05381630000010773,
+        "summarization_seconds": 0.00795349999998507,
+        "postprocessing_seconds": 0.06673580000006041,
+        "metrics_seconds": 0.0016132000000652624,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 0.1308905999999297
+      },
+      "generated_at": "2026-10-02T06:47:53.263973+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "2589a84fcceea281f4cf706967b26ed29c30c1b0577655fed0b37009f5f29921",
+      "configuration": {
+        "system": "proposed",
+        "mode": "balanced",
+        "profile": "technical",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.32,
+          "title": 0.14,
+          "position": 0.12,
+          "paragraph_pos": 0.08,
+          "section": 0.2,
+          "type_relevance": 0.14
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Detection of Outliers — Introduction",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 76,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [
+        "Completeness: no methodology sentence in output for academic/technical mode.",
+        "Completeness: no findings/results sentence in output."
+      ],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.5352112676056338,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 46.47887323943662,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 36.36363636363637,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 1.0,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "document_id": "NIST-OUTLIERS-INTRO",
+      "synthetic": false,
+      "mode": "detailed",
+      "profile": "technical",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "For example, the data may have been coded incorrectly or an experiment may not have been run correctly. If it can be determined that an outlying point is in fact erroneous, then the outlying value should be deleted from the analysis (or corrected if possible). Outliers may be due to random variation or may indicate something scientifically interesting. In any event, we typically do not want to simply delete the outlying observation. However, if the data contains significant outliers, we may need to consider the use of robust statistical techniques.",
+      "source_sha256": "8753c70cce94ea69ec72ce1bfbd77a6ba9abae933237f907fbf4f4d0d0289ae8",
+      "source_word_count": 142,
+      "word_count": 90,
+      "target_words": 90,
+      "timings": {
+        "preprocessing_seconds": 0.04377569999996922,
+        "summarization_seconds": 0.008685799999966548,
+        "postprocessing_seconds": 0.07185210000034203,
+        "metrics_seconds": 0.0019487999998091254,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 0.1270355000001473
+      },
+      "generated_at": "2026-10-02T06:47:53.395084+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "7c2a3092502e4237562c500adb4de3117f656d76576c67e1f1db4e79bd01d6df",
+      "configuration": {
+        "system": "proposed",
+        "mode": "detailed",
+        "profile": "technical",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.32,
+          "title": 0.14,
+          "position": 0.12,
+          "paragraph_pos": 0.08,
+          "section": 0.2,
+          "type_relevance": 0.14
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Detection of Outliers — Introduction",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 90,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [
+        "Completeness: no methodology sentence in output for academic/technical mode.",
+        "Completeness: no findings/results sentence in output."
+      ],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.6338028169014085,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 36.61971830985915,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 45.45454545454545,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 1.0,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "document_id": "NIST-OUTLIERS-INTRO",
+      "synthetic": false,
+      "mode": "comprehensive",
+      "profile": "technical",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "Identification of potential outliers is important for the following reasons. An outlier may indicate bad data. For example, the data may have been coded incorrectly or an experiment may not have been run correctly. If it can be determined that an outlying point is in fact erroneous, then the outlying value should be deleted from the analysis (or corrected if possible). In some cases, it may not be possible to determine if an outlying point is bad data. Outliers may be due to random variation or may indicate something scientifically interesting. In any event, we typically do not want to simply delete the outlying observation. However, if the data contains significant outliers, we may need to consider the use of robust statistical techniques.",
+      "source_sha256": "8753c70cce94ea69ec72ce1bfbd77a6ba9abae933237f907fbf4f4d0d0289ae8",
+      "source_word_count": 142,
+      "word_count": 123,
+      "target_words": 123,
+      "timings": {
+        "preprocessing_seconds": 0.046100700000351935,
+        "summarization_seconds": 0.00776159999986703,
+        "postprocessing_seconds": 0.05755600000020422,
+        "metrics_seconds": 0.0015608999997311912,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 0.11355189999994764
+      },
+      "generated_at": "2026-10-02T06:47:53.522353+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "15a08cc155320e2c229875e0503c47799e7a5eeefa89a6414810c19c43c45e7d",
+      "configuration": {
+        "system": "proposed",
+        "mode": "comprehensive",
+        "profile": "technical",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.32,
+          "title": 0.14,
+          "position": 0.12,
+          "paragraph_pos": 0.08,
+          "section": 0.2,
+          "type_relevance": 0.14
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Detection of Outliers — Introduction",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 123,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [
+        "Completeness: no methodology sentence in output for academic/technical mode.",
+        "Completeness: no findings/results sentence in output."
+      ],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.8661971830985915,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 13.38028169014085,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 72.72727272727273,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 1.0,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "document_id": "CENSUS-CB24-149",
+      "synthetic": false,
+      "mode": "brief",
+      "profile": "executive",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "An estimated 26.4 million or 8.0% of people did not have health insurance at any point during 2023. These findings come from three Census Bureau reports: Income in the United States: 2023; Poverty in the United States: 2023; and Health Insurance Coverage in the United States: 2023. Since the response rates remain below pre-pandemic levels, which were regularly above 80%, it is important to examine how respondents differ from nonrespondents. For more details on how sample difference and the associated nonresponse bias impact income and official poverty estimates, refer to the Research Matters blog.",
+      "source_sha256": "c6b01d872a2133e86f0e102407410e97de901627aa09ac60fd6a093b475d5abf",
+      "source_word_count": 1465,
+      "word_count": 94,
+      "target_words": 94,
+      "timings": {
+        "preprocessing_seconds": 0.1914585999998053,
+        "summarization_seconds": 0.029209199999968405,
+        "postprocessing_seconds": 0.06319310000026235,
+        "metrics_seconds": 0.015191099999810831,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 0.2995246999998926
+      },
+      "generated_at": "2026-10-02T06:47:53.635953+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "323b2043dc4bf5ceee8285113335fc2bb54f6cfcca8b852d3b0d61d77511c0eb",
+      "configuration": {
+        "system": "proposed",
+        "mode": "brief",
+        "profile": "executive",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.28,
+          "title": 0.14,
+          "position": 0.2,
+          "paragraph_pos": 0.14,
+          "section": 0.16,
+          "type_relevance": 0.08
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Income, Poverty and Health Insurance Coverage in the United States: 2023",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 94,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [
+        "Qualifier warning: source contains uncertainty markers (may/could/suggests) that are absent from the summary. Verify no unsupported claims were introduced."
+      ],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.06416382252559727,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 93.58361774744027,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 5.853658536585366,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 0.5,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "document_id": "CENSUS-CB24-149",
+      "synthetic": false,
+      "mode": "balanced",
+      "profile": "executive",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "DATA USER NOTE: On July 17, 2026, the Bureau of Labor Statistics re-released SPM thresholds for 2019-2024 following the discovery of coding errors. Meanwhile, 92.0% of the U.S. population had health insurance coverage for all or part of 2023, not statistically different from 2022. An estimated 26.4 million or 8.0% of people did not have health insurance at any point during 2023, according to the 2024 Current Population Survey Annual Social and Economic Supplement (CPS ASEC), also not statistically different from the previous year. These findings come from three Census Bureau reports: Income in the United States: 2023; Poverty in the United States: 2023; and Health Insurance Coverage in the United States: 2023. The SPM provides an alternative way of measuring poverty in the United States and serves as an additional indicator of economic well-being. The Current Population Survey (CPS), sponsored jointly by the Census Bureau and BLS, is conducted every month and is the primary source of labor force statistics for the U.S. population. The CPS ASEC — conducted in February, March and April — is designed to provide annual, national estimates of income, poverty and health insurance estimates, collecting information about job status, income and health insurance coverage during the prior calendar year. Since the response rates remain below pre-pandemic levels, which were regularly above 80%, it is important to examine how respondents differ from nonrespondents, as this difference could affect the accuracy of the estimates. For more details on how sample difference and the associated nonresponse bias impact income and official poverty estimates, refer to the Research Matters blog. All comparisons made here and in each respective report have been tested and found to be statistically significant at the 90% confidence level, unless otherwise noted.",
+      "source_sha256": "c6b01d872a2133e86f0e102407410e97de901627aa09ac60fd6a093b475d5abf",
+      "source_word_count": 1465,
+      "word_count": 286,
+      "target_words": 286,
+      "timings": {
+        "preprocessing_seconds": 0.18703240000013466,
+        "summarization_seconds": 0.054201500000090164,
+        "postprocessing_seconds": 0.11803680000002714,
+        "metrics_seconds": 0.01091709999991508,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 0.3707051000001229
+      },
+      "generated_at": "2026-10-02T06:47:53.935941+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "cff2ce016bd002ac7f20f5636387cf56cb563f6f07ec4c259384fe7225c5bafc",
+      "configuration": {
+        "system": "proposed",
+        "mode": "balanced",
+        "profile": "executive",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.28,
+          "title": 0.14,
+          "position": 0.2,
+          "paragraph_pos": 0.14,
+          "section": 0.16,
+          "type_relevance": 0.08
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Income, Poverty and Health Insurance Coverage in the United States: 2023",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 286,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.19522184300341297,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 80.4778156996587,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 21.463414634146343,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 1.0,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "document_id": "CENSUS-CB24-149",
+      "synthetic": false,
+      "mode": "detailed",
+      "profile": "executive",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "DATA USER NOTE: On July 17, 2026, the Bureau of Labor Statistics re-released SPM thresholds for 2019-2024 following the discovery of coding errors. SEPT. 10, 2024 — The U.S. Census Bureau today announced that real median household income increased by 4.0% between 2022 and 2023. Meanwhile, 92.0% of the U.S. population had health insurance coverage for all or part of 2023, not statistically different from 2022. An estimated 26.4 million or 8.0% of people did not have health insurance at any point during 2023, according to the 2024 Current Population Survey Annual Social and Economic Supplement (CPS ASEC), also not statistically different from the previous year. These findings come from three Census Bureau reports: Income in the United States: 2023; Poverty in the United States: 2023; and Health Insurance Coverage in the United States: 2023. While the official poverty measure is based on the concept of money income, which is pretax and does not include tax credits, the SPM is a post-tax and transfer poverty measure. The SPM provides an alternative way of measuring poverty in the United States and serves as an additional indicator of economic well-being. The Current Population Survey (CPS), sponsored jointly by the Census Bureau and BLS, is conducted every month and is the primary source of labor force statistics for the U.S. population. The CPS ASEC — conducted in February, March and April — is designed to provide annual, national estimates of income, poverty and health insurance estimates, collecting information about job status, income and health insurance coverage during the prior calendar year. The response rate for the CPS basic household survey declined from 68.9% in March 2023 to 67.2% in March 2024. Since the response rates remain below pre-pandemic levels, which were regularly above 80%, it is important to examine how respondents differ from nonrespondents, as this difference could affect the accuracy of the estimates. For more details on how sample difference and the associated nonresponse bias impact income and official poverty estimates, refer to the Research Matters blog. Between 2022 and 2023, the official poverty rate decreased for White and non-Hispanic White individuals; women; 18- to 64-year-olds; unrelated individuals; all workers; less than full-time, year-round workers; and those with some college. The SPM does not replace the official poverty measure; however, it does provide a different metric of economic well-being that includes resources from government programs and tax credits to low-income families. In 2023, private health insurance coverage continued to be more prevalent than public coverage, at 65.4% and 36.3%, respectively. Of the more common subtypes of health insurance coverage, employment-based insurance was the most prevalent, covering 53.7% of the population for some or all of the calendar year, followed by Medicaid (18.9%), Medicare (18.9%), and direct-purchase coverage (10.2%). Regional estimates are available for income, poverty and health insurance coverage in each respective report. All comparisons made here and in each respective report have been tested and found to be statistically significant at the 90% confidence level, unless otherwise noted.",
+      "source_sha256": "c6b01d872a2133e86f0e102407410e97de901627aa09ac60fd6a093b475d5abf",
+      "source_word_count": 1465,
+      "word_count": 494,
+      "target_words": 494,
+      "timings": {
+        "preprocessing_seconds": 0.19227559999990262,
+        "summarization_seconds": 0.12285680000013599,
+        "postprocessing_seconds": 0.17430229999990843,
+        "metrics_seconds": 0.02042440000013812,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 0.5105297000000064
+      },
+      "generated_at": "2026-10-02T06:47:54.307375+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "f3c9a4458bb351ad6ed1956ddec523b273299bdbd6aaf582b7998e78c0503c25",
+      "configuration": {
+        "system": "proposed",
+        "mode": "detailed",
+        "profile": "executive",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.28,
+          "title": 0.14,
+          "position": 0.2,
+          "paragraph_pos": 0.14,
+          "section": 0.16,
+          "type_relevance": 0.08
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Income, Poverty and Health Insurance Coverage in the United States: 2023",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 494,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.3372013651877133,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 66.27986348122867,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 41.46341463414634,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 0.95,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "document_id": "CENSUS-CB24-149",
+      "synthetic": false,
+      "mode": "comprehensive",
+      "profile": "executive",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "DATA USER NOTE: On July 17, 2026, the Bureau of Labor Statistics re-released SPM thresholds for 2019-2024 following the discovery of coding errors. The U.S. Census Bureau will publish revised SPM poverty rates using these updated thresholds prior to the release of the annual poverty report in September. SEPT. 10, 2024 — The U.S. Census Bureau today announced that real median household income increased by 4.0% between 2022 and 2023. The Supplemental Poverty Measure (SPM) rate in 2023 was 12.9%, an increase of 0.5 percentage points from 2022. Meanwhile, 92.0% of the U.S. population had health insurance coverage for all or part of 2023, not statistically different from 2022. An estimated 26.4 million or 8.0% of people did not have health insurance at any point during 2023, according to the 2024 Current Population Survey Annual Social and Economic Supplement (CPS ASEC), also not statistically different from the previous year. These findings come from three Census Bureau reports: Income in the United States: 2023; Poverty in the United States: 2023; and Health Insurance Coverage in the United States: 2023. While the official poverty measure is based on the concept of money income, which is pretax and does not include tax credits, the SPM is a post-tax and transfer poverty measure. The SPM provides an alternative way of measuring poverty in the United States and serves as an additional indicator of economic well-being. The Census Bureau has published poverty estimates using the SPM annually since 2011 in collaboration with the U.S. Bureau of Labor Statistics (BLS). For consistency with past reports, the income estimates in the “Income in the United States: 2023” report are based on the concept of money income. The Current Population Survey (CPS), sponsored jointly by the Census Bureau and BLS, is conducted every month and is the primary source of labor force statistics for the U.S. population. The CPS ASEC — conducted in February, March and April — is designed to provide annual, national estimates of income, poverty and health insurance estimates, collecting information about job status, income and health insurance coverage during the prior calendar year. The response rate for the CPS basic household survey declined from 68.9% in March 2023 to 67.2% in March 2024. Since the response rates remain below pre-pandemic levels, which were regularly above 80%, it is important to examine how respondents differ from nonrespondents, as this difference could affect the accuracy of the estimates. For more details on how sample difference and the associated nonresponse bias impact income and official poverty estimates, refer to the Research Matters blog. Household income rose throughout the income distribution, increasing 6.7% at the 10th percentile and 4.6% at the 90th percentile. Earnings * Real median earnings for men who worked full-time, year-round increased by 3.0%, and real median earnings increased 1.5% for women who worked full-time, year-round. For full-time, year-round workers, the female-to-male earnings ratio in 2023 fell to 82.7% from 84.0% in 2022. Post-Tax Income Post-tax income is defined as money income net of federal and state taxes and credits, payroll taxes (FICA) and temporary cash payments administered by tax agencies like rebates or stimulus payments. Appendix B of the income report compares household median income and inequality measures based on post-tax income. Between 2022 and 2023, the official poverty rate decreased for White and non-Hispanic White individuals; women; 18- to 64-year-olds; unrelated individuals; all workers; less than full-time, year-round workers; and those with some college. The SPM does not replace the official poverty measure; however, it does provide a different metric of economic well-being that includes resources from government programs and tax credits to low-income families. The share of the population with resources below 50% of their poverty threshold was higher using the official poverty measure with a consistent universe (5.2%) than when using the SPM (4.4%). In 2023, private health insurance coverage continued to be more prevalent than public coverage, at 65.4% and 36.3%, respectively. Some people may have more than one coverage type during the calendar year. Of the more common subtypes of health insurance coverage, employment-based insurance was the most prevalent, covering 53.7% of the population for some or all of the calendar year, followed by Medicaid (18.9%), Medicare (18.9%), and direct-purchase coverage (10.2%). Between 2022 and 2023, the rate of Medicare coverage increased by 0.2 percentage points to cover 18.9% of people. Regional estimates are available for income, poverty and health insurance coverage in each respective report. Tables showing state-level poverty and SPM rates using three-year averages are available in the press kit. The CPS ASEC is subject to sampling and nonsampling errors. All comparisons made here and in each respective report have been tested and found to be statistically significant at the 90% confidence level, unless otherwise noted.",
+      "source_sha256": "c6b01d872a2133e86f0e102407410e97de901627aa09ac60fd6a093b475d5abf",
+      "source_word_count": 1465,
+      "word_count": 785,
+      "target_words": 785,
+      "timings": {
+        "preprocessing_seconds": 0.19555310000032478,
+        "summarization_seconds": 0.2851056999998036,
+        "postprocessing_seconds": 0.3336731999997937,
+        "metrics_seconds": 0.06807179999987056,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 0.8833671000002141
+      },
+      "generated_at": "2026-10-02T06:47:54.818574+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "4aa3483a0e9becb170c191335ce28477ba114a455b6ddd8a9f66694e06330af6",
+      "configuration": {
+        "system": "proposed",
+        "mode": "comprehensive",
+        "profile": "executive",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.28,
+          "title": 0.14,
+          "position": 0.2,
+          "paragraph_pos": 0.14,
+          "section": 0.16,
+          "type_relevance": 0.08
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Income, Poverty and Health Insurance Coverage in the United States: 2023",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 785,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [
+        "Faithfulness warning: sentence start not found in source: 'earnings * real median earnings for…'",
+        "Faithfulness warning: sentence start not found in source: 'post-tax income post-tax income is defined…'"
+      ],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.5358361774744027,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 46.41638225255973,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 66.82926829268293,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 0.9444444444444444,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "document_id": "SYNTHETIC-REPEATED-PARAGRAPHS",
+      "synthetic": true,
+      "mode": "brief",
+      "profile": "general",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "The demonstration study enrolled approximately 1,240 participants on 12 March 2024. The concluding statement repeats no additional experiment; this is an intentionally constructed software stress fixture.",
+      "source_sha256": "8cba359dd71d7fe7fedf2021421b87f4399c53c75166a988e93df7e8164334bc",
+      "source_word_count": 135,
+      "word_count": 26,
+      "target_words": 26,
+      "timings": {
+        "preprocessing_seconds": 0.04629679999970904,
+        "summarization_seconds": 0.005787100000361534,
+        "postprocessing_seconds": 0.019155599999976403,
+        "metrics_seconds": 0.0024208999998336367,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 0.07412120000026334
+      },
+      "generated_at": "2026-10-02T06:47:55.702694+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "ded0fb4ba3f61079568783063cc16392d215d63eb25db8c267ed2c1166faade5",
+      "configuration": {
+        "system": "proposed",
+        "mode": "brief",
+        "profile": "general",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.38,
+          "title": 0.18,
+          "position": 0.14,
+          "paragraph_pos": 0.1,
+          "section": 0.12,
+          "type_relevance": 0.08
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Synthetic repeated paragraph stress test",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 26,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.1925925925925926,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 80.74074074074073,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 25.714285714285715,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 1.0,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "document_id": "SYNTHETIC-REPEATED-PARAGRAPHS",
+      "synthetic": true,
+      "mode": "balanced",
+      "profile": "general",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "The demonstration study enrolled approximately 1,240 participants on 12 March 2024. The change may reflect selection bias and does not establish causation. The committee recommended further study before implementation. The concluding statement repeats no additional experiment; this is an intentionally constructed software stress fixture.",
+      "source_sha256": "8cba359dd71d7fe7fedf2021421b87f4399c53c75166a988e93df7e8164334bc",
+      "source_word_count": 135,
+      "word_count": 44,
+      "target_words": 44,
+      "timings": {
+        "preprocessing_seconds": 0.0351143999996566,
+        "summarization_seconds": 0.003868600000259903,
+        "postprocessing_seconds": 0.028901499999847147,
+        "metrics_seconds": 0.0009469999999964784,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 0.0693810000002486
+      },
+      "generated_at": "2026-10-02T06:47:55.777105+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "bd46de25858d3c7fbeb04da105feb14f99160f2d3c896f2f2ee99b34d62b04bb",
+      "configuration": {
+        "system": "proposed",
+        "mode": "balanced",
+        "profile": "general",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.38,
+          "title": 0.18,
+          "position": 0.14,
+          "paragraph_pos": 0.1,
+          "section": 0.12,
+          "type_relevance": 0.08
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Synthetic repeated paragraph stress test",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 44,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.32592592592592595,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 67.4074074074074,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 37.142857142857146,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 1.0,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "document_id": "SYNTHETIC-REPEATED-PARAGRAPHS",
+      "synthetic": true,
+      "mode": "detailed",
+      "profile": "general",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "The demonstration study enrolled approximately 1,240 participants on 12 March 2024. The change may reflect selection bias and does not establish causation. North Laboratory measured 17.4% while South Laboratory measured 9.2%. The committee recommended further study before implementation. The concluding statement repeats no additional experiment; this is an intentionally constructed software stress fixture.",
+      "source_sha256": "8cba359dd71d7fe7fedf2021421b87f4399c53c75166a988e93df7e8164334bc",
+      "source_word_count": 135,
+      "word_count": 53,
+      "target_words": 53,
+      "timings": {
+        "preprocessing_seconds": 0.039580799999839655,
+        "summarization_seconds": 0.004545400000097288,
+        "postprocessing_seconds": 0.029052500000034343,
+        "metrics_seconds": 0.0012260000003152527,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 0.07491170000002967
+      },
+      "generated_at": "2026-10-02T06:47:55.846580+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "8c2e372fb9a2e9e30630545fa563dfae32007d4e513d53ddb052a133734e8da6",
+      "configuration": {
+        "system": "proposed",
+        "mode": "detailed",
+        "profile": "general",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.38,
+          "title": 0.18,
+          "position": 0.14,
+          "paragraph_pos": 0.1,
+          "section": 0.12,
+          "type_relevance": 0.08
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Synthetic repeated paragraph stress test",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 53,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.3925925925925926,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 60.74074074074074,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 60.0,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 1.0,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "document_id": "SYNTHETIC-REPEATED-PARAGRAPHS",
+      "synthetic": true,
+      "mode": "comprehensive",
+      "profile": "general",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "The demonstration study enrolled approximately 1,240 participants on 12 March 2024. Treatment did not significantly reduce mortality. Retention increased by 12.7%, not 27%. The change may reflect selection bias and does not establish causation. Researchers measured a mean concentration of 0.03 milligram per liter. North Laboratory measured 17.4% while South Laboratory measured 9.2%. The committee recommended further study before implementation. The concluding statement repeats no additional experiment; this is an intentionally constructed software stress fixture.",
+      "source_sha256": "8cba359dd71d7fe7fedf2021421b87f4399c53c75166a988e93df7e8164334bc",
+      "source_word_count": 135,
+      "word_count": 75,
+      "target_words": 75,
+      "timings": {
+        "preprocessing_seconds": 0.03238310000006095,
+        "summarization_seconds": 0.003934599999865895,
+        "postprocessing_seconds": 0.03768480000007912,
+        "metrics_seconds": 0.0017293999999310472,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 0.07611550000001444
+      },
+      "generated_at": "2026-10-02T06:47:55.921458+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "5eee4c6b7de24f0a6902b2dfbcb9955352267cb0c7b657525559b784c5d74874",
+      "configuration": {
+        "system": "proposed",
+        "mode": "comprehensive",
+        "profile": "general",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.38,
+          "title": 0.18,
+          "position": 0.14,
+          "paragraph_pos": 0.1,
+          "section": 0.12,
+          "type_relevance": 0.08
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Synthetic repeated paragraph stress test",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 75,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.5555555555555556,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 44.44444444444444,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 100.0,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 1.0,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "document_id": "SYNTHETIC-OCR-NOISE",
+      "synthetic": true,
+      "mode": "brief",
+      "profile": "technical",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "OCR text may confu5e letters and numbers. The change may reflect selection bias and does not establish causation.",
+      "source_sha256": "d7900015e1c8434fa8480e85fbcaa5f229954c7ff75624bd3e6957e1f04daf52",
+      "source_word_count": 105,
+      "word_count": 18,
+      "target_words": 18,
+      "timings": {
+        "preprocessing_seconds": 0.02413219999971261,
+        "summarization_seconds": 0.003800800000135496,
+        "postprocessing_seconds": 0.014404500000182452,
+        "metrics_seconds": 0.0009382000002915447,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 0.04378790000009758
+      },
+      "generated_at": "2026-10-02T06:47:55.997863+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "199956c57906c2d73054d2cef9e725ed6503bb970bb3383aa87d098588eff72d",
+      "configuration": {
+        "system": "proposed",
+        "mode": "brief",
+        "profile": "technical",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.32,
+          "title": 0.14,
+          "position": 0.12,
+          "paragraph_pos": 0.08,
+          "section": 0.2,
+          "type_relevance": 0.14
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Synthetic OCR and hyphenation stress test",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 18,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [
+        "Completeness: no methodology sentence in output for academic/technical mode.",
+        "Completeness: no findings/results sentence in output."
+      ],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.17142857142857143,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 82.85714285714285,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 13.333333333333334,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 1.0,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "document_id": "SYNTHETIC-OCR-NOISE",
+      "synthetic": true,
+      "mode": "balanced",
+      "profile": "technical",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "The demonstration study enrolled approximately 1,240 participants. OCR text may confu5e letters and numbers. The change may reflect selection bias and does not establish causation. The committee recommended further study before implementation.",
+      "source_sha256": "d7900015e1c8434fa8480e85fbcaa5f229954c7ff75624bd3e6957e1f04daf52",
+      "source_word_count": 105,
+      "word_count": 32,
+      "target_words": 32,
+      "timings": {
+        "preprocessing_seconds": 0.025169500000174594,
+        "summarization_seconds": 0.0036887999999635213,
+        "postprocessing_seconds": 0.025677799999812123,
+        "metrics_seconds": 0.0009307000000262633,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 0.056039699999928416
+      },
+      "generated_at": "2026-10-02T06:47:56.041889+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "ba73db40d53e71e70b7d08ef32a78db6dc3a295ac08442e9246d73784ae9e160",
+      "configuration": {
+        "system": "proposed",
+        "mode": "balanced",
+        "profile": "technical",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.32,
+          "title": 0.14,
+          "position": 0.12,
+          "paragraph_pos": 0.08,
+          "section": 0.2,
+          "type_relevance": 0.14
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Synthetic OCR and hyphenation stress test",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 32,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [
+        "Completeness: no methodology sentence in output for academic/technical mode.",
+        "Completeness: no findings/results sentence in output."
+      ],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.3047619047619048,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 69.52380952380952,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 26.666666666666668,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 1.0,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "document_id": "SYNTHETIC-OCR-NOISE",
+      "synthetic": true,
+      "mode": "detailed",
+      "profile": "technical",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "OCR text may confu5e letters and numbers. The demonstration study enrolled approximately 1,240 participants on 12 March 2024. The change may reflect selection bias and does not establish causation. North Laboratory measured 17.4% while South Laboratory measured 9.2%. The committee recommended further study before implementation.",
+      "source_sha256": "d7900015e1c8434fa8480e85fbcaa5f229954c7ff75624bd3e6957e1f04daf52",
+      "source_word_count": 105,
+      "word_count": 45,
+      "target_words": 45,
+      "timings": {
+        "preprocessing_seconds": 0.023504100000081962,
+        "summarization_seconds": 0.003928900000119029,
+        "postprocessing_seconds": 0.031134999999721913,
+        "metrics_seconds": 0.0011308000002827612,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 0.06033309999975245
+      },
+      "generated_at": "2026-10-02T06:47:56.098103+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "361e071d16a178215948b9c671877fbd0a6652ed27955841fbed04c4bcb1012c",
+      "configuration": {
+        "system": "proposed",
+        "mode": "detailed",
+        "profile": "technical",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.32,
+          "title": 0.14,
+          "position": 0.12,
+          "paragraph_pos": 0.08,
+          "section": 0.2,
+          "type_relevance": 0.14
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Synthetic OCR and hyphenation stress test",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 45,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [
+        "Completeness: no methodology sentence in output for academic/technical mode.",
+        "Completeness: no findings/results sentence in output."
+      ],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.42857142857142855,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 57.14285714285714,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 46.666666666666664,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 1.0,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "document_id": "SYNTHETIC-OCR-NOISE",
+      "synthetic": true,
+      "mode": "comprehensive",
+      "profile": "technical",
+      "system": "proposed",
+      "dataset_split": "validation",
+      "status": "completed",
+      "summary": "The intervention did not improve retention. OCR text may confu5e letters and numbers. The demonstration study enrolled approximately 1,240 participants on 12 March 2024. Treatment did not significantly reduce mortality. The change may reflect selection bias and does not establish causation. Researchers measured a mean concentration of 0.03 milligram per liter. North Laboratory measured 17.4% while South Laboratory measured 9.2%. The committee recommended further study before implementation.",
+      "source_sha256": "d7900015e1c8434fa8480e85fbcaa5f229954c7ff75624bd3e6957e1f04daf52",
+      "source_word_count": 105,
+      "word_count": 67,
+      "target_words": 67,
+      "timings": {
+        "preprocessing_seconds": 0.0232613000002857,
+        "summarization_seconds": 0.003860899999835965,
+        "postprocessing_seconds": 0.03947539999990113,
+        "metrics_seconds": 0.0016688999999132648,
+        "budget_calibration_seconds": 0.0,
+        "total_seconds": 0.06877060000033453
+      },
+      "generated_at": "2026-10-02T06:47:56.158376+00:00",
+      "summarizer_version": "adaptive-extractive-eval-hooks-1+1befca1bfa46",
+      "configuration_hash": "9fbee44a780be200c65cf7d6a02c710d497d8ea9a5f0f88a4548c4fbf974d74e",
+      "configuration": {
+        "system": "proposed",
+        "mode": "comprehensive",
+        "profile": "technical",
+        "ablation": null,
+        "ablation_description": null,
+        "profile_weights": {
+          "tfidf": 0.32,
+          "title": 0.14,
+          "position": 0.12,
+          "paragraph_pos": 0.08,
+          "section": 0.2,
+          "type_relevance": 0.14
+        },
+        "preprocessing": {
+          "lowercase": false,
+          "remove_punctuation": false,
+          "remove_stopwords": false,
+          "tokenize": false,
+          "lemmatize": false,
+          "remove_visual_artifacts": true,
+          "remove_email_addresses": true,
+          "remove_known_noise": true,
+          "normalize_whitespace": true
+        },
+        "output_format": "paragraph",
+        "metrics": {
+          "bertscore": false
+        },
+        "baseline_version": "1.0.0",
+        "evaluation_version": "1.0.0",
+        "summarizer_code_hash": "1befca1bfa46f527b8024c1b8651d98714b58f112ba7892a4fea3571649484d5",
+        "packages": {
+          "numpy": "2.4.4",
+          "scipy": "1.17.1",
+          "scikit-learn": "1.8.0",
+          "nltk": "3.8.1",
+          "spacy": null,
+          "bert-score": null,
+          "torch": null,
+          "transformers": null,
+          "sentence-transformers": null
+        },
+        "nlp_resources": {
+          "tokenizers/punkt": {
+            "available": true,
+            "sha256": "ef6b35ac4557a264508b5100ab7832a68d17d91dac29bec3ef8f175daa88705a",
+            "file_count": 20
+          },
+          "tokenizers/punkt_tab": {
+            "available": false
+          },
+          "corpora/wordnet.zip": {
+            "available": true,
+            "sha256": "331e718dba209dbf2546dab432412472c069dd2bea453fe2113f3b7c2e0e899c",
+            "file_count": 1
+          },
+          "corpora/stopwords": {
+            "available": true,
+            "sha256": "f0df2d2043f90498de7920ec3c512a284f13d155b3a25e126e8d1bb2a489907d",
+            "file_count": 34
+          },
+          "taggers/averaged_perceptron_tagger": {
+            "available": true,
+            "sha256": "a8fc58c23afc7b8dfb361a511762c0685d0b747e52d887ae6114e457dee44f99",
+            "file_count": 1
+          },
+          "taggers/averaged_perceptron_tagger_eng": {
+            "available": true,
+            "sha256": "29ef62c8e4aa72b7447d5f7094723e917e1d4b23fa1983e1518d30f5e30345cd",
+            "file_count": 3
+          },
+          "spacy/en_core_web_sm": {
+            "available": false
+          }
+        },
+        "local_embedding_model": null,
+        "local_embedding_fingerprint": null,
+        "title": "Synthetic OCR and hyphenation stress test",
+        "budget_policy": "match full-system actual word count using closest ranked whole-sentence prefix for baselines",
+        "target_words": 67,
+        "target_budget_origin": "full_system_actual_output"
+      },
+      "warnings": [
+        "Completeness: no methodology sentence in output for academic/technical mode.",
+        "Completeness: no findings/results sentence in output."
+      ],
+      "errors": [],
+      "metrics": [
+        {
+          "name": "compression_ratio",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.638095238095238,
+          "error": null
+        },
+        {
+          "name": "compression_percentage",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 36.1904761904762,
+          "error": null
+        },
+        {
+          "name": "rouge_1",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_2",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "rouge_l",
+          "version": "rouge-token-lcs-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "redundancy",
+          "version": "1.0.0",
+          "status": "ok",
+          "value": 0.0,
+          "error": null
+        },
+        {
+          "name": "critical_fact_preservation",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 60.0,
+          "error": null
+        },
+        {
+          "name": "factual_consistency",
+          "version": "source-aligned-lexical-v1",
+          "status": "ok",
+          "value": 1.0,
+          "error": null
+        },
+        {
+          "name": "content_unit_coverage",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "challenge",
+          "version": "1.0.0",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        },
+        {
+          "name": "bertscore",
+          "version": "bert-score-optional-v1",
+          "status": "not_applicable",
+          "value": null,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "manual_inspection": "docs/evaluation-validation-observations.md"
+}

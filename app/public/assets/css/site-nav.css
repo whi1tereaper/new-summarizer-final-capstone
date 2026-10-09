@@ -1,0 +1,209 @@
+/* ====================================================================
+   site-nav.css - Shared Universal Site Header / Navigation
+   LIGHT: Minimalist editorial header matching landing page layout.
+   Sparse typography, uppercase text links, brand left, nav right.
+   ==================================================================== */
+
+.site-header,
+.nex-header {
+  background: var(--color-bg, #EEEDEA);
+  border-bottom: 1px solid var(--color-border, rgba(8, 8, 8, 0.12));
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-sticky, 400);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px clamp(16px, 3vw, 48px);
+  box-sizing: border-box;
+  transition: background-color 200ms ease, border-color 200ms ease;
+}
+
+/* Landing page hero overlay mode: floating transparently over hero */
+body.nex-landing:not(.nex-workspace-page) > .nex-header {
+  position: fixed;
+  background: transparent;
+  border-bottom: none;
+}
+
+/* Minimalist editorial brand mark */
+.nex-brand {
+  font-family: var(--font-display, 'Outfit', 'Inter', system-ui, sans-serif);
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  color: var(--color-text, #080808);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 200ms ease;
+  line-height: 1;
+}
+
+.nex-brand:hover {
+  color: var(--color-accent, #7F00FF);
+}
+
+/* Right side navigation cluster */
+.nex-header-right,
+.site-actions {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2.5vw, 32px);
+  pointer-events: auto;
+}
+
+.nex-nav__link {
+  font-family: var(--font-display, 'Outfit', 'Inter', system-ui, sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text, #080808);
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 200ms ease, color 200ms ease;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nex-nav__link:hover,
+.nex-nav__link:focus-visible {
+  opacity: 1;
+  color: var(--color-accent, #7F00FF);
+}
+
+.nex-nav__link--active {
+  opacity: 1;
+  color: var(--color-accent, #7F00FF);
+  border-bottom: 2px solid var(--color-accent, #7F00FF);
+}
+
+.site-header a:focus-visible,
+.nex-header a:focus-visible {
+  outline: 2px solid var(--color-accent, #7F00FF);
+  outline-offset: 4px;
+}
+
+/* Mobile hamburger button: hidden by default on desktop */
+.nex-menu-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .site-header,
+  .nex-header {
+    padding: 16px 20px;
+  }
+
+  /* Editorial minimalist 2-bar menu button */
+  .nex-menu-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    gap: 6px;
+    z-index: 501;
+    border-radius: 4px;
+    transition: background-color 150ms ease;
+  }
+
+  .nex-menu-toggle:focus-visible {
+    outline: 2px solid var(--color-accent, #7F00FF);
+    outline-offset: 2px;
+  }
+
+  .nex-menu-toggle__bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--color-text, #080808);
+    border-radius: 2px;
+    transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), opacity 180ms ease, background-color 180ms ease;
+    transform-origin: center;
+  }
+
+  /* Morph to X when menu is open */
+  .nex-header.is-menu-open .nex-menu-toggle__bar:first-child {
+    transform: translateY(4px) rotate(45deg);
+  }
+
+  .nex-header.is-menu-open .nex-menu-toggle__bar:last-child {
+    transform: translateY(-4px) rotate(-45deg);
+  }
+
+  /* Mobile Navigation Drawer */
+  .nex-header-right,
+  .site-actions {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100dvh;
+    background: #EEEDEA;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 80px 32px 48px;
+    gap: 8px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: opacity 220ms ease, transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 500;
+    overflow-y: auto;
+    box-sizing: border-box;
+  }
+
+  .nex-header.is-menu-open .nex-header-right,
+  .nex-header.is-menu-open .site-actions {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .nex-nav__link {
+    font-family: var(--font-display, 'Outfit', 'Inter', system-ui, sans-serif);
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-text, #080808);
+    padding: 12px 0;
+    width: 100%;
+    border-bottom: 1px solid rgba(8, 8, 8, 0.08);
+    opacity: 1;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+
+  .nex-nav__link:hover,
+  .nex-nav__link:focus-visible {
+    color: var(--color-accent, #7F00FF);
+    padding-left: 6px;
+  }
+
+  .nex-nav__link--active {
+    color: var(--color-accent, #7F00FF);
+    border-bottom-color: var(--color-accent, #7F00FF);
+  }
+}
+
+body.nex-menu-locked {
+  overflow: hidden !important;
+}

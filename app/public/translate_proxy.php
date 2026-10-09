@@ -49,12 +49,8 @@ try {
     $decoded = (new LocalPythonBridge())->translate($text, $targetLang, 60);
 } catch (\RuntimeException $exception) {
     error_log('[TranslateProxy] Translation worker error: ' . $exception->getMessage());
-    echo json_encode([
-        'translated' => $text,
-        'target_lang' => 'en',
-        'warning' => 'Translation is temporarily unavailable. Showing the English summary instead.',
-        'used_fallback' => true,
-    ]);
+    http_response_code(503);
+    echo json_encode(['error' => 'Filipino translation is temporarily unavailable. Please try again shortly.']);
     exit;
 }
 
@@ -63,12 +59,8 @@ $translated = isset($decoded['translated']) && is_string($decoded['translated'])
     : '';
 if ($translated === '') {
     error_log('[TranslateProxy] Translation worker returned an empty response.');
-    echo json_encode([
-        'translated' => $text,
-        'target_lang' => 'en',
-        'warning' => 'Translation is temporarily unavailable. Showing the English summary instead.',
-        'used_fallback' => true,
-    ]);
+    http_response_code(502);
+    echo json_encode(['error' => 'The translation service returned no Filipino text. Please try again.']);
     exit;
 }
 
