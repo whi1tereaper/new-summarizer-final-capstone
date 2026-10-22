@@ -149,15 +149,27 @@ try {
     $pdo->beginTransaction();
 
     // Upsert the session record. Ignore fields already set on duplicate.
-    $upsert = $pdo->prepare("
-        INSERT INTO landing_page_sessions
-            (session_id, user_id, guest_token, ip_hash, user_agent, device_category, referrer)
-        VALUES
-            (:session_id, :user_id, :guest_token, :ip_hash, :user_agent, :device_category, :referrer)
-        ON DUPLICATE KEY UPDATE
-            user_id    = COALESCE(user_id, VALUES(user_id)),
-            updated_at = CURRENT_TIMESTAMP()
-    ");
+    if (\App\Src\Database::getInstance()->isPostgres()) {
+        $upsert = $pdo->prepare("
+            INSERT INTO landing_page_sessions
+                (session_id, user_id, guest_token, ip_hash, user_agent, device_category, referrer)
+            VALUES
+                (:session_id, :user_id, :guest_token, :ip_hash, :user_agent, :device_category, :referrer)
+            ON CONFLICT (session_id) DO UPDATE SET
+                user_id    = COALESCE(landing_page_sessions.user_id, EXCLUDED.user_id),
+                updated_at = CURRENT_TIMESTAMP
+        ");
+    } else {
+        $upsert = $pdo->prepare("
+            INSERT INTO landing_page_sessions
+                (session_id, user_id, guest_token, ip_hash, user_agent, device_category, referrer)
+            VALUES
+                (:session_id, :user_id, :guest_token, :ip_hash, :user_agent, :device_category, :referrer)
+            ON DUPLICATE KEY UPDATE
+                user_id    = COALESCE(user_id, VALUES(user_id)),
+                updated_at = CURRENT_TIMESTAMP
+        ");
+    }
     $upsert->execute([
         ':session_id'      => $sessionId,
         ':user_id'         => $userId,

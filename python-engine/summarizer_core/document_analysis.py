@@ -20,6 +20,19 @@ from .structure import extract_structural_heading, match_section_heading
 _WORD = re.compile(r"[\w'-]+", re.UNICODE)
 _CITATION = re.compile(r"\([^()]{0,80}\b(?:19|20)\d{2}[a-z]?\b[^()]{0,30}\)|\b(?:doi|et al\.)\b", re.I)
 _NUMBER = re.compile(r"(?<!\w)[+-]?\d[\d,]*(?:\.\d+)?\s*(?:%|percent|p\s*[<>=]|α\s*=\s*0?\.\d+)?", re.I)
+_COMPARATIVE_RESULT = re.compile(
+    r"\b(?:concentrations?|rates?|levels?|scores?|measurements?|proportions?|"
+    r"prevalence|incidence|values?|amounts?|quantities|temperatures?|performance|"
+    r"accuracy|frequency|duration|risk|counts?|yields?|flows?|volumes?)\b.{0,100}"
+    r"\b(?:higher|lower|greater|less|more|fewer|larger|smaller|increased|decreased)\b"
+    r".{0,100}\b(?:than|compared\s+(?:with|to)|relative\s+to|versus|vs\.?)\b|"
+    r"\b(?:higher|lower|greater|less|more|fewer|larger|smaller|increased|decreased)\b"
+    r".{0,80}\b(?:concentrations?|rates?|levels?|scores?|measurements?|proportions?|"
+    r"prevalence|incidence|values?|amounts?|quantities|temperatures?|performance|"
+    r"accuracy|frequency|duration|risk|counts?|yields?|flows?|volumes?)\b"
+    r".{0,100}\b(?:than|compared\s+(?:with|to)|relative\s+to|versus|vs\.?)\b",
+    re.I,
+)
 _ACADEMIC_SECTIONS = {"abstract", "introduction", "literature_review", "methodology", "results", "discussion", "conclusion", "limitations", "future_work"}
 _ROLE_BY_SECTION = {
     "abstract": "context", "introduction": "context", "background": "context",
@@ -66,13 +79,29 @@ _CUE_GROUPS: dict[str, dict[str, tuple[str, ...]]] = {
         "argument_terms": ("this essay argues", "i argue", "the central argument", "on the other hand", "in contrast", "therefore, we should"),
         "argument_structure": ("thesis statement", "counterargument"),
     },
+    "scientific_publication": {
+        "science_terms": ("empirical", "experiment", "experimental group", "control group", "clinical trial", "statistically significant", "p-value", "confidence interval", "effect size", "laboratory", "in vitro", "in vivo", "peer-reviewed"),
+        "science_structure": ("abstract", "hypotheses", "methodology", "experiments", "results", "discussion", "conclusion"),
+    },
+    "financial_report": {
+        "finance_terms": ("balance sheet", "income statement", "cash flow", "fiscal year", "ebitda", "operating income", "net earnings", "gross margin", "liabilities", "assets", "gaap", "diluted earnings per share", "10-k", "10-q", "quarterly results"),
+        "finance_structure": ("financial results", "balance sheet", "statement of operations", "cash flows", "financial overview"),
+    },
+    "meeting_transcript": {
+        "transcript_terms": ("meeting minutes", "adjourned", "roll call", "motion was made", "seconded by", "attendees", "quorum", "agenda items", "speaker", "interview transcript"),
+        "transcript_structure": ("agenda", "attendees", "call to order", "approval of minutes", "discussion items", "adjournment"),
+    },
+    "narrative": {
+        "narrative_terms": ("character", "protagonist", "chapter", "scene", "dialogue", "story", "plot", "narrator"),
+        "narrative_structure": ("prologue", "chapter", "epilogue"),
+    },
 }
 
 _CUE_PATTERNS: dict[str, re.Pattern[str]] = {
     "objective": re.compile(r"\b(?:aims?|seeks?|intends?|objectives?|purpose is|research question|asks? whether|investigates?)\b", re.I),
     "hypothesis": re.compile(r"\b(?:hypothes(?:ize|izes|ized|izing)\s+that|the hypothesis is|hypothesis predicts?|we expect that)\b", re.I),
     "future": re.compile(r"\b(?:will|shall|plans? to|planned to|intends? to|aims? to|seeks? to|proposes? to|is expected to|are expected to)\b", re.I),
-    "actual": re.compile(r"\b(?:found|observed|measured|recorded|increased|decreased|remained|was associated|were associated|was correlated|were correlated|demonstrated|showed|revealed|indicated|reported|states?|argues?|achieved)\b", re.I),
+    "actual": re.compile(r"\b(?:found|finds|observed|observes|measured|measures|record(?:ed|s)?|warmest|hottest|coldest|highest|lowest|increased|increasing|increases|decreased|decreasing|decreases|trend|trends|downward|upward|displayed|displays|remained|was associated|were associated|was correlated|were correlated|demonstrated|demonstrates|showed|shows|revealed|reveals|indicated|indicates|reported|reports|states?|argues?|achieved|statistically significant|statically significant|non-significant|not statistically significant|shift|shifts)\b", re.I),
     "decision": re.compile(
         r"\b(?:(?:hospital|company|corporate|executive|advisory)?\s*board\s+approved|"
         r"board\s+approved|executives?\s+approved|budget\s+allocation|strategic\s+investment|"
@@ -84,13 +113,17 @@ _CUE_PATTERNS: dict[str, re.Pattern[str]] = {
     "recommendation": re.compile(r"\b(?:recommend(?:s|ed|ation)?|should consider|future work should|we propose that|must be addressed)\b", re.I),
     "limitation": re.compile(r"\b(?:limitation|limited by|did not include|was not designed to|caveat|constraint)\b", re.I),
     "conclusion": re.compile(r"\b(?:in conclusion|to conclude|we conclude|the study concludes|it can be concluded|overall,? the (?:study|authors?) conclude)\b", re.I),
-    "definition": re.compile(r"\b(?:is defined as|are defined as|refers to|is the process of|means that)\b", re.I),
+    "definition": re.compile(
+        r"\b(?:is defined as|are defined as|refers to|is the process of|means that)\b|"
+        r"\b(?:a|an)\s+[\w-]+(?:\s+[\w-]+){0,3}\s+is\s+(?:a|an|the)\s+",
+        re.I,
+    ),
     "prior_literature": re.compile(
         r"(?i:\b(?:previous|prior|earlier|reviewed|past|other)\s+(?:stud(?:y|ies)|research|literature|investigations?|authors?|findings?)\b)|"
-        r"\baccording to\b|"
+        r"\baccording to\s+(?:the\s+)?(?:previous|prior|earlier|other)\b|"
         r"\b[A-Z][a-zA-Z]+(?:\s+(?:and|&)\s+[A-Z][a-zA-Z]+|\s+et\s+al\.)\s*(?:\([0-9]{4}[a-z]?\)|\b(?:found|showed|reported|observed|demonstrated|argued|noted|concluded)\b)|"
         r"\b[A-Z][a-zA-Z]+\s*\([0-9]{4}[a-z]?\)\s*(?:found|showed|reported|observed|demonstrated|argued|noted|concluded)\b|"
-        r"\([^()]{0,80}\b(?:19|20)\d{2}[a-z]?\b[^()]{0,30}\)",
+        r"\([A-Z][A-Za-z]+(?:\s+(?:et\s+al\.?|and\s+[A-Z][A-Za-z]+))?[,;]?\s*(?:19|20)\d{2}[a-z]?\)",
     ),
 }
 
@@ -177,24 +210,19 @@ def classify_claim_with_provenance(
         is_prior_lit = True
     elif _CUE_PATTERNS["prior_literature"].search(text):
         is_prior_lit = True
-    elif attribution != "" and section not in {"results", "discussion", "methodology", "conclusion"}:
+    elif re.search(r"\b[A-Z][a-zA-Z]+(?:\s+(?:et\s+al\.?|tal\.?))?\s*[,;]?\s*\((?:19|20)\d{2}[a-z]?\)", text):
         is_prior_lit = True
-    elif attribution != "" and re.search(r"\b(?:19|20)\d{2}\b", attribution):
+    elif re.search(r"\([A-Z][A-Za-z]+(?:\s+(?:et\s+al\.?|tal\.?))?[,;]?\s*(?:19|20)\d{2}[a-z]?\)", text):
+        is_prior_lit = True
+    elif re.search(r"\b[A-Z][a-zA-Z]+\s+(?:et\s+al\.?|tal\.?)\s*(?:,\s*)?(?:19|20)\d{2}\b", text):
         is_prior_lit = True
 
-    if is_prior_lit and (
-        _CUE_PATTERNS["actual"].search(text)
-        or _CUE_PATTERNS["objective"].search(text)
-        or section in {"literature_review", "related_work"}
-        or subsection.lower() in {"literature review", "synthesis", "research gap", "related literature"}
-    ):
-        if not attribution and section in {"literature_review", "related_work"}:
-            attribution = "prior literature"
+    if is_prior_lit:
         return (
             "literature_finding",
             "PRIOR_STUDY_RESULT",
             "prior_study",
-            attribution,
+            attribution or "prior literature",
             numbers,
             qualifiers,
             negation,
@@ -328,18 +356,20 @@ def classify_claim_with_provenance(
     if _CUE_PATTERNS["conclusion"].search(text) or section == "conclusion":
         return ("conclusion", "AUTHOR_CLAIM", "current_study", "", numbers, qualifiers, negation, 0.85)
 
+    # Definitions take precedence over cautious wording such as "appears to".
+    if _CUE_PATTERNS["definition"].search(text) or section == "definitions":
+        return ("definition", "DEFINITION", "definition", "", numbers, qualifiers, negation, 0.85)
+
     # Rule 11: Actual Results
-    if (_CUE_PATTERNS["actual"].search(text) or re.search(r"\b(?:achieved|measured|outperformed|accuracy|latency|throughput)\b", lowered)) and (
+    if (
         section in {"results", "discussion", "evaluation", "outcome", "highlights"}
-        or re.search(r"\b(?:result|finding|data|accuracy|diagnostic|performance|metric|p-value)\b", lowered)
+        or _CUE_PATTERNS["actual"].search(text)
+        or _COMPARATIVE_RESULT.search(text)
+        or re.search(r"\b(?:achieved|measured|outperformed)\b", lowered)
     ):
         status = "CURRENT_RESULT" if document_stage != "proposal" else "PRIOR_STUDY_RESULT"
         role = "current_study" if document_stage != "proposal" else "prior_study"
         return ("result", status, role, attribution, numbers, qualifiers, negation, 0.88)
-
-    # Rule 12: Definitions
-    if _CUE_PATTERNS["definition"].search(text) or section == "definitions":
-        return ("definition", "DEFINITION", "definition", "", numbers, qualifiers, negation, 0.85)
 
     # Rule 13: Academic background
     if re.search(r"\b(?:may|might|could|suggests?|appears? to|seems? to|approximately|about)\b", lowered):
@@ -348,6 +378,150 @@ def classify_claim_with_provenance(
         return ("background", "BACKGROUND_INFORMATION", "author_background", "", numbers, qualifiers, negation, 0.75)
 
     return ("claim", "UNKNOWN", "unknown", attribution, numbers, qualifiers, negation, 0.50)
+
+
+def identify_primary_findings(
+    candidates: list[SentenceCandidate],
+    document_type: str,
+) -> list[int]:
+    """Rank source-supported outcome statements above generic evidence and caveats."""
+    result_statuses = {"ACTUAL_RESULT", "MAIN_FINDING", "CURRENT_RESULT"}
+    reporting_cue = re.compile(
+        r"\b(?:results?|findings?)\s+(?:show|shows|showed|indicate|indicates|indicated|"
+        r"reveal|reveals|revealed|demonstrate|demonstrates|demonstrated|confirm|confirmed)|"
+        r"\b(?:announced|reported|found|showed|revealed|demonstrated|confirmed|ruled|held|"
+        r"approved|adopted|enacted)\s+(?:that\s+)?",
+        re.I,
+    )
+    outcome_cue = re.compile(
+        r"\b(?:increas(?:e|es|ed|ing)|decreas(?:e|es|ed|ing)|rose|risen|fell|falling|"
+        r"declin(?:e|es|ed|ing)|reduc(?:e|es|ed|ing)|improv(?:e|es|ed|ing)|"
+        r"worsen(?:s|ed|ing)?|grew|growth|outperform(?:s|ed|ing)?|"
+        r"associat(?:e|es|ed)|correlat(?:e|es|ed)|effect|impact|difference|"
+        r"remained stable|no (?:significant )?effect|approved|adopted|ruled|held|"
+        r"prohibited|required|requires|decided|selected|awarded|record(?:ed)?|"
+        r"warmest|coldest|highest|lowest|ranked|reached|exceeded|surpassed|"
+        r"higher|lower|above|below)\b",
+        re.I,
+    )
+    comparative_context = re.compile(
+        r"\b(?:between|from|to|by|compared with|compared to|versus|vs\.?|"
+        r"than|since|during|in \d{4}|over the (?:past|last|study) period)\b",
+        re.I,
+    )
+    temporal_qualification = re.compile(
+        r"\b(?:first|only|record|highest|lowest)\b.{0,100}\b(?:since|in|over|for)\s+\d{4}\b",
+        re.I,
+    )
+    causal_qualification = re.compile(
+        r"\b(?:cannot|can not|does not|do not|did not)\s+"
+        r"(?:establish|prove|demonstrate|show)\b.{0,120}\bcaus(?:e|es|al|ation)\b",
+        re.I,
+    )
+    qualification_only = re.compile(
+        r"\b(?:important to examine|tested and found|confidence level)\b",
+        re.I,
+    )
+    candidate_rows: list[tuple[float, int]] = []
+    candidates_by_index = {candidate.index: candidate for candidate in candidates}
+    for candidate in candidates:
+        legal_rule = bool(re.search(
+            r"\b(?:(?:shall|must)\s+(?:not\s+)?(?:be\s+)?"
+            r"(?:deleted|retained|recorded|logged|sold|disclosed|destroyed|stored|"
+            r"provided|reviewed|maintained|preserved|accompanied|reported|approved)|"
+            r"is limited to|except where|requires disclosure|may approve|"
+            r"is prohibited from|may not\s+(?:be\s+)?(?:deleted|retained|recorded|"
+            r"logged|sold|disclosed|destroyed|stored|provided|reviewed|maintained|"
+            r"preserved|accompanied|reported|approved|released|release|shared|share|"
+            r"accessed|access|used|use|disclosed|disclose))\b",
+            candidate.text,
+            re.I,
+        )) and bool(re.search(
+            r"\b(?:footage|records?|data|information|employee|access|camera|disclosure|"
+            r"request|law enforcement|warrant|third parties|court order|city attorney)\b",
+            candidate.text,
+            re.I,
+        ))
+        if candidate.source_role == "prior_study" or (
+            candidate.claim_status not in result_statuses | {"DECISION"} and not legal_rule
+        ):
+            continue
+        text = candidate.text
+        lowered = text.casefold()
+        if qualification_only.search(lowered):
+            continue
+        has_outcome = bool(outcome_cue.search(text))
+        has_reporting_cue = bool(reporting_cue.search(text))
+        has_measurement = bool(_NUMBER.search(text))
+        has_comparison = bool(comparative_context.search(text))
+        has_result_section = candidate.section in {"results", "findings", "conclusion", "highlights", "outcome"}
+
+        strength = 0.0
+        if has_outcome and has_reporting_cue:
+            strength += 4.0
+        if has_outcome and has_measurement and (has_comparison or has_result_section):
+            strength += 4.5
+        if (
+            has_outcome
+            and has_comparison
+            and not has_measurement
+            and not has_reporting_cue
+            and candidate.claim_status in result_statuses
+        ):
+            strength += 3.5
+        if has_outcome and has_result_section:
+            strength += 1.5
+        if has_outcome and candidate.claim_status == "DECISION":
+            strength += 1.5
+        if legal_rule:
+            strength += 4.0
+        if candidate.sentence_in_paragraph == 0 and document_type in {
+            "news_article", "official_report", "business_report", "financial_report",
+            "scientific_publication", "academic_research",
+        }:
+            strength += 0.25
+        if strength >= 3.0:
+            candidate_rows.append((strength, candidate.index))
+
+    candidate_rows.sort(key=lambda item: (-item[0], item[1]))
+    if candidate_rows:
+        lead_candidate = candidates_by_index[candidate_rows[0][1]]
+        lead_tokens = {
+            token.casefold()
+            for token in _WORD.findall(lead_candidate.text)
+            if len(token) >= 4 and token.casefold() not in {"this", "that", "with", "from", "between"}
+        }
+        linked_context: dict[int, float] = {}
+        lead_strength = candidate_rows[0][0]
+        for candidate in candidates:
+            if candidate.index == lead_candidate.index:
+                continue
+            candidate_tokens = {
+                token.casefold()
+                for token in _WORD.findall(candidate.text)
+                if len(token) >= 4 and token.casefold() not in {"this", "that", "with", "from", "between"}
+            }
+            shared_ratio = len(lead_tokens & candidate_tokens) / max(
+                1, min(len(lead_tokens), len(candidate_tokens))
+            )
+            if (
+                abs(candidate.paragraph_index - lead_candidate.paragraph_index) <= 1
+                and (
+                    temporal_qualification.search(candidate.text)
+                    or causal_qualification.search(candidate.text)
+                )
+                and shared_ratio >= 0.30
+            ):
+                linked_context[candidate.index] = lead_strength - 0.25
+        if linked_context:
+            strengths = {index: strength for strength, index in candidate_rows}
+            for index, strength in linked_context.items():
+                strengths[index] = max(strengths.get(index, 0.0), strength)
+            candidate_rows = sorted(
+                ((strength, index) for index, strength in strengths.items()),
+                key=lambda item: (-item[0], item[1]),
+            )
+    return [index for _strength, index in candidate_rows[:8]]
 
 
 def classify_claim(text: str, section: str = "body") -> tuple[str, str]:
@@ -431,6 +605,20 @@ def _classify_document(text: str, sections: list[str], paragraphs: list[str]) ->
         add("educational_material", "education_terms", 1.5, "learning and instructional terminology")
     if _terms_present(lowered, _CUE_GROUPS["essay"]["argument_terms"]) >= 1 or present_sections & {"thesis_statement", "counterargument"}:
         add("essay", "argument_structure", 1.5, "explicit argument or essay structure")
+    if _terms_present(lowered, _CUE_GROUPS["financial_report"]["finance_terms"]) >= 2:
+        add("financial_report", "finance_terms", 1.8, "financial performance and accounting terminology")
+    if present_sections & {"financial_results", "statement_of_operations", "balance_sheet", "financial_overview"}:
+        add("financial_report", "finance_structure", 1.4, "financial report section headings")
+    if _terms_present(lowered, _CUE_GROUPS["meeting_transcript"]["transcript_terms"]) >= 2 or re.search(r"^(?:[A-Z][a-zA-Z\s]{1,20}:|\bSpeaker\s+\d+:)", text, re.MULTILINE):
+        add("meeting_transcript", "transcript_markers", 1.8, "meeting minutes or dialogue transcript markers")
+    if present_sections & {"agenda", "attendees", "call_to_order", "adjournment"}:
+        add("meeting_transcript", "transcript_structure", 1.4, "meeting procedural headings")
+    if _terms_present(lowered, _CUE_GROUPS["narrative"]["narrative_terms"]) >= 2 and not (present_sections & _ACADEMIC_SECTIONS):
+        add("narrative", "narrative_terms", 1.5, "story and literary narrative terminology")
+    if _terms_present(lowered, _CUE_GROUPS["scientific_publication"]["science_terms"]) >= 2:
+        add("scientific_publication", "science_terms", 1.8, "empirical scientific study terminology")
+    if present_sections & {"experiments", "hypotheses", "methodology", "results"}:
+        add("scientific_publication", "science_structure", 1.3, "scientific experimental sections")
 
     if not scores:
         word_count = len(_WORD.findall(text))
@@ -439,9 +627,9 @@ def _classify_document(text: str, sections: list[str], paragraphs: list[str]) ->
 
     ranked = sorted(scores.items(), key=lambda item: (-item[1], item[0]))
     if not ranked:
-        return "unknown", 0.0, [], {}
+        return "unknown", 0.0, ["inconclusive document structure; using general approach"], {}
     if ranked[0][1] < 1.2:
-        return "unknown", 0.0, [], dict(scores)
+        return "unknown", 0.0, ["inconclusive document signals; using general approach"], dict(scores)
     if len(ranked) > 1 and ranked[1][1] >= 2.0 and ranked[1][1] >= ranked[0][1] * 0.88:
         selected = "mixed"
         signal_share = (ranked[0][1] + ranked[1][1]) / max(sum(scores.values()), 0.001)
@@ -455,7 +643,7 @@ def _classify_document(text: str, sections: list[str], paragraphs: list[str]) ->
         _terms_present(lowered, ("experiment", "clinical trial", "randomized", "laboratory", "specimen", "experimental group")) >= 2
         and bool(present_sections & {"methodology", "results", "discussion"})
     ):
-        selected = "scientific_paper"
+        selected = "scientific_publication"
     rationale = [reason for kind, _score in ranked[:2] for reason in reasons[kind]]
     return selected, confidence, rationale, dict(scores)
 
@@ -741,6 +929,54 @@ def analyze_document_structure(
         row["paragraph_indices"] = [index for index in row["paragraph_indices"]]
         row["confidence"] = "heading_match" if row["section_key"] != "body" else "fallback_body"
 
+    # Document understanding: Identify main subject, purpose, key findings, supporting details, and conclusion
+    main_subject = ""
+    if paragraphs:
+        first_para_lines = [line.strip() for line in paragraphs[0].split("\n") if line.strip()]
+        if first_para_lines and len(first_para_lines[0].split()) <= 15 and not first_para_lines[0].endswith((".", ":")):
+            main_subject = first_para_lines[0]
+        elif first_para_lines:
+            tokens = [w for w in re.findall(r"\b[A-Za-z]{4,}\b", first_para_lines[0]) if w.lower() not in {"this", "that", "these", "those", "from", "with", "about"}]
+            if tokens:
+                main_subject = " ".join(tokens[:3]).title()
+
+    purpose_cands = [
+        c for c in enriched
+        if c.claim_status in {"RESEARCH_OBJECTIVE", "RESEARCH_QUESTION", "HYPOTHESIS"}
+        or re.search(
+            r"\b(?:aims?|purpose|objective|investigates?|sought to|focuses on)\b|"
+            r"\b(?:this|the|our)\s+(?:study|research|paper|report|analysis)\s+examines?\b",
+            c.text,
+            re.I,
+        )
+    ]
+
+    key_findings = [
+        c.text for c in enriched
+        if (c.claim_status in {"ACTUAL_RESULT", "MAIN_FINDING", "DECISION"}
+            or (c.section in {"results", "findings"} and c.source_role != "prior_study"))
+    ][:5]
+    primary_finding_indices = identify_primary_findings(enriched, document_type)
+    primary_findings = [enriched[index].text for index in primary_finding_indices]
+    purpose = (
+        purpose_cands[0].text
+        if purpose_cands
+        else (primary_findings[0] if primary_findings else (enriched[0].text if enriched else ""))
+    )
+
+    supporting_details = [
+        c.text for c in enriched
+        if c.claim_status in {"PROPOSED_METHOD", "THEORETICAL_CLAIM"}
+        or c.section in {"methodology", "methods", "background", "literature_review"}
+    ][:5]
+
+    conclusion_cands = [
+        c for c in enriched
+        if c.section in {"conclusion", "recommendations"}
+        or re.search(r"\b(?:in conclusion|we conclude|concludes? that|overall, the study|in summary)\b", c.text, re.I)
+    ]
+    conclusion = conclusion_cands[0].text if conclusion_cands else ""
+
     analysis = {
         "document_type": document_type,
         "document_type_confidence": type_confidence,
@@ -758,6 +994,13 @@ def analyze_document_structure(
         "results_available": results_available,
         "conclusion_available": conclusion_available,
         "missing_information": missing_information,
+        "main_subject": main_subject,
+        "purpose": purpose,
+        "key_findings": key_findings,
+        "primary_finding_indices": primary_finding_indices,
+        "primary_findings": primary_findings,
+        "supporting_details": supporting_details,
+        "conclusion": conclusion,
         "claim_count": len(claims),
         "claims": claims,
     }
@@ -942,5 +1185,5 @@ __all__ = [
     "classify_claim",
     "classify_claim_with_provenance",
     "detect_document_stage",
+    "identify_primary_findings",
 ]
-

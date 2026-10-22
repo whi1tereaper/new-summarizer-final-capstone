@@ -88,6 +88,8 @@ $expectedMigrations = [
     '012_evaluation_framework.sql',
     '013_nutshell_production_contract.sql',
     '014_feedback_hardening_and_reasons.sql',
+    '015_summary_jobs.sql',
+    '016_summary_error_contract.sql',
 ];
 
 $actualBasenames = array_map('basename', $migrationFiles);
@@ -133,6 +135,7 @@ $requiredTables = [
     'schema_migrations',
     'summaries',
     'summary_artifacts',
+    'summary_jobs',
     'user_tokens',
     'users',
 ];

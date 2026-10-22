@@ -149,6 +149,25 @@ class TestEvaluationGeneration(unittest.TestCase):
         finally:
             OFFLINE_RESOURCES.reset(token)
 
+    def test_request_time_nltk_resource_check_never_downloads(self):
+        from summarizer_core.tokenization import OFFLINE_RESOURCES, try_ensure_nltk_resource
+        token = OFFLINE_RESOURCES.set(False)
+        try:
+            with patch("nltk.data.find", side_effect=LookupError("missing")), patch("nltk.download") as download:
+                self.assertFalse(try_ensure_nltk_resource("missing", "missing"))
+                download.assert_not_called()
+        finally:
+            OFFLINE_RESOURCES.reset(token)
+
+    def test_optional_nltk_preprocessing_uses_local_fallbacks(self):
+        import nlp_pipeline
+
+        with patch("nltk.data.find", side_effect=LookupError("missing")), patch("nltk.download") as download:
+            self.assertFalse(nlp_pipeline.ensure_nltk_resource("missing", "missing"))
+            self.assertEqual(nlp_pipeline.remove_stopwords("The data is useful"), "data useful")
+            self.assertEqual(nlp_pipeline.lemmatize_text("The data were useful"), "The data were useful")
+            download.assert_not_called()
+
     def test_default_evaluation_matches_production(self):
         for mode in ("brief", "balanced", "detailed", "comprehensive"):
             with self.subTest(mode=mode):

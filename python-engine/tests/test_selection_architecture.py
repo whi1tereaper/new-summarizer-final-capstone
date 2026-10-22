@@ -106,6 +106,40 @@ class TestSelectionArchitecture(unittest.TestCase):
         )
         self.assertEqual(pipe_depth, mod_depth)
 
+    def test_depth_coverage_does_not_replace_primary_evidence(self):
+        candidates = [
+            SentenceCandidate(
+                0, 0, 0, 1, "results",
+                "The adjusted result remained associated with a 4.1-point increase.",
+                "The adjusted result remained associated with a 4.1-point increase.",
+                "the adjusted result remained associated with a 4.1-point increase", 12,
+            ),
+            SentenceCandidate(
+                1, 1, 0, 1, "background",
+                "The sample included office workers from two cities.",
+                "The sample included office workers from two cities.",
+                "the sample included office workers from two cities", 9,
+            ),
+            SentenceCandidate(
+                2, 2, 0, 1, "conclusion",
+                "In conclusion, the study supports further longitudinal research.",
+                "In conclusion, the study supports further longitudinal research.",
+                "in conclusion the study supports further longitudinal research", 10,
+            ),
+        ]
+
+        selected = ensure_depth_coverage(
+            [0, 1],
+            candidates,
+            [0.1, 0.8, 0.5],
+            2,
+            include_limitations=False,
+            include_conclusion=True,
+            priority_indices=[0],
+        )
+
+        self.assertEqual(selected, [0, 2])
+
     def test_selection_does_not_import_pipeline(self):
         """Verify selection.py does not import pipeline.py either statically or at runtime."""
         script = """

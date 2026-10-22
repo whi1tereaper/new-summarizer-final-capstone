@@ -66,13 +66,15 @@
 .metric-card small, .chart-title span { color: var(--color-text-muted); font-size: .74rem; }
 
 /* Charts */
-.chart-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
-.chart-card { padding: 20px; min-width: 0; }
+.chart-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; align-items: stretch; }
+.chart-card { padding: 20px; min-width: 0; border-radius: 12px; overflow: hidden; }
 .chart-card--wide { grid-column: 1/-1; }
 .chart-card h2, .performance-section h2, .recent-section h2 { font: 600 1rem/1.2 var(--font-display); letter-spacing: -0.02em; margin: 0 0 16px; color: var(--color-text); }
-.chart-title { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.chart-title { display: flex; justify-content: space-between; gap: 12px; align-items: center; min-height: 26px; }
 .chart-title h2 { margin-bottom: 0; }
-.chart-wrap { height: 260px; position: relative; }
+.chart-title span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chart-wrap { height: 260px; position: relative; margin-top: 8px; }
+.chart-wrap canvas { display: block; width: 100% !important; height: 100% !important; }
 .chart-wrap--donut { height: 240px; }
 
 /* Performance + Activity */

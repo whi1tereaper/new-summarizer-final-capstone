@@ -11,6 +11,7 @@ require_once __DIR__ . '/../src/Services/RateLimiter.php';
 require_once __DIR__ . '/../src/Services/TermsAcceptanceService.php';
 require_once __DIR__ . '/../src/Utils/Formatter.php';
 require_once __DIR__ . '/../src/Utils/validation.php';
+require_once __DIR__ . '/../src/Support/ProcessingError.php';
 
 use App\Src\Database;
 use App\Src\Services\FileUploadService;
@@ -19,18 +20,47 @@ use App\Src\Services\RateLimiter;
 use App\Src\Services\SourceResolver;
 use App\Src\Support\RuntimePaths;
 use App\Src\Utils\Formatter;
+use App\Src\Support\ProcessingError;
 
 function nutshellJson(int $status, array $body): void
 {
     while (ob_get_level() > 0) ob_end_clean();
     http_response_code($status);
     header('Content-Type: application/json; charset=utf-8');
-    echo json_encode($body, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    header('Cache-Control: no-store');
+    echo json_encode($body, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE);
 }
 
-function nutshellError(int $status, string $code, string $message): array
+function nutshellError(int $status, string $code, string $message = '', ?ProcessingError $failure = null): array
 {
-    return [$status, ['success' => false, 'status' => $code, 'error' => $code, 'message' => $message]];
+    // Keep legacy status/error keys for existing Nutshell clients, with the same
+    // safe, centralized failure object used by the summarization workflow.
+    $failure ??= new ProcessingError(match ($code) {
+        'method_not_allowed', 'invalid_request_key', 'invalid_summary_id' => 'REQUEST_INVALID',
+        'registration_required' => 'AUTH_REQUIRED',
+        'csrf_invalid', 'account_inactive' => 'ACCESS_DENIED',
+        'terms_required' => 'TERMS_REQUIRED',
+        'summary_not_found' => 'RESULT_UNAVAILABLE',
+        'summary_ineligible' => 'SUMMARY_INELIGIBLE',
+        'ambiguous_input' => 'SOURCE_CONFLICT',
+        'invalid_input' => 'INPUT_EMPTY',
+        'source_too_large' => 'INPUT_TOO_LARGE',
+        'insufficient_content' => 'INPUT_TOO_SHORT',
+        'rate_limited' => 'RATE_LIMITED',
+        default => 'PROCESSING_FAILED',
+    });
+    $httpStatus = $code === 'method_not_allowed' ? 405 : $failure->httpStatus;
+    return [$httpStatus, ['success' => false, 'status' => $code, 'error' => $code,
+        'message' => $failure->getMessage(), 'failure' => $failure->toArray()]];
+}
+
+function nutshellPreviousFailure(array $row): array
+{
+    $reason = (string)($row['failure_reason'] ?? '');
+    // Old output_validation rows prove a quality failure; old worker_error rows
+    // do not establish whether the source or infrastructure actually failed.
+    $failure = new ProcessingError($reason === 'output_validation' ? 'SUMMARY_QUALITY_FAILED' : $reason);
+    return nutshellError($failure->httpStatus, 'generation_failed', '', $failure);
 }
 
 function nutshellWordCount(string $text): int
@@ -49,7 +79,7 @@ function nutshellGenerate(): array
     $userId = (int)($_SESSION['user_id'] ?? 0);
     try {
         if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') return nutshellError(405, 'method_not_allowed', 'POST request required.');
-        if ($userId < 1) return nutshellError(403, 'registration_required', 'Create an account to use Nutshell.');
+        if ($userId < 1) return nutshellError(401, 'registration_required', 'Create an account to use Nutshell.');
 
         $raw = file_get_contents('php://input');
         $json = $raw !== '' ? json_decode($raw, true) : null;
@@ -73,18 +103,19 @@ function nutshellGenerate(): array
         if (!is_string($requestKey) || !preg_match('/^[A-Za-z0-9_-]{16,100}$/', $requestKey)) return nutshellError(400, 'invalid_request_key', 'Refresh the page and try again.');
         $idempotencyKey = hash('sha256', $userId . ':' . ($summaryId ?? 'standalone') . ':' . $requestKey);
         if ($summaryId === null) {
-            $priorStmt = $db->prepare('SELECT id,status,nutshell_text,word_count,source_word_count,primary_summary_word_count,compression_ratio,processing_time_ms,algorithm_version,analysis_mode FROM nutshell_generations WHERE idempotency_key=:key LIMIT 1');
+            $priorStmt = $db->prepare('SELECT id,status,failure_reason,nutshell_text,word_count,source_word_count,primary_summary_word_count,compression_ratio,processing_time_ms,algorithm_version,analysis_mode FROM nutshell_generations WHERE idempotency_key=:key LIMIT 1');
             $priorStmt->execute(['key' => $idempotencyKey]);
             $prior = $priorStmt->fetch(PDO::FETCH_ASSOC);
             if ($prior && $prior['status'] === 'completed' && trim((string)$prior['nutshell_text']) !== '') {
                 return [200, nutshellSuccess((string)$prior['nutshell_text'], $prior, (string)$prior['analysis_mode'], null, true)];
             }
-            if ($prior) return nutshellError(503, 'generation_failed', 'Unable to generate Nutshell. Please retry.');
+            if ($prior) return nutshellPreviousFailure($prior);
         }
         $text = is_string($input['text'] ?? null) ? trim($input['text']) : (is_string($input['original_text'] ?? null) ? trim($input['original_text']) : '');
         $hasFile = !$isJson && isset($_FILES['pdf_file']) && (int)($_FILES['pdf_file']['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE;
         if ($summaryId !== null && ($text !== '' || $hasFile)) return nutshellError(400, 'ambiguous_input', 'Choose either a saved summary or a new source.');
-        if ($summaryId === null && (($text !== '') === $hasFile)) return nutshellError(400, 'invalid_input', 'Provide exactly one text, URL, or document.');
+        if ($summaryId === null && $text !== '' && $hasFile) return nutshellError(422, 'invalid_input', '', new ProcessingError('SOURCE_CONFLICT'));
+        if ($summaryId === null && $text === '' && !$hasFile) return nutshellError(422, 'invalid_input');
         if (strlen($text) > 200000) return nutshellError(413, 'source_too_large', 'Text must be 200,000 bytes or less.');
 
         $mode = strtolower(trim((string)($input['analysis_mode'] ?? 'general')));
@@ -114,12 +145,12 @@ function nutshellGenerate(): array
                 $db->commit(); $transaction = false;
                 return [200, nutshellSuccess($cachedText, $cached, $mode, $summaryId, true)];
             }
-            $existing = $db->prepare('SELECT id,status,nutshell_text,word_count,source_word_count,primary_summary_word_count,compression_ratio,processing_time_ms,algorithm_version FROM nutshell_generations WHERE idempotency_key = :key LIMIT 1');
+            $existing = $db->prepare('SELECT id,status,failure_reason,nutshell_text,word_count,source_word_count,primary_summary_word_count,compression_ratio,processing_time_ms,algorithm_version FROM nutshell_generations WHERE idempotency_key = :key LIMIT 1');
             $existing->execute(['key' => $idempotencyKey]); $prior = $existing->fetch(PDO::FETCH_ASSOC);
             if ($prior) {
                 $db->commit(); $transaction = false;
                 if ($prior['status'] === 'completed' && trim((string)$prior['nutshell_text']) !== '') return [200, nutshellSuccess((string)$prior['nutshell_text'], $prior, $mode, $summaryId, true)];
-                return nutshellError(503, 'generation_failed', 'Unable to generate Nutshell. Please retry.');
+                return nutshellPreviousFailure($prior);
             }
             if ($primaryWords <= 20) { $db->commit(); $transaction = false; return [200, ['success' => true, 'status' => 'not_needed', 'nutshell' => '', 'generation' => null, 'configuration' => ['analysis_mode' => $mode, 'output_format' => 'paragraph', 'source_summary_id' => $summaryId], 'warnings' => ['The primary summary is already concise.']]]; }
             $text = $sourceSummary;
@@ -129,18 +160,21 @@ function nutshellGenerate(): array
         $limiter = new RateLimiter();
         if ($limiter->isLimited('nutshell', (string)$userId)) {
             if ($transaction) { $db->rollBack(); $transaction = false; }
-            return [429, ['success' => false, 'status' => 'rate_limited', 'error' => 'rate_limited', 'message' => 'Nutshell generation limit reached. Try again later.', 'retry_after' => $limiter->getRetryAfter('nutshell', (string)$userId)]];
+            [$status, $failure] = nutshellError(429, 'rate_limited');
+            $failure['retry_after'] = $limiter->getRetryAfter('nutshell', (string)$userId);
+            return [$status, $failure];
         }
         if ($hasFile) {
             $savedFile = (new FileUploadService())->saveUploadedFile($_FILES['pdf_file']);
             $inputType = strtolower(pathinfo((string)($_FILES['pdf_file']['name'] ?? ''), PATHINFO_EXTENSION));
-        } elseif (preg_match('~^https?://~i', $text)) {
+        } elseif (preg_match('~^(?:[a-z][a-z0-9+.-]*://|www\.)~i', $text)) {
             $resolvedSource = (new SourceResolver())->resolve($text);
             $text = $resolvedSource->getText();
+            $savedFile = $resolvedSource->getFilePath();
             $inputType = 'url';
         }
-        $sourceWords = $hasFile ? 0 : nutshellWordCount($text);
-        if (!$hasFile && $sourceWords < 8) { if ($transaction) { $db->rollBack(); $transaction = false; } return nutshellError(422, 'insufficient_content', 'The source does not contain enough readable content.'); }
+        $sourceWords = $savedFile !== '' ? 0 : nutshellWordCount($text);
+        if ($savedFile === '' && $sourceWords < 8) { if ($transaction) { $db->rollBack(); $transaction = false; } return nutshellError(422, 'insufficient_content', 'The source does not contain enough readable content.'); }
 
         $started = microtime(true);
         try {
@@ -151,13 +185,14 @@ function nutshellGenerate(): array
                 'primary_summary_word_count' => $primaryWords,
             ], 45);
         } catch (Throwable $exception) {
-            error_log('[Nutshell] generation failed summary_id=' . ($summaryId ?? 'none') . ' category=worker_error class=' . get_class($exception));
-            $db->prepare('INSERT INTO nutshell_generations (summary_id,user_id,input_type,status,failure_reason,analysis_mode,output_format,primary_summary_word_count,processing_time_ms,idempotency_key) VALUES (:summary_id,:user_id,:input_type,\'failed\',\'worker_error\',:mode,\'paragraph\',:primary_words,:duration,:key)')->execute([
-                'summary_id'=>$summaryId, 'user_id'=>$userId, 'input_type'=>$inputType, 'mode'=>$mode, 'primary_words'=>$primaryWords, 'duration'=>(int)((microtime(true)-$started)*1000), 'key'=>$idempotencyKey,
+            $failure = ProcessingError::fromThrowable($exception);
+            $failure->log();
+            $db->prepare('INSERT INTO nutshell_generations (summary_id,user_id,input_type,status,failure_reason,analysis_mode,output_format,primary_summary_word_count,processing_time_ms,idempotency_key) VALUES (:summary_id,:user_id,:input_type,\'failed\',:failure_reason,:mode,\'paragraph\',:primary_words,:duration,:key)')->execute([
+                'summary_id'=>$summaryId, 'user_id'=>$userId, 'input_type'=>$inputType, 'failure_reason'=>$failure->errorCode, 'mode'=>$mode, 'primary_words'=>$primaryWords, 'duration'=>(int)((microtime(true)-$started)*1000), 'key'=>$idempotencyKey,
             ]);
             if ($transaction) { $db->commit(); $transaction = false; }
             $limiter->recordAttempt('nutshell', (string)$userId);
-            return nutshellError(503, 'generation_failed', 'Unable to generate Nutshell. Please retry.');
+            return nutshellError($failure->httpStatus, 'generation_failed', '', $failure);
         }
         $content = trim((string)($result['nutshell'] ?? ''));
         $sourceWords = max($sourceWords, (int)($result['source_word_count'] ?? 0));
@@ -170,13 +205,13 @@ function nutshellGenerate(): array
         $plain = preg_replace('/<\s*\/?\s*[a-z][^>]*>/i', '', $content) === $content;
         $uniqueLines = array_unique(array_filter(array_map('trim', preg_split('/\R/', $content) ?: [])));
         if (($result['status'] ?? '') !== 'completed' || $content === '' || !$plain || $wordCount >= $sourceWords || ($primaryWords > 0 && $wordCount >= $primaryWords) || count($uniqueLines) !== count(array_filter(array_map('trim', preg_split('/\R/', $content) ?: [])))) {
-            $db->prepare('INSERT INTO nutshell_generations (summary_id,user_id,input_type,status,failure_reason,analysis_mode,output_format,source_word_count,primary_summary_word_count,processing_time_ms,idempotency_key) VALUES (:summary_id,:user_id,:input_type,\'failed\',\'output_validation\',:mode,\'paragraph\',:source_words,:primary_words,:duration,:key)')->execute([
+            $db->prepare('INSERT INTO nutshell_generations (summary_id,user_id,input_type,status,failure_reason,analysis_mode,output_format,source_word_count,primary_summary_word_count,processing_time_ms,idempotency_key) VALUES (:summary_id,:user_id,:input_type,\'failed\',\'SUMMARY_QUALITY_FAILED\',:mode,\'paragraph\',:source_words,:primary_words,:duration,:key)')->execute([
                 'summary_id'=>$summaryId, 'user_id'=>$userId, 'input_type'=>$inputType, 'mode'=>$mode, 'source_words'=>$sourceWords, 'primary_words'=>$primaryWords, 'duration'=>$duration, 'key'=>$idempotencyKey,
             ]);
             if ($transaction) { $db->commit(); $transaction = false; }
             $limiter->recordAttempt('nutshell', (string)$userId);
             error_log('[Nutshell] generation rejected summary_id=' . ($summaryId ?? 'none') . ' category=output_validation duration_ms=' . $duration);
-            return nutshellError(503, 'generation_failed', 'Unable to generate Nutshell. Please retry.');
+            return nutshellError(422, 'generation_failed', '', new ProcessingError('SUMMARY_QUALITY_FAILED'));
         }
         $ratio = round($wordCount / max(1, $sourceWords), 4);
         $insert = $db->prepare('INSERT INTO nutshell_generations (summary_id,user_id,input_type,nutshell_text,status,analysis_mode,output_format,word_count,source_word_count,primary_summary_word_count,compression_ratio,processing_time_ms,algorithm_version,idempotency_key) VALUES (:summary_id,:user_id,:input_type,:text,\'completed\',:mode,\'paragraph\',:words,:source_words,:primary_words,:ratio,:duration,:version,:key)');
@@ -195,16 +230,18 @@ function nutshellGenerate(): array
         if ($transaction && $db instanceof PDO && $db->inTransaction()) $db->rollBack();
         if ($db instanceof PDO && $summaryId === null && isset($idempotencyKey)) {
             try {
-                $priorStmt = $db->prepare('SELECT id,status,nutshell_text,word_count,source_word_count,primary_summary_word_count,compression_ratio,processing_time_ms,algorithm_version,analysis_mode FROM nutshell_generations WHERE idempotency_key=:key LIMIT 1');
+                $priorStmt = $db->prepare('SELECT id,status,failure_reason,nutshell_text,word_count,source_word_count,primary_summary_word_count,compression_ratio,processing_time_ms,algorithm_version,analysis_mode FROM nutshell_generations WHERE idempotency_key=:key LIMIT 1');
                 $priorStmt->execute(['key' => $idempotencyKey]);
                 $prior = $priorStmt->fetch(PDO::FETCH_ASSOC);
                 if ($prior && $prior['status'] === 'completed' && trim((string)$prior['nutshell_text']) !== '') {
                     return [200, nutshellSuccess((string)$prior['nutshell_text'], $prior, (string)$prior['analysis_mode'], null, true)];
                 }
+                if ($prior && $prior['status'] === 'failed') return nutshellPreviousFailure($prior);
             } catch (Throwable $ignored) { }
         }
-        error_log('[Nutshell] request failed summary_id=' . ($summaryId ?? 'none') . ' category=internal_error class=' . get_class($exception));
-        return nutshellError(500, 'internal_error', 'Unable to process the Nutshell request. Please try again.');
+        $failure = ProcessingError::fromThrowable($exception);
+        $failure->log();
+        return nutshellError($failure->httpStatus, 'internal_error', '', $failure);
     } finally {
         if ($savedFile !== '' && is_file($savedFile)) @unlink($savedFile);
         if ($resolvedSource !== null) $resolvedSource->cleanup();

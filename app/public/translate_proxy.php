@@ -6,8 +6,10 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../src/Utils/validation.php';
 
 use App\Src\Services\LocalPythonBridge;
+use App\Src\Support\ProcessingError;
 
 header('Content-Type: application/json');
+header('Cache-Control: no-store');
 
 if (empty($_SESSION)) {
     http_response_code(401);
@@ -47,10 +49,23 @@ if (!is_string($targetLang) || !in_array($targetLang, $allowedLangs, true)) {
 
 try {
     $decoded = (new LocalPythonBridge())->translate($text, $targetLang, 60);
-} catch (\RuntimeException $exception) {
-    error_log('[TranslateProxy] Translation worker error: ' . $exception->getMessage());
-    http_response_code(503);
-    echo json_encode(['error' => 'Filipino translation is temporarily unavailable. Please try again shortly.']);
+} catch (\Throwable $exception) {
+    $failure = ProcessingError::fromThrowable($exception, 'WORKER_UNAVAILABLE');
+    $failure->log();
+    $catalogEntry = ProcessingError::catalog()[$failure->errorCode];
+    http_response_code($failure->httpStatus);
+    if ($failure->retryAfterSeconds !== null) {
+        header('Retry-After: ' . $failure->retryAfterSeconds);
+    }
+    $response = [
+        'error' => $failure->getMessage(),
+        'code' => $failure->errorCode,
+        'retryable' => (bool) $catalogEntry['retryable'],
+    ];
+    if ($failure->retryAfterSeconds !== null) {
+        $response['retry_after_seconds'] = $failure->retryAfterSeconds;
+    }
+    echo json_encode($response);
     exit;
 }
 
@@ -58,9 +73,14 @@ $translated = isset($decoded['translated']) && is_string($decoded['translated'])
     ? trim($decoded['translated'])
     : '';
 if ($translated === '') {
-    error_log('[TranslateProxy] Translation worker returned an empty response.');
-    http_response_code(502);
-    echo json_encode(['error' => 'The translation service returned no Filipino text. Please try again.']);
+    $failure = new ProcessingError('TRANSLATION_INVALID_RESPONSE');
+    $failure->log();
+    http_response_code($failure->httpStatus);
+    echo json_encode([
+        'error' => $failure->getMessage(),
+        'code' => $failure->errorCode,
+        'retryable' => (bool) ProcessingError::catalog()[$failure->errorCode]['retryable'],
+    ]);
     exit;
 }
 

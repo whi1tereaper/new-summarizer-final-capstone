@@ -13,6 +13,8 @@ from summarizer_core.document_analysis import (
     build_source_evidence,
     build_summary_plan,
     classify_claim,
+    classify_claim_with_provenance,
+    identify_primary_findings,
 )
 from summarizer_core.fact_ledger import build_fact_ledger, validate_summary_facts
 from summarizer_core.models import SentenceCandidate, SummarizationPipeline
@@ -105,6 +107,172 @@ class DocumentAnalysisTests(unittest.TestCase):
     def test_research_question_and_hypothesis_have_distinct_statuses(self):
         self.assertEqual(classify_claim("Does price relate to purchase decisions?", "introduction")[1], "RESEARCH_QUESTION")
         self.assertEqual(classify_claim("The researchers hypothesize that quality predicts choice.", "introduction")[1], "HYPOTHESIS")
+
+    def test_unmeasured_estimate_accuracy_caution_is_not_classified_as_a_result(self):
+        caution = (
+            "Since the response rates remain below pre-pandemic levels, which were "
+            "regularly above 80%, it is important to examine how respondents differ "
+            "from nonrespondents, as this difference could affect the accuracy of "
+            "the estimates."
+        )
+        measured_result = "The model achieved 95.2% accuracy on the held-out test set."
+
+        self.assertEqual(classify_claim(caution)[1], "AUTHOR_CLAIM")
+        self.assertEqual(classify_claim(measured_result)[1], "ACTUAL_RESULT")
+
+    def test_primary_finding_can_be_late_when_it_has_direct_outcome_evidence(self):
+        candidates = [
+            candidate(0, "The agency introduced the service after a year-long design process."),
+            candidate(1, "The service supports several workflows for local offices."),
+            candidate(
+                2,
+                "The service reduced processing errors by 35% during the six-month pilot.",
+                claim_type="result",
+                claim_status="ACTUAL_RESULT",
+                source_role="current_study",
+            ),
+        ]
+
+        self.assertEqual(identify_primary_findings(candidates, "technical_document"), [2])
+
+    def test_primary_finding_supports_scientific_result_and_legal_obligation(self):
+        scientific = candidate(
+            0,
+            "After adjustment, active commuting remained associated with a 4.1-point higher wellbeing score (95% CI 2.3 to 5.9).",
+            section="results",
+            claim_type="result",
+            claim_status="ACTUAL_RESULT",
+            source_role="current_study",
+        )
+        secondary_result = candidate(
+            1,
+            "Respondents who cycled reported slightly higher scores than those who walked, but the difference was not statistically significant.",
+            section="results",
+            claim_type="result",
+            claim_status="ACTUAL_RESULT",
+            source_role="current_study",
+        )
+        causal_qualification = candidate(
+            2,
+            "Because the design is cross-sectional, the results cannot establish that active commuting causes higher wellbeing.",
+            paragraph=1,
+            section="discussion",
+            claim_type="limitation",
+            claim_status="ACTUAL_RESULT",
+            source_role="current_study",
+        )
+        legal = candidate(
+            3,
+            "Footage not associated with a violation shall be deleted no later than 30 days after recording.",
+            claim_type="method",
+            claim_status="PROPOSED_METHOD",
+            source_role="current_study",
+        )
+        access_exception = candidate(
+            4,
+            "Access to retained footage is limited to authorized personnel, except where a court order requires disclosure.",
+            claim_type="method",
+            claim_status="PROPOSED_METHOD",
+            source_role="current_study",
+        )
+        no_sale = candidate(
+            5,
+            "Footage shall not be sold, licensed, or otherwise provided to commercial entities.",
+            claim_type="method",
+            claim_status="PROPOSED_METHOD",
+            source_role="current_study",
+        )
+        warrant = candidate(
+            6,
+            "Requests from outside law enforcement must be accompanied by a warrant, unless an imminent threat permits disclosure.",
+            claim_type="method",
+            claim_status="PROPOSED_METHOD",
+            source_role="current_study",
+        )
+
+        self.assertEqual(
+            identify_primary_findings(
+                [scientific, secondary_result, causal_qualification],
+                "scientific_publication",
+            ),
+            [0, 2, 1],
+        )
+        self.assertEqual(
+            identify_primary_findings(
+                [legal, access_exception, no_sale, warrant],
+                "general_article",
+            ),
+            [3, 4, 5, 6],
+        )
+
+    def test_epistemic_may_not_is_not_promoted_as_a_legal_finding(self):
+        examples = [
+            "For example, the data may have been coded incorrectly or an experiment may not have been run correctly.",
+            "In some cases, it may not be possible to determine if an outlying point is bad data.",
+        ]
+        candidates = []
+        for index, text in enumerate(examples):
+            claim_type, status, *_ = classify_claim_with_provenance(text)
+            self.assertEqual(status, "AUTHOR_CLAIM")
+            candidates.append(candidate(
+                index,
+                text,
+                claim_type=claim_type,
+                claim_status=status,
+                source_role="current_study",
+            ))
+
+        self.assertEqual(identify_primary_findings(candidates, "general_article"), [])
+        legal_rule = candidate(
+            2,
+            "City staff may not disclose footage unless a court order requires release.",
+            claim_type="method",
+            claim_status="PROPOSED_METHOD",
+            source_role="current_study",
+        )
+        self.assertEqual(identify_primary_findings([legal_rule], "general_article"), [2])
+
+    def test_nominal_definition_with_cautious_phrase_is_classified_as_definition(self):
+        claim_type, status = classify_claim_with_provenance(
+            "An outlier is an observation that appears to deviate markedly from other observations in the sample."
+        )[:2]
+        self.assertEqual((claim_type, status), ("definition", "DEFINITION"))
+
+    def test_unquantified_comparative_measurement_is_recognized_as_a_finding(self):
+        text = (
+            "In general, major ion concentrations were higher at sites on the "
+            "tributaries compared to sites on the Red River of the North."
+        )
+        claim_type, status, role, *_ = classify_claim_with_provenance(text)
+        self.assertEqual((claim_type, status, role), ("result", "CURRENT_RESULT", "current_study"))
+
+        finding = candidate(
+            0,
+            text,
+            claim_type=claim_type,
+            claim_status=status,
+            source_role=role,
+        )
+        self.assertEqual(identify_primary_findings([finding], "official_report"), [0])
+
+    def test_source_attributed_record_finding_is_not_misclassified_as_prior_literature(self):
+        text = (
+            "Earth's average surface temperature in 2024 was the warmest on record, "
+            "according to an analysis led by NASA scientists."
+        )
+        claim_type, status, role, *_ = classify_claim_with_provenance(text)
+        self.assertEqual(claim_type, "result")
+        self.assertEqual(status, "CURRENT_RESULT")
+        self.assertEqual(role, "current_study")
+
+        finding = candidate(
+            0,
+            text,
+            claim_type=claim_type,
+            claim_status=status,
+            source_role=role,
+        )
+        self.assertEqual(identify_primary_findings([finding], "scientific_publication"), [0])
 
     def test_literature_findings_remain_attributed(self):
         _claim_type, status = classify_claim(

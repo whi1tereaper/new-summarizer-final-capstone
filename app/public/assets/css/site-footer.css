@@ -26,9 +26,9 @@
 /* ── Universal Footer Surface ────────────────────────────────────── */
 .nex-footer,
 .site-footer {
-  background: #EEEDEA !important;
-  color: #080808 !important;
-  border-top: 1px solid rgba(8, 8, 8, 0.14) !important;
+  background: var(--color-bg, #EEEDEA) !important;
+  color: var(--color-text, #080808) !important;
+  border-top: 1px solid rgba(var(--color-text-rgb, 8, 8, 8), 0.14) !important;
   padding: clamp(64px, 8vw, 112px) clamp(24px, 4vw, 64px) 36px !important;
   position: relative !important;
   overflow: hidden !important;
@@ -76,7 +76,7 @@
 
 /* ── Column Headers (Clean hairline divider ABOVE title) ─────────── */
 .nex-footer__col-head {
-  border-top: 1px solid rgba(8, 8, 8, 0.14) !important;
+  border-top: 1px solid rgba(var(--color-text-rgb, 8, 8, 8), 0.14) !important;
   border-bottom: none !important;
   padding-top: 14px !important;
   padding-bottom: 0 !important;
@@ -89,7 +89,7 @@
   font-weight: 700 !important;
   letter-spacing: 0.14em !important;
   text-transform: uppercase !important;
-  color: rgba(8, 8, 8, 0.45) !important;
+  color: var(--color-text-muted, rgba(8, 8, 8, 0.48)) !important;
   display: block !important;
   line-height: 1.2 !important;
 }
@@ -99,7 +99,7 @@
   font-family: 'Outfit', 'Inter', system-ui, sans-serif !important;
   font-size: clamp(1.0625rem, 1.35vw, 1.375rem) !important;
   font-weight: 600 !important;
-  color: #080808 !important;
+  color: var(--color-text, #080808) !important;
   text-decoration: none !important;
   display: inline-block !important;
   letter-spacing: -0.01em !important;
@@ -109,9 +109,15 @@
 
 .nex-footer__email:hover,
 .nex-footer__email:focus-visible {
-  color: #7F00FF !important;
+  color: var(--color-accent, #7F00FF) !important;
   transform: translateX(4px) !important;
-  outline: none !important;
+}
+
+.nex-footer__email:focus-visible,
+.nex-footer__link:focus-visible,
+.nex-footer__back:focus-visible {
+  outline: 2px solid var(--color-focus, #7F00FF) !important;
+  outline-offset: 3px !important;
 }
 
 .nex-footer__tagline {
@@ -119,14 +125,14 @@
   font-size: clamp(1.125rem, 1.45vw, 1.375rem) !important;
   font-weight: 500 !important;
   line-height: 1.4 !important;
-  color: rgba(8, 8, 8, 0.86) !important;
+  color: var(--color-text-secondary, rgba(8, 8, 8, 0.68)) !important;
   max-width: 500px !important;
   margin: 0 !important;
 }
 
 .nex-footer__tagline strong {
   font-weight: 800 !important;
-  color: #7F00FF !important;
+  color: var(--color-accent, #7F00FF) !important;
 }
 
 /* ── Column 2 & 3: Link Lists (Never bulleted) ───────────────────── */
@@ -151,7 +157,7 @@
   font-family: 'Outfit', 'Inter', system-ui, sans-serif !important;
   font-size: 0.9375rem !important;
   font-weight: 500 !important;
-  color: #080808 !important;
+  color: var(--color-text, #080808) !important;
   text-decoration: none !important;
   display: inline-flex !important;
   align-items: center !important;
@@ -161,9 +167,8 @@
 
 .nex-footer__link:hover,
 .nex-footer__link:focus-visible {
-  color: #7F00FF !important;
+  color: var(--color-accent, #7F00FF) !important;
   transform: translateX(4px) !important;
-  outline: none !important;
 }
 
 /* ── Giant Brand Typography ("LIGHT") ────────────────────────────── */
@@ -188,7 +193,7 @@
   letter-spacing: -0.05em !important;
   line-height: 0.8 !important;
   text-transform: uppercase !important;
-  color: #080808 !important;
+  color: var(--color-text, #080808) !important;
   cursor: default !important;
   user-select: none !important;
   -webkit-user-select: none !important;
@@ -253,7 +258,7 @@
 
 /* ── Bottom Bar: Copyright & Back To Top ─────────────────────────── */
 .nex-footer__bottom {
-  border-top: 1px solid rgba(8, 8, 8, 0.14) !important;
+  border-top: 1px solid rgba(var(--color-text-rgb, 8, 8, 8), 0.14) !important;
   padding-top: 24px !important;
   display: flex !important;
   justify-content: space-between !important;
@@ -266,7 +271,7 @@
   font-family: 'Outfit', 'Inter', system-ui, sans-serif !important;
   font-size: 0.75rem !important;
   font-weight: 500 !important;
-  color: rgba(8, 8, 8, 0.45) !important;
+  color: var(--color-text-muted, rgba(8, 8, 8, 0.48)) !important;
   margin: 0 !important;
   letter-spacing: 0.02em !important;
 }
@@ -277,7 +282,7 @@
   font-weight: 700 !important;
   letter-spacing: 0.08em !important;
   text-transform: uppercase !important;
-  color: #080808 !important;
+  color: var(--color-text, #080808) !important;
   text-decoration: none !important;
   display: inline-flex !important;
   align-items: center !important;
@@ -287,9 +292,8 @@
 
 .nex-footer__back:hover,
 .nex-footer__back:focus-visible {
-  color: #7F00FF !important;
+  color: var(--color-accent, #7F00FF) !important;
   transform: translateY(-2px) !important;
-  outline: none !important;
 }
 
 /* ── Accessibility & Reduced Motion ──────────────────────────────── */

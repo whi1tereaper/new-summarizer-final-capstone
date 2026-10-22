@@ -22,6 +22,12 @@ TRANSFER & SETUP IN 5 STEPS:
 
 ACCESS: http://localhost:8000
 
+WINDOWS / XAMPP: Install the persistent local NLP worker once from the project
+directory in PowerShell:
+   powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\install_nlp_worker_task.ps1
+The monitor runs with your current user's limited privileges and restarts the
+supervisor if it exits.
+
 REQUIREMENTS:
 - PHP 8.1+ with MySQL extensions
 - Python 3.8+ with pip

@@ -36,6 +36,26 @@ def normalize_whitespace(text: str) -> str:
     return _runtime_normalize_whitespace(text)
 
 
+def ensure_terminal_punctuation(text: str) -> str:
+    """Add sentence punctuation before closing quotes, or after other closers."""
+    value = text.rstrip().rstrip(",").rstrip()
+    if value == "":
+        return ""
+
+    quote_closers = "\"”»"
+    value = re.sub(r'([.!?])(["”»\'])\1$', r"\1\2", value)
+    quote_length = len(value) - len(value.rstrip(quote_closers))
+    if value.endswith("'") and value.count("'") >= 2:
+        quote_length += 1
+    if quote_length:
+        sentence = value[:-quote_length].rstrip()
+        if sentence and sentence[-1] in ".!?":
+            return value
+        return f"{sentence}.{value[-quote_length:]}"
+
+    return value if value[-1] in ".!?" else f"{value}."
+
+
 def normalize_source_newlines(text: str) -> str:
     normalized = text.replace("\r\n", "\n").replace("\r", "\n").replace("\u00ad", "")
     normalized = re.sub(r"(?<=\w)-\n(?=\w)", "", normalized)
@@ -57,4 +77,4 @@ def normalize_summary_count(sentence_count: int) -> int:
     return max(1, int(sentence_count))
 
 
-__all__ = ['_fallback_normalize_whitespace', 'log_summary_event', 'normalize_pdf_line_breaks', 'normalize_source_newlines', 'normalize_summary_count', 'normalize_whitespace']
+__all__ = ['_fallback_normalize_whitespace', 'ensure_terminal_punctuation', 'log_summary_event', 'normalize_pdf_line_breaks', 'normalize_source_newlines', 'normalize_summary_count', 'normalize_whitespace']

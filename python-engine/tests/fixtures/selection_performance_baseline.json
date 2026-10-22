@@ -1,0 +1,1926 @@
+{
+  "description": "Frozen pre-performance-optimization selection on shared annotated evidence; no model inference.",
+  "baseline_selection_sha256": "88c36d9bca83d5b5b79d84b9a57db96206ee6e56bfe11aa553f50aaec76e41af",
+  "cases": {
+    "general/very_brief": {
+      "indices": [
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.5213,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5213,
+          "high_information_density": 0.5213,
+          "broad_topic_coverage": 0.5213,
+          "coherence_prioritized": 0.5213,
+          "graph_centrality": 0.5213
+        },
+        "quality_metrics": {
+          "indices": [
+            8
+          ],
+          "composite_score": 0.5213,
+          "topic_coverage": 0.0833,
+          "info_density": 0.5333,
+          "novelty_score": 1.0,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "general/brief": {
+      "indices": [
+        3,
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.5807,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5807,
+          "high_information_density": 0.5567,
+          "broad_topic_coverage": 0.5807,
+          "coherence_prioritized": 0.5807,
+          "graph_centrality": 0.5467
+        },
+        "quality_metrics": {
+          "indices": [
+            3,
+            8
+          ],
+          "composite_score": 0.5807,
+          "topic_coverage": 0.1667,
+          "info_density": 0.6833,
+          "novelty_score": 1.0,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "general/short": {
+      "indices": [
+        3,
+        4,
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "high_information_density",
+        "composite_score": 0.5973,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5833,
+          "high_information_density": 0.5973,
+          "broad_topic_coverage": 0.5833,
+          "coherence_prioritized": 0.5833,
+          "graph_centrality": 0.5833
+        },
+        "quality_metrics": {
+          "indices": [
+            3,
+            4,
+            8
+          ],
+          "composite_score": 0.5973,
+          "topic_coverage": 0.25,
+          "info_density": 0.6889,
+          "novelty_score": 0.95,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "general/balanced": {
+      "indices": [
+        3,
+        6,
+        8,
+        9
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.6093,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.6093,
+          "high_information_density": 0.6053,
+          "broad_topic_coverage": 0.6093,
+          "coherence_prioritized": 0.6093,
+          "graph_centrality": 0.6093
+        },
+        "quality_metrics": {
+          "indices": [
+            3,
+            6,
+            8,
+            9
+          ],
+          "composite_score": 0.6093,
+          "topic_coverage": 0.3333,
+          "info_density": 0.7333,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "general/detailed": {
+      "indices": [
+        1,
+        3,
+        4,
+        6,
+        8,
+        9
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.6547,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.6547,
+          "high_information_density": 0.6547,
+          "broad_topic_coverage": 0.6547,
+          "coherence_prioritized": 0.6547,
+          "graph_centrality": 0.6547
+        },
+        "quality_metrics": {
+          "indices": [
+            1,
+            3,
+            4,
+            6,
+            8,
+            9
+          ],
+          "composite_score": 0.6547,
+          "topic_coverage": 0.5,
+          "info_density": 0.7278,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "general/comprehensive": {
+      "indices": [
+        1,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.6967,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.6967,
+          "high_information_density": 0.6947,
+          "broad_topic_coverage": 0.6967,
+          "coherence_prioritized": 0.6967,
+          "graph_centrality": 0.6967
+        },
+        "quality_metrics": {
+          "indices": [
+            1,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "composite_score": 0.6967,
+          "topic_coverage": 0.6667,
+          "info_density": 0.7083,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "academic/very_brief": {
+      "indices": [
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.5213,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5213,
+          "high_information_density": 0.5213,
+          "broad_topic_coverage": 0.5213,
+          "coherence_prioritized": 0.5213,
+          "graph_centrality": 0.5213
+        },
+        "quality_metrics": {
+          "indices": [
+            8
+          ],
+          "composite_score": 0.5213,
+          "topic_coverage": 0.0833,
+          "info_density": 0.5333,
+          "novelty_score": 1.0,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "academic/brief": {
+      "indices": [
+        3,
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.5807,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5807,
+          "high_information_density": 0.5567,
+          "broad_topic_coverage": 0.5807,
+          "coherence_prioritized": 0.5807,
+          "graph_centrality": 0.5467
+        },
+        "quality_metrics": {
+          "indices": [
+            3,
+            8
+          ],
+          "composite_score": 0.5807,
+          "topic_coverage": 0.1667,
+          "info_density": 0.6833,
+          "novelty_score": 1.0,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "academic/short": {
+      "indices": [
+        4,
+        6,
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.5727,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5727,
+          "high_information_density": 0.5727,
+          "broad_topic_coverage": 0.5727,
+          "coherence_prioritized": 0.5727,
+          "graph_centrality": 0.5727
+        },
+        "quality_metrics": {
+          "indices": [
+            4,
+            6,
+            8
+          ],
+          "composite_score": 0.5727,
+          "topic_coverage": 0.25,
+          "info_density": 0.6778,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "academic/balanced": {
+      "indices": [
+        3,
+        4,
+        6,
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.6053,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.6053,
+          "high_information_density": 0.6053,
+          "broad_topic_coverage": 0.6053,
+          "coherence_prioritized": 0.6053,
+          "graph_centrality": 0.6053
+        },
+        "quality_metrics": {
+          "indices": [
+            3,
+            4,
+            6,
+            8
+          ],
+          "composite_score": 0.6053,
+          "topic_coverage": 0.3333,
+          "info_density": 0.7167,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "academic/detailed": {
+      "indices": [
+        1,
+        3,
+        4,
+        6,
+        8,
+        9
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.6547,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.6547,
+          "high_information_density": 0.6547,
+          "broad_topic_coverage": 0.6547,
+          "coherence_prioritized": 0.6547,
+          "graph_centrality": 0.6547
+        },
+        "quality_metrics": {
+          "indices": [
+            1,
+            3,
+            4,
+            6,
+            8,
+            9
+          ],
+          "composite_score": 0.6547,
+          "topic_coverage": 0.5,
+          "info_density": 0.7278,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "academic/comprehensive": {
+      "indices": [
+        1,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.6967,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.6967,
+          "high_information_density": 0.6947,
+          "broad_topic_coverage": 0.6967,
+          "coherence_prioritized": 0.6967,
+          "graph_centrality": 0.6967
+        },
+        "quality_metrics": {
+          "indices": [
+            1,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "composite_score": 0.6967,
+          "topic_coverage": 0.6667,
+          "info_density": 0.7083,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "executive/very_brief": {
+      "indices": [
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.5213,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5213,
+          "high_information_density": 0.5213,
+          "broad_topic_coverage": 0.5213,
+          "coherence_prioritized": 0.5213,
+          "graph_centrality": 0.5213
+        },
+        "quality_metrics": {
+          "indices": [
+            8
+          ],
+          "composite_score": 0.5213,
+          "topic_coverage": 0.0833,
+          "info_density": 0.5333,
+          "novelty_score": 1.0,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "executive/brief": {
+      "indices": [
+        3,
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.5807,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5807,
+          "high_information_density": 0.5567,
+          "broad_topic_coverage": 0.5807,
+          "coherence_prioritized": 0.5807,
+          "graph_centrality": 0.5467
+        },
+        "quality_metrics": {
+          "indices": [
+            3,
+            8
+          ],
+          "composite_score": 0.5807,
+          "topic_coverage": 0.1667,
+          "info_density": 0.6833,
+          "novelty_score": 1.0,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "executive/short": {
+      "indices": [
+        4,
+        8,
+        9
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.5911,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5911,
+          "high_information_density": 0.5911,
+          "broad_topic_coverage": 0.5911,
+          "coherence_prioritized": 0.5911,
+          "graph_centrality": 0.5911
+        },
+        "quality_metrics": {
+          "indices": [
+            4,
+            8,
+            9
+          ],
+          "composite_score": 0.5911,
+          "topic_coverage": 0.25,
+          "info_density": 0.6667,
+          "novelty_score": 0.9444,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "executive/balanced": {
+      "indices": [
+        3,
+        6,
+        8,
+        9
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.6093,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.6093,
+          "high_information_density": 0.6053,
+          "broad_topic_coverage": 0.6093,
+          "coherence_prioritized": 0.6093,
+          "graph_centrality": 0.6013
+        },
+        "quality_metrics": {
+          "indices": [
+            3,
+            6,
+            8,
+            9
+          ],
+          "composite_score": 0.6093,
+          "topic_coverage": 0.3333,
+          "info_density": 0.7333,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "executive/detailed": {
+      "indices": [
+        1,
+        3,
+        4,
+        6,
+        8,
+        9
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.6547,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.6547,
+          "high_information_density": 0.6547,
+          "broad_topic_coverage": 0.6547,
+          "coherence_prioritized": 0.6547,
+          "graph_centrality": 0.6547
+        },
+        "quality_metrics": {
+          "indices": [
+            1,
+            3,
+            4,
+            6,
+            8,
+            9
+          ],
+          "composite_score": 0.6547,
+          "topic_coverage": 0.5,
+          "info_density": 0.7278,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "executive/comprehensive": {
+      "indices": [
+        1,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.6967,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.6967,
+          "high_information_density": 0.6947,
+          "broad_topic_coverage": 0.6967,
+          "coherence_prioritized": 0.6967,
+          "graph_centrality": 0.6967
+        },
+        "quality_metrics": {
+          "indices": [
+            1,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "composite_score": 0.6967,
+          "topic_coverage": 0.6667,
+          "info_density": 0.7083,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "technical/very_brief": {
+      "indices": [
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.5213,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5213,
+          "high_information_density": 0.5213,
+          "broad_topic_coverage": 0.5213,
+          "coherence_prioritized": 0.5213,
+          "graph_centrality": 0.5213
+        },
+        "quality_metrics": {
+          "indices": [
+            8
+          ],
+          "composite_score": 0.5213,
+          "topic_coverage": 0.0833,
+          "info_density": 0.5333,
+          "novelty_score": 1.0,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "technical/brief": {
+      "indices": [
+        3,
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.5807,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5807,
+          "high_information_density": 0.5567,
+          "broad_topic_coverage": 0.5807,
+          "coherence_prioritized": 0.5807,
+          "graph_centrality": 0.5467
+        },
+        "quality_metrics": {
+          "indices": [
+            3,
+            8
+          ],
+          "composite_score": 0.5807,
+          "topic_coverage": 0.1667,
+          "info_density": 0.6833,
+          "novelty_score": 1.0,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "technical/short": {
+      "indices": [
+        3,
+        4,
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "high_information_density",
+        "composite_score": 0.5973,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5833,
+          "high_information_density": 0.5973,
+          "broad_topic_coverage": 0.5833,
+          "coherence_prioritized": 0.5833,
+          "graph_centrality": 0.5833
+        },
+        "quality_metrics": {
+          "indices": [
+            3,
+            4,
+            8
+          ],
+          "composite_score": 0.5973,
+          "topic_coverage": 0.25,
+          "info_density": 0.6889,
+          "novelty_score": 0.95,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "technical/balanced": {
+      "indices": [
+        3,
+        6,
+        8,
+        9
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.6093,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.6093,
+          "high_information_density": 0.6053,
+          "broad_topic_coverage": 0.6093,
+          "coherence_prioritized": 0.6093,
+          "graph_centrality": 0.6093
+        },
+        "quality_metrics": {
+          "indices": [
+            3,
+            6,
+            8,
+            9
+          ],
+          "composite_score": 0.6093,
+          "topic_coverage": 0.3333,
+          "info_density": 0.7333,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "technical/detailed": {
+      "indices": [
+        1,
+        3,
+        4,
+        6,
+        8,
+        9
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.6547,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.6547,
+          "high_information_density": 0.6547,
+          "broad_topic_coverage": 0.6547,
+          "coherence_prioritized": 0.6547,
+          "graph_centrality": 0.6547
+        },
+        "quality_metrics": {
+          "indices": [
+            1,
+            3,
+            4,
+            6,
+            8,
+            9
+          ],
+          "composite_score": 0.6547,
+          "topic_coverage": 0.5,
+          "info_density": 0.7278,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "technical/comprehensive": {
+      "indices": [
+        1,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.6967,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.6967,
+          "high_information_density": 0.6947,
+          "broad_topic_coverage": 0.6967,
+          "coherence_prioritized": 0.6967,
+          "graph_centrality": 0.6967
+        },
+        "quality_metrics": {
+          "indices": [
+            1,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "composite_score": 0.6967,
+          "topic_coverage": 0.6667,
+          "info_density": 0.7083,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "study/very_brief": {
+      "indices": [
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.5213,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5213,
+          "high_information_density": 0.5213,
+          "broad_topic_coverage": 0.5213,
+          "coherence_prioritized": 0.5213,
+          "graph_centrality": 0.5213
+        },
+        "quality_metrics": {
+          "indices": [
+            8
+          ],
+          "composite_score": 0.5213,
+          "topic_coverage": 0.0833,
+          "info_density": 0.5333,
+          "novelty_score": 1.0,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "study/brief": {
+      "indices": [
+        3,
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.5807,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5807,
+          "high_information_density": 0.5567,
+          "broad_topic_coverage": 0.5807,
+          "coherence_prioritized": 0.5807,
+          "graph_centrality": 0.5467
+        },
+        "quality_metrics": {
+          "indices": [
+            3,
+            8
+          ],
+          "composite_score": 0.5807,
+          "topic_coverage": 0.1667,
+          "info_density": 0.6833,
+          "novelty_score": 1.0,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "study/short": {
+      "indices": [
+        0,
+        3,
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.5804,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5804,
+          "high_information_density": 0.5698,
+          "broad_topic_coverage": 0.5804,
+          "coherence_prioritized": 0.5804,
+          "graph_centrality": 0.5567
+        },
+        "quality_metrics": {
+          "indices": [
+            0,
+            3,
+            8
+          ],
+          "composite_score": 0.5804,
+          "topic_coverage": 0.25,
+          "info_density": 0.6222,
+          "novelty_score": 0.9444,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "study/balanced": {
+      "indices": [
+        3,
+        4,
+        6,
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "high_information_density",
+        "composite_score": 0.6053,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5933,
+          "high_information_density": 0.6053,
+          "broad_topic_coverage": 0.5933,
+          "coherence_prioritized": 0.5933,
+          "graph_centrality": 0.5933
+        },
+        "quality_metrics": {
+          "indices": [
+            3,
+            4,
+            6,
+            8
+          ],
+          "composite_score": 0.6053,
+          "topic_coverage": 0.3333,
+          "info_density": 0.7167,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "study/detailed": {
+      "indices": [
+        0,
+        1,
+        3,
+        6,
+        8,
+        9
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.6467,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.6467,
+          "high_information_density": 0.6453,
+          "broad_topic_coverage": 0.6467,
+          "coherence_prioritized": 0.6467,
+          "graph_centrality": 0.6467
+        },
+        "quality_metrics": {
+          "indices": [
+            0,
+            1,
+            3,
+            6,
+            8,
+            9
+          ],
+          "composite_score": 0.6467,
+          "topic_coverage": 0.5,
+          "info_density": 0.6944,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "study/comprehensive": {
+      "indices": [
+        0,
+        1,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.6927,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.6927,
+          "high_information_density": 0.6897,
+          "broad_topic_coverage": 0.6927,
+          "coherence_prioritized": 0.6927,
+          "graph_centrality": 0.6927
+        },
+        "quality_metrics": {
+          "indices": [
+            0,
+            1,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9
+          ],
+          "composite_score": 0.6927,
+          "topic_coverage": 0.6667,
+          "info_density": 0.6917,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "news/very_brief": {
+      "indices": [
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.5213,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5213,
+          "high_information_density": 0.5213,
+          "broad_topic_coverage": 0.5213,
+          "coherence_prioritized": 0.5213,
+          "graph_centrality": 0.5213
+        },
+        "quality_metrics": {
+          "indices": [
+            8
+          ],
+          "composite_score": 0.5213,
+          "topic_coverage": 0.0833,
+          "info_density": 0.5333,
+          "novelty_score": 1.0,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "news/brief": {
+      "indices": [
+        3,
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.5807,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5807,
+          "high_information_density": 0.5567,
+          "broad_topic_coverage": 0.5807,
+          "coherence_prioritized": 0.5807,
+          "graph_centrality": 0.5467
+        },
+        "quality_metrics": {
+          "indices": [
+            3,
+            8
+          ],
+          "composite_score": 0.5807,
+          "topic_coverage": 0.1667,
+          "info_density": 0.6833,
+          "novelty_score": 1.0,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "news/short": {
+      "indices": [
+        3,
+        4,
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "high_information_density",
+        "composite_score": 0.5973,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5833,
+          "high_information_density": 0.5973,
+          "broad_topic_coverage": 0.5833,
+          "coherence_prioritized": 0.5833,
+          "graph_centrality": 0.5833
+        },
+        "quality_metrics": {
+          "indices": [
+            3,
+            4,
+            8
+          ],
+          "composite_score": 0.5973,
+          "topic_coverage": 0.25,
+          "info_density": 0.6889,
+          "novelty_score": 0.95,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "news/balanced": {
+      "indices": [
+        3,
+        6,
+        8,
+        9
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.6093,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.6093,
+          "high_information_density": 0.6053,
+          "broad_topic_coverage": 0.6093,
+          "coherence_prioritized": 0.6093,
+          "graph_centrality": 0.6093
+        },
+        "quality_metrics": {
+          "indices": [
+            3,
+            6,
+            8,
+            9
+          ],
+          "composite_score": 0.6093,
+          "topic_coverage": 0.3333,
+          "info_density": 0.7333,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "news/detailed": {
+      "indices": [
+        1,
+        3,
+        4,
+        6,
+        8,
+        9
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.6547,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.6547,
+          "high_information_density": 0.6547,
+          "broad_topic_coverage": 0.6547,
+          "coherence_prioritized": 0.6547,
+          "graph_centrality": 0.6547
+        },
+        "quality_metrics": {
+          "indices": [
+            1,
+            3,
+            4,
+            6,
+            8,
+            9
+          ],
+          "composite_score": 0.6547,
+          "topic_coverage": 0.5,
+          "info_density": 0.7278,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "news/comprehensive": {
+      "indices": [
+        1,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.6967,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.6967,
+          "high_information_density": 0.6947,
+          "broad_topic_coverage": 0.6967,
+          "coherence_prioritized": 0.6967,
+          "graph_centrality": 0.6967
+        },
+        "quality_metrics": {
+          "indices": [
+            1,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "composite_score": 0.6967,
+          "topic_coverage": 0.6667,
+          "info_density": 0.7083,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "legal/very_brief": {
+      "indices": [
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.5213,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5213,
+          "high_information_density": 0.5213,
+          "broad_topic_coverage": 0.5213,
+          "coherence_prioritized": 0.5213,
+          "graph_centrality": 0.5213
+        },
+        "quality_metrics": {
+          "indices": [
+            8
+          ],
+          "composite_score": 0.5213,
+          "topic_coverage": 0.0833,
+          "info_density": 0.5333,
+          "novelty_score": 1.0,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "legal/brief": {
+      "indices": [
+        3,
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.5807,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5807,
+          "high_information_density": 0.5567,
+          "broad_topic_coverage": 0.5807,
+          "coherence_prioritized": 0.5807,
+          "graph_centrality": 0.5467
+        },
+        "quality_metrics": {
+          "indices": [
+            3,
+            8
+          ],
+          "composite_score": 0.5807,
+          "topic_coverage": 0.1667,
+          "info_density": 0.6833,
+          "novelty_score": 1.0,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "legal/short": {
+      "indices": [
+        3,
+        8,
+        10
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.6,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.6,
+          "high_information_density": 0.5813,
+          "broad_topic_coverage": 0.6,
+          "coherence_prioritized": 0.6,
+          "graph_centrality": 0.5673
+        },
+        "quality_metrics": {
+          "indices": [
+            3,
+            8,
+            10
+          ],
+          "composite_score": 0.6,
+          "topic_coverage": 0.25,
+          "info_density": 0.6667,
+          "novelty_score": 1.0,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "legal/balanced": {
+      "indices": [
+        3,
+        4,
+        6,
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "high_information_density",
+        "composite_score": 0.6053,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.6013,
+          "high_information_density": 0.6053,
+          "broad_topic_coverage": 0.6013,
+          "coherence_prioritized": 0.6013,
+          "graph_centrality": 0.6013
+        },
+        "quality_metrics": {
+          "indices": [
+            3,
+            4,
+            6,
+            8
+          ],
+          "composite_score": 0.6053,
+          "topic_coverage": 0.3333,
+          "info_density": 0.7167,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "legal/detailed": {
+      "indices": [
+        1,
+        3,
+        6,
+        8,
+        9,
+        10
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.652,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.652,
+          "high_information_density": 0.6507,
+          "broad_topic_coverage": 0.652,
+          "coherence_prioritized": 0.652,
+          "graph_centrality": 0.652
+        },
+        "quality_metrics": {
+          "indices": [
+            1,
+            3,
+            6,
+            8,
+            9,
+            10
+          ],
+          "composite_score": 0.652,
+          "topic_coverage": 0.5,
+          "info_density": 0.7167,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "legal/comprehensive": {
+      "indices": [
+        1,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.6967,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.6967,
+          "high_information_density": 0.6937,
+          "broad_topic_coverage": 0.6967,
+          "coherence_prioritized": 0.6967,
+          "graph_centrality": 0.6947
+        },
+        "quality_metrics": {
+          "indices": [
+            1,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "composite_score": 0.6967,
+          "topic_coverage": 0.6667,
+          "info_density": 0.7083,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "scientific/very_brief": {
+      "indices": [
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.5213,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5213,
+          "high_information_density": 0.5213,
+          "broad_topic_coverage": 0.5213,
+          "coherence_prioritized": 0.5213,
+          "graph_centrality": 0.5213
+        },
+        "quality_metrics": {
+          "indices": [
+            8
+          ],
+          "composite_score": 0.5213,
+          "topic_coverage": 0.0833,
+          "info_density": 0.5333,
+          "novelty_score": 1.0,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "scientific/brief": {
+      "indices": [
+        3,
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.5807,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5807,
+          "high_information_density": 0.5567,
+          "broad_topic_coverage": 0.5807,
+          "coherence_prioritized": 0.5807,
+          "graph_centrality": 0.5467
+        },
+        "quality_metrics": {
+          "indices": [
+            3,
+            8
+          ],
+          "composite_score": 0.5807,
+          "topic_coverage": 0.1667,
+          "info_density": 0.6833,
+          "novelty_score": 1.0,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "scientific/short": {
+      "indices": [
+        4,
+        6,
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.5727,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.5727,
+          "high_information_density": 0.5727,
+          "broad_topic_coverage": 0.5727,
+          "coherence_prioritized": 0.5727,
+          "graph_centrality": 0.5727
+        },
+        "quality_metrics": {
+          "indices": [
+            4,
+            6,
+            8
+          ],
+          "composite_score": 0.5727,
+          "topic_coverage": 0.25,
+          "info_density": 0.6778,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "scientific/balanced": {
+      "indices": [
+        3,
+        4,
+        6,
+        8
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.6053,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.6053,
+          "high_information_density": 0.6053,
+          "broad_topic_coverage": 0.6053,
+          "coherence_prioritized": 0.6053,
+          "graph_centrality": 0.6053
+        },
+        "quality_metrics": {
+          "indices": [
+            3,
+            4,
+            6,
+            8
+          ],
+          "composite_score": 0.6053,
+          "topic_coverage": 0.3333,
+          "info_density": 0.7167,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "scientific/detailed": {
+      "indices": [
+        1,
+        3,
+        4,
+        6,
+        8,
+        9
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.6547,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.6547,
+          "high_information_density": 0.6547,
+          "broad_topic_coverage": 0.6547,
+          "coherence_prioritized": 0.6547,
+          "graph_centrality": 0.6547
+        },
+        "quality_metrics": {
+          "indices": [
+            1,
+            3,
+            4,
+            6,
+            8,
+            9
+          ],
+          "composite_score": 0.6547,
+          "topic_coverage": 0.5,
+          "info_density": 0.7278,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    },
+    "scientific/comprehensive": {
+      "indices": [
+        1,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "metadata": {
+        "selected_strategy": "balanced",
+        "composite_score": 0.6967,
+        "strategies_evaluated": [
+          "balanced",
+          "high_information_density",
+          "broad_topic_coverage",
+          "coherence_prioritized",
+          "graph_centrality"
+        ],
+        "strategy_scores": {
+          "balanced": 0.6967,
+          "high_information_density": 0.6947,
+          "broad_topic_coverage": 0.6967,
+          "coherence_prioritized": 0.6967,
+          "graph_centrality": 0.6967
+        },
+        "quality_metrics": {
+          "indices": [
+            1,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "composite_score": 0.6967,
+          "topic_coverage": 0.6667,
+          "info_density": 0.7083,
+          "novelty_score": 0.8125,
+          "coherence_score": 1.0,
+          "semantic_relevance": 0.5
+        }
+      }
+    }
+  }
+}

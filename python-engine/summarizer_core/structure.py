@@ -22,8 +22,8 @@ def normalize_heading_candidate(text: str) -> str:
     normalized = normalize_whitespace(text).strip(":- ")
     # Strip "CHAPTER"/"SECTION" prefix before numeral stripping
     normalized = re.sub(r"^(?:chapter|section|part)\s+", "", normalized, flags=re.IGNORECASE)
-    # Strip roman numeral or decimal prefixes (uppercase and lowercase)
-    normalized = re.sub(r"^(?:\d+(?:\.\d+)*|[IVXLCDMivxlcdm]+)[\)\.\s-]+", "", normalized)
+    # Strip roman numeral, decimal, or single-letter subsection prefixes (e.g. IV., 1.2., E.)
+    normalized = re.sub(r"^(?:\d+(?:\.\d+)*|[IVXLCDMivxlcdm]+|[A-Za-z])[\)\.\s-]+", "", normalized)
     normalized = normalized.strip(":- ")
     return normalized.lower()
 
@@ -90,10 +90,47 @@ def is_possible_section_heading(text: str) -> bool:
         for alias in aliases:
             if candidate == alias:
                 return True
-            if candidate.startswith(alias + " ") and token_count <= len(alias.split()) + 2:
+            if candidate.startswith(alias + " ") and token_count <= len(alias.split()) + 3:
                 return True
 
     return False
+
+
+def _looks_like_heading_label(text: str) -> bool:
+    compact = normalize_whitespace(text).strip(":- ")
+    words = tokenize_words(compact)
+    if not compact or not 1 <= len(words) <= 6 or len(compact) > 65:
+        return False
+    if compact[-1:] in ".!?;,":
+        return False
+    if not compact[0].isupper():
+        return False
+
+    lowercase_heading_words = {
+        "a", "an", "and", "as", "at", "by", "for", "from", "in", "of",
+        "on", "or", "the", "to", "under", "with",
+    }
+    heading_words = re.findall(r"[A-Za-z][A-Za-z'-]*", compact)
+    if not heading_words:
+        return False
+    lowercase_words = [word.lower() for word in heading_words]
+    finite_verbs = {
+        "am", "are", "be", "been", "being", "can", "could", "did", "do",
+        "does", "had", "has", "have", "is", "may", "might", "must", "shall",
+        "should", "was", "were", "will", "would",
+    }
+    if finite_verbs.intersection(lowercase_words):
+        return False
+
+    title_case = all(
+        word.lower() in lowercase_heading_words or word[0].isupper()
+        for word in heading_words
+    )
+    sentence_case = all(
+        word.lower() in lowercase_heading_words or word[0].islower()
+        for word in heading_words[1:]
+    )
+    return title_case or sentence_case
 
 
 def is_heading_only_text(text: str) -> bool:
@@ -107,6 +144,8 @@ def is_heading_only_text(text: str) -> bool:
         return True
     norm = normalize_heading_candidate(compact)
     if any(norm == h.lower() for h in GENERIC_HEADINGS) and len(tokenize_words(compact)) <= 8:
+        return True
+    if _looks_like_heading_label(compact):
         return True
     return norm in {
         "abstract",
@@ -135,7 +174,7 @@ def extract_structural_heading(text: str) -> tuple[str | None, str]:
         return None, ""
 
     prefix_match = re.match(
-        r"^(?:(?:chapter|section|part)\s+\d+[:.\s-]+)?(?:[IVXLCDMivxlcdm]+|\d+(?:\.\d+)*)[\)\.\s-]+",
+        r"^(?:(?:chapter|section|part)\s+\d+[:.\s-]+)?(?:[A-Za-z][\)\.]|[IVXLCDMivxlcdm]+|\d+(?:\.\d+)*)[\)\.\s-]+",
         compact,
         flags=re.IGNORECASE,
     )
@@ -149,9 +188,16 @@ def extract_structural_heading(text: str) -> tuple[str | None, str]:
         if len(heading.split()) == 1:
             m = re.match(rf"^{escaped}(?:\s*[:]\s*|\s+[-–—]\s+|\s{{2,}})(.*)$", stripped, flags=re.IGNORECASE)
         else:
-            m = re.match(rf"^{escaped}(?:\s*[:]\s*|\s+[-–—]\s+|\s{{2,}}|\s+(?=[A-Z0-9]))(.*)$", stripped, flags=re.IGNORECASE)
+            m = re.match(
+                rf"^{escaped}(\s*:\s*|\s+[-–—]\s+|\s{{2,}}|\s+)(.*)$",
+                stripped,
+                flags=re.IGNORECASE,
+            )
         if m:
-            prose = m.group(1).strip()
+            separator = m.group(1)
+            prose = m.group(2).strip() if len(heading.split()) > 1 else m.group(1).strip()
+            if separator.isspace() and len(separator) < 2 and prose and prose[0].islower():
+                continue
             if prose:
                 if prose[0].islower():
                     prose = prose[0].upper() + prose[1:]
@@ -188,7 +234,7 @@ def strip_leading_heading_label(paragraph: str) -> str:
         return normalize_whitespace(prose)
 
     compact = normalize_whitespace(paragraph)
-    compact = re.sub(r"^(?:(?:chapter|section|part)\s+\d+[:.\s-]+)?(?:[IVXLCDMivxlcdm]+|\d+(?:\.\d+)*)[\)\.\s-]+", "", compact, flags=re.IGNORECASE)
+    compact = re.sub(r"^(?:(?:chapter|section|part)\s+\d+[:.\s-]+)?(?:[A-Za-z][\)\.]|[IVXLCDMivxlcdm]+|\d+(?:\.\d+)*)[\)\.\s-]+", "", compact, flags=re.IGNORECASE)
 
     all_headings = set(GENERIC_HEADINGS) | {
         "perceived impact on coding skills and logical thinking",
@@ -199,10 +245,14 @@ def strip_leading_heading_label(paragraph: str) -> str:
     }
     multi_headings = [h for h in all_headings if len(h.split()) >= 2]
     pattern_str = "|".join(re.escape(h) for h in sorted(multi_headings, key=len, reverse=True))
-    m = re.match(rf"^({pattern_str})(?:\s*[:\-–—]\s*|\s+)(.*)$", compact, re.IGNORECASE)
+    m = re.match(
+        rf"^({pattern_str})(\s*[:\-–—]\s*|\s+)(.*)$",
+        compact,
+        re.IGNORECASE,
+    )
     if m:
-        _heading, rest = m.group(1), m.group(2).strip()
-        if rest:
+        _heading, separator, rest = m.group(1), m.group(2), m.group(3).strip()
+        if rest and not (separator.isspace() and len(separator) < 2 and rest[0].islower()):
             if rest[0].islower():
                 rest = rest[0].upper() + rest[1:]
             compact = rest
@@ -254,14 +304,16 @@ def looks_like_document_title_line(text: str) -> bool:
         return False
     if compact.endswith((".", "!", "?", ":", ";")):
         return False
-    if any(character.isdigit() for character in compact):
+    # Allow 4-digit years in titles (e.g. "from 1951 to 2020"); only reject non-year numeric tables
+    non_year = re.sub(r"\b(?:19|20)\d{2}\b", "", compact)
+    if re.search(r"\d{3,}", non_year):
         return False
     capitalized_words = sum(
         1
         for word in compact.split()
-        if word[:1].isupper() or word.lower() in {"of", "and", "the", "in", "on", "for", "to"}
+        if word[:1].isupper() or word.lower() in {"of", "and", "the", "in", "on", "for", "to", "from", "with", "between"}
     )
-    return capitalized_words / max(len(compact.split()), 1) >= 0.72
+    return capitalized_words / max(len(compact.split()), 1) >= 0.65
 
 
 def is_plausible_title(text: str) -> bool:
@@ -331,17 +383,6 @@ def detect_document_title(raw_text: str, title_hint: str = "") -> str:
     if plausible_lines:
         return plausible_lines[0]
 
-    fallback_sentences = safe_sent_tokenize(lines[0])
-    for sentence in fallback_sentences:
-        candidate = normalize_whitespace(sentence)
-        if candidate == "":
-            continue
-        if is_possible_section_heading(candidate):
-            continue
-        if len(tokenize_words(candidate)) < 4:
-            continue
-        return candidate[:180]
-
     return "Generated Summary"
 
 
@@ -393,6 +434,7 @@ def detect_explicit_sections(paragraphs: list[str], raw_text: str | None = None)
 def rebuild_paragraphs_from_lines(lines: Iterable[str], *, repair_fragments: bool = True) -> list[str]:
     from .cleaning import normalize_pdf_line
     """Combine extracted lines into meaningful paragraphs, preserving section boundaries."""
+    raw_lines = list(lines)
     paragraphs: list[str] = []
     current: list[str] = []
 
@@ -404,27 +446,42 @@ def rebuild_paragraphs_from_lines(lines: Iterable[str], *, repair_fragments: boo
             paragraphs.append(paragraph)
         current.clear()
 
-    for raw_line in lines:
+    previous_line_was_blank = False
+    for index, raw_line in enumerate(raw_lines):
         line = normalize_pdf_line(raw_line) if repair_fragments else normalize_whitespace(raw_line)
         if line == "":
             flush_current()
+            previous_line_was_blank = True
             continue
 
         # If a line looks like a section heading, it should always start a new paragraph
         if is_possible_section_heading(line):
             flush_current()
             paragraphs.append(line)
+            previous_line_was_blank = False
             continue
 
         if looks_like_document_title_line(line):
             flush_current()
             paragraphs.append(line)
+            previous_line_was_blank = False
+            continue
+
+        next_index = index + 1
+        next_line = ""
+        while next_index < len(raw_lines) and not next_line:
+            next_line = normalize_pdf_line(raw_lines[next_index]) if repair_fragments else normalize_whitespace(raw_lines[next_index])
+            next_index += 1
+        if not current and previous_line_was_blank and _looks_like_heading_label(line) and next_line and next_line[0].isupper():
+            paragraphs.append(line)
+            previous_line_was_blank = False
             continue
 
         if current and current[-1].endswith("-"):
             current[-1] = current[-1][:-1] + line
         else:
             current.append(line)
+        previous_line_was_blank = False
 
     flush_current()
     return paragraphs
@@ -453,13 +510,40 @@ def looks_like_continuation_paragraph(paragraph: str) -> bool:
     ))
 
 
-def merge_continuation_paragraphs(paragraphs: list[str]) -> list[str]:
+def _ends_with_sentence_punctuation(text: str) -> bool:
+    value = normalize_whitespace(text)
+    while value and value[-1] in "\"'”»’)]}":
+        value = value[:-1].rstrip()
+    return value.endswith((".", "!", "?"))
+
+
+def merge_continuation_paragraphs(
+    paragraphs: list[str],
+    *,
+    merge_open_sentence: bool = False,
+) -> list[str]:
     merged: list[str] = []
     for paragraph in paragraphs:
         compact = normalize_whitespace(paragraph)
         if compact == "":
             continue
-        if merged and looks_like_continuation_paragraph(compact):
+        if merged:
+            previous = merged[-1]
+            current_is_heading = is_heading_only_text(compact) or PAGE_NUMBER_PATTERN.fullmatch(compact) is not None
+            previous_is_heading = is_heading_only_text(previous) or PAGE_NUMBER_PATTERN.fullmatch(previous) is not None
+            joins_open_sentence = (
+                merge_open_sentence
+                and not current_is_heading
+                and not previous_is_heading
+                and not _ends_with_sentence_punctuation(previous)
+            )
+        else:
+            joins_open_sentence = False
+            current_is_heading = False
+            previous_is_heading = False
+        if merged and not current_is_heading and not previous_is_heading and (
+            looks_like_continuation_paragraph(compact) or joins_open_sentence
+        ):
             merged[-1] = normalize_whitespace(f"{merged[-1]} {compact}")
             continue
         merged.append(compact)
@@ -486,15 +570,23 @@ def shorten_summary_title(title: str, keywords: list[str]) -> str:
     # Compare it with topics extracted from selected summary sentences before keeping it.
     content_words = {
         word.lower()
-        for phrase in keywords[:5]
+        for phrase in keywords[:10]
         for word in tokenize_words(phrase)
         if len(word) > 2
     }
     title_words = {word.lower() for word in tokenize_words(normalized) if len(word) > 2}
     overlap = len(content_words & title_words)
-    aligned = not content_words or overlap >= min(2, max(1, len(content_words) // 4))
+    # Also check stem/prefix overlap (e.g. coding vs code, student vs study)
+    content_stems = {w[:4] for w in content_words}
+    title_stems = {w[:4] for w in title_words}
+    stem_overlap = len(content_stems & title_stems)
+    aligned = not content_words or overlap >= 1 or stem_overlap >= 1
 
     if title_is_usable and aligned:
+        return normalized.rstrip(",:;- ")
+
+    # If detected title is usable with sufficient word count, prefer it over generic keyword fallbacks
+    if title_is_usable and len(tokenize_words(normalized)) >= SUMMARY_TITLE_MIN_WORDS:
         return normalized.rstrip(",:;- ")
 
     # Keywords come from selected summary sentences, so they better reflect the
@@ -503,10 +595,6 @@ def shorten_summary_title(title: str, keywords: list[str]) -> str:
         candidate = normalize_whitespace(phrase)
         if len(tokenize_words(candidate)) >= SUMMARY_TITLE_MIN_WORDS:
             return candidate.rstrip(",:;- ")[:1].upper() + candidate.rstrip(",:;- ")[1:]
-    if keywords:
-        candidate = normalize_whitespace(keywords[0])
-        if candidate:
-            return candidate[:1].upper() + candidate[1:]
     return "Generated Summary"
 
 
@@ -528,4 +616,3 @@ __all__ = [
     'shorten_summary_title',
     'strip_leading_heading_label',
 ]
-

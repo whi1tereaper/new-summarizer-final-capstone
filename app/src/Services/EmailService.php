@@ -71,4 +71,34 @@ class EmailService
             return false;
         }
     }
+
+    public function sendAdminLoginCodeEmail(string $to, string $code): bool
+    {
+        try {
+            $this->mailer->clearAddresses();
+            $this->mailer->clearAllRecipients();
+            $this->mailer->addAddress($to);
+            $this->mailer->isHTML(true);
+            $this->mailer->Subject = 'Your LIGHT administrator sign-in code';
+
+            $safeCode = htmlspecialchars($code, ENT_QUOTES, 'UTF-8');
+            $this->mailer->Body = "
+                <div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333;'>
+                    <h2 style='color: #1a1a1a;'>Administrator sign-in</h2>
+                    <p>Use this one-time code to finish signing in to your LIGHT administrator account:</p>
+                    <div style='background: #f4f4f4; padding: 15px; text-align: center; font-size: 26px; font-weight: bold; letter-spacing: 5px; margin: 25px 0;'>
+                        {$safeCode}
+                    </div>
+                    <p><strong>This code expires in 10 minutes and can only be used once.</strong></p>
+                    <p>If you did not attempt to sign in, you can ignore this email.</p>
+                </div>
+            ";
+            $this->mailer->AltBody = "Your LIGHT administrator sign-in code is {$safeCode}. It expires in 10 minutes and can only be used once.";
+            $this->mailer->send();
+            return true;
+        } catch (Exception $e) {
+            error_log('[EmailService] Administrator sign-in email failed: ' . $e->getMessage());
+            return false;
+        }
+    }
 }

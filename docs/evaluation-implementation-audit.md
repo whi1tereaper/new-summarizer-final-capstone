@@ -6,6 +6,8 @@ Recorded **2026-10-02**, Asia/Manila. This is an implementation and engineering-
 
 **Validation of verification removal:** 19 security checks, 54 transactional evaluation checks, and 38 local HTTP checks passed. HTTP coverage includes actual password login, remembered login and token rotation, administrator navigation, restricted pages/APIs, retired challenge GET/POST routes, pending-only and ordinary-user denial, terms acceptance, incorrect passwords and invalid CSRF. Changed PHP files passed syntax checks. Temporary accounts, tokens and sessions were removed; evaluation fixtures rolled back. Legacy suites that perform broad database or file mutations were not executed.
 
+**Current administrator sign-in flow, 2026-10-17:** an administrator enters the email address associated with the account and receives a six-digit sign-in code; no password is requested, and password login cannot establish an administrator session. The code is hashed in the server-side session, expires after 10 minutes, and is accepted once. Requests and attempts are rate-limited by IP and a hash of the normalized email address. Administrator remember-me tokens cannot establish a session. Email possession is the sole admin sign-in factor, so mailbox compromise grants administrator access and mailbox loss prevents sign-in. The 2026-10-02 verification-removal test results above are historical and do not validate this updated flow. Email delivery requires the existing SMTP configuration.
+
 ## Implemented
 
 - Separate, versioned evaluation datasets with configurable planning counts, source text stored privately in the database, provenance, source hashes, categories, profiles, inclusion timestamps, active states, and development/validation/test splits.

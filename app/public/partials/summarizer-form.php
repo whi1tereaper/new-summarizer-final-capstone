@@ -3,8 +3,17 @@ use App\Src\Services\ArticleService;
 use App\Src\Services\FileUploadService;
 use App\Src\Services\SummarizerPromptTemplate;
 
+if (!isset($_SESSION['summarizer_form_saved_at']) || time() - (int)$_SESSION['summarizer_form_saved_at'] > 3600) {
+    unset($_SESSION['summarizer_form_state'], $_SESSION['flash_failure']);
+}
 $formState = is_array($_SESSION['summarizer_form_state'] ?? null) ? $_SESSION['summarizer_form_state'] : $_POST;
-unset($_SESSION['summarizer_form_state']);
+// Dashboard preference links may preselect only these validated form fields.
+foreach (['analysis_mode', 'output_format', 'summary_depth'] as $preferredField) {
+    if (isset($_GET[$preferredField]) && is_string($_GET[$preferredField])) {
+        $formState[$preferredField] = $_GET[$preferredField];
+    }
+}
+$csrf_token = $csrf_token ?? (function_exists('generateCsrfToken') ? generateCsrfToken() : (string)($_SESSION['csrf_token'] ?? ''));
 $llmSynthesisAvailable = (bool)config('summarizer.llm_available', false);
 $sourceType = (string)($formState['source_type'] ?? 'file');
 $sourceLabels = ['file' => 'Upload File', 'text' => 'Paste Text', 'url' => 'URL'];
@@ -17,14 +26,18 @@ $analysisModes = [
     'technical' => ['Technical', 'Highlights architecture, implementation, mechanisms, constraints, and trade-offs.'],
     'study' => ['Study', 'Focuses on core concepts, explanations, definitions, and learning takeaways.'],
     'news' => ['News', 'Leads with the most newsworthy facts, then adds context and implications.'],
+    'legal' => ['Legal & Policy', 'Prioritizes operative terms, obligations, liabilities, compliance, and conditions.'],
+    'scientific' => ['Scientific', 'Prioritizes hypotheses, experimental methods, empirical findings, and limitations.'],
 ];
 $formats = [
     'paragraph' => ['Paragraph', 'A continuous narrative of the document’s key ideas.'],
     'bullets' => ['Bullet Points', 'Key takeaways presented as concise standalone points.'],
     'hybrid' => ['Hybrid (Overview + Bullets)', 'A short overview followed by scannable key points.'],
     'structured' => ['Structured Sections', 'Selected evidence organized into clearly labeled sections.'],
+    'key_takeaways' => ['Key Takeaways', 'High-impact key takeaways prioritized for instant comprehension.'],
 ];
 $depths = [
+    'very_brief' => ['Very Brief', 'Ultra-condensed distillation of the single most vital premise.'],
     'brief' => ['Brief', 'Distills the single most important premise or conclusion.'],
     'short' => ['Short', 'Keeps core points with minimal supporting context.'],
     'balanced' => ['Balanced', 'Preserves primary ideas, supporting points, and the main conclusion.'],
@@ -44,28 +57,40 @@ $capabilities = [
     'analysisModes' => array_map(static fn($key, $item) => ['value' => $key, 'label' => $item[0], 'description' => $item[1]], array_keys($analysisModes), array_values($analysisModes)),
     'formats' => array_map(static fn($key, $item) => ['value' => $key, 'label' => $item[0], 'description' => $item[1]], array_keys($formats), array_values($formats)),
     'depths' => array_map(static fn($key, $item) => ['value' => $key, 'label' => $item[0], 'description' => $item[1]], array_keys($depths), array_values($depths)),
-    'maxUploadBytes' => FileUploadService::MAX_UPLOAD_BYTES,
+    'maxUploadBytes' => FileUploadService::effectiveUploadLimit(),
     'maxTextBytes' => ArticleService::MAX_TEXT_BYTES,
+    'maxTitleCharacters' => ArticleService::MAX_TITLE_CHARACTERS,
+    'allowedExtensions' => FileUploadService::ALLOWED_EXTENSIONS,
     'llmSynthesisAvailable' => $llmSynthesisAvailable,
+    'serverSavedAt' => (int)($_SESSION['summarizer_form_saved_at'] ?? 0) * 1000,
 ];
+$initialFailure = is_array($_SESSION['flash_failure'] ?? null) ? $_SESSION['flash_failure'] : null;
+unset($_SESSION['flash_error']);
+require __DIR__ . '/error-support.php';
 ?>
-<form id="summarize-form" action="summarize.php" method="POST" enctype="multipart/form-data" class="summary-workspace workspace-page__form" data-capabilities="<?= htmlspecialchars(json_encode($capabilities, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8') ?>">
+<form id="summarize-form" action="summarize.php" method="POST" enctype="multipart/form-data" novalidate class="summary-workspace workspace-page__form" data-initial-failure="<?= htmlspecialchars(json_encode($initialFailure, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8') ?>" data-capabilities="<?= htmlspecialchars(json_encode($capabilities, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8') ?>">
     <?php if (!empty($embeddedSummarizer)): ?>
     <h2 class="workspace-title visually-hidden" id="workspace-title">Summarizer</h2>
     <?php else: ?>
     <h1 class="workspace-title visually-hidden" id="workspace-title">Summarizer</h1>
     <?php endif; ?>
     <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
-
-    <?php $errorMessage = $_SESSION['flash_error'] ?? $_GET['error'] ?? null; if ($errorMessage): ?>
-        <div class="flash-error" role="alert"><?= htmlspecialchars($errorMessage) ?><?php unset($_SESSION['flash_error']); ?></div>
-    <?php endif; ?>
+    <input type="hidden" name="request_token" value="<?= bin2hex(random_bytes(16)) ?>">
 
     <div class="summary-panel summary-panel--page">
         <div class="summary-grid">
             <div class="nex-form-row" id="document-title-card">
                 <label class="nex-form-row__label" for="document_title">Document Title <span class="label-hint">(Optional)</span></label>
-                <div><input type="text" id="document_title" name="document_title" placeholder="Add a title or leave blank to use the document heading" value="<?= htmlspecialchars($formState['document_title'] ?? '') ?>" autocomplete="off"></div>
+                <div>
+                    <input type="text" id="document_title" name="document_title" placeholder="Add a title or leave blank to use the document heading" value="<?= htmlspecialchars($formState['document_title'] ?? '') ?>" autocomplete="off" aria-describedby="document-title-error">
+                    <div class="light-error" id="document-title-error" role="alert" tabindex="-1"<?= ($initialFailure['code'] ?? '') === 'TITLE_TOO_LONG' ? '' : ' hidden' ?>>
+                        <?php if (($initialFailure['code'] ?? '') === 'TITLE_TOO_LONG'): ?>
+                        <strong class="light-error__title"><?= htmlspecialchars($initialFailure['title'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></strong>
+                        <p><?= htmlspecialchars($initialFailure['explanation'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></p>
+                        <p><?= htmlspecialchars($initialFailure['recovery'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></p>
+                        <?php endif; ?>
+                    </div>
+                </div>
             </div>
 
             <fieldset class="nex-form-row source-method" id="source-method">
@@ -82,28 +107,41 @@ $capabilities = [
                         <div class="nex-drop-zone" id="drop-zone">
                             <div class="nex-drop-zone__icon" aria-hidden="true">↑</div>
                             <p class="nex-drop-zone__hint">UPLOAD YOUR DOCUMENT<br><span>PDF / DOCX · drag and drop or click to browse</span></p>
-                            <p class="privacy-note">Maximum size: 30 MB</p>
+                            <p class="privacy-note">Maximum size: <?= number_format(FileUploadService::effectiveUploadLimit() / 1048576, 1) ?> MiB (<?= number_format(FileUploadService::effectiveUploadLimit()) ?> bytes)</p>
                             <div class="nex-drop-zone__file-row" hidden>
                                 <span class="nex-drop-zone__filename"></span>
                                 <button type="button" class="nex-drop-zone__replace">Replace</button>
                                 <button type="button" class="nex-drop-zone__remove">Remove</button>
                             </div>
-                            <input type="file" id="pdf" name="pdf_file" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" aria-describedby="source-selection-note">
+                            <input type="file" id="pdf" name="pdf_file" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" aria-describedby="source-selection-note source-error">
                         </div>
                     </div>
                     <div class="source-panel" data-source-panel="text"<?= $sourceType === 'text' ? '' : ' hidden' ?>>
                         <label class="visually-hidden" for="text">Paste document text</label>
-                        <textarea id="text" name="original_text" maxlength="200000" placeholder="Paste document text here..." aria-describedby="source-selection-note"><?= htmlspecialchars((($formState['source_type'] ?? '') === 'text') ? ($formState['original_text'] ?? '') : '') ?></textarea>
-                        <p class="privacy-note">Up to 200 KB of text.</p>
+                        <textarea id="text" name="original_text" placeholder="Paste document text here..." aria-describedby="source-selection-note source-error"><?= htmlspecialchars((($formState['source_type'] ?? '') === 'text') ? ($formState['original_text'] ?? '') : '') ?></textarea>
+                        <p class="privacy-note">Up to <?= number_format(ArticleService::MAX_TEXT_BYTES) ?> bytes of text (<?= number_format(ArticleService::MAX_TEXT_BYTES / 1000, 0) ?> KB in UTF-8).</p>
                     </div>
                     <div class="source-panel" data-source-panel="url"<?= $sourceType === 'url' ? '' : ' hidden' ?>>
                         <label class="visually-hidden" for="source_url">Article URL</label>
-                        <input type="url" id="source_url" name="source_url" placeholder="https://example.com/article" value="<?= htmlspecialchars((($formState['source_type'] ?? '') === 'url') ? ($formState['source_url'] ?? '') : '') ?>" autocomplete="url">
+                        <input type="url" id="source_url" name="source_url" placeholder="https://example.com/article" value="<?= htmlspecialchars((($formState['source_type'] ?? '') === 'url') ? ($formState['source_url'] ?? '') : '') ?>" autocomplete="url" aria-describedby="source-selection-note source-error">
                         <p class="privacy-note">Public web pages and direct PDF links are retrieved and checked for readable content.</p>
                     </div>
                     <p class="privacy-note" id="source-selection-note" aria-live="polite">Choose a PDF or DOCX, paste text, or provide a public article URL.</p>
                     <p class="privacy-note">Please do not submit private, sensitive, or confidential information unless you are allowed to do so.</p>
-                    <p class="source-error" id="source-error" role="alert" hidden></p>
+                    <div class="light-error" id="source-error" role="alert" tabindex="-1" data-error-code="<?= htmlspecialchars((string)($initialFailure['code'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"<?= $initialFailure && $initialFailure['code'] !== 'TITLE_TOO_LONG' ? '' : ' hidden' ?>>
+                        <?php if ($initialFailure): ?>
+                        <strong class="light-error__title"><?= htmlspecialchars((string)($initialFailure['title'] ?? 'We could not complete this request.'), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></strong>
+                        <p><?= htmlspecialchars((string)($initialFailure['explanation'] ?? ''), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></p>
+                        <p><?= htmlspecialchars((string)($initialFailure['recovery'] ?? ''), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></p>
+                        <?php endif; ?>
+                    </div>
+                    <div id="source-recovery-actions" class="light-recovery-actions" hidden>
+                        <button type="button" id="source-retry" hidden>Retry request</button>
+                        <button type="button" data-recovery-source="text" hidden>Paste readable text</button>
+                        <button type="button" data-recovery-source="file" hidden>Choose another document</button>
+                        <a href="login.php" id="source-sign-in" hidden>Sign in</a>
+                    </div>
+                    <p class="light-draft-note" id="draft-recovery-note" role="status" hidden></p>
                 </div>
             </fieldset>
 

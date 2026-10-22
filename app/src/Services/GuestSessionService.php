@@ -153,22 +153,24 @@ class GuestSessionService
                 $deletedSessions = $sessionStatement->rowCount();
             }
 
+            $legacyCutoff = date('Y-m-d H:i:s', time() - self::GUEST_TTL_SECONDS);
+
             $legacyFeedbackStatement = $this->db->prepare(
-                'DELETE FROM feedback
+                "DELETE FROM feedback
                  WHERE user_id IS NULL
-                   AND (guest_token IS NULL OR guest_token = "")
-                   AND created_at < DATE_SUB(NOW(), INTERVAL ? SECOND)'
+                   AND (guest_token IS NULL OR guest_token = '')
+                   AND created_at < ?"
             );
-            $legacyFeedbackStatement->execute([self::GUEST_TTL_SECONDS]);
+            $legacyFeedbackStatement->execute([$legacyCutoff]);
             $deletedLegacyFeedback = $legacyFeedbackStatement->rowCount();
 
             $legacySummaryStatement = $this->db->prepare(
-                'DELETE FROM summaries
+                "DELETE FROM summaries
                  WHERE user_id IS NULL
-                   AND (guest_token IS NULL OR guest_token = "")
-                   AND created_at < DATE_SUB(NOW(), INTERVAL ? SECOND)'
+                   AND (guest_token IS NULL OR guest_token = '')
+                   AND created_at < ?"
             );
-            $legacySummaryStatement->execute([self::GUEST_TTL_SECONDS]);
+            $legacySummaryStatement->execute([$legacyCutoff]);
             $deletedLegacySummaries = $legacySummaryStatement->rowCount();
 
             $this->db->commit();
@@ -193,17 +195,33 @@ class GuestSessionService
 
     private function touchGuest(string $guestToken): void
     {
-        $statement = $this->db->prepare(
-            'INSERT INTO guest_sessions (guest_token, created_at, last_activity, expires_at)
-             VALUES (:guest_token, NOW(), NOW(), DATE_ADD(NOW(), INTERVAL :ttl_insert SECOND))
-             ON DUPLICATE KEY UPDATE
-                last_activity = NOW(),
-                expires_at = DATE_ADD(NOW(), INTERVAL :ttl_update SECOND)'
-        );
+        $now = date('Y-m-d H:i:s');
+        $expiresAt = date('Y-m-d H:i:s', time() + self::GUEST_TTL_SECONDS);
+        $isPg = \App\Src\Database::getInstance()->isPostgres();
+
+        if ($isPg) {
+            $statement = $this->db->prepare(
+                'INSERT INTO guest_sessions (guest_token, created_at, last_activity, expires_at)
+                 VALUES (:guest_token, :created_at, :last_activity, :expires_at)
+                 ON CONFLICT (guest_token) DO UPDATE SET
+                    last_activity = EXCLUDED.last_activity,
+                    expires_at = EXCLUDED.expires_at'
+            );
+        } else {
+            $statement = $this->db->prepare(
+                'INSERT INTO guest_sessions (guest_token, created_at, last_activity, expires_at)
+                 VALUES (:guest_token, :created_at, :last_activity, :expires_at)
+                 ON DUPLICATE KEY UPDATE
+                    last_activity = VALUES(last_activity),
+                    expires_at = VALUES(expires_at)'
+            );
+        }
+
         $statement->execute([
             'guest_token' => $guestToken,
-            'ttl_insert' => self::GUEST_TTL_SECONDS,
-            'ttl_update' => self::GUEST_TTL_SECONDS,
+            'created_at' => $now,
+            'last_activity' => $now,
+            'expires_at' => $expiresAt,
         ]);
     }
 

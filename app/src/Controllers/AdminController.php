@@ -56,28 +56,58 @@ class AdminController {
         return $stmt->fetchAll();
     }
 
-    public function getSystemStats() {
-        $stats = [];
-        
-        $stmt = $this->db->prepare("SELECT COUNT(*) as count FROM users");
-        $stmt->execute();
-        $stats['user_count'] = $stmt->fetch()['count'];
-        
-        $stmt = $this->db->prepare("SELECT COUNT(*) as count FROM summaries");
-        $stmt->execute();
-        $stats['summary_count'] = $stmt->fetch()['count'];
+    public function getSystemStats(?string $from = null, ?string $to = null): array {
+        $range = $this->normalizeStatsRange($from, $to);
+        $toNext = $range !== null ? (new \DateTimeImmutable($range[1]))->modify('+1 day')->format('Y-m-d') : null;
+        $dateClause = $range === null
+            ? ''
+            : ' WHERE created_at >= :from AND created_at < :to_next';
+        $params = $range === null ? [] : ['from' => $range[0], 'to_next' => $toNext];
 
-        $stmt = $this->db->prepare(
-            "SELECT COUNT(DISTINCT guest_token) as count
-             FROM summaries
-             WHERE user_id IS NULL
-               AND guest_token IS NOT NULL
-               AND guest_token <> ''"
-         );
-        $stmt->execute();
-        $stats['guest_user_count'] = $stmt->fetch()['count'];
+        $userStatement = $this->db->prepare('SELECT COUNT(*) FROM users' . $dateClause);
+        $userStatement->execute($params);
 
-        return $stats;
+        $summaryStatement = $this->db->prepare('SELECT COUNT(*) FROM summaries' . $dateClause);
+        $summaryStatement->execute($params);
+
+        $guestWhere = ' WHERE user_id IS NULL AND guest_token IS NOT NULL AND guest_token <> :empty_guest_token';
+        if ($range !== null) {
+            $guestWhere .= ' AND created_at >= :from AND created_at < :to_next';
+        }
+        $guestStatement = $this->db->prepare('SELECT COUNT(DISTINCT guest_token) FROM summaries' . $guestWhere);
+        $guestParams = ['empty_guest_token' => ''];
+        if ($range !== null) {
+            $guestParams['from'] = $range[0];
+            $guestParams['to_next'] = $toNext;
+        }
+        $guestStatement->execute($guestParams);
+
+        return [
+            'user_count' => (int)$userStatement->fetchColumn(),
+            'summary_count' => (int)$summaryStatement->fetchColumn(),
+            'guest_user_count' => (int)$guestStatement->fetchColumn(),
+        ];
+    }
+
+    /** Validate date inputs before they are bound to system-stat queries. */
+    private function normalizeStatsRange(?string $from, ?string $to): ?array {
+        if ($from === null && $to === null) {
+            return null;
+        }
+        if ($from === null || $to === null) {
+            throw new \InvalidArgumentException('Both system-stat range dates are required.');
+        }
+
+        $timezone = new \DateTimeZone(date_default_timezone_get());
+        $fromDate = \DateTimeImmutable::createFromFormat('!Y-m-d', $from, $timezone);
+        $toDate = \DateTimeImmutable::createFromFormat('!Y-m-d', $to, $timezone);
+        if (!$fromDate || !$toDate || $fromDate->format('Y-m-d') !== $from || $toDate->format('Y-m-d') !== $to) {
+            throw new \InvalidArgumentException('Invalid system-stat date range.');
+        }
+        if ($fromDate > $toDate) {
+            [$fromDate, $toDate] = [$toDate, $fromDate];
+        }
+        return [$fromDate->format('Y-m-d'), $toDate->format('Y-m-d')];
     }
 
     public function toggleUserStatus(int $userId, int $status): bool {

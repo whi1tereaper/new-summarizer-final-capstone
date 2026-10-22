@@ -1,0 +1,27 @@
+-- Migration 015: Durable summary jobs for long-running document processing
+CREATE TABLE IF NOT EXISTS `summary_jobs` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `job_id` VARCHAR(64) NOT NULL,
+  `user_id` INT NULL DEFAULT NULL,
+  `guest_token` VARCHAR(64) NULL DEFAULT NULL,
+  `state` ENUM('queued','processing','completed','failed','cancelled','timed_out') NOT NULL DEFAULT 'queued',
+  `payload` LONGTEXT NOT NULL,
+  `idempotency_key` VARCHAR(128) NOT NULL,
+  `result_id` INT NULL DEFAULT NULL,
+  `error_message` TEXT NULL DEFAULT NULL,
+  `worker_pid` INT NULL DEFAULT NULL,
+  `started_at` DATETIME NULL DEFAULT NULL,
+  `completed_at` DATETIME NULL DEFAULT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_summary_jobs_job_id` (`job_id`),
+  UNIQUE KEY `uq_summary_jobs_idempotency` (`idempotency_key`),
+  KEY `idx_summary_jobs_state` (`state`),
+  KEY `idx_summary_jobs_user` (`user_id`),
+  KEY `idx_summary_jobs_guest` (`guest_token`),
+  KEY `idx_summary_jobs_result` (`result_id`),
+  KEY `idx_summary_jobs_created` (`created_at`),
+  CONSTRAINT `fk_summary_jobs_result` FOREIGN KEY (`result_id`) REFERENCES `summaries` (`id`) ON DELETE SET NULL,
+  CONSTRAINT `fk_summary_jobs_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

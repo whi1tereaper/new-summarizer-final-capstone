@@ -4,8 +4,10 @@ namespace App\Src\Services;
 require_once __DIR__ . '/LocalPythonBridge.php';
 require_once __DIR__ . '/../Support/config.php';
 require_once __DIR__ . '/../Support/RuntimePaths.php';
+require_once __DIR__ . '/../Support/ProcessingError.php';
 
 use App\Src\Support\RuntimePaths;
+use App\Src\Support\ProcessingError;
 
 final class SourceResolution
 {
@@ -13,6 +15,7 @@ final class SourceResolution
         private string $text,
         private string $inputType,
         private array $temporaryPaths = [],
+        private string $filePath = '',
     ) {}
 
     public function getText(): string
@@ -23,6 +26,11 @@ final class SourceResolution
     public function getInputType(): string
     {
         return $this->inputType;
+    }
+
+    public function getFilePath(): string
+    {
+        return $this->filePath;
     }
 
     public function cleanup(): void
@@ -45,10 +53,9 @@ class SourceResolver
     private const REQUEST_TIMEOUT_SECONDS = 20;
     private const MAX_HTML_BYTES = 5 * 1024 * 1024;
     private const MAX_PDF_BYTES = 30 * 1024 * 1024;
-    private const CURL_ERROR_OVERSIZED = '__oversized_transfer__';
-
     private LocalPythonBridge $pythonBridge;
     private ?string $caBundlePath;
+    private array $validatedAddresses = [];
 
     public function __construct(?LocalPythonBridge $pythonBridge = null)
     {
@@ -61,7 +68,7 @@ class SourceResolver
         // Treat plain text and URLs differently so pasted articles do not pay the network-fetch path.
         $sourceText = trim($rawInput);
         if ($sourceText === '') {
-            return new SourceResolution('', 'text');
+            throw new ProcessingError('INPUT_EMPTY');
         }
 
         if (!$this->looksLikeStandaloneUrl($sourceText)) {
@@ -77,30 +84,32 @@ class SourceResolver
         return $this->resolveHtmlUrl($normalizedUrl);
     }
 
+    public function validateUrl(string $rawUrl): string
+    {
+        return $this->normalizeAndValidateUrl($rawUrl);
+    }
+
     private function resolvePdfUrl(string $url): SourceResolution
     {
         // PDFs go through a download-plus-extraction path because the worker reads them from disk.
         $download = $this->downloadBinaryWithRedirectValidation($url, self::MAX_PDF_BYTES);
-        $contentType = $this->normalizeContentType($download['content_type'] ?? '');
-        $finalUrl = (string)($download['final_url'] ?? $url);
-
-        if (!$this->isPdfResponse($finalUrl, $contentType)) {
-            throw new \RuntimeException('The PDF link did not return a readable PDF file.');
-        }
-
         $temporaryPdfPath = (string)($download['file_path'] ?? '');
         if ($temporaryPdfPath === '' || !is_file($temporaryPdfPath)) {
-            throw new \RuntimeException('The PDF link could not be downloaded. Paste the article text instead.');
+            throw new ProcessingError('URL_UNREACHABLE');
+        }
+
+        if (config('summarizer.engine_version', 'legacy') === 'v2') {
+            return new SourceResolution('', 'url', [$temporaryPdfPath], $temporaryPdfPath);
         }
 
         try {
             $extractedText = $this->pythonBridge->extractPdfText($temporaryPdfPath, 60);
-        } catch (\RuntimeException $exception) {
-            throw new \RuntimeException($this->normalizePdfExtractionError($exception->getMessage()), 0, $exception);
-        }
-
-        if (trim($extractedText) === '') {
-            throw new \RuntimeException('No readable text was found in the PDF. Scanned PDFs need OCR before summarization.');
+            if (trim($extractedText) === '') {
+                throw new ProcessingError('FILE_TEXT_UNAVAILABLE');
+            }
+        } catch (\Throwable $exception) {
+            @unlink($temporaryPdfPath);
+            throw ProcessingError::fromThrowable($exception, 'DOCUMENT_EXTRACTION_FAILED');
         }
 
         // Keep track of the temporary file so the controller can clean it up after the request finishes.
@@ -113,12 +122,15 @@ class SourceResolver
         $htmlFetch = $this->downloadTextWithRedirectValidation($url, self::MAX_HTML_BYTES);
         $contentType = $this->normalizeContentType($htmlFetch['content_type'] ?? '');
         if ($contentType !== '' && !$this->isHtmlLikeContentType($contentType)) {
-            throw new \RuntimeException('This URL is not a readable article page. Paste the article text instead.');
+            throw new ProcessingError('URL_CONTENT_UNAVAILABLE');
         }
 
-        $readableText = $this->extractReadableHtmlText((string)($htmlFetch['body'] ?? ''));
+        $body = (string)($htmlFetch['body'] ?? '');
+        $readableText = $contentType === 'text/plain'
+            ? trim($body)
+            : $this->extractReadableHtmlText($body);
         if ($readableText === '') {
-            throw new \RuntimeException('Could not extract readable article text from this URL. Paste the article text instead.');
+            throw new ProcessingError('URL_CONTENT_UNAVAILABLE');
         }
 
         return new SourceResolution($readableText, 'url');
@@ -126,7 +138,7 @@ class SourceResolver
 
     private function looksLikeStandaloneUrl(string $value): bool
     {
-        return preg_match('/^(https?:\/\/\S+|www\.\S+)$/i', $value) === 1;
+        return preg_match('/^(?:[a-z][a-z0-9+.-]*:\/\/|www\.)[^\r\n]*$/i', $value) === 1;
     }
 
     private function normalizeAndValidateUrl(string $rawUrl): string
@@ -137,19 +149,22 @@ class SourceResolver
             $normalizedUrl = 'https://' . $normalizedUrl;
         }
 
+        if (preg_match('/[\x00-\x20\x7f\\\\]/', $normalizedUrl) === 1) {
+            throw new ProcessingError('URL_INVALID');
+        }
         $parts = parse_url($normalizedUrl);
         if (!is_array($parts)) {
-            throw new \RuntimeException('Invalid URL');
+            throw new ProcessingError('URL_INVALID');
         }
 
         $scheme = strtolower((string)($parts['scheme'] ?? ''));
-        $host = strtolower((string)($parts['host'] ?? ''));
+        $host = strtolower(trim((string)($parts['host'] ?? ''), '[]'));
         if (!in_array($scheme, ['http', 'https'], true) || $host === '') {
-            throw new \RuntimeException('Invalid URL');
+            throw new ProcessingError('URL_INVALID');
         }
 
-        if (filter_var($normalizedUrl, FILTER_VALIDATE_URL) === false) {
-            throw new \RuntimeException('Invalid URL');
+        if (isset($parts['user']) || isset($parts['pass']) || filter_var($normalizedUrl, FILTER_VALIDATE_URL) === false) {
+            throw new ProcessingError('URL_INVALID');
         }
 
         $this->assertAllowedHost($host);
@@ -161,8 +176,9 @@ class SourceResolver
     private function assertAllowedHost(string $host): void
     {
         // Disallow local hostnames so the URL feature cannot be used to probe the server itself.
+        $host = rtrim($host, '.');
         if ($host === 'localhost' || str_ends_with($host, '.localhost') || str_ends_with($host, '.local')) {
-            throw new \RuntimeException('Invalid URL');
+            throw new ProcessingError('URL_UNSAFE');
         }
     }
 
@@ -197,18 +213,35 @@ class SourceResolver
 
         $resolvedIps = array_values(array_unique(array_filter($resolvedIps, 'is_string')));
         if ($resolvedIps === []) {
-            throw new \RuntimeException('Invalid URL');
+            throw new ProcessingError('URL_UNREACHABLE');
         }
 
         foreach ($resolvedIps as $ipAddress) {
             if (!$this->isPublicIpAddress($ipAddress)) {
-                throw new \RuntimeException('Invalid URL');
+                throw new ProcessingError('URL_UNSAFE');
             }
         }
+        $this->validatedAddresses[$host] = $resolvedIps;
     }
 
     private function isPublicIpAddress(string $ipAddress): bool
     {
+        $packed = @inet_pton($ipAddress);
+        if ($packed === false) {
+            return false;
+        }
+        // PHP's range flags do not consistently reject mapped IPv4 or shared
+        // address space. Treat mapped addresses according to their IPv4 target.
+        if (strlen($packed) === 16) {
+            if (substr($packed, 0, 12) === str_repeat("\0", 10) . "\xff\xff") {
+                return $this->isPublicIpAddress((string)inet_ntop(substr($packed, 12)));
+            }
+            if ((ord($packed[0]) & 0xe0) !== 0x20) {
+                return false;
+            }
+        } elseif (ord($packed[0]) >= 224 || (ord($packed[0]) === 100 && (ord($packed[1]) & 0xc0) === 64)) {
+            return false;
+        }
         return filter_var(
             $ipAddress,
             FILTER_VALIDATE_IP,
@@ -220,15 +253,6 @@ class SourceResolver
     {
         $path = (string)(parse_url($url, PHP_URL_PATH) ?? '');
         return preg_match('/\.pdf$/i', $path) === 1;
-    }
-
-    private function isPdfResponse(string $url, string $contentType): bool
-    {
-        if ($contentType === 'application/pdf') {
-            return true;
-        }
-
-        return $this->isDirectPdfUrl($url);
     }
 
     private function isHtmlLikeContentType(string $contentType): bool
@@ -252,6 +276,9 @@ class SourceResolver
 
     private function downloadBinaryWithRedirectValidation(string $url, int $maxBytes): array
     {
+        if (!function_exists('curl_init')) {
+            throw new ProcessingError('WORKER_UNAVAILABLE');
+        }
         // Follow a small number of redirects manually so each hop can be revalidated.
         $currentUrl = $url;
         for ($redirectCount = 0; $redirectCount <= self::MAX_REDIRECTS; $redirectCount++) {
@@ -266,14 +293,15 @@ class SourceResolver
             $temporaryFile = $this->createTemporaryPdfPath();
             $fileHandle = fopen($temporaryFile, 'wb');
             if ($fileHandle === false) {
-                throw new \RuntimeException('Unsupported source type');
+                @unlink($temporaryFile);
+                throw new ProcessingError('WORKER_UNAVAILABLE');
             }
 
             $curlHandle = curl_init($currentUrl);
             if ($curlHandle === false) {
                 fclose($fileHandle);
                 @unlink($temporaryFile);
-                throw new \RuntimeException('Unsupported source type');
+                throw new ProcessingError('WORKER_UNAVAILABLE');
             }
 
             curl_setopt_array($curlHandle, [
@@ -319,24 +347,26 @@ class SourceResolver
                     }
 
                     $written = fwrite($fileHandle, $chunk);
-                    return $written === false ? 0 : $chunkLength;
+                    return $written === false ? 0 : $written;
                 },
                 CURLOPT_HTTPHEADER => ['Accept: application/pdf,*/*;q=0.8'],
                 CURLOPT_SSL_VERIFYPEER => true,
                 CURLOPT_SSL_VERIFYHOST => 2,
             ]);
+            $this->pinValidatedAddress($curlHandle, $currentUrl);
             if ($this->caBundlePath !== null) {
                 curl_setopt($curlHandle, CURLOPT_CAINFO, $this->caBundlePath);
             }
 
             $executionResult = curl_exec($curlHandle);
-            $curlError = curl_error($curlHandle);
+            $curlErrorCode = curl_errno($curlHandle);
             $statusCode = (int)curl_getinfo($curlHandle, CURLINFO_RESPONSE_CODE);
+            curl_close($curlHandle);
             fclose($fileHandle);
 
             if ($contentLength !== null && $contentLength > $maxBytes) {
                 @unlink($temporaryFile);
-                throw new \RuntimeException('PDF too large');
+                throw new ProcessingError('URL_TOO_LARGE');
             }
 
             if ($statusCode >= 300 && $statusCode < 400) {
@@ -344,11 +374,11 @@ class SourceResolver
                 @unlink($temporaryFile);
                 $redirectLocation = $responseHeaders['location'] ?? '';
                 if (!is_string($redirectLocation) || trim($redirectLocation) === '') {
-                    throw new \RuntimeException('Invalid URL');
+                    throw new ProcessingError('URL_CONTENT_UNAVAILABLE');
                 }
 
                 if ($redirectCount === self::MAX_REDIRECTS) {
-                    throw new \RuntimeException('Invalid URL');
+                    throw new ProcessingError('URL_UNREACHABLE');
                 }
 
                 $currentUrl = $this->resolveRedirectLocation($currentUrl, $redirectLocation);
@@ -357,17 +387,20 @@ class SourceResolver
 
             if ($sawOversizedTransfer) {
                 @unlink($temporaryFile);
-                throw new \RuntimeException('PDF too large');
+                throw new ProcessingError('URL_TOO_LARGE');
             }
 
             if ($executionResult === false || $statusCode < 200 || $statusCode >= 300) {
                 @unlink($temporaryFile);
-                throw new \RuntimeException('Invalid URL');
+                if ($executionResult === false) {
+                    throw $this->networkFailure($curlErrorCode);
+                }
+                throw $this->remoteStatusFailure($statusCode);
             }
 
             if (!str_starts_with($pdfSignatureBytes, '%PDF-')) {
                 @unlink($temporaryFile);
-                throw new \RuntimeException('Unsupported source type');
+                throw new ProcessingError('URL_CONTENT_UNAVAILABLE');
             }
 
             // Return both the saved file and response metadata so the caller can validate the source type.
@@ -378,11 +411,14 @@ class SourceResolver
             ];
         }
 
-        throw new \RuntimeException('Invalid URL');
+        throw new ProcessingError('URL_UNREACHABLE');
     }
 
     private function downloadTextWithRedirectValidation(string $url, int $maxBytes): array
     {
+        if (!function_exists('curl_init')) {
+            throw new ProcessingError('WORKER_UNAVAILABLE');
+        }
         $currentUrl = $url;
         for ($redirectCount = 0; $redirectCount <= self::MAX_REDIRECTS; $redirectCount++) {
             $this->normalizeAndValidateUrl($currentUrl);
@@ -395,7 +431,7 @@ class SourceResolver
 
             $curlHandle = curl_init($currentUrl);
             if ($curlHandle === false) {
-                throw new \RuntimeException('Unsupported source type');
+                throw new ProcessingError('WORKER_UNAVAILABLE');
             }
 
             curl_setopt_array($curlHandle, [
@@ -441,26 +477,28 @@ class SourceResolver
                 CURLOPT_SSL_VERIFYPEER => true,
                 CURLOPT_SSL_VERIFYHOST => 2,
             ]);
+            $this->pinValidatedAddress($curlHandle, $currentUrl);
             if ($this->caBundlePath !== null) {
                 curl_setopt($curlHandle, CURLOPT_CAINFO, $this->caBundlePath);
             }
 
             $executionResult = curl_exec($curlHandle);
-            $curlError = curl_error($curlHandle);
+            $curlErrorCode = curl_errno($curlHandle);
             $statusCode = (int)curl_getinfo($curlHandle, CURLINFO_RESPONSE_CODE);
+            curl_close($curlHandle);
 
             if ($contentLength !== null && $contentLength > $maxBytes) {
-                throw new \RuntimeException('Unsupported source type');
+                throw new ProcessingError('URL_TOO_LARGE');
             }
 
             if ($statusCode >= 300 && $statusCode < 400) {
                 $redirectLocation = $responseHeaders['location'] ?? '';
                 if (!is_string($redirectLocation) || trim($redirectLocation) === '') {
-                    throw new \RuntimeException('Invalid URL');
+                    throw new ProcessingError('URL_CONTENT_UNAVAILABLE');
                 }
 
                 if ($redirectCount === self::MAX_REDIRECTS) {
-                    throw new \RuntimeException('Invalid URL');
+                    throw new ProcessingError('URL_UNREACHABLE');
                 }
 
                 $currentUrl = $this->resolveRedirectLocation($currentUrl, $redirectLocation);
@@ -468,12 +506,14 @@ class SourceResolver
             }
 
             if ($sawOversizedTransfer) {
-                throw new \RuntimeException('Unsupported source type');
+                throw new ProcessingError('URL_TOO_LARGE');
             }
 
             if ($executionResult === false || $statusCode < 200 || $statusCode >= 300) {
-                $normalizedError = trim($curlError);
-                throw new \RuntimeException($normalizedError === '' ? 'Invalid URL' : 'Invalid URL');
+                if ($executionResult === false) {
+                    throw $this->networkFailure($curlErrorCode);
+                }
+                throw $this->remoteStatusFailure($statusCode);
             }
 
             return [
@@ -483,25 +523,80 @@ class SourceResolver
             ];
         }
 
-        throw new \RuntimeException('Invalid URL');
+        throw new ProcessingError('URL_UNREACHABLE');
+    }
+
+    /**
+     * Pin DNS resolution to the pre-validated IP address to prevent DNS rebinding.
+     * Accepts native \CurlHandle in production or test transport fixtures in test suites.
+     *
+     * @param \CurlHandle|object $curlHandle
+     * @param string $url
+     * @return void
+     */
+    private function pinValidatedAddress(object $curlHandle, string $url): void
+    {
+        $parts = parse_url($url);
+        $host = strtolower(trim((string)$parts['host'], '[]'));
+        // Prevent a second DNS answer from changing the destination between
+        // validation and connection. TLS still verifies the original hostname.
+        $address = $this->validatedAddresses[$host][0];
+        $port = (int)($parts['port'] ?? ($parts['scheme'] === 'https' ? 443 : 80));
+        $target = str_contains($address, ':') ? '[' . $address . ']' : $address;
+        curl_setopt($curlHandle, CURLOPT_PROXY, '');
+        if (filter_var($host, FILTER_VALIDATE_IP) === false) {
+            curl_setopt($curlHandle, CURLOPT_RESOLVE, [$host . ':' . $port . ':' . $target]);
+        }
+    }
+
+    private function networkFailure(int $curlErrorCode): ProcessingError
+    {
+        if ($curlErrorCode === CURLE_OPERATION_TIMEDOUT) {
+            return new ProcessingError('URL_TIMEOUT');
+        }
+
+        // PHP/libcurl versions expose certificate verification code 60 under
+        // different constant names (XAMPP commonly uses CURLE_SSL_CACERT).
+        $certificateErrors = [60];
+        foreach (['CURLE_PEER_FAILED_VERIFICATION', 'CURLE_SSL_CACERT', 'CURLE_SSL_CERTPROBLEM', 'CURLE_SSL_CACERT_BADFILE'] as $name) {
+            if (defined($name)) $certificateErrors[] = constant($name);
+        }
+        if (in_array($curlErrorCode, $certificateErrors, true)) {
+            return new ProcessingError('URL_TLS_FAILED');
+        }
+
+        return new ProcessingError('URL_UNREACHABLE');
+    }
+
+    private function remoteStatusFailure(int $statusCode): ProcessingError
+    {
+        if (in_array($statusCode, [401, 403, 407, 451], true)) {
+            return new ProcessingError('URL_ACCESS_RESTRICTED');
+        }
+        if ($statusCode === 429) {
+            return new ProcessingError('URL_RATE_LIMITED');
+        }
+        return new ProcessingError($statusCode >= 500 || $statusCode === 0
+            ? 'URL_UNREACHABLE'
+            : 'URL_CONTENT_UNAVAILABLE');
     }
 
     private function createTemporaryPdfPath(): string
     {
         $temporaryDirectory = RuntimePaths::temporaryDirectory('source-resolver');
         if (!RuntimePaths::ensureDirectory($temporaryDirectory, 0775)) {
-            throw new \RuntimeException('Temporary storage is not writable.');
+            throw new ProcessingError('WORKER_UNAVAILABLE');
         }
 
         $basePath = tempnam($temporaryDirectory, 'remote_pdf_');
         if ($basePath === false) {
-            throw new \RuntimeException('Unsupported source type');
+            throw new ProcessingError('WORKER_UNAVAILABLE');
         }
 
         $pdfPath = $basePath . '.pdf';
         if (!@rename($basePath, $pdfPath)) {
             @unlink($basePath);
-            throw new \RuntimeException('Unsupported source type');
+            throw new ProcessingError('WORKER_UNAVAILABLE');
         }
 
         return $pdfPath;
@@ -541,23 +636,26 @@ class SourceResolver
     {
         $target = trim($redirectLocation);
         if ($target === '') {
-            throw new \RuntimeException('Invalid URL');
+            throw new ProcessingError('URL_CONTENT_UNAVAILABLE');
         }
 
         if (preg_match('#^https?://#i', $target) === 1) {
             return $target;
         }
+        if (preg_match('#^[a-z][a-z0-9+.-]*:#i', $target) === 1) {
+            throw new ProcessingError('URL_UNSAFE');
+        }
 
         $currentParts = parse_url($currentUrl);
         if (!is_array($currentParts)) {
-            throw new \RuntimeException('Invalid URL');
+            throw new ProcessingError('URL_INVALID');
         }
 
         $scheme = (string)($currentParts['scheme'] ?? 'https');
         $host = (string)($currentParts['host'] ?? '');
         $port = isset($currentParts['port']) ? ':' . $currentParts['port'] : '';
         if ($host === '') {
-            throw new \RuntimeException('Invalid URL');
+            throw new ProcessingError('URL_INVALID');
         }
 
         if (str_starts_with($target, '//')) {
@@ -617,57 +715,88 @@ class SourceResolver
         libxml_use_internal_errors($previousLibxmlSetting);
 
         $xpath = new \DOMXPath($document);
-        foreach ($xpath->query('//script|//style|//nav|//header|//footer|//aside|//form|//noscript|//svg') as $node) {
+        $nonArticleContent = $xpath->query(
+            '//script|//style|//nav|//header|//footer|//aside|//form|//noscript|//svg'
+            . '|//sup[contains(concat(" ", normalize-space(@class), " "), " reference ")]'
+            . '|//*[@role="navigation" or @role="banner" or @role="complementary" or @role="dialog"]'
+            . '|//*[not(self::html) and not(self::body) and ('
+            . '  contains(concat(" ", normalize-space(@class), " "), " reflist ")'
+            . '  or contains(concat(" ", normalize-space(@class), " "), " references ")'
+            . '  or contains(concat(" ", normalize-space(@class), " "), " navbox ")'
+            . '  or contains(concat(" ", normalize-space(@class), " "), " infobox ")'
+            . '  or contains(concat(" ", normalize-space(@class), " "), " hatnote ")'
+            . '  or contains(concat(" ", normalize-space(@class), " "), " mw-editsection ")'
+            . '  or contains(concat(" ", normalize-space(@class), " "), " catlinks ")'
+            . '  or contains(concat(" ", normalize-space(@class), " "), " shortdescription ")'
+            . '  or contains(concat(" ", normalize-space(@class), " "), " toc ")'
+            . '  or @id="toc"'
+            . '  or contains(@class, "mw-empty-elt")'
+            . ')]'
+            . '|//*[not(self::html) and not(self::body) and ('
+            . '  contains(translate(@class, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"), "cookie")'
+            . '  or contains(translate(@class, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"), "consent")'
+            . '  or contains(translate(@class, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"), "advertisement")'
+            . '  or contains(translate(@class, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"), "sponsored")'
+            . '  or contains(translate(@class, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"), "related-content")'
+            . '  or contains(translate(@class, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"), "newsletter")'
+            . ')]'
+        );
+        foreach ($nonArticleContent as $node) {
             $node->parentNode?->removeChild($node);
         }
 
-        $contentNode = $xpath->query('//article[1] | //main[1] | //body[1]')->item(0);
+        $contentNode = $xpath->query('//*[@id="mw-content-text"]//*[contains(@class, "mw-parser-output")]')->item(0)
+            ?? $xpath->query('//article')->item(0)
+            ?? $xpath->query('//main')->item(0)
+            ?? $xpath->query('//body')->item(0);
         if (!$contentNode instanceof \DOMNode) {
             return '';
         }
 
-        $paragraphs = [];
-        foreach ($xpath->query('.//p', $contentNode) as $paragraphNode) {
-            $paragraphText = $this->normalizeWhitespace($paragraphNode->textContent ?? '');
-            if ($paragraphText === '' || str_word_count($paragraphText) < 6) {
+        $contentBlocks = [];
+        $skipAfterSections = ['references', 'external links', 'see also', 'further reading', 'notes', 'sources', 'bibliography'];
+        $isSkipping = false;
+
+        foreach ($xpath->query('.//h1|.//h2|.//h3|.//h4|.//h5|.//h6|.//p|.//li', $contentNode) as $contentNodePart) {
+            $blockText = $this->normalizeWhitespace($contentNodePart->textContent ?? '');
+            $tagName = strtolower($contentNodePart->nodeName);
+            $isHeading = in_array($tagName, ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], true);
+
+            if ($isHeading) {
+                $cleanHeading = strtolower(trim((string)preg_replace('/[^a-z0-9 ]/i', '', $blockText)));
+                if (in_array($cleanHeading, $skipAfterSections, true)) {
+                    $isSkipping = true;
+                    continue;
+                }
+            }
+
+            if ($isSkipping) {
                 continue;
             }
-            $paragraphs[] = $paragraphText;
+
+            // Strip residual inline bracket citation markers like [1], [24], [note 1]
+            $blockText = trim((string)preg_replace('/\[\s*(?:\d+|[a-zA-Z]|note\s*\d+)\s*\]/i', '', $blockText));
+            $blockText = $this->normalizeWhitespace($blockText);
+
+            $wordCount = str_word_count($blockText);
+            $minimumWords = $tagName === 'li' ? 3 : 6;
+            if ($blockText === '' || ($isHeading ? $wordCount > 16 : $wordCount < $minimumWords)) {
+                continue;
+            }
+            $contentBlocks[] = $blockText;
         }
 
-        if ($paragraphs !== []) {
-            return implode("\n\n", $paragraphs);
+        if ($contentBlocks !== []) {
+            return implode("\n\n", $contentBlocks);
         }
 
         $fallbackText = $this->normalizeWhitespace($contentNode->textContent ?? '');
+        $fallbackText = trim((string)preg_replace('/\[\s*(?:\d+|[a-zA-Z]|note\s*\d+)\s*\]/i', '', $fallbackText));
         if ($fallbackText === '' || str_word_count($fallbackText) < 6) {
             return '';
         }
 
         return $fallbackText;
-    }
-
-    private function normalizePdfExtractionError(string $message): string
-    {
-        $normalized = strtolower(trim($message));
-        if (
-            str_contains($normalized, 'scanned')
-            || str_contains($normalized, 'image-only')
-            || str_contains($normalized, 'does not contain readable text')
-            || str_contains($normalized, 'does not contain enough readable text')
-        ) {
-            return 'No readable text was found in the PDF. Scanned PDFs need OCR before summarization.';
-        }
-
-        if (str_contains($normalized, 'not found')) {
-            return 'Invalid URL';
-        }
-
-        if (str_contains($normalized, 'not a pdf') || str_contains($normalized, 'valid text-based pdf')) {
-            return 'Unsupported source type';
-        }
-
-        return 'No readable text found';
     }
 
     private function normalizeWhitespace(string $text): string

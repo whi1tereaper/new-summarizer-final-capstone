@@ -118,12 +118,24 @@ class RememberMeService
         }
 
         if (hash_equals($record['hashed_validator'], hash('sha256', $validator))) {
+            if (($record['role'] ?? '') === 'admin') {
+                $deleteStmt = $db->prepare("DELETE FROM user_tokens WHERE id = ?");
+                $deleteStmt->execute([$record['id']]);
+                self::clearCookie();
+                return;
+            }
+
             // Token is valid, log them in
             session_regenerate_id(true);
             $_SESSION['user_id'] = $record['user_id'];
             $_SESSION['role'] = $record['role'];
             $_SESSION['username'] = $record['username'];
-            unset($_SESSION['pending_admin_user_id'], $_SESSION['pending_admin_remember_me'], $_SESSION['admin_challenge_verified']);
+            unset(
+                $_SESSION['pending_admin_user_id'],
+                $_SESSION['pending_admin_remember_me'],
+                $_SESSION['admin_challenge_verified'],
+                $_SESSION['pending_admin_login']
+            );
             
             // Set terms state
             $userForTerms = [

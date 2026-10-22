@@ -40,6 +40,16 @@
   --button-hover-text:          #ffffff;
 }
 
+/* The workspace has its own editorial tokens, so keep them in sync with the
+   shared theme toggle.  Without this override dark mode leaves several
+   controls using the light palette. */
+html[data-theme="dark"] .nex-landing {
+  --nex-light-bg:      #171917;
+  --nex-light-text:    #f1f2ee;
+  --nex-light-muted:   #a6afa1;
+  --nex-light-border:  #3d4339;
+}
+
 .nex-landing,
 .nex-landing *,
 .nex-landing *::before,
@@ -52,133 +62,6 @@
   color: var(--nex-light-text);
   font-family: var(--nex-font-display);
   overflow-x: hidden;
-}
-
-/* ------------------------------------------------------------------
-   1. Fixed header
-   ------------------------------------------------------------------ */
-.nex-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 400;
-  padding: 20px var(--nex-gutter);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  pointer-events: none;
-  --h-text: var(--nex-light-text);
-  --h-muted: var(--nex-light-muted);
-}
-
-.nex-header[data-active-theme="dark"] {
-  --h-text: var(--nex-dark-text);
-  --h-muted: var(--nex-dark-muted);
-}
-.nex-header[data-active-theme="accent"] {
-  --h-text: var(--nex-accent-text);
-  --h-muted: var(--nex-accent-muted);
-}
-.nex-header * { pointer-events: auto; }
-
-.nex-brand {
-  font-family: var(--nex-font-display);
-  font-size: 1.25rem;
-  font-weight: 900;
-  letter-spacing: -0.04em;
-  color: var(--h-text);
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: color 250ms var(--nex-ease);
-  line-height: 1;
-}
-.nex-brand:hover {
-  color: var(--accent-purple);
-}
-
-.nex-nav {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-}
-
-.nex-nav__link {
-  font-family: var(--nex-font-display);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--h-text);
-  text-decoration: none;
-  opacity: 0.65;
-  transition: opacity 250ms ease, color 250ms var(--nex-ease);
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-}
-.nex-nav__link:hover {
-  opacity: 1;
-  color: var(--accent-purple);
-}
-
-.nex-header-auth {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.nex-header-auth__link {
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--h-text);
-  text-decoration: none;
-  opacity: 0.65;
-  transition: opacity 250ms ease, color 250ms var(--nex-ease);
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-}
-.nex-header-auth__link:hover {
-  opacity: 1;
-  color: var(--accent-purple);
-}
-
-.nex-header-auth__btn {
-  font-family: var(--nex-font-display);
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--nex-light-bg);
-  background: var(--h-text);
-  border: 1px solid var(--h-text);
-  border-radius: 999px;
-  padding: 8px 20px;
-  min-height: 36px;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  transition: background 250ms ease, color 250ms ease, border-color 250ms ease, box-shadow 250ms ease;
-}
-.nex-header-auth__btn:hover {
-  background: var(--accent-purple);
-  border-color: var(--accent-purple);
-  color: #ffffff;
-  box-shadow: 0 4px 16px rgba(127, 0, 255, 0.30);
-}
-
-.nex-header-welcome {
-  font-size: 0.625rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--h-muted);
-  transition: color 400ms var(--nex-ease);
 }
 
 /* ------------------------------------------------------------------
@@ -1413,6 +1296,33 @@
   letter-spacing: -0.01em;
 }
 
+/* Nutshell intentionally remains a light reading surface in dark mode.
+   Override the inherited dark-mode text color so the generated text remains
+   readable against that white surface. */
+html[data-theme="dark"] .nex-landing .nutshell-panel {
+  background: #ffffff;
+  color: #11130f;
+  border-color: #d6d8d2;
+}
+
+html[data-theme="dark"] .nex-landing .nutshell-panel__header {
+  border-bottom-color: #e2e3df;
+}
+
+html[data-theme="dark"] .nex-landing .nutshell-text {
+  color: #11130f;
+}
+
+html[data-theme="dark"] .nex-landing .nutshell-loading {
+  color: #3f433c;
+}
+
+html[data-theme="dark"] .nex-landing .nutshell-copy-btn {
+  background: #f1f2ee;
+  border-color: #c7cac2;
+  color: #11130f;
+}
+
 /* Error state */
 .nex-landing .nutshell-panel--error {
   border-color: rgba(220, 38, 38, 0.45);
@@ -1567,7 +1477,6 @@
     align-items: flex-start;
     border-radius: 20px;
   }
-  .nex-nav { gap: 20px; }
 }
 
 
@@ -1649,39 +1558,6 @@
 
 .nex-hero-bl { left: clamp(12px, 1.5vw, 30px); }
 .nex-hero-br { right: clamp(32px, 2.5vw, 52px); }
-
-/* ============================================================
-   HEADER — updated for 2-column layout
-   Brand LEFT, .nex-header-right contains ALL nav + auth links.
-   ============================================================ */
-
-/* Right-side cluster: all section links + auth in one flex row */
-.nex-header-right {
-  display: flex;
-  align-items: center;
-  gap: 36px;
-  pointer-events: auto;
-}
-
-/* Header padding tweak to match reference: tight but not cramped */
-.nex-header {
-  padding-top: 28px;
-  padding-bottom: 28px;
-  padding-left: clamp(16px, 2vw, 48px);
-  padding-right: clamp(16px, 2vw, 48px);
-}
-
-/* Links inside .nex-header-right inherit the nav__link style.
-   Ensure pointer-events work since parent has pointer-events: none. */
-.nex-header-right .nex-nav__link {
-  pointer-events: auto;
-}
-
-/* Brand: slightly reduced size to match reference's compact mark */
-.nex-brand {
-  font-size: 1rem;
-  letter-spacing: -0.01em;
-}
 
 /* ============================================================
    HERO STAGE RESPONSIVE
@@ -2119,13 +1995,6 @@
   min-height: 48px;
   font-size: 0.6875rem;
   letter-spacing: 0.1em;
-}
-
-.nex-nav__link--active {
-  color: var(--accent-purple) !important;
-  font-weight: 700 !important;
-  border-bottom: 2px solid var(--accent-purple);
-  padding-bottom: 2px;
 }
 
 /* ============================================================

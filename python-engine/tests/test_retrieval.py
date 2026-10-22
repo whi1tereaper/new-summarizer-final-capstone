@@ -305,22 +305,17 @@ class RetrievalTests(unittest.TestCase):
 
     def test_worker_serializes_stable_result_evidence_and_coverage_contract(self):
         paragraphs = []
-        for section, text in [
-            ("methods", "Researchers used a randomized clinical trial with 420 adult participants across six hospitals."),
-            ("results", "The treatment reduced symptom severity by 31 percent after twelve weeks of follow-up."),
-            ("limitations", "The study did not include children and follow-up ended after twelve weeks."),
-            ("conclusion", "The authors recommend a larger trial before the treatment is adopted in routine care."),
+        for section, text, extra in [
+            ("methods", "Researchers used a randomized clinical trial with 420 adult participants across six hospitals.", "The clinical methodology involved strict double-blind administration and computer-generated randomization sequences. Qualified investigators monitored dosage compliance and adherence schedules across all regional facilities during trial execution."),
+            ("results", "The treatment reduced symptom severity by 31 percent after twelve weeks of follow-up.", "Statistical analysis confirmed that the primary outcome achieved significance with a p-value below 0.01 across cohorts. Secondary biomarker measurements corroborated clinical findings and demonstrated sustained improvements in metabolic parameters."),
+            ("limitations", "The study did not include children and follow-up ended after twelve weeks.", "Exclusion criteria precluded evaluation in pediatric groups and individuals with advanced renal insufficiency. Future observational registries will be necessary to ascertain extended durability past the initial evaluation period."),
+            ("conclusion", "The authors recommend a larger trial before the treatment is adopted in routine care.", "The aggregated evidence demonstrates meaningful therapeutic efficacy and an acceptable tolerability profile for adult patients. Clinical guidelines should incorporate these discoveries pending confirmation in multi-center validation studies."),
         ]:
             paragraphs.append(
-                f"{section.title()}\n{text} "
-                f"The report provides detailed evidence about {section} and patient outcomes. "
-                f"Researchers documented a separate {section} observation for clinical decision makers. "
-                "Investigators recorded clinical response, safety indicators, and participant follow-up "
-                "intervals using a predefined observation protocol. Study coordinators reviewed outcome "
-                "trends with physicians before recording the final interpretation for each participating "
-                "clinical site. The report compares those observations with baseline measurements and "
-                f"notes how the evidence informs subsequent care planning. The {section} review "
-                "documented additional safeguards for reliable clinical interpretation."
+                f"{section.title()}\n{text} {extra} "
+                f"The clinical team completed detailed examinations regarding {section} and patient outcomes. "
+                f"Specialists documented distinct observations for clinical decision makers at participating sites. "
+                "Staff recorded clinical response, safety indicators, and participant follow-up intervals using predefined protocols."
             )
         result = handle_summarize({
             "text": "\n\n".join(paragraphs),

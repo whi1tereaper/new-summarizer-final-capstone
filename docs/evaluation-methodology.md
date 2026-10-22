@@ -4,7 +4,7 @@ Protocol version: **1.0**, recorded **2026-10-02** (Asia/Manila). Statistical im
 
 ## Architecture and scope
 
-The application remains PHP with its existing authenticated sessions, database and presentation conventions. Evaluation management requires a signed-in, active administrator account; the separate administrator challenge was removed at the user's request on 2026-10-02. Ordinary evaluators retain access only to their assigned assessments. Evaluation uses separate dataset/run/output/metric/assignment/rating records. The offline worker invokes `python-engine/evaluation_cli.py`, which reuses `summarizer_core.pipeline.SummarizationPipeline` through an evaluation-only subclass. Normal summaries continue through their existing path. Evaluation cannot redefine ordinary user ratings as independent research assessments.
+The application remains PHP with its existing authenticated sessions, database and presentation conventions. Evaluation management requires a signed-in, active administrator account. Administrator sign-in uses a six-digit, single-use code emailed to the address on an active administrator account and expires after 10 minutes; no password is requested. Email possession is the sole sign-in factor, so mailbox compromise grants administrator access and mailbox loss prevents sign-in. Ordinary evaluators retain access only to their assigned assessments. Evaluation uses separate dataset/run/output/metric/assignment/rating records. The offline worker invokes `python-engine/evaluation_cli.py`, which reuses `summarizer_core.pipeline.SummarizationPipeline` through an evaluation-only subclass. Normal summaries continue through their existing path. Evaluation cannot redefine ordinary user ratings as independent research assessments.
 
 The queue processes an output at a time, persists individual metric statuses and retains successful outputs when another item fails. Statistical aggregation is an offline operation, persisted for web display and export. Optional transformer inference does not execute in the ordinary summarization request. Database migrations and the deployment commands are documented in the implementation audit.
 
@@ -19,6 +19,26 @@ Use separate `development`, `validation` and `test` splits. Algorithm changes ca
 A document, rather than a summary output, is the sampling unit. Four modes applied to one source are repeated measurements. Syndicated articles, overlapping excerpts of the same report and near-duplicate revisions are dependent sources: deduplicate them or assign a shared parent-document cluster before analysis. The implemented statistics expect independent document IDs; they do not infer those relationships automatically. A convenience sample supports claims about that sample, not automatically about all domains or languages.
 
 The checked-in `python-engine/tests/fixtures/evaluation_validation_documents.json` contains four real, attributed public-agency text excerpts and two explicitly synthetic repetition/OCR stress cases. They provide engineering coverage of the four categories, short and long text, percentages, dates, decimals, units, qualifiers, negation and multiple named entities. They have no human references or ratings. Synthetic noisy text is not a scanned-document OCR benchmark. The Census fixture retains the agency's correction notice; the experiment measures fidelity to the supplied historical snapshot, not whether every underlying real-world claim remains current. Exclude synthetic stress cases from reports describing real-document quality, or report them as their own run.
+
+## V2 cutover gate
+
+The user-selected acceptance gate, agreed 2026-10-13, for a future blinded
+legacy-versus-v2 review is:
+
+- Human ratings use a 1–5 scale and are collected without reviewers knowing
+  which system produced each output.
+- V2 must score at least **0.2 points higher than legacy on the overall
+  quality rating**.
+- On every other rated quality dimension, v2 must be no more than **0.2 points
+  below legacy**.
+- The reviewed sample must contain **zero critical unsupported or contradicted
+  claims** in v2 outputs, based on source-level review.
+
+Report the rating dimensions, sample/document denominators, per-document
+paired results, missing ratings, and all critical factual findings. This gate
+does not make a convenience sample representative; use a diverse, frozen,
+article-heavy held-out sample and report the non-article strata separately.
+No current run has human ratings, so the gate has not been evaluated.
 
 ## Run and configuration records
 

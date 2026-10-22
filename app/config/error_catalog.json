@@ -1,0 +1,361 @@
+{
+  "TITLE_TOO_LONG": {"category":"input","http_status":422,"retryable":false,"title":"Shorten the document title.","explanation":"Document titles can contain up to 255 characters.","recovery":"Use a shorter title or leave the title blank."},
+  "REQUEST_EXPIRED": {"category":"input","http_status":410,"retryable":false,"title":"This request has expired.","explanation":"The recovery period ended and the retained source was removed.","recovery":"Return to the form and submit your source again."},
+  "TERMS_REQUIRED": {"category":"auth","http_status":403,"retryable":false,"title":"Accept the terms to continue.","explanation":"This action requires acceptance of the Terms and Conditions.","recovery":"Review and accept the terms, then return to your request."},
+  "SUMMARY_INELIGIBLE": {"category":"input","http_status":409,"retryable":false,"title":"This summary cannot be used yet.","explanation":"This action requires a completed summary with readable source text and a readable result.","recovery":"Choose a completed summary or submit a new source."},
+  "RESULT_UNAVAILABLE": {"category":"auth","http_status":404,"retryable":false,"title":"This result is not available.","explanation":"The result could not be found or is not accessible in your current session.","recovery":"Return to your summary history or submit a source in this session."},
+  "URL_TLS_FAILED": {"category":"network","http_status":502,"retryable":false,"title":"A secure connection could not be established.","explanation":"LIGHT could not verify a secure connection to the source website.","recovery":"Use another accessible source or paste text you can access."},
+  "URL_TOO_LARGE": {"category":"input","http_status":413,"retryable":false,"title":"This web source is too large.","explanation":"The response exceeds LIGHT’s supported download size.","recovery":"Use a smaller source or paste the relevant article text."},
+  "INPUT_EMPTY": {
+    "category": "input",
+    "http_status": 422,
+    "retryable": false,
+    "title": "Add a source to continue.",
+    "explanation": "There is no text or article link to summarize.",
+    "recovery": "Paste readable text, enter an article URL, or select a PDF or DOCX."
+  },
+  "INPUT_INVALID": {
+    "category": "input",
+    "http_status": 400,
+    "retryable": false,
+    "title": "Check your input.",
+    "explanation": "LIGHT could not read the submitted source fields.",
+    "recovery": "Choose one source method and enter your source again."
+  },
+  "INPUT_TOO_SHORT": {
+    "category": "input",
+    "http_status": 422,
+    "retryable": false,
+    "title": "More source text is needed.",
+    "explanation": "The supplied text does not contain enough usable content for this request.",
+    "recovery": "Include the complete passage or another relevant paragraph."
+  },
+  "INPUT_TOO_LARGE": {
+    "category": "input",
+    "http_status": 413,
+    "retryable": false,
+    "title": "This source is too large.",
+    "explanation": "The source exceeds the supported input limit shown on the form.",
+    "recovery": "Shorten the pasted text or use a smaller source."
+  },
+  "SOURCE_CONFLICT": {
+    "category": "input",
+    "http_status": 422,
+    "retryable": false,
+    "title": "Choose one source.",
+    "explanation": "More than one source method was submitted.",
+    "recovery": "Keep either a file, pasted text, or an article URL."
+  },
+  "SETTINGS_INVALID": {
+    "category": "input",
+    "http_status": 422,
+    "retryable": false,
+    "title": "Check your summary settings.",
+    "explanation": "One of the selected options is unavailable or unsupported.",
+    "recovery": "Choose an available analysis mode, output format, and summary depth."
+  },
+  "REQUEST_INVALID": {
+    "category": "input",
+    "http_status": 400,
+    "retryable": false,
+    "title": "This request could not be read.",
+    "explanation": "Some required request information is missing or invalid.",
+    "recovery": "Return to the form and submit your source again."
+  },
+  "FILE_REQUIRED": {
+    "category": "input",
+    "http_status": 422,
+    "retryable": false,
+    "title": "Select a document.",
+    "explanation": "No file was received for the file source.",
+    "recovery": "Select a PDF or DOCX file and submit again."
+  },
+  "FILE_UNSUPPORTED": {
+    "category": "format",
+    "http_status": 415,
+    "retryable": false,
+    "title": "This file format is not supported.",
+    "explanation": "The file type or signature does not match a supported PDF or DOCX document.",
+    "recovery": "Export the document as PDF or DOCX, or paste its text."
+  },
+  "FILE_TOO_LARGE": {
+    "category": "input",
+    "http_status": 413,
+    "retryable": false,
+    "title": "This file is too large.",
+    "explanation": "The file exceeds the current upload or download size limit.",
+    "recovery": "Choose a smaller document within the limit shown on the form."
+  },
+  "FILE_PAGE_LIMIT": {
+    "category": "input",
+    "http_status": 413,
+    "retryable": false,
+    "title": "This PDF has too many pages.",
+    "explanation": "The PDF exceeds the processing engine’s supported page limit.",
+    "recovery": "Upload a smaller selection of relevant pages."
+  },
+  "FILE_CORRUPTED": {
+    "category": "extraction",
+    "http_status": 422,
+    "retryable": false,
+    "title": "This document could not be opened.",
+    "explanation": "The document structure is damaged, incomplete, or malformed.",
+    "recovery": "Open and export a fresh copy, or paste the document text."
+  },
+  "FILE_ENCRYPTED": {
+    "category": "extraction",
+    "http_status": 422,
+    "retryable": false,
+    "title": "This document is protected.",
+    "explanation": "The document is encrypted or requires a password to read.",
+    "recovery": "If you have permission, export an unprotected copy or paste accessible text."
+  },
+  "FILE_TEXT_UNAVAILABLE": {
+    "category": "content",
+    "http_status": 422,
+    "retryable": false,
+    "title": "No readable document text was found.",
+    "explanation": "LIGHT could not obtain readable text. The document may contain images or unsupported text encoding.",
+    "recovery": "Try a text-based copy or paste its text. An image-only document may need OCR first."
+  },
+  "UPLOAD_INCOMPLETE": {
+    "category": "network",
+    "http_status": 400,
+    "retryable": true,
+    "title": "The upload did not finish.",
+    "explanation": "Only part of the file reached LIGHT.",
+    "recovery": "Check your connection, select the file again, and retry."
+  },
+  "UPLOAD_FAILED": {
+    "category": "infrastructure",
+    "http_status": 503,
+    "retryable": true,
+    "title": "The file could not be received.",
+    "explanation": "LIGHT could not store the uploaded file for processing.",
+    "recovery": "Wait a moment, then select the file again and retry."
+  },
+  "URL_INVALID": {
+    "category": "input",
+    "http_status": 422,
+    "retryable": false,
+    "title": "Check the article URL.",
+    "explanation": "The link is not a valid HTTP or HTTPS address.",
+    "recovery": "Copy the complete article address, including https://."
+  },
+  "URL_UNREACHABLE": {
+    "category": "network",
+    "http_status": 502,
+    "retryable": true,
+    "title": "The website could not be reached.",
+    "explanation": "LIGHT could not connect to the article website.",
+    "recovery": "Check the address and try again later, or paste text you can access."
+  },
+  "URL_TIMEOUT": {
+    "category": "network",
+    "http_status": 504,
+    "retryable": true,
+    "title": "The website took too long to respond.",
+    "explanation": "The article could not be retrieved within the connection time limit.",
+    "recovery": "Try again later, or paste the article text you can access."
+  },
+  "URL_ACCESS_RESTRICTED": {
+    "category": "access",
+    "http_status": 422,
+    "retryable": false,
+    "title": "The website restricted access.",
+    "explanation": "The source website refused access or requires authorization.",
+    "recovery": "Open the source yourself and paste text you are allowed to use, or choose an accessible source."
+  },
+  "URL_RATE_LIMITED": {
+    "category": "access",
+    "http_status": 429,
+    "retryable": true,
+    "title": "The website is limiting requests.",
+    "explanation": "The source website asked LIGHT to slow down.",
+    "recovery": "Wait before retrying, or paste the article text you can access."
+  },
+  "URL_CONTENT_UNAVAILABLE": {
+    "category": "content",
+    "http_status": 422,
+    "retryable": false,
+    "title": "The article content is unavailable.",
+    "explanation": "The link did not return a readable article or the requested document.",
+    "recovery": "Check the article link, use another accessible source, or paste its text."
+  },
+  "URL_UNSAFE": {
+    "category": "access",
+    "http_status": 422,
+    "retryable": false,
+    "title": "This address cannot be fetched.",
+    "explanation": "LIGHT only retrieves sources from permitted public website addresses.",
+    "recovery": "Use a public HTTP or HTTPS article URL, or paste the text."
+  },
+  "DOCUMENT_EXTRACTION_FAILED": {
+    "category": "extraction",
+    "http_status": 422,
+    "retryable": false,
+    "title": "We could not read this document.",
+    "explanation": "The document was received, but extraction did not complete. The exact cause could not be determined.",
+    "recovery": "Try another copy or paste the document text."
+  },
+  "CONTENT_UNREADABLE": {
+    "category": "content",
+    "http_status": 422,
+    "retryable": false,
+    "title": "More readable content is needed.",
+    "explanation": "The source does not contain enough usable text for reliable processing.",
+    "recovery": "Paste a complete readable passage, or choose a clearer document."
+  },
+  "SOURCE_UNAVAILABLE": {
+    "category": "extraction",
+    "http_status": 422,
+    "retryable": false,
+    "title": "The source is no longer available.",
+    "explanation": "The source file could not be found for this request.",
+    "recovery": "Return to the form and select the file again."
+  },
+  "NLP_NO_VALID_CANDIDATES": {
+    "category": "nlp",
+    "http_status": 422,
+    "retryable": false,
+    "title": "No usable summary passages were found.",
+    "explanation": "LIGHT could not identify suitable passages in the available text.",
+    "recovery": "Include complete sentences and relevant context, or choose a clearer source."
+  },
+  "SUMMARY_QUALITY_FAILED": {
+    "category": "quality",
+    "http_status": 422,
+    "retryable": false,
+    "title": "A reliable summary could not be produced.",
+    "explanation": "The available text did not produce a summary that passed LIGHT’s quality checks.",
+    "recovery": "Try clearer source text or include more relevant context."
+  },
+  "WORKER_UNAVAILABLE": {
+    "category": "infrastructure",
+    "http_status": 503,
+    "retryable": true,
+    "title": "Processing is temporarily unavailable.",
+    "explanation": "LIGHT could not start or reach its processing service.",
+    "recovery": "Wait a moment and retry. Your source and settings can be reused where available."
+  },
+  "TRANSLATION_RATE_LIMITED": {
+    "category": "translation",
+    "http_status": 503,
+    "retryable": true,
+    "title": "Filipino translation is temporarily unavailable.",
+    "explanation": "Filipino translation is temporarily unavailable because the translation service is busy. Your original summary is safe. Please try again later.",
+    "recovery": "Wait until the indicated retry interval has passed, then retry manually."
+  },
+  "TRANSLATION_TIMEOUT": {
+    "category": "translation",
+    "http_status": 504,
+    "retryable": true,
+    "title": "Translation took too long.",
+    "explanation": "The translation service did not respond in time. Your original summary is safe.",
+    "recovery": "Try again later."
+  },
+  "TRANSLATION_NETWORK_FAILURE": {
+    "category": "translation",
+    "http_status": 503,
+    "retryable": true,
+    "title": "Translation is temporarily unavailable.",
+    "explanation": "LIGHT could not connect to the translation service. Your original summary is safe.",
+    "recovery": "Check your connection and try again later."
+  },
+  "TRANSLATION_UNAVAILABLE": {
+    "category": "translation",
+    "http_status": 503,
+    "retryable": true,
+    "title": "Translation is temporarily unavailable.",
+    "explanation": "The translation service is temporarily unavailable. Your original summary is safe.",
+    "recovery": "Try again later."
+  },
+  "TRANSLATION_INVALID_RESPONSE": {
+    "category": "translation",
+    "http_status": 502,
+    "retryable": true,
+    "title": "Translation could not be verified.",
+    "explanation": "The translation service returned a response LIGHT could not verify. Your original summary is safe.",
+    "recovery": "Try again later."
+  },
+  "TRANSLATION_VALIDATION_ERROR": {
+    "category": "translation",
+    "http_status": 502,
+    "retryable": false,
+    "title": "Translation could not be verified.",
+    "explanation": "LIGHT could not verify a complete Filipino translation. Your original summary is safe.",
+    "recovery": "Keep using your original English summary."
+  },
+  "TRANSLATION_WORKER_FAILURE": {
+    "category": "infrastructure",
+    "http_status": 503,
+    "retryable": true,
+    "title": "Translation is temporarily unavailable.",
+    "explanation": "LIGHT could not complete translation processing. Your original summary is safe.",
+    "recovery": "Wait a moment and retry."
+  },
+  "PROCESSING_TIMEOUT": {
+    "category": "network",
+    "http_status": 504,
+    "retryable": true,
+    "title": "Processing took too long.",
+    "explanation": "LIGHT did not finish within the processing time limit.",
+    "recovery": "Try a shorter source, or retry once processing is available."
+  },
+  "PROCESSING_FAILED": {
+    "category": "infrastructure",
+    "http_status": 500,
+    "retryable": false,
+    "title": "This request could not be completed.",
+    "explanation": "LIGHT encountered a problem, but could not determine its exact cause.",
+    "recovery": "Return to your settings. If the problem continues, share the reference below with support."
+  },
+  "PROCESSING_CANCELLED": {
+    "category": "input",
+    "http_status": 409,
+    "retryable": false,
+    "title": "Summary cancelled.",
+    "explanation": "This request was cancelled before a result was completed.",
+    "recovery": "Return to your settings to submit a source again."
+  },
+  "RATE_LIMITED": {
+    "category": "access",
+    "http_status": 429,
+    "retryable": true,
+    "title": "Please wait before trying again.",
+    "explanation": "Too many attempts were made in a short time.",
+    "recovery": "Wait a moment before retrying this request."
+  },
+  "AUTH_REQUIRED": {
+    "category": "auth",
+    "http_status": 401,
+    "retryable": false,
+    "title": "Sign in to continue.",
+    "explanation": "Your session no longer has access to this request.",
+    "recovery": "Sign in again, then return to your summary."
+  },
+  "ACCESS_DENIED": {
+    "category": "auth",
+    "http_status": 403,
+    "retryable": false,
+    "title": "This request is not permitted.",
+    "explanation": "Your session could not authorize this action.",
+    "recovery": "Reload the form to refresh your session, then try again."
+  },
+  "JOB_NOT_FOUND": {
+    "category": "auth",
+    "http_status": 404,
+    "retryable": false,
+    "title": "This request is not available.",
+    "explanation": "The request could not be found in your current session.",
+    "recovery": "Return to your own summary history or submit a source in this session."
+  },
+  "NETWORK_INTERRUPTED": {
+    "category": "network",
+    "http_status": 503,
+    "retryable": true,
+    "title": "The connection was interrupted.",
+    "explanation": "LIGHT could not confirm the latest request status. Processing may still be running.",
+    "recovery": "Check your connection, then check this request again."
+  }
+}

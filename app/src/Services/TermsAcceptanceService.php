@@ -159,12 +159,14 @@ class TermsAcceptanceService
         exit;
     }
 
-    public static function redirectAfterTermsAcceptance(): string
+    public static function redirectAfterTermsAcceptance(?string $requestedTarget = null): string
     {
-        $requestedTarget = (string)($_SESSION['terms_redirect_after_accept'] ?? '');
+        $requestedTarget = $requestedTarget !== null
+            ? $requestedTarget
+            : (string)($_SESSION['terms_redirect_after_accept'] ?? '');
         unset($_SESSION['terms_redirect_after_accept']);
 
-        $allowedTargets = ['index.php', 'summarizer.php', 'history.php', 'analytics.php'];
+        $allowedTargets = ['index.php', 'summarizer.php', 'history.php', 'analytics.php', 'register.php'];
 
         if (($_SESSION['role'] ?? 'user') === 'admin') {
             if ($requestedTarget === 'admin_dashboard.php' || in_array($requestedTarget, $allowedTargets, true)) {

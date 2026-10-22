@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 import subprocess
 import sys
 import unittest
@@ -13,6 +14,7 @@ import summarizer_core.pipeline as pipeline_mod
 import summarizer_core.scoring as scoring_mod
 import summarizer_core.text_utils as text_utils_mod
 from summarizer_core.models import SentenceCandidate
+from summarizer_core.profiles import resolve_profile
 from summarizer_core.scoring import (
     MODE_FOCUS_PATTERNS,
     NEGATION_CUES,
@@ -20,6 +22,7 @@ from summarizer_core.scoring import (
     QUALIFIER_PATTERN,
     calculate_candidate_scores,
     calculate_candidate_scores_with_profile,
+    calculate_focus_relevance_scores,
     extract_content_tokens,
     normalize_scores,
     sentence_token_overlap,
@@ -35,6 +38,7 @@ class TestScoringArchitecture(unittest.TestCase):
         self.assertTrue(callable(calculate_candidate_scores_with_profile))
         self.assertTrue(callable(calculate_candidate_scores))
         self.assertTrue(callable(normalize_scores))
+        self.assertTrue(callable(calculate_focus_relevance_scores))
         self.assertTrue(callable(sentence_token_overlap))
         self.assertTrue(callable(sentences_are_redundant))
         self.assertTrue(callable(extract_content_tokens))
@@ -107,6 +111,127 @@ assert 'summarizer_core.scoring' not in sys.modules, 'models should not eagerly 
         self.assertEqual(normalize_scores([2.0, 2.0, 2.0]), [0.0, 0.0, 0.0])
         self.assertEqual(normalize_scores([0.0, 10.0]), [0.0, 1.0])
         self.assertEqual(normalize_scores([10.0, 20.0, 30.0]), [0.0, 0.5, 1.0])
+
+    def test_focus_relevance_rewards_coverage_and_phrase_alignment(self):
+        scores = calculate_focus_relevance_scores(
+            [
+                "The study measured clinical outcomes.",
+                "The study measured outcomes in clinical cases.",
+                "The study measured unrelated financial results.",
+            ],
+            "What were the clinical outcomes?",
+        )
+
+        self.assertGreater(scores[0], scores[1])
+        self.assertGreater(scores[1], scores[2])
+        self.assertAlmostEqual(scores[0], 1.0)
+        self.assertEqual(
+            calculate_focus_relevance_scores(
+                ["Clinical outcomes were measured."],
+                "what is the?",
+            ),
+            [0.0],
+        )
+        self.assertEqual(calculate_focus_relevance_scores(["C is used."], "C"), [1.0])
+        self.assertEqual(calculate_focus_relevance_scores([], "clinical outcomes"), [])
+
+    def test_focus_evaluation_cases_cover_negation_order_and_no_evidence(self):
+        cases = [
+            {
+                "query": "Why did the policy not reduce costs?",
+                "candidates": [
+                    "The policy reduced costs.",
+                    "The policy failed to reduce costs.",
+                    "The policy did not reduce costs.",
+                ],
+                "expected_best": 2,
+            },
+            {
+                "query": "Did the policy reduce costs?",
+                "candidates": [
+                    "The policy did not reduce costs.",
+                    "The policy reduced costs.",
+                ],
+                "expected_best": 1,
+            },
+            {
+                "query": "health care outcomes",
+                "candidates": [
+                    "Outcomes improve health care.",
+                    "Health care outcomes improved.",
+                ],
+                "expected_best": 1,
+            },
+            {
+                "query": "clinical outcomes",
+                "candidates": [
+                    "Financial outcomes were reported.",
+                    "Clinical outcomes were reported.",
+                ],
+                "expected_best": 1,
+            },
+        ]
+
+        for case in cases:
+            with self.subTest(query=case["query"]):
+                scores = calculate_focus_relevance_scores(
+                    case["candidates"],
+                    case["query"],
+                )
+                self.assertEqual(scores.index(max(scores)), case["expected_best"])
+
+        no_evidence_scores = calculate_focus_relevance_scores(
+            ["The report describes routine financial results."],
+            "clinical outcomes",
+        )
+        self.assertEqual(no_evidence_scores, [0.0])
+
+    def test_focus_relevance_uses_length_normalized_term_frequency(self):
+        scores = calculate_focus_relevance_scores(
+            [
+                "Clinical outcomes improved.",
+                (
+                    "The report reviews several methods and study details, "
+                    "then notes that clinical outcomes improved."
+                ),
+            ],
+            "clinical outcomes",
+        )
+
+        self.assertGreater(scores[0], scores[1])
+
+    def test_focus_query_score_is_integrated_without_changing_unfocused_scores(self):
+        texts = [
+            "The study measured clinical outcomes.",
+            "The study measured outcomes in unrelated cases.",
+        ]
+        candidates = [
+            SentenceCandidate(index, 0, index, 2, "body", text, text, text.lower(), 6)
+            for index, text in enumerate(texts)
+        ]
+        parameters = dict(
+            candidates=candidates,
+            tfidf_scores=[0.5, 0.5],
+            title_scores=[0.2, 0.2],
+            article_type="general_article",
+            article_type_family={},
+            section_importance={},
+            position_score_fn=lambda *_: 0.2,
+            paragraph_position_score_fn=lambda *_: 0.3,
+            article_type_relevance_fn=lambda *_: 0.1,
+            boilerplate_penalty_fn=lambda *_: 0.0,
+            antecedent_pattern=re.compile(r"^$"),
+            sel_profile=resolve_profile("general"),
+        )
+
+        baseline = calculate_candidate_scores_with_profile(**parameters)
+        focused = calculate_candidate_scores_with_profile(
+            **parameters,
+            focus_query="What were the clinical outcomes?",
+        )
+
+        self.assertGreater(focused[0] - baseline[0], focused[1] - baseline[1])
+        self.assertEqual(baseline, calculate_candidate_scores_with_profile(**parameters, focus_query=""))
 
     def test_token_overlap_edge_cases(self):
         """Verify sentence_token_overlap handles empty ranking text."""

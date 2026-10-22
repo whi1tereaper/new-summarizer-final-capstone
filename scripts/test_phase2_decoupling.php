@@ -170,7 +170,7 @@ $rawText = implode('', $output);
 $jsonOutput = json_decode($rawText, true);
 assertTest(
     "summarize.php?action=execute returns 400 JSON when no pending summary",
-    isset($jsonOutput['error']) && $jsonOutput['error'] === 'No pending summary found.',
+    isset($jsonOutput['success']) && $jsonOutput['success'] === false && isset($jsonOutput['failure']),
     $rawText
 );
 
@@ -346,15 +346,15 @@ assertTest(
 
 // Test 6.2: Stage 2 executes summarizer and returns valid redirect contract
 $codeStage2 = '<?php
-$_SERVER["REQUEST_METHOD"] = "GET";
-$_GET["action"] = "execute";
 require_once "app/src/whitereaper.php";
 require_once "app/src/Utils/validation.php";
 require_once "app/src/Controllers/ArticleController.php";
+require_once "app/src/Services/SummaryJobService.php";
 
 session_start();
 $guestToken = "test_guest_" . bin2hex(random_bytes(8));
-$_SESSION["pending_summary"] = [
+$_SESSION["guest_token"] = $guestToken;
+$pending = [
     "original_text" => "Quantum computing harnesses quantum mechanics to solve complex problems exponentially faster than classical computers. Quantum bits or qubits can exist in superposition states. Entanglement enables interconnected processing capabilities.",
     "file_path" => "",
     "sentence_count" => 3,
@@ -367,11 +367,20 @@ $_SESSION["pending_summary"] = [
     "output_format" => "paragraph",
     "user_id" => null,
     "guest_token" => $guestToken,
-    "csrf_token" => generateCsrfToken(),
 ];
 
+$jobService = new App\Src\Services\SummaryJobService();
+$job = $jobService->ensureJobForPending($pending, null, $guestToken);
+$_SESSION["pending_summary"] = ["job_id" => $job["job_id"]];
+
 $controller = new App\Src\Controllers\ArticleController();
-// execute() outputs JSON and calls exit
+$controller->handleBackgroundJob($job["job_id"]);
+
+$_SERVER["REQUEST_METHOD"] = "POST";
+$_GET["action"] = "execute";
+$_POST["csrf_token"] = generateCsrfToken();
+$_POST["job_id"] = $job["job_id"];
+
 $controller->execute();
 ';
 

@@ -8,7 +8,7 @@ use App\Src\Utils\TermsContent;
 
 $sections = TermsContent::getSections();
 $csrfToken = generateCsrfToken();
-$allowedReturnTargets = ['index.php', 'summarizer.php'];
+$allowedReturnTargets = ['index.php', 'summarizer.php', 'register.php'];
 $requestedReturnTarget = (string)($_POST['return_to'] ?? $_GET['return'] ?? 'index.php');
 $returnTarget = in_array($requestedReturnTarget, $allowedReturnTargets, true) ? $requestedReturnTarget : 'index.php';
 $needsTermsReview = \App\Src\Services\TermsAcceptanceService::currentUserNeedsAcceptance();
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $showTermsActions) {
         $_SESSION['guest_terms_accepted'] = true;
         $_SESSION['guest_terms_accepted_at'] = date('Y-m-d H:i:s');
         rotateCsrfToken();
-        header('Location: ' . \App\Src\Services\TermsAcceptanceService::redirectAfterTermsAcceptance());
+        header('Location: ' . \App\Src\Services\TermsAcceptanceService::redirectAfterTermsAcceptance($returnTarget));
         exit;
     }
 }
@@ -73,7 +73,7 @@ $backLabel = empty($_SESSION['user_id'])
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/images/poc-neust-logo.png">
     <link rel="stylesheet" href="assets/css/design-tokens.css">
-    <link rel="stylesheet" href="assets/css/style.css?v=terms-3">
+    <link rel="stylesheet" href="assets/css/style.css?v=terms-3-<?= filemtime(__DIR__ . '/assets/css/style.css') ?>">
     <link rel="stylesheet" href="assets/css/site-footer.css?v=nex-8">
 </head>
 <body>

@@ -132,6 +132,12 @@ class DocumentAwareEngineTests(unittest.TestCase):
             stripped = strip_leading_heading_label(raw)
             self.assertEqual(stripped, expected_prose)
 
+        statistical_result = "Statistical analysis confirmed that response latencies increased significantly."
+        heading, prose = extract_structural_heading(statistical_result)
+        self.assertIsNone(heading)
+        self.assertEqual(prose, statistical_result)
+        self.assertEqual(strip_leading_heading_label(statistical_result), statistical_result)
+
     def test_current_study_vs_prior_study_provenance(self) -> None:
         """Literature citations must be classified as prior_study and retain attribution."""
         rrl_sentence = "Indah and Liana (2019) found a significant positive relationship between affordable pricing and product repurchase intentions."

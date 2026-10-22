@@ -56,9 +56,9 @@ class FeedbackHandler
         return self::service()->getCommentsForSummary($summaryId, $limit);
     }
 
-    public static function getSystemFeedbackStats(): array
+    public static function getSystemFeedbackStats(?string $from = null, ?string $to = null): array
     {
-        return self::service()->getSystemFeedbackStats();
+        return self::service()->getSystemFeedbackStats($from, $to);
     }
 
     public static function getAllFeedbackForAdmin(array $filters = []): array

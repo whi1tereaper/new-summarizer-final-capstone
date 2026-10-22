@@ -1,166 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const appViewer = window.appViewer || {};
-    const sidebarData = window.sidebarAnalyticsData;
-    const sidebar = document.querySelector('.analytics-sidebar');
-    if (sidebarData && sidebar) {
-        const chartInstances = [];
-        const _style = getComputedStyle(document.documentElement);
-        const _accent  = (_style.getPropertyValue('--color-accent')         || '#a43d2f').trim();
-        const _inkSec  = (_style.getPropertyValue('--color-text-secondary') || '#4f554d').trim();
-        const _muted   = (_style.getPropertyValue('--color-text-muted')     || '#6e756b').trim();
-        const _success = (_style.getPropertyValue('--color-success')        || '#3d7a5a').trim();
-        const _border  = (_style.getPropertyValue('--color-border')         || '#c8c5bb').trim();
-        const chartColors = [_accent, '#3B82F6', '#10B981', '#F59E0B', '#8B5CF6'];
-        function _alpha(hex, a) { const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16); return `rgba(${r},${g},${b},${a})`; }
-        const chartLabels = rows => rows.map(row => row.label || 'Other');
-        const chartValues = rows => rows.map(row => Number(row.total));
-        const formatMetric = value => value === null || value === undefined ? 'N/A' : Number(value).toLocaleString();
-        const formatMethod = m => {
-            if (!m || m === 'N/A') return 'N/A';
-            const map = {
-                'standard_paragraph': 'Paragraph',
-                'bullet_points': 'Bullets',
-                'hybrid': 'Hybrid',
-                'executive_summary': 'Executive',
-                'academic_summary': 'Academic',
-                'simple_summary': 'Simple',
-                'technical_summary': 'Technical',
-                'news_summary': 'News'
-            };
-            return map[m] || m.replace(/_/g, ' ');
-        };
-        const renderSidebar = data => {
-            const empty = Number(data.kpis?.summaries || 0) === 0;
-            sidebar.querySelector('.analytics-sidebar__empty').hidden = !empty;
-            sidebar.querySelectorAll('.analytics-sidebar__chart').forEach(node => { node.hidden = empty; });
-            sidebar.querySelectorAll('[data-analytics]').forEach(node => {
-                const key = node.dataset.analytics;
-                node.textContent = key === 'reduction' && data.kpis[key] !== null ? `${data.kpis[key]}%` : key === 'method' ? formatMethod(data.kpis[key]) : formatMetric(data.kpis[key]);
-            });
-            if (typeof Chart === 'undefined') return;
-            chartInstances.splice(0).forEach(chart => chart.destroy());
-            if (empty) return;
-            const base = {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        backgroundColor: '#080808',
-                        titleColor: '#ffffff',
-                        bodyColor: '#ffffff',
-                        padding: 8,
-                        cornerRadius: 4,
-                        titleFont: { size: 10, family: 'Inter, sans-serif', weight: '600' },
-                        bodyFont: { size: 10, family: 'Inter, sans-serif' }
-                    }
-                }
-            };
-            chartInstances.push(new Chart(document.getElementById('sidebarActivityChart'), {
-                type: 'line',
-                data: {
-                    labels: data.trend.map(row => row.bucket),
-                    datasets: [{
-                        data: chartValues(data.trend),
-                        borderColor: _accent,
-                        backgroundColor: _alpha(_accent, .1),
-                        fill: true,
-                        tension: .3,
-                        borderWidth: 2,
-                        pointRadius: 2,
-                        pointHoverRadius: 4,
-                        pointBackgroundColor: _accent
-                    }]
-                },
-                options: {
-                    ...base,
-                    scales: {
-                        x: {
-                            ticks: { maxTicksLimit: 5, maxRotation: 0, color: _muted, font: { size: 9, family: 'Inter, sans-serif' } },
-                            grid: { display: false }
-                        },
-                        y: {
-                            beginAtZero: true,
-                            ticks: { precision: 0, color: _muted, font: { size: 9, family: 'Inter, sans-serif' } },
-                            grid: { color: 'rgba(8, 8, 8, 0.05)' }
-                        }
-                    }
-                }
-            }));
-            chartInstances.push(new Chart(document.getElementById('sidebarWordsChart'), {
-                type: 'bar',
-                data: {
-                    labels: ['Words'],
-                    datasets: [
-                        { label: 'Original', data: [Number(data.words_comparison.original_words || 0)], backgroundColor: 'rgba(8, 8, 8, 0.25)', borderRadius: 3, borderSkipped: false },
-                        { label: 'Summary', data: [Number(data.words_comparison.summary_words || 0)], backgroundColor: _accent, borderRadius: 3, borderSkipped: false }
-                    ]
-                },
-                options: {
-                    ...base,
-                    plugins: {
-                        ...base.plugins,
-                        legend: { display: true, labels: { boxWidth: 8, boxHeight: 8, color: _muted, font: { size: 10, family: 'Inter, sans-serif' } } }
-                    },
-                    scales: {
-                        x: { ticks: { color: _muted, font: { size: 9, family: 'Inter, sans-serif' } }, grid: { display: false } },
-                        y: { beginAtZero: true, ticks: { color: _muted, font: { size: 9, family: 'Inter, sans-serif' } }, grid: { color: 'rgba(8, 8, 8, 0.05)' } }
-                    }
-                }
-            }));
-            chartInstances.push(new Chart(document.getElementById('sidebarCategoryChart'), {
-                type: 'doughnut',
-                data: {
-                    labels: chartLabels(data.categories),
-                    datasets: [{ data: chartValues(data.categories), backgroundColor: chartColors, borderWidth: 0 }]
-                },
-                options: {
-                    ...base,
-                    plugins: {
-                        ...base.plugins,
-                        legend: { display: true, position: 'bottom', labels: { boxWidth: 8, boxHeight: 8, color: _muted, font: { size: 9, family: 'Inter, sans-serif' } } }
-                    },
-                    cutout: '68%'
-                }
-            }));
-            chartInstances.push(new Chart(document.getElementById('sidebarMethodChart'), {
-                type: 'bar',
-                data: {
-                    labels: chartLabels(data.styles),
-                    datasets: [{ data: chartValues(data.styles), backgroundColor: _alpha(_accent, .65), borderRadius: 3, borderSkipped: false }]
-                },
-                options: {
-                    ...base,
-                    indexAxis: 'y',
-                    scales: {
-                        x: { beginAtZero: true, ticks: { precision: 0, color: _muted, font: { size: 9, family: 'Inter, sans-serif' } }, grid: { color: 'rgba(8, 8, 8, 0.05)' } },
-                        y: { ticks: { color: _muted, font: { size: 9, family: 'Inter, sans-serif' } }, grid: { display: false } }
-                    }
-                }
-            }));
-        };
-        renderSidebar(sidebarData);
-        sidebar.querySelectorAll('.analytics-range').forEach(button => button.addEventListener('click', async () => {
-            sidebar.querySelectorAll('.analytics-range').forEach(item => item.classList.remove('is-active'));
-            button.classList.add('is-active');
-            sidebar.classList.add('is-loading');
-            try {
-                const response = await fetch(`analytics.php?action=data&range=${encodeURIComponent(button.dataset.range)}`, { headers: { Accept: 'application/json' } });
-                const data = await response.json();
-                if (data && data.redirect) {
-                    window.location.href = data.redirect;
-                    return;
-                }
-                if (!response.ok || data.error) throw new Error(data.error || 'Analytics unavailable');
-                renderSidebar(data);
-            } catch (error) {
-                sidebar.querySelector('.analytics-sidebar__empty').textContent = 'Analytics data could not be loaded. Please try again.';
-                sidebar.querySelector('.analytics-sidebar__empty').hidden = false;
-            } finally { sidebar.classList.remove('is-loading'); }
-        }));
-    }
 
-    // ── Summary length slider ────────────────────────────────────────────────
+    // ── Summary length slider & Form handling ────────────────────────────────
     const form = document.getElementById('summarize-form');
     const capabilities = form ? JSON.parse(form.dataset.capabilities || '{}') : {};
     const fileInput = document.getElementById('pdf');
@@ -171,6 +12,52 @@ document.addEventListener('DOMContentLoaded', () => {
     const sourceError = document.getElementById('source-error');
     const submitStatus = document.getElementById('submit-status');
     const sentenceCount = document.getElementById('sentence_count');
+    const errors = window.LightErrors;
+    const draftFields = ['document_title', 'original_text', 'source_url', 'source_type', 'analysis_mode', 'output_format', 'summary_depth', 'summary_length', 'sentence_count', 'summary_style', 'use_llm_synthesis', 'request_token'];
+    const initialFailure = form ? JSON.parse(form.dataset.initialFailure || 'null') : null;
+    const savedDraft = errors?.draft.read();
+    let currentFailure = savedDraft && savedDraft.savedAt > Number(capabilities.serverSavedAt || 0) ? savedDraft.failure || null : initialFailure;
+    let restoredFileName = savedDraft?.fileName || '';
+    let restoredFileIdentity = savedDraft?.fileIdentity || '';
+    let uncertainSubmission = savedDraft?.uncertainSubmission === true;
+    const fileIdentity = file => file ? `${file.name}|${file.size}|${file.lastModified}` : '';
+    let submitting = false;
+    let nutshellRequestKey = null;
+    const newToken = () => Array.from(crypto.getRandomValues(new Uint8Array(16)), byte => byte.toString(16).padStart(2, '0')).join('');
+    if (form && savedDraft?.fields) {
+        const preferences = new URLSearchParams(location.search);
+        for (const name of draftFields) {
+            const field = form.elements.namedItem(name);
+            if (!field || preferences.has(name) || !(name in savedDraft.fields)) continue;
+            if (field.type === 'checkbox') field.checked = savedDraft.fields[name] === '1';
+            else if (field.tagName !== 'SELECT' || Array.from(field.options).some(option => option.value === savedDraft.fields[name])) field.value = savedDraft.fields[name];
+        }
+    }
+    function saveDraft() {
+        if (!form || !errors) return false;
+        const fields = {};
+        for (const name of draftFields) {
+            const field = form.elements.namedItem(name);
+            if (field) fields[name] = field.type === 'checkbox' ? (field.checked ? '1' : '') : field.value;
+        }
+        return errors.draft.write({ fields, fileName: fileInput?.files?.[0]?.name || restoredFileName, fileIdentity: fileIdentity(fileInput?.files?.[0]) || restoredFileIdentity, uncertainSubmission, failure: currentFailure, nutshellRequestKey });
+    }
+    function sourceChanged(event) {
+        if (!form) return;
+        const samePendingFile = uncertainSubmission && event?.target === fileInput && restoredFileIdentity && fileIdentity(fileInput.files?.[0]) === restoredFileIdentity;
+        if (!samePendingFile) {
+            form.elements.namedItem('request_token').value = newToken();
+            uncertainSubmission = false;
+        }
+        nutshellRequestKey = null;
+        currentFailure = null;
+        if (sourceError) sourceError.hidden = true;
+        const titleError = document.getElementById('document-title-error');
+        if (titleError) titleError.hidden = true;
+        document.getElementById('document_title')?.removeAttribute('aria-invalid');
+        document.getElementById('source-recovery-actions')?.setAttribute('hidden', '');
+        saveDraft();
+    }
     const fileReadyText = file => `${file.name} · ${(file.size / 1048576).toFixed(1)} MB · Ready for summarization.`;
 
     const setDescription = (selectId, descriptions, targetId) => {
@@ -216,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
             : 'Choose a PDF or DOCX, paste text, or provide a public article URL.';
         if (focus) document.querySelector(`[data-source-panel="${method}"] input:not(:disabled), [data-source-panel="${method}"] textarea:not(:disabled)`)?.focus();
     };
-    document.querySelectorAll('[data-source-choice]').forEach(button => button.addEventListener('click', () => updateSource(button.dataset.sourceChoice, true)));
+    document.querySelectorAll('[data-source-choice]').forEach(button => button.addEventListener('click', () => { updateSource(button.dataset.sourceChoice, true); sourceChanged(); }));
     updateSource(sourceType?.value || 'file');
 
     document.querySelectorAll('[data-depth]').forEach(button => button.addEventListener('click', () => {
@@ -229,38 +116,121 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         document.getElementById('summary_depth').value = depth;
         document.getElementById('summary_length').value = depth;
-        if (sentenceCount) sentenceCount.value = ({ brief: 3, short: 5, balanced: 8, detailed: 11, comprehensive: 15 })[depth] || 8;
+        if (sentenceCount) sentenceCount.value = ({ very_brief: 1, brief: 3, short: 5, balanced: 8, detailed: 11, comprehensive: 15 })[depth] || 8;
         document.getElementById('depth_description').textContent = description?.description || '';
+        sourceChanged();
     }));
+    const restoredDepth = document.getElementById('summary_depth')?.value;
+    document.querySelectorAll('[data-depth]').forEach(button => { const active = button.dataset.depth === restoredDepth; button.classList.toggle('is-active', active); button.setAttribute('aria-pressed', String(active)); });
+    if (restoredDepth && document.getElementById('depth_description')) document.getElementById('depth_description').textContent = (capabilities.depths || []).find(item => item.value === restoredDepth)?.description || '';
 
-    if (form) form.addEventListener('submit', event => {
+    function validateSource() {
+        const titleInput = document.getElementById('document_title');
+        if (titleInput && Array.from(titleInput.value.trim()).length > Number(capabilities.maxTitleCharacters)) {
+            showSourceFailure({ code: 'TITLE_TOO_LONG' });
+            titleInput.focus();
+            return false;
+        }
         const method = sourceType?.value;
         const text = textInput?.value.trim() || '';
         const url = urlInput?.value.trim() || '';
         const file = fileInput?.files?.[0];
-        let error = '';
-        if (method === 'file' && !file) error = 'Choose a PDF or DOCX file to continue.';
-        else if (method === 'file' && file && file.size > Number(capabilities.maxUploadBytes || 0)) error = 'This file is larger than the 30 MB limit.';
-        else if (method === 'file' && file && !/\.(pdf|docx)$/i.test(file.name)) error = 'Choose a PDF or DOCX file.';
-        else if (method === 'text' && !text) error = 'Paste document text to continue.';
-        else if (method === 'text' && new TextEncoder().encode(text).length > Number(capabilities.maxTextBytes || 200000)) error = 'Text input is too long. Limit: 195 KB.';
-        else if (method === 'url' && (!url || !urlInput.checkValidity() || !/^https?:\/\//i.test(url))) error = 'Enter a valid HTTP or HTTPS article URL.';
-        if (error) {
-            event.preventDefault();
-            if (sourceError) { sourceError.textContent = error; sourceError.hidden = false; }
+        let code = '';
+        if (method === 'file' && !file) code = 'FILE_REQUIRED';
+        else if (method === 'file' && file && file.size > Number(capabilities.maxUploadBytes)) code = 'FILE_TOO_LARGE';
+        else if (method === 'file' && file && !(capabilities.allowedExtensions || []).includes(file.name.split('.').pop().toLowerCase())) code = 'FILE_UNSUPPORTED';
+        else if (method === 'text' && !text) code = 'INPUT_EMPTY';
+        else if (method === 'text' && new TextEncoder().encode(textInput.value).length > Number(capabilities.maxTextBytes)) code = 'INPUT_TOO_LARGE';
+        else if (method === 'text' && !/[\p{L}\p{N}]/u.test(text)) code = 'CONTENT_UNREADABLE';
+        else if (method === 'url') {
+            try { const parsed = new URL(url); if (!['http:', 'https:'].includes(parsed.protocol) || !parsed.hostname || parsed.username || parsed.password) code = 'URL_INVALID'; }
+            catch { code = 'URL_INVALID'; }
+        }
+        if (code) {
+            showSourceFailure({ code });
             const invalidInput = method === 'file' ? fileInput : method === 'url' ? urlInput : textInput;
             invalidInput?.setAttribute('aria-invalid', 'true');
             invalidInput?.focus();
-            return;
+            return false;
         }
         if (sourceError) sourceError.hidden = true;
+        return true;
+    }
+    function showSourceFailure(value) {
+        currentFailure = errors.failure(value);
+        const titleError = document.getElementById('document-title-error');
+        const isTitleError = currentFailure.code === 'TITLE_TOO_LONG';
+        if (sourceError) sourceError.hidden = isTitleError;
+        if (titleError) titleError.hidden = !isTitleError;
+        if (isTitleError) document.getElementById('document_title')?.setAttribute('aria-invalid', 'true');
+        errors.render(isTitleError ? titleError : sourceError, currentFailure);
+        const actions = document.getElementById('source-recovery-actions');
+        const retry = document.getElementById('source-retry');
+        if (retry) retry.hidden = !currentFailure.retryable;
+        document.querySelectorAll('[data-recovery-source]').forEach(button => { button.hidden = !(['access', 'extraction', 'format', 'content', 'quality', 'nlp'].includes(currentFailure.category) || /^(URL|FILE)_/.test(currentFailure.code)) || button.dataset.recoverySource === sourceType?.value; });
+        const signIn = document.getElementById('source-sign-in');
+        if (signIn) signIn.hidden = currentFailure.code !== 'AUTH_REQUIRED';
+        if (actions) actions.hidden = !Array.from(actions.children).some(element => !element.hidden);
+        saveDraft();
+    }
+    function setSubmitting(busy) {
+        submitting = busy;
         const submitButton = form.querySelector('.summary-submit-button');
-        if (submitButton) { submitButton.disabled = true; submitButton.textContent = 'Starting summary…'; }
-        document.getElementById('btn-nutshell-action')?.setAttribute('disabled', 'disabled');
-        if (submitStatus) submitStatus.textContent = 'Preparing your document for summarization…';
+        if (submitButton) { submitButton.disabled = busy; submitButton.textContent = busy ? 'Starting summary…' : 'Summarize Document'; }
+        const nutshellButton = document.getElementById('btn-nutshell-action');
+        if (nutshellButton) nutshellButton.disabled = busy;
+        const retry = document.getElementById('source-retry');
+        if (retry) retry.disabled = busy;
+        form.setAttribute('aria-busy', String(busy));
+        if (submitStatus) submitStatus.textContent = busy ? 'Preparing your document for summarization…' : '';
+    }
+    if (form) form.addEventListener('submit', async event => {
+        event.preventDefault();
+        if (submitting || !validateSource()) return;
+        currentFailure = null;
+        uncertainSubmission = true;
+        restoredFileIdentity = fileIdentity(fileInput?.files?.[0]) || restoredFileIdentity;
+        saveDraft();
+        const body = new FormData(form);
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 45000);
+        setSubmitting(true);
+        try {
+            const response = await fetch(form.action, { method: 'POST', body, headers: { Accept: 'application/json' }, signal: controller.signal });
+            let data;
+            try { data = await response.json(); } catch { showSourceFailure({ code: 'NETWORK_INTERRUPTED' }); return; }
+            if (response.ok && data?.success === true && typeof data.redirect === 'string') {
+                const target = new URL(data.redirect, location.href);
+                const expected = new URL('processing.php', location.href);
+                const result = new URL('result.php', location.href);
+                if (target.origin === expected.origin && [expected.pathname, result.pathname].includes(target.pathname)) {
+                    if (target.pathname === result.pathname) errors.draft.clear();
+                    location.assign(target.href);
+                    return;
+                }
+            }
+            uncertainSubmission = false;
+            showSourceFailure(data?.failure || { code: response.status === 413 ? 'INPUT_TOO_LARGE' : response.status === 401 ? 'AUTH_REQUIRED' : 'PROCESSING_FAILED' });
+        } catch { showSourceFailure({ code: 'NETWORK_INTERRUPTED' }); }
+        finally { clearTimeout(timeout); setSubmitting(false); }
     });
+    document.getElementById('source-retry')?.addEventListener('click', () => form?.requestSubmit());
+    document.querySelectorAll('[data-recovery-source]').forEach(button => button.addEventListener('click', () => { updateSource(button.dataset.recoverySource, true); sourceChanged(); }));
+    form?.addEventListener('input', sourceChanged);
+    form?.addEventListener('change', sourceChanged);
+    if (savedDraft) {
+        const note = document.getElementById('draft-recovery-note');
+        if (note) { note.hidden = false; note.textContent = sourceType?.value === 'file' && restoredFileName ? `Your settings were restored. Select ${restoredFileName} again; browsers cannot restore local file selections.` : 'Your source and settings were restored in this tab. Recovery drafts expire after one hour and are cleared after a successful summary.'; }
+    }
+    if (currentFailure) showSourceFailure(currentFailure);
+    else {
+        if (sourceError) sourceError.hidden = true;
+        const titleError = document.getElementById('document-title-error');
+        if (titleError) titleError.hidden = true;
+    }
     [fileInput, textInput, urlInput].forEach(input => input?.addEventListener('input', () => { input.removeAttribute('aria-invalid'); if (sourceError) sourceError.hidden = true; }));
     fileInput?.addEventListener('change', () => {
+        restoredFileName = fileInput.files?.[0]?.name || '';
         fileInput.removeAttribute('aria-invalid');
         if (sourceError) sourceError.hidden = true;
         if (fileInput.files?.length && sourceNote) sourceNote.textContent = fileReadyText(fileInput.files[0]);
@@ -274,9 +244,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const nutshellError = document.getElementById('nutshell-error');
     const nutshellErrorMessage = document.getElementById('nutshell-error-message');
     const nutshellRetryBtn = document.getElementById('nutshell-retry-btn');
-    let nutshellRequestKey = null;
+    nutshellRequestKey = savedDraft?.nutshellRequestKey || null;
 
-    function setNutshellErrorState(errorMessage) {
+    function setNutshellErrorState(value) {
         if (!nutshellPanel) return;
         nutshellPanel.classList.add('nutshell-panel--error');
         if (nutshellLoading) nutshellLoading.style.display = 'none';
@@ -285,7 +255,11 @@ document.addEventListener('DOMContentLoaded', () => {
             nutshellText.style.display = 'none';
         }
         if (nutshellCopyBtn) nutshellCopyBtn.style.display = 'none';
-        if (nutshellErrorMessage) nutshellErrorMessage.textContent = errorMessage || 'An unexpected error occurred while distilling the text.';
+        const failure = errors.failure(value);
+        const title = nutshellError?.querySelector('.nutshell-error__title');
+        if (title) title.textContent = failure.title;
+        if (nutshellErrorMessage) nutshellErrorMessage.textContent = `${failure.explanation} ${failure.recovery}${failure.reference ? ` Reference: ${failure.reference}` : ''}`;
+        if (nutshellRetryBtn) nutshellRetryBtn.hidden = !failure.retryable;
         if (nutshellError) nutshellError.style.display = 'flex';
     }
 
@@ -315,6 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
 
             if (appViewer.requiresRegistrationForNutshell) {
+                saveDraft();
                 window.location.href = appViewer.registerUrl || 'register.php';
                 return;
             }
@@ -328,13 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const originalText = method === 'url' ? (urlInput?.value.trim() || '') : (textInput?.value.trim() || '');
             const hasFile = method === 'file' && fileInput && fileInput.files && fileInput.files.length > 0;
 
-            if (!originalText && !hasFile) {
-                nutshellPanel.style.display = 'block';
-                nutshellPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                setNutshellErrorState('Please paste article text, provide a valid URL, or select a document first.');
-                if (textInput) textInput.focus();
-                return;
-            }
+            if (!validateSource()) return;
 
             // Reveal nutshell panel & loading state
             nutshellPanel.style.display = 'block';
@@ -346,6 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData();
             if (csrfInput) formData.append('csrf_token', csrfInput.value);
             nutshellRequestKey ||= (window.crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`).replace(/[^A-Za-z0-9_-]/g, '');
+            saveDraft();
             formData.append('request_key', nutshellRequestKey);
             formData.append('analysis_mode', analysisMode);
             formData.append('source_type', method);
@@ -367,8 +337,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 if (data && data.redirect) {
-                    window.location.href = data.redirect;
-                    return;
+                    const destination = new URL(data.redirect, location.href);
+                    if (destination.origin === location.origin && ['login.php', 'register.php'].some(path => destination.pathname === new URL(path, location.href).pathname)) {
+                        window.location.href = destination.href;
+                        return;
+                    }
                 }
 
                 if (nutshellLoading) nutshellLoading.style.display = 'none';
@@ -376,6 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (data && data.success && data.nutshell) {
                     nutshellRequestKey = null;
+                    errors.draft.clear();
                     resetNutshellState();
                     if (nutshellText) {
                         nutshellText.textContent = data.nutshell;
@@ -384,19 +358,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (nutshellCopyBtn) nutshellCopyBtn.style.display = 'inline-flex';
                 } else if (data && data.status === 'not_needed') {
                     nutshellRequestKey = null;
-                    setNutshellErrorState('The primary summary is already concise.');
-                } else if (data && data.message) {
-                    nutshellRequestKey = null;
-                    setNutshellErrorState(data.message);
-                } else if (!response.ok) {
-                    setNutshellErrorState(`Server responded with status ${response.status}. Please check your input and try again.`);
+                    resetNutshellState();
+                    if (nutshellText) { nutshellText.textContent = 'The primary summary is already concise.'; nutshellText.style.display = 'block'; }
+                } else if (data?.failure) {
+                    setNutshellErrorState(data.failure);
                 } else {
-                    setNutshellErrorState('Failed to extract a valid summary statement from the provided document.');
+                    setNutshellErrorState({ code: data ? 'PROCESSING_FAILED' : 'NETWORK_INTERRUPTED' });
                 }
             } catch (err) {
                 if (nutshellLoading) nutshellLoading.style.display = 'none';
                 nutshellBtn.disabled = false;
-                setNutshellErrorState('Unable to reach the server. Please check your network connection and try again.');
+                setNutshellErrorState({ code: 'NETWORK_INTERRUPTED' });
             }
         });
     }
@@ -416,109 +388,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const logoutLinks = document.querySelectorAll('.js-logout-link');
-    if (logoutLinks.length === 0) {
-        return;
-    }
-
-    const logoutDialog = createLogoutDialog();
-    let pendingHref = '';
-    let lastActiveElement = null;
-
-    const openLogoutDialog = (href) => {
-        pendingHref = href;
-        lastActiveElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-        logoutDialog.overlay.hidden = false;
-        logoutDialog.overlay.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('modal-open');
-        window.setTimeout(() => logoutDialog.confirmButton.focus(), 0);
-    };
-
-    const closeLogoutDialog = () => {
-        pendingHref = '';
-        logoutDialog.overlay.hidden = true;
-        logoutDialog.overlay.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('modal-open');
-
-        if (lastActiveElement instanceof HTMLElement) {
-            lastActiveElement.focus();
-        }
-    };
-
-    logoutLinks.forEach((link) => {
-        link.addEventListener('click', (event) => {
-            event.preventDefault();
-            openLogoutDialog(link.href);
-        });
-    });
-
-    logoutDialog.cancelButton.addEventListener('click', closeLogoutDialog);
-    logoutDialog.overlay.addEventListener('click', (event) => {
-        if (event.target === logoutDialog.overlay) {
-            closeLogoutDialog();
-        }
-    });
-    logoutDialog.confirmButton.addEventListener('click', () => {
-        if (pendingHref !== '') {
-            window.location.href = pendingHref;
-        }
-    });
-
-    document.addEventListener('keydown', (event) => {
-        if (logoutDialog.overlay.hidden) {
-            return;
-        }
-
-        if (event.key === 'Escape') {
-            event.preventDefault();
-            closeLogoutDialog();
-            return;
-        }
-
-        if (event.key === 'Tab') {
-            const focusableElements = [
-                logoutDialog.cancelButton,
-                logoutDialog.confirmButton,
-            ];
-            const currentIndex = focusableElements.indexOf(document.activeElement);
-            const direction = event.shiftKey ? -1 : 1;
-            const fallbackIndex = event.shiftKey ? focusableElements.length - 1 : 0;
-            const nextIndex = currentIndex === -1
-                ? fallbackIndex
-                : (currentIndex + direction + focusableElements.length) % focusableElements.length;
-
-            event.preventDefault();
-            focusableElements[nextIndex].focus();
-        }
-    });
 });
-
-function createLogoutDialog() {
-    const overlay = document.createElement('div');
-    overlay.className = 'confirmation-modal';
-    overlay.hidden = true;
-    overlay.setAttribute('aria-hidden', 'true');
-
-    overlay.innerHTML = `
-        <div class="confirmation-modal__backdrop"></div>
-        <div class="confirmation-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="logout-modal-title" aria-describedby="logout-modal-message">
-            <p class="confirmation-modal__eyebrow">Session Confirmation</p>
-            <h2 id="logout-modal-title" class="confirmation-modal__title">Log out?</h2>
-            <p id="logout-modal-message" class="confirmation-modal__message">
-                Are you sure you want to logout from your current session?
-            </p>
-            <div class="confirmation-modal__actions">
-                <button type="button" class="confirmation-modal__button confirmation-modal__button-secondary">Cancel</button>
-                <button type="button" class="confirmation-modal__button confirmation-modal__button-primary">Logout</button>
-            </div>
-        </div>
-    `;
-
-    document.body.appendChild(overlay);
-
-    return {
-        overlay,
-        cancelButton: overlay.querySelector('.confirmation-modal__button-secondary'),
-        confirmButton: overlay.querySelector('.confirmation-modal__button-primary'),
-    };
-}

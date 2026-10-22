@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+from failure_contract import ProcessingFailure
+from .cleaning import MIN_CONTENT_PARAGRAPH_WORDS
+
 from collections import Counter, defaultdict
 from dataclasses import replace
 import logging
@@ -16,6 +19,7 @@ from .constants import (
     ARTICLE_TYPE_FAMILY,
     ARTICLE_TYPE_LABELS,
     ARTICLE_TYPE_RELEVANCE_PATTERNS,
+    CITATION_ENTRY_PATTERN,
     DEPTH_CONFIG,
     DISCOURSE_BOOST_PATTERNS,
     MAX_IMPORTANT_TERMS,
@@ -46,13 +50,14 @@ from .models import (
     SummarizationResult,
 )
 from .fact_ledger import build_fact_ledger, validate_summary_facts
+from .normalization import ensure_terminal_punctuation
 from .document_analysis import (
     analyze_document_structure,
     build_dynamic_summary_sections,
     build_source_evidence,
     build_summary_plan,
 )
-from .profiles import resolve_profile
+from .profiles import SUPPORTED_PROFILE_SELECTIONS, resolve_profile
 from .retrieval import (
     MAX_RETRIEVAL_SCORE_ADJUSTMENT,
     map_selected_evidence,
@@ -74,6 +79,7 @@ from .scoring import (
 from .selection import (
     detect_topic_clusters,
     ensure_depth_coverage,
+    generate_and_rank_summary_candidates,
     select_candidate_indices,
     select_candidate_indices_with_profile,
 )
@@ -95,7 +101,11 @@ from .text_utils import (
     is_noise_important_term,
     is_noise_keyword,
     is_ocr_corruption_line,
+    is_plausible_title,
     load_source_document,
+    looks_like_author_or_affiliation_line,
+    looks_like_document_title_line,
+    looks_like_reference_metadata_sentence,
     normalize_summary_sentence,
     normalize_whitespace,
     prepare_document_paragraphs,
@@ -103,6 +113,16 @@ from .text_utils import (
     safe_sent_tokenize,
     shorten_summary_title,
     tokenize_words,
+)
+from .tokenization import load_optional_spacy_pipeline, safe_pos_tag
+from .runtime import parse_text, request_scoped, stage, timed
+
+SUPPORTED_OUTPUT_FORMATS = (
+    "paragraph",
+    "bullets",
+    "hybrid",
+    "structured",
+    "key_takeaways",
 )
 
 
@@ -115,6 +135,8 @@ class SummarizationPipeline:
     _NUMERIC_PATTERN = NUMERIC_PATTERN
     _logger = logging.getLogger(__name__)
 
+    @request_scoped
+    @timed("summary_pipeline")
     def summarize(self, request: SummarizationRequest) -> SummarizationResult:
         """Summarize the document based on the request."""
         # Resolve the summarization profile from the user's selection.
@@ -125,6 +147,8 @@ class SummarizationPipeline:
             or request.summary_style
             or "general"
         ).strip().lower()
+        if effective_mode not in SUPPORTED_PROFILE_SELECTIONS:
+            raise ProcessingFailure("SETTINGS_INVALID", "Unsupported analysis mode.")
         sel_profile = resolve_profile(effective_mode)
         output_format = self._resolve_output_format(request.output_format, request.summary_style)
         summary_normalizer = lambda value: normalize_summary_sentence(
@@ -133,34 +157,29 @@ class SummarizationPipeline:
         )
 
         preprocessing_options = request.preprocessing_options or PreprocessingOptions()
-        source_document = load_source_document(text=request.text, file_path=request.file_path)
-        if source_document.raw_text.strip() == "":
-            raise ValueError("No content provided.")
-
-        paragraphs = prepare_document_paragraphs(source_document.raw_text, preprocessing_options)
-        if not paragraphs:
-            raise ValueError("No continuous readable text found. The source may be empty or image-only.")
-
-        cleaned_text = "\n\n".join(paragraphs)
-        original_word_count = self._count_words(cleaned_text)
-
         raw_depth = str(
             request.summary_depth or request.summary_length or ""
         ).strip().lower()
         _NUMERIC_DEPTH_MAP = {
-            "0": "brief",
-            "1": "short",
+            "0": "very_brief",
+            "1": "brief",
             "2": "balanced",
             "3": "detailed",
             "4": "comprehensive",
         }
-        if raw_depth in _NUMERIC_DEPTH_MAP:
+        if raw_depth in ("very_brief", "very brief", "very-brief"):
+            summary_length_key = "very_brief"
+        elif raw_depth in _NUMERIC_DEPTH_MAP:
             summary_length_key = _NUMERIC_DEPTH_MAP[raw_depth]
         elif raw_depth in DEPTH_CONFIG:
             summary_length_key = raw_depth
+        elif raw_depth:
+            raise ProcessingFailure("SETTINGS_INVALID", "Unsupported summary depth.")
         else:
             cnt = int(request.sentence_count or 8)
-            if cnt <= 3:
+            if cnt <= 2:
+                summary_length_key = "very_brief"
+            elif cnt <= 4:
                 summary_length_key = "brief"
             elif cnt <= 6:
                 summary_length_key = "short"
@@ -171,6 +190,43 @@ class SummarizationPipeline:
             else:
                 summary_length_key = "comprehensive"
 
+        source_document = load_source_document(text=request.text, file_path=request.file_path)
+        if source_document.raw_text.strip() == "":
+            raise ProcessingFailure("INPUT_EMPTY")
+
+        try:
+            title_seed = detect_document_title(source_document.raw_text, source_document.title_hint)
+        except Exception:
+            title_seed = "Generated Summary"
+
+        paragraphs = prepare_document_paragraphs(source_document.raw_text, preprocessing_options)
+        if not paragraphs:
+            token_count = len(tokenize_words(source_document.raw_text))
+            raise ProcessingFailure("INPUT_TOO_SHORT" if 0 < token_count < MIN_CONTENT_PARAGRAPH_WORDS else "CONTENT_UNREADABLE")
+
+        first_source_line = next(
+            (normalize_whitespace(line) for line in source_document.raw_text.splitlines() if line.strip()),
+            "",
+        )
+        normalized_title = normalize_whitespace(title_seed)
+        if (
+            normalized_title
+            and normalized_title != "Generated Summary"
+            and first_source_line.casefold() == normalized_title.casefold()
+        ):
+            first_paragraph = normalize_whitespace(paragraphs[0])
+            if first_paragraph.casefold().startswith(normalized_title.casefold()):
+                remaining_content = first_paragraph[len(normalized_title):].strip()
+                if remaining_content:
+                    paragraphs[0] = remaining_content
+                elif len(paragraphs) > 1:
+                    paragraphs.pop(0)
+        if not paragraphs:
+            token_count = len(tokenize_words(source_document.raw_text))
+            raise ProcessingFailure("INPUT_TOO_SHORT" if 0 < token_count < MIN_CONTENT_PARAGRAPH_WORDS else "CONTENT_UNREADABLE")
+
+        cleaned_text = "\n\n".join(paragraphs)
+        original_word_count = self._count_words(cleaned_text)
         length_config = DEPTH_CONFIG.get(summary_length_key, DEPTH_CONFIG["balanced"])
         sections, heading_counts = detect_explicit_sections(paragraphs, raw_text=source_document.raw_text)
         profile = self._detect_document_profile(
@@ -182,6 +238,14 @@ class SummarizationPipeline:
             ARTICLE_TYPE_RELEVANCE_PATTERNS,
         )
 
+        user_title = (request.document_title or "").strip()
+        effective_title = user_title if user_title else title_seed
+        is_real_title = bool(
+            user_title
+            or is_plausible_title(effective_title)
+            or looks_like_document_title_line(effective_title)
+        )
+
         candidates, paragraph_sentences = self._build_sentence_candidates(
             paragraphs,
             sections,
@@ -191,9 +255,10 @@ class SummarizationPipeline:
             contains_article_noise,
             normalize_whitespace,
             tokenize_words,
+            effective_title=effective_title if is_real_title else "",
         )
         if not candidates:
-            raise ValueError("No summary could be generated from the provided text.")
+            raise ProcessingFailure("NLP_NO_VALID_CANDIDATES")
 
         document_analysis, candidates = analyze_document_structure(
             paragraphs,
@@ -201,6 +266,7 @@ class SummarizationPipeline:
             candidates,
             page_texts=source_document.page_texts,
         )
+        primary_finding_indices = list(document_analysis.get("primary_finding_indices", []))
         summary_plan = build_summary_plan(
             document_analysis,
             candidates,
@@ -208,20 +274,13 @@ class SummarizationPipeline:
             summary_length_key,
         )
 
-        try:
-            title_seed = detect_document_title(source_document.raw_text, source_document.title_hint)
-        except Exception:
-            title_seed = "Generated Summary"
-
-        user_title = (request.document_title or "").strip()
-        effective_title = user_title if user_title else title_seed
-
         ranking_corpus = [
             candidate.ranking_text if candidate.ranking_text != "" else candidate.normalized_text.lower()
             for candidate in candidates
         ]
         vectorizer = TfidfVectorizer(ngram_range=(1, 2), min_df=1)
-        matrix = vectorizer.fit_transform(ranking_corpus)
+        with stage("tfidf_vectorization"):
+            matrix = vectorizer.fit_transform(ranking_corpus)
         tfidf_scores = self._normalize_scores(_legacy_tfidf_sentence_strength(matrix))
         title_scores = self._normalize_scores(
             _legacy_title_similarity_score(effective_title, vectorizer, matrix)
@@ -243,6 +302,11 @@ class SummarizationPipeline:
             depth_config=length_config,
             profile_compression_bias=sel_profile.compression_bias,
         )
+        if summary_length_key in {"detailed", "comprehensive"} and primary_finding_indices:
+            target_count = min(
+                max(target_count, len(primary_finding_indices)),
+                int(length_config.get("max_sentences", target_count)),
+            )
 
         retrieval_outcome = None
         retrieval_metadata: dict[str, Any]
@@ -293,6 +357,9 @@ class SummarizationPipeline:
             }
             retrieval_outcome = None
 
+        focus_query = str(getattr(request, "focus_query", "") or "").strip()
+        multi_document_metadata = self._detect_multi_documents(source_document.raw_text)
+
         # Depth-aware candidate scoring
         combined_scores = self._score_candidates_with_profile(
             candidates,
@@ -309,6 +376,8 @@ class SummarizationPipeline:
             sel_profile,
             depth_key=summary_length_key,
             depth_config=length_config,
+            focus_query=focus_query,
+            document_analysis=document_analysis,
         )
         for claim, score in zip(document_analysis["claims"], combined_scores, strict=True):
             claim["importance"] = round(float(score), 6)
@@ -322,8 +391,8 @@ class SummarizationPipeline:
                 )
             ]
 
-        # Depth-aware candidate selection with topic coverage and section quota controls
-        selected_indices = self._select_candidate_indices_with_profile(
+        # Multi-candidate summary generation & evidence-based quality selection
+        selected_indices, quality_selection_meta = self._generate_and_rank_summary_candidates(
             candidates,
             combined_scores,
             profile.article_type,
@@ -334,14 +403,8 @@ class SummarizationPipeline:
             topic_clusters=topic_clusters,
             depth_key=summary_length_key,
             depth_config=length_config,
-        )
-        selected_indices = self._ensure_depth_coverage(
-            selected_indices,
-            candidates,
-            combined_scores,
-            target_count,
-            include_limitations=bool(length_config.get("include_limitations", False)),
-            include_conclusion=bool(length_config.get("include_conclusion", False)),
+            document_analysis=document_analysis,
+            effective_title=effective_title,
         )
         selected_candidates = [candidates[index] for index in selected_indices]
         selected_candidates = self._order_summary_candidates(
@@ -361,16 +424,37 @@ class SummarizationPipeline:
             selected_sentences,
             max_words=dynamic_max_words,
         )
+        # Plain-language natural simplification and grammar preservation
+        from .simplification import simplify_summary_sentences
+        simplified_sentences, simplification_audit = simplify_summary_sentences(
+            selected_sentences,
+            mode=sel_profile.mode,
+            document_analysis=document_analysis,
+        )
+        if simplified_sentences:
+            selected_sentences = simplified_sentences
+
         from .fact_ledger import FactualityValidator
         validated_sentences, factuality_report = FactualityValidator.validate_and_repair(
             selected_sentences,
             candidates,
             document_stage=document_analysis.get("document_stage", "unknown"),
         )
-        if validated_sentences:
-            selected_sentences = validated_sentences
+        selected_sentences = validated_sentences
         if not selected_sentences:
-            raise ValueError("No summary could be generated from the provided text.")
+            raise ProcessingFailure("SUMMARY_QUALITY_FAILED")
+
+        # Local grammar diagnostics (LanguageTool local service / spaCy fallback)
+        from .grammar_check import get_grammar_checker
+        grammar_checker = get_grammar_checker()
+        grammar_diagnostics: list[dict[str, Any]] = []
+        try:
+            for s_idx, sent in enumerate(selected_sentences):
+                issues = grammar_checker.check(sent)
+                if issues:
+                    grammar_diagnostics.append({"sentence_index": s_idx, "issues": issues})
+        except Exception as exc:
+            self._logger.warning("Grammar diagnostics skipped: %s", exc)
 
         # Synthesis is doubly opt-in: a request flag plus server-side provider config.
         # The default path stays fully local and extractive.
@@ -442,8 +526,19 @@ class SummarizationPipeline:
             max_key_points=int(max_kp),
             contains_article_noise=contains_article_noise,
         )
+        takeaway_sentences: list[str] | None = None
+        if output_format == "key_takeaways":
+            takeaway_sentences = []
+            for sentence in [*overview[:1], *key_points]:
+                if not any(self._sentences_are_redundant(sentence, item) for item in takeaway_sentences):
+                    takeaway_sentences.append(sentence)
+                if len(takeaway_sentences) >= int(max_kp):
+                    break
         plain_summary, overall_summary_bullets = self._build_plain_summary(
-            selected_sentences, output_format
+            selected_sentences,
+            output_format,
+            takeaway_sentences=takeaway_sentences,
+            max_takeaways=int(max_kp),
         )
         paragraph_summaries = self._build_paragraph_summaries(
             paragraphs,
@@ -475,7 +570,12 @@ class SummarizationPipeline:
         covered_topics_count = len(covered_topic_indices)
         covered_sections = sorted({candidate.section for candidate in selected_candidates if candidate.section})
 
-        summary_word_count = self._count_words(plain_summary)
+        rendered_summary = (
+            " ".join([plain_summary, *overall_summary_bullets])
+            if output_format == "hybrid"
+            else plain_summary
+        )
+        summary_word_count = self._count_words(rendered_summary)
         compression_ratio = round(summary_word_count / max(original_word_count, 1), 3)
         readability = {
             "original_word_count": original_word_count,
@@ -537,6 +637,8 @@ class SummarizationPipeline:
                 "request_local_retrieval",
                 "selection_aware_scoring",
                 "profile_coverage_selection",
+                "natural_language_simplification",
+                "grammar_and_coherence_validation",
                 *( ["supported_evidence_package", "optional_llm_synthesis", "deterministic_synthesis_checks"] if synthesis["accepted"] else [] ),
                 "structured_output_formatting",
                 "profile_validation",
@@ -597,27 +699,33 @@ class SummarizationPipeline:
             "synthesis_status": synthesis_metadata.get("status", "not_requested"),
             "synthesis_model": synthesis_metadata.get("model", ""),
             "synthesis_verification": synthesis_metadata.get("verification", "not_applicable"),
+            "simplification": {
+                "status": "applied" if any(a.get("modified") for a in simplification_audit) else "verified_unchanged",
+                "sentences_simplified_count": sum(1 for a in simplification_audit if a.get("modified")),
+                "total_sentences_checked": len(simplification_audit),
+            },
+            "quality_selection": quality_selection_meta,
+            "grammar_diagnostics": {
+                "available": bool(grammar_checker.available),
+                "issues_count": sum(len(d.get("issues", [])) for d in grammar_diagnostics),
+                "diagnostics": grammar_diagnostics,
+            },
             "document_analysis": {
                 key: document_analysis[key]
                 for key in (
                     "document_type", "document_type_confidence", "confidence_method",
                     "classification_signals", "detected_structure", "research_stage",
                     "results_section_available", "results_available", "conclusion_available",
-                    "missing_information", "claim_count",
+                    "missing_information", "claim_count", "main_subject", "purpose",
+                    "key_findings", "supporting_details", "conclusion",
+                    "primary_finding_indices", "primary_findings",
                 )
+                if key in document_analysis
             },
             "summary_plan": summary_plan,
+            "focus_query": focus_query,
+            "multi_document": multi_document_metadata,
         }
-
-        # Run profile-aware validation before returning.
-        validation_passed, validation_notes = self._validate_against_profile(
-            selected_sentences,
-            selected_candidates,
-            sel_profile,
-            source_document.raw_text,
-        )
-        if synthesis_note:
-            validation_notes.append(synthesis_note)
 
         result = SummarizationResult(
             title=title,
@@ -646,9 +754,9 @@ class SummarizationPipeline:
             output_format=output_format,
             profile_label=sel_profile.label,
             active_profile_weights=active_weights,
-            validation_passed=validation_passed,
-            validation_notes=validation_notes,
             retrieval_metadata=retrieval_metadata,
+            focus_query=focus_query,
+            multi_document_metadata=multi_document_metadata,
         )
         validated_result = self._validate_summary_output(
             result,
@@ -662,6 +770,17 @@ class SummarizationPipeline:
             validated_result.sentences,
             candidates,
         )
+        if not guarded_sentences and validated_result.sentences:
+            self._logger.warning("All summary sentences were rejected by source guard; falling back to validated sentences.")
+            guarded_sentences = list(validated_result.sentences)
+        validation_passed, validation_notes = self._validate_against_profile(
+            guarded_sentences,
+            candidates,
+            sel_profile,
+            source_document.raw_text,
+        )
+        if synthesis_note:
+            validation_notes.append(synthesis_note)
         guarded_overview, _overview_guard = self._guard_summary_sentences(
             validated_result.overview,
             candidates,
@@ -675,12 +794,27 @@ class SummarizationPipeline:
             candidates,
         )
         guarded_conclusion = " ".join(guarded_conclusion_parts)
+        guarded_takeaways: list[str] | None = None
+        if output_format == "key_takeaways":
+            guarded_takeaways = []
+            for sentence in [*(guarded_overview[:1] or guarded_sentences[:1]), *guarded_key_points]:
+                if not any(self._sentences_are_redundant(sentence, item) for item in guarded_takeaways):
+                    guarded_takeaways.append(sentence)
+                if len(guarded_takeaways) >= int(max_kp):
+                    break
         guarded_plain_summary, guarded_bullets = self._build_plain_summary(
             guarded_sentences,
             output_format,
+            takeaway_sentences=guarded_takeaways,
+            max_takeaways=int(max_kp),
         )
         guarded_readability = dict(validated_result.readability)
-        guarded_readability["summary_word_count"] = self._count_words(guarded_plain_summary)
+        guarded_rendered_summary = (
+            " ".join([guarded_plain_summary, *guarded_bullets])
+            if output_format == "hybrid"
+            else guarded_plain_summary
+        )
+        guarded_readability["summary_word_count"] = self._count_words(guarded_rendered_summary)
         guarded_readability["estimated_reading_time_minutes"] = self._estimate_reading_time(
             guarded_readability["summary_word_count"]
         )
@@ -700,6 +834,8 @@ class SummarizationPipeline:
             key_points=guarded_key_points,
             conclusion=guarded_conclusion,
             readability=guarded_readability,
+            validation_passed=validation_passed,
+            validation_notes=validation_notes,
         )
         evidence: list[dict[str, Any]] = []
         if synthesis["accepted"]:
@@ -787,6 +923,8 @@ class SummarizationPipeline:
             "section_coverage": quality_metrics.section_coverage,
             "dangling_reference_count": quality_metrics.dangling_reference_count,
             "heading_leak_count": quality_metrics.heading_leak_count,
+            "trend_consistency_rate": quality_metrics.trend_consistency_rate,
+            "unsupported_numeric_count": quality_metrics.unsupported_numeric_count,
         }
         updated_source_metadata["document_stage"] = document_analysis.get("document_stage", "unknown")
         updated_source_metadata["document_stage_confidence"] = document_analysis.get("document_stage_confidence", 0.0)
@@ -798,8 +936,8 @@ class SummarizationPipeline:
         updated_summary_method["retrieval"] = dict(retrieval_metadata)
         updated_summary_method["synthesis"] = synthesis_metadata
         updated_summary_method["fact_validation"] = {
-            "status": fact_validation["status"],
-            "method": fact_validation["method"],
+            "status": str(fact_validation.get("status", "unavailable")),
+            "method": str(fact_validation.get("method", "literal_span_and_marker_checks_v1")),
         }
         return replace(
             validated_result,
@@ -807,8 +945,11 @@ class SummarizationPipeline:
             summary_method=updated_summary_method,
             retrieval_metadata=dict(retrieval_metadata),
             evidence=evidence,
+            focus_query=focus_query,
+            multi_document_metadata=multi_document_metadata,
         )
 
+    @timed("coherence_ordering")
     def _order_summary_candidates(
         self,
         candidates: list[SentenceCandidate],
@@ -820,64 +961,81 @@ class SummarizationPipeline:
             return list(candidates)
 
         def slot_rank(cand: SentenceCandidate) -> int:
-            if mode == "academic":
-                if cand.section in {"abstract", "overview", "introduction"} and cand.epistemic_status in {"BACKGROUND_INFORMATION", "UNKNOWN"}:
+            text_lower = cand.text.lower()
+            is_objective = (
+                cand.epistemic_status in {"RESEARCH_OBJECTIVE", "RESEARCH_QUESTION", "HYPOTHESIS"}
+                or cand.section in {"problem", "purpose", "hypotheses"}
+                or bool(re.search(r"\b(?:aim of (?:this|the)|objective of (?:this|the)|focuses on|investigates? the|presents? the trend analysis|studied the trend)\b", text_lower))
+            )
+            is_result = (
+                cand.epistemic_status in {"CURRENT_RESULT", "ACTUAL_RESULT"}
+                or cand.section in {"results", "findings"}
+                or bool(re.search(r"\b(?:results? (?:show|indicate|demonstrate)|findings? (?:show|indicate)|increased (?:trend|by)|decreased (?:trend|by)|negative trend|upward trend|downward trend|statically significant|statistically significant)\b", text_lower))
+            )
+            is_conclusion = (
+                cand.epistemic_status in {"RECOMMENDATION", "LIMITATION"}
+                or cand.section in {"conclusion", "recommendations", "implications"}
+                or bool(re.search(r"\b(?:in conclusion|conclude that|findings suggest|these results indicate that|overall, the)\b", text_lower))
+            )
+            is_method = (
+                cand.epistemic_status == "PROPOSED_METHOD"
+                or cand.section in {"methodology", "methods"}
+                or cand.claim_type == "method"
+                or bool(re.search(r"\b(?:mann-kendall|trend test was used|data were collected|were screened from)\b", text_lower))
+            )
+
+            if mode in {"academic", "scientific"}:
+                if is_objective:
                     return 1
-                if cand.epistemic_status in {"RESEARCH_OBJECTIVE", "RESEARCH_QUESTION", "HYPOTHESIS"} or cand.section in {"problem", "purpose", "hypotheses"}:
+                if cand.section in {"abstract", "overview", "introduction"} and not is_result:
                     return 2
-                if cand.epistemic_status == "THEORETICAL_CLAIM" or cand.section in {"framework", "theory"} or any(kw in (cand.subsection or "").lower() for kw in ("respondents", "framework", "variables", "population")):
+                if is_result:
                     return 3
-                if cand.epistemic_status in {"PRIOR_STUDY_RESULT", "LITERATURE_FINDING"} or cand.section in {"literature_review", "related_work"} or cand.source_role == "prior_study":
+                if cand.section in {"discussion", "body"}:
                     return 4
-                if cand.epistemic_status == "PROPOSED_METHOD" or cand.section in {"methodology", "methods"} or cand.claim_type == "method":
+                if is_method:
                     return 5
-                if cand.epistemic_status in {"CURRENT_RESULT", "ACTUAL_RESULT"} or cand.section == "results":
+                if is_conclusion:
                     return 6
-                if cand.section == "discussion":
-                    return 7
-                if cand.epistemic_status == "LIMITATION" or cand.section in {"limitations", "scope"} or cand.claim_type == "limitation":
-                    return 8
-                if cand.epistemic_status == "RECOMMENDATION" or cand.section in {"conclusion", "recommendations"}:
-                    return 9
-                return 5
+                return 4
             elif mode == "executive":
-                if cand.section in {"overview", "executive_summary", "introduction"}:
+                if cand.section in {"overview", "executive_summary", "introduction"} or is_objective:
                     return 1
-                if cand.claim_type == "decision" or cand.section in {"decisions", "strategy"}:
+                if is_result or cand.section in {"results", "financial_results", "performance"}:
                     return 2
-                if cand.claim_type == "risk" or cand.section in {"risks", "threats"}:
+                if cand.claim_type == "decision" or cand.section in {"decisions", "strategy"}:
                     return 3
-                if cand.section in {"results", "financial_results", "performance"}:
+                if cand.claim_type == "risk" or cand.section in {"risks", "threats"}:
                     return 4
-                return 5
+                if is_conclusion:
+                    return 5
+                return 4
             elif mode == "technical":
-                if cand.section in {"overview", "abstract", "system_description"}:
+                if is_objective or cand.section in {"overview", "abstract", "system_description"}:
                     return 1
                 if cand.section in {"architecture", "components", "design"}:
                     return 2
-                if cand.section in {"implementation", "methodology"}:
+                if cand.section in {"implementation", "methodology"} or is_method:
                     return 3
-                if cand.section in {"results", "performance", "evaluation"}:
+                if is_result or cand.section in {"results", "performance", "evaluation"}:
                     return 4
-                if cand.section in {"limitations", "configuration", "deployment"}:
+                if is_conclusion or cand.section in {"limitations", "configuration", "deployment"}:
                     return 5
-                return 6
-            elif mode == "news":
-                if cand.section in {"lead", "overview", "headline"}:
-                    return 1
-                if cand.section in {"body", "details"}:
-                    return 2
-                return 3
+                return 4
             else:
-                if cand.section in {"abstract", "overview", "introduction"}:
+                if is_objective:
                     return 1
-                if cand.section in {"body", "methodology"}:
+                if cand.section in {"abstract", "overview", "introduction"} and not is_result:
                     return 2
-                if cand.section in {"results", "discussion"}:
+                if is_result:
                     return 3
-                if cand.section in {"conclusion", "recommendations"}:
+                if cand.section in {"discussion", "body"}:
                     return 4
-                return 5
+                if is_method:
+                    return 5
+                if is_conclusion:
+                    return 6
+                return 4
 
         ordered = sorted(candidates, key=lambda c: (slot_rank(c), c.index))
 
@@ -893,6 +1051,7 @@ class SummarizationPipeline:
 
         return ordered
 
+    @timed("topic_clustering")
     def _detect_topic_clusters(
         self,
         candidates: list[SentenceCandidate],
@@ -905,6 +1064,7 @@ class SummarizationPipeline:
         """
         return detect_topic_clusters(candidates, tfidf_matrix, tfidf_scores)
 
+    @timed("depth_budget")
     def _calculate_dynamic_target(
         self,
         source_words: int,
@@ -930,6 +1090,7 @@ class SummarizationPipeline:
         # When content is scarce, do not artificially inflate or force repetition.
         if source_words < 250 or candidate_count <= 6:
             convergence_targets = {
+                "very_brief": min(1, candidate_count),
                 "brief": min(2, candidate_count),
                 "short": min(3, candidate_count),
                 "balanced": min(4, candidate_count),
@@ -996,6 +1157,7 @@ class SummarizationPipeline:
     # Profile-aware scoring
     # ------------------------------------------------------------------
 
+    @timed("sentence_ranking")
     def _score_candidates_with_profile(
         self,
         candidates: list[SentenceCandidate],
@@ -1012,6 +1174,8 @@ class SummarizationPipeline:
         sel_profile: Any,
         depth_key: str = "balanced",
         depth_config: dict[str, Any] | None = None,
+        focus_query: str = "",
+        document_analysis: dict[str, Any] | None = None,
     ) -> list[float]:
         """Score candidates using profile-specific weights plus mode-level bonuses/penalties."""
         return calculate_candidate_scores_with_profile(
@@ -1029,11 +1193,86 @@ class SummarizationPipeline:
             sel_profile=sel_profile,
             depth_key=depth_key,
             depth_config=depth_config,
+            focus_query=focus_query,
+            document_analysis=document_analysis,
         )
+
+    def _detect_multi_documents(self, raw_text: str) -> dict[str, Any]:
+        """Detect whether the input comprises multiple distinct source documents."""
+        boundary_patterns = [
+            re.compile(r"^(?:---+|===+|\*\*\*+)\s*(?:DOCUMENT|SOURCE|FILE|PART)\s*([0-9A-Za-z_-]+)?.*$", re.IGNORECASE | re.MULTILINE),
+            re.compile(r"^(?:DOCUMENT|SOURCE|ARTICLE)\s*#?\s*([0-9]+)\s*[:\-–]\s*(.+)$", re.IGNORECASE | re.MULTILINE),
+            re.compile(r"^\[(?:DOCUMENT|SOURCE)\s*([0-9]+)\]\s*(.*)$", re.IGNORECASE | re.MULTILINE),
+        ]
+        matches = []
+        for pat in boundary_patterns:
+            found = list(pat.finditer(raw_text))
+            if len(found) >= 2:
+                matches = found
+                break
+
+        if len(matches) >= 2:
+            docs = []
+            for i, match in enumerate(matches):
+                start = match.end()
+                end = matches[i + 1].start() if i + 1 < len(matches) else len(raw_text)
+                snippet = raw_text[start:end].strip()
+                label = match.group(0).strip()
+                words = len(snippet.split())
+                docs.append({
+                    "id": i + 1,
+                    "label": label,
+                    "word_count": words,
+                    "preview": snippet[:120] + "..." if len(snippet) > 120 else snippet,
+                })
+            return {
+                "is_multi_document": True,
+                "document_count": len(docs),
+                "documents": docs,
+                "provenance_tracking": "active",
+            }
+
+        return {
+            "is_multi_document": False,
+            "document_count": 1,
+            "documents": [],
+            "provenance_tracking": "single_source",
+        }
 
     # ------------------------------------------------------------------
     # Profile-aware candidate selection
     # ------------------------------------------------------------------
+
+    @timed("candidate_selection")
+    def _generate_and_rank_summary_candidates(
+        self,
+        candidates: list[SentenceCandidate],
+        combined_scores: list[float],
+        article_type: str,
+        target_count: int,
+        section_coverage_groups: dict[str, list[set[str]]],
+        section_coverage_weight: float,
+        sel_profile: Any,
+        topic_clusters: list[list[int]] | None = None,
+        depth_key: str = "balanced",
+        depth_config: dict[str, Any] | None = None,
+        document_analysis: dict[str, Any] | None = None,
+        effective_title: str = "",
+    ) -> tuple[list[int], dict[str, Any]]:
+        return generate_and_rank_summary_candidates(
+            candidates,
+            combined_scores,
+            article_type,
+            target_count,
+            section_coverage_groups,
+            section_coverage_weight,
+            sel_profile,
+            topic_clusters=topic_clusters,
+            depth_key=depth_key,
+            depth_config=depth_config,
+            document_analysis=document_analysis,
+            effective_title=effective_title,
+        )
 
     def _select_candidate_indices_with_profile(
         self,
@@ -1041,7 +1280,7 @@ class SummarizationPipeline:
         combined_scores: list[float],
         article_type: str,
         target_count: int,
-        section_coverage_groups: dict[str, list[list[str]]],
+        section_coverage_groups: dict[str, list[set[str]]],
         section_coverage_weight: float,
         sel_profile: Any,
         topic_clusters: list[list[int]] | None = None,
@@ -1137,6 +1376,8 @@ class SummarizationPipeline:
 
                 report = validate_summary_facts([sentence], (ledger_entry,))
                 issues = report.get("issues", [])
+                if not isinstance(issues, list):
+                    raise TypeError("Fact validation issues must be a list.")
                 if issues:
                     for issue in issues:
                         if isinstance(issue, dict) and isinstance(issue.get("issue"), str):
@@ -1156,6 +1397,7 @@ class SummarizationPipeline:
             "semantic_entailment_measured": False,
         }
 
+    @timed("factual_validation")
     def _verify_source_faithfulness(
         self,
         selected_sentences: list[str],
@@ -1178,17 +1420,28 @@ class SummarizationPipeline:
 
         raw_lower = raw_text.lower()
         raw_tokens = set(self._content_tokens(raw_text))
+        candidate_tokens = [
+            self._content_tokens(candidate.text)
+            for candidate in (selected_candidates or [])
+        ]
 
         for sentence in selected_sentences:
             sentence = sentence.replace("\ufffd", "")
             sent_lower = sentence.lower()
             sent_tokens = self._content_tokens(sentence)
 
-            # --- Layer 1: 6-gram prefix check (existing) ---
+            # --- Layer 1: Source prefix or strong selected-candidate support ---
             words = sent_lower.split()
             if len(words) >= 6:
                 gram = " ".join(words[:6])
-                if gram not in raw_lower:
+                candidate_support = max(
+                    (
+                        len(sent_tokens & source_tokens) / len(sent_tokens)
+                        for source_tokens in candidate_tokens
+                    ),
+                    default=0.0,
+                ) if sent_tokens else 0.0
+                if gram not in raw_lower and candidate_support < 0.8:
                     notes.append(f"Faithfulness warning: sentence start not found in source: '{gram}…'")
                     passed = False
 
@@ -1214,20 +1467,31 @@ class SummarizationPipeline:
 
             # --- Layer 4: Negation scope verification ---
             for neg_cue in self._NEGATION_CUES:
-                if neg_cue in sent_lower:
+                neg_match = re.search(rf"(?<!\w){re.escape(neg_cue)}(?!\w)", sent_lower)
+                if neg_match:
                     # Check if negation cue exists in source near the sentence content
-                    # Find the position of negation in sentence
-                    neg_pos = sent_lower.find(neg_cue)
-                    if neg_pos >= 0:
-                        # Get context around negation (10 words before/after)
-                        sent_words = sent_lower.split()
-                        neg_word_idx = len(sent_lower[:neg_pos].split())
-                        context_start = max(0, neg_word_idx - 5)
-                        context_end = min(len(sent_words), neg_word_idx + 6)
-                        context = " ".join(sent_words[context_start:context_end])
-                        if context not in raw_lower:
-                            notes.append(f"Faithfulness warning: negation scope '{neg_cue}' context not verifiable in source")
-                            passed = False
+                    # If matching candidate from source contains this negation cue, it is source-grounded
+                    candidate_has_neg = any(
+                        re.search(rf"(?<!\w){re.escape(neg_cue)}(?!\w)", cand.text, re.IGNORECASE)
+                        for cand in (selected_candidates or [])
+                        if sent_tokens and len(sent_tokens & self._content_tokens(cand.text)) >= max(1, int(len(sent_tokens) * 0.4))
+                    )
+                    if candidate_has_neg:
+                        continue
+
+                    sent_words = sent_lower.split()
+                    neg_word_idx = len(sent_lower[:neg_match.start()].split())
+                    context_start = max(0, neg_word_idx - 5)
+                    context_end = min(len(sent_words), neg_word_idx + 6)
+                    context = " ".join(sent_words[context_start:context_end])
+
+                    norm_context = re.sub(r"[^\w\s]", "", context)
+                    norm_raw = re.sub(r"[^\w\s]", "", raw_lower)
+                    if context in raw_lower or (norm_context and norm_context in norm_raw):
+                        continue
+
+                    notes.append(f"Faithfulness warning: negation scope '{neg_cue}' context not verifiable in source")
+                    passed = False
 
             # --- Layer 5: Qualifier preservation (don't strengthen claims) ---
             source_qualifiers = set(self._QUALIFIER_PATTERN.findall(raw_text))
@@ -1246,6 +1510,7 @@ class SummarizationPipeline:
 
         return passed, notes
 
+    @timed("mode_validation")
     def _validate_against_profile(
         self,
         selected_sentences: list[str],
@@ -1424,6 +1689,7 @@ class SummarizationPipeline:
             heading_counts=dict(heading_counts),
         )
 
+    @timed("candidate_generation")
     def _build_sentence_candidates(
         self,
         paragraphs: list[str],
@@ -1434,6 +1700,7 @@ class SummarizationPipeline:
         contains_article_noise: Any,
         normalize_whitespace: Any,
         tokenize_words: Any,
+        effective_title: str = "",
     ) -> tuple[list[SentenceCandidate], list[list[str]]]:
         candidates: list[SentenceCandidate] = []
         paragraph_sentences: list[list[str]] = []
@@ -1452,23 +1719,37 @@ class SummarizationPipeline:
             if not sentences:
                 sentences = [normalize_whitespace(paragraph)]
 
-            usable_sentences = [
-                sentence
-                for sentence in sentences
-                if len(tokenize_words(sentence)) >= 5
-                and len(tokenize_words(sentence)) <= 80
-                and not contains_article_noise(sentence)
-                and not self._looks_sentence_fragment(sentence)
-            ]
+            usable_sentences: list[str] = []
+            for sentence in sentences:
+                word_count = len(tokenize_words(sentence))
+                if word_count < 5 or word_count > 80:
+                    continue
+                if contains_article_noise(sentence) or self._looks_sentence_fragment(sentence):
+                    continue
+                if looks_like_author_or_affiliation_line(sentence) or looks_like_reference_metadata_sentence(sentence) or CITATION_ENTRY_PATTERN.match(sentence):
+                    continue
+                if effective_title and sentence.strip().rstrip(".").lower() == effective_title.strip().rstrip(".").lower():
+                    continue
+                if looks_like_document_title_line(sentence):
+                    continue
+                usable_sentences.append(sentence)
+
             if not usable_sentences:
-                usable_sentences = [
-                    sentence
-                    for sentence in sentences
-                    if len(tokenize_words(sentence)) >= 8
-                    and len(tokenize_words(sentence)) <= 90
-                    and not contains_article_noise(normalize_whitespace(sentence))
-                    and not self._looks_sentence_fragment(sentence)
-                ]
+                for sentence in sentences:
+                    word_count = len(tokenize_words(sentence))
+                    if word_count < 8 or word_count > 90:
+                        continue
+                    compact = normalize_whitespace(sentence)
+                    if contains_article_noise(compact) or self._looks_sentence_fragment(compact):
+                        continue
+                    if looks_like_author_or_affiliation_line(compact) or looks_like_reference_metadata_sentence(compact) or CITATION_ENTRY_PATTERN.match(compact):
+                        continue
+                    if effective_title and compact.strip().rstrip(".").lower() == effective_title.strip().rstrip(".").lower():
+                        continue
+                    if looks_like_document_title_line(compact):
+                        continue
+                    usable_sentences.append(compact)
+
             paragraph_sentences.append(usable_sentences)
             if not usable_sentences:
                 continue
@@ -1525,7 +1806,7 @@ class SummarizationPipeline:
         combined_scores: list[float],
         article_type: str,
         target_count: int,
-        section_coverage_groups: dict[str, list[list[str]]],
+        section_coverage_groups: dict[str, list[set[str]]],
         section_coverage_weight: float,
     ) -> list[int]:
         """Base candidate selection with section coverage groups and MMR fill."""
@@ -1561,7 +1842,7 @@ class SummarizationPipeline:
         """
         if not selected_sentences:
             return []
-        if depth_key == "brief":
+        if depth_key in {"very_brief", "brief"}:
             count = 1
         elif depth_key in ("short", "balanced"):
             count = 2
@@ -1671,44 +1952,93 @@ class SummarizationPipeline:
 
         return points[:max_key_points]
 
+    @timed("format_rendering")
     def _build_plain_summary(
-        self, selected_sentences: list[str], summary_style: str
+        self,
+        selected_sentences: list[str],
+        summary_style: str,
+        *,
+        takeaway_sentences: list[str] | None = None,
+        max_takeaways: int = 5,
     ) -> tuple[str, list[str]]:
-        """Build the Overall Summary content based on the requested display style.
-
-        Returns a (plain_summary, overall_summary_bullets) tuple:
-        - plain_summary  : synthesized paragraph string (used by audio/translate and paragraph style).
-        - overall_summary_bullets : list of bullet-ready sentences (populated for bullet_points
-          and hybrid styles; empty for paragraph styles).
-
-        Style behaviour:
-        - standard_paragraph / academic_summary / simple_summary:
-            plain_summary = all selected sentences joined into one paragraph.
-            overall_summary_bullets = []  (not needed for paragraph rendering)
-        - bullet_points:
-            plain_summary = all sentences joined (kept for audio/translate fallback).
-            overall_summary_bullets = each selected sentence as a bullet item.
-        - hybrid:
-            plain_summary = first 1–2 sentences joined (the intro paragraph).
-            overall_summary_bullets = remaining sentences (the supporting bullets).
-        """
         if not selected_sentences:
             return "", []
 
-        joined = " ".join(selected_sentences)
+        # Discourse smoothing and transition cleanup across selected sentences
+        smoothed_sentences: list[str] = []
+        for idx, sentence in enumerate(selected_sentences):
+            s = sentence.strip()
+            if not s:
+                continue
+            if idx == 0:
+                # Opener: strip leading connective words that make the opening feel abrupt
+                s = re.sub(
+                    r"^(?:(?:However|Furthermore|Additionally|Moreover|Therefore|In addition(?: to this)?|Not only that(?:,)?\s*but\s*(?:also)?)\s*[,;]?\s*)",
+                    "",
+                    s,
+                    flags=re.IGNORECASE,
+                ).strip()
+                if s and s[0].islower():
+                    s = s[0].upper() + s[1:]
+            else:
+                # Intermediate sentences: smooth awkward connectives
+                s = re.sub(
+                    r"^Not only that(?:,)?\s*but\s*(?:also)?\s*",
+                    "Furthermore, ",
+                    s,
+                    flags=re.IGNORECASE,
+                )
+                s = re.sub(
+                    r"^In addition to this,\s*",
+                    "Additionally, ",
+                    s,
+                    flags=re.IGNORECASE,
+                )
+                # Resolve dangling demonstrative openers
+                s = re.sub(
+                    r"^These\s+(?:unexpected|destructive|observed|major)\s+",
+                    "Observed ",
+                    s,
+                    flags=re.IGNORECASE,
+                )
+            smoothed_sentences.append(ensure_terminal_punctuation(s))
+
+        joined = " ".join(smoothed_sentences)
 
         if summary_style in ("bullets", "bullet_points"):
-            return joined, list(selected_sentences)
+            return joined, list(smoothed_sentences)
+
+        if summary_style in ("key_takeaways", "takeaways", "key_points"):
+            if takeaway_sentences is None:
+                takeaways = list(smoothed_sentences)
+            else:
+                smoothed_by_source = {
+                    normalize_whitespace(original).casefold(): smoothed
+                    for original, smoothed in zip(selected_sentences, smoothed_sentences)
+                }
+                takeaways = []
+                for sentence in takeaway_sentences:
+                    cleaned = normalize_whitespace(sentence)
+                    rendered = smoothed_by_source.get(cleaned.casefold(), cleaned)
+                    if not rendered or any(
+                        self._sentences_are_redundant(rendered, existing)
+                        for existing in takeaways
+                    ):
+                        continue
+                    takeaways.append(rendered)
+                    if len(takeaways) >= max(1, max_takeaways):
+                        break
+                if not takeaways:
+                    takeaways = smoothed_sentences[:1]
+            return " ".join(takeaways), takeaways
 
         if summary_style in ("hybrid", "executive_summary"):
-            # Take the first 1 or 2 sentences as the intro paragraph.
-            split_at = 2 if len(selected_sentences) > 3 else 1
-            intro_sentences = selected_sentences[:split_at]
-            bullet_sentences = selected_sentences[split_at:]
+            split_at = 2 if len(smoothed_sentences) > 3 else 1
+            intro_sentences = smoothed_sentences[:split_at]
+            bullet_sentences = smoothed_sentences[split_at:]
             intro_paragraph = " ".join(intro_sentences)
             return intro_paragraph, list(bullet_sentences)
 
-        # paragraph styles: plain join, no bullets
         return joined, []
 
     def _resolve_output_format(self, requested: str, legacy_style: str) -> str:
@@ -1717,15 +2047,20 @@ class SummarizationPipeline:
         Legacy style values remain accepted so old clients keep rendering the
         same way while new clients can send an explicit output format.
         """
-        allowed = {"paragraph", "bullets", "hybrid", "structured"}
         value = (requested or "").strip().lower()
-        if value in allowed:
+        if value in SUPPORTED_OUTPUT_FORMATS:
             return value
+        if value in {"takeaways", "key_takeaway", "key-takeaways"}:
+            return "key_takeaways"
+        if value:
+            raise ProcessingFailure("SETTINGS_INVALID", "Unsupported output format.")
         legacy = (legacy_style or "").strip().lower()
         if legacy == "bullet_points":
             return "bullets"
-        if legacy == "hybrid" or legacy == "executive_summary":
+        if legacy in ("hybrid", "executive_summary"):
             return "hybrid"
+        if legacy and legacy not in SUPPORTED_PROFILE_SELECTIONS:
+            raise ProcessingFailure("SETTINGS_INVALID", "Unsupported summary style.")
         return "paragraph"
 
     def _compress_selected_sentences(
@@ -1785,9 +2120,15 @@ class SummarizationPipeline:
 
         words = cleaned.split()
         if len(words) <= max_words:
-            if cleaned and cleaned[-1] not in ".!?":
-                cleaned += "."
-            return cleaned
+            return ensure_terminal_punctuation(cleaned)
+
+        if re.search(
+            r"\b(?:except(?:\s+for)?|unless|although|though|however|whereas|while|if|"
+            r"provided\s+that|only\s+if|other\s+than|with\s+the\s+exception)\b",
+            cleaned,
+            flags=re.IGNORECASE,
+        ):
+            return ensure_terminal_punctuation(cleaned)
 
         # Define protected patterns that should never be cut mid-span
         # These are (start_word_idx, end_word_idx) pairs in the original word list
@@ -1886,10 +2227,9 @@ class SummarizationPipeline:
                 return cleaned
 
         cleaned = " ".join(cut_words).rstrip(",;:")
-        if cleaned and cleaned[-1] not in ".!?":
-            cleaned += "."
-        return cleaned
+        return ensure_terminal_punctuation(cleaned)
 
+    @timed("paragraph_rendering")
     def _build_paragraph_summaries(
         self,
         paragraphs: list[str],
@@ -1975,6 +2315,7 @@ class SummarizationPipeline:
 
         return analyses
 
+    @timed("coherence_validation")
     def _validate_summary_output(
         self,
         result: SummarizationResult,
@@ -2202,9 +2543,7 @@ class SummarizationPipeline:
 
         # Clean trailing punctuation that would look odd mid-sentence
         excerpt = excerpt.rstrip(",.;:(")
-        if excerpt and excerpt[-1] not in ".!?":
-            excerpt += "."
-        return excerpt
+        return ensure_terminal_punctuation(excerpt)
 
     def _detect_paragraph_purpose(
         self,
@@ -2251,6 +2590,7 @@ class SummarizationPipeline:
     def _sentences_are_redundant(self, left: str, right: str, threshold: float = 0.62) -> bool:
         return sentences_are_redundant(left, right, threshold)
 
+    @timed("sentence_completeness")
     def _looks_sentence_fragment(self, text: str) -> bool:
         normalized = text.strip()
         if normalized == "":
@@ -2260,14 +2600,91 @@ class SummarizationPipeline:
             return True
         if normalized.count(",") >= 4 and not any(mark in normalized for mark in ".;:"):
             return True
-        if len(normalized.split()) < 7 and normalized[-1] not in ".!?":
-            return True
         words = normalized.split()
+        if len(words) < 5 and normalized[-1] not in ".!?":
+            return True
         capitalized_words = sum(1 for word in words if word[:1].isupper())
         if len(words) <= 8 and capitalized_words / max(len(words), 1) >= 0.7:
             return True
         if re.match(r"^[A-Z][A-Za-z'-]+,\s*[A-Z]\.", normalized):
             return True
+
+        # Reject dangling relative clause fragments (e.g. "Which showed a notable increase...")
+        if re.match(r"^(?:which|whose|whereby|wherein)\b", normalized, re.IGNORECASE) and not normalized.endswith("?"):
+            return True
+
+        # Reject headless auxiliary past participles lacking subject (e.g. "Was observed across all stations...")
+        if re.match(r"^(?:was|were|is|are)\s+(?:observed|found|measured|recorded|seen|noted|shown|demonstrated)\b", normalized, re.IGNORECASE) and not normalized.endswith("?"):
+            return True
+
+        # Grammatical structure analysis via spaCy dependency parser
+        nlp = load_optional_spacy_pipeline()
+        if nlp is not None:
+            try:
+                doc = parse_text(nlp, normalized)
+                roots = [token for token in doc if token.dep_ == "ROOT"]
+                if roots:
+                    root = roots[0]
+                    # Identify meaningful verbs/auxiliaries (excluding 'according to' preposition idiom)
+                    verbs = [
+                        token for token in doc
+                        if token.pos_ in ("VERB", "AUX") and token.lemma_.lower() != "accord"
+                    ]
+
+                    # 1. Sentences lacking any verbs/auxiliaries are bare fragments
+                    if not verbs:
+                        return True
+
+                    # 2. Headless present participle fragment (e.g. "Showing a significant trend...")
+                    if doc[0].tag_ == "VBG" and root == doc[0]:
+                        has_subject = any(
+                            child.dep_ in ("nsubj", "nsubjpass", "csubj", "csubjpass", "expl")
+                            for child in root.children
+                        )
+                        has_aux = any(child.dep_ in ("aux", "auxpass") for child in root.children)
+                        if not has_subject and not has_aux:
+                            return True
+
+                    # 3. Subordinate clause without independent main clause (e.g. "Because the temperature increased...")
+                    if doc[0].lower_ in ("because", "although", "whereas", "while") and len(list(doc.sents)) <= 1:
+                        if "," not in normalized:
+                            return True
+
+                    # 4. If root is not a finite verb/aux, verify whether a valid predicate exists
+                    if root.pos_ not in ("VERB", "AUX"):
+                        # Check for copula or passive/aux predicate on the root
+                        has_predicate = any(child.dep_ in ("cop", "aux", "auxpass") for child in root.children)
+                        if not has_predicate:
+                            # If the only verbs are strictly inside a restrictive relative clause ('relcl'),
+                            # then the root noun lacks a main predicate (e.g. "The book that I read yesterday.")
+                            non_relcl_verbs = [
+                                v for v in verbs
+                                if v.dep_ != "relcl" and not any(ancestor.dep_ == "relcl" for ancestor in v.ancestors)
+                            ]
+                            if not non_relcl_verbs:
+                                return True
+                    else:
+                        # Root is verb: must have an attached grammatical subject unless imperative
+                        has_subject = any(
+                            child.dep_ in ("nsubj", "nsubjpass", "csubj", "csubjpass", "expl")
+                            for child in root.children
+                        )
+                        if not has_subject and root.tag_ not in ("VB", "VBP"):
+                            has_conj_subj = any(
+                                child.dep_ == "conj" and any(c.dep_ in ("nsubj", "nsubjpass") for c in child.children)
+                                for child in root.children
+                            )
+                            if not has_conj_subj:
+                                return True
+            except Exception:
+                pass
+        else:
+            # Fallback when spaCy is unavailable: check for finite verb presence
+            tags = safe_pos_tag(tokenize_words(normalized))
+            has_verb = any(tag.startswith("V") or tag == "MD" for _, tag in tags)
+            if not has_verb:
+                return True
+
         return False
 
     def _content_tokens(self, text: str) -> set[str]:

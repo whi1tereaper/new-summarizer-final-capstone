@@ -422,10 +422,126 @@ NEWS_PROFILE = SummarizationProfile(
     coherence_weight=1.1,
 )
 
+LEGAL_PROFILE = SummarizationProfile(
+    mode="legal",
+    label="Legal & Policy Summary",
+    scoring_weights={
+        "tfidf":           0.30,
+        "title":           0.14,
+        "position":        0.16,
+        "paragraph_pos":   0.10,
+        "section":         0.20,
+        "type_relevance":  0.10,
+    },
+    section_importance_override={
+        "legal_basis":     1.00,
+        "policy_scope":    0.95,
+        "obligations":     1.00,
+        "definitions":     0.90,
+        "penalties":       0.90,
+        "compliance":      0.95,
+        "conclusion":      0.90,
+        "references":      0.00,
+        "acknowledgment":  0.00,
+    },
+    importance_bonuses=[
+        _bp(r"\b(?:shall\s+be|shall\s+not|hereby|pursuant\s+to|under\s+section|statutory|regulation|compliance|obligation|liabilit(?:y|ies))\b", 0.14),
+        _bp(r"\b(?:prohibited|authorized|entitled\s+to|jurisdiction|enforceable|governed\s+by|binding)\b", 0.12),
+        _bp(r"\b(?:defined\s+as|for\s+the\s+purposes\s+of\s+this|within\s+the\s+meaning\s+of)\b", 0.10),
+        _bp(r"\b(?:effective\s+date|term\s+of|expiration|termination|breach|remedy|penalty|fine)\b", 0.10),
+    ],
+    importance_penalties=[
+        _pp(r"\b(?:in\s+my\s+opinion|we\s+believe|it\s+seems|casual|anecdote)\b", 0.14),
+        _pp(r"\b(?:marketing|promotion|advertisement)\b", 0.15),
+    ],
+    compression_bias="generous",
+    detail_level_floor=2,
+    preferred_sections=["legal_basis", "policy_scope", "obligations", "definitions", "compliance"],
+    must_preserve_labels=["Legal Basis & Scope", "Key Obligations & Rights", "Compliance & Penalties"],
+    output_schema=["Legal Basis & Scope", "Key Obligations & Rights", "Definitions & Terms", "Compliance & Penalties"],
+    factuality_strictness="high",
+    validation_rules=[
+        "source_faithfulness",
+        "qualifier_preservation",
+        "section_structure",
+    ],
+    faithfulness_weight=1.6,
+    negation_preservation=True,
+    numeric_fact_protection=True,
+    coherence_weight=1.2,
+)
+
+SCIENTIFIC_PROFILE = SummarizationProfile(
+    mode="scientific",
+    label="Scientific & Empirical Summary",
+    scoring_weights={
+        "tfidf":           0.28,
+        "title":           0.14,
+        "position":        0.10,
+        "paragraph_pos":   0.08,
+        "section":         0.24,
+        "type_relevance":  0.16,
+    },
+    section_importance_override={
+        "hypotheses":      1.00,
+        "methodology":     0.96,
+        "experiments":     1.00,
+        "results":         1.00,
+        "discussion":      0.94,
+        "conclusion":      1.00,
+        "limitations":     0.85,
+        "references":      0.00,
+        "acknowledgment":  0.00,
+    },
+    importance_bonuses=[
+        _bp(r"\b(?:hypothes(?:is|es)|experimental|control\s+group|treatment|empirical|clinical\s+trial|sample\s+size|n\s*=\s*\d+)\b", 0.12),
+        _bp(r"\b(?:statistically\s+significant|p\s*[<>=]\s*0\.\d+|confidence\s+interval|f\s*\(\d+,\s*\d+\)|chi-square|standard\s+deviation)\b", 0.14),
+        _bp(r"\b(?:findings?\s+(?:demonstrate|indicate|confirm|reject|support)|the\s+data\s+(?:shows?|reveals?))\b", 0.10),
+        _bp(r"\b(?:measured|observed|quantified|correlation|effect\s+size|variance)\b", 0.09),
+        _bp(r"\b(?:in\s+conclusion|the\s+evidence\s+supports|contrary\s+to\s+expectation|limitations?\s+of\s+the\s+study)\b", 0.09),
+    ],
+    importance_penalties=[
+        _pp(r"\b(?:further\s+investigation\s+is\s+needed|future\s+work\s+will|untested\s+conjecture)\b", 0.08),
+        _pp(r"\b(?:anecdotal|informal\s+observation)\b", 0.12),
+    ],
+    compression_bias="generous",
+    detail_level_floor=2,
+    preferred_sections=["hypotheses", "methodology", "experiments", "results", "discussion", "conclusion", "limitations"],
+    must_preserve_labels=["Hypothesis & Question", "Experimental Methodology", "Empirical Findings", "Scientific Conclusion"],
+    output_schema=["Hypothesis & Question", "Experimental Methodology", "Empirical Findings", "Scientific Conclusion", "Limitations"],
+    factuality_strictness="high",
+    validation_rules=[
+        "source_faithfulness",
+        "must_preserve_completeness",
+        "qualifier_preservation",
+        "section_structure",
+    ],
+    faithfulness_weight=1.6,
+    negation_preservation=True,
+    numeric_fact_protection=True,
+    coherence_weight=1.3,
+)
+
 
 # ---------------------------------------------------------------------------
 # Profile registry and resolution
 # ---------------------------------------------------------------------------
+
+_CANONICAL_PROFILE_REGISTRY: dict[str, SummarizationProfile] = {
+    profile.mode: profile
+    for profile in (
+        GENERAL_PROFILE,
+        ACADEMIC_PROFILE,
+        EXECUTIVE_PROFILE,
+        STUDY_PROFILE,
+        TECHNICAL_PROFILE,
+        NEWS_PROFILE,
+        LEGAL_PROFILE,
+        SCIENTIFIC_PROFILE,
+    )
+}
+
+SUPPORTED_ANALYSIS_MODES = tuple(_CANONICAL_PROFILE_REGISTRY)
 
 _PROFILE_REGISTRY: dict[str, SummarizationProfile] = {
     # Current summary_style values
@@ -438,15 +554,13 @@ _PROFILE_REGISTRY: dict[str, SummarizationProfile] = {
     # New selection modes
     "technical_summary":   TECHNICAL_PROFILE,
     "news_summary":        NEWS_PROFILE,
+    "legal_summary":       LEGAL_PROFILE,
+    "scientific_summary":  SCIENTIFIC_PROFILE,
     # Canonical mode keys (used when selection_mode is sent separately)
-    "general":             GENERAL_PROFILE,
-    "academic":            ACADEMIC_PROFILE,
-    "executive":           EXECUTIVE_PROFILE,
-    "study":               STUDY_PROFILE,
-    "technical":           TECHNICAL_PROFILE,
-    "news":                NEWS_PROFILE,
+    **_CANONICAL_PROFILE_REGISTRY,
 }
 
+SUPPORTED_PROFILE_SELECTIONS = frozenset(_PROFILE_REGISTRY)
 _DEFAULT_PROFILE = GENERAL_PROFILE
 
 
@@ -479,6 +593,10 @@ __all__ = [
     "STUDY_PROFILE",
     "TECHNICAL_PROFILE",
     "NEWS_PROFILE",
+    "LEGAL_PROFILE",
+    "SCIENTIFIC_PROFILE",
+    "SUPPORTED_ANALYSIS_MODES",
+    "SUPPORTED_PROFILE_SELECTIONS",
     "resolve_profile",
     "apply_compression_bias",
 ]

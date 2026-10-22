@@ -21,12 +21,20 @@ switch ($action) {
         $controller->login();
         break;
 
+    case 'verifyAdminLoginCode':
+        $controller->verifyAdminLoginCode();
+        break;
+
     case 'register':
         $controller->register();
         break;
 
     case 'logout':
         $controller->logout();
+        break;
+
+    case 'deactivateAccount':
+        $controller->deactivateAccount();
         break;
 
     case 'forgotPassword':

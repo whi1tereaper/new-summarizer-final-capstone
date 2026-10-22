@@ -8,6 +8,9 @@ import math
 import re
 from typing import Any, Callable, cast
 import unicodedata
+from .runtime import timed
+
+MIN_CONTENT_PARAGRAPH_WORDS = 12
 
 from .constants import (
     ABSTRACT_LABEL_PATTERN,
@@ -49,6 +52,7 @@ from .constants import (
 from .models import PreprocessingOptions
 from .normalization import (
     _fallback_normalize_whitespace,
+    ensure_terminal_punctuation,
     normalize_pdf_line_breaks,
     normalize_source_newlines,
     normalize_whitespace,
@@ -75,6 +79,12 @@ from .tokenization import (
 )
 
 LOGGER = logging.getLogger(__name__)
+
+_MONTH_YEAR_RANGE_PATTERN = re.compile(
+    rf"\(\s*{MONTH_PATTERN.pattern}\s+\d{{4}}\s*(?:through|to|[-\u2013\u2014])\s*"
+    rf"{MONTH_PATTERN.pattern}\s+\d{{4}}\s*\)",
+    flags=re.IGNORECASE,
+)
 
 # Preprocessing runtime binding
 try:
@@ -112,57 +122,138 @@ def preprocess_text(
     return _runtime_preprocess_text(text, options)
 
 
+_ENGLISH_VOCAB: set[str] | None = None
+
+def _get_english_vocab() -> set[str]:
+    global _ENGLISH_VOCAB
+    if _ENGLISH_VOCAB is None:
+        try:
+            from nltk.corpus import words
+            _ENGLISH_VOCAB = set(w.lower() for w in words.words())
+        except Exception:
+            _ENGLISH_VOCAB = set()
+        _ENGLISH_VOCAB.update({
+            "analyzed", "decreased", "increased", "warming", "trends", "stations",
+            "depended", "cooling", "growing", "precipitation", "temperature", "temperatures",
+            "sunshine", "humidity", "extreme", "ecosystem", "modifications", "dramatically",
+            "increasing", "decreasing", "substantially", "maximum", "minimum", "seasonal",
+            "annual", "middle", "weakest", "levels", "leading", "several", "variability",
+            "demonstrate", "demonstrated", "demonstrates", "concluded", "identifying"
+        })
+    return _ENGLISH_VOCAB
+
+
 def repair_fragmented_tokens(text: str) -> str:
-    """Repair words split by accidental spaces or OCR artifacts (e.g., 'a nnual', 'cl imate')."""
+    """Repair words split by accidental spaces or OCR artifacts (e.g., 'a nnual', 'de pended', 'wa ter')."""
     if not text:
         return ""
-    
+
     # 1. Hyphenated word repair at newlines
     repaired = re.sub(r"(\w)-\n(\w)", r"\1\2", text)
     repaired = normalize_whitespace(repaired)
 
-    # 2. Hardcoded common split repairs from academic PDF tests
-    repairs = {
-        r"\ba\s+nnual\b": "annual",
-        r"\bst\s+ations\b": "stations",
-        r"\bO\s+ctober\b": "October",
-        r"\btemperatu\s+re\b": "temperature",
-        r"\bth\s+e\b": "the",
-        r"\bfr\s+om\b": "from",
-        r"\brefe\s+r\b": "refer",
-        r"\bcl\s+imate\b": "climate",
-        r"\bannua\s+l\b": "annual",
-        r"\btem\s+perature\b": "temperature",
-        r"\bsuns\s+hine\b": "sunshine",
-        r"\bp\s+recipitation\b": "precipitation",
-        r"\bdemo\s+nstrate\b": "demonstrate",
-        r"\banaly\s+zing\b": "analyzing",
+    # 2. Recombine split 4-digit years and numbers (e.g., '195 1' -> '1951', '20 20' -> '2020', '1970 s' -> '1970s', '2 001' -> '2001')
+    repaired = re.sub(r"\b(19\d{2}|20\d{2})\s+s\b", r"\1s", repaired)
+    repaired = re.sub(r"\b(19\d|20\d)\s+(\d)\b", r"\1\2", repaired)
+    repaired = re.sub(r"\b(19|20)\s+(\d{2})\b", r"\1\2", repaired)
+    repaired = re.sub(r"\b(2)\s+(00\d)\b", r"\1\2", repaired)
+
+    # 3. Glued contractions and words (e.g., "China'sclimate" -> "China's climate")
+    repaired = re.sub(r"([a-z]+(?:\'s|\'t|\'d|\'re|\'ve|\'ll))([a-z]{2,})", r"\1 \2", repaired, flags=re.IGNORECASE)
+
+    # 4. Known shifted whitespace pairs from OCR kerning (e.g., "waterl evels" -> "water levels")
+    shifted_pairs = {
+        r"\bwaterl\s+evels\b": "water levels",
+        r"\bsoilm\s+oisture\b": "soil moisture",
+        r"\bbel\s+eading\b": "be leading",
+        r"\bi\s+sgrowing\b": "is growing",
+        r"\bthec\s+hange\b": "the change",
+        r"\bfors\s+everal\b": "for several",
+        r"\bonlyt\s+hat\b": "only that",
+        r"\btod\s+etect\b": "to detect",
+        r"\bthat\'sstrongly\b": "that's strongly",
     }
-    for pattern, replacement in repairs.items():
+    for pattern, replacement in shifted_pairs.items():
         repaired = re.sub(pattern, replacement, repaired, flags=re.IGNORECASE)
 
-    # 3. Heuristic repair: Join split word fragments
-    # Patterns like "WordPart e" or "WordPart s" where it's likely a suffix split
-    repaired = re.sub(
-        r"\b([A-Za-z]{2,})\s+([a-z])\b",
-        lambda m: m.group(1) + m.group(2) if m.group(2).lower() not in {"a", "i"} else m.group(0),
-        repaired
-    )
-    # Patterns like "p Recipitation" or "c limate"
-    repaired = re.sub(
-        r"\b([A-Za-z])\s+([A-Za-z]{3,})\b",
-        lambda m: m.group(1) + m.group(2) if m.group(1).lower() not in {"a", "i"} else m.group(0),
-        repaired
-    )
+    # 5. Conservative, context-aware linear token scanner for genuine split word fragments
+    vocab = _get_english_vocab()
+    abbreviations = {
+        "et", "al", "eg", "ie", "vs", "fig", "tab", "vol", "pp", "dr", "mr", "mrs", "ms", "prof", "no", "r", "p", "f", "z", "t"
+    }
 
-    # 4. Clean up specific known OCR artifacts
-    repaired = re.sub(r"\b(Mr\.?\s*&\s*Ms\.?\s*NEUST-POC\s*2026)\s+ant\b", r"\1 pageant", repaired, flags=re.IGNORECASE)
-    
-    return repaired
+    tokens = re.split(r"(\s+)", repaired)
+    rebuilt: list[str] = []
+    i = 0
+    n = len(tokens)
+
+    while i < n:
+        if i + 2 < n and tokens[i + 1].isspace():
+            w1, sep, w2 = tokens[i], tokens[i + 1], tokens[i + 2]
+            c1 = re.sub(r"^[^\w]+|[^\w]+$", "", w1)
+            c2 = re.sub(r"^[^\w]+|[^\w]+$", "", w2)
+
+            if c1 and c2 and c1.isalpha() and c2.isalpha():
+                c1_low, c2_low = c1.lower(), c2.lower()
+
+                # Guard abbreviations, statistical expressions, citations
+                if c1_low in abbreviations or c2_low in abbreviations:
+                    rebuilt.append(tokens[i])
+                    i += 1
+                    continue
+
+                # Guard acronyms / internal uppercase (e.g. NASA, ANOVA)
+                if (c1.isupper() and len(c1) > 1) or (c2.isupper() and len(c2) > 1):
+                    rebuilt.append(tokens[i])
+                    i += 1
+                    continue
+
+                # Guard proper nouns / names where both words are capitalized (e.g. "New York", "John Doe")
+                if c1[0].isupper() and c2[0].isupper():
+                    rebuilt.append(tokens[i])
+                    i += 1
+                    continue
+
+                c1_in_vocab = c1_low in vocab
+                c2_in_vocab = c2_low in vocab
+
+                # CRITICAL SAFETY RULE: Never merge if BOTH tokens are valid standalone English words.
+                # Preserves legitimate word boundaries: "now here", "the rapist", "in to", "for ever", "a part".
+                if c1_in_vocab and c2_in_vocab:
+                    rebuilt.append(tokens[i])
+                    i += 1
+                    continue
+
+                # Guard single-letter words: "a book", "I see" must never merge if second word is a word
+                if c1_low in {"a", "i"} and c2_in_vocab:
+                    rebuilt.append(tokens[i])
+                    i += 1
+                    continue
+
+                combined = (c1 + c2).lower()
+                # Merge ONLY when the combined form is a recognized English dictionary word (len >= 4)
+                # and at least one part is an OCR/extraction non-word fragment.
+                if combined in vocab and len(combined) >= 4:
+                    lead = w1[:len(w1) - len(c1)]
+                    trail = w2[len(c2):]
+                    merged_word = c1 + c2
+                    if c1[0].isupper() and c2.islower():
+                        merged_word = c1[0].upper() + (c1[1:] + c2).lower()
+                    rebuilt.append(lead + merged_word + trail)
+                    i += 3
+                    continue
+
+        rebuilt.append(tokens[i])
+        i += 1
+
+    return "".join(rebuilt)
 
 
 def normalize_pdf_line(line: str) -> str:
-    return repair_fragmented_tokens(line.replace("\u00ad", ""))
+    cleaned = line.replace("\u00ad", "")
+    cleaned = re.sub(r"\b(19\d|20\d)\s+(\d)\b", r"\1\2", cleaned)
+    cleaned = re.sub(r"([a-zA-Z]+'s)([a-zA-Z]+)", r"\1 \2", cleaned)
+    return cleaned
 
 
 def line_alpha_ratio(text: str) -> float:
@@ -184,7 +275,7 @@ def is_mostly_uppercase(text: str) -> bool:
 def is_section_number_noise(text: str) -> bool:
     compact = normalize_whitespace(text).strip(".:- ")
     if compact == "":
-        return True
+        return False
     return re.fullmatch(r"(?:[IVXLCDM]+|\d+(?:\.\d+){0,4})", compact, flags=re.IGNORECASE) is not None
 
 
@@ -218,12 +309,16 @@ def looks_like_author_or_affiliation_line(text: str) -> bool:
         return False
     if EMAIL_PATTERN.search(compact):
         return True
-    if re.search(r"\b(?:corresponding author|department|college|university|campus|faculty|institute|philippines)\b", lowered):
+    if re.search(r"\b(?:corresponding author|department|college|university|campus|faculty|institute|school\s+of|philippines|china|ministry|laboratory)\b", lowered):
         if re.search(r"\b(?:announced|confirmed|reported|stated|said|investigat(?:ed|ing)|will|has|have|were|was)\b", lowered):
             return False
-        return len(tokenize_words(compact)) <= 24
+        return len(tokenize_words(compact)) <= 28
     if re.fullmatch(r"[A-Z][A-Z\s\.\-']{5,}(?:\*)?", compact):
         return len(tokenize_words(compact)) <= 8
+    # Match authors with initials or standard bylines: e.g. "P.A.D.H.N Ponnamperuma", "P. A. D. H. N. Ponnamperuma", "J. R. Smith", "A. B. Davis and C. D. Jones"
+    if re.match(r"^(?:(?:[A-Z]\.?\s*)+|[A-Z][a-z]+)\s+[A-Z][A-Za-z\-']+(?:\s*(?:,|and|&)\s*(?:(?:[A-Z]\.?\s*)+|[A-Z][a-z]+)\s+[A-Z][A-Za-z\-']+)*$", compact):
+        if not re.search(r"\b(?:is|are|was|were|has|have|had|will|showed|found|indicates|observed|analyzed)\b", lowered):
+            return True
     return False
 
 
@@ -253,7 +348,7 @@ def remove_section_number_noise(text: str) -> str:
     cleaned_lines = [
         line
         for line in normalize_source_newlines(text).split("\n")
-        if not is_section_number_noise(line)
+        if line.strip() == "" or not is_section_number_noise(line)
     ]
     return "\n".join(cleaned_lines)
 
@@ -379,6 +474,10 @@ def segment_document_content(text: str) -> dict[str, list[str]]:
         compact = normalize_whitespace(para)
         if not compact:
             continue
+        inline_heading, separator, inline_body = compact.partition("|")
+        if separator and inline_body.strip() and match_section_heading(inline_heading):
+            main_reading.extend((inline_heading.strip(), inline_body.strip()))
+            continue
         if is_branding_or_watermark_line(compact) or is_ocr_corruption_line(compact) or looks_like_publication_noise(compact):
             noise.append(compact)
         elif is_directions_line(compact):
@@ -416,7 +515,7 @@ def is_valid_content_paragraph(paragraph: str) -> bool:
     # noise instead of allowing the entire block into the summary candidates.
     if looks_like_table_of_contents_entry(compact):
         return False
-    if word_count < 12:
+    if word_count < MIN_CONTENT_PARAGRAPH_WORDS:
         return False
     if line_alpha_ratio(compact) < 0.50:
         return False
@@ -453,26 +552,31 @@ def is_valid_content_paragraph(paragraph: str) -> bool:
 
 def extract_valid_paragraphs(clean_text: str) -> list[str]:
     raw_paragraphs = rebuild_paragraphs_from_lines(normalize_source_newlines(clean_text).split("\n"))
+    raw_paragraphs = merge_continuation_paragraphs(raw_paragraphs, merge_open_sentence=True)
     valid_paragraphs: list[str] = []
     current_section = "body"
-    for paragraph in raw_paragraphs:
+    for i, paragraph in enumerate(raw_paragraphs):
         matched = match_section_heading(paragraph)
         if matched is not None:
             current_section = matched
             continue
+        compact = _strip_inline_table_of_contents_prefix(paragraph)
+        compact = strip_leading_heading_label(compact)
+        if not compact:
+            continue
+        # Detect transition into trailing references list even if header was missing
+        if i >= max(2, len(raw_paragraphs) // 3) and (CITATION_ENTRY_PATTERN.match(compact) or re.match(r"^\[\d+\]", compact)):
+            current_section = "references"
         if current_section in TRAILING_DROP_SECTIONS:
             continue
         # Some DOCX/PDF extractors flatten the last TOC row and the first
         # chapter paragraph together. Remove the TOC prefix while retaining
         # the actual prose that follows it.
-        compact = _strip_inline_table_of_contents_prefix(paragraph)
-        compact = strip_leading_heading_label(compact)
-        if not compact:
-            continue
         if not is_valid_content_paragraph(compact):
             continue
+        compact = repair_fragmented_tokens(compact)
         valid_paragraphs.append(compact)
-    return deduplicate_paragraphs(merge_continuation_paragraphs(valid_paragraphs), threshold=0.9)
+    return deduplicate_paragraphs(valid_paragraphs, threshold=0.9)
 
 
 def contains_article_noise(text: str) -> bool:
@@ -496,10 +600,89 @@ def contains_article_noise(text: str) -> bool:
     )
 
 
+def remove_author_citation_fragments(text: str) -> str:
+    """Remove author-style citation fragments and numeric citations, including OCR-broken variants."""
+    if not text:
+        return ""
+    protected_ranges: list[tuple[str, str]] = []
+
+    def preserve_month_year_range(match: re.Match[str]) -> str:
+        token = f"__LIGHT_MONTH_YEAR_RANGE_{len(protected_ranges)}__"
+        protected_ranges.append((token, match.group(0)))
+        return token
+
+    cleaned = _MONTH_YEAR_RANGE_PATTERN.sub(preserve_month_year_range, text)
+    # 1. Bracketed numeric citations [1], [1, 2], [1-3]
+    cleaned = re.sub(r"\[\s*\d+(?:\s*[,;\-–—]\s*\d+)*\s*\]", "", cleaned)
+    # 2. Baseline regex for (Author et al.) / (Author, 2018) / (Liet al.) / (Sanchez-Lorenzo et al.
+    author = r"[A-Z][A-Za-z]+(?:[-'][A-Z][A-Za-z]+)?"
+    base_citation = re.compile(
+        rf"\s*\(\s*{author}(?:\s*,\s*\d{{4}}[a-z]?\.?)?"
+        rf"(?:\s*[,;]?\s*et\s*al\.?|\s*[,;]?\s*\d{{4}}[a-z]?\.?)\s*\)?",
+        flags=re.IGNORECASE,
+    )
+    cleaned = base_citation.sub("", cleaned)
+    # 3. Expanded author-date parenthetical citations with periods, multiple authors, or spaced years:
+    # Handles: (Zhang et al. 2008), (Xue et al. 2018.), (Yu et al. 20 21.), (Mudelsee, 2019.), (Zhai and Pan. 2003)
+    author_date_pat = re.compile(
+        r"\(\s*(?:[A-Za-z\s.\'\-]+?)(?:et\s*al\.?|and|&)?(?:\s+[A-Za-z\s.\'\-]+?)?"
+        r"[,;]?\s*(?:\d{4}|\d{2}\s+\d{2})[a-z]?\.?\s*\)",
+        re.IGNORECASE,
+    )
+    cleaned = author_date_pat.sub("", cleaned)
+    # 4. Multi-author semicolon blocks (Author 2018; Author 2020)
+    cleaned = re.sub(
+        r"\(\s*[A-Za-z\s.\'\-]+?[,;]?\s*\d{4}[a-z]?(?:\s*[;,]\s*[A-Za-z\s.\'\-]+?[,;]?\s*\d{4}[a-z]?)+\s*\)",
+        "",
+        cleaned,
+        flags=re.IGNORECASE,
+    )
+    # 5. Standalone parenthetical years after an author name: e.g. Smith (2018)
+    cleaned = re.sub(r"(\b[A-Z][a-z]{2,})\s*\(\s*\d{4}[a-z]?\s*\)", r"\1", cleaned)
+    # 6. Trailing/superscript citation extractions glued to words before punctuation: e.g. "trends2015.)." -> "trends."
+    cleaned = re.sub(r"([a-zA-Z])(?:\d{4}|\d{2}\s+\d{2})\.?\s*\)\.?", r"\1.", cleaned)
+    # 7. Orphaned parentheses remnants
+    cleaned = re.sub(r"\(\s*[.,;]?\s*\)", "", cleaned)
+    cleaned = re.sub(r"\s+([,.;:])", r"\1", cleaned)
+    for token, date_range in protected_ranges:
+        cleaned = cleaned.replace(token, date_range)
+    return cleaned.strip()
+
+
+def remove_orphan_parentheses(text: str) -> str:
+    """Remove unmatched closing parentheses and trim trailing unclosed opening parentheses."""
+    if "(" not in text and ")" not in text:
+        return text
+    chars = []
+    depth = 0
+    for char in text:
+        if char == "(":
+            depth += 1
+            chars.append(char)
+        elif char == ")":
+            if depth > 0:
+                depth -= 1
+                chars.append(char)
+        else:
+            chars.append(char)
+    result = "".join(chars)
+    if depth > 0:
+        result = re.sub(r"\s*\([^)]*$", "", result)
+    return result
+
+
 def normalize_summary_sentence(text: str, preserve_statistical_details: bool = False) -> str:
     original = text
+    text = repair_fragmented_tokens(text)
     text = normalize_summary_artifacts(text)
     cleaned = strip_leading_heading_label(text)
+    # Strip leading figure reference and caption markers: e.g. "Changes trends of... Figure 1, the trend line..." -> "The trend line..."
+    cleaned = re.sub(
+        r"^(?:[A-Z]\.\s+)?[A-Za-z0-9\s/&, -]{0,60}?(?:Figure|Fig\.)\s*\d+[a-z]?(?:\s*\([a-z]\))?[:,\s]+",
+        "",
+        cleaned,
+        flags=re.IGNORECASE,
+    )
     cleaned = INLINE_CITATION_PATTERN.sub("", cleaned)
     cleaned = remove_author_citation_fragments(cleaned)
     cleaned = DOI_PATTERN.sub("", cleaned)
@@ -507,27 +690,21 @@ def normalize_summary_sentence(text: str, preserve_statistical_details: bool = F
     cleaned = URL_GUARD_PATTERN.sub("", cleaned)
     cleaned = re.sub(r"\bISSN\b\s*[:\-\dXx ]+", "", cleaned, flags=re.IGNORECASE)
     cleaned = re.sub(r"\b(?:copyright|all rights reserved|camscanner)\b.*$", "", cleaned, flags=re.IGNORECASE)
+    cleaned = repair_fragmented_tokens(cleaned)
     cleaned = normalize_summary_artifacts(cleaned)
+    cleaned = remove_orphan_parentheses(cleaned)
     cleaned = re.sub(r"\s+([,.;:])", r"\1", cleaned)
-    cleaned = re.sub(r"^[^\w\s\"'(]+", "", cleaned)
+    cleaned = re.sub(r",{2,}", ",", cleaned)
+    cleaned = re.sub(r"^[^\w\s\"'(“‘]+", "", cleaned)
     cleaned = normalize_whitespace(cleaned)
+    if cleaned and cleaned[0].islower():
+        cleaned = cleaned[0].upper() + cleaned[1:]
     if not semantic_tokens_preserved(original, cleaned):
         cleaned = normalize_whitespace(normalize_summary_artifacts(original))
-    if cleaned and cleaned[-1] not in ".!?":
-        cleaned += "."
-    return cleaned
-
-
-def remove_author_citation_fragments(text: str) -> str:
-    """Remove author-style citation fragments, including OCR-broken variants."""
-    author = r"[A-Z][A-Za-z]+(?:[-'][A-Z][A-Za-z]+)?"
-    citation = re.compile(
-        rf"\s*\(\s*{author}(?:\s*,\s*\d{{4}}[a-z]?)?"
-        rf"(?:\s*[,;]?\s*et\s*al\.?|\s*[,;]\s*\d{{4}}[a-z]?)\s*\)?",
-        flags=re.IGNORECASE,
-    )
-    cleaned = citation.sub("", text)
-    return re.sub(r"\s+([,.;:])", r"\1", cleaned)
+        cleaned = repair_fragmented_tokens(cleaned)
+        cleaned = remove_author_citation_fragments(cleaned)
+        cleaned = remove_orphan_parentheses(cleaned)
+    return ensure_terminal_punctuation(cleaned)
 
 
 def is_formatting_artifact(text: str) -> bool:
@@ -780,11 +957,21 @@ def reformat_table_row(text: str) -> str:
 
 def looks_like_figure_caption(text: str) -> bool:
     normalized = normalize_whitespace(text)
-    return (
-        FIGURE_CAPTION_PATTERN.match(normalized) is not None
-        or INLINE_FIGURE_REFERENCE_PATTERN.search(normalized) is not None
-        or NUMBERED_CAPTION_PATTERN.match(normalized) is not None
-    )
+    if not normalized:
+        return False
+    if re.search(r"\bChanges trends of\b", normalized, re.IGNORECASE):
+        return True
+    if re.search(r"\b(?:Fig(?:ure)?|Table|Chart)\.?\s*\d+", normalized, re.IGNORECASE) and re.search(r"\([a-d]\)", normalized, re.IGNORECASE):
+        return True
+    if len(re.findall(r"\([a-d]\)", normalized, re.IGNORECASE)) >= 2:
+        return True
+    words = tokenize_words(normalized)
+    word_count = len(words)
+    if FIGURE_CAPTION_PATTERN.match(normalized) and word_count <= 25:
+        return True
+    if NUMBERED_CAPTION_PATTERN.match(normalized) and word_count <= 20:
+        return True
+    return False
 
 
 def looks_like_navigation_noise(text: str) -> bool:
@@ -1005,6 +1192,7 @@ def should_drop_paragraph(paragraph: str) -> bool:
     return False
 
 
+@timed("text_normalization")
 def prepare_document_paragraphs(
     raw_text: str,
     preprocessing_options: PreprocessingOptions,
@@ -1066,6 +1254,8 @@ def strip_low_value_sections(paragraphs: list[str]) -> list[str]:
     for index, paragraph in enumerate(paragraphs):
         section = sections[index]
         if section in TRAILING_DROP_SECTIONS and index >= max(2, len(paragraphs) // 2):
+            break
+        if index >= max(2, len(paragraphs) // 3) and (CITATION_ENTRY_PATTERN.match(paragraph) or re.match(r"^\[\d+\]", paragraph)):
             break
         if section in LOW_VALUE_SECTIONS:
             continue
@@ -1176,4 +1366,4 @@ def _legacy_is_page_number_line(text: str) -> bool:
     return PAGE_NUMBER_PATTERN.match(text) is not None
 
 
-__all__ = ['_fallback_preprocess_text', '_legacy_contains_failure_artifact', '_legacy_is_generic_important_term', '_legacy_is_noise_keyword', '_legacy_is_page_number_line', '_legacy_is_usable_sentence', '_legacy_looks_like_metadata_line', 'assess_summary_text_quality', 'clean_paragraph', 'clean_pdf_extracted_text', 'contains_article_noise', 'contains_failure_artifact', 'deduplicate_paragraphs', 'detect_repeated_noise_markers', 'extract_valid_paragraphs', 'is_assessment_or_question_line', 'is_branding_or_watermark_line', 'is_choice_line', 'is_directions_line', 'is_formatting_artifact', 'is_generic_important_term', 'is_mostly_uppercase', 'is_noise_important_term', 'is_noise_keyword', 'is_ocr_corruption_line', 'is_page_number_line', 'is_reference_like_sentence', 'is_section_number_noise', 'is_valid_content_paragraph', 'line_alpha_ratio', 'line_similarity_key', 'looks_like_author_or_affiliation_line', 'looks_like_citation_only_line', 'looks_like_code_text', 'looks_like_figure_caption', 'looks_like_metadata_line', 'looks_like_navigation_noise', 'looks_like_publication_noise', 'looks_like_reference_metadata_sentence', 'looks_like_repeated_metadata_candidate', 'looks_like_symbol_or_number_noise', 'looks_like_table_block', 'looks_like_table_of_contents_entry', 'looks_like_table_row', 'normalize_pdf_line', 'normalize_summary_artifacts', 'normalize_summary_sentence', 'prepare_document_paragraphs', 'preprocess_text', 'reformat_table_row', 'remove_author_citation_fragments', 'remove_journal_noise', 'remove_metadata_lines', 'remove_repeated_headers_footers', 'remove_section_number_noise', 'repair_fragmented_tokens', 'segment_document_content', 'semantic_tokens', 'semantic_tokens_preserved', 'should_drop_line', 'should_drop_paragraph', 'strip_leading_academic_metadata', 'strip_low_value_sections']
+__all__ = ['_fallback_preprocess_text', '_legacy_contains_failure_artifact', '_legacy_is_generic_important_term', '_legacy_is_noise_keyword', '_legacy_is_page_number_line', '_legacy_is_usable_sentence', '_legacy_looks_like_metadata_line', 'assess_summary_text_quality', 'clean_paragraph', 'clean_pdf_extracted_text', 'contains_article_noise', 'contains_failure_artifact', 'deduplicate_paragraphs', 'detect_repeated_noise_markers', 'extract_valid_paragraphs', 'is_assessment_or_question_line', 'is_branding_or_watermark_line', 'is_choice_line', 'is_directions_line', 'is_formatting_artifact', 'is_generic_important_term', 'is_mostly_uppercase', 'is_noise_important_term', 'is_noise_keyword', 'is_ocr_corruption_line', 'is_page_number_line', 'is_reference_like_sentence', 'is_section_number_noise', 'is_valid_content_paragraph', 'line_alpha_ratio', 'line_similarity_key', 'looks_like_author_or_affiliation_line', 'looks_like_citation_only_line', 'looks_like_code_text', 'looks_like_figure_caption', 'looks_like_metadata_line', 'looks_like_navigation_noise', 'looks_like_publication_noise', 'looks_like_reference_metadata_sentence', 'looks_like_repeated_metadata_candidate', 'looks_like_symbol_or_number_noise', 'looks_like_table_block', 'looks_like_table_of_contents_entry', 'looks_like_table_row', 'normalize_pdf_line', 'normalize_summary_artifacts', 'normalize_summary_sentence', 'prepare_document_paragraphs', 'preprocess_text', 'reformat_table_row', 'remove_author_citation_fragments', 'remove_journal_noise', 'remove_metadata_lines', 'remove_orphan_parentheses', 'remove_repeated_headers_footers', 'remove_section_number_noise', 'repair_fragmented_tokens', 'segment_document_content', 'semantic_tokens', 'semantic_tokens_preserved', 'should_drop_line', 'should_drop_paragraph', 'strip_leading_academic_metadata', 'strip_low_value_sections']

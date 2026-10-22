@@ -35,7 +35,7 @@ $nutshellHistory = HistoryHandler::getNutshellHistory($userId, $guestToken);
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/images/poc-neust-logo.png">
     <link rel="stylesheet" href="assets/css/design-tokens.css">
-    <link rel="stylesheet" href="assets/css/style.css?v=navbar-3">
+    <link rel="stylesheet" href="assets/css/style.css?v=navbar-3-<?= filemtime(__DIR__ . '/assets/css/style.css') ?>">
     <link rel="stylesheet" href="assets/css/site-nav.css?v=3">
     <link rel="stylesheet" href="assets/css/site-footer.css?v=nex-8">
     <link rel="stylesheet" href="assets/css/global-button-effects.css?v=2">

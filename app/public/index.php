@@ -22,7 +22,7 @@ $navCurrentPage = 'index.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIGHT — AI Document Summarizer</title>
+    <title>LIGHT — AI Article Summarizer</title>
     <meta name="description" content="LIGHT turns complex documents into clear, useful knowledge. Explore the workspace to create a focused summary of your document.">
 
     <!-- Preload local display font -->
@@ -38,11 +38,11 @@ $navCurrentPage = 'index.php';
 
     <!-- Design tokens and global base -->
     <link rel="stylesheet" href="assets/css/design-tokens.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=<?= filemtime(__DIR__ . '/assets/css/style.css') ?>">
     <link rel="stylesheet" href="assets/css/site-footer.css?v=nex-8">
 
     <!-- Landing-specific editorial stylesheet (new, scoped to .nex-landing) -->
-    <link rel="stylesheet" href="assets/css/nex-landing.css?v=18">
+    <link rel="stylesheet" href="assets/css/nex-landing.css?v=20">
 
 </head>
 
@@ -95,9 +95,7 @@ $navCurrentPage = 'index.php';
             </div>
 
             <div class="nex-about__statement nex-reveal">
-                <h2 id="about-title">LIGHT turns complex
-documents into clear,
-useful knowledge.</h2>
+                <h2 id="about-title">LIGHT turns complex articles into clear, useful knowledge.</h2>
                 <p class="nex-about__secondary">Understand more
 without reading
 everything.</p>

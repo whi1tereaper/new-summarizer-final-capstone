@@ -3,10 +3,13 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../app/src/whitereaper.php';
 require_once __DIR__ . '/../app/src/Database.php';
+require_once __DIR__ . '/../app/src/Repositories/UserRepository.php';
+require_once __DIR__ . '/../app/src/Utils/PasswordPolicy.php';
 require_once __DIR__ . '/../app/src/Utils/validation.php';
 require_once __DIR__ . '/../app/src/Services/AdminSecurityService.php';
 
 use App\Src\Database;
+use App\Src\Repositories\UserRepository;
 use App\Src\Services\AdminSecurityService;
 
 echo "====================================================\n";
@@ -28,6 +31,8 @@ function assertAuth(string $name, bool $condition, string $detail = ''): void {
 }
 
 $db = Database::getInstance()->getConnection();
+$users = new UserRepository($db);
+$temporaryLoginUserId = null;
 
 // 1. User login (valid user credentials)
 $stmt = $db->prepare("SELECT * FROM users WHERE role = 'user' AND active = 1 LIMIT 1");
@@ -43,6 +48,7 @@ if ($normalUser) {
     $ins = $db->prepare("INSERT INTO users (username, email, password_hash, role, active, created_at) VALUES (?, ?, ?, 'user', 1, NOW())");
     $ins->execute([$tempUsername, $tempUsername . '@example.com', $hash]);
     $userId = (int)$db->lastInsertId();
+    $temporaryLoginUserId = $userId;
     $normalUser = ['id' => $userId, 'username' => $tempUsername, 'role' => 'user'];
     assertAuth("Created temporary test user for login verification", true, "User ID: " . $userId);
 }
@@ -131,6 +137,73 @@ assertAuth(
 
 // Clean up test registered user
 if ($createdUser) {
+    $duplicateResponseFile = sys_get_temp_dir() . '/test_dup_reg_result_' . bin2hex(random_bytes(4)) . '.json';
+    $duplicateRegisterPayload = '<?php
+$_SERVER["REQUEST_METHOD"] = "POST";
+$_GET["action"] = "register";
+require_once "app/src/whitereaper.php";
+require_once "app/src/Utils/validation.php";
+session_start();
+$_POST["csrf_token"] = generateCsrfToken();
+$_POST["username"] = ' . var_export($testRegUser, true) . ';
+$_POST["email"] = ' . var_export($testRegEmail, true) . ';
+$_POST["password"] = "Str0ngP@ssword2026!";
+$_POST["confirm_password"] = "Str0ngP@ssword2026!";
+$_POST["terms_accept"] = "1";
+register_shutdown_function(static function (): void {
+    file_put_contents(' . var_export($duplicateResponseFile, true) . ', json_encode([
+        "error" => $_SESSION["error"] ?? null,
+        "success" => $_SESSION["success"] ?? null,
+    ]));
+});
+require_once "app/public/auth.php";
+';
+    $tempFile = sys_get_temp_dir() . '/test_dup_reg_' . bin2hex(random_bytes(4)) . '.php';
+    file_put_contents($tempFile, $duplicateRegisterPayload);
+    exec('php ' . escapeshellarg($tempFile), $duplicateOutput, $duplicateExitCode);
+    unlink($tempFile);
+    $duplicateResponse = json_decode((string)file_get_contents($duplicateResponseFile), true);
+    unlink($duplicateResponseFile);
+
+    $duplicateCountStatement = $db->prepare('SELECT COUNT(*) FROM users WHERE username = ? OR email = ?');
+    $duplicateCountStatement->execute([$testRegUser, $testRegEmail]);
+    assertAuth(
+        "Duplicate registration reports the existing-account error without creating another account",
+        $duplicateExitCode === 0
+            && ($duplicateResponse['error'] ?? null) === 'Username or email already exists.'
+            && ($duplicateResponse['success'] ?? null) === null
+            && (int)$duplicateCountStatement->fetchColumn() === 1
+    );
+
+    $repositoryUser = $users->findActiveByCredential($testRegUser);
+    assertAuth(
+        "UserRepository reads the newly registered active account",
+        is_array($repositoryUser)
+            && (int)$repositoryUser['id'] === (int)$createdUser['id']
+            && $repositoryUser['role'] === 'user'
+    );
+    assertAuth(
+        "UserRepository finds accounts by normalized email",
+        $users->findIdByEmail($testRegEmail) === (int)$createdUser['id']
+    );
+    $testPasswordHash = \App\Src\Utils\PasswordPolicy::hash('UpdatedPass123!');
+    $users->updatePasswordHash((int)$createdUser['id'], $testPasswordHash);
+    $updatedPasswordStatement = $db->prepare('SELECT password_hash FROM users WHERE id = ?');
+    $updatedPasswordStatement->execute([$createdUser['id']]);
+    assertAuth(
+        "UserRepository updates password hashes without changing account identity",
+        password_verify('UpdatedPass123!', (string)$updatedPasswordStatement->fetchColumn())
+    );
+    $duplicateAccountError = new PDOException('duplicate account', 23000);
+    $duplicateAccountError->errorInfo = ['23000', 1062, 'Duplicate entry'];
+    $otherIntegrityError = new PDOException('other integrity failure', 23000);
+    $otherIntegrityError->errorInfo = ['23000', 1451, 'Foreign key constraint failure'];
+    assertAuth(
+        "Registration recognizes only MySQL duplicate-key failures as duplicate accounts",
+        UserRepository::isUniqueConstraintViolation($duplicateAccountError)
+            && !UserRepository::isUniqueConstraintViolation($otherIntegrityError)
+    );
+
     $delStmt = $db->prepare("DELETE FROM users WHERE id = ?");
     $delStmt->execute([$createdUser['id']]);
 }
@@ -176,6 +249,11 @@ $exitCode = 0;
 exec($cmd, $output, $exitCode);
 unlink($tempFile);
 assertAuth("ForgotPassword action routes structurally without error", $exitCode === 0);
+
+if ($temporaryLoginUserId !== null) {
+    $cleanup = $db->prepare('DELETE FROM users WHERE id = ?');
+    $cleanup->execute([$temporaryLoginUserId]);
+}
 
 echo "\n====================================================\n";
 echo "AUTH VERIFICATION RESULTS: {$passCount} PASSED, {$failCount} FAILED\n";

@@ -21,7 +21,7 @@ Migration 012 creates these 13 tables:
 - `evaluation_assignments`, `evaluation_ratings`
 - `evaluation_errors`, `evaluation_content_unit_reviews`, `evaluation_audit_log`
 
-`users` remains the existing `user`/`admin` role model. Evaluation management requires a signed-in, active administrator account. At the user's request on 2026-10-02, the separate anime/number administrator challenge was removed; password login and valid remember-me authentication now establish the administrator session directly. A session containing only the retired pending-admin state must sign in again. An active ordinary account can read and submit only its explicitly assigned assessments. No new authentication role is needed.
+`users` remains the existing `user`/`admin` role model. Evaluation management requires a signed-in, active administrator account. Administrator sign-in uses a six-digit code sent to the email address on an active administrator account; no password is requested, and password login cannot establish an administrator session. Codes expire after 10 minutes, are single-use, stored only as a hash in the server-side session, and are rate-limited by IP and a hash of the normalized email address. Administrator remember-me authentication is disabled so it cannot bypass code verification. Email possession is the sole admin sign-in factor: compromise of that mailbox can grant administrator access, and loss of mailbox access prevents sign-in. An active ordinary account can read and submit only its explicitly assigned assessments. No new authentication role is needed.
 
 ## Create and freeze a corpus
 

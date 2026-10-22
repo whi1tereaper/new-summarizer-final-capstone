@@ -24,24 +24,29 @@
 /* == Light Editorial Tokens (Default Brand System) == */
 :root {
   --color-bg:              #EEEDEA;
+  --color-bg-rgb:          238, 237, 234;
   --color-bg-secondary:    #F7F6F2;
   --color-bg-tertiary:     #E5E4DE;
   --color-surface:         #ffffff;
   --color-text:            #080808;
+  --color-text-rgb:        8, 8, 8;
   --color-text-secondary:  rgba(8, 8, 8, 0.68);
   --color-text-muted:      rgba(8, 8, 8, 0.48);
   --color-border:          rgba(8, 8, 8, 0.14);
   --color-border-strong:   rgba(8, 8, 8, 0.28);
   --color-accent:          #7F00FF;
+  --color-accent-rgb:      127, 0, 255;
   --color-accent-hover:    #6a00d8;
   --color-accent-soft:     rgba(127, 0, 255, 0.08);
   --color-accent-strong:   #7F00FF;
   --color-on-accent:       #ffffff;
   --color-success:         #15803d;
+  --color-success-rgb:     21, 128, 61;
   --color-success-soft:    #f0fdf4;
   --color-warning:         #b45309;
   --color-warning-soft:    #fefce8;
   --color-danger:          #b91c1c;
+  --color-danger-rgb:      185, 28, 28;
   --color-danger-soft:     #fef2f2;
   --color-focus:           #7F00FF;
   --gradient-primary:      none;
@@ -98,11 +103,11 @@
 }
 
 [data-theme="dark"] {
-  --color-bg:#171917; --color-bg-secondary:#20231f; --color-bg-tertiary:#2b2f29;
+  --color-bg:#171917; --color-bg-rgb:23, 25, 23; --color-bg-secondary:#20231f; --color-bg-tertiary:#2b2f29;
   --color-surface:#242723;
-  --color-text:#f1f2ee; --color-text-secondary:#cdd1c9; --color-text-muted:#a6afa1;
+  --color-text:#f1f2ee; --color-text-rgb:241, 242, 238; --color-text-secondary:#cdd1c9; --color-text-muted:#a6afa1;
   --color-border:#3d4339; --color-border-strong:#747e6f;
-  --color-accent:#9d87f5; --color-accent-hover:#b5a4fb; --color-accent-soft:#2a224a;
+  --color-accent:#9d87f5; --color-accent-rgb:157, 135, 245; --color-accent-hover:#b5a4fb; --color-accent-soft:#2a224a;
   --color-accent-strong:#b5a4fb; --color-focus:#b5a4fb;
   --color-on-accent:#13111c;
   --shadow-xs:0 1px 2px rgba(0,0,0,.3); --shadow-sm:0 2px 6px rgba(0,0,0,.35);
@@ -111,21 +116,22 @@
 }
 
 [data-theme="light"] {
-  --color-bg:#EEEDEA; --color-bg-secondary:#F7F6F2; --color-bg-tertiary:#E5E4DE;
+  --color-bg:#EEEDEA; --color-bg-rgb:238, 237, 234; --color-bg-secondary:#F7F6F2; --color-bg-tertiary:#E5E4DE;
   --color-surface:#ffffff;
-  --color-text:#080808; --color-text-secondary:rgba(8, 8, 8, 0.68); --color-text-muted:rgba(8, 8, 8, 0.48);
+  --color-text:#080808; --color-text-rgb:8, 8, 8; --color-text-secondary:rgba(8, 8, 8, 0.68); --color-text-muted:rgba(8, 8, 8, 0.48);
   --color-border:rgba(8, 8, 8, 0.14); --color-border-strong:rgba(8, 8, 8, 0.28);
-  --color-accent:#7F00FF; --color-accent-hover:#6a00d8; --color-accent-soft:rgba(127, 0, 255, 0.08);
+  --color-accent:#7F00FF; --color-accent-rgb:127, 0, 255; --color-accent-hover:#6a00d8; --color-accent-soft:rgba(127, 0, 255, 0.08);
   --color-accent-strong:#7F00FF; --color-focus:#7F00FF;
   --color-on-accent:#ffffff;
 }
 
 /* == Reduced Motion == */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  *:not(.loader, .loader *, .load, .load *, [class*="spin"], [class*="loader"]),
+  *:not(.loader, .loader *, .load, .load *, [class*="spin"], [class*="loader"])::before,
+  *:not(.loader, .loader *, .load, .load *, [class*="spin"], [class*="loader"])::after {
+    animation: none !important;
+    transition: none !important;
     scroll-behavior: auto !important;
   }
 }

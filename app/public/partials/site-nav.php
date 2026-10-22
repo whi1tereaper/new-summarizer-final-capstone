@@ -5,9 +5,13 @@ $navUsername = $_SESSION['username'] ?? 'GUEST';
 $navIsAdmin = !empty($navUserId) && ($_SESSION['role'] ?? 'user') === 'admin';
 $navCurrentPage = basename((string)($_SERVER['SCRIPT_NAME'] ?? ''));
 $isLanding = ($navCurrentPage === 'index.php' || $navCurrentPage === '');
-$aboutHref = $isLanding ? '#about-light' : 'index.php#about-light';
 ?>
-<link rel="stylesheet" href="assets/css/site-nav.css?v=nex-10">
+<link rel="stylesheet" href="assets/css/site-nav.css?v=nex-13">
+<script src="assets/js/logout-confirmation.js?v=<?= filemtime(__DIR__ . '/../assets/js/logout-confirmation.js') ?>" defer></script>
+<?php if (!$isLanding): ?>
+<link rel="stylesheet" href="assets/css/theme-toggle.css?v=2">
+<script src="assets/js/theme-toggle.js?v=2"></script>
+<?php endif; ?>
 <header class="nex-header site-header" id="nex-site-header" data-active-theme="light" aria-label="LIGHT navigation">
     <a href="index.php" class="nex-brand" aria-label="LIGHT home">LIGHT</a>
 
@@ -18,22 +22,25 @@ $aboutHref = $isLanding ? '#about-light' : 'index.php#about-light';
     </button>
 
     <nav class="nex-header-right site-actions" id="nex-nav-menu" role="navigation" aria-label="Site navigation">
-        <?php if (!$navIsAdmin): ?>
-            <a href="<?= $aboutHref ?>" class="nex-nav__link<?= $navCurrentPage === 'about.php' ? ' nex-nav__link--active' : '' ?>">About</a>
-        <?php endif; ?>
         <a href="summarizer.php" class="nex-nav__link<?= $navCurrentPage === 'summarizer.php' ? ' nex-nav__link--active' : '' ?>">Summarize</a>
 
         <?php if ($navUserId): ?>
             <?php if ($navIsAdmin): ?>
                 <a href="admin_dashboard.php" class="nex-nav__link<?= ($navCurrentPage === 'admin_dashboard.php' || $navCurrentPage === 'admin_audit_logs.php') ? ' nex-nav__link--active' : '' ?>">Admin</a>
-                <a href="evaluation.php" class="nex-nav__link<?= in_array($navCurrentPage, ['evaluation.php', 'evaluation_export.php'], true) ? ' nex-nav__link--active' : '' ?>">Evaluation</a>
+            <?php else: ?>
+                <a href="dashboard.php" class="nex-nav__link<?= $navCurrentPage === 'dashboard.php' ? ' nex-nav__link--active' : '' ?>">Dashboard</a>
             <?php endif; ?>
-            <a href="analytics.php" class="nex-nav__link<?= $navCurrentPage === 'analytics.php' ? ' nex-nav__link--active' : '' ?>">Analytics</a>
+            <?php if ($navIsAdmin): ?><a href="analytics.php" class="nex-nav__link<?= $navCurrentPage === 'analytics.php' ? ' nex-nav__link--active' : '' ?>">Analytics</a><?php endif; ?>
+            <?php if ($navIsAdmin): ?><a href="admin_audit_logs.php" class="nex-nav__link<?= $navCurrentPage === 'admin_audit_logs.php' ? ' nex-nav__link--active' : '' ?>">Audit Logs</a><?php endif; ?>
+            <a href="profile.php" class="nex-nav__link<?= $navCurrentPage === 'profile.php' ? ' nex-nav__link--active' : '' ?>">Profile</a>
             <a href="history.php" class="nex-nav__link<?= $navCurrentPage === 'history.php' ? ' nex-nav__link--active' : '' ?>">History</a>
             <a href="auth.php?action=logout" class="nex-nav__link js-logout-link">Logout</a>
         <?php else: ?>
             <a href="login.php" class="nex-nav__link<?= $navCurrentPage === 'login.php' ? ' nex-nav__link--active' : '' ?>">Login</a>
             <a href="register.php" class="nex-nav__link<?= $navCurrentPage === 'register.php' ? ' nex-nav__link--active' : '' ?>">Register</a>
+        <?php endif; ?>
+        <?php if (!$isLanding): ?>
+            <?php require __DIR__ . '/theme-toggle-button.php'; ?>
         <?php endif; ?>
     </nav>
 </header>

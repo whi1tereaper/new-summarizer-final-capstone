@@ -330,8 +330,9 @@ class AnalyticsController
     public function getDashboardData(?int $userId, bool $isAdmin, string $from, string $to, ?string $guestToken = null): array
     {
         [$from, $to] = $this->normalizeDateRange($from, $to);
-        $where = 'created_at >= :from AND created_at < DATE_ADD(:to, INTERVAL 1 DAY)';
-        $params = ['from' => $from, 'to' => $to];
+        $toNext = (new \DateTimeImmutable($to))->modify('+1 day')->format('Y-m-d');
+        $where = 'created_at >= :from AND created_at < :to_next';
+        $params = ['from' => $from, 'to_next' => $toNext];
         if (!$isAdmin) {
             if ($userId !== null && $userId > 0) {
                 $where .= ' AND user_id = :user_id';
@@ -344,16 +345,19 @@ class AnalyticsController
 
         $completedWhere = $where . " AND status = 'completed'";
         $monthlyTrend = (strtotime($to) - strtotime($from)) > (90 * 86400);
-        $trendBucket = $monthlyTrend ? "DATE_FORMAT(created_at, '%Y-%m')" : 'DATE(created_at)';
-        $nutshellWhere = "status = 'completed' AND created_at >= :from AND created_at < DATE_ADD(:to, INTERVAL 1 DAY)";
+        $isPg = \App\Src\Database::getInstance()->isPostgres();
+        if ($isPg) {
+            $trendBucket = $monthlyTrend ? "TO_CHAR(created_at, 'YYYY-MM')" : 'CAST(created_at AS date)';
+        } else {
+            $trendBucket = $monthlyTrend ? "DATE_FORMAT(created_at, '%Y-%m')" : 'DATE(created_at)';
+        }
+        $nutshellWhere = "status = 'completed' AND created_at >= :from AND created_at < :to_next";
         if (!$isAdmin) {
             $nutshellWhere .= $userId !== null && $userId > 0
                 ? ' AND user_id = :user_id'
                 : ' AND guest_token = :guest_token';
         }
-        $nutshellTrendBucket = $monthlyTrend
-            ? "DATE_FORMAT(created_at, '%Y-%m')"
-            : 'DATE(created_at)';
+        $nutshellTrendBucket = $trendBucket;
         $query = function (string $sql) use ($params): array {
             $statement = $this->db->prepare($sql);
             $statement->execute($params);
@@ -363,7 +367,7 @@ class AnalyticsController
         $kpiRows = $query("SELECT COUNT(*) AS articles, COALESCE(SUM(original_word_count), 0) AS words,
             AVG(NULLIF(original_word_count, 0)) AS original_avg, AVG(NULLIF(summary_word_count, 0)) AS summary_avg,
                 COALESCE(AVG(CASE WHEN original_word_count > 0 THEN
-                    (original_word_count - summary_word_count) / original_word_count * 100 END), NULL) AS reduction
+                    (CAST(original_word_count AS SIGNED) - CAST(summary_word_count AS SIGNED)) / original_word_count * 100 END), NULL) AS reduction
             FROM summaries WHERE {$completedWhere}");
         $kpis = $kpiRows[0] ?? [];
 
@@ -513,5 +517,38 @@ class AnalyticsController
         }
 
         return $result;
+    }
+
+    /** Return the authenticated user's most-used completed settings. */
+    public function getUserPreferredSettings(int $userId): array
+    {
+        if ($userId <= 0) {
+            return [];
+        }
+        $stmt = $this->db->prepare(
+            'SELECT s.summary_style, s.summary_length, a.generated_summary
+             FROM summaries s
+             LEFT JOIN summary_artifacts a ON a.summary_id = s.id
+             WHERE s.user_id = :user_id AND s.status = "completed"
+             ORDER BY s.created_at DESC LIMIT 1000'
+        );
+        $stmt->execute(['user_id' => $userId]);
+        $counts = [];
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
+            $payload = json_decode((string)($row['generated_summary'] ?? ''), true);
+            $payload = is_array($payload) ? $payload : [];
+            $mode = strtolower(trim((string)($payload['analysis_mode'] ?? 'general')));
+            $format = strtolower(trim((string)($payload['output_format'] ?? '')));
+            $depth = strtolower(trim((string)($payload['summary_depth'] ?? ($row['summary_length'] ?? 'balanced'))));
+            $format = $format !== '' ? $format : match ((string)($row['summary_style'] ?? '')) {
+                'bullet_points' => 'bullets', 'hybrid' => 'hybrid', default => 'paragraph'
+            };
+            $key = $mode . '|' . $format . '|' . $depth;
+            $counts[$key] = ($counts[$key] ?? 0) + 1;
+        }
+        if ($counts === []) return [];
+        uksort($counts, static fn(string $a, string $b): int => $counts[$b] <=> $counts[$a] ?: strcmp($a, $b));
+        [$mode, $format, $depth] = explode('|', (string)array_key_first($counts));
+        return ['analysis_mode' => $mode, 'output_format' => $format, 'summary_depth' => $depth, 'count' => $counts[array_key_first($counts)]];
     }
 }

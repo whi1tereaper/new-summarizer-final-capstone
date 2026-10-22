@@ -58,6 +58,9 @@ ARTICLE_TYPE_LABELS = {
     "announcement": "Announcement",
     "transcript_interview": "Transcript / Interview",
     "narrative": "Narrative",
+    "scientific_publication": "Scientific Publication",
+    "financial_report": "Financial Report",
+    "meeting_transcript": "Meeting Minutes / Transcript",
     "short_text": "Short Text",
     "general_article": "General",
 }
@@ -108,6 +111,11 @@ SECTION_ALIASES = {
         "synthesis of the study",
         "synthesis of related literature",
         "research gap",
+        "domestic and international research progress",
+        "research progress",
+        "related research",
+        "prior research",
+        "current research status",
     ),
     "methodology": (
         "methodology",
@@ -135,7 +143,30 @@ SECTION_ALIASES = {
         "statistical analysis",
         "data analysis",
     ),
-    "results": ("results", "findings", "outcomes", "empirical results", "actual findings"),
+    "results": (
+        "results",
+        "findings",
+        "outcomes",
+        "empirical results",
+        "actual findings",
+        "research results",
+        "results and analysis",
+        "research results and analysis",
+        "trend analysis",
+        "changes trends",
+        "relative humidity changes",
+        "annual relative humidity changes",
+        "seasonal relative humidity changes",
+        "sunshine duration changes",
+        "annual sunshine duration changes",
+        "seasonal sunshine duration changes",
+        "precipitation changes",
+        "annual precipitation changes",
+        "seasonal precipitation changes",
+        "temperature changes",
+        "annual temperature changes",
+        "seasonal temperature changes",
+    ),
     "discussion": ("discussion", "analysis", "results and discussion"),
     "conclusion": ("conclusion", "conclusions", "closing thoughts", "final thoughts", "summary of findings"),
     "recommendations": ("recommendation", "recommendations", "policy recommendations"),
@@ -179,7 +210,11 @@ SECTION_ALIASES = {
     "outcome": ("outcome", "status update"),
     "table_of_contents": ("contents", "table of contents"),
     "activity_name": ("activity name", "title of activity", "program name", "project title"),
-    "date_and_venue": ("date", "venue", "date and venue", "location", "time"),
+    "date_and_venue": ("date and venue", "date & venue", "date and time", "time and venue", "date and location", "activity date", "event date"),
+    "compliance": ("compliance", "compliance requirements", "regulatory compliance", "penalties"),
+    "penalties": ("penalties", "sanctions", "fines", "liabilities"),
+    "experiments": ("experiments", "experimental setup", "experimental procedure", "experimental results", "trials"),
+    "financial_overview": ("financial overview", "financial results", "financial performance", "earnings", "balance sheet"),
     "highlights": ("highlights", "activity highlights", "program highlights", "event highlights"),
     "annexes": ("annex", "annexes", "attachment", "attachments", "supporting attachments"),
     "documentation": ("documentation", "supporting documentation", "photos", "photo documentation"),
@@ -300,9 +335,8 @@ SIMILARITY_THRESHOLDS: dict[str, float] = {
 SECTION_COVERAGE_GROUPS: dict[str, list[set[str]]] = {
     "academic": [
         {"abstract", "introduction", "background", "purpose", "problem", "framework"},
-        {"literature_review"},
-        {"methodology"},
         {"results", "discussion"},
+        {"methodology"},
         {"conclusion", "recommendations", "future_work", "limitations", "policy_scope"},
     ],
     "case_study": [
@@ -508,9 +542,11 @@ SURFACE_TERM_PATTERNS = (
 )
 
 CITATION_ENTRY_PATTERN = re.compile(
-    r"(?:^\[?\d+\]?\s*[A-Z][a-z]+.*?\(\d{4}\))"
-    r"|(?:^[A-Z][a-z]+,\s*[A-Z]\..*?\(\d{4}\))"
-    r"|(?:^[A-Z][a-z]+,\s*[A-Z]\.\s*(?:&|and)\s*[A-Z])",
+    r"(?:^\[\d+\]\s*[A-Za-z]+)"
+    r"|(?:^\d+\.\s+[A-Z][a-z]+.*?(?:\(\d{4}\)|,\s*\d{4}|\.\s*\d{4}))"
+    r"|(?:^[A-Z][a-zA-Z\'-]+,\s*[A-Z]\..*?(?:\(\d{4}\)|,\s*\d{4}|\.\s*\d{4}))"
+    r"|(?:^[A-Z][a-zA-Z\'-]+,\s*[A-Z]\.\s*(?:&|and)\s*[A-Z])"
+    r"|(?:^\[?\d+\]?\s*[A-Z][a-z]+.*?\(\d{4}\))",
 )
 REFERENCE_METADATA_HINT_PATTERN = re.compile(
     r"\b(?:journal|vol(?:ume)?|issue|pages?|pp\.?|doi|abstract|paperid|issn|isbn)\b",
@@ -539,6 +575,7 @@ DIRECTIONS_PATTERN = re.compile(
     r"^(?:directions?|instructions?|assessment(?:\s+items?)?|activity(?:\s+\d+)?|"
     r"exercise(?:\s+\d+)?|practice(?:\s+questions?|\s+test)?|comprehension\s+questions?|"
     r"evaluation|multiple\s+choice|true\s+or\s+false|fill\s+in\s+the\s+blanks?|"
+    r"read\s+(?:the\s+)?questions?\s+carefully|write\s+(?:your\s+)?answers?\b|"
     r"choose\s+the\s+(?:best|correct)\s+answer|write\s+\d+\s+paragraphs?|"
     r"answer\s+the\s+(?:following|questions?)|match\s+column\s+[a-z]|"
     r"guide\s+questions?|learning\s+activity\s+sheet)\b",
@@ -1211,12 +1248,41 @@ STRUCTURED_ROLES = {
 }
 
 
-SUMMARY_DEPTHS = ("brief", "short", "balanced", "detailed", "comprehensive")
+SUMMARY_DEPTHS = ("very_brief", "brief", "short", "balanced", "detailed", "comprehensive")
 
 # Central summary depth configuration:
 # Governs compression ratio, topic coverage, section quotas, redundancy penalty,
 # supporting detail preservation, sentence length ceilings, and key points/conclusion targets.
 DEPTH_CONFIG: dict[str, dict[str, Any]] = {
+    "very_brief": {
+        "label": "Very Brief",
+        "detail_level": 1,
+        "compression_min": 0.04,
+        "compression_max": 0.08,
+        "target_ratio": 0.06,
+        "coverage_strength": 0.20,
+        "supporting_detail": 0.10,
+        "redundancy_penalty": 1.00,
+        "redundancy_tolerance": 0.15,
+        "section_coverage": 0.20,
+        "section_coverage_weight": 0.15,
+        "topic_coverage_ratio": 0.20,
+        "max_topics": 1,
+        "min_topics": 1,
+        "min_sentences": 1,
+        "max_sentences": 2,
+        "min_words": 15,
+        "max_words": 80,
+        "max_sentence_length_words": 28,
+        "key_points_range": (1, 2),
+        "key_points_max": 2,
+        "conclusion_depth": "concise",
+        "evidence_level": "minimal",
+        "include_limitations": False,
+        "include_conclusion": True,
+        "include_methodology": False,
+        "prompt_instruction": "Distill into the single most essential premise and primary conclusion.",
+    },
     "brief": {
         "label": "Brief",
         "detail_level": 1,
@@ -1243,6 +1309,7 @@ DEPTH_CONFIG: dict[str, dict[str, Any]] = {
         "evidence_level": "minimal",
         "include_limitations": False,
         "include_conclusion": True,
+        "include_methodology": False,
         "prompt_instruction": "Focus strictly on the core main idea and essential findings.",
     },
     "short": {
@@ -1271,6 +1338,7 @@ DEPTH_CONFIG: dict[str, dict[str, Any]] = {
         "evidence_level": "essential",
         "include_limitations": False,
         "include_conclusion": True,
+        "include_methodology": False,
         "prompt_instruction": "Provide the main argument and the most important supporting points.",
     },
     "balanced": {
@@ -1299,6 +1367,7 @@ DEPTH_CONFIG: dict[str, dict[str, Any]] = {
         "evidence_level": "supporting",
         "include_limitations": True,
         "include_conclusion": True,
+        "include_methodology": True,
         "prompt_instruction": "Give a well-rounded summary that preserves the main argument, important supporting details, and major conclusion.",
     },
     "detailed": {
@@ -1327,6 +1396,7 @@ DEPTH_CONFIG: dict[str, dict[str, Any]] = {
         "evidence_level": "substantial",
         "include_limitations": True,
         "include_conclusion": True,
+        "include_methodology": True,
         "prompt_instruction": "Preserve major arguments, supporting evidence, important examples, findings, qualifications, and conclusions.",
     },
     "comprehensive": {
@@ -1355,11 +1425,10 @@ DEPTH_CONFIG: dict[str, dict[str, Any]] = {
         "evidence_level": "maximum",
         "include_limitations": True,
         "include_conclusion": True,
+        "include_methodology": True,
         "prompt_instruction": "Produce a high-coverage condensed representation preserving all important sections, arguments, evidence, methods, findings, limitations, and conclusions.",
     },
 }
 
 # Retained as compatibility alias for existing imports and PHP/database layer
 SUMMARY_LENGTH_CONFIG: dict[str, dict[str, Any]] = DEPTH_CONFIG
-
-

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 import re
 from typing import Any
 
@@ -17,6 +18,8 @@ from .text_utils import (
     is_choice_line,
     is_directions_line,
     is_ocr_corruption_line,
+    looks_like_author_or_affiliation_line,
+    looks_like_publication_noise,
 )
 
 # ----------------------------------------------------------------------
@@ -54,6 +57,18 @@ MODE_FOCUS_PATTERNS: dict[str, tuple[re.Pattern[str], ...]] = {
             re.IGNORECASE,
         ),
     ),
+    "legal": (
+        re.compile(
+            r"\b(?:shall\s+be|hereby|pursuant\s+to|under\s+section|statutory|regulation|compliance|obligation|liabilit(?:y|ies)|prohibited|authorized|jurisdiction|enforceable|governed\s+by|penalty|fine)\b",
+            re.IGNORECASE,
+        ),
+    ),
+    "scientific": (
+        re.compile(
+            r"\b(?:hypothes(?:is|es)|experimental|control\s+group|treatment|empirical|clinical\s+trial|statistically\s+significant|p\s*[<>=]\s*0\.\d+|confidence\s+interval|findings?|measured|observed|effect\s+size)\b",
+            re.IGNORECASE,
+        ),
+    ),
 }
 
 NEGATION_CUES: frozenset[str] = frozenset({
@@ -87,6 +102,42 @@ STOP_WORDS: frozenset[str] = frozenset({
     "this", "that", "these", "those", "it", "its", "their", "they",
 })
 
+FOCUS_QUERY_STOP_WORDS: frozenset[str] = STOP_WORDS | frozenset({
+    "what", "how", "why", "who", "which", "where", "when", "do", "does",
+    "did", "can", "could", "would", "should", "please", "summarize",
+    "summary", "summarization", "focus", "topic", "question", "i",
+})
+FOCUS_NEGATION_PATTERN = re.compile(
+    r"\b(?:no|not|never|without|cannot|can't|didn't|doesn't|don't|"
+    r"isn't|aren't|wasn't|weren't|failed|fails|unable)\b",
+    re.IGNORECASE,
+)
+FOCUS_CONTEXT_REFERENCE_PATTERN = re.compile(
+    r"^(?:it|they|this|these|those|such|however|therefore|moreover|thus)\b",
+    re.IGNORECASE,
+)
+
+
+def _focus_token_variants(token: str) -> frozenset[str]:
+    variants = {token}
+    if len(token) > 4 and token.endswith("ies"):
+        variants.add(token[:-3] + "y")
+    if len(token) > 3 and token.endswith("s") and not token.endswith("ss"):
+        variants.add(token[:-1])
+    if len(token) > 4 and token.endswith("ed"):
+        stem = token[:-2]
+        if len(stem) > 2 and stem[-1] == stem[-2]:
+            stem = stem[:-1]
+        variants.update((stem, stem + "e"))
+        if stem.endswith("i"):
+            variants.add(stem[:-1] + "y")
+    if len(token) > 5 and token.endswith("ing"):
+        stem = token[:-3]
+        if len(stem) > 2 and stem[-1] == stem[-2]:
+            stem = stem[:-1]
+        variants.update((stem, stem + "e"))
+    return frozenset(variants)
+
 
 # ----------------------------------------------------------------------
 # Pure Score Normalization & Lexical Overlap Helpers
@@ -114,6 +165,150 @@ def extract_content_tokens(text: str) -> set[str]:
         for token in re.findall(r"[A-Za-z][A-Za-z'-]{2,}", text)
         if token.lower() not in STOP_WORDS
     }
+
+
+def calculate_focus_relevance_scores(
+    candidate_texts: list[str],
+    focus_query: str,
+    context_texts: list[str] | None = None,
+) -> list[float]:
+    """Score candidate text by query-term coverage and phrase alignment in [0, 1]."""
+    query_tokens = list(dict.fromkeys(
+        token
+        for token in re.findall(r"[\w'-]+", focus_query.casefold(), flags=re.UNICODE)
+        if token not in FOCUS_QUERY_STOP_WORDS
+    ))
+    if not candidate_texts or not query_tokens:
+        return [0.0] * len(candidate_texts)
+
+    query_variants = [_focus_token_variants(token) for token in query_tokens]
+    candidate_tokens = [
+        [
+            token
+            for token in re.findall(r"[\w'-]+", text.casefold(), flags=re.UNICODE)
+        ]
+        for text in candidate_texts
+    ]
+    filtered_candidate_tokens = [
+        [token for token in tokens if token not in FOCUS_QUERY_STOP_WORDS]
+        for tokens in candidate_tokens
+    ]
+    candidate_variants = [
+        [_focus_token_variants(token) for token in tokens]
+        for tokens in filtered_candidate_tokens
+    ]
+    document_frequency = [
+        sum(
+            any(query_form & token_form for token_form in tokens)
+            for tokens in candidate_variants
+        )
+        for query_form in query_variants
+    ]
+    document_count = len(candidate_texts)
+    term_weights = {
+        token: math.log1p(
+            (document_count - frequency + 0.5) / (frequency + 0.5)
+        )
+        for token, frequency in zip(query_tokens, document_frequency, strict=True)
+    }
+    total_weight = sum(term_weights.values())
+
+    average_candidate_length = max(
+        1.0,
+        sum(len(tokens) for tokens in filtered_candidate_tokens) / len(candidate_texts),
+    )
+    query_bigrams = list(zip(query_variants, query_variants[1:]))
+    query_is_negated = bool(FOCUS_NEGATION_PATTERN.search(focus_query))
+    scores: list[float] = []
+    for tokens, token_forms in zip(
+        filtered_candidate_tokens,
+        candidate_variants,
+        strict=True,
+    ):
+        token_counts = [
+            sum(bool(query_form & token_form) for token_form in token_forms)
+            for query_form in query_variants
+        ]
+        length_norm = 1.2 * (
+            0.25 + 0.75 * len(tokens) / average_candidate_length
+        )
+        coverage = sum(
+            weight * (count * 2.2 / (count + length_norm))
+            for count, weight in zip(token_counts, term_weights.values(), strict=True)
+        ) / total_weight
+        candidate_bigrams = list(zip(token_forms, token_forms[1:]))
+        bigram_coverage = (
+            sum(
+                any(
+                    query_left & candidate_left
+                    and query_right & candidate_right
+                    for candidate_left, candidate_right in candidate_bigrams
+                )
+                for query_left, query_right in query_bigrams
+            )
+            / len(query_bigrams)
+            if query_bigrams
+            else 0.0
+        )
+        phrase_match = any(
+            all(
+                query_form & token_form
+                for query_form, token_form in zip(
+                    query_variants,
+                    token_forms[index:index + len(query_variants)],
+                    strict=True,
+                )
+            )
+            for index in range(len(tokens) - len(query_tokens) + 1)
+        )
+        order_score = bigram_coverage if query_bigrams else coverage
+        score = 0.70 * coverage + 0.15 * order_score + (0.15 if phrase_match else 0.0)
+        candidate_is_negated = bool(
+            FOCUS_NEGATION_PATTERN.search(" ".join(tokens))
+        )
+        if query_is_negated != candidate_is_negated:
+            score -= 0.20 if query_is_negated else 0.15
+        scores.append(max(0.0, min(1.0, score)))
+
+    if context_texts is None:
+        return scores
+    if len(context_texts) != len(candidate_texts):
+        raise ValueError("Context text count must match candidate text count.")
+    contextual_scores = calculate_focus_relevance_scores(
+        context_texts,
+        focus_query,
+    )
+    blended_scores = []
+    for text, score, context_score in zip(
+        candidate_texts,
+        scores,
+        contextual_scores,
+        strict=True,
+    ):
+        context_weight = (
+            0.55 if FOCUS_CONTEXT_REFERENCE_PATTERN.match(text) else 0.15
+        )
+        blended_scores.append(
+            (1.0 - context_weight) * score + context_weight * context_score
+        )
+    return blended_scores
+
+
+def _focus_context_texts(candidates: list[SentenceCandidate]) -> list[str]:
+    contexts: list[str] = []
+    for index, candidate in enumerate(candidates):
+        parts = []
+        section = candidate.section.strip()
+        if section and section.casefold() not in {"body", "document"}:
+            parts.append(section)
+        for neighbor_index in (index - 1, index + 1):
+            if not 0 <= neighbor_index < len(candidates):
+                continue
+            neighbor = candidates[neighbor_index]
+            if neighbor.paragraph_index == candidate.paragraph_index:
+                parts.append(neighbor.text)
+        contexts.append(" ".join(parts))
+    return contexts
 
 
 def sentence_token_overlap(left: SentenceCandidate, right: SentenceCandidate) -> float:
@@ -198,6 +393,8 @@ def calculate_candidate_scores_with_profile(
     depth_key: str = "balanced",
     depth_config: dict[str, Any] | None = None,
     disabled_features: frozenset[str] = frozenset(),
+    focus_query: str = "",
+    document_analysis: dict[str, Any] | None = None,
 ) -> list[float]:
     """Score candidates using profile-specific weights plus mode-level bonuses/penalties."""
     w = sel_profile.scoring_weights
@@ -210,10 +407,10 @@ def calculate_candidate_scores_with_profile(
     mode_focus_patterns = MODE_FOCUS_PATTERNS.get(sel_profile.mode, ())
 
     # Depth strategy adjustments
-    if depth_key == "brief":
-        w_tfidf_eff = w_tfidf * 1.15
-        w_title_eff = w_title * 1.25
-        w_position_eff = w_position * 1.25
+    if depth_key in {"very_brief", "brief"}:
+        w_tfidf_eff = w_tfidf * (1.20 if depth_key == "very_brief" else 1.15)
+        w_title_eff = w_title * (1.30 if depth_key == "very_brief" else 1.25)
+        w_position_eff = w_position * (1.35 if depth_key == "very_brief" else 1.25)
         w_para_pos_eff = w_para_pos * 1.10
         w_section_eff = w_section * 0.90
     elif depth_key == "short":
@@ -251,6 +448,28 @@ def calculate_candidate_scores_with_profile(
         effective_section_weights.update(sel_profile.section_importance_override)
 
     combined_scores: list[float] = []
+    primary_finding_indices = set(
+        document_analysis.get("primary_finding_indices", [])
+        if document_analysis is not None
+        else []
+    )
+    primary_finding_lead = (
+        document_analysis.get("primary_finding_indices", [None])[0]
+        if document_analysis is not None
+        and document_analysis.get("primary_finding_indices")
+        else None
+    )
+    primary_finding_support = (
+        document_analysis.get("primary_finding_indices", [None, None])[1]
+        if document_analysis is not None
+        and len(document_analysis.get("primary_finding_indices", [])) > 1
+        else None
+    )
+    focus_relevance_scores = calculate_focus_relevance_scores(
+        [candidate.text for candidate in candidates],
+        focus_query,
+        _focus_context_texts(candidates) if focus_query else None,
+    )
 
     for index, candidate in enumerate(candidates):
         lowered_text = candidate.text.lower()
@@ -280,6 +499,9 @@ def calculate_candidate_scores_with_profile(
         for pattern in mode_focus_patterns:
             if pattern.search(candidate.text):
                 focus_bonus += 0.28
+
+        # --- Query-focused summarization bonus ---
+        query_bonus = 0.35 * focus_relevance_scores[index]
 
         # --- Faithfulness/Coherence bonuses ---
         # Qualifier preservation bonus: reward hedging language that preserves nuance
@@ -329,10 +551,81 @@ def calculate_candidate_scores_with_profile(
             if candidate.section in ("methodology", "discussion", "limitations", "recommendations", "background"):
                 depth_bonus += 0.08
 
-        # --- Generic noise/quality penalties ---
+        # --- Generic noise/quality penalties and core rhetorical roles ---
+        is_prior_lit_cand = (
+            candidate.section in {"literature_review", "related_work"}
+            or getattr(candidate, "source_role", "") == "prior_study"
+            or getattr(candidate, "claim_status", "") in {"LITERATURE_FINDING", "PRIOR_STUDY_RESULT"}
+        )
+
         finding_bonus = 0.0
-        if article_type == "academic" and re.search(r"\b(?:results|findings|revealed|found|indicated|reported)\b", lowered_text):
-            finding_bonus = 0.08
+        if not is_prior_lit_cand and re.search(
+            r"\b(?:"
+            r"results? (?:show|shows|indicate|indicates|reveal|reveals|demonstrate|demonstrates|confirm|confirms|suggest|suggests)|"
+            r"findings? (?:show|shows|indicate|indicates|reveal|reveals|demonstrate|demonstrates|suggest|suggests)|"
+            r"(?:our|this) (?:study|analysis|research|paper) (?:found|observed|revealed|identified|demonstrated|confirms)|"
+            r"(?:we|the authors) (?:found|observed|conclude|concluded|identified|demonstrated|report)|"
+            r"(?:annual|seasonal|average|mean|total) (?:temperature|precipitation|humidity|sunshine|rainfall|radiation).*(?:increased|decreased|increasing|decreasing|trend|statistically significant)|"
+            r"(?:the|an) overall trend (?:was|indicated|showed)|"
+            r"(?:chief|major|primary|key) (?:change|trend|finding|outcome)|"
+            r"significantly (?:increased|decreased|higher|lower|reduced)|"
+            r"(?:statistically )?significant (?:increase|decrease|reduction|difference|correlation|trend)|"
+            r"not statistically significant|non-significant|"
+            r"in conclusion|it was concluded that|the study concludes that"
+            r")\b",
+            lowered_text,
+        ):
+            finding_bonus = 0.38
+        elif not is_prior_lit_cand and article_type == "academic" and re.search(r"\b(?:results|findings|revealed|found|indicated|reported)\b", lowered_text):
+            finding_bonus = 0.12
+
+        # Research objective and primary scope bonus
+        if re.search(
+            r"\b(?:"
+            r"the (?:objective|purpose|aim|goal) of this (?:study|paper|research)|"
+            r"this (?:study|paper|research) (?:investigates|analyzes|examines|focuses on|aims to|was conducted to)|"
+            r"the content of this study is mainly based on|"
+            r"we (?:investigate|analyze|examine|study) the (?:trend|impact|effect|relationship) of"
+            r")\b",
+            lowered_text,
+        ):
+            finding_bonus = max(finding_bonus, 0.25)
+
+        # Prior study and literature citation penalty: do not let external works displace current paper findings
+        prior_study_penalty = 0.0
+        if is_prior_lit_cand:
+            prior_study_penalty = 0.50
+        elif re.search(r"\b(?:et\s+al\.?|tal\.?|\b(?:previous|prior|earlier|other|past)\s+(?:studies|research|authors|findings|literature|reports)|\baccording\s+to\s+[A-Z]|\(\s*[A-Z][a-z]+.*?\d{4}\))\b", candidate.text):
+            prior_study_penalty = 0.50
+
+        # Methodological procedural detail penalty for balanced/brief summaries
+        methodology_penalty = 0.0
+        if sel_profile.mode != "technical" and re.search(
+            r"\b(?:data (?:was|were) (?:collected|gathered|retrieved|obtained)|"
+            r"using (?:the )?(?:software|tool|package|algorithm|formula|model|equation|xlstat)|"
+            r"(?:test|survey|questionnaire) was (?:used|applied|administered|conducted)|"
+            r"sample consisted of \d+|were analyzed using (?:the )?(?:mann-kendall|regression))\b",
+            lowered_text,
+        ):
+            methodology_penalty = 0.18
+
+        # Document metadata, acknowledgment boilerplate, and publication noise disqualification
+        metadata_penalty = 0.0
+        if (
+            looks_like_author_or_affiliation_line(candidate.text)
+            or looks_like_publication_noise(candidate.text)
+            or re.search(
+                r"\b(?:"
+                r"would like to thank|express my (?:heartfelt )?gratitude|grateful to (?:my|all)|"
+                r"without their support|thanks to my supervisor|sincere thanks|"
+                r"financial support from|funded by|supported by (?:grant|many people)|"
+                r"helped to normalize them|fathers? dream|passed away|comfort to me"
+                r")\b",
+                lowered_text,
+            )
+        ):
+            metadata_penalty = 1.0
+
         method_bonus = 0.0
         if article_type == "academic" and re.search(r"\b(?:survey|sampling|questionnaire|respondents|study employed)\b", lowered_text):
             method_bonus = 0.04
@@ -341,24 +634,45 @@ def calculate_candidate_scores_with_profile(
         organization_penalty = 0.12 if re.search(r"\b(?:findings are organized chronologically|this section utilized|this section presents|this section discusses)\b", lowered_text) else 0.0
         conclusion_bonus = 0.06 if re.search(r"\b(?:concludes?|concluded|therefore|thus|overall)\b", lowered_text) else 0.0
 
-        # Structure-aware claim status complements section and lexical weights.
-        # These small deterministic adjustments prioritize what the source says
-        # the study did while keeping proposed procedures distinct from findings.
-        claim_status_bonus = 0.0
-        if sel_profile.mode == "academic" or candidate.section in {
-            "abstract", "introduction", "literature_review", "methodology",
-            "results", "discussion", "conclusion", "limitations",
-        }:
-            claim_status_bonus = {
-                "ACTUAL_RESULT": 0.10,
-                "RESEARCH_OBJECTIVE": 0.07,
-                "RESEARCH_QUESTION": 0.05,
-                "PROPOSED_METHOD": 0.04 if depth_key in {"detailed", "comprehensive"} else 0.01,
-                "LITERATURE_FINDING": 0.025,
-                "LIMITATION": 0.035,
-                "RECOMMENDATION": 0.025,
-                "BACKGROUND_INFORMATION": -0.025,
-            }.get(candidate.claim_status, 0.0)
+        # Information-value scoring: Prioritize main claims, actual outcomes, purpose, and conclusions.
+        info_value_map = {
+            "ACTUAL_RESULT": 0.12,
+            "MAIN_FINDING": 0.14,
+            "DECISION": 0.12,
+            "RESEARCH_OBJECTIVE": 0.09,
+            "RESEARCH_QUESTION": 0.06,
+            "HYPOTHESIS": 0.06,
+            "CONCLUSION": 0.08,
+            "RECOMMENDATION": 0.05,
+            "PROPOSED_METHOD": 0.04 if depth_key in {"detailed", "comprehensive"} else 0.01,
+            "LITERATURE_FINDING": 0.02,
+            "LIMITATION": 0.035 if depth_key in {"detailed", "comprehensive"} else 0.01,
+            "BACKGROUND_INFORMATION": -0.03,
+        }
+        claim_status_bonus = info_value_map.get(candidate.claim_status, 0.0)
+        if candidate.source_role == "result":
+            claim_status_bonus = max(claim_status_bonus, 0.10)
+        elif candidate.source_role == "objective":
+            claim_status_bonus = max(claim_status_bonus, 0.08)
+        elif candidate.source_role == "conclusion":
+            claim_status_bonus = max(claim_status_bonus, 0.07)
+
+        primary_finding_bonus = (
+            0.28 if candidate.index == primary_finding_lead
+            else 0.24 if candidate.index == primary_finding_support
+            else 0.16 if candidate.index in primary_finding_indices
+            else 0.0
+        )
+
+        # Meaningful comparison and quantitative relationships boost
+        comparison_bonus = 0.0
+        if re.search(r"\b(?:compared\s+(?:with|to)|higher\s+than|lower\s+than|greater\s+than|fewer\s+than|in\s+contrast|whereas|significant\s+difference)\b", lowered_text):
+            comparison_bonus = 0.05
+
+        # Procedural survey distribution / questionnaire mechanical boilerplate penalty
+        procedural_penalty = 0.0
+        if re.search(r"\b(?:purposive\s+sampling|stratified\s+random|questionnaires?\s+were\s+distributed|administered\s+to\s+respondents|spss\s+version|cronbach's\s+alpha)\b", lowered_text):
+            procedural_penalty = 0.12 if depth_key in {"very_brief", "brief", "short", "balanced"} else 0.03
 
         question_penalty = 0.60 if (
             QUESTION_PUNCTUATION_PATTERN.search(candidate.text)
@@ -386,8 +700,11 @@ def calculate_candidate_scores_with_profile(
             + method_bonus
             + conclusion_bonus
             + claim_status_bonus
+            + primary_finding_bonus
+            + comparison_bonus
             + profile_bonus
             + focus_bonus
+            + query_bonus
             + qualifier_bonus
             + negation_bonus
             + numeric_bonus
@@ -395,9 +712,13 @@ def calculate_candidate_scores_with_profile(
             + depth_bonus
             - (boilerplate_penalty * 0.10)
             - antecedent_penalty
+            - prior_study_penalty
+            - methodology_penalty
+            - metadata_penalty
             - future_work_penalty
             - table_penalty
             - organization_penalty
+            - procedural_penalty
             - length_penalty
             - profile_penalty
             - question_penalty

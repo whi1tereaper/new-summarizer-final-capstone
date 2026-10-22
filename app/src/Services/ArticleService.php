@@ -8,10 +8,12 @@ require_once __DIR__ . '/../Utils/validation.php';
 require_once __DIR__ . '/LocalPythonBridge.php';
 require_once __DIR__ . '/SourceResolver.php';
 require_once __DIR__ . '/FileUploadService.php';
+require_once __DIR__ . '/../Support/ProcessingError.php';
 
 use App\Src\Database;
 use App\Src\Utils\Privacy;
 use PDO;
+use App\Src\Support\ProcessingError;
 
 final class ArticleService
 {
@@ -30,9 +32,10 @@ final class ArticleService
     public const MIN_SUMMARY_COUNT = 3;
     public const MAX_SUMMARY_COUNT = 15;
     public const MAX_TEXT_BYTES = 200000;
-    public const ALLOWED_ANALYSIS_MODES = ['general', 'academic', 'executive', 'study', 'technical', 'news'];
-    public const ALLOWED_OUTPUT_FORMATS = ['paragraph', 'bullets', 'hybrid', 'structured'];
-    public const ALLOWED_SUMMARY_DEPTHS = ['brief', 'short', 'balanced', 'detailed', 'comprehensive'];
+    public const MAX_TITLE_CHARACTERS = 255;
+    public const ALLOWED_ANALYSIS_MODES = ['general', 'academic', 'executive', 'study', 'technical', 'news', 'legal', 'scientific'];
+    public const ALLOWED_OUTPUT_FORMATS = ['paragraph', 'bullets', 'hybrid', 'structured', 'key_takeaways'];
+    public const ALLOWED_SUMMARY_DEPTHS = ['very_brief', 'brief', 'short', 'balanced', 'detailed', 'comprehensive'];
 
     private PDO $db;
     private FileUploadService $uploadService;
@@ -56,55 +59,64 @@ final class ArticleService
         // The declared source method is authoritative; reject conflicting raw requests before saving uploads.
         $sourceType = is_string($request['source_type'] ?? null) ? strtolower(trim($request['source_type'])) : '';
         if (!in_array($sourceType, self::ALLOWED_SOURCE_TYPES, true)) {
-            throw new \RuntimeException('Choose a file, pasted text, or a URL as your source.');
+            throw new ProcessingError('INPUT_INVALID');
         }
         $pastedText = $this->normalizeOriginalText($request['original_text'] ?? '');
         $sourceUrl = is_string($request['source_url'] ?? null) ? trim($request['source_url']) : '';
         $upload = $files['pdf_file'] ?? null;
         $hasUpload = is_array($upload) && ($upload['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE;
         if ($sourceType === 'file' && ($pastedText !== '' || $sourceUrl !== '')) {
-            throw new \RuntimeException('Only one source can be submitted at a time.');
+            throw new ProcessingError('SOURCE_CONFLICT');
         }
         if ($sourceType === 'text' && ($hasUpload || $sourceUrl !== '')) {
-            throw new \RuntimeException('Only one source can be submitted at a time.');
+            throw new ProcessingError('SOURCE_CONFLICT');
         }
         if ($sourceType === 'url' && ($hasUpload || $pastedText !== '')) {
-            throw new \RuntimeException('Only one source can be submitted at a time.');
+            throw new ProcessingError('SOURCE_CONFLICT');
         }
         if ($sourceType === 'text' && $pastedText === '') {
-            throw new \RuntimeException('Paste document text to continue.');
+            throw new ProcessingError('INPUT_EMPTY');
         }
         if ($sourceType === 'url' && ($sourceUrl === '' || filter_var($sourceUrl, FILTER_VALIDATE_URL) === false || !in_array(strtolower((string)parse_url($sourceUrl, PHP_URL_SCHEME)), ['http', 'https'], true))) {
-            throw new \RuntimeException('Enter a valid HTTP or HTTPS article URL.');
+            throw new ProcessingError('URL_INVALID');
+        }
+        if ($sourceType === 'text' && !preg_match('/[\p{L}\p{N}]/u', $pastedText)) {
+            throw new ProcessingError('CONTENT_UNREADABLE');
+        }
+        if ($sourceType === 'url') {
+            $this->sourceResolver->validateUrl($sourceUrl);
         }
         $requestedDepth = $request['summary_depth'] ?? ($request['summary_length'] ?? 'balanced');
         if (!is_string($requestedDepth) || !in_array(strtolower(trim($requestedDepth)), self::ALLOWED_SUMMARY_DEPTHS, true)) {
-            throw new \RuntimeException('Choose a supported summary depth.');
+            throw new ProcessingError('SETTINGS_INVALID');
         }
         $requestedMode = $request['analysis_mode'] ?? ($request['selection_mode'] ?? 'general');
         if (!is_string($requestedMode) || !in_array(strtolower(trim($requestedMode)), self::ALLOWED_ANALYSIS_MODES, true)) {
-            throw new \RuntimeException('Choose a supported analysis mode.');
+            throw new ProcessingError('SETTINGS_INVALID');
         }
         $requestedFormat = $request['output_format'] ?? 'paragraph';
         if (!is_string($requestedFormat) || !in_array(strtolower(trim($requestedFormat)), self::ALLOWED_OUTPUT_FORMATS, true)) {
-            throw new \RuntimeException('Choose a supported output format.');
+            throw new ProcessingError('SETTINGS_INVALID');
         }
         $rawSynthesisChoice = $request['use_llm_synthesis'] ?? '';
         if (!is_string($rawSynthesisChoice) || !in_array($rawSynthesisChoice, ['', '1'], true)) {
-            throw new \RuntimeException('Choose a supported synthesis setting.');
+            throw new ProcessingError('SETTINGS_INVALID');
         }
         $useLlmSynthesis = $rawSynthesisChoice === '1';
         if ($useLlmSynthesis && !config('summarizer.llm_available', false)) {
-            throw new \RuntimeException('Language-model synthesis is not configured.');
+            throw new ProcessingError('SETTINGS_INVALID');
         }
         $originalText = match ($sourceType) {
             'text' => $pastedText,
             'url' => $sourceUrl,
             default => '',
         };
+        $rawDocumentTitle = is_string($request['document_title'] ?? null) ? $request['document_title'] : '';
+        $documentTitle = trim(preg_replace('/\s+/u', ' ', $rawDocumentTitle) ?? '');
+        if (mb_strlen($documentTitle, 'UTF-8') > self::MAX_TITLE_CHARACTERS) throw new ProcessingError('TITLE_TOO_LONG');
         $filePath = $sourceType === 'file' ? $this->resolveUploadedFilePath($upload) : '';
         if ($sourceType === 'file' && $filePath === '') {
-            throw new \RuntimeException('Choose a PDF or DOCX file to continue.');
+            throw new ProcessingError('FILE_REQUIRED');
         }
         // Display metadata only: storage and worker input continue to use the generated file path.
         $originalFileName = '';
@@ -119,8 +131,11 @@ final class ArticleService
             $request['sentence_count'] ?? null
         );
 
-        $rawDocumentTitle = is_string($request['document_title'] ?? null) ? $request['document_title'] : '';
-        $documentTitle = trim(preg_replace('/\s+/u', ' ', $rawDocumentTitle) ?? '');
+        // The selected depth is the source of truth for output size. The
+        // sentence_count field is client-controlled and may be stale after a
+        // restored draft or an older client submits the form.
+        $sentenceCount = $this->sentenceCountForDepth($summaryDepth);
+
         $analysisMode = $this->normalizeAnalysisMode(
             $request['analysis_mode'] ?? ($request['selection_mode'] ?? '')
         );
@@ -135,19 +150,30 @@ final class ArticleService
             };
         }
 
+        $rawFocusQuery = is_string($request['focus_query'] ?? null) ? $request['focus_query'] : '';
+        $rawFocusQuery = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $rawFocusQuery) ?? '';
+        $rawFocusQuery = strip_tags($rawFocusQuery);
+        $focusQuery = trim(preg_replace('/\s+/u', ' ', $rawFocusQuery) ?? '');
+        if (mb_strlen($focusQuery) > 300) {
+            $focusQuery = mb_substr($focusQuery, 0, 300);
+        }
+
         return [
             'original_text' => $originalText,
             'file_path' => $filePath,
             'original_file_name' => $originalFileName,
+            'source_hash' => $filePath !== '' ? hash_file('sha256', $filePath) : hash('sha256', $originalText),
+            'request_token' => is_string($request['request_token'] ?? null) && preg_match('/\A[a-f0-9]{32}\z/', $request['request_token']) ? $request['request_token'] : '',
             'source_type' => $sourceType,
             'source_url' => $sourceType === 'url' ? $sourceUrl : '',
-            'sentence_count' => $this->normalizeSummaryCount($request['sentence_count'] ?? 8),
+            'sentence_count' => $sentenceCount,
             // summary_depth is canonical; summary_length is kept for existing
             // session, database, and analytics contracts.
             'summary_depth' => $summaryDepth,
             'summary_length' => $summaryDepth,
             'summary_style' => $summaryStyle,
             'document_title' => $documentTitle,
+            'focus_query' => $focusQuery,
             'selection_mode' => $selectionMode,
             'analysis_mode' => $analysisMode,
             'output_format' => $outputFormat,
@@ -155,6 +181,7 @@ final class ArticleService
             'user_id' => $userId,
             'guest_token' => $guestToken,
             'csrf_token' => $request['csrf_token'] ?? '',
+            'job_id' => bin2hex(random_bytes(16)),
         ];
     }
 
@@ -172,6 +199,7 @@ final class ArticleService
         $resolvedSource = $this->sourceResolver->resolve($originalText);
         return [
             'text' => $resolvedSource->getText(),
+            'file_path' => $resolvedSource->getFilePath(),
             'input_type' => $resolvedSource->getInputType(),
             'resolved_source' => $resolvedSource,
         ];
@@ -188,12 +216,15 @@ final class ArticleService
         string $analysisMode = '',
         string $outputFormat = '',
         bool $useLlmSynthesis = false,
-        int $targetWordBudget = 0
+        int $targetWordBudget = 0,
+        string $focusQuery = '',
+        string $jobId = ''
     ): array {
         try {
             // Send only the worker-facing data contract; preprocessing flags stay server-owned.
             $preprocessing = $this->summaryPreprocessingOptions($selectionMode);
-            return $this->pythonBridge->summarize([
+            $payload = [
+                'job_id' => $jobId,
                 'text' => $originalText,
                 'file_path' => $filePath,
                 'sentence_count' => $sentenceCount,
@@ -204,14 +235,21 @@ final class ArticleService
                 'analysis_mode' => $this->normalizeAnalysisMode($analysisMode !== '' ? $analysisMode : $selectionMode),
                 'output_format' => $this->normalizeOutputFormat($outputFormat),
                 'document_title' => $documentTitle,
+                'focus_query' => $focusQuery,
                 'preprocessing' => $preprocessing,
                 'use_llm_synthesis' => $useLlmSynthesis,
                 'target_word_budget' => max(0, min(50000, $targetWordBudget)),
-            ], max(60, (int)config('python.timeout', 120)));
-        } catch (\RuntimeException $exception) {
-            // Preserve the detailed worker failure in logs while giving controllers a cleaner message.
-            error_log('[ArticleService] Summarization error: ' . $exception->getMessage());
-            throw new \RuntimeException($this->normalizeWorkerErrorMessage($exception->getMessage()), 0, $exception);
+            ];
+            // Honor LOCAL_PYTHON_TIMEOUT up to the bridge's hard safety ceiling.
+            // A 90-second cap here silently overrode the configured 120-second
+            // budget and caused valid, slower PDF jobs to be marked timed out.
+            $timeout = max(30, min(300, (int)config('python.timeout', 180)));
+            if (config('summarizer.engine_version', 'legacy') === 'v2') {
+                return $this->pythonBridge->summarizeV2($payload, $timeout);
+            }
+            return $this->pythonBridge->summarize($payload, $timeout);
+        } catch (\Throwable $exception) {
+            throw ProcessingError::fromThrowable($exception);
         }
     }
 
@@ -235,14 +273,22 @@ final class ArticleService
         string $summaryStyle,
         string $originalText,
         string $summaryLength = 'balanced',
-        ?float $processingTime = null
+        ?float $processingTime = null,
+        ?string $jobId = null
     ): string {
+        if ($jobId !== null && $jobId !== '' && isset($_SESSION['stored_job_' . $jobId])) {
+            return (string)$_SESSION['stored_job_' . $jobId];
+        }
+
         if ($userId !== null && !$this->userExists((int)$userId)) {
             error_log("[ArticleService] Non-existent userId {$userId} passed to storeSummary; falling back to guest.");
             $userId = null;
         }
 
         $summaryResult = $this->normalizeContractSummaryResult($summaryResult);
+        if (($summaryResult['validation_passed'] ?? true) === false) {
+            throw new ProcessingError('SUMMARY_QUALITY_FAILED');
+        }
 
         // Normalize every optional worker field before storing anything in JSON or the database.
         $summaryBlocks = $this->normalizeSummaryBlocks($summaryResult['sentences'] ?? []);
@@ -253,6 +299,9 @@ final class ArticleService
             $summaryBlocks,
             $summaryResult['conclusion'] ?? ''
         );
+        if (trim($plainSummary) === '') {
+            throw new ProcessingError('SUMMARY_QUALITY_FAILED');
+        }
         $keywords = $this->normalizeKeywords($summaryResult['keywords'] ?? []);
         $importantTerms = $this->normalizeImportantTerms($summaryResult['important_terms'] ?? []);
         $keyPoints = $this->normalizeKeywords($summaryResult['key_points'] ?? []);
@@ -304,6 +353,8 @@ final class ArticleService
             'summary_depth' => $this->normalizeSummaryLength(
                 $summaryResult['summary_depth'] ?? ($summaryResult['summary_length'] ?? $summaryLength)
             ),
+            'focus_query' => (string)($summaryResult['focus_query'] ?? ''),
+            'multi_document' => (array)($summaryResult['multi_document_metadata'] ?? ($summaryResult['multi_document'] ?? [])),
             'profile_label' => (string)($summaryResult['profile_label'] ?? ''),
             'active_profile_weights' => (array)($summaryResult['active_profile_weights'] ?? []),
             'validation_passed' => (bool)($summaryResult['validation_passed'] ?? true),
@@ -320,6 +371,18 @@ final class ArticleService
         // Prepared statements keep summary content out of raw SQL and preserve the insert contract.
         try {
             $this->db->beginTransaction();
+            if ($jobId !== null && $jobId !== '') {
+                $lock = $this->db->prepare('SELECT state, result_id, worker_pid FROM summary_jobs WHERE job_id = ? FOR UPDATE');
+                $lock->execute([$jobId]);
+                $job = $lock->fetch(PDO::FETCH_ASSOC);
+                if ($job && $job['state'] === 'completed' && $job['result_id']) {
+                    $this->db->commit();
+                    return (string)$job['result_id'];
+                }
+                if (!$job || $job['state'] !== 'processing' || (int)$job['worker_pid'] !== getmypid()) {
+                    throw new ProcessingError('PROCESSING_CANCELLED');
+                }
+            }
 
             $statement = $this->db->prepare(
                 'INSERT INTO summaries (user_id, guest_token, share_token, article_title, input_type, summary_style, summary_length, article_category, original_word_count, summary_word_count, processing_time, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
@@ -353,14 +416,20 @@ final class ArticleService
                 $summaryJson,
             ]);
 
+            if ($jobId !== null && $jobId !== '') {
+                $complete = $this->db->prepare("UPDATE summary_jobs SET state = 'completed', result_id = ?, completed_at = NOW(), updated_at = NOW(), error_message = NULL, error_details = NULL, payload = '{}' WHERE job_id = ?");
+                $complete->execute([$summaryId, $jobId]);
+            }
             $this->db->commit();
+            if ($jobId !== null && $jobId !== '') {
+                $_SESSION['stored_job_' . $jobId] = (string)$summaryId;
+            }
             return (string)$summaryId;
         } catch (\Exception $e) {
             if ($this->db->inTransaction()) {
                 $this->db->rollBack();
             }
-            error_log('[ArticleService] Failed to store summary: ' . $e->getMessage());
-            throw new \RuntimeException('Failed to store summary: ' . $e->getMessage(), 0, $e);
+            throw ProcessingError::fromThrowable($e);
         }
     }
 
@@ -373,15 +442,21 @@ final class ArticleService
         $meta = is_array($summaryResult['summary_meta'] ?? null)
             ? $summaryResult['summary_meta']
             : [];
+        if (isset($summaryResult['executive_overview']) && !is_string($summaryResult['executive_overview'])) {
+            throw new ProcessingError('SUMMARY_QUALITY_FAILED');
+        }
         $overview = trim((string)($summaryResult['executive_overview'] ?? ''));
         $paragraphs = [];
         $sentences = [];
 
         foreach ($summaryResult['thematic_paragraphs'] as $paragraph) {
             if (!is_array($paragraph)) {
-                continue;
+                throw new ProcessingError('SUMMARY_QUALITY_FAILED');
             }
 
+            if (isset($paragraph['content']) && !is_string($paragraph['content'])) {
+                throw new ProcessingError('SUMMARY_QUALITY_FAILED');
+            }
             $content = trim((string)($paragraph['content'] ?? ''));
             if ($content === '') {
                 continue;
@@ -433,14 +508,14 @@ final class ArticleService
         $resolvedSource?->cleanup();
     }
 
-    public function recordFailedSummary(?int $userId, ?string $guestToken, string $inputType, string $summaryStyle, string $summaryLength, float $processingTime): void
+    public function recordFailedSummary(?int $userId, ?string $guestToken, string $inputType, string $summaryStyle, string $summaryLength, float $processingTime, string $errorMessage = ''): void
     {
         if ($userId !== null && !$this->userExists((int)$userId)) {
             $userId = null;
         }
 
         $statement = $this->db->prepare(
-            'INSERT INTO summaries (user_id, guest_token, share_token, article_title, input_type, summary_style, summary_length, processing_time, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+            'INSERT INTO summaries (user_id, guest_token, share_token, article_title, input_type, summary_style, summary_length, processing_time, status, error_message) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
         );
         $statement->execute([
             $userId,
@@ -452,6 +527,7 @@ final class ArticleService
             $this->normalizeSummaryLength($summaryLength),
             $processingTime,
             'failed',
+            $errorMessage !== '' ? mb_substr($errorMessage, 0, 1000) : null,
         ]);
     }
 
@@ -501,7 +577,8 @@ final class ArticleService
 
         if ($fallbackCount !== null) {
             $count = (int)$fallbackCount;
-            if ($count <= 3) return 'brief';
+            if ($count <= 2) return 'very_brief';
+            if ($count <= 4) return 'brief';
             if ($count <= 6) return 'short';
             if ($count <= 9) return 'balanced';
             if ($count <= 13) return 'detailed';
@@ -509,6 +586,23 @@ final class ArticleService
         }
 
         return 'balanced';
+    }
+
+    /**
+     * Return the worker sentence budget for the canonical depth selection.
+     * Keeping this mapping server-side prevents stale form state from
+     * changing the meaning of the user's selected depth.
+     */
+    public function sentenceCountForDepth(string $depth): int
+    {
+        return match ($this->normalizeSummaryLength($depth)) {
+            'very_brief' => 3,
+            'brief' => 3,
+            'short' => 5,
+            'balanced' => 8,
+            'detailed' => 11,
+            'comprehensive' => 15,
+        };
     }
 
     public function normalizeAnalysisMode(mixed $value): string
@@ -520,6 +614,8 @@ final class ArticleService
             'simple_summary' => 'study',
             'technical_summary' => 'technical',
             'news_summary' => 'news',
+            'legal_summary' => 'legal',
+            'scientific_summary' => 'scientific',
             'standard_paragraph' => 'general',
             'bullet_points' => 'general',
             'hybrid' => 'general',
@@ -535,6 +631,8 @@ final class ArticleService
             'standard_paragraph' => 'paragraph',
             'bullet_points' => 'bullets',
             'executive_summary' => 'hybrid',
+            'takeaways' => 'key_takeaways',
+            'key_takeaways' => 'key_takeaways',
         ];
         $format = $aliases[$format] ?? $format;
         return in_array($format, self::ALLOWED_OUTPUT_FORMATS, true) ? $format : 'paragraph';
@@ -551,12 +649,12 @@ final class ArticleService
     {
         // Reject non-string input quietly, then enforce a practical size limit before worker processing.
         if (!is_string($value)) {
-            return '';
+            throw new ProcessingError('INPUT_INVALID');
         }
 
         $text = trim($value);
-        if ($text !== '' && strlen($value) > self::MAX_TEXT_BYTES) {
-            throw new \RuntimeException('Text input is too long. Limit: 195 KB.');
+        if (strlen($value) > self::MAX_TEXT_BYTES) {
+            throw new ProcessingError('INPUT_TOO_LARGE');
         }
 
         return $text;
@@ -623,7 +721,10 @@ final class ArticleService
     {
         // A summary without actual content is treated as a worker failure, not as a valid empty result.
         if (!is_array($summaryBlocks)) {
-            throw new \RuntimeException('Summarization failed. Please try again later.');
+            throw new ProcessingError('SUMMARY_QUALITY_FAILED');
+        }
+        foreach ($summaryBlocks as $block) {
+            if (!is_string($block)) throw new ProcessingError('SUMMARY_QUALITY_FAILED');
         }
 
         $normalized = array_values(array_filter(
@@ -632,7 +733,7 @@ final class ArticleService
         ));
 
         if ($normalized === []) {
-            throw new \RuntimeException('No summary could be generated from the provided text.');
+            throw new ProcessingError('SUMMARY_QUALITY_FAILED');
         }
 
         return $normalized;
@@ -705,6 +806,7 @@ final class ArticleService
 
     private function normalizePlainSummary(mixed $value, array $overview, array $summaryBlocks, mixed $conclusion): string
     {
+        if (!is_string($value)) throw new ProcessingError('SUMMARY_QUALITY_FAILED');
         // Fall back to a stitched plain summary so older or partial worker payloads still render usefully.
         $plainSummary = trim((string)$value);
         if ($plainSummary !== '') {
@@ -839,6 +941,7 @@ final class ArticleService
             'article_type',
             'article_type_key',
             'engine',
+            'semantic_model_status',
             'scoring_strategy',
             'summary_length',
             'summary_depth',
@@ -939,6 +1042,7 @@ final class ArticleService
             $analysis = [];
             foreach ([
                 'document_type', 'confidence_method', 'research_stage',
+                'selection_profile', 'selection_profile_source',
             ] as $key) {
                 if (is_string($rawAnalysis[$key] ?? null) && trim($rawAnalysis[$key]) !== '') {
                     $analysis[$key] = trim($rawAnalysis[$key]);
@@ -1056,6 +1160,36 @@ final class ArticleService
             }
             if ($guard !== []) {
                 $normalized['source_guard'] = $guard;
+            }
+        }
+
+        if (is_array($value['grammar_diagnostics'] ?? null)) {
+            $rawGrammar = $value['grammar_diagnostics'];
+            $grammar = [];
+            foreach (['status', 'method', 'reason'] as $key) {
+                if (is_string($rawGrammar[$key] ?? null) && trim($rawGrammar[$key]) !== '') {
+                    $grammar[$key] = trim($rawGrammar[$key]);
+                }
+            }
+            if (isset($rawGrammar['issue_count']) && is_numeric($rawGrammar['issue_count'])) {
+                $grammar['issue_count'] = max(0, (int)$rawGrammar['issue_count']);
+            }
+            if (is_array($rawGrammar['issues_by_sentence'] ?? null)) {
+                $issuesBySentence = [];
+                foreach (array_slice($rawGrammar['issues_by_sentence'], 0, 50) as $row) {
+                    if (!is_array($row) || !is_numeric($row['summary_sentence_index'] ?? null)) {
+                        continue;
+                    }
+                    $issuesBySentence[] = [
+                        'summary_sentence_index' => max(0, (int)$row['summary_sentence_index']),
+                        'issue_count' => max(0, (int)($row['issue_count'] ?? 0)),
+                        'rule_ids' => array_slice($this->normalizeTextList($row['rule_ids'] ?? []), 0, 50),
+                    ];
+                }
+                $grammar['issues_by_sentence'] = $issuesBySentence;
+            }
+            if ($grammar !== []) {
+                $normalized['grammar_diagnostics'] = $grammar;
             }
         }
 

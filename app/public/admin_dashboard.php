@@ -125,10 +125,20 @@ if ($action !== null) {
 }
 
 $admin = new AdminController();
+$adminStatsRanges = ['7' => 'Last 7 days', '30' => 'Last 30 days', '90' => 'Last 90 days', 'all' => 'All time'];
+$requestedStatsRange = isset($_GET['stats_range']) && is_scalar($_GET['stats_range'])
+    ? (string)$_GET['stats_range']
+    : 'all';
+$adminStatsRange = isset($adminStatsRanges[$requestedStatsRange]) ? $requestedStatsRange : 'all';
+$adminStatsTo = date('Y-m-d');
+$adminStatsFrom = $adminStatsRange === 'all'
+    ? null
+    : date('Y-m-d', strtotime('-' . ((int)$adminStatsRange - 1) . ' days'));
+$analyticsStatsFrom = $adminStatsFrom ?? '1970-01-01';
 $users = $admin->getAllUsers();
-$stats = $admin->getSystemStats();
+$stats = $admin->getSystemStats($adminStatsFrom, $adminStatsRange === 'all' ? null : $adminStatsTo);
 $orphanStats = $admin->getUploadOrphanStats();
-$feedbackStats = $admin->getFeedbackStats();
+$feedbackStats = FeedbackHandler::getSystemFeedbackStats($adminStatsFrom, $adminStatsRange === 'all' ? null : $adminStatsTo);
 $fbFilterRating  = isset($_GET['fb_rating']) && is_numeric($_GET['fb_rating']) ? (int)$_GET['fb_rating'] : null;
 $fbFilterComment = isset($_GET['fb_comment']) && $_GET['fb_comment'] !== '' ? ($_GET['fb_comment'] === '1') : null;
 $fbFilterSort    = isset($_GET['fb_sort']) && in_array($_GET['fb_sort'], ['newest', 'lowest_rated', 'highest_rated'], true) ? $_GET['fb_sort'] : 'newest';
@@ -149,6 +159,8 @@ $analyticsDevices   = [];
 $analyticsFunnel    = [];
 $analyticsTrend     = [];
 $analyticsReferrers = [];
+$analyticsData      = null;
+$isAdmin            = true;
 try {
     $analytics = new AnalyticsController();
     $analyticsKpis      = $analytics->getKpis();
@@ -156,22 +168,25 @@ try {
     $analyticsFunnel    = $analytics->getScrollFunnel();
     $analyticsTrend     = $analytics->getDailyTrend();
     $analyticsReferrers = $analytics->getTopReferrers();
+    $analyticsData      = $analytics->getDashboardData(null, true, $analyticsStatsFrom, $adminStatsTo, null);
     $analyticsAvailable = true;
 } catch (Throwable $e) {
     error_log('[admin_dashboard analytics] Failed to load landing analytics: ' . $e->getMessage());
     $analyticsAvailable = false;
+    $analyticsData = null;
 }
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/images/poc-neust-logo.png">
-    <link rel="stylesheet" href="assets/css/style.css?v=navbar-3">
+    <link rel="stylesheet" href="assets/css/style.css?v=navbar-3-<?= filemtime(__DIR__ . '/assets/css/style.css') ?>">
+    <link rel="stylesheet" href="assets/css/dashboard-charts.css?v=<?= file_exists(__DIR__ . '/assets/css/dashboard-charts.css') ? filemtime(__DIR__ . '/assets/css/dashboard-charts.css') : '1' ?>">
     <style>
         .admin-section { margin-bottom: 60px; }
         .admin-section h2 {
@@ -191,6 +206,36 @@ try {
             background: var(--color-border);
             margin-left: 20px;
         }
+        #admin-feedback-section .feedback-filters {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 0;
+        }
+        #admin-feedback-section .feedback-filters label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin: 0;
+            line-height: 1;
+            white-space: nowrap;
+        }
+        #admin-feedback-section .feedback-filters select,
+        #admin-feedback-section .feedback-filters button,
+        #admin-feedback-section .feedback-filters .feedback-reset {
+            box-sizing: border-box;
+            min-height: 28px;
+            margin: 0;
+            line-height: 1.2;
+        }
+        #admin-feedback-section .feedback-filters button {
+            align-self: center;
+        }
+        #admin-feedback-section .feedback-filters .feedback-reset {
+            display: inline-flex;
+            align-items: center;
+        }
 
         .stats-grid {
             display: grid;
@@ -199,16 +244,22 @@ try {
             margin-bottom: 40px;
         }
         .stat-card {
-            background: rgba(255, 255, 255, 0.74);
+            background: var(--color-bg-secondary);
             border: 1px solid var(--color-border);
             padding: 25px;
             box-shadow: var(--shadow-soft);
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .stat-card .stat-value {
-            font-family: 'Merriweather', serif;
+            font-family: 'Outfit', 'Inter', sans-serif;
             font-size: 2.5em;
             font-weight: 700;
+            letter-spacing: -0.05em;
             color: var(--color-text);
+            line-height: 1;
         }
         .stat-card .stat-label {
             font-family: 'Inter', sans-serif;
@@ -295,6 +346,144 @@ try {
             -webkit-overflow-scrolling: touch;
         }
 
+        .admin-user-filters {
+            display: grid;
+            grid-template-columns: minmax(220px, 2fr) repeat(2, minmax(150px, 1fr)) auto;
+            align-items: end;
+            gap: 12px;
+            padding: 16px;
+            margin-bottom: 14px;
+            background: var(--color-bg-secondary, #fcfbf9);
+            border: 1px solid var(--color-border);
+        }
+
+        .admin-user-filters__field {
+            display: grid;
+            gap: 6px;
+            min-width: 0;
+        }
+
+        .admin-user-filters__field label {
+            color: var(--color-text-muted);
+            font: 600 0.7em 'Inter', sans-serif;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .admin-user-filters__field input,
+        .admin-user-filters__field select {
+            width: 100%;
+            min-height: 40px;
+            padding: 8px 10px;
+            color: var(--color-text);
+            background: var(--color-bg, #fff);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            font: 0.85em 'Inter', sans-serif;
+        }
+
+        .admin-user-filters__field input:focus-visible,
+        .admin-user-filters__field select:focus-visible,
+        .admin-user-filters__clear:focus-visible {
+            outline: 2px solid var(--color-focus, var(--color-accent));
+            outline-offset: 2px;
+        }
+
+        .admin-user-filters__clear {
+            min-height: 40px;
+            padding: 8px 14px;
+            color: var(--color-text);
+            background: transparent;
+            border: 1px solid var(--color-border);
+            cursor: pointer;
+            font: 600 0.78em 'Inter', sans-serif;
+        }
+
+        .admin-user-filters__clear:hover {
+            color: var(--color-accent-strong, var(--color-accent));
+            border-color: var(--color-accent);
+        }
+
+        .admin-user-filters__count {
+            margin: 0 0 10px;
+            color: var(--color-text-muted);
+            font: 0.78em 'Inter', sans-serif;
+        }
+
+        .admin-stats-range {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            gap: 14px;
+            margin: -5px 0 18px;
+        }
+
+        .admin-stats-range label {
+            display: grid;
+            gap: 8px;
+            color: var(--color-text-muted);
+            margin: 0;
+            font: 600 0.7em 'Inter', sans-serif;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .admin-stats-range select {
+            min-height: 42px;
+            min-width: 170px;
+            padding: 8px 10px;
+            color: var(--color-text);
+            background: var(--color-bg, #fff);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            font: 0.85em 'Inter', sans-serif;
+        }
+
+        .admin-stats-range button {
+            min-height: 42px;
+            padding: 8px 18px;
+            border: 1px solid var(--color-accent);
+            color: var(--color-bg, #fff);
+            background: var(--color-accent);
+            cursor: pointer;
+            font: 600 0.78em 'Inter', sans-serif;
+            align-self: flex-end;
+        }
+
+        .admin-stats-range button:focus-visible,
+        .admin-stats-range select:focus-visible {
+            outline: 2px solid var(--color-focus, var(--color-accent));
+            outline-offset: 2px;
+        }
+
+        .admin-stats-range__caption {
+            align-self: flex-end;
+            margin: 0;
+            padding-bottom: 4px;
+            color: var(--color-text-muted);
+            font: 0.78em 'Inter', sans-serif;
+        }
+
+        @media (max-width: 700px) {
+            .admin-user-filters {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .admin-user-filters__field--search {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .admin-user-filters {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-user-filters__field--search {
+                grid-column: auto;
+            }
+        }
+
         @media (max-width: 992px) {
             .stats-grid {
                 grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -377,8 +566,6 @@ try {
     <div class="editorial-layout">
         <nav style="margin-bottom: 40px; display:flex; gap:20px; flex-wrap:wrap;">
             <a href="index.php" style="text-decoration:none; font-size:0.8em; color:var(--color-muted); font-family:'Inter'; text-transform:uppercase; letter-spacing:1px;">&larr; Dashboard</a>
-            <a href="admin_audit_logs.php" style="text-decoration:none; font-size:0.8em; color:var(--color-primary-dark); font-family:'Inter'; text-transform:uppercase; letter-spacing:1px;">Audit Logs</a>
-            <a href="auth.php?action=logout" class="js-logout-link" style="text-decoration:none; font-size:0.8em; color:var(--color-danger); font-family:'Inter'; text-transform:uppercase; letter-spacing:1px;">Logout</a>
         </nav>
 
         <div class="admin-toolbar">
@@ -401,6 +588,22 @@ try {
 
         <div class="admin-section">
             <h2>System Overview</h2>
+            <form class="admin-stats-range" id="admin-stats-range-form" method="get" action="admin_dashboard.php">
+                <label for="admin-stats-range-select">Statistics period
+                    <select id="admin-stats-range-select" name="stats_range">
+                        <?php foreach ($adminStatsRanges as $rangeValue => $rangeLabel): ?>
+                            <option value="<?= htmlspecialchars((string)$rangeValue, ENT_QUOTES, 'UTF-8') ?>" <?= $adminStatsRange === (string)$rangeValue ? 'selected' : '' ?>><?= htmlspecialchars($rangeLabel, ENT_QUOTES, 'UTF-8') ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </label>
+                <?php foreach (['fb_rating', 'fb_comment', 'fb_sort'] as $preservedFilter): ?>
+                    <?php if (isset($_GET[$preservedFilter]) && is_scalar($_GET[$preservedFilter])): ?>
+                        <input type="hidden" name="<?= htmlspecialchars($preservedFilter, ENT_QUOTES, 'UTF-8') ?>" value="<?= htmlspecialchars((string)$_GET[$preservedFilter], ENT_QUOTES, 'UTF-8') ?>">
+                    <?php endif; ?>
+                <?php endforeach; ?>
+                <button type="submit">Apply period</button>
+                <p class="admin-stats-range__caption">Overview totals and analytics use <?= htmlspecialchars($adminStatsRanges[$adminStatsRange], ENT_QUOTES, 'UTF-8') ?>.</p>
+            </form>
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-value"><?= $stats['user_count'] ?></div>
@@ -425,6 +628,8 @@ try {
             </div>
         </div>
 
+        <?php require __DIR__ . '/partials/analytics-graphs-card.php'; ?>
+
         <div class="admin-section">
             <h2>Storage & Maintenance</h2>
             
@@ -446,8 +651,32 @@ try {
 
         <div class="admin-section">
             <h2>User Management</h2>
+            <div class="admin-user-filters" role="search" aria-label="Filter user list">
+                <div class="admin-user-filters__field admin-user-filters__field--search">
+                    <label for="admin-user-search">Search users</label>
+                    <input id="admin-user-search" type="search" autocomplete="off" placeholder="Name, email, or ID" aria-controls="admin-user-table">
+                </div>
+                <div class="admin-user-filters__field">
+                    <label for="admin-user-role">Role</label>
+                    <select id="admin-user-role" aria-controls="admin-user-table">
+                        <option value="">All roles</option>
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                    </select>
+                </div>
+                <div class="admin-user-filters__field">
+                    <label for="admin-user-status">Status</label>
+                    <select id="admin-user-status" aria-controls="admin-user-table">
+                        <option value="">All statuses</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+                <button type="button" class="admin-user-filters__clear" id="admin-user-filters-clear">Clear filters</button>
+            </div>
+            <p class="admin-user-filters__count" id="admin-user-filter-count" role="status" aria-live="polite" aria-atomic="true"></p>
             <div class="table-responsive">
-            <table>
+            <table id="admin-user-table">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -460,9 +689,12 @@ try {
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="admin-user-table-body">
                     <?php foreach ($users as $user): ?>
-                    <tr>
+                    <tr data-admin-user-row
+                        data-search="<?= htmlspecialchars((string)$user['id'] . ' ' . (string)$user['username'] . ' ' . (string)$user['email'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>"
+                        data-role="<?= htmlspecialchars((string)$user['role'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>"
+                        data-status="<?= !empty($user['active']) ? 'active' : 'inactive' ?>">
                         <td><?= $user['id'] ?></td>
                         <td><strong><?= htmlspecialchars($user['username']) ?></strong></td>
                         <td><?= htmlspecialchars($user['email']) ?></td>
@@ -504,6 +736,9 @@ try {
                         </td>
                     </tr>
                     <?php endforeach; ?>
+                    <tr id="admin-user-no-results" hidden>
+                        <td colspan="8" style="text-align:center; color:var(--color-muted);">No users match these filters.</td>
+                    </tr>
                 </tbody>
             </table>
             </div>
@@ -517,7 +752,7 @@ try {
             </p>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 25px;">
                 <!-- Telemetry by Analysis Mode -->
-                <div style="background: #fff; border: 1px solid var(--color-border); padding: 16px;">
+                <div style="background: var(--color-surface); color: var(--color-text); border: 1px solid var(--color-border); padding: 16px;">
                     <strong style="display: block; font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text); margin-bottom: 10px;">By Analysis Mode</strong>
                     <?php if (!empty($feedbackTelemetry['by_style'])): ?>
                     <table style="width: 100%; font-size: 0.82em;">
@@ -537,7 +772,7 @@ try {
                 </div>
 
                 <!-- Telemetry by Depth -->
-                <div style="background: #fff; border: 1px solid var(--color-border); padding: 16px;">
+                <div style="background: var(--color-surface); color: var(--color-text); border: 1px solid var(--color-border); padding: 16px;">
                     <strong style="display: block; font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text); margin-bottom: 10px;">By Summary Depth</strong>
                     <?php if (!empty($feedbackTelemetry['by_length'])): ?>
                     <table style="width: 100%; font-size: 0.82em;">
@@ -557,7 +792,7 @@ try {
                 </div>
 
                 <!-- Reported Issue Reasons -->
-                <div style="background: #fff; border: 1px solid var(--color-border); padding: 16px;">
+                <div style="background: var(--color-surface); color: var(--color-text); border: 1px solid var(--color-border); padding: 16px;">
                     <strong style="display: block; font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text); margin-bottom: 10px;">Reported Issue Reasons</strong>
                     <?php if (!empty($feedbackTelemetry['reasons_counts'])): 
                         $allowedLabels = \App\Src\Services\FeedbackService::ALLOWED_REASONS;
@@ -582,7 +817,7 @@ try {
                 <h2 style="margin: 0;">User Feedback (Anonymous Repository)</h2>
                 
                 <!-- Feedback Filters Bar -->
-                <form method="GET" action="admin_dashboard.php" style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                <form method="GET" action="admin_dashboard.php" class="feedback-filters">
                     <label style="font-size: 0.8em; color: var(--color-muted);">Rating:
                         <select name="fb_rating" style="padding: 4px 8px; font-size: 0.85em; border: 1px solid var(--color-border);">
                             <option value="">All ratings</option>
@@ -610,8 +845,8 @@ try {
                         </select>
                     </label>
 
-                    <button type="submit" style="padding: 4px 10px; font-size: 0.8em; background: var(--color-primary-dark); color: #fff; border: none; cursor: pointer;">Filter</button>
-                    <a href="admin_dashboard.php#admin-feedback-section" style="font-size: 0.8em; color: var(--color-muted); text-decoration: underline;">Reset</a>
+                    <button type="submit" style="padding: 4px 10px; font-size: 0.8em; background: var(--color-primary-dark); color: var(--color-on-accent); border: none; cursor: pointer;">Filter</button>
+                    <a href="admin_dashboard.php#admin-feedback-section" class="feedback-reset" style="font-size: 0.8em; color: var(--color-muted); text-decoration: underline;">Reset</a>
                 </form>
             </div>
 
@@ -712,7 +947,7 @@ try {
                         }
                     }
                 ?>
-                    <div class="comment-card" style="background: #fff; border: 1px solid var(--color-border); padding: 20px; border-radius: 0; position: relative;">
+                    <div class="comment-card" style="background: var(--color-surface); color: var(--color-text); border: 1px solid var(--color-border); padding: 20px; border-radius: 0; position: relative;">
                         <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
                             <div>
                                 <strong style="display: block; font-size: 1em; color: var(--color-text);">Anonymous User</strong>
@@ -1077,7 +1312,10 @@ try {
             <a href="index.php" style="font-family:'Inter'; font-size:0.8em; color:var(--color-primary-dark); text-decoration:underline; text-transform:uppercase; letter-spacing:1px;">Return to Dashboard</a>
         </div>
     </div>
-    <script src="assets/js/index.js"></script>
+    <script src="assets/js/vendor/chart.umd.min.js"></script>
+    <script src="assets/js/dashboard-charts.js?v=<?= file_exists(__DIR__ . '/assets/js/dashboard-charts.js') ? filemtime(__DIR__ . '/assets/js/dashboard-charts.js') : '1' ?>"></script>
+    <script src="assets/js/admin-user-filters.js?v=<?= file_exists(__DIR__ . '/assets/js/admin-user-filters.js') ? filemtime(__DIR__ . '/assets/js/admin-user-filters.js') : '1' ?>"></script>
+    <script src="assets/js/index.js?v=<?= filemtime(__DIR__ . '/assets/js/index.js') ?>"></script>
 <?php require __DIR__ . '/partials/site-footer.php'; ?>
 </body>
 </html>

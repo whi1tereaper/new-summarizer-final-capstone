@@ -16,4 +16,5 @@ CREATE TABLE IF NOT EXISTS `admin_security_challenges` (
     INDEX `idx_admin_security_locked_until` (`locked_until`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Note: To set up the admin challenge, an initial hash needs to be inserted for the admin user manually or via an initial setup script.
+-- Legacy challenge storage retained for existing installations; current admin sign-in
+-- uses a one-time email code and does not read or write this table.

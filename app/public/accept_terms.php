@@ -13,16 +13,17 @@ $csrfToken = generateCsrfToken();
 $sections = TermsContent::getSections();
 $termsService = new TermsAcceptanceService();
 $errorMessage = '';
+$needsTermsAcceptance = $userId && TermsAcceptanceService::currentUserNeedsAcceptance();
 
-if (!$userId) {
-    http_response_code(403);
-    $errorMessage = 'Unauthorized request.';
-} elseif (!TermsAcceptanceService::currentUserNeedsAcceptance()) {
+if ($userId && !$needsTermsAcceptance) {
     header('Location: ' . TermsAcceptanceService::redirectAfterTermsAcceptance());
     exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && $errorMessage === '') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$needsTermsAcceptance) {
+    http_response_code(403);
+    $errorMessage = 'Sign in to accept the Terms and Conditions.';
+} elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && $errorMessage === '') {
     if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
         $errorMessage = 'Unauthorized request.';
         http_response_code(403);
@@ -65,21 +66,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $errorMessage === '') {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/images/poc-neust-logo.png">
     <link rel="stylesheet" href="assets/css/design-tokens.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=<?= filemtime(__DIR__ . '/assets/css/style.css') ?>">
     <link rel="stylesheet" href="assets/css/site-footer.css?v=nex-8">
 </head>
 <body>
     <?php require __DIR__ . '/partials/site-nav.php'; ?>
     <main class="editorial-layout terms-shell">
-        <nav class="terms-nav">
-            <a href="auth.php?action=logout" class="js-logout-link">Logout</a>
-        </nav>
-
         <header class="terms-header">
             <h1>Terms and Conditions</h1>
             <p>
-                Your account needs a one-time confirmation before you can continue using the software.
-                Review the terms below, then confirm your acceptance.
+                <?php if ($needsTermsAcceptance): ?>
+                    Your account needs a one-time confirmation before you can continue using the software.
+                    Review the terms below, then confirm your acceptance.
+                <?php else: ?>
+                    Review the terms below to learn about using the software.
+                <?php endif; ?>
             </p>
         </header>
 
@@ -98,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $errorMessage === '') {
             <?php endforeach; ?>
         </section>
 
-        <?php if ($errorMessage !== 'Unauthorized request.'): ?>
+        <?php if ($needsTermsAcceptance): ?>
             <form method="POST" action="accept_terms.php" class="terms-actions">
                 <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
                 <div class="consent-box consent-box-standalone">
@@ -117,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $errorMessage === '') {
             </form>
         <?php endif; ?>
     </main>
-    <script src="assets/js/index.js"></script>
+    <script src="assets/js/index.js?v=<?= filemtime(__DIR__ . '/assets/js/index.js') ?>"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const termsCheckbox = document.querySelector('[data-terms-checkbox]');

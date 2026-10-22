@@ -1,0 +1,164 @@
+/* Dashboard Analytics Section & Charts Grid */
+.dashboard-analytics-section {
+  margin: 32px 0 40px;
+  width: 100%;
+}
+
+.analytics-section-card {
+  background: var(--color-bg, #ffffff);
+  border: 1px solid var(--color-border, #e5e5e0);
+  border-radius: var(--radius-surface, 18px);
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.analytics-section-card.is-loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.analytics-section-card .analytics-sidebar__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px 16px;
+  background: var(--color-bg-secondary, #fcfbf9);
+  border-bottom: 1px solid var(--color-border, #e5e5e0);
+}
+
+.analytics-section-card .sidebar-header__eyebrow {
+  display: block;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-accent, #a43d2f);
+  margin-bottom: 2px;
+}
+
+.analytics-section-card .sidebar-header__title {
+  margin: 0;
+  font-family: var(--font-display, 'Satoshi', 'Outfit', sans-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text, #080808);
+}
+
+.analytics-section-card .analytics-sidebar__open {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border, #e5e5e0);
+  color: var(--color-text, #080808);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.analytics-section-card .analytics-sidebar__open:hover {
+  background: var(--color-text, #080808);
+  color: var(--color-bg, #ffffff);
+  border-color: var(--color-text, #080808);
+}
+
+.analytics-section-card .analytics-sidebar__filters {
+  display: flex;
+  gap: 8px;
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--color-border, #e5e5e0);
+  background: var(--color-bg, #ffffff);
+}
+
+.analytics-section-card .analytics-range {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border, #e5e5e0);
+  background: transparent;
+  color: var(--color-text-muted, #6e756b);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.analytics-section-card .analytics-range:hover {
+  color: var(--color-text, #080808);
+  border-color: var(--color-text, #080808);
+}
+
+.analytics-section-card .analytics-range.is-active {
+  background: var(--color-text, #080808);
+  color: var(--color-bg, #ffffff);
+  border-color: var(--color-text, #080808);
+}
+
+.analytics-section-card .analytics-sidebar__metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--color-border, #e5e5e0);
+  background: var(--color-bg-secondary, #fcfbf9);
+}
+
+.analytics-section-card .analytics-sidebar__metrics strong {
+  display: block;
+  font-family: var(--font-display, 'Satoshi', 'Outfit', sans-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-text, #080808);
+}
+
+.analytics-section-card .analytics-sidebar__metrics span {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--color-text-muted, #6e756b);
+  margin-top: 3px;
+}
+
+.dashboard-charts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--color-border, #e5e5e0);
+}
+
+.dashboard-charts-grid .analytics-sidebar__chart {
+  background: var(--color-bg, #ffffff);
+  padding: 20px 24px;
+}
+
+.dashboard-charts-grid .analytics-sidebar__chart h3 {
+  font-family: var(--font-display, 'Satoshi', 'Outfit', sans-serif);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text, #080808);
+  margin: 0 0 16px;
+}
+
+.dashboard-charts-grid .analytics-sidebar__chart > div {
+  height: 200px;
+  position: relative;
+}
+
+.analytics-sidebar__empty {
+  color: var(--color-text-muted, #6e756b);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin: 24px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .dashboard-charts-grid {
+    grid-template-columns: 1fr;
+  }
+  .analytics-section-card .analytics-sidebar__metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

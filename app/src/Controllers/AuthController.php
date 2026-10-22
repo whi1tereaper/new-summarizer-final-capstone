@@ -2,6 +2,7 @@
 namespace App\Src\Controllers;
 
 use App\Src\Database;
+use App\Src\Repositories\UserRepository;
 use App\Src\Services\EmailService;
 use App\Src\Services\GuestSessionService;
 use App\Src\Services\PasswordResetService;
@@ -15,24 +16,34 @@ require_once __DIR__ . '/../whitereaper.php';
 require_once __DIR__ . '/../Utils/SessionManager.php';
 require_once __DIR__ . '/../Utils/PasswordPolicy.php';
 require_once __DIR__ . '/../Database.php';
+require_once __DIR__ . '/../Repositories/UserRepository.php';
 require_once __DIR__ . '/../Utils/validation.php';
 require_once __DIR__ . '/../Services/RateLimiter.php';
+require_once __DIR__ . '/../Services/NeonAuthService.php';
+
+use App\Src\Services\NeonAuthService;
 
 class AuthController
 {
+    private const ADMIN_LOGIN_CODE_TTL = 600;
+
     private PDO $db;
+    private UserRepository $users;
     private ?EmailService $emailService;
     private ?PasswordResetService $resetService;
     private TermsAcceptanceService $termsAcceptanceService;
+    private NeonAuthService $neonAuth;
 
     public function __construct()
     {
         $this->db = Database::getInstance()->getConnection();
-        $this->emailService = class_exists(EmailService::class) ? new EmailService() : null;
+        $this->users = new UserRepository($this->db);
+        $this->emailService = null;
         $this->resetService = class_exists(PasswordResetService::class)
             ? new PasswordResetService($this->db)
             : null;
         $this->termsAcceptanceService = new TermsAcceptanceService();
+        $this->neonAuth = new NeonAuthService();
     }
 
     public function login(): void
@@ -63,32 +74,43 @@ class AuthController
             $this->redirectWithError('Invalid credentials.', $loginLocation);
         }
 
-        $user = $this->findActiveUserByCredential($username);
+        $user = $this->users->findActiveByCredential($username);
+        $authenticated = false;
+
         if ($user && \App\Src\Utils\PasswordPolicy::verify($password, $user['password_hash'])) {
-            $limiter->resetAttempts('login', $ip);
+            $authenticated = true;
+        } elseif ($this->neonAuth->isEnabled()) {
+            $emailToTry = filter_var($username, FILTER_VALIDATE_EMAIL) ? $username : ($user['email'] ?? '');
+            if ($emailToTry !== '') {
+                $neonResult = $this->neonAuth->signIn($emailToTry, $password);
+                if ($neonResult['success']) {
+                    if (!$user) {
+                        $neonUser = $neonResult['user'];
+                        $defaultUsername = $neonUser['name'] ?? explode('@', $emailToTry)[0];
+                        $user = $this->users->createPendingTermsAccount(
+                            $defaultUsername,
+                            $emailToTry,
+                            \App\Src\Utils\PasswordPolicy::hash($password)
+                        );
+                    }
+                    $authenticated = true;
+                    if (isset($neonResult['token'])) {
+                        $_SESSION['neon_auth_token'] = $neonResult['token'];
+                    }
+                }
+            }
+        }
 
-            $guestSessionService = new GuestSessionService();
-            $guestToken = $guestSessionService->getCurrentGuestToken();
-
-            \App\Src\Utils\SessionManager::regenerate();
-
-            // Password authentication establishes the session for both users and admins.
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['role'] = $user['role'];
-            $_SESSION['username'] = $user['username'];
-            unset($_SESSION['admin_challenge_verified']);
-            unset($_SESSION['pending_admin_user_id']);
-            unset($_SESSION['pending_admin_remember_me']);
-
-            $this->termsAcceptanceService->storeTermsStateInSession($user);
-
-            try {
-                $guestSessionService->claimGuestDataForUser((int)$user['id'], $guestToken);
-            } catch (\Throwable $throwable) {
-                error_log('[AuthController] Guest data migration failed during login: ' . $throwable->getMessage());
+        if ($authenticated && $user) {
+            if (($user['role'] ?? '') === 'admin') {
+                $limiter->resetAttempts('login', $ip);
+                $this->beginAdminLoginCode($user);
             }
 
-            $guestSessionService->clearGuestIdentity();
+            $limiter->resetAttempts('login', $ip);
+            if (!$this->establishAuthenticatedSession($user)) {
+                $this->redirect($loginLocation);
+            }
 
             // Remember Me: generate secure token and store in DB
             $rememberMe = isset($_POST['remember_me']) && $_POST['remember_me'] === '1';
@@ -96,7 +118,6 @@ class AuthController
                 RememberMeService::createCookieForUser((int)$user['id']);
             }
 
-            rotateCsrfToken();
             if (TermsAcceptanceService::currentUserNeedsAcceptance()) {
                 $this->redirect('accept_terms.php');
             }
@@ -108,9 +129,160 @@ class AuthController
         $this->redirectWithError('Invalid username or password.', $loginLocation);
     }
 
+    private function beginAdminLoginCode(array $user): void
+    {
+        $loginLocation = 'login.php?context=admin';
+        $email = strtolower(trim((string)($user['email'] ?? '')));
+        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+            error_log('[AuthController] Admin account has no valid email address for second-factor sign-in.');
+            $this->redirectWithError('Administrator sign-in is unavailable. Please contact support.', $loginLocation);
+        }
+
+        $ip = RateLimiter::getClientIp();
+        $limiter = new RateLimiter();
+        $emailIdentifier = hash('sha256', $email);
+        $requestLimits = [
+            ['admin_code_request_ip', $ip],
+            ['admin_code_request_user', $emailIdentifier],
+        ];
+
+        foreach ($requestLimits as [$action, $identifier]) {
+            $this->redirectIfRateLimited(
+                $limiter,
+                $action,
+                $identifier,
+                $loginLocation,
+                'Too many verification emails were requested. Please try again in %d minute(s).',
+                'Administrator sign-in code request'
+            );
+        }
+        foreach ($requestLimits as [$action, $identifier]) {
+            $limiter->recordAttempt($action, $identifier);
+        }
+
+        $code = (string)random_int(100000, 999999);
+        $emailService = $this->getEmailService();
+        if (!$emailService || !$emailService->sendAdminLoginCodeEmail($email, $code)) {
+            $this->redirectWithError('We could not send a verification code. Please try again later.', $loginLocation);
+        }
+
+        \App\Src\Utils\SessionManager::regenerate();
+        unset(
+            $_SESSION['user_id'],
+            $_SESSION['role'],
+            $_SESSION['username'],
+            $_SESSION['terms_accepted'],
+            $_SESSION['terms_accepted_at'],
+            $_SESSION['admin_challenge_verified'],
+            $_SESSION['pending_admin_user_id'],
+            $_SESSION['pending_admin_remember_me']
+        );
+        $_SESSION['pending_admin_login'] = [
+            'user_id' => (int)($user['id'] ?? 0),
+            'code_hash' => password_hash($code, PASSWORD_DEFAULT),
+            'email_hash' => $emailIdentifier,
+            'email_hint' => $this->maskEmailAddress($email),
+            'rate_identifier' => $emailIdentifier,
+            'expires_at' => time() + self::ADMIN_LOGIN_CODE_TTL,
+        ];
+        rotateCsrfToken();
+
+        $this->redirectWithSuccess(
+            'A one-time sign-in code has been sent to ' . $this->maskEmailAddress($email) . '.',
+            $loginLocation
+        );
+    }
+
+    public function verifyAdminLoginCode(): void
+    {
+        $this->checkCsrf();
+        $loginLocation = 'login.php?context=admin';
+        $pending = $_SESSION['pending_admin_login'] ?? null;
+        $userId = is_array($pending) ? filter_var($pending['user_id'] ?? null, FILTER_VALIDATE_INT) : false;
+
+        if (
+            $userId === false
+            || !is_string($pending['code_hash'] ?? null)
+            || !is_string($pending['rate_identifier'] ?? null)
+            || !is_int($pending['expires_at'] ?? null)
+        ) {
+            unset($_SESSION['pending_admin_login']);
+            $this->redirectWithError('Start administrator sign-in again to request a new code.', $loginLocation);
+        }
+
+        if ($pending['expires_at'] <= time()) {
+            unset($_SESSION['pending_admin_login']);
+            $this->redirectWithError('That sign-in code has expired. Sign in again to request a new code.', $loginLocation);
+        }
+
+        $ip = RateLimiter::getClientIp();
+        $limiter = new RateLimiter();
+        $this->redirectIfRateLimited(
+            $limiter,
+            'admin_code_verify_ip',
+            $ip,
+            $loginLocation,
+            'Too many code attempts. Please try again in %d minute(s).',
+            'Administrator code verification'
+        );
+        $this->redirectIfRateLimited(
+            $limiter,
+            'admin_code_verify_user',
+            $pending['rate_identifier'],
+            $loginLocation,
+            'Too many code attempts. Please try again in %d minute(s).',
+            'Administrator code verification'
+        );
+
+        $code = trim((string)($_POST['code'] ?? ''));
+        if (!preg_match('/^\d{6}$/', $code) || !password_verify($code, $pending['code_hash'])) {
+            $limiter->recordAttempt('admin_code_verify_ip', $ip);
+            $limiter->recordAttempt('admin_code_verify_user', $pending['rate_identifier']);
+            $this->redirectWithError('The code is invalid or expired. Check the email and try again.', $loginLocation);
+        }
+
+        $user = $userId > 0 ? $this->users->findActiveById((int)$userId) : null;
+        if (
+            !$user
+            || ($user['role'] ?? '') !== 'admin'
+            || !hash_equals(
+                (string)($pending['email_hash'] ?? ''),
+                hash('sha256', strtolower(trim((string)($user['email'] ?? ''))))
+            )
+        ) {
+            unset($_SESSION['pending_admin_login']);
+            $this->redirectWithError('Administrator sign-in could not be verified. Start again.', $loginLocation);
+        }
+
+        $limiter->resetAttempts('admin_code_verify_ip', $ip);
+        $limiter->resetAttempts('admin_code_verify_user', $pending['rate_identifier']);
+
+        if (!$this->establishAuthenticatedSession($user)) {
+            $this->redirect($loginLocation);
+        }
+
+        if (TermsAcceptanceService::currentUserNeedsAcceptance()) {
+            $this->redirect('accept_terms.php');
+        }
+
+        $this->redirect('admin_dashboard.php');
+    }
+
     public function register(): void
     {
         $this->checkCsrf();
+
+        $ip = RateLimiter::getClientIp();
+        $limiter = new RateLimiter();
+        $this->redirectIfRateLimited(
+            $limiter,
+            'register',
+            $ip,
+            'register.php',
+            'Too many registration attempts. Please try again in %d minute(s).',
+            'Registration'
+        );
+        $limiter->recordAttempt('register', $ip);
 
         $username = trim($_POST['username'] ?? '');
         $email = $_POST['email'] ?? '';
@@ -145,21 +317,73 @@ class AuthController
         $passwordHash = \App\Src\Utils\PasswordPolicy::hash($password);
 
         try {
-            $statement = $this->db->prepare(
-                'INSERT INTO users (username, email, password_hash, terms_accepted, terms_accepted_at)
-                 VALUES (?, ?, ?, 0, NULL)'
-            );
-            $statement->execute([$username, $normalizedEmail, $passwordHash]);
+            if ($this->neonAuth->isEnabled()) {
+                $neonResult = $this->neonAuth->signUp($username, $normalizedEmail, $password);
+                if (!$neonResult['success']) {
+                    $errMsg = $neonResult['error'] ?? '';
+                    if (stripos($errMsg, 'already') !== false || stripos($errMsg, 'exists') !== false) {
+                        $this->redirectWithError('Username or email already exists.', 'register.php');
+                    }
+                } elseif (isset($neonResult['token'])) {
+                    $_SESSION['neon_auth_token'] = $neonResult['token'];
+                }
+            }
 
-            rotateCsrfToken();
-            $this->redirectWithSuccess('Registration successful. Please login.', 'login.php');
+            $user = $this->users->createPendingTermsAccount($username, $normalizedEmail, $passwordHash);
+            if (!$this->establishAuthenticatedSession($user)) {
+                $this->redirect('login.php');
+            }
+
+            if (TermsAcceptanceService::currentUserNeedsAcceptance()) {
+                $this->redirect('accept_terms.php');
+            }
+
+            $this->redirect('profile.php');
         } catch (PDOException $exception) {
-            $this->redirectWithError('Username or email already exists.', 'register.php');
+            if (UserRepository::isUniqueConstraintViolation($exception)) {
+                $this->redirectWithError('Username or email already exists.', 'register.php');
+            }
+            throw $exception;
         }
+    }
+
+    private function establishAuthenticatedSession(array $user): bool
+    {
+        $guestSessionService = new GuestSessionService();
+        $guestToken = $guestSessionService->getCurrentGuestToken();
+
+        \App\Src\Utils\SessionManager::regenerate();
+
+        try {
+            $guestSessionService->claimGuestDataForUser((int)$user['id'], $guestToken);
+        } catch (PDOException $exception) {
+            error_log('[AuthController] Guest data migration failed during authentication: ' . $exception->getMessage());
+            $_SESSION['error'] = "Your account is ready, but we could not link this guest session's saved data. Your summaries are preserved; please sign in again shortly.";
+            return false;
+        }
+
+        $_SESSION['user_id'] = (int)$user['id'];
+        $_SESSION['role'] = (string)($user['role'] ?? 'user');
+        $_SESSION['username'] = (string)$user['username'];
+        unset($_SESSION['admin_challenge_verified']);
+        unset($_SESSION['pending_admin_user_id']);
+        unset($_SESSION['pending_admin_remember_me']);
+        unset($_SESSION['pending_admin_login']);
+
+        $this->termsAcceptanceService->storeTermsStateInSession($user);
+
+        $guestSessionService->clearGuestIdentity();
+        rotateCsrfToken();
+        return true;
     }
 
     public function logout(): void
     {
+        if (isset($_SESSION['neon_auth_token'])) {
+            $this->neonAuth->signOut((string)$_SESSION['neon_auth_token']);
+            unset($_SESSION['neon_auth_token']);
+        }
+
         RememberMeService::clearCookie();
         
         $guestSessionService = new GuestSessionService();
@@ -168,11 +392,68 @@ class AuthController
         unset($_SESSION['pending_admin_user_id']);
         unset($_SESSION['pending_admin_remember_me']);
         unset($_SESSION['admin_challenge_verified']);
+        unset($_SESSION['pending_admin_login']);
 
         \App\Src\Utils\SessionManager::destroy();
 
         $this->redirect('index.php');
     }
+
+    public function deactivateAccount(): void
+    {
+        $this->checkCsrf();
+
+        $userId = filter_var($_SESSION['user_id'] ?? null, FILTER_VALIDATE_INT);
+        if (!$userId || $userId < 1) {
+            $this->redirect('login.php');
+        }
+
+        $password = $_POST['password'] ?? '';
+        if (!is_string($password) || $password === '' || strlen($password) > 72) {
+            $this->redirectWithError('Enter your current password to deactivate your account.', 'profile.php');
+        }
+
+        $ip = RateLimiter::getClientIp();
+        $limiter = new RateLimiter();
+        $limiterIdentifier = $userId . ':' . $ip;
+        $this->redirectIfRateLimited(
+            $limiter,
+            'account_deactivation',
+            $limiterIdentifier,
+            'profile.php',
+            'Too many deactivation attempts. Please try again in %d minute(s).',
+            'Account deactivation'
+        );
+
+        try {
+            $user = $this->users->findActiveAccountForDeactivation((int)$userId);
+            if (!$user || !\App\Src\Utils\PasswordPolicy::verify($password, (string)$user['password_hash'])) {
+                $limiter->recordAttempt('account_deactivation', $limiterIdentifier);
+                $this->redirectWithError('The password is incorrect. Your account was not deactivated.', 'profile.php');
+            }
+
+            if (!$this->users->deactivateAccount((int)$userId)) {
+                $message = ($user['role'] ?? '') === 'admin'
+                    ? 'Administrators cannot deactivate their own account. Ask another administrator for assistance.'
+                    : 'This account cannot be deactivated right now.';
+                $this->redirectWithError(
+                    $message,
+                    'profile.php'
+                );
+            }
+
+            $limiter->resetAttempts('account_deactivation', $limiterIdentifier);
+            RememberMeService::clearCookie();
+            \App\Src\Utils\SessionManager::destroy();
+            \App\Src\Utils\SessionManager::start();
+            $_SESSION['success'] = 'Your account has been deactivated. Your saved summaries have been retained.';
+            $this->redirect('login.php');
+        } catch (\Throwable $exception) {
+            error_log('[AuthController] Account deactivation failed: ' . $exception->getMessage());
+            $this->redirectWithError('We could not deactivate your account. Please try again.', 'profile.php');
+        }
+    }
+
     public function forgotPassword(): void
     {
         $this->checkCsrf();
@@ -198,11 +479,12 @@ class AuthController
             'Please enter a valid email address.'
         );
 
-        $user = $this->findUserByEmail($email);
-        if ($user) {
-            $otp = $this->resetService->createToken($user['id']);
-            if ($this->emailService) {
-                $this->emailService->sendPasswordResetEmail($email, $otp);
+        $userId = $this->users->findIdByEmail($email);
+        if ($userId !== null) {
+            $otp = $this->resetService->createToken($userId);
+            $emailService = $this->getEmailService();
+            if ($emailService) {
+                $emailService->sendPasswordResetEmail($email, $otp);
             }
         }
 
@@ -257,8 +539,8 @@ class AuthController
             $this->redirectWithError('OTP must be a 6-digit numeric code.', 'reset_password.php');
         }
 
-        $user = $this->findUserByEmail($email);
-        if ($user && $this->resetPasswordForUser($user['id'], $otp, $password)) {
+        $userId = $this->users->findIdByEmail($email);
+        if ($userId !== null && $this->resetPasswordForUser($userId, $otp, $password)) {
             $limiter->resetAttempts('otp_verify', $ip);
             unset($_SESSION['reset_email']);
 
@@ -271,6 +553,31 @@ class AuthController
             'Invalid or expired OTP code, or unrecognized email.',
             'reset_password.php'
         );
+    }
+
+    private function getEmailService(): ?EmailService
+    {
+        if ($this->emailService !== null) {
+            return $this->emailService;
+        }
+
+        try {
+            $this->emailService = new EmailService();
+        } catch (\RuntimeException|\PHPMailer\PHPMailer\Exception $exception) {
+            error_log('[AuthController] Email service initialization failed: ' . $exception->getMessage());
+            return null;
+        }
+
+        return $this->emailService;
+    }
+
+    private function maskEmailAddress(string $email): string
+    {
+        [$localPart, $domain] = explode('@', $email, 2);
+        $visibleCharacter = substr($localPart, 0, 1);
+        $maskedCharacters = str_repeat('*', max(1, min(8, strlen($localPart) - 1)));
+
+        return $visibleCharacter . $maskedCharacters . '@' . $domain;
     }
 
     private function checkCsrf(): void
@@ -321,26 +628,6 @@ class AuthController
         return $result['email'];
     }
 
-    private function findActiveUserByCredential(string $usernameOrEmail)
-    {
-        $statement = $this->db->prepare(
-            'SELECT * FROM users WHERE (username = :u1 OR email = :u2) AND active = 1'
-        );
-        $statement->execute([
-            'u1' => $usernameOrEmail,
-            'u2' => $usernameOrEmail,
-        ]);
-
-        return $statement->fetch();
-    }
-
-    private function findUserByEmail(string $email)
-    {
-        $statement = $this->db->prepare('SELECT id FROM users WHERE email = ?');
-        $statement->execute([$email]);
-        return $statement->fetch();
-    }
-
     private function resetPasswordForUser(int $userId, string $otp, string $password): bool
     {
         $resetRecord = $this->resetService->validateToken($userId, $otp);
@@ -352,10 +639,7 @@ class AuthController
 
         $this->db->beginTransaction();
         try {
-            $updateStatement = $this->db->prepare(
-                'UPDATE users SET password_hash = ? WHERE id = ?'
-            );
-            $updateStatement->execute([$passwordHash, $userId]);
+            $this->users->updatePasswordHash($userId, $passwordHash);
 
             $this->resetService->markTokenUsed($userId);
             $this->db->commit();

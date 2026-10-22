@@ -65,6 +65,7 @@ class SummarizationRequest:
     output_format: str = ""       # paragraph, bullets, or structured
     use_llm_synthesis: bool = False # per-request opt-in; server configuration must also enable it
     target_word_budget: int = 0     # optional evaluation-only comparison budget
+    focus_query: str = ""           # query-focused summarization query/topic
 
 
 @dataclass(frozen=True)
@@ -172,6 +173,8 @@ class QualityMetrics:
     section_coverage: float = 1.0
     dangling_reference_count: int = 0
     heading_leak_count: int = 0
+    trend_consistency_rate: float = 1.0
+    unsupported_numeric_count: int = 0
     method: str = "deterministic_provenance_and_coverage_v1"
 
     def as_dict(self) -> dict[str, Any]:
@@ -185,6 +188,8 @@ class QualityMetrics:
             "section_coverage": round(self.section_coverage, 4),
             "dangling_reference_count": self.dangling_reference_count,
             "heading_leak_count": self.heading_leak_count,
+            "trend_consistency_rate": round(self.trend_consistency_rate, 4),
+            "unsupported_numeric_count": self.unsupported_numeric_count,
             "method": self.method,
         }
 
@@ -262,6 +267,8 @@ class SummarizationResult:
     output_format: str = "paragraph"
     retrieval_metadata: dict[str, Any] = field(default_factory=dict)
     evidence: list[dict[str, Any]] = field(default_factory=list)
+    focus_query: str = ""
+    multi_document_metadata: dict[str, Any] = field(default_factory=dict)
 
 
 def __getattr__(name: str) -> Any:

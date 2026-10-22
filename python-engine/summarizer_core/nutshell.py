@@ -1,4 +1,4 @@
-﻿"""Nutshell Analyzer for coherent document-level synthesis."""
+"""Nutshell Analyzer for coherent document-level synthesis."""
 
 from __future__ import annotations
 
@@ -307,6 +307,10 @@ def generate_nutshell(
         return {"status": "insufficient_content", "reason": "no_readable_content", "nutshell": "", "word_count": 0, "source_word_count": 0, "primary_summary_word_count": max(0, int(primary_summary_word_count)), "compression_ratio": 0.0, "analysis_mode": _normalize_analysis_mode(analysis_mode), "format": "paragraph", "algorithm_version": ALGORITHM_VERSION}
 
     title = detect_document_title(raw_text, source_doc.title_hint)
+    if not title or title.strip().lower() in {"generated summary", "untitled", "document"}:
+        first_line = raw_text.strip().split("\n")[0].strip()
+        if 1 <= len(first_line.split()) <= 10 and not first_line.endswith((".", "!", "?")):
+            title = first_line
     sections, _counts = detect_explicit_sections(paragraphs)
 
     candidates: list[str] = []
@@ -345,7 +349,7 @@ def generate_nutshell(
         flags=re.IGNORECASE,
     )
     thesis_cues = re.compile(
-        r"\b(?:aims?|examines?|explores?|investigates?|focuses? on|purpose|essential|fundamental|key role|crucial|maintains?|enables?|provides?|allows?|supports?)\b",
+        r"\b(?:aims?|examines?|explores?|investigates?|focuses? on|purpose|essential|fundamental|key role|crucial|maintains?|enables?|provides?|allows?|supports?|is built around|anchored by|defined by|embodies|represents)\b",
         flags=re.IGNORECASE,
     )
 
@@ -376,6 +380,15 @@ def generate_nutshell(
             score += 0.38
         if _MODE_CUES[mode].search(cand):
             score += 0.48
+
+        # Boost candidates mentioning key terms from the document title to retain core subject
+        title_terms = {
+            w.lower()
+            for w in tokenize_words(title)
+            if len(w) >= 3 and w.lower() not in {"overview", "summary", "report", "the", "and"}
+        }
+        if title_terms and any(t in cand.lower() for t in title_terms):
+            score += 0.30
 
         sec_name = cand_sections[idx].lower() if idx < len(cand_sections) else "body"
         sec_weight = _SECTION_WEIGHTS.get(sec_name, 1.0)
@@ -421,7 +434,23 @@ def generate_nutshell(
     selected: list[str] = []
     selected_signatures: set[str] = set()
     used_words = 0
-    for item in scored_candidates:
+    priority_items: list[dict[str, Any]] = []
+    seen_pri: set[str] = set()
+    if early_thesis:
+        for it in scored_candidates:
+            if it["sentence"] == early_thesis:
+                priority_items.append(it)
+                seen_pri.add(it["sentence"])
+                break
+    if best_finding:
+        for it in scored_candidates:
+            if it["sentence"] == best_finding and it["sentence"] not in seen_pri:
+                priority_items.append(it)
+                seen_pri.add(it["sentence"])
+                break
+
+    ordered_candidates = priority_items + [it for it in scored_candidates if it["sentence"] not in seen_pri]
+    for item in ordered_candidates:
         sentence = normalize_whitespace(item["sentence"])
         if item["section"] in {"references", "appendix", "literature_review"}:
             continue

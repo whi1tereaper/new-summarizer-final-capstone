@@ -3,6 +3,7 @@ from __future__ import annotations
 import sys
 import tempfile
 import unittest
+import json
 from pathlib import Path
 import shutil
 from unittest.mock import patch
@@ -17,8 +18,10 @@ from summarizer_core.text_utils import (
     extract_valid_paragraphs,
     load_source_document,
     normalize_summary_sentence,
+    segment_document_content,
     semantic_tokens_preserved,
 )
+from summarizer_core.structure import detect_document_title
 from pure_nlp import summarize_to_contract
 from local_cli import (
     TRANSLATION_CHUNK_SIZE,
@@ -101,6 +104,139 @@ hat does the journey of data packets mainly show?
 
 class SummarizerQualityTests(unittest.TestCase):
     maxDiff = None
+
+    def test_census_brief_preserves_the_primary_income_finding(self):
+        fixture_path = Path(__file__).parent / "fixtures" / "evaluation_validation_documents.json"
+        fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+        document = next(item for item in fixture["documents"] if item["id"] == "CENSUS-CB24-149")
+
+        result = SummarizationPipeline().summarize(
+            SummarizationRequest(
+                text=document["source_text"],
+                analysis_mode="general",
+                summary_depth="brief",
+                output_format="paragraph",
+            )
+        )
+        summary = result.plain_summary
+        document_analysis = result.source_metadata["document_analysis"]
+        primary_findings = document_analysis["primary_findings"]
+
+        self.assertIn("4.0%", summary)
+        self.assertIn("between 2022 and 2023", summary)
+        self.assertIn("since 2019", summary.lower())
+        self.assertIn("4.0%", primary_findings[0])
+        self.assertIn("since 2019", primary_findings[1].lower())
+        self.assertNotIn("response rates", document_analysis["purpose"].lower())
+        self.assertTrue(summary.startswith("SEPT. 10, 2024"))
+
+    def test_nasa_brief_preserves_an_untitled_record_finding(self):
+        fixture_path = Path(__file__).parent / "fixtures" / "evaluation_validation_documents.json"
+        fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+        document = next(item for item in fixture["documents"] if item["id"] == "NASA-RELEASE-25-002")
+
+        self.assertEqual(detect_document_title(document["source_text"]), "Generated Summary")
+        result = SummarizationPipeline().summarize(
+            SummarizationRequest(
+                text=document["source_text"],
+                analysis_mode="news",
+                summary_depth="brief",
+                output_format="paragraph",
+            )
+        )
+        summary = result.plain_summary.lower()
+        primary_findings = result.source_metadata["document_analysis"]["primary_findings"]
+
+        self.assertIn("warmest on record", summary)
+        self.assertIn("2024", summary)
+        self.assertIn("warmest on record", primary_findings[0].lower())
+
+    def test_technical_brief_preserves_core_definition_over_unrelated_caveats(self):
+        fixture_path = Path(__file__).parent / "fixtures" / "evaluation_validation_documents.json"
+        fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+        document = next(item for item in fixture["documents"] if item["id"] == "NIST-OUTLIERS-INTRO")
+
+        result = SummarizationPipeline().summarize(
+            SummarizationRequest(
+                text=document["source_text"],
+                analysis_mode="technical",
+                summary_depth="brief",
+                output_format="paragraph",
+            )
+        )
+        summary = result.plain_summary.lower()
+        analysis = result.source_metadata["document_analysis"]
+
+        self.assertIn("outlier is an observation", summary)
+        self.assertEqual(analysis["primary_finding_indices"], [])
+
+    def test_usgs_brief_preserves_unquantified_comparative_finding(self):
+        fixture_path = Path(__file__).parent / "fixtures" / "evaluation_validation_documents.json"
+        fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+        document = next(item for item in fixture["documents"] if item["id"] == "USGS-SIR-2023-5136")
+
+        result = SummarizationPipeline().summarize(
+            SummarizationRequest(
+                text=document["source_text"],
+                analysis_mode="general",
+                summary_depth="brief",
+                output_format="paragraph",
+            )
+        )
+        summary = result.plain_summary.lower()
+
+        self.assertIn("major ion concentrations were higher", summary)
+        self.assertIn("compared to sites on the red river", summary)
+
+    def test_research_brief_preserves_primary_effect_and_noncausal_qualification(self):
+        fixture_path = Path(__file__).parents[1] / "evaluation" / "corpus" / "heldout_documents.json"
+        fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+        document = next(item for item in fixture["documents"] if item["id"] == "HO-RESEARCH-COMMUTE")
+
+        result = SummarizationPipeline().summarize(
+            SummarizationRequest(
+                text=document["source_text"],
+                analysis_mode="general",
+                summary_depth="brief",
+                output_format="paragraph",
+            )
+        )
+        summary = result.plain_summary.lower()
+
+        self.assertIn("4.1-point higher wellbeing", summary)
+        self.assertIn("95% ci 2.3 to 5.9", summary)
+        self.assertIn("cannot establish that active commuting causes higher wellbeing", summary)
+        primary_findings = result.source_metadata["document_analysis"]["primary_findings"]
+        self.assertIn("4.1-point higher wellbeing", primary_findings[0])
+        self.assertIn("cannot establish", primary_findings[1].lower())
+
+    def test_detailed_policy_summary_preserves_retention_rules_and_exceptions(self):
+        fixture_path = Path(__file__).parents[1] / "evaluation" / "corpus" / "heldout_documents.json"
+        fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+        document = next(item for item in fixture["documents"] if item["id"] == "HO-POLICY-DATA")
+
+        result = SummarizationPipeline().summarize(
+            SummarizationRequest(
+                text=document["source_text"],
+                analysis_mode="legal",
+                summary_depth="detailed",
+                output_format="paragraph",
+            )
+        )
+        summary = result.plain_summary.lower()
+
+        for required_text in (
+            "30 days",
+            "18 months",
+            "whichever occurs later",
+            "court order",
+            "shall not be sold",
+            "warrant",
+            "imminent threat",
+            "10 business days",
+        ):
+            with self.subTest(required_text=required_text):
+                self.assertIn(required_text, summary)
 
     def test_summary_output_removes_decorative_symbols_but_preserves_facts(self):
         sentence = "★ The result was measured on 2026-09-22 — approximately $1.8M, with 32GB of storage. ✅"
@@ -204,6 +340,18 @@ class SummarizerQualityTests(unittest.TestCase):
         sentence = "The intervention improved attendance, although it did not improve final examination scores."
 
         self.assertEqual(pipeline._compress_sentence(sentence, max_words=30), sentence)
+
+    def test_sentence_compression_preserves_complete_exception_lists(self):
+        pipeline = SummarizationPipeline()
+        sentence = (
+            "The median filtered ammonia concentration at most sites was less than the "
+            "laboratory reporting level of 0.03 milligram per liter as nitrogen except for "
+            "the Sheyenne River at Harwood, North Dakota (U.S. Geological Survey [USGS] "
+            "station 05060400), and Red River of the North near Georgetown, Minnesota "
+            "(USGS station 05062130)."
+        )
+
+        self.assertEqual(pipeline._compress_sentence(sentence, max_words=34), sentence)
 
     def test_output_style_controls_the_serialized_summary_structure(self) -> None:
         sentences = [
@@ -333,6 +481,62 @@ class SummarizerQualityTests(unittest.TestCase):
         self.assertTrue(all(sentence[-1] in ".!?" for sentence in result.sentences))
         self.assertTrue(result.paragraph_summaries)
         self.assertTrue(all(not contains_article_noise(item.summary) for item in result.paragraph_summaries))
+
+    def test_read_and_write_assessment_directions_are_segmented_as_directions(self) -> None:
+        segmented = segment_document_content(
+            "Read the questions carefully and choose the correct answer from the choices provided. "
+            "Write your answers on a separate sheet of paper."
+        )
+
+        self.assertEqual(segmented["main_reading"], [])
+        self.assertEqual(len(segmented["directions"]), 1)
+
+    def test_citation_cleanup_preserves_parenthetical_month_date_ranges(self) -> None:
+        source = (
+            "The record followed 15 consecutive months (June 2023 through August 2024) "
+            "of monthly temperature records."
+        )
+
+        normalized = normalize_summary_sentence(source)
+
+        self.assertIn("(June 2023 through August 2024)", normalized)
+        self.assertNotIn("monthsthrough", normalized)
+
+    def test_summary_sentence_preserves_balanced_curly_quote(self) -> None:
+        source = "“Not every year is going to break records, but the long-term trend is clear,” Schmidt said."
+
+        normalized = normalize_summary_sentence(source)
+
+        self.assertTrue(normalized.startswith("“"))
+        self.assertIn("clear,” Schmidt said.", normalized)
+
+    def test_technical_comprehensive_summary_keeps_inline_heading_definition(self) -> None:
+        text = (
+            "Introduction | An outlier is an observation that appears to deviate markedly from other "
+            "observations in the sample. Identification of potential outliers is important for the following "
+            "reasons.\n\n"
+            "1. An outlier may indicate bad data. For example, the data may have been coded incorrectly or an "
+            "experiment may not have been run correctly. If it can be determined that an outlying point is in "
+            "fact erroneous, then the outlying value should be deleted from the analysis (or corrected if possible).\n\n"
+            "2. In some cases, it may not be possible to determine if an outlying point is bad data. Outliers may "
+            "be due to random variation or may indicate something scientifically interesting. In any event, we "
+            "typically do not want to simply delete the outlying observation. However, if the data contains "
+            "significant outliers, we may need to consider the use of robust statistical techniques."
+        )
+        result = SummarizationPipeline().summarize(
+            SummarizationRequest(
+                text=text,
+                analysis_mode="technical",
+                summary_length="comprehensive",
+                output_format="bullets",
+                preprocessing_options=PreprocessingOptions(),
+            )
+        )
+
+        self.assertTrue(any(
+            sentence.startswith("An outlier is an observation")
+            for sentence in result.sentences
+        ))
 
     def test_pipeline_excludes_assessment_questions_and_ocr_artifacts(self) -> None:
         pipeline = SummarizationPipeline()
@@ -606,6 +810,40 @@ class SummarizerQualityTests(unittest.TestCase):
         passed, notes = pipeline._verify_source_faithfulness([paraphrased], source_text, candidates)
         self.assertFalse(passed)
         self.assertTrue(any("not found in source" in note or "low token overlap" in note for note in notes))
+
+    def test_profile_validation_uses_final_source_guarded_sentences(self) -> None:
+        fixture_path = Path(__file__).parent / "fixtures" / "evaluation_validation_documents.json"
+        fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+        source = next(item["source_text"] for item in fixture["documents"] if item["id"] == "USGS-SIR-2023-5136")
+        pipeline = SummarizationPipeline()
+        guarded_source_sentence: list[str] = []
+
+        def guard_to_source_sentence(sentences, candidates):
+            if not guarded_source_sentence:
+                guarded_source_sentence.append(candidates[0].text)
+                return list(guarded_source_sentence), {"status": "checked"}
+            return list(sentences), {"status": "checked"}
+
+        def validate_final_sentences(sentences, candidates, profile, raw_text):
+            passed = sentences == guarded_source_sentence
+            return passed, [] if passed else ["The pre-guard summary does not match the guarded source sentence."]
+
+        with (
+            patch.object(pipeline, "_guard_summary_sentences", side_effect=guard_to_source_sentence),
+            patch.object(pipeline, "_validate_against_profile", side_effect=validate_final_sentences),
+        ):
+            result = pipeline.summarize(
+                SummarizationRequest(
+                    text=source,
+                    analysis_mode="general",
+                    summary_depth="comprehensive",
+                    output_format="paragraph",
+                )
+            )
+
+        self.assertEqual(result.sentences, guarded_source_sentence)
+        self.assertTrue(result.validation_passed)
+        self.assertEqual(result.validation_notes, [])
 
     def test_qualifier_preservation_in_output(self) -> None:
         """Test that hedging language (may, might, could) is preserved."""

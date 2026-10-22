@@ -118,11 +118,11 @@ try {
     assertCondition($byId('summary-status') !== null, 'Action status feedback remains available');
     assertCondition($xpath->query('//*[@id="summary-status"]/following::*[@id="original-summary"]')->length === 1, 'Action feedback is near the reading toolbar');
 
-    foreach (['result-context', 'result-sources', 'result-details'] as $disclosureId) {
-        $disclosure = $byId($disclosureId);
-        assertCondition($disclosure?->nodeName === 'details', $disclosureId . ' uses a native disclosure');
-        assertCondition($disclosure instanceof DOMElement && !$disclosure->hasAttribute('open'), $disclosureId . ' starts collapsed');
-        assertCondition($xpath->query('//*[@id="' . $disclosureId . '"]/summary')->length === 1, $disclosureId . ' has a keyboard-accessible summary control');
+    foreach (['result-context', 'result-sources', 'result-details'] as $sectionId) {
+        $section = $byId($sectionId);
+        assertCondition($section !== null, $sectionId . ' is available directly on the page');
+        assertCondition($section?->nodeName === 'section', $sectionId . ' is rendered as a straightforward open section');
+        assertCondition($xpath->query('//*[@id="' . $sectionId . '"]//summary')->length === 0, $sectionId . ' has no collapsible drop-down toggles');
     }
     assertCondition(str_contains($byId('result-details')?->textContent ?? '', '74.5%'), 'Compression remains available inside optional summary details');
     assertCondition($xpath->query('//*[' . $hasClass('result-stat__bar') . ']')->length === 0, 'Compression is not presented as a prominent score bar');
@@ -132,6 +132,12 @@ try {
 
     assertCondition($byId('feedback-widget') !== null, 'Summary rating remains available');
     assertCondition($xpath->query('//*[@id="feedback-widget"]/ancestor::details')->length === 0, 'Rating can be reached independently of optional reading panels');
+    $commentBlock = $byId('feedback-comment-block');
+    assertCondition($commentBlock !== null, 'Feedback comment block is available directly on the page');
+    assertCondition(!str_contains($commentBlock?->getAttribute('class') ?? '', 'hidden'), 'Feedback comment block is not hidden by default');
+    assertCondition($byId('feedback-comment') !== null, 'Feedback comment textarea is directly available');
+    assertCondition(!str_contains($html, "Anything you'd like to add?"), 'Feedback section omits redundant prompt label');
+    assertCondition(!str_contains($html, 'Your comment is displayed anonymously to administrators.'), 'Feedback section omits redundant anonymous hint paragraph');
     assertCondition(str_contains($byId('result-context')?->textContent ?? '', $purposeSnippet), 'Section analysis recovers Purpose from its overview instead of duplicating Conclusion');
     assertCondition(str_contains($html, $conclusionSnippet), 'Conclusion retains the actual conclusion text');
 

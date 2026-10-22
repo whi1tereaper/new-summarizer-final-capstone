@@ -12,8 +12,14 @@ class RateLimiter
     // max attempts and window length per action
     private const LIMITS = [
         'login'         => ['max' => 5,  'window' => 900],   // 5 attempts per 15 min
+        'register'      => ['max' => 5,  'window' => 900],   // 5 attempts per 15 min
         'reset_request' => ['max' => 1,  'window' => 60],    // 1 per 1 min
         'otp_verify'    => ['max' => 5,  'window' => 900],   // 5 per 15 min
+        'admin_code_request_user' => ['max' => 3, 'window' => 900],
+        'admin_code_request_ip'   => ['max' => 3, 'window' => 900],
+        'admin_code_verify_user'  => ['max' => 5, 'window' => 900],
+        'admin_code_verify_ip'    => ['max' => 5, 'window' => 900],
+        'account_deactivation' => ['max' => 5, 'window' => 900],
         'landing_beacon' => ['max' => 30, 'window' => 60],   // telemetry batches per minute
         'nutshell'      => ['max' => 10, 'window' => 3600],  // 10 new generations per hour
         'feedback'      => ['max' => 10, 'window' => 60],    // 10 feedback submissions per minute
@@ -63,22 +69,39 @@ class RateLimiter
         }
 
         // insert first attempt or bump the current window
-        $stmt = $this->db->prepare("
-            INSERT INTO rate_limits (action_type, identifier, attempts, window_start)
-            VALUES (?, ?, 1, NOW())
-            ON DUPLICATE KEY UPDATE
-                attempts = IF(
-                    TIMESTAMPDIFF(SECOND, window_start, NOW()) >= ?,
-                    1,
-                    attempts + 1
-                ),
-                window_start = IF(
-                    TIMESTAMPDIFF(SECOND, window_start, NOW()) >= ?,
-                    NOW(),
-                    window_start
-                )
-        ");
-        $stmt->execute([$action, $identifier, $config['window'], $config['window']]);
+        if (\App\Src\Database::getInstance()->isPostgres()) {
+            $stmt = $this->db->prepare("
+                INSERT INTO rate_limits (action_type, identifier, attempts, window_start)
+                VALUES (?, ?, 1, NOW())
+                ON CONFLICT (action_type, identifier) DO UPDATE SET
+                    attempts = CASE
+                        WHEN EXTRACT(EPOCH FROM (NOW() - rate_limits.window_start)) >= ? THEN 1
+                        ELSE rate_limits.attempts + 1
+                    END,
+                    window_start = CASE
+                        WHEN EXTRACT(EPOCH FROM (NOW() - rate_limits.window_start)) >= ? THEN NOW()
+                        ELSE rate_limits.window_start
+                    END
+            ");
+            $stmt->execute([$action, $identifier, $config['window'], $config['window']]);
+        } else {
+            $stmt = $this->db->prepare("
+                INSERT INTO rate_limits (action_type, identifier, attempts, window_start)
+                VALUES (?, ?, 1, NOW())
+                ON DUPLICATE KEY UPDATE
+                    attempts = IF(
+                        TIMESTAMPDIFF(SECOND, window_start, NOW()) >= ?,
+                        1,
+                        attempts + 1
+                    ),
+                    window_start = IF(
+                        TIMESTAMPDIFF(SECOND, window_start, NOW()) >= ?,
+                        NOW(),
+                        window_start
+                    )
+            ");
+            $stmt->execute([$action, $identifier, $config['window'], $config['window']]);
+        }
 
         // clean stale rows once in a while
         if (random_int(1, 100) === 1) {
@@ -127,31 +150,50 @@ class RateLimiter
     public function purgeExpired(): int
     {
         $maxWindow = max(array_column(self::LIMITS, 'window'));
+        $cutoff = date('Y-m-d H:i:s', time() - $maxWindow);
         $stmt = $this->db->prepare(
-            "DELETE FROM rate_limits WHERE window_start < DATE_SUB(NOW(), INTERVAL ? SECOND)"
+            "DELETE FROM rate_limits WHERE window_start < ?"
         );
-        $stmt->execute([$maxWindow]);
+        $stmt->execute([$cutoff]);
         return $stmt->rowCount();
     }
 
-    // use proxy headers when available, then fall back to REMOTE_ADDR
+    // Forwarded addresses are trusted only when REMOTE_ADDR is an explicitly trusted proxy.
     public static function getClientIp(): string
     {
-        if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            // first IP is the original client
-            $ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
-            $ip = trim($ips[0]);
-        } elseif (!empty($_SERVER['HTTP_X_REAL_IP'])) {
-            $ip = $_SERVER['HTTP_X_REAL_IP'];
-        } else {
-            $ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+        $remoteAddress = trim((string)($_SERVER['REMOTE_ADDR'] ?? ''));
+        if (filter_var($remoteAddress, FILTER_VALIDATE_IP) === false) {
+            return '0.0.0.0';
         }
 
-        // ignore weird header values
-        if (filter_var($ip, FILTER_VALIDATE_IP)) {
-            return $ip;
+        $trustedProxies = function_exists('config')
+            ? config('security.trusted_proxies', [])
+            : [];
+        if (!is_array($trustedProxies) || !in_array($remoteAddress, $trustedProxies, true)) {
+            return $remoteAddress;
         }
 
-        return $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+        $forwardedFor = trim((string)($_SERVER['HTTP_X_FORWARDED_FOR'] ?? ''));
+        if ($forwardedFor !== '') {
+            $addresses = array_map('trim', explode(',', $forwardedFor));
+            $addresses[] = $remoteAddress;
+
+            foreach (array_reverse($addresses) as $address) {
+                if (filter_var($address, FILTER_VALIDATE_IP) === false) {
+                    return $remoteAddress;
+                }
+
+                if (!in_array($address, $trustedProxies, true)) {
+                    return $address;
+                }
+            }
+
+            return $remoteAddress;
+        }
+
+        $realAddress = trim((string)($_SERVER['HTTP_X_REAL_IP'] ?? ''));
+        return filter_var($realAddress, FILTER_VALIDATE_IP) !== false
+            ? $realAddress
+            : $remoteAddress;
     }
 }

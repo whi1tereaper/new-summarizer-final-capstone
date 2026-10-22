@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import subprocess
 import sys
 import unittest
@@ -84,6 +85,7 @@ class TestPipelineArchitecture(unittest.TestCase):
 
     def test_independent_cold_process_imports(self):
         """Verify each module can be imported in a completely fresh Python interpreter."""
+        env = dict(os.environ, OPENBLAS_NUM_THREADS="1")
         sub_tests = [
             "import sys; sys.path.insert(0, 'python-engine'); import summarizer_core.models",
             "import sys; sys.path.insert(0, 'python-engine'); import summarizer_core.pipeline",
@@ -92,7 +94,7 @@ class TestPipelineArchitecture(unittest.TestCase):
             "import sys; sys.path.insert(0, 'python-engine'); from summarizer_core.models import SummarizationPipeline",
         ]
         for script in sub_tests:
-            result = subprocess.run([sys.executable, "-c", script], capture_output=True, text=True)
+            result = subprocess.run([sys.executable, "-c", script], capture_output=True, text=True, env=env)
             self.assertEqual(
                 result.returncode,
                 0,
@@ -101,6 +103,7 @@ class TestPipelineArchitecture(unittest.TestCase):
 
     def test_acyclic_import_graph(self):
         """Verify that models.py does not import pipeline or text_utils at module load."""
+        env = dict(os.environ, OPENBLAS_NUM_THREADS="1")
         script = """
 import sys
 sys.path.insert(0, 'python-engine')
@@ -108,7 +111,7 @@ import summarizer_core.models
 assert 'summarizer_core.pipeline' not in sys.modules, 'models should not eagerly import pipeline'
 assert 'summarizer_core.text_utils' not in sys.modules, 'models should not eagerly import text_utils'
 """
-        result = subprocess.run([sys.executable, "-c", script], capture_output=True, text=True)
+        result = subprocess.run([sys.executable, "-c", script], capture_output=True, text=True, env=env)
         self.assertEqual(result.returncode, 0, f"Acyclic check failed: {result.stderr}")
 
 

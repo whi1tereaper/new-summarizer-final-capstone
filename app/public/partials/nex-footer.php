@@ -1,7 +1,7 @@
 <?php
 // Shared editorial footer matching NexStudio aesthetic specification
 ?>
-<link rel="stylesheet" href="assets/css/site-footer.css?v=nex-8">
+<link rel="stylesheet" href="assets/css/site-footer.css?v=<?= filemtime(__DIR__ . '/../assets/css/site-footer.css') ?>">
 
 <footer class="nex-footer" data-nav-theme="light" role="contentinfo">
     <div class="nex-footer__inner">
@@ -42,7 +42,6 @@
                     <span class="nex-footer__col-title">INFORMATION</span>
                 </div>
                 <ul class="nex-footer__links">
-                    <li><a href="about.php" class="nex-footer__link">About Us</a></li>
                     <li><a href="accept_terms.php" class="nex-footer__link">Terms and Conditions</a></li>
                 </ul>
             </div>

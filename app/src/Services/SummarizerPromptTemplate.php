@@ -18,9 +18,12 @@ final class SummarizerPromptTemplate
         'technical',
         'study',
         'news',
+        'legal',
+        'scientific',
     ];
 
     public const ALLOWED_LENGTHS = [
+        'very_brief',
         'brief',
         'balanced',
         'detailed',
@@ -34,9 +37,17 @@ final class SummarizerPromptTemplate
         'technical' => 'Highlight system architecture, engineering specifications, implementation details, mechanisms, constraints, and quantitative trade-offs.',
         'study' => 'Structure around foundational concepts, clear principle explanations, key definitions, and study takeaways for learning and retention.',
         'news' => 'Use an inverted pyramid style: lead with the most newsworthy facts (who, what, where, when, why), followed by crucial context and immediate implications.',
+        'legal' => 'Highlight operative terms, rights, obligations, compliance mandates, conditions, liabilities, and dispute resolution mechanisms with textual fidelity.',
+        'scientific' => 'Emphasize research hypotheses, experimental methodology, empirical findings, scientific conclusions, and analytical limitations.',
     ];
 
     public const LENGTH_INSTRUCTIONS = [
+        'very_brief' => [
+            'label' => 'Very Brief',
+            'sentence_range' => '1 sentence',
+            'approx_words' => '15-30 words',
+            'instruction' => 'Distill the single fundamental premise or key finding into one ultra-concise sentence.',
+        ],
         'brief' => [
             'label' => 'Brief',
             'sentence_range' => '1-2 sentences',

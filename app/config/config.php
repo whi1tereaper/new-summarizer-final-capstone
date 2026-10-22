@@ -7,6 +7,10 @@ $storageUploads = Env::requirePath('STORAGE_UPLOADS');
 $storageAudio = Env::requirePath('STORAGE_AUDIO');
 $storageLogs = Env::requirePath('STORAGE_LOGS');
 $storageTmp = Env::requirePath('STORAGE_TMP');
+$summarizerEngineVersion = strtolower(trim(Env::string('SUMMARIZER_ENGINE_VERSION', 'legacy')));
+if (!in_array($summarizerEngineVersion, ['legacy', 'v2'], true)) {
+    throw new RuntimeException('SUMMARIZER_ENGINE_VERSION must be "legacy" or "v2".');
+}
 $llmEnabled = Env::bool('SUMMARIZER_LLM_ENABLED', false);
 $llmProvider = strtolower(Env::string('SUMMARIZER_LLM_PROVIDER', 'openai_compatible'));
 $llmModel = Env::string('SUMMARIZER_LLM_MODEL', '');
@@ -25,10 +29,24 @@ $llmIsLocal = in_array($llmHost, ['localhost', '127.0.0.1', '::1'], true);
 $llmEndpointAllowed = $llmEndpointShapeValid && ($llmIsLocal
     ? in_array($llmScheme, ['http', 'https'], true)
     : ($llmAllowRemote && $llmScheme === 'https'));
+$trustedProxies = array_filter(
+    array_map('trim', explode(',', Env::string('TRUSTED_PROXIES', ''))),
+    static fn(string $address): bool => $address !== ''
+);
+foreach ($trustedProxies as $trustedProxy) {
+    if (filter_var($trustedProxy, FILTER_VALIDATE_IP) === false) {
+        throw new RuntimeException('TRUSTED_PROXIES must contain comma-separated IP addresses.');
+    }
+}
+$trustedProxies = array_values(array_unique($trustedProxies));
 
 return [
     'session' => [
         'name' => Env::string('SESSION_NAME', 'LIGHT_SESSID'),
+    ],
+
+    'security' => [
+        'trusted_proxies' => $trustedProxies,
     ],
 
     'app' => [
@@ -39,12 +57,20 @@ return [
     ],
 
     'database' => [
-        'host' => Env::requireString('DB_HOST'),
-        'port' => Env::requireString('DB_PORT'),
-        'name' => Env::requireString('DB_NAME'),
-        'username' => Env::requireString('DB_USERNAME'),
-        'password' => Env::requireString('DB_PASSWORD'),
-        'charset' => Env::requireString('DB_CHARSET'),
+        'url' => Env::string('DATABASE_URL', ''),
+        'unpooled_url' => Env::string('DATABASE_URL_UNPOOLED', ''),
+        'host' => Env::string('DB_HOST', '127.0.0.1'),
+        'port' => Env::string('DB_PORT', '3306'),
+        'name' => Env::string('DB_NAME', 'ai_summarizer'),
+        'username' => Env::string('DB_USERNAME', 'root'),
+        'password' => Env::string('DB_PASSWORD', ''),
+        'charset' => Env::string('DB_CHARSET', 'utf8mb4'),
+    ],
+
+    'neon_auth' => [
+        'base_url' => Env::string('NEON_AUTH_BASE_URL', ''),
+        'jwks_url' => Env::string('NEON_AUTH_JWKS_URL', ''),
+        'enabled'  => Env::string('NEON_AUTH_BASE_URL', '') !== '',
     ],
 
     'python' => [
@@ -57,6 +83,8 @@ return [
     ],
 
     'summarizer' => [
+        'engine_version' => $summarizerEngineVersion,
+        'local_embedding_model' => Env::string('SUMMARIZER_LOCAL_EMBEDDING_MODEL', ''),
         'llm_enabled' => $llmEnabled,
         'llm_provider' => $llmProvider,
         'llm_model' => $llmModel,

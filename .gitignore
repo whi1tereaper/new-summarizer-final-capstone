@@ -8,14 +8,26 @@ cookies.txt
 /h
 
 # Storage runtime artifacts (keep directories via .gitkeep)
+/app/uploads/*
+!/app/uploads/.htaccess
+!/app/uploads/.gitkeep
 storage/uploads/*
 !storage/uploads/.gitkeep
 storage/audio/*
 !storage/audio/.gitkeep
+storage/models/*
+!storage/models/.gitkeep
 storage/logs/*
 !storage/logs/.gitkeep
 storage/tmp/*
 !storage/tmp/.gitkeep
+/storage/*.token
+/storage/*cooldown*.json
+/storage/*cooldown*.lock
+/python-engine/output/
+/python-engine/.tmp/
+/artifacts/
+/docs/system-audit/evidence/tool-dependencies/
 
 # Python cache & virtual environments
 __pycache__/
@@ -41,3 +53,6 @@ scratch/
 Thumbs.db
 Desktop.ini
 .DS_Store
+/ai-summarizer-123 - quality upg
+.neon
+node_modules/

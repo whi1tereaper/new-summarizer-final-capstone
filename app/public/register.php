@@ -4,6 +4,10 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../src/Utils/validation.php';
 
 $csrf_token = generateCsrfToken();
+$termsAcceptedFromTermsPage = !empty($_SESSION['guest_terms_accepted']);
+$termsNotice = $termsAcceptedFromTermsPage
+    ? 'Terms accepted. Complete this form to create your account.'
+    : '';
 ?>
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
@@ -17,7 +21,7 @@ $csrf_token = generateCsrfToken();
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/images/poc-neust-logo.png">
     <link rel="stylesheet" href="assets/css/design-tokens.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=<?= filemtime(__DIR__ . '/assets/css/style.css') ?>">
     <link rel="stylesheet" href="assets/css/site-footer.css?v=nex-8">
 </head>
 <body class="page-auth-layout">
@@ -45,6 +49,12 @@ $csrf_token = generateCsrfToken();
                             <svg class="message-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
                             <span><?= htmlspecialchars($_SESSION['error']) ?></span>
                             <?php unset($_SESSION['error']); ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if ($termsNotice !== ''): ?>
+                        <div class="message message-success" role="status">
+                            <?= htmlspecialchars($termsNotice) ?>
                         </div>
                     <?php endif; ?>
 
@@ -106,10 +116,10 @@ $csrf_token = generateCsrfToken();
                         </div>
 
                         <label class="consent-box consent-box-standalone">
-                            <input type="checkbox" id="terms_accept" name="terms_accept" value="1" required>
+                            <input type="checkbox" id="terms_accept" name="terms_accept" value="1" required<?= $termsAcceptedFromTermsPage ? ' checked' : '' ?>>
                             <span class="consent-copy">
                                 I have read and agree to the
-                                <a href="terms.php" target="_blank" rel="noopener noreferrer">Terms and Conditions</a>.
+                                <a href="terms.php?return=register.php" target="_blank" rel="noopener noreferrer">Terms and Conditions</a>.
                             </span>
                         </label>
 

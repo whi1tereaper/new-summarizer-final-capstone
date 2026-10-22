@@ -125,8 +125,20 @@ def tokenize_words(text: str) -> list[str]:
 
 
 def remove_stopwords(text: str, language: str = "english") -> str:
-    ensure_nltk_resource("corpora/stopwords", "stopwords")
-    stop_words = set(stopwords.words(language))
+    if ensure_nltk_resource("corpora/stopwords", "stopwords"):
+        stop_words = set(stopwords.words(language))
+    else:
+        stop_words = {
+            "a", "an", "the", "and", "or", "but", "if", "then", "else", "when",
+            "at", "by", "for", "with", "about", "against", "between", "into",
+            "through", "during", "before", "after", "above", "below", "to",
+            "from", "up", "down", "in", "out", "on", "off", "over", "under",
+            "again", "further", "once", "here", "there", "where", "why", "how",
+            "all", "any", "both", "each", "few", "more", "most", "other", "some",
+            "such", "no", "nor", "not", "only", "own", "same", "so", "than",
+            "too", "very", "can", "will", "just", "should", "now", "am", "is",
+            "are", "was", "were", "be", "been", "being",
+        }
     tokens = [
         token
         for token in tokenize_words(text)
@@ -136,7 +148,8 @@ def remove_stopwords(text: str, language: str = "english") -> str:
 
 
 def lemmatize_text(text: str) -> str:
-    ensure_nltk_resource(("corpora/wordnet", "corpora/wordnet.zip"), "wordnet")
+    if not ensure_nltk_resource(("corpora/wordnet", "corpora/wordnet.zip"), "wordnet"):
+        return text
     lemmatizer = WordNetLemmatizer()
     tokens = [
         lemmatizer.lemmatize(token)
@@ -147,13 +160,15 @@ def lemmatize_text(text: str) -> str:
     return " ".join(tokens)
 
 
-def ensure_nltk_resource(resource_paths: str | tuple[str, ...], package_name: str) -> None:
+def ensure_nltk_resource(resource_paths: str | tuple[str, ...], package_name: str) -> bool:
+    """Check for installed NLTK data without downloading it during a request."""
+    del package_name
     paths = (resource_paths,) if isinstance(resource_paths, str) else resource_paths
     for resource_path in paths:
         try:
             nltk.data.find(resource_path)
-            return
-        except LookupError:
+            return True
+        except (LookupError, OSError):
             continue
 
-    nltk.download(package_name, quiet=True)
+    return False

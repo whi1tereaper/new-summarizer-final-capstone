@@ -93,6 +93,21 @@ INSTALLATION STEPS
 
    Access at: http://localhost:8000
 
+   WINDOWS / XAMPP NLP WORKER
+   From PowerShell in the project directory, install the current-user worker
+   monitor once:
+   powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\install_nlp_worker_task.ps1
+   It starts the authenticated NLP supervisor at sign-in and checks it every
+   30 seconds, restarting it if it exits. The task runs as the signed-in user
+   with limited privileges; it does not run Apache as Administrator. The worker
+   listens only on 127.0.0.1 and uses storage\worker.token (or
+   PYTHON_WORKER_SECRET) for authentication.
+
+   To start it for this session without installing the task:
+   powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\start_nlp_worker.ps1
+   To remove the task and stop the worker:
+   powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\remove_nlp_worker_task.ps1
+
 CONFIGURATION
 -------------
 

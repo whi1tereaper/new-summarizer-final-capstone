@@ -8,6 +8,7 @@ import importlib
 import logging
 import math
 import re
+from threading import Lock
 from typing import Any, cast
 
 import nltk
@@ -22,35 +23,24 @@ from .constants import (
 )
 from .models import PreprocessingOptions
 from .normalization import normalize_whitespace
+from .runtime import parse_text, request_cache, timed
 
 LOGGER = logging.getLogger(__name__)
 # Offline evaluation scopes resource lookup to already installed data. Ordinary
 # requests retain their existing resource preparation behavior.
 OFFLINE_RESOURCES: ContextVar[bool] = ContextVar("summarizer_offline_resources", default=False)
 
+@lru_cache(maxsize=32)
 def try_ensure_nltk_resource(resource: str | tuple[str, ...], package: str) -> bool:
+    """Check for a local NLTK resource without downloading during a request."""
+    del package
     resource_names = (resource,) if isinstance(resource, str) else resource
 
     for resource_name in resource_names:
         try:
             nltk.data.find(resource_name)
             return True
-        except (LookupError, OSError, Exception):
-            continue
-
-    if OFFLINE_RESOURCES.get():
-        return False
-
-    try:
-        nltk.download(package, quiet=True)
-    except Exception:
-        return False
-
-    for resource_name in resource_names:
-        try:
-            nltk.data.find(resource_name)
-            return True
-        except (LookupError, OSError, Exception):
+        except (LookupError, OSError):
             continue
 
     return False
@@ -72,6 +62,17 @@ def protect_fallback_sentence_boundaries(text: str) -> tuple[str, dict[str, str]
     protected = re.sub(r"(?<=\d)\.(?=\d)", lambda match: remember(match.group(0)), protected)
     protected = re.sub(
         r"\b(?:[A-Z]\.){2,}",
+        lambda match: remember(match.group(0)),
+        protected,
+    )
+    protected = re.sub(
+        r"\b(?:N|S)\.\s*Dak\.|\bN\.\s*Mex\.|\bW\.\s*Va\.",
+        lambda match: remember(match.group(0)),
+        protected,
+        flags=re.IGNORECASE,
+    )
+    protected = re.sub(
+        r"\b(?:Ala|Ariz|Ark|Calif|Colo|Conn|Del|Fla|Ga|Ill|Ind|Kans?|Ky|La|Mass|Md|Mich|Minn|Miss|Mo|Mont|Neb|Nebr|Nev|Okla|Ore|Pa|Tenn|Vt|Va|Wash|Wisc?|Wyo)\.(?=\s+[a-z])",
         lambda match: remember(match.group(0)),
         protected,
     )
@@ -110,14 +111,28 @@ def optional_module(module_name: str) -> Any | None:
         return None
 
 
+_CACHED_SPACY_NLP: Any | None = None
+_SPACY_LOAD_ATTEMPTED = False
+_SPACY_LOAD_LOCK = Lock()
+
+
+@timed("spacy_initialization")
 def load_optional_spacy_pipeline() -> Any | None:
-    spacy_module = optional_module("spacy")
-    if spacy_module is None:
-        return None
-    try:
-        return spacy_module.load("en_core_web_sm")
-    except Exception:
-        return None
+    global _CACHED_SPACY_NLP, _SPACY_LOAD_ATTEMPTED
+    if _CACHED_SPACY_NLP is not None:
+        return _CACHED_SPACY_NLP
+    with _SPACY_LOAD_LOCK:
+        if _SPACY_LOAD_ATTEMPTED:
+            return _CACHED_SPACY_NLP
+        _SPACY_LOAD_ATTEMPTED = True
+        spacy_module = optional_module("spacy")
+        if spacy_module is None:
+            return None
+        try:
+            _CACHED_SPACY_NLP = spacy_module.load("en_core_web_sm")
+        except Exception:
+            return None
+        return _CACHED_SPACY_NLP
 
 
 def optional_spacy_sent_tokenize(text: str) -> list[str]:
@@ -125,7 +140,7 @@ def optional_spacy_sent_tokenize(text: str) -> list[str]:
     if nlp is None:
         return []
     try:
-        doc = nlp(text)
+        doc = parse_text(nlp, text)
         return [
             normalize_whitespace(sent.text)
             for sent in doc.sents
@@ -135,13 +150,44 @@ def optional_spacy_sent_tokenize(text: str) -> list[str]:
         return []
 
 
+def _merge_geographic_abbreviation_boundaries(sentences: list[str]) -> list[str]:
+    merged: list[str] = []
+    state_abbreviation_at_end = re.compile(
+        r"\b(?:N\.\s*Dak|S\.\s*Dak|N\.\s*Mex|W\.\s*Va)\.$",
+        flags=re.IGNORECASE,
+    )
+    month_abbreviation_at_end = re.compile(
+        r"\b(?:Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\.$",
+        flags=re.IGNORECASE,
+    )
+    date_start = re.compile(r"^\d{1,2}(?:st|nd|rd|th)?\b")
+    for sentence in sentences:
+        normalized = normalize_whitespace(sentence)
+        if (
+            merged
+            and normalized.startswith("(")
+            and state_abbreviation_at_end.search(merged[-1])
+        ):
+            merged[-1] = f"{merged[-1]} {normalized}"
+        elif (
+            merged
+            and month_abbreviation_at_end.search(merged[-1])
+            and date_start.search(normalized)
+        ):
+            merged[-1] = f"{merged[-1]} {normalized}"
+        elif normalized:
+            merged.append(normalized)
+    return merged
+
+
+@timed("sentence_segmentation")
 def safe_sent_tokenize(text: str) -> list[str]:
     if text.strip() == "":
         return []
 
     spacy_sentences = optional_spacy_sent_tokenize(text)
     if spacy_sentences:
-        return spacy_sentences
+        return _merge_geographic_abbreviation_boundaries(spacy_sentences)
 
     # ASSUMPTION: if spaCy is unavailable locally, NLTK punkt remains the safest offline fallback.
     # Try punkt_tab first (better boundary detection in NLTK 3.9+), then punkt
@@ -151,15 +197,11 @@ def safe_sent_tokenize(text: str) -> list[str]:
     ):
         if try_ensure_nltk_resource(resource, package):
             try:
-                return [
-                    normalize_whitespace(sentence)
-                    for sentence in nltk.sent_tokenize(text)
-                    if normalize_whitespace(sentence) != ""
-                ]
+                return _merge_geographic_abbreviation_boundaries(nltk.sent_tokenize(text))
             except Exception:
                 continue
 
-    return fallback_sentence_split(text)
+    return _merge_geographic_abbreviation_boundaries(fallback_sentence_split(text))
 
 
 def tokenize_words(text: str) -> list[str]:
@@ -195,16 +237,31 @@ def penn_to_wordnet(tag: str) -> str | None:
     return None
 
 
+_CACHED_LEMMATIZER = WordNetLemmatizer()
+_WORDNET_CHECKED = False
+_WORDNET_AVAILABLE = False
+_CACHED_STOP_WORDS: set[str] | None = None
+
+
+def _is_wordnet_available() -> bool:
+    global _WORDNET_CHECKED, _WORDNET_AVAILABLE
+    if not _WORDNET_CHECKED:
+        _WORDNET_AVAILABLE = bool(
+            try_ensure_nltk_resource(("corpora/wordnet", "corpora/wordnet.zip"), "wordnet")
+        )
+        _WORDNET_CHECKED = True
+    return _WORDNET_AVAILABLE
+
+
 def lemmatize_tokens(tokens: list[str]) -> list[str]:
     lowered = [token.lower() for token in tokens]
     if lowered == []:
         return []
 
-    wordnet_ok = try_ensure_nltk_resource(("corpora/wordnet", "corpora/wordnet.zip"), "wordnet")
-    if not wordnet_ok:
+    if not _is_wordnet_available():
         return lowered
 
-    lemmatizer = WordNetLemmatizer()
+    lemmatizer = _CACHED_LEMMATIZER
     tagged_tokens = safe_pos_tag(lowered)
     lemmas: list[str] = []
     for token, tag in tagged_tokens:
@@ -220,43 +277,20 @@ def lemmatize_tokens(tokens: list[str]) -> list[str]:
 
 
 def _legacy_english_stop_words() -> set[str]:
-    if try_ensure_nltk_resource("corpora/stopwords", "stopwords"):
-        try:
-            return set(stopwords.words("english"))
-        except Exception:
-            pass
-
-    return {
-        "a",
-        "an",
-        "and",
-        "are",
-        "as",
-        "at",
-        "be",
-        "by",
-        "for",
-        "from",
-        "in",
-        "is",
-        "it",
-        "of",
-        "on",
-        "or",
-        "that",
-        "the",
-        "to",
-        "with",
-    }
+    return english_stop_words()
 
 
 def english_stop_words() -> set[str]:
-    """Return a set of common English stop words."""
+    """Return a set of common English stop words with process-level caching."""
+    global _CACHED_STOP_WORDS
+    if _CACHED_STOP_WORDS is not None:
+        return _CACHED_STOP_WORDS
+
     try:
-        return set(stopwords.words("english"))
+        _CACHED_STOP_WORDS = set(stopwords.words("english"))
+        return _CACHED_STOP_WORDS
     except Exception:
-        # fallback if nltk data not available
-        return {
+        _CACHED_STOP_WORDS = {
             "a", "an", "the", "and", "or", "but", "if", "then", "else", "when",
             "at", "by", "for", "with", "about", "against", "between", "into",
             "through", "during", "before", "after", "above", "below", "to",
@@ -267,17 +301,27 @@ def english_stop_words() -> set[str]:
             "so", "than", "too", "very", "s", "t", "can", "will", "just", "don",
             "should", "now"
         }
+        return _CACHED_STOP_WORDS
 
 
+@timed("ranking_linguistic_features")
 def preprocess_sentence_for_ranking(sentence: str) -> list[str]:
+    cache = request_cache("ranking_tokens")
+    cached = cache.get(sentence) if cache is not None else None
+    if cached is not None:
+        return list(cached)
+
     tokens = [token.lower() for token in tokenize_words(sentence)]
     alphabetic_tokens = [token for token in tokens if re.search(r"[A-Za-z]", token)]
     if alphabetic_tokens == []:
+        if cache is not None:
+            cache.put(sentence, [], len(sentence))
         return []
 
     lemmas = lemmatize_tokens(alphabetic_tokens)
-    stop_words = english_stop_words()
-    return [token for token in lemmas if token not in stop_words and len(token) > 1]
+    if cache is not None:
+        cache.put(sentence, lemmas, len(sentence) + sum(map(len, lemmas)))
+    return lemmas
 
 
 def count_words(text: str) -> int:

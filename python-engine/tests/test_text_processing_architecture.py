@@ -132,6 +132,28 @@ assert 'summarizer_core.pipeline' not in sys.modules, '{mod} should NEVER import
         sentences = tokenization_mod.safe_sent_tokenize("Dr. Smith visited Washington, D.C. He had fun.")
         self.assertGreaterEqual(len(sentences), 1)
 
+    def test_geographic_abbreviation_does_not_truncate_sentence(self):
+        source = (
+            "Water-quality measurements continuously recorded at the Red River of the North "
+            "at Hickson, N. Dak. (USGS station 05051522); Red River of the North at Fargo, "
+            "N. Dak.; and Red River of the North near Georgetown, Minn. included water "
+            "temperature, specific conductance, dissolved oxygen, pH, and turbidity."
+        )
+
+        sentences = tokenization_mod.safe_sent_tokenize(source)
+        self.assertEqual(sentences, [source])
+
+        fallback_sentences = tokenization_mod.fallback_sentence_split(source)
+        self.assertEqual(fallback_sentences, [source])
+
+    def test_month_dateline_abbreviation_stays_with_its_date_and_lead(self):
+        source = (
+            "SEPT. 10, 2024 — The Census Bureau announced that real income "
+            "increased by 4.0% between 2022 and 2023."
+        )
+
+        self.assertEqual(tokenization_mod.safe_sent_tokenize(source), [source])
+
     def test_structure_heading_recognition(self):
         """Verify heading recognition identifies canonical section headers."""
         self.assertEqual(structure_mod.match_section_heading("1. Introduction"), "introduction")

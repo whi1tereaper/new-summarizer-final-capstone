@@ -81,3 +81,49 @@ The indicator is indeterminate because the existing execute request publishes on
 Uploaded original filenames are retained as display metadata without changing storage names or worker inputs. URL staging now retains `source_url` so the recovery form actually restores the original link. Uploaded files must still be selected again after a failure.
 
 Validation: 74 headless Chrome assertions passed across 1920px, 1366px, 768px, 390px, and 320px widths, covering long/escaped/missing titles, source types, elapsed time, delayed responses, successful navigation, server/network/invalid-response errors, reduced motion, and JavaScript disabled. Execute responses were intercepted; these checks did not run summarization or contact providers. PHP and JavaScript syntax checks passed. Source/settings recovery was separately exercised through the actual pending-payload and form-state methods.
+
+## Processing screen cleanup — 2026-10-14
+- Removed redundant "In progress" eyebrow above headline to streamline vertical visual flow.
+- Removed duplicated "Working on your document" activity label and accent dot from card footer.
+- Aligned elapsed timer and cancel control cleanly to the right side of the activity footer.
+- Cleaned up JavaScript DOM element references to prevent null-property errors.
+
+## Result page feature cleanup — 2026-10-14
+- Removed the "Ask About This Document" (Document Q&A) section from `result.php`.
+- Removed corresponding event listeners, fetch logic, and state handling in `assets/js/result.js`.
+- Pruned unused `.result-section--qa` and `.result-qa-*` styling rules from `assets/css/result.css`.
+- Removed collapsible `<details>` / `<summary>` dropdown toggles for `result-context`, `result-sources`, and `result-details`, rendering them directly as open semantic sections (`.result-open-group`).
+- Displayed supporting evidence items and source text viewer openly without click-to-expand toggles.
+- Made the feedback comment block (`#feedback-comment-block`) visible directly without requiring a prior star rating click.
+- Wired up the "Update feedback" toggle (`#feedback-edit-btn`) to restore the form and comment block when editing past feedback.
+- Removed redundant prompt label ("Anything you'd like to add? (optional)") and explanatory hint paragraph ("Your comment is displayed anonymously to administrators.") above the textarea.
+- Preserved the Anonymous badge aligned to the top-right and added an explicit `aria-label` to the textarea for full accessibility.
+- Updated `scripts/test_part2_and_result_page.php` to verify open section accessibility, comment block visibility, and omission of redundant feedback copy.
+
+## Analytics & Graphs Dashboard Relocation — 2026-10-14
+- Relocated the analytics KPI cards and interactive charts from the summarizer page (`summarizer.php`) to the user dashboard (`dashboard.php`) and administrator dashboard (`admin_dashboard.php`).
+- Extracted the analytics component into a shared partial (`app/public/partials/analytics-graphs-card.php`) supporting role-based contexts (`Your Activity` for regular users vs `System Overview` for administrators).
+- Modularized styling into `app/public/assets/css/dashboard-charts.css` featuring a responsive 2x2 chart grid with unified typography, spacing, and design token integration.
+- Decoupled Chart.js rendering and dynamic date-range filtering (`30d`, `7d`, `90d`, `all`) into dedicated `app/public/assets/js/dashboard-charts.js`, removing ~160 lines of sidebar chart logic from `app/public/assets/js/index.js`.
+- Restored `summarizer.php` to a clean, focused single-column workspace dedicated solely to document drop and analysis configuration, removing unused database queries and vendor Chart.js bundles.
+- Verified system-wide admin analytics aggregation and regular user-scoped dashboard rendering across both dashboard views.
+
+## Native Audio Player Cleanup — 2026-10-14
+- Hidden the browser native `<audio controls>` player widget on `result.php`.
+- Removed `controls` attribute and added `hidden` attribute to `#summary-audio-player` in `result.php`.
+- Added `display: none !important;` for `.result-audio-player` in `assets/css/result.css`.
+- Streamlined playback control through the reading toolbar `#play-audio-btn`, which dynamically toggles state labels ("Listen", "Pause", "Resume") across both Web Speech API boundaries and server-generated audio streams.
+
+## Dark Mode Theme Isolation — 2026-10-14
+- Restricted dark mode theme execution exclusively to the results page (`result.php`).
+- Removed `localStorage.getItem('light-results-theme')` execution scripts from `summarizer.php` and `processing.php` to prevent theme bleed across navigation.
+- Removed dark theme overrides for `.nex-workspace-page` (summarizer workspace) in `assets/css/light-errors.css`.
+- Explicitly enforced `<html lang="en" data-theme="light">` across `dashboard.php`, `admin_dashboard.php`, `summarizer.php`, and `processing.php`.
+- Retained full dark theme toggle capabilities (`#result-theme-toggle`), storage persistence, and scoped CSS variables on `.result-page-body` for `result.php`.
+
+
+
+
+
+
+

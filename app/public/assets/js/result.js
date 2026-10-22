@@ -4,6 +4,22 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    const themeToggle = document.getElementById('result-theme-toggle');
+    function applyResultTheme(theme) {
+        const dark = theme === 'dark';
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+        if (themeToggle) {
+            themeToggle.setAttribute('aria-pressed', String(dark));
+            themeToggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+        }
+    }
+    applyResultTheme(document.documentElement.dataset.theme || 'light');
+    themeToggle?.addEventListener('click', () => {
+        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem('light-results-theme', next); } catch (e) { /* storage may be unavailable */ }
+        applyResultTheme(next);
+    });
+
     // ── Page data ────────────────────────────────────────────────────
     const summaryText = page.dataset.summaryText || '';
     const summaryId   = Number(page.dataset.summaryId || 0);
@@ -15,6 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let translatedLanguage = 'en';
     let translationWarning = '';
     let translationActive  = false;
+    let translationRequestActive = false;
+    let translationRetryTimer = null;
+    let translationRetrySeconds = 0;
+    let speechUtterance = null;
+    let speechSpeaking = false;
 
     // ── Helpers ──────────────────────────────────────────────────────
     function setTextState(element, message, tone = 'neutral') {
@@ -42,6 +63,39 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!button) return;
         const label = button.querySelector('.result-tool-btn__text') || button.querySelector('span');
         (label || button).textContent = text;
+    }
+
+    function clearTranslationRetryTimer() {
+        if (translationRetryTimer !== null) {
+            window.clearInterval(translationRetryTimer);
+            translationRetryTimer = null;
+        }
+        translationRetrySeconds = 0;
+    }
+
+    function startTranslationRetryCooldown(seconds, button) {
+        clearTranslationRetryTimer();
+        if (!Number.isSafeInteger(seconds) || seconds <= 0 || !button) return;
+        translationRetrySeconds = seconds;
+        const update = () => {
+            if (translationRetrySeconds <= 0) {
+                clearTranslationRetryTimer();
+                button.disabled = false;
+                setActionLabel(button, 'Retry translation');
+                return;
+            }
+            button.disabled = true;
+            setActionLabel(button, `Retry in ${translationRetrySeconds}s`);
+            setSummaryStatus(
+                `The translation service is busy. You can retry manually in ${translationRetrySeconds} seconds.`,
+                'error'
+            );
+            translationRetrySeconds -= 1;
+        };
+        update();
+        if (translationRetrySeconds > 0) {
+            translationRetryTimer = window.setInterval(update, 1000);
+        }
     }
 
     function setAudioPanelVisible(visible) {
@@ -80,6 +134,66 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${getPreferredAudioLanguage()}:${getPreferredAudioText()}`;
     }
 
+    function stopSpeechReader() {
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        speechUtterance = null;
+        speechSpeaking = false;
+        const subtitles = document.getElementById('speech-subtitles');
+        if (subtitles) subtitles.hidden = true;
+        document.querySelectorAll('.speech-subtitles__word.is-active').forEach((word) => word.classList.remove('is-active'));
+        const btn = document.getElementById('play-audio-btn');
+        if (btn) setActionLabel(btn, 'Listen');
+    }
+
+    function speakWithBoundaries(text, language) {
+        if (!('speechSynthesis' in window) || !window.SpeechSynthesisUtterance) return false;
+        stopSpeechReader();
+        const subtitles = document.getElementById('speech-subtitles');
+        const sentenceEl = subtitles?.querySelector('.speech-subtitles__sentence');
+        if (!subtitles || !sentenceEl) return false;
+        const words = [...text.matchAll(/\S+/g)].map((match) => ({ text: match[0], start: match.index, end: match.index + match[0].length }));
+        if (!words.length) return false;
+        sentenceEl.textContent = '';
+        words.forEach((word, index) => {
+            const span = document.createElement('span');
+            span.className = 'speech-subtitles__word';
+            span.textContent = word.text;
+            span.dataset.index = String(index);
+            sentenceEl.appendChild(span);
+            if (index < words.length - 1) sentenceEl.appendChild(document.createTextNode(' '));
+        });
+        subtitles.hidden = false;
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = language === 'tl' ? 'fil-PH' : 'en-US';
+        const button = document.getElementById('play-audio-btn');
+        utterance.onstart = () => {
+            speechSpeaking = true;
+            setSummaryStatus('Reading summary…', 'success');
+            if (button) setActionLabel(button, 'Pause');
+        };
+        utterance.onboundary = (event) => {
+            if (typeof event.charIndex !== 'number') return;
+            let active = -1;
+            words.forEach((word, index) => { if (event.charIndex >= word.start && event.charIndex < word.end) active = index; });
+            sentenceEl.querySelectorAll('.speech-subtitles__word').forEach((word, index) => word.classList.toggle('is-active', index === active));
+        };
+        utterance.onend = () => {
+            speechSpeaking = false;
+            setSummaryStatus('');
+            sentenceEl.querySelectorAll('.is-active').forEach((word) => word.classList.remove('is-active'));
+            if (button) setActionLabel(button, 'Listen');
+        };
+        utterance.onerror = () => {
+            speechSpeaking = false;
+            subtitles.hidden = true;
+            setSummaryStatus('Speech playback is unavailable in this browser.', 'error');
+            if (button) setActionLabel(button, 'Listen');
+        };
+        speechUtterance = utterance;
+        window.speechSynthesis.speak(utterance);
+        return true;
+    }
+
     function resetAudioSource() {
         const audioPlayer = getAudioPlayer();
         if (!audioPlayer) return;
@@ -87,7 +201,10 @@ document.addEventListener('DOMContentLoaded', () => {
         audioPlayer.removeAttribute('src');
         audioPlayer.dataset.requestKey = '';
         audioPlayer.load();
+        stopSpeechReader();
         setAudioPanelVisible(false);
+        const btn = document.getElementById('play-audio-btn');
+        if (btn) setActionLabel(btn, 'Listen');
     }
 
     function renderTranslatedText(target) {
@@ -257,12 +374,37 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // Browser speech exposes real onboundary positions, so use it for
+        // synchronized subtitles. Generated WAV remains the fallback where
+        // speech synthesis is unavailable.
+        if ('speechSynthesis' in window && speechSpeaking) {
+            if (window.speechSynthesis.paused) {
+                window.speechSynthesis.resume();
+                if (button) setActionLabel(button, 'Pause');
+            } else {
+                window.speechSynthesis.pause();
+                if (button) setActionLabel(button, 'Resume');
+            }
+            setSummaryStatus(window.speechSynthesis.paused ? 'Reading paused.' : 'Reading summary…', 'success');
+            return;
+        }
+        if ('speechSynthesis' in window && speakWithBoundaries(audioText, audioLang)) {
+            setAudioPanelVisible(true);
+            return;
+        }
+
         // Already generated - show panel and play
         if (audioPlayer.src && audioPlayer.dataset.requestKey === requestKey) {
             setAudioPanelVisible(true);
-            audioPlayer.play().catch(() => {
-                setSummaryStatus('Audio is ready. Press play on the player if autoplay is blocked.', 'success');
-            });
+            if (audioPlayer.paused) {
+                audioPlayer.play().catch(() => {
+                    setSummaryStatus('Audio is ready. Press play if autoplay is blocked.', 'success');
+                });
+                if (button) setActionLabel(button, 'Pause');
+            } else {
+                audioPlayer.pause();
+                if (button) setActionLabel(button, 'Resume');
+            }
             return;
         }
 
@@ -317,7 +459,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const section = document.getElementById('translation-section');
         const target  = document.getElementById('translated-text');
 
-        if (!section || !target) return;
+        if (!section || !target || translationRequestActive) return;
 
         if (!summaryText) {
             setSummaryStatus('No summary text is available for translation.', 'error');
@@ -352,6 +494,8 @@ document.addEventListener('DOMContentLoaded', () => {
             setActionLabel(button, 'Translating…');
             button.disabled = true;
         }
+        clearTranslationRetryTimer();
+        translationRequestActive = true;
         target.textContent = '';
         setTranslationVisible(false);
         setSummaryStatus('Translating summary…');
@@ -365,12 +509,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 target_lang: 'tl',
             }),
         })
-            .then((r) => parseJsonResponse(r, 'Translation returned an invalid response.'))
-            .then((data) => {
-                if (data.error) {
-                    throw new Error(data.error);
+            .then(async (response) => {
+                const data = await parseJsonResponse(response, 'Translation returned an invalid response.');
+                if (!response.ok || data.error) {
+                    const failure = new Error(
+                        typeof data.error === 'string' ? data.error : 'Translation service unavailable.'
+                    );
+                    const headerRetryAfter = response.headers.get('Retry-After');
+                    const headerSeconds = headerRetryAfter && /^\d+$/.test(headerRetryAfter)
+                        ? Number(headerRetryAfter) : null;
+                    const bodySeconds = Number(data.retry_after_seconds);
+                    failure.retryAfterSeconds = Number.isSafeInteger(headerSeconds) && headerSeconds > 0
+                        ? headerSeconds
+                        : (Number.isSafeInteger(bodySeconds) && bodySeconds > 0 ? bodySeconds : null);
+                    throw failure;
                 }
-
+                return data;
+            })
+            .then((data) => {
                 const nextText = String(data.translated || '').trim();
                 if (!nextText) throw new Error('Translation returned an empty response.');
                 if (data.target_lang !== 'tl' || data.used_fallback === true) {
@@ -378,6 +534,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 translatedText     = nextText;
+                clearTranslationRetryTimer();
                 translatedLanguage = data.target_lang === 'tl' ? 'tl' : 'en';
                 translationWarning = typeof data.warning === 'string' ? data.warning : '';
                 translationActive  = translatedLanguage === 'tl';
@@ -405,9 +562,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTranslationVisible(true);
                 setActionLabel(button, 'Retry translation');
                 setSummaryStatus(error.message || 'Translation service unavailable.', 'error');
+                if (Number.isSafeInteger(error.retryAfterSeconds) && error.retryAfterSeconds > 0) {
+                    startTranslationRetryCooldown(error.retryAfterSeconds, button);
+                }
             })
             .finally(() => {
-                if (button) button.disabled = false;
+                translationRequestActive = false;
+                if (button && translationRetrySeconds <= 0) button.disabled = false;
             });
     }
 
@@ -415,13 +576,26 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.star-btn').forEach((button) => {
         button.addEventListener('mouseenter', () => renderStars(Number(button.dataset.value || 0)));
         button.addEventListener('mouseleave', () => renderStars(null));
+        button.addEventListener('focus', () => renderStars(Number(button.dataset.value || 0)));
+        button.addEventListener('blur', () => renderStars(null));
+        button.addEventListener('keydown', (event) => {
+            if (!['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'].includes(event.key)) return;
+            const stars = Array.from(document.querySelectorAll('.star-btn'));
+            const currentIndex = stars.indexOf(button);
+            if (currentIndex < 0) return;
+            event.preventDefault();
+            const direction = (event.key === 'ArrowRight' || event.key === 'ArrowDown') ? 1 : -1;
+            const nextIndex = (currentIndex + direction + stars.length) % stars.length;
+            stars[nextIndex].focus();
+            selectRating(Number(stars[nextIndex].dataset.value || 0));
+        });
         button.addEventListener('click', () => selectRating(Number(button.dataset.value || 0)));
     });
 
     const commentInput = document.getElementById('feedback-comment');
     const commentCounter = document.getElementById('feedback-counter');
     if (commentInput && commentCounter) {
-        commentInput.addEventListener('input', () => {
+        const updateCommentCounter = () => {
             const remaining = 500 - commentInput.value.length;
             if (remaining <= 50) {
                 commentCounter.classList.remove('hidden');
@@ -429,12 +603,40 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 commentCounter.classList.add('hidden');
             }
-        });
+        };
+        commentInput.addEventListener('input', updateCommentCounter);
+        if (commentInput.value.length > 0) {
+            updateCommentCounter();
+        }
     }
 
     const feedbackSubmitBtn = document.getElementById('feedback-submit-btn');
     if (feedbackSubmitBtn) {
         feedbackSubmitBtn.addEventListener('click', submitFeedback);
+    }
+
+    const feedbackEditBtn = document.getElementById('feedback-edit-btn');
+    if (feedbackEditBtn) {
+        feedbackEditBtn.addEventListener('click', () => {
+            const formContainer = document.getElementById('feedback-form-container');
+            const confirmed = document.getElementById('feedback-confirmed');
+            if (formContainer) {
+                formContainer.classList.remove('hidden');
+                formContainer.hidden = false;
+            }
+            if (confirmed) {
+                confirmed.classList.add('hidden');
+                confirmed.hidden = true;
+            }
+            const commentBlock = document.getElementById('feedback-comment-block');
+            if (commentBlock) {
+                commentBlock.classList.remove('hidden');
+                commentBlock.hidden = false;
+            }
+            if (currentRating && !selectedRating) {
+                selectRating(currentRating);
+            }
+        });
     }
 
     // Summary toolbar audio button.
@@ -510,6 +712,53 @@ document.addEventListener('DOMContentLoaded', () => {
         exportPdfBtn.addEventListener('click', () => window.print());
     }
 
+    const exportTxtBtn = document.getElementById('export-txt-btn');
+    if (exportTxtBtn) {
+        exportTxtBtn.addEventListener('click', () => {
+            if (!summaryText) {
+                setSummaryStatus('No summary text is available to export.', 'error');
+                return;
+            }
+            const blob = new Blob([summaryText], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `summary-${summaryId || 'document'}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            setSummaryStatus('Summary exported as plain text file.', 'success');
+        });
+    }
+
+    // ── Interactive Evidence Viewer ──────────────────────────────────
+    document.querySelectorAll('.result-evidence-badge, [data-evidence-target]').forEach((link) => {
+        link.addEventListener('click', (event) => {
+            const targetId = link.getAttribute('data-evidence-target');
+            if (!targetId) return;
+            const targetEl = document.getElementById(targetId);
+            if (!targetEl) return;
+
+            const detailsParent = targetEl.closest('details') || (targetEl.tagName === 'DETAILS' ? targetEl : null);
+            if (detailsParent) {
+                detailsParent.open = true;
+            }
+            const disclosureSources = document.getElementById('result-sources');
+            if (disclosureSources && disclosureSources.tagName === 'DETAILS') {
+                disclosureSources.open = true;
+            }
+
+            const elToHighlight = detailsParent || targetEl;
+            elToHighlight.classList.remove('result-evidence-item--highlighted');
+            void elToHighlight.offsetWidth;
+            elToHighlight.classList.add('result-evidence-item--highlighted');
+            setTimeout(() => {
+                elToHighlight.classList.remove('result-evidence-item--highlighted');
+            }, 2500);
+        });
+    });
+
     const translateBtn = document.getElementById('translate-btn');
     if (translateBtn) {
         translateBtn.setAttribute('aria-controls', 'translation-section');
@@ -518,8 +767,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const audioPlayer = document.getElementById('summary-audio-player');
     if (audioPlayer) {
+        audioPlayer.addEventListener('play', () => {
+            const btn = document.getElementById('play-audio-btn');
+            if (btn) setActionLabel(btn, 'Pause');
+        });
+        audioPlayer.addEventListener('pause', () => {
+            const btn = document.getElementById('play-audio-btn');
+            if (btn && audioPlayer.currentTime < audioPlayer.duration) {
+                setActionLabel(btn, 'Resume');
+            }
+        });
+        audioPlayer.addEventListener('ended', () => {
+            const btn = document.getElementById('play-audio-btn');
+            if (btn) setActionLabel(btn, 'Listen');
+            setSummaryStatus('');
+        });
         audioPlayer.addEventListener('error', () => {
             setSummaryStatus('Audio player could not load the generated file.', 'error');
+            const btn = document.getElementById('play-audio-btn');
+            if (btn) setActionLabel(btn, 'Listen');
         });
     }
 

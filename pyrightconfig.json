@@ -1,0 +1,12 @@
+{
+  "include": [
+    "python-engine",
+    "scratch",
+    "scripts"
+  ],
+  "extraPaths": [
+    "python-engine"
+  ],
+  "venvPath": ".",
+  "venv": ".venv"
+}
