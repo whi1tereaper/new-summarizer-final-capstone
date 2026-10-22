@@ -5,11 +5,17 @@ final class Env
 {
     private static bool $loaded = false;
     private static array $values = [];
+    private static array $processValues = [];
 
     public static function load(?string $path = null): void
     {
         if (self::$loaded) {
             return;
+        }
+
+        $processEnvironment = getenv();
+        if (is_array($processEnvironment)) {
+            self::$processValues = $processEnvironment;
         }
 
         $envPath = $path ?: self::projectRoot() . DIRECTORY_SEPARATOR . '.env';
@@ -40,9 +46,14 @@ final class Env
             $cleanedValue = self::stripWrappingQuotes($cleanedValue);
 
             self::$values[$name] = $cleanedValue;
-            $_ENV[$name] = $cleanedValue;
-            $_SERVER[$name] = $cleanedValue;
-            putenv($name . '=' . $cleanedValue);
+
+            // Process-level values are authoritative in production. Do not
+            // overwrite Render/Docker environment variables with a local .env.
+            if (!array_key_exists($name, self::$processValues)) {
+                $_ENV[$name] = $cleanedValue;
+                $_SERVER[$name] = $cleanedValue;
+                putenv($name . '=' . $cleanedValue);
+            }
         }
 
         self::$loaded = true;
@@ -51,6 +62,10 @@ final class Env
     public static function get(string $name, mixed $default = null): mixed
     {
         self::load();
+
+        if (array_key_exists($name, self::$processValues)) {
+            return self::$processValues[$name];
+        }
 
         if (!array_key_exists($name, self::$values)) {
             return $default;
@@ -181,7 +196,8 @@ final class Env
     private static function exists(string $name): bool
     {
         self::load();
-        return array_key_exists($name, self::$values);
+        return array_key_exists($name, self::$processValues)
+            || array_key_exists($name, self::$values);
     }
 
     private static function stripWrappingQuotes(string $value): string

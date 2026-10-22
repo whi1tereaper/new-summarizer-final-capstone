@@ -65,6 +65,8 @@ return [
         'username' => Env::string('DB_USERNAME', 'root'),
         'password' => Env::string('DB_PASSWORD', ''),
         'charset' => Env::string('DB_CHARSET', 'utf8mb4'),
+        'ssl_enabled' => Env::bool('DB_SSL_ENABLED', false),
+        'ssl_ca' => Env::string('DB_SSL_CA', ''),
     ],
 
     'neon_auth' => [

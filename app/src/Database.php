@@ -43,11 +43,7 @@ class Database {
         $charset = config('database.charset', 'utf8mb4');
 
         $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
-        $options = [
-            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES   => false,
-        ];
+        $options = self::mysqlOptions();
 
         try {
             $this->pdo = new PDO($dsn, $user, $pass, $options);
@@ -119,6 +115,35 @@ class Database {
             }
             throw $e;
         }
+    }
+
+    private static function mysqlOptions(): array
+    {
+        $options = [
+            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES   => false,
+        ];
+
+        if (!config('database.ssl_enabled', false)) {
+            return $options;
+        }
+
+        if (!defined('PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT')) {
+            throw new \RuntimeException('MySQL TLS verification is unavailable in this PHP runtime.');
+        }
+
+        $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = true;
+        $caPath = trim((string)config('database.ssl_ca', ''));
+        if ($caPath !== '') {
+            if (!is_file($caPath) || !is_readable($caPath)) {
+                throw new \RuntimeException('Configured MySQL TLS CA file is missing or unreadable.');
+            }
+
+            $options[PDO::MYSQL_ATTR_SSL_CA] = $caPath;
+        }
+
+        return $options;
     }
 
     // Block alternate construction paths that would break the singleton contract.
