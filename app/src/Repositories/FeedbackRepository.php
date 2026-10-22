@@ -97,9 +97,10 @@ final class FeedbackRepository
                 }
             }
             if ($from > $to) {
-            $toNext = (new \DateTimeImmutable($to))->modify('+1 day')->format('Y-m-d');
-            $sql .= ' AND created_at >= :from AND created_at < :to_next';
-            $params = ['from' => $from, 'to_next' => $toNext];
+                $toNext = (new \DateTimeImmutable($to))->modify('+1 day')->format('Y-m-d');
+                $sql .= ' AND created_at >= :from AND created_at < :to_next';
+                $params = ['from' => $from, 'to_next' => $toNext];
+            }
         }
         $statement = $this->db->prepare($sql);
         $statement->execute($params);
