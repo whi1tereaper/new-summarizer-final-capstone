@@ -6,6 +6,7 @@ namespace App\Src\Services;
 require_once __DIR__ . '/../Database.php';
 require_once __DIR__ . '/SummarizerPromptTemplate.php';
 require_once __DIR__ . '/LocalPythonBridge.php';
+require_once __DIR__ . '/CampusAccessService.php';
 
 use App\Src\Database;
 use DateTimeImmutable;
@@ -39,6 +40,11 @@ class DocumentSummaryService
      */
     public function createDocument(string $text, ?int $userId = null, ?string $guestToken = null): int
     {
+        $userId=isset($_SESSION['user_id'])?(int)$_SESSION['user_id']:null;
+        $guestToken=$userId===null?($_SESSION['guest_token']??null):null;
+        if($userId===null && !$guestToken)throw new \App\Src\Support\ProcessingError('AUTH_REQUIRED');
+        $access=new CampusAccessService($this->db);
+        $access->assertCanStart($userId,$access->visitorToken());
         $normalizedText = trim($text);
         if ($normalizedText === '') {
             throw new InvalidArgumentException("Document text cannot be empty.");
@@ -69,7 +75,13 @@ class DocumentSummaryService
         $stmt->execute([$documentId]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        return $row ?: null;
+        if(!$row)return null;
+        $userId=(int)($_SESSION['user_id']??0);
+        if($userId>0) {
+            (new CampusAccessService($this->db))->account($userId);
+            if((int)$row['user_id']!==$userId)return null;
+        }elseif(!$row['guest_token'] || !is_string($_SESSION['guest_token']??null) || !hash_equals((string)$row['guest_token'],$_SESSION['guest_token']))return null;
+        return $row;
     }
 
     /**
@@ -165,13 +177,14 @@ class DocumentSummaryService
             $summaryText = self::NONSENSE_NOTE;
         } else {
             try {
-                $workerResult = $this->pythonBridge->generateSummary($cleanSource, $normProfile, $normLength);
+                $workerResult = $this->pythonBridge->generateSummary($cleanSource, $normProfile, $normLength,$this->remainingWorkerBudget(60));
                 $summaryText = trim($workerResult['summary'] ?? '');
                 if ($summaryText === '') {
                     $summaryText = trim($workerResult['plain_summary'] ?? '');
                 }
             } catch (\Throwable $e) {
-                error_log("[DocumentSummaryService] Worker generation failed: " . $e->getMessage());
+                if($e instanceof \App\Src\Support\ProcessingError && $e->errorCode==='PROCESSING_TIMEOUT')throw $e;
+                error_log('[DocumentSummaryService] Worker generation failed: '.get_class($e));
                 // Fallback attempt via standard summarize contract
                 try {
                     $workerResult = $this->pythonBridge->summarize([
@@ -179,7 +192,7 @@ class DocumentSummaryService
                         'selection_mode' => $normProfile,
                         'summary_depth' => $normLength,
                         'summary_length' => $normLength,
-                    ]);
+                    ],$this->remainingWorkerBudget(60));
                     $summaryText = trim($workerResult['plain_summary'] ?? '');
                 } catch (\Throwable $inner) {
                     throw new RuntimeException("Summarization engine failed: " . $e->getMessage(), 0, $e);
@@ -210,6 +223,17 @@ class DocumentSummaryService
         ];
     }
 
+    private function remainingWorkerBudget(int $ceiling): int
+    {
+        $limit=(int)ini_get('max_execution_time');
+        if($limit<=0)return $ceiling;
+        $start=(float)($_SERVER['REQUEST_TIME_FLOAT']??microtime(true));
+        // Account for the bridge's health probe, transport margin and 10s floor.
+        $remaining=(int)floor($start+$limit-microtime(true))-15;
+        if($remaining<10)throw new \App\Src\Support\ProcessingError('PROCESSING_TIMEOUT');
+        return min($ceiling,$remaining);
+    }
+
     /**
      * On-demand cached generation for a specific (documentId, profile, length) combination.
      */
@@ -232,22 +256,33 @@ class DocumentSummaryService
         if ($cachedRow) {
             return $this->formatSummaryResponse($cachedRow, true);
         }
+        if($this->isNonsenseRequest($document['content'],$normLength)){
+            $short=$this->generateSummary($document['content'],$normProfile,$normLength);
+            return $this->formatSummaryResponse(['profile'=>$normProfile,'length'=>$normLength,'summary'=>$short['summary'],'word_count'=>$short['metadata']['wordCount'],'source_word_count'=>$short['metadata']['sourceWordCount'],'compression_ratio'=>$short['metadata']['compressionRatio'],'estimated_reading_time_seconds'=>$short['metadata']['estimatedReadingTimeSeconds']],false);
+        }
 
-        // 2. Generate on cache miss
+        $access=new CampusAccessService($this->db);
+        $ticket=$access->reserve(isset($_SESSION['user_id'])?(int)$_SESSION['user_id']:null,$access->visitorToken(),'document:'.bin2hex(random_bytes(16)));
+        $own=!$this->db->inTransaction();
+        try {
+        // A racing cache winner is returned without a second debit.
         $generated = $this->generateSummary($document['content'], $normProfile, $normLength);
         $summaryText = $generated['summary'];
         $meta = $generated['metadata'];
+        if($summaryText===self::NONSENSE_NOTE)throw new InvalidArgumentException(self::NONSENSE_NOTE);
+        if($own)$this->db->beginTransaction();
+        $lock=$this->db->prepare('SELECT id FROM documents WHERE id=? FOR UPDATE');$lock->execute([$documentId]);
+        $fresh=$this->db->prepare('SELECT * FROM document_summaries WHERE document_id=? AND profile=? AND length=? FOR UPDATE');
+        $fresh->execute([$documentId,$normProfile,$normLength]);
+        if($hit=$fresh->fetch(PDO::FETCH_ASSOC)) {
+            if($own)$this->db->commit();
+            return $this->formatSummaryResponse($hit,true);
+        }
 
         // 3. Store in cache table
         $insertStmt = $this->db->prepare(
             'INSERT INTO document_summaries (document_id, profile, length, summary, word_count, source_word_count, compression_ratio, estimated_reading_time_seconds, created_at)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())
-             ON DUPLICATE KEY UPDATE
-                summary = VALUES(summary),
-                word_count = VALUES(word_count),
-                source_word_count = VALUES(source_word_count),
-                compression_ratio = VALUES(compression_ratio),
-                estimated_reading_time_seconds = VALUES(estimated_reading_time_seconds)'
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())'
         );
         $insertStmt->execute([
             $documentId,
@@ -265,6 +300,8 @@ class DocumentSummaryService
         );
         $rowStmt->execute([$documentId, $normProfile, $normLength]);
         $storedRow = $rowStmt->fetch(PDO::FETCH_ASSOC);
+        $access->complete($ticket);
+        if($own)$this->db->commit();
 
         return $this->formatSummaryResponse($storedRow ?: [
             'profile' => $normProfile,
@@ -276,6 +313,8 @@ class DocumentSummaryService
             'estimated_reading_time_seconds' => $meta['estimatedReadingTimeSeconds'],
             'created_at' => (new DateTimeImmutable('now', new DateTimeZone('UTC')))->format('Y-m-d H:i:s'),
         ], false);
+        }catch(\Throwable $e){if($own&&$this->db->inTransaction())$this->db->rollBack();throw $e;}
+        finally{$access->release($ticket);}
     }
 
     /**
@@ -327,6 +366,7 @@ class DocumentSummaryService
             throw new OutOfBoundsException("Document with ID {$documentId} not found.");
         }
 
+        if(count($combinations)>12)throw new InvalidArgumentException('Request at most 12 combinations per batch.');
         if (empty($combinations)) {
             return [];
         }
@@ -342,11 +382,14 @@ class DocumentSummaryService
         }
 
         $results = [];
+        $own=!$this->db->inTransaction();if($own)$this->db->beginTransaction();
+        try {
         foreach ($normalizedCombinations as $combo) {
             $results[] = $this->getOrGenerateSummary($documentId, $combo['profile'], $combo['length']);
         }
 
-        return $results;
+        if($own)$this->db->commit();return $results;
+        }catch(\Throwable $e){if($own&&$this->db->inTransaction())$this->db->rollBack();throw $e;}
     }
 
     private function formatSummaryResponse(array $row, bool $cached): array

@@ -1,0 +1,53 @@
+   •   Here you can see all of the binned folders and
+       files.
+   •   Binned folders and files will automatically be
+       permanently deleted after a 90-day period.
+   •   You can manually permanently delete a folder or
+       file if it is your upload.
+   •   Admins can manually permanently delete all binned
+       folders or files.
+
+I. File Details and Versions
+   •   Upon clicking the information button on a file,
+       (Circle button with an “i”) you can see the
+       details of the file and its versions.
+
+
+
+
+
+   •   You can view the full File Name, the user that
+       created/uploaded the file, the date and time the
+       file was created/uploaded, which user last viewed
+       the file, and last viewed at.
+   •   You can also Manage Versions, which will show you
+       the old and new versions of the file.
+   •   Click the three dots and an option to download
+       that version of the file will be available.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                   136

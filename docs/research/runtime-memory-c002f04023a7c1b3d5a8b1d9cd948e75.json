@@ -1,0 +1,13 @@
+{
+  "job_id": "c002f04023a7c1b3d5a8b1d9cd948e75",
+  "sampled_python_rss_mib": 570.4609375,
+  "python_process_high_water_mib": 693.89453125,
+  "sampled_parent_php_rss_mib": 13.93359375,
+  "sampled_shared_apache_rss_mib": 10.51171875,
+  "limits": [
+    "Started after request admission; Python OS high-water mark supplements RSS samples.",
+    "Apache processes are shared; their RSS is not attributable solely to this request.",
+    "No container memory cap was enforced."
+  ],
+  "sample_seconds": 185.53100000000268
+}

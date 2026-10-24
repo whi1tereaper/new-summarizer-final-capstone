@@ -1,0 +1,39 @@
+that consist of two        (2) sub-characteristics,
+namely: coexistence and interoperability.
+Table 12. Assessment of the IT consultants on
+the Compatibility of the developed system
+
+
+  Software Product          Weighted            Verbal
+      Categories              Mean         Interpretation
+
+
+
+     Co-existence              3.4        Very Compatible
+
+
+
+
+  Inter-operability            3.2        Very Compatible
+
+
+
+
+    Compatibility              3.3        Very Compatible
+
+
+
+   As shown in Table 12, the evaluation results
+for  the  Compatibility  category  indicate  a
+weighted mean of 3.3, and a verbal rating of
+“Very Compatible”.
+
+   5.4 Usability
+   Table 13 shows the usability of the developed
+AccredX: Record Management and Archiving System
+assessed by the IT consultants that consist of
+six      (6)    sub-characteristics,    namely:
+appropriateness recognizability, learnability,
+
+
+                                                        93

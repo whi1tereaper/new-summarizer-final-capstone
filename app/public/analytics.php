@@ -1,6 +1,11 @@
 <?php
 declare(strict_types=1);
 
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Cache-Control: post-check=0, pre-check=0', false);
+header('Pragma: no-cache');
+header('Expires: 0');
+
 require_once __DIR__ . '/../src/whitereaper.php';
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../src/Controllers/AnalyticsController.php';
@@ -96,14 +101,15 @@ $formatSeconds = static fn(mixed $value): string => $value === null ? 'N/A' : nu
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analytics — LIGHT</title>
+    <script>try{var t=localStorage.getItem('light-results-theme');if(t!=='light'&&t!=='dark')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t;}catch(e){}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/images/poc-neust-logo.png">
-    <link rel="stylesheet" href="assets/css/design-tokens.css">
+    <link rel="stylesheet" href="assets/css/design-tokens.css?v=<?= filemtime(__DIR__ . '/assets/css/design-tokens.css') ?>">
     <link rel="stylesheet" href="assets/css/style.css?v=navbar-2-<?= filemtime(__DIR__ . '/assets/css/style.css') ?>">
     <link rel="stylesheet" href="assets/css/index.css?v=navbar-2">
-    <link rel="stylesheet" href="assets/css/analytics.css?v=navbar-2">
+    <link rel="stylesheet" href="assets/css/analytics.css?v=<?= filemtime(__DIR__ . '/assets/css/analytics.css') ?>">
     <link rel="stylesheet" href="assets/css/site-nav.css?v=3">
     <link rel="stylesheet" href="assets/css/site-footer.css?v=nex-8">
     <link rel="stylesheet" href="assets/css/global-button-effects.css?v=2">
@@ -147,7 +153,7 @@ $formatSeconds = static fn(mixed $value): string => $value === null ? 'N/A' : nu
     <p class="chart-summary" role="status">Activity over the selected period: <?= number_format($kpis['summaries']) ?> summaries completed across <?= count(array_filter($data['trend'], static fn(array $row): bool => (int)$row['total'] > 0)) ?> active periods.</p>
     <script src="assets/js/vendor/chart.umd.min.js"></script>
     <script>window.analyticsData = <?= json_encode(['trend' => $data['trend'], 'nutshellTrend' => $data['nutshell_trend'] ?? [], 'styles' => $data['styles'], 'lengths' => $data['lengths'], 'words' => $data['words_comparison'], 'types' => $data['types'], 'styleLabels' => $styleLabels, 'typeLabels' => $typeLabels], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-    <script src="assets/js/analytics.js"></script>
+    <script src="assets/js/analytics.js?v=<?= filemtime(__DIR__ . '/assets/js/analytics.js') ?>"></script>
     <?php endif; ?>
 </main>
 <?php require __DIR__ . '/partials/site-footer.php'; ?>

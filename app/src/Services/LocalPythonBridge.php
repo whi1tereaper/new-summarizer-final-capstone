@@ -5,6 +5,7 @@ require_once __DIR__ . '/../Support/ProcessingError.php';
 require_once __DIR__ . '/../Support/config.php';
 
 use App\Src\Support\ProcessingError;
+use App\Src\Support\ProcessingDiagnostics;
 
 final class PythonWorkerLaunchException extends \RuntimeException
 {
@@ -30,6 +31,8 @@ class LocalPythonBridge
 
     public function summarize(array $payload, ?int $timeoutSeconds = null): array
     {
+        // A server-owned per-request flag reaches both daemon and subprocess.
+        $payload['automatic_article_routing'] = (bool)config('summarizer.automatic_article_routing', false);
         return $this->run('summarize', $payload, $this->configuredSummaryTimeout($timeoutSeconds));
     }
 
@@ -130,6 +133,9 @@ class LocalPythonBridge
         bool $useDaemon = true
     ): array
     {
+        ProcessingDiagnostics::stage('python_bridge', self::class, 'run');
+        ProcessingDiagnostics::engine(!empty($payload['automatic_article_routing']) ? 'article_pending'
+            : config('summarizer.engine_version', 'legacy'));
         try {
             return $this->runWorker($action, $payload, $timeoutSeconds, $scriptPath, $useDaemon);
         } catch (\Throwable $exception) {
@@ -275,6 +281,7 @@ class LocalPythonBridge
                 if (microtime(true) > $deadline) {
                     $pid = isset($status['pid']) ? (int)$status['pid'] : null;
                     $this->terminateProcessTree($process, $pid);
+                    ProcessingDiagnostics::workerExit(null, (string)@file_get_contents($stderrPath));
                     throw new ProcessingError('PROCESSING_TIMEOUT');
                 }
 
@@ -296,6 +303,7 @@ class LocalPythonBridge
             if ($stdout === false || $stderr === false) {
                 throw new \RuntimeException('Could not read local Python worker output.');
             }
+            ProcessingDiagnostics::workerExit($exitCode, $stderr);
             if ($exitCode !== 0) {
                 throw $this->buildProcessFailure($stderr, $stdout, $exitCode);
             }
@@ -455,6 +463,14 @@ class LocalPythonBridge
             'OPENBLAS_NUM_THREADS' => '1',
             'OMP_NUM_THREADS' => '1',
             'MKL_NUM_THREADS' => '1',
+            // The configured embedding model is local-only. Do not let optional
+            // tokenizer/adapter resolution stall a service account on network
+            // retries. Missing local resources retain the existing fallback.
+            'HF_HUB_OFFLINE' => '1',
+            'TRANSFORMERS_OFFLINE' => '1',
+            'TOKENIZERS_PARALLELISM' => 'false',
+            'LIGHT_STAGE_TRACE' => '1',
+            'SUMMARIZER_DIAGNOSTICS_DIR' => config('storage.logs'),
             'NLTK_DATA' => config('python.nltk_data'),
             'SUMMARIZER_UPLOADS_DIR' => config('storage.uploads'),
             'SUMMARIZER_TMP_DIR' => config('storage.tmp'),

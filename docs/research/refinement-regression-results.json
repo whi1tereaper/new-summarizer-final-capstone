@@ -1,0 +1,26 @@
+{
+  "command": [
+    "C:\\xampp\\htdocs\\ai-summarizer-123 - quality upg\\.venv-nlp\\Scripts\\python.exe",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "python-engine/tests",
+    "-p",
+    "test_*.py"
+  ],
+  "exit_code": 0,
+  "tests_run": 678,
+  "skipped": 4,
+  "seconds": 1001.0364837000016,
+  "summary_tail": [
+    "RuntimeError: retrieval unavailable",
+    "...................................................................................................................................................................ssss.........worker_unavailable reference=dff7464f0aef4840999ffc3f8383a89b exception_type=ConnectionResetError",
+    "....",
+    "----------------------------------------------------------------------",
+    "Ran 678 tests in 983.502s",
+    "",
+    "OK (skipped=4)"
+  ],
+  "full_log": "artifacts/runtime-refinement/python-tests.log"
+}

@@ -55,7 +55,8 @@ def load_project_env() -> None:
         if len(cleaned) >= 2 and cleaned[0] == cleaned[-1] and cleaned[0] in {'"', "'"}:
             cleaned = cleaned[1:-1]
 
-        os.environ[name] = cleaned
+        # Explicit PHP/process settings select the same cache for generation and playback.
+        os.environ.setdefault(name, cleaned)
 
 
 load_project_env()

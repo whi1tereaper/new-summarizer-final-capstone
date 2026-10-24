@@ -1,0 +1,53 @@
+                   checked or
+                   not
+required_files     Required          int(11)
+                   number of
+                   files for
+                   the
+                   checklist
+uploaded_count     Number of         int(11)
+                   files
+                   uploaded
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                77

@@ -1,0 +1,89 @@
+{
+    "recorded_utc": "2026-10-23T02:33:40+00:00",
+    "driver": "mysql",
+    "isolated_fixture": true,
+    "passed": 20,
+    "failed": 0,
+    "checks": [
+        {
+            "name": "landing KPIs",
+            "passed": true
+        },
+        {
+            "name": "device breakdown",
+            "passed": true
+        },
+        {
+            "name": "scroll funnel",
+            "passed": true
+        },
+        {
+            "name": "fourteen-day trend",
+            "passed": true
+        },
+        {
+            "name": "referrer host parsing",
+            "passed": true
+        },
+        {
+            "name": "administrative sidebar",
+            "passed": true
+        },
+        {
+            "name": "owner sidebar remains scoped",
+            "passed": true
+        },
+        {
+            "name": "summary analytics decimal reduction",
+            "passed": true
+        },
+        {
+            "name": "all-six-depth analytics ordering preserves exhaustive",
+            "passed": true
+        },
+        {
+            "name": "fractional compression preserved",
+            "passed": true
+        },
+        {
+            "name": "Nutshell analytics does not silently degrade",
+            "passed": true
+        },
+        {
+            "name": "saved preferences",
+            "passed": true
+        },
+        {
+            "name": "password reset SQL",
+            "passed": true
+        },
+        {
+            "name": "OTP replay denied",
+            "passed": true
+        },
+        {
+            "name": "remember-me storage SQL",
+            "passed": true
+        },
+        {
+            "name": "audit logger SQL",
+            "passed": true
+        },
+        {
+            "name": "existing feedback write SQL",
+            "passed": true
+        },
+        {
+            "name": "feedback telemetry SQL",
+            "passed": true
+        },
+        {
+            "name": "feedback retention interval SQL",
+            "passed": true
+        },
+        {
+            "name": "Nutshell history PostgreSQL\/MySQL string literals",
+            "passed": true
+        }
+    ]
+}

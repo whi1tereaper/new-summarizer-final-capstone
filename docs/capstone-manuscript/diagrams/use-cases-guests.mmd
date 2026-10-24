@@ -1,0 +1,15 @@
+%% Guest context has no personal history or standalone Nutshell. Reading helpers remain subject to route guards.
+flowchart TB
+    ACTOR["Guest visitor"]
+    subgraph SYSTEM["LIGHT summarizer"]
+    C0(["Provide text, URL, PDF or DOCX<br/>and choose summary settings"])
+    C1(["Generate a summary; inspect<br/>progress, retry or cancel"])
+    C2(["Read an authorized result;<br/>copy / export / reading helpers"])
+    C3(["Submit permitted rating<br/>and feedback comments"])
+    C4(["Register, sign in or<br/>request password recovery"])
+    end
+    ACTOR --- C0
+    ACTOR --- C1
+    ACTOR --- C2
+    ACTOR --- C3
+    ACTOR --- C4

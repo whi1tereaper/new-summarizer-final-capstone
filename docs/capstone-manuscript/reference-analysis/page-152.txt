@@ -1,0 +1,52 @@
+      4) Sort & Filter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+               •  You can sort the items in the Folder by
+                  Folders Only, Files Only, Marked, and
+                  Unmarked.
+               •  Folders Only will only show Folders
+               •  Files Only will only show Files
+               •  Marked will show only files that have
+                  been marked as a checklist item.
+               •  Unmarked will show files that have not
+                  yet been marked as an item in the
+                  checklist.
+
+      5) Select Items
+
+
+
+
+
+
+
+             •   You can see the options to Select All,
+                 Move, Archive, Bin, or Cancel.
+             •   Select All will select all the Files in
+                 the Folder.
+             •   Move will move all the selected files into
+                 another destination folder.
+             •   Archive will archive all the selected
+                 files.
+             •   Bin will bin all the selected files.
+
+
+                                                                    133

@@ -1,0 +1,14 @@
+{
+  "status": "proposed_external_development_sources_independent_review_pending",
+  "heldout_sources": [],
+  "calibration_sources": [],
+  "limits": "Verified source nominations only. Full snapshots, licensing review, independent units, opinion/educational coverage and partition locking remain pending.",
+  "candidates": [
+    {"id": "EXT-CAND-NIST-CLOCK", "category": "technical/science reporting", "title": "World’s Most Accurate and Precise Atomic Clock Pushes New Frontiers in Physics", "date": "2024-07-01", "url": "https://www.nist.gov/news-events/news/2024/07/worlds-most-accurate-and-precise-atomic-clock-pushes-new-frontiers-physics", "independent_units": null},
+    {"id": "EXT-CAND-USGS-WATER", "category": "environmental research reporting", "title": "Millions in the U.S. may rely on groundwater contaminated with PFAS for drinking water supplies", "date": "2024-10-24", "url": "https://www.usgs.gov/news/national-news-release/millions-us-may-rely-groundwater-contaminated-pfas-drinking-water", "independent_units": null},
+    {"id": "EXT-CAND-NASA-NISAR", "category": "news/space technology", "title": "NASA-ISRO Satellite Lifts Off to Track Earth’s Changing Surfaces", "date": "2025-07-30", "url": "https://www.nasa.gov/news-release/nasa-isro-satellite-lifts-off-to-track-earths-changing-surfaces/", "independent_units": null},
+    {"id": "EXT-CAND-EIA-GENERATION", "category": "business/energy analysis", "title": "U.S. electricity generation in 2025 hit a record, again", "date": "2026-03-05", "url": "https://www.eia.gov/todayinenergy/detail.php?id=67284", "independent_units": null},
+    {"id": "EXT-CAND-USGS-SEDIMENT", "category": "environmental research reporting", "title": "USGS-led Study: Sediment Management is Key to Preserving Puget Sound's Estuarine Habitats", "date": "2024-04-19", "url": "https://www.usgs.gov/programs/cmhrp/news/usgs-led-study-sediment-management-key-preserving-puget-sounds-estuarine", "independent_units": null},
+    {"id": "EXT-CAND-NIST-CHIPS", "category": "business/technical policy reporting", "title": "CHIPS Incentives Awards with Corning, Edwards Vacuum, and Infinera", "date": "2025-01-17", "url": "https://www.nist.gov/news-events/news/2025/01/us-department-commerce-announces-chips-incentives-awards-corning-edwards", "independent_units": null}
+  ]
+}

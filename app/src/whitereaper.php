@@ -69,6 +69,11 @@ if (PHP_SAPI !== 'cli') {
 
     // Guests and logged-in users share the same public pages, so bootstrap both contexts up front.
     (new GuestSessionService())->bootstrapCurrentVisitor();
+    // Issue the durable trial identity before templates send headers, including
+    // visitors without JavaScript. Missing migrations never grant free access.
+    require_once __DIR__.'/Services/CampusAccessService.php';
+    try { (new \App\Src\Services\CampusAccessService())->visitorToken(); }
+    catch (\Throwable $exception) { /* Generation endpoints fail closed with a safe setup error. */ }
 
     // Terms state is enforced centrally so each page does not need to duplicate that gate.
     $termsAcceptanceService = new TermsAcceptanceService();

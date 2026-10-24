@@ -125,6 +125,18 @@ assert 'summarizer_core.pipeline' not in sys.modules, '{mod} should NEVER import
         self.assertEqual(normalization_mod.normalize_whitespace("Hello   \n\t  World"), "Hello World")
         self.assertEqual(normalization_mod.normalize_source_newlines("Line 1\r\nLine 2\rLine 3"), "Line 1\nLine 2\nLine 3")
 
+    def test_navigation_keyword_inside_article_prose_is_preserved(self):
+        paragraph = (
+            "The community library opened a new reading room on Monday. The room contains "
+            "120 books and has space for 24 visitors. Staff will provide reading support "
+            "each afternoon. Visitors must register at the front desk before using the room."
+        )
+        self.assertFalse(cleaning_mod.looks_like_navigation_noise(paragraph))
+        self.assertFalse(cleaning_mod.should_drop_paragraph(paragraph))
+
+    def test_short_navigation_block_is_removed(self):
+        self.assertTrue(cleaning_mod.looks_like_navigation_noise("Home About Us Contact Us"))
+
     def test_tokenization_edge_cases(self):
         """Verify sentence tokenization handles empty and complex text."""
         self.assertEqual(tokenization_mod.safe_sent_tokenize(""), [])

@@ -1,0 +1,45 @@
+   XAMPP Control Panel was used to test and run
+the developed system, while the output was
+reviewed through browsers Google Chrome and
+Microsoft  Edge.  The  system’s  data  and
+functionality were tested and validated within
+the database using XAMPP.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           Figure 19. XAMPP Control Panel
+   Using phpMyAdmin, the researchers were able
+to create the necessary databases and tables to
+store the system’s data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                      82

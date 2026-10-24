@@ -1,0 +1,681 @@
+{
+  "provenance": "historical_outputs_plus_frozen_v1_code",
+  "articles": [
+    {
+      "id": "HO-RESEARCH-COMMUTE",
+      "source_text": "Active Commuting and Self-Reported Wellbeing Among Office Workers\n\nAbstract\nThis study examined whether commuting by bicycle or on foot is associated with higher self-reported wellbeing among office workers. A cross-sectional survey was distributed to employees of 14 firms in two mid-sized cities between March and June 2025. A total of 1,186 valid responses were analyzed.\n\nIntroduction\nUrban planners increasingly promote active travel as a way to reduce congestion. Earlier work has linked physical activity with mood, but few studies have compared commuting modes within the same workforce. The present study addresses that gap by comparing active commuters with car and public transport users.\n\nMethodology\nParticipants completed the WHO-5 Wellbeing Index and reported their usual commuting mode, commute duration, income band, and weekly exercise outside of commuting. Linear regression models adjusted for age, sex, income, and leisure-time exercise. Respondents with commutes longer than 90 minutes were excluded because the sample in that group was too small.\n\nResults\nActive commuters reported a mean WHO-5 score of 64.2, compared with 57.9 for car commuters and 58.6 for public transport users. After adjustment, active commuting remained associated with a 4.1-point higher wellbeing score (95% CI 2.3 to 5.9). Commute duration was not significantly associated with wellbeing among active commuters. Respondents who cycled reported slightly higher scores than those who walked, but the difference was not statistically significant.\n\nDiscussion\nThe association persisted after controlling for leisure-time exercise, which suggests that the benefit may not be explained by overall fitness alone. However, people who already feel well may be more likely to choose active travel. Because the design is cross-sectional, the results cannot establish that active commuting causes higher wellbeing.\n\nLimitations\nThe sample was drawn from office workers in two cities, so the findings may not generalize to shift workers or rural populations. Commuting mode was self-reported.\n\nConclusion\nActive commuting was associated with modestly higher wellbeing among office workers. Longitudinal studies are needed to determine whether switching to active travel improves wellbeing over time.",
+      "source_sentence_count": 20,
+      "tokenizer": "nltk_punkt",
+      "word_budget": 251,
+      "used_token_words": 243,
+      "selected_indices": [
+        0,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "missing": [
+        {
+          "kind": "unit",
+          "label": "sample",
+          "source_contains_tokens": true,
+          "matching_sentences": [
+            {
+              "index": 2,
+              "text": "A total of 1,186 valid responses were analyzed.",
+              "section": "Abstract",
+              "score": 0.342074,
+              "rank": 20,
+              "words": 9,
+              "max_selected_cosine": 0.0,
+              "causes": [
+                "remaining_word_budget_insufficient",
+                "ratio_sentence_cap_reached"
+              ]
+            }
+          ],
+          "annotation_limit": null
+        },
+        {
+          "kind": "fact",
+          "label": "1,186",
+          "source_contains_tokens": true,
+          "matching_sentences": [
+            {
+              "index": 2,
+              "text": "A total of 1,186 valid responses were analyzed.",
+              "section": "Abstract",
+              "score": 0.342074,
+              "rank": 20,
+              "words": 9,
+              "max_selected_cosine": 0.0,
+              "causes": [
+                "remaining_word_budget_insufficient",
+                "ratio_sentence_cap_reached"
+              ]
+            }
+          ],
+          "annotation_limit": null
+        },
+        {
+          "kind": "fact",
+          "label": "14 firms",
+          "source_contains_tokens": true,
+          "matching_sentences": [
+            {
+              "index": 1,
+              "text": "A cross-sectional survey was distributed to employees of 14 firms in two mid-sized cities between March and June 2025.",
+              "section": "Abstract",
+              "score": 0.42841,
+              "rank": 19,
+              "words": 19,
+              "max_selected_cosine": 0.11967207659747146,
+              "causes": [
+                "remaining_word_budget_insufficient",
+                "ratio_sentence_cap_reached"
+              ]
+            }
+          ],
+          "annotation_limit": null
+        }
+      ],
+      "format_changes_source_text": false
+    },
+    {
+      "id": "HO-NEWS-BRIDGE",
+      "source_text": "Harbor Bridge Closed After Inspectors Find Cable Corrosion\n\nThe Harbor Street Bridge in Port Alden was closed to all vehicle traffic on Monday after state inspectors found corrosion in two of its 48 suspension cables, the Department of Transportation said.\n\nThe bridge carries about 31,000 vehicles a day between the downtown district and the east shore. Pedestrians and cyclists will still be allowed to cross on the north walkway while engineers assess the damage.\n\nTransportation Commissioner Dana Whitfield said the closure was a precaution. \"We have no evidence that the structure is in immediate danger, but we are not willing to take chances with public safety,\" Whitfield said at a news conference.\n\nThe corrosion was discovered during a routine inspection that began on September 29. Officials said the affected cables had last been inspected in 2023 and showed no significant damage at that time.\n\nCity officials announced that three additional bus routes would run across the Lowell Avenue crossing during the closure. Mayor Victor Ruiz urged residents to allow extra travel time and to consider working from home where possible.\n\nThe department has not said how long the bridge will remain closed. An engineering firm is expected to deliver a repair estimate within three weeks. Local business owners on the east shore said they were worried about losing customers if the closure lasts more than a month.\n\nThe Harbor Street Bridge opened in 1968 and was last rehabilitated in 2009 at a cost of $22 million.",
+      "source_sentence_count": 13,
+      "tokenizer": "nltk_punkt",
+      "word_budget": 185,
+      "used_token_words": 177,
+      "selected_indices": [
+        0,
+        1,
+        3,
+        4,
+        6,
+        7,
+        9,
+        11,
+        12
+      ],
+      "missing": [
+        {
+          "kind": "fact",
+          "label": "September 29",
+          "source_contains_tokens": true,
+          "matching_sentences": [
+            {
+              "index": 5,
+              "text": "The corrosion was discovered during a routine inspection that began on September 29.",
+              "section": "Article",
+              "score": 0.501594,
+              "rank": 12,
+              "words": 13,
+              "max_selected_cosine": 0.037118602044906426,
+              "causes": [
+                "remaining_word_budget_insufficient"
+              ]
+            }
+          ],
+          "annotation_limit": null
+        },
+        {
+          "kind": "fact",
+          "label": "three weeks",
+          "source_contains_tokens": true,
+          "matching_sentences": [
+            {
+              "index": 10,
+              "text": "An engineering firm is expected to deliver a repair estimate within three weeks.",
+              "section": "Article",
+              "score": 0.410613,
+              "rank": 13,
+              "words": 13,
+              "max_selected_cosine": 0.0,
+              "causes": [
+                "remaining_word_budget_insufficient"
+              ]
+            }
+          ],
+          "annotation_limit": null
+        }
+      ],
+      "format_changes_source_text": false
+    },
+    {
+      "id": "HO-TECH-QUEUE",
+      "source_text": "Migrating the Order Pipeline from Polling to a Message Queue\n\nOverview\nThe order service currently polls the orders table every five seconds to find new records. This design produces constant database load even when no orders arrive, and it delays order confirmation by up to five seconds. This document describes the migration to a RabbitMQ-based message queue.\n\nCurrent Problems\nDuring the November 2025 sale, polling queries accounted for 38 percent of all primary database reads. Two worker instances occasionally processed the same order because the row-locking strategy relied on a status column that was updated after processing began. This caused 214 duplicate confirmation emails in a single day.\n\nProposed Architecture\nThe checkout service will publish an order.created event after the database transaction commits. A consumer group of order workers will subscribe to the order.created queue. Each message carries the order ID and an idempotency key. Workers acknowledge a message only after the order has been fully processed, so unacknowledged messages are redelivered if a worker crashes.\n\nIdempotency\nBecause RabbitMQ provides at-least-once delivery, a message can be delivered more than once. Workers must therefore record each processed idempotency key in a dedicated table with a unique constraint. A worker that encounters an existing key skips the order without sending a second email.\n\nRollout\nThe migration will run in shadow mode for two weeks, with both polling and queue consumers active but only the polling path sending emails. If the queue path processes at least 99.9 percent of orders correctly during shadow mode, polling will be disabled.\n\nRisks\nThe queue introduces a new operational dependency. If the RabbitMQ cluster is unavailable, checkout will still succeed, but order confirmation will be delayed until the cluster recovers. The team has not yet load-tested the cluster above 2,000 messages per second.",
+      "source_sentence_count": 18,
+      "tokenizer": "nltk_punkt",
+      "word_budget": 191,
+      "used_token_words": 190,
+      "selected_indices": [
+        0,
+        1,
+        2,
+        7,
+        8,
+        9,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "missing": [
+        {
+          "kind": "unit",
+          "label": "problem_load",
+          "source_contains_tokens": true,
+          "matching_sentences": [
+            {
+              "index": 3,
+              "text": "During the November 2025 sale, polling queries accounted for 38 percent of all primary database reads.",
+              "section": "Overview",
+              "score": 0.524234,
+              "rank": 16,
+              "words": 16,
+              "max_selected_cosine": 0.07376048936871987,
+              "causes": [
+                "remaining_word_budget_insufficient",
+                "ratio_sentence_cap_reached"
+              ]
+            }
+          ],
+          "annotation_limit": null
+        },
+        {
+          "kind": "unit",
+          "label": "duplicates",
+          "source_contains_tokens": true,
+          "matching_sentences": [
+            {
+              "index": 5,
+              "text": "This caused 214 duplicate confirmation emails in a single day.",
+              "section": "Overview",
+              "score": 0.493485,
+              "rank": 17,
+              "words": 10,
+              "max_selected_cosine": 0.04698625031842658,
+              "causes": [
+                "remaining_word_budget_insufficient",
+                "ratio_sentence_cap_reached"
+              ]
+            }
+          ],
+          "annotation_limit": null
+        },
+        {
+          "kind": "fact",
+          "label": "38 percent",
+          "source_contains_tokens": true,
+          "matching_sentences": [
+            {
+              "index": 3,
+              "text": "During the November 2025 sale, polling queries accounted for 38 percent of all primary database reads.",
+              "section": "Overview",
+              "score": 0.524234,
+              "rank": 16,
+              "words": 16,
+              "max_selected_cosine": 0.07376048936871987,
+              "causes": [
+                "remaining_word_budget_insufficient",
+                "ratio_sentence_cap_reached"
+              ]
+            }
+          ],
+          "annotation_limit": null
+        },
+        {
+          "kind": "fact",
+          "label": "214",
+          "source_contains_tokens": true,
+          "matching_sentences": [
+            {
+              "index": 5,
+              "text": "This caused 214 duplicate confirmation emails in a single day.",
+              "section": "Overview",
+              "score": 0.493485,
+              "rank": 17,
+              "words": 10,
+              "max_selected_cosine": 0.04698625031842658,
+              "causes": [
+                "remaining_word_budget_insufficient",
+                "ratio_sentence_cap_reached"
+              ]
+            }
+          ],
+          "annotation_limit": null
+        },
+        {
+          "kind": "fact",
+          "label": "at-least-once",
+          "source_contains_tokens": true,
+          "matching_sentences": [
+            {
+              "index": 10,
+              "text": "Because RabbitMQ provides at-least-once delivery, a message can be delivered more than once.",
+              "section": "Overview",
+              "score": 0.592659,
+              "rank": 14,
+              "words": 13,
+              "max_selected_cosine": 0.12240732398901077,
+              "causes": [
+                "remaining_word_budget_insufficient",
+                "ratio_sentence_cap_reached"
+              ]
+            }
+          ],
+          "annotation_limit": null
+        }
+      ],
+      "format_changes_source_text": false
+    },
+    {
+      "id": "HO-ESSAY-HOMEWORK",
+      "source_text": "Why Homework Policy Should Follow the Evidence\n\nFew school policies generate as much argument at the dinner table as homework. Parents worry that too much of it crowds out sleep and family time, while others fear that too little leaves children unprepared. This essay argues that homework policy should be set by age group and grounded in research, rather than by tradition or by the loudest voices in a school community.\n\nThe research on homework is more nuanced than either side tends to admit. For secondary school students, moderate amounts of homework are generally associated with higher achievement, although the benefit appears to level off after roughly two hours per night. For primary school students, the relationship between homework and achievement is weak, and some reviews have found no clear benefit at all.\n\nThis difference matters. A single school-wide rule, such as thirty minutes of homework per subject, may be reasonable for a sixteen-year-old but excessive for an eight-year-old. Schools that apply one standard to every grade are ignoring what the evidence actually shows.\n\nCritics of reduced homework argue that practice at home builds discipline and independent study habits. That concern is legitimate, but discipline can also be built through reading for pleasure, household responsibilities, and structured activities that do not require worksheets.\n\nTherefore, schools should adopt age-specific limits, review them regularly against student outcomes, and explain the reasoning to parents. Homework should be a tool chosen for a purpose, not a habit inherited from previous generations.",
+      "source_sentence_count": 12,
+      "tokenizer": "nltk_punkt",
+      "word_budget": 185,
+      "used_token_words": 181,
+      "selected_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        8,
+        9,
+        11
+      ],
+      "missing": [
+        {
+          "kind": "unit",
+          "label": "recommendation",
+          "source_contains_tokens": true,
+          "matching_sentences": [
+            {
+              "index": 10,
+              "text": "Therefore, schools should adopt age-specific limits, review them regularly against student outcomes, and explain the reasoning to parents.",
+              "section": "Article",
+              "score": 0.664424,
+              "rank": 6,
+              "words": 18,
+              "max_selected_cosine": 0.08606356440124532,
+              "causes": [
+                "cross_paragraph_context_rejected",
+                "remaining_word_budget_insufficient",
+                "ratio_sentence_cap_reached"
+              ]
+            }
+          ],
+          "annotation_limit": null
+        },
+        {
+          "kind": "fact",
+          "label": "thirty minutes",
+          "source_contains_tokens": true,
+          "matching_sentences": [
+            {
+              "index": 6,
+              "text": "A single school-wide rule, such as thirty minutes of homework per subject, may be reasonable for a sixteen-year-old but excessive for an eight-year-old.",
+              "section": "Article",
+              "score": 0.592146,
+              "rank": 11,
+              "words": 23,
+              "max_selected_cosine": 0.02689072791678207,
+              "causes": [
+                "remaining_word_budget_insufficient",
+                "ratio_sentence_cap_reached"
+              ]
+            }
+          ],
+          "annotation_limit": null
+        }
+      ],
+      "format_changes_source_text": false
+    },
+    {
+      "id": "HO-AMBIGUOUS-TRIAL",
+      "source_text": "Mixed Results from Two Trials of a Herbal Sleep Supplement\n\nTwo randomized trials have tested whether a valerian-based supplement improves sleep in adults with mild insomnia, and their results disagree.\n\nThe first trial, conducted in Norway with 212 participants, reported that the supplement reduced the time needed to fall asleep by an average of 11 minutes compared with placebo. The researchers described this effect as modest but clinically meaningful.\n\nThe second trial, conducted in Canada with 340 participants, found no significant difference between the supplement and placebo in time to fall asleep or total sleep duration. The Canadian team used a lower dose and measured sleep with wrist-worn devices rather than sleep diaries.\n\nExperts noted that the differences in dose and measurement method could explain the conflicting results. Sleep diaries rely on participants' own reports and may be more sensitive to expectation effects, while wrist-worn devices may underestimate small changes in sleep onset.\n\nNeither trial reported serious side effects, although about 7 percent of participants in both trials reported mild stomach discomfort. The supplement manufacturer funded the Norwegian trial but was not involved in the Canadian trial.\n\nBased on the current evidence, it remains unclear whether the supplement is effective. A larger trial using both diaries and devices would help resolve the question.",
+      "source_sentence_count": 11,
+      "tokenizer": "nltk_punkt",
+      "word_budget": 160,
+      "used_token_words": 152,
+      "selected_indices": [
+        0,
+        1,
+        3,
+        4,
+        6,
+        7,
+        8
+      ],
+      "missing": [
+        {
+          "kind": "unit",
+          "label": "unclear",
+          "source_contains_tokens": true,
+          "matching_sentences": [
+            {
+              "index": 9,
+              "text": "Based on the current evidence, it remains unclear whether the supplement is effective.",
+              "section": "Article",
+              "score": 0.617364,
+              "rank": 8,
+              "words": 13,
+              "max_selected_cosine": 0.06685196132208496,
+              "causes": [
+                "remaining_word_budget_insufficient"
+              ]
+            }
+          ],
+          "annotation_limit": null
+        },
+        {
+          "kind": "fact",
+          "label": "remains unclear",
+          "source_contains_tokens": true,
+          "matching_sentences": [
+            {
+              "index": 9,
+              "text": "Based on the current evidence, it remains unclear whether the supplement is effective.",
+              "section": "Article",
+              "score": 0.617364,
+              "rank": 8,
+              "words": 13,
+              "max_selected_cosine": 0.06685196132208496,
+              "causes": [
+                "remaining_word_budget_insufficient"
+              ]
+            }
+          ],
+          "annotation_limit": null
+        }
+      ],
+      "format_changes_source_text": false
+    },
+    {
+      "id": "NASA-CRS35-HEALTH-RESEARCH",
+      "source_text": "NASA experiments focused on human and plant health and drug-resistant organisms will travel to the International Space Station aboard SpaceX’s 35th Commercial Resupply Services mission for the agency from Cape Canaveral Space Force Station in Florida, advancing research that benefits life on Earth and future exploration.\n\nThis research supports astronaut health during long-duration missions through four investigations from the agency’s Biological and Physical Sciences division, including 3D models of the human brain, a crop disease study, a faster way to assess astronaut health, and an analysis of antibiotic-resistant bacteria aboard the space station.\n\nTiny brain models, big questions\n\nA new precision health investigation helps address a key question: What happens to the human brain in space?\n\nThe experiment sends small, lab-grown models of the human brain to the orbiting laboratory for five weeks. Researchers compare tissue models that traveled to space with identical ones kept on Earth to determine how a short spaceflight affects the human brain at the cellular level.\n\nThe effort could deepen our understanding of how the human brain responds to stress and help lay the groundwork for methods that counter risks to brain health that astronauts may face on future missions to the Moon and beyond.\n\nDisease-resistant crops for space\n\nA space crops investigation tests whether crop diseases develop faster and more severely in microgravity.\n\nThe experiment compares molecular and structural changes between Earth-grown and space station-grown plants infected with a disease-causing fungus. The findings could guide plant breeding on Earth to produce disease-resistant crops and help minimize yield losses in future space agriculture systems.\n\nSpace crops provide nutrition, increase dietary variety, and offer psychological benefits for astronauts during extended missions. They also absorb carbon dioxide, produce oxygen, and recycle water, which will become increasingly important as human missions extend farther from Earth.\n\nAnalysis helps astronauts thrive\n\nThe spacecraft also carries the first test of a compact microplate reader that arrived aboard the space station earlier this year.\n\nThe Commercially Enabled Rapid Space Science initiative experiment tests the device’s ability to detect and measure certain biomarkers such as antibodies, antigens, and proteins.\n\nUse of the plate reader would allow scientists to analyze samples aboard the space station and obtain data quickly, rather than wait for the samples to return to Earth for analysis.\n\nUltimately, the research aims to support the timely detection of infections and other health issues in astronauts while expanding science capabilities in remote exploration locations where resupply will be more difficult.\n\nTracking antibiotic-resistant bacteria\n\nA precision health investigation returns for its fourth and final planned stay aboard the space station to study how antibiotic-resistant bacteria survive and evolve in microgravity.\n\nAs part of the investigation, astronauts repeatedly sample surfaces throughout the space station to monitor for drug-resistant organisms.\n\nThe work could help develop ways to protect astronauts against bacterial infections during long-duration missions. On Earth, the findings could provide insight into how superbugs develop from the overuse of antibiotics.\n\nTo learn more about NASA’s biological and physical research in space, visit NASA’s Biological and Physical Sciences division.",
+      "source_sentence_count": 20,
+      "tokenizer": "nltk_punkt",
+      "word_budget": 382,
+      "used_token_words": 351,
+      "selected_indices": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        11,
+        13,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "missing": [
+        {
+          "kind": "unit",
+          "label": "four_investigations",
+          "source_contains_tokens": true,
+          "matching_sentences": [
+            {
+              "index": 1,
+              "text": "This research supports astronaut health during long-duration missions through four investigations from the agency’s Biological and Physical Sciences division, including 3D models of the human brain, a crop disease study, a faster way to assess astronaut health, and an analysis of antibiotic-resistant bacteria aboard the space station.",
+              "section": "Article",
+              "score": 0.816667,
+              "rank": 1,
+              "words": 48,
+              "max_selected_cosine": 0.2288730814675635,
+              "causes": [
+                "cross_paragraph_context_rejected",
+                "remaining_word_budget_insufficient",
+                "ratio_sentence_cap_reached"
+              ]
+            }
+          ],
+          "annotation_limit": null
+        },
+        {
+          "kind": "unit",
+          "label": "rapid_health_testing",
+          "source_contains_tokens": true,
+          "matching_sentences": [],
+          "annotation_limit": "requires_multiple_sentences_or_noncontiguous_source"
+        },
+        {
+          "kind": "fact",
+          "label": "four investigations",
+          "source_contains_tokens": true,
+          "matching_sentences": [
+            {
+              "index": 1,
+              "text": "This research supports astronaut health during long-duration missions through four investigations from the agency’s Biological and Physical Sciences division, including 3D models of the human brain, a crop disease study, a faster way to assess astronaut health, and an analysis of antibiotic-resistant bacteria aboard the space station.",
+              "section": "Article",
+              "score": 0.816667,
+              "rank": 1,
+              "words": 48,
+              "max_selected_cosine": 0.2288730814675635,
+              "causes": [
+                "cross_paragraph_context_rejected",
+                "remaining_word_budget_insufficient",
+                "ratio_sentence_cap_reached"
+              ]
+            }
+          ],
+          "annotation_limit": null
+        },
+        {
+          "kind": "fact",
+          "label": "antibodies, antigens, and proteins",
+          "source_contains_tokens": true,
+          "matching_sentences": [
+            {
+              "index": 12,
+              "text": "The Commercially Enabled Rapid Space Science initiative experiment tests the device’s ability to detect and measure certain biomarkers such as antibodies, antigens, and proteins.",
+              "section": "Article",
+              "score": 0.294958,
+              "rank": 20,
+              "words": 25,
+              "max_selected_cosine": 0.03649615486479753,
+              "causes": [
+                "ratio_sentence_cap_reached"
+              ]
+            }
+          ],
+          "annotation_limit": null
+        }
+      ],
+      "format_changes_source_text": false
+    },
+    {
+      "id": "NASA-EARTH-OBSERVATORY-THAILAND-FLOODS",
+      "source_text": "September falls in the heart of the monsoon season in Thailand, where cities and towns are accustomed to the afternoon rains and thunderstorms that frequently roll through. But throughout late September and early October 2026, persistent heavy rains punctuated by intense downpours left low-lying areas across the country in Southeast Asia under sustained flooding.\n\nPrachin Buri province was among the areas where flooding was widespread. The right image above shows land along the Bang Pakong River and nearby agricultural areas and aquaculture facilities inundated on October 2, 2026. The left image shows the same area at the same time of year in 2025. Acquired with NASA-USGS Landsat satellites, the images are false-color to better distinguish water from vegetation, developed land, and other surfaces. The bright red shapes are floating solar arrays.\n\nSome of the flooding likely stemmed from a low-pressure system that stalled over the area for several days in late September. Stoked by moisture and energy from the warm Gulf of Thailand nearby, the system delivered especially intense rains to the region. About 100 kilometers (60 miles) to the west, Bangkok received nearly 300 millimeters (11.8 inches) of rain over a 48-hour period, according to news reports, close to the average monthly rainfall total for September of 344 millimeters (13.5 inches).\n\nSince mid-September, flooding has occurred in 50 provinces across the country, affecting over 4 million people and causing dozens of deaths, according to the International Federation of Red Cross and Red Crescent Societies. Government agencies estimate about 270,000 hectares (670,000 acres) of farmland, including rice fields and fruit orchards, have been damaged.\n\nNASA Earth Observatory images by Lauren Dauphin, using Landsat data from the U.S. Geological Survey. Story by Lindsey Doermann.",
+      "source_sentence_count": 14,
+      "tokenizer": "nltk_punkt",
+      "word_budget": 216,
+      "used_token_words": 214,
+      "selected_indices": [
+        0,
+        1,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        12
+      ],
+      "missing": [
+        {
+          "kind": "unit",
+          "label": "location",
+          "source_contains_tokens": true,
+          "matching_sentences": [],
+          "annotation_limit": "requires_multiple_sentences_or_noncontiguous_source"
+        },
+        {
+          "kind": "unit",
+          "label": "agricultural_damage",
+          "source_contains_tokens": true,
+          "matching_sentences": [
+            {
+              "index": 11,
+              "text": "Government agencies estimate about 270,000 hectares (670,000 acres) of farmland, including rice fields and fruit orchards, have been damaged.",
+              "section": "Article",
+              "score": 0.446666,
+              "rank": 13,
+              "words": 21,
+              "max_selected_cosine": 0.0,
+              "causes": [
+                "remaining_word_budget_insufficient"
+              ]
+            }
+          ],
+          "annotation_limit": null
+        },
+        {
+          "kind": "fact",
+          "label": "October 2, 2026",
+          "source_contains_tokens": true,
+          "matching_sentences": [
+            {
+              "index": 3,
+              "text": "The right image above shows land along the Bang Pakong River and nearby agricultural areas and aquaculture facilities inundated on October 2, 2026.",
+              "section": "Article",
+              "score": 0.711673,
+              "rank": 4,
+              "words": 23,
+              "max_selected_cosine": 0.09059289607936673,
+              "causes": [
+                "layout_reference_rejected",
+                "remaining_word_budget_insufficient"
+              ]
+            }
+          ],
+          "annotation_limit": null
+        },
+        {
+          "kind": "fact",
+          "label": "2025",
+          "source_contains_tokens": true,
+          "matching_sentences": [
+            {
+              "index": 4,
+              "text": "The left image shows the same area at the same time of year in 2025.",
+              "section": "Article",
+              "score": 0.66383,
+              "rank": 6,
+              "words": 15,
+              "max_selected_cosine": 0.03446865900707399,
+              "causes": [
+                "layout_reference_rejected",
+                "remaining_word_budget_insufficient"
+              ]
+            }
+          ],
+          "annotation_limit": null
+        },
+        {
+          "kind": "fact",
+          "label": "270,000 hectares",
+          "source_contains_tokens": true,
+          "matching_sentences": [
+            {
+              "index": 11,
+              "text": "Government agencies estimate about 270,000 hectares (670,000 acres) of farmland, including rice fields and fruit orchards, have been damaged.",
+              "section": "Article",
+              "score": 0.446666,
+              "rank": 13,
+              "words": 21,
+              "max_selected_cosine": 0.0,
+              "causes": [
+                "remaining_word_budget_insufficient"
+              ]
+            }
+          ],
+          "annotation_limit": null
+        }
+      ],
+      "format_changes_source_text": false
+    },
+    {
+      "id": "heldout-educational",
+      "source_text": "Understanding how rivers shape the land\n\nA river transports sediment as water flows from higher ground toward the sea. Erosion means that moving water removes soil and rock from the river channel. This process explains why a river can gradually deepen its valley even when the surrounding landscape appears unchanged.\n\nThe amount of material a river carries depends on the speed and volume of its flow. For example, heavy rainfall may increase both the current and the supply of loose sediment. Scientists measured these changes over many years to understand how seasonal floods reshape river banks.\n\nDeposition occurs when the water slows and can no longer carry the same sediment load. This principle explains the formation of sand bars and broad floodplains near the lower river. Learning to distinguish erosion from deposition helps communities understand why building close to a river can involve long term risks.",
+      "source_sentence_count": 9,
+      "tokenizer": "nltk_punkt",
+      "word_budget": 110,
+      "used_token_words": 109,
+      "selected_indices": [
+        0,
+        1,
+        2,
+        4,
+        6,
+        7,
+        8
+      ],
+      "missing": [],
+      "format_changes_source_text": false
+    },
+    {
+      "id": "heldout-business",
+      "source_text": "Regional firms face rising energy costs\n\nBusinesses across the region reported lower profits as energy prices increased during the winter. Investors had expected revenue growth to offset those costs, but several companies announced weaker earnings than analysts predicted. Market observers said the pressure was strongest among manufacturers using older equipment.\n\nThe financial results do not suggest that every company experienced the same decline. Firms that invested in efficient machinery reported more stable operating costs and stronger sales abroad. However, smaller businesses said they could not easily obtain loans to pay for similar upgrades.\n\nEconomists believe the outlook depends partly on whether inflation continues to fall over the coming months. A recovery in consumer spending could improve revenue without immediately restoring profit margins. Analysts cautioned investors against treating one quarter of earnings as proof of a lasting market recovery.",
+      "source_sentence_count": 9,
+      "tokenizer": "nltk_punkt",
+      "word_budget": 104,
+      "used_token_words": 101,
+      "selected_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        7,
+        8
+      ],
+      "missing": [],
+      "format_changes_source_text": false
+    },
+    {
+      "id": "heldout-feature",
+      "source_text": "A neighborhood rebuilds its shared garden\n\nFor years, families in the neighborhood gathered beside an abandoned railway to grow vegetables together. The community garden became a place where older residents taught children how to care for seedlings and save seeds. Its history reflects the changing lives of families who moved to the area seeking work.\n\nDuring an interview, residents recalled how a severe storm destroyed the first wooden beds and flooded the storage shed. They did not have enough money to replace everything immediately, so volunteers began collecting materials from nearby businesses. The community organized weekend repairs while families continued growing food in containers at home.\n\nThe garden reopened after months of shared work and now includes a sheltered space for neighborhood meetings. Residents said the journey taught them that rebuilding a public place requires patience as well as funding. Younger families have begun keeping a record of the garden's history so that future volunteers understand why it matters.",
+      "source_sentence_count": 9,
+      "tokenizer": "nltk_punkt",
+      "word_budget": 119,
+      "used_token_words": 116,
+      "selected_indices": [
+        0,
+        1,
+        2,
+        5,
+        6,
+        7,
+        8
+      ],
+      "missing": [],
+      "format_changes_source_text": false
+    }
+  ],
+  "limits": "Trace explains eligibility and final selection constraints; it does not infer a human importance ranking."
+}

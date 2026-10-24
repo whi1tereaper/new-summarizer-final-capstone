@@ -1,0 +1,20 @@
+erDiagram
+    direction LR
+    users {
+        int id PK
+    }
+    admin_security_challenges {
+        bigint id PK
+        int user_id FK
+    }
+    password_resets {
+        int id PK
+        int user_id FK
+    }
+    user_tokens {
+        int id PK
+        int user_id FK
+    }
+    users ||--o| admin_security_challenges : "user_id"
+    users ||--o{ password_resets : "user_id"
+    users ||--o{ user_tokens : "user_id"

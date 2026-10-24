@@ -1,0 +1,1445 @@
+{
+  "instruction": "Keep separate from reviewers until judgments are locked.",
+  "key": {
+    "2529f9b1989a1e2a": {
+      "system": "legacy",
+      "case_id": "IV-BUSINESS:very_brief:general",
+      "selected_trial": 0
+    },
+    "85b0f683c0858b6e": {
+      "system": "legacy",
+      "case_id": "IV-BUSINESS:brief:general",
+      "selected_trial": 0
+    },
+    "2ab17124d3ccdaa7": {
+      "system": "legacy",
+      "case_id": "IV-BUSINESS:short:general",
+      "selected_trial": 0
+    },
+    "61023ac7cb74258f": {
+      "system": "legacy",
+      "case_id": "IV-BUSINESS:balanced:general",
+      "selected_trial": 0
+    },
+    "1ba92b59dcdad79f": {
+      "system": "legacy",
+      "case_id": "IV-BUSINESS:detailed:general",
+      "selected_trial": 0
+    },
+    "29e15649317ce1fd": {
+      "system": "legacy",
+      "case_id": "IV-BUSINESS:comprehensive:general",
+      "selected_trial": 0
+    },
+    "0dea797ac336278a": {
+      "system": "legacy",
+      "case_id": "IV-BUSINESS:balanced:supported",
+      "selected_trial": 0
+    },
+    "726b412716f52907": {
+      "system": "legacy",
+      "case_id": "IV-BUSINESS:balanced:partial",
+      "selected_trial": 0
+    },
+    "d63e76742075d1e1": {
+      "system": "legacy",
+      "case_id": "IV-BUSINESS:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "1a4cd1d552e396c5": {
+      "system": "legacy",
+      "case_id": "IV-EDITORIAL:very_brief:general",
+      "selected_trial": 0
+    },
+    "0d54afd962902a37": {
+      "system": "legacy",
+      "case_id": "IV-EDITORIAL:brief:general",
+      "selected_trial": 0
+    },
+    "3f10698a22be2164": {
+      "system": "legacy",
+      "case_id": "IV-EDITORIAL:short:general",
+      "selected_trial": 0
+    },
+    "e2163367f2ccb885": {
+      "system": "legacy",
+      "case_id": "IV-EDITORIAL:balanced:general",
+      "selected_trial": 0
+    },
+    "82525033b9dc561e": {
+      "system": "legacy",
+      "case_id": "IV-EDITORIAL:detailed:general",
+      "selected_trial": 0
+    },
+    "801c0d0623c110af": {
+      "system": "legacy",
+      "case_id": "IV-EDITORIAL:comprehensive:general",
+      "selected_trial": 0
+    },
+    "d2ac577ceda8153d": {
+      "system": "legacy",
+      "case_id": "IV-EDITORIAL:balanced:supported",
+      "selected_trial": 0
+    },
+    "6ef2c6adafdb09d6": {
+      "system": "legacy",
+      "case_id": "IV-EDITORIAL:balanced:partial",
+      "selected_trial": 0
+    },
+    "dc0dd9753bc2b398": {
+      "system": "legacy",
+      "case_id": "IV-EDITORIAL:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "468c50119e2c622e": {
+      "system": "legacy",
+      "case_id": "IV-EDUCATION:very_brief:general",
+      "selected_trial": 0
+    },
+    "0c579864320ad599": {
+      "system": "legacy",
+      "case_id": "IV-EDUCATION:brief:general",
+      "selected_trial": 0
+    },
+    "cbe8886de3d04f3f": {
+      "system": "legacy",
+      "case_id": "IV-EDUCATION:short:general",
+      "selected_trial": 0
+    },
+    "c30aaec24422bd4a": {
+      "system": "legacy",
+      "case_id": "IV-EDUCATION:balanced:general",
+      "selected_trial": 0
+    },
+    "8ae28369dfbc061a": {
+      "system": "legacy",
+      "case_id": "IV-EDUCATION:detailed:general",
+      "selected_trial": 0
+    },
+    "fc6569daa618487a": {
+      "system": "legacy",
+      "case_id": "IV-EDUCATION:comprehensive:general",
+      "selected_trial": 0
+    },
+    "ae702c26ece4a002": {
+      "system": "legacy",
+      "case_id": "IV-EDUCATION:balanced:supported",
+      "selected_trial": 0
+    },
+    "7b0fa5ad29ffb49e": {
+      "system": "legacy",
+      "case_id": "IV-EDUCATION:balanced:partial",
+      "selected_trial": 0
+    },
+    "4e848507126926c6": {
+      "system": "legacy",
+      "case_id": "IV-EDUCATION:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "8895702c5ca375b9": {
+      "system": "legacy",
+      "case_id": "IV-FEATURE:very_brief:general",
+      "selected_trial": 0
+    },
+    "316884441837305a": {
+      "system": "legacy",
+      "case_id": "IV-FEATURE:brief:general",
+      "selected_trial": 0
+    },
+    "22be82ea0fd28f65": {
+      "system": "legacy",
+      "case_id": "IV-FEATURE:short:general",
+      "selected_trial": 0
+    },
+    "f35b33261ba21fa0": {
+      "system": "legacy",
+      "case_id": "IV-FEATURE:balanced:general",
+      "selected_trial": 0
+    },
+    "b9b8466550543ea5": {
+      "system": "legacy",
+      "case_id": "IV-FEATURE:detailed:general",
+      "selected_trial": 0
+    },
+    "f2001364480b8a4c": {
+      "system": "legacy",
+      "case_id": "IV-FEATURE:comprehensive:general",
+      "selected_trial": 0
+    },
+    "d39ad09148065371": {
+      "system": "legacy",
+      "case_id": "IV-FEATURE:balanced:supported",
+      "selected_trial": 0
+    },
+    "c0eca1246704c146": {
+      "system": "legacy",
+      "case_id": "IV-FEATURE:balanced:partial",
+      "selected_trial": 0
+    },
+    "ee845080b1fbb19c": {
+      "system": "legacy",
+      "case_id": "IV-FEATURE:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "9ddaf1818c265375": {
+      "system": "legacy",
+      "case_id": "IV-NEWS:very_brief:general",
+      "selected_trial": 0
+    },
+    "41b4a2bea881e31b": {
+      "system": "legacy",
+      "case_id": "IV-NEWS:brief:general",
+      "selected_trial": 0
+    },
+    "d19946fbda2a8ed9": {
+      "system": "legacy",
+      "case_id": "IV-NEWS:short:general",
+      "selected_trial": 0
+    },
+    "ffff55643ac2c18a": {
+      "system": "legacy",
+      "case_id": "IV-NEWS:balanced:general",
+      "selected_trial": 0
+    },
+    "ab561956fe726aa3": {
+      "system": "legacy",
+      "case_id": "IV-NEWS:detailed:general",
+      "selected_trial": 0
+    },
+    "e198aaa8ccb836c1": {
+      "system": "legacy",
+      "case_id": "IV-NEWS:comprehensive:general",
+      "selected_trial": 0
+    },
+    "b683d0a1ca3b9011": {
+      "system": "legacy",
+      "case_id": "IV-NEWS:balanced:supported",
+      "selected_trial": 0
+    },
+    "438f28debea43084": {
+      "system": "legacy",
+      "case_id": "IV-NEWS:balanced:partial",
+      "selected_trial": 0
+    },
+    "3ee17ba15f91398a": {
+      "system": "legacy",
+      "case_id": "IV-NEWS:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "9ab7dce2b5bd42ab": {
+      "system": "legacy",
+      "case_id": "IV-RESEARCH:very_brief:general",
+      "selected_trial": 0
+    },
+    "dc5d07664e6ccb6f": {
+      "system": "legacy",
+      "case_id": "IV-RESEARCH:brief:general",
+      "selected_trial": 0
+    },
+    "892734fe4b8b03dd": {
+      "system": "legacy",
+      "case_id": "IV-RESEARCH:short:general",
+      "selected_trial": 0
+    },
+    "434fbaa16a2e3f78": {
+      "system": "legacy",
+      "case_id": "IV-RESEARCH:balanced:general",
+      "selected_trial": 0
+    },
+    "4d284666b55cdeb5": {
+      "system": "legacy",
+      "case_id": "IV-RESEARCH:detailed:general",
+      "selected_trial": 0
+    },
+    "890073ff061c2e7d": {
+      "system": "legacy",
+      "case_id": "IV-RESEARCH:comprehensive:general",
+      "selected_trial": 0
+    },
+    "5dd93b7e5f354624": {
+      "system": "legacy",
+      "case_id": "IV-RESEARCH:balanced:supported",
+      "selected_trial": 0
+    },
+    "ff0e9f08b8b34917": {
+      "system": "legacy",
+      "case_id": "IV-RESEARCH:balanced:partial",
+      "selected_trial": 0
+    },
+    "864bb37c9f3382f2": {
+      "system": "legacy",
+      "case_id": "IV-RESEARCH:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "81c2a236bbc3893a": {
+      "system": "legacy",
+      "case_id": "IV-SCIENCE:very_brief:general",
+      "selected_trial": 0
+    },
+    "fb8299a8ce3f4a55": {
+      "system": "legacy",
+      "case_id": "IV-SCIENCE:brief:general",
+      "selected_trial": 0
+    },
+    "03e80cafa1e7b7dc": {
+      "system": "legacy",
+      "case_id": "IV-SCIENCE:short:general",
+      "selected_trial": 0
+    },
+    "37d15da342a341a7": {
+      "system": "legacy",
+      "case_id": "IV-SCIENCE:balanced:general",
+      "selected_trial": 0
+    },
+    "e289c3f777f30d04": {
+      "system": "legacy",
+      "case_id": "IV-SCIENCE:detailed:general",
+      "selected_trial": 0
+    },
+    "0c7c62ca3d1b1bc6": {
+      "system": "legacy",
+      "case_id": "IV-SCIENCE:comprehensive:general",
+      "selected_trial": 0
+    },
+    "158b071c22bcc73c": {
+      "system": "legacy",
+      "case_id": "IV-SCIENCE:balanced:supported",
+      "selected_trial": 0
+    },
+    "709716cb96c37048": {
+      "system": "legacy",
+      "case_id": "IV-SCIENCE:balanced:partial",
+      "selected_trial": 0
+    },
+    "df19ddf652734099": {
+      "system": "legacy",
+      "case_id": "IV-SCIENCE:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "f7760d51fbf65747": {
+      "system": "legacy",
+      "case_id": "IV-TECHNICAL:very_brief:general",
+      "selected_trial": 0
+    },
+    "1ee8168a9f0f790a": {
+      "system": "legacy",
+      "case_id": "IV-TECHNICAL:brief:general",
+      "selected_trial": 0
+    },
+    "aef57bd3533653d1": {
+      "system": "legacy",
+      "case_id": "IV-TECHNICAL:short:general",
+      "selected_trial": 0
+    },
+    "4b89e8534e1bfd43": {
+      "system": "legacy",
+      "case_id": "IV-TECHNICAL:balanced:general",
+      "selected_trial": 0
+    },
+    "8aeec149d3fe6613": {
+      "system": "legacy",
+      "case_id": "IV-TECHNICAL:detailed:general",
+      "selected_trial": 0
+    },
+    "4b2250ae2a97ef0b": {
+      "system": "legacy",
+      "case_id": "IV-TECHNICAL:comprehensive:general",
+      "selected_trial": 0
+    },
+    "02474ab0fb44f80b": {
+      "system": "legacy",
+      "case_id": "IV-TECHNICAL:balanced:supported",
+      "selected_trial": 0
+    },
+    "9a41c1178cfcf9e8": {
+      "system": "legacy",
+      "case_id": "IV-TECHNICAL:balanced:partial",
+      "selected_trial": 0
+    },
+    "b3f42c328731e1b4": {
+      "system": "legacy",
+      "case_id": "IV-TECHNICAL:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "dac4129be2357988": {
+      "system": "guide_lsa",
+      "case_id": "IV-BUSINESS:very_brief:general",
+      "selected_trial": 0
+    },
+    "bbd43409059b42ac": {
+      "system": "guide_lsa",
+      "case_id": "IV-BUSINESS:brief:general",
+      "selected_trial": 0
+    },
+    "af876fe0b853243e": {
+      "system": "guide_lsa",
+      "case_id": "IV-BUSINESS:short:general",
+      "selected_trial": 0
+    },
+    "3814e4a5281e3dc3": {
+      "system": "guide_lsa",
+      "case_id": "IV-BUSINESS:balanced:general",
+      "selected_trial": 0
+    },
+    "aaa6d13bd1dbddd9": {
+      "system": "guide_lsa",
+      "case_id": "IV-BUSINESS:detailed:general",
+      "selected_trial": 0
+    },
+    "d4f1c6c0a9776904": {
+      "system": "guide_lsa",
+      "case_id": "IV-BUSINESS:comprehensive:general",
+      "selected_trial": 0
+    },
+    "a11651628d11ebd6": {
+      "system": "guide_lsa",
+      "case_id": "IV-BUSINESS:balanced:supported",
+      "selected_trial": 0
+    },
+    "670e2095597a5143": {
+      "system": "guide_lsa",
+      "case_id": "IV-BUSINESS:balanced:partial",
+      "selected_trial": 0
+    },
+    "dac080d89476967c": {
+      "system": "guide_lsa",
+      "case_id": "IV-BUSINESS:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "96328ef5f6d28c4d": {
+      "system": "guide_lsa",
+      "case_id": "IV-EDITORIAL:very_brief:general",
+      "selected_trial": 2
+    },
+    "5187a77816cee77d": {
+      "system": "guide_lsa",
+      "case_id": "IV-EDITORIAL:brief:general",
+      "selected_trial": 0
+    },
+    "eedd85c8be612259": {
+      "system": "guide_lsa",
+      "case_id": "IV-EDITORIAL:short:general",
+      "selected_trial": 0
+    },
+    "f728bad9160aeae9": {
+      "system": "guide_lsa",
+      "case_id": "IV-EDITORIAL:balanced:general",
+      "selected_trial": 0
+    },
+    "b7c7f433ac4deae8": {
+      "system": "guide_lsa",
+      "case_id": "IV-EDITORIAL:detailed:general",
+      "selected_trial": 0
+    },
+    "766f1a10b285f4d2": {
+      "system": "guide_lsa",
+      "case_id": "IV-EDITORIAL:comprehensive:general",
+      "selected_trial": 0
+    },
+    "6b3ab5f3c2d99ce6": {
+      "system": "guide_lsa",
+      "case_id": "IV-EDITORIAL:balanced:supported",
+      "selected_trial": 0
+    },
+    "e3d094d6646e17c9": {
+      "system": "guide_lsa",
+      "case_id": "IV-EDITORIAL:balanced:partial",
+      "selected_trial": 0
+    },
+    "c67b31fa4d42fea3": {
+      "system": "guide_lsa",
+      "case_id": "IV-EDITORIAL:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "e65bdc1eebcc5fd2": {
+      "system": "guide_lsa",
+      "case_id": "IV-EDUCATION:very_brief:general",
+      "selected_trial": 2
+    },
+    "4d210e1073b67abf": {
+      "system": "guide_lsa",
+      "case_id": "IV-EDUCATION:brief:general",
+      "selected_trial": 0
+    },
+    "ebd1f6283a99539c": {
+      "system": "guide_lsa",
+      "case_id": "IV-EDUCATION:short:general",
+      "selected_trial": 0
+    },
+    "8703168c3445972e": {
+      "system": "guide_lsa",
+      "case_id": "IV-EDUCATION:balanced:general",
+      "selected_trial": 0
+    },
+    "a959ea48d2538c65": {
+      "system": "guide_lsa",
+      "case_id": "IV-EDUCATION:detailed:general",
+      "selected_trial": 0
+    },
+    "e7330daebcdda339": {
+      "system": "guide_lsa",
+      "case_id": "IV-EDUCATION:comprehensive:general",
+      "selected_trial": 0
+    },
+    "e72e70628bb5bf3b": {
+      "system": "guide_lsa",
+      "case_id": "IV-EDUCATION:balanced:supported",
+      "selected_trial": 0
+    },
+    "3b78c70299fcd12f": {
+      "system": "guide_lsa",
+      "case_id": "IV-EDUCATION:balanced:partial",
+      "selected_trial": 0
+    },
+    "c817f3d8f96f7778": {
+      "system": "guide_lsa",
+      "case_id": "IV-EDUCATION:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "42b07b22ba046655": {
+      "system": "guide_lsa",
+      "case_id": "IV-FEATURE:very_brief:general",
+      "selected_trial": 0
+    },
+    "17316eac600b86fe": {
+      "system": "guide_lsa",
+      "case_id": "IV-FEATURE:brief:general",
+      "selected_trial": 0
+    },
+    "d1f9e0e77b7f9f95": {
+      "system": "guide_lsa",
+      "case_id": "IV-FEATURE:short:general",
+      "selected_trial": 0
+    },
+    "9870c4bb79ff5cd4": {
+      "system": "guide_lsa",
+      "case_id": "IV-FEATURE:balanced:general",
+      "selected_trial": 0
+    },
+    "04a283ccb045235b": {
+      "system": "guide_lsa",
+      "case_id": "IV-FEATURE:detailed:general",
+      "selected_trial": 0
+    },
+    "f7d6ae4e9bd5883e": {
+      "system": "guide_lsa",
+      "case_id": "IV-FEATURE:comprehensive:general",
+      "selected_trial": 0
+    },
+    "e569a37a7c200209": {
+      "system": "guide_lsa",
+      "case_id": "IV-FEATURE:balanced:supported",
+      "selected_trial": 0
+    },
+    "4e2ac160a5b9bd94": {
+      "system": "guide_lsa",
+      "case_id": "IV-FEATURE:balanced:partial",
+      "selected_trial": 0
+    },
+    "b6cc142ef084c78b": {
+      "system": "guide_lsa",
+      "case_id": "IV-FEATURE:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "00ddd6e8150cd2f7": {
+      "system": "guide_lsa",
+      "case_id": "IV-NEWS:very_brief:general",
+      "selected_trial": 1
+    },
+    "8eafd88422645f90": {
+      "system": "guide_lsa",
+      "case_id": "IV-NEWS:brief:general",
+      "selected_trial": 2
+    },
+    "67364aab246a4c91": {
+      "system": "guide_lsa",
+      "case_id": "IV-NEWS:short:general",
+      "selected_trial": 0
+    },
+    "af318343de3f00d2": {
+      "system": "guide_lsa",
+      "case_id": "IV-NEWS:balanced:general",
+      "selected_trial": 0
+    },
+    "90376676d5023a83": {
+      "system": "guide_lsa",
+      "case_id": "IV-NEWS:detailed:general",
+      "selected_trial": 0
+    },
+    "89d348e3190e345c": {
+      "system": "guide_lsa",
+      "case_id": "IV-NEWS:comprehensive:general",
+      "selected_trial": 0
+    },
+    "a316bc1851413584": {
+      "system": "guide_lsa",
+      "case_id": "IV-NEWS:balanced:supported",
+      "selected_trial": 0
+    },
+    "31cd5f754adbc727": {
+      "system": "guide_lsa",
+      "case_id": "IV-NEWS:balanced:partial",
+      "selected_trial": 0
+    },
+    "af9b09c67b9d9cff": {
+      "system": "guide_lsa",
+      "case_id": "IV-NEWS:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "5c95e9f252dd82e4": {
+      "system": "guide_lsa",
+      "case_id": "IV-RESEARCH:very_brief:general",
+      "selected_trial": 1
+    },
+    "8a3e1b0a108c9d8c": {
+      "system": "guide_lsa",
+      "case_id": "IV-RESEARCH:brief:general",
+      "selected_trial": 0
+    },
+    "246f094cffc06636": {
+      "system": "guide_lsa",
+      "case_id": "IV-RESEARCH:short:general",
+      "selected_trial": 0
+    },
+    "d21ab586b376490d": {
+      "system": "guide_lsa",
+      "case_id": "IV-RESEARCH:balanced:general",
+      "selected_trial": 0
+    },
+    "d8154b1b0cb96690": {
+      "system": "guide_lsa",
+      "case_id": "IV-RESEARCH:detailed:general",
+      "selected_trial": 0
+    },
+    "39199fb1ba78e0e4": {
+      "system": "guide_lsa",
+      "case_id": "IV-RESEARCH:comprehensive:general",
+      "selected_trial": 0
+    },
+    "fd2fe197383756d1": {
+      "system": "guide_lsa",
+      "case_id": "IV-RESEARCH:balanced:supported",
+      "selected_trial": 0
+    },
+    "0a2d64aabc8a598e": {
+      "system": "guide_lsa",
+      "case_id": "IV-RESEARCH:balanced:partial",
+      "selected_trial": 0
+    },
+    "b120d1bf2fc72961": {
+      "system": "guide_lsa",
+      "case_id": "IV-RESEARCH:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "608a4d0ab00995e5": {
+      "system": "guide_lsa",
+      "case_id": "IV-SCIENCE:very_brief:general",
+      "selected_trial": 2
+    },
+    "8ec0f1ac6b23ea74": {
+      "system": "guide_lsa",
+      "case_id": "IV-SCIENCE:brief:general",
+      "selected_trial": 0
+    },
+    "4eb10641450eb316": {
+      "system": "guide_lsa",
+      "case_id": "IV-SCIENCE:short:general",
+      "selected_trial": 4
+    },
+    "f128d41906222fdb": {
+      "system": "guide_lsa",
+      "case_id": "IV-SCIENCE:balanced:general",
+      "selected_trial": 6
+    },
+    "50495e965e4e4dbc": {
+      "system": "guide_lsa",
+      "case_id": "IV-SCIENCE:detailed:general",
+      "selected_trial": 8
+    },
+    "86c91fd38dc2ae58": {
+      "system": "guide_lsa",
+      "case_id": "IV-SCIENCE:comprehensive:general",
+      "selected_trial": 11
+    },
+    "67edefbbd66e06f1": {
+      "system": "guide_lsa",
+      "case_id": "IV-SCIENCE:balanced:supported",
+      "selected_trial": 6
+    },
+    "c066107724c33832": {
+      "system": "guide_lsa",
+      "case_id": "IV-SCIENCE:balanced:partial",
+      "selected_trial": 6
+    },
+    "53bebc011bbdc9dc": {
+      "system": "guide_lsa",
+      "case_id": "IV-SCIENCE:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "12adaab5fbd8813c": {
+      "system": "guide_lsa",
+      "case_id": "IV-TECHNICAL:very_brief:general",
+      "selected_trial": 2
+    },
+    "a506a641a2928855": {
+      "system": "guide_lsa",
+      "case_id": "IV-TECHNICAL:brief:general",
+      "selected_trial": 0
+    },
+    "6d39d70f86d3fe9e": {
+      "system": "guide_lsa",
+      "case_id": "IV-TECHNICAL:short:general",
+      "selected_trial": 0
+    },
+    "948c68f1714fbd3e": {
+      "system": "guide_lsa",
+      "case_id": "IV-TECHNICAL:balanced:general",
+      "selected_trial": 0
+    },
+    "64cd7c47046c6de5": {
+      "system": "guide_lsa",
+      "case_id": "IV-TECHNICAL:detailed:general",
+      "selected_trial": 0
+    },
+    "f71bd161b00cb6fa": {
+      "system": "guide_lsa",
+      "case_id": "IV-TECHNICAL:comprehensive:general",
+      "selected_trial": 0
+    },
+    "89fea439688fb9ec": {
+      "system": "guide_lsa",
+      "case_id": "IV-TECHNICAL:balanced:supported",
+      "selected_trial": 0
+    },
+    "69eeefecb72a13ec": {
+      "system": "guide_lsa",
+      "case_id": "IV-TECHNICAL:balanced:partial",
+      "selected_trial": 0
+    },
+    "975a0b34ff86a864": {
+      "system": "guide_lsa",
+      "case_id": "IV-TECHNICAL:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "44973ed2e33af9f7": {
+      "system": "article21_light",
+      "case_id": "IV-BUSINESS:very_brief:general",
+      "selected_trial": 0
+    },
+    "38df9834f7547dad": {
+      "system": "article21_light",
+      "case_id": "IV-BUSINESS:brief:general",
+      "selected_trial": 0
+    },
+    "0f922995d9063c87": {
+      "system": "article21_light",
+      "case_id": "IV-BUSINESS:short:general",
+      "selected_trial": 0
+    },
+    "d169fca51089fe23": {
+      "system": "article21_light",
+      "case_id": "IV-BUSINESS:balanced:general",
+      "selected_trial": 0
+    },
+    "46100e3d55f8ed13": {
+      "system": "article21_light",
+      "case_id": "IV-BUSINESS:detailed:general",
+      "selected_trial": 0
+    },
+    "56fcd53bfdfd9972": {
+      "system": "article21_light",
+      "case_id": "IV-BUSINESS:comprehensive:general",
+      "selected_trial": 0
+    },
+    "eb4833d3894ecb37": {
+      "system": "article21_light",
+      "case_id": "IV-BUSINESS:balanced:supported",
+      "selected_trial": 0
+    },
+    "928cf8439eb2c641": {
+      "system": "article21_light",
+      "case_id": "IV-BUSINESS:balanced:partial",
+      "selected_trial": 1
+    },
+    "5c62a12c67c08452": {
+      "system": "article21_light",
+      "case_id": "IV-BUSINESS:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "a50c06983f62ce14": {
+      "system": "article21_light",
+      "case_id": "IV-EDITORIAL:very_brief:general",
+      "selected_trial": 0
+    },
+    "7e929ab0996d901b": {
+      "system": "article21_light",
+      "case_id": "IV-EDITORIAL:brief:general",
+      "selected_trial": 0
+    },
+    "2464c208266b44d3": {
+      "system": "article21_light",
+      "case_id": "IV-EDITORIAL:short:general",
+      "selected_trial": 0
+    },
+    "f60724a4f160405c": {
+      "system": "article21_light",
+      "case_id": "IV-EDITORIAL:balanced:general",
+      "selected_trial": 0
+    },
+    "5c1b6b23cd3c6b51": {
+      "system": "article21_light",
+      "case_id": "IV-EDITORIAL:detailed:general",
+      "selected_trial": 0
+    },
+    "a53544687278d500": {
+      "system": "article21_light",
+      "case_id": "IV-EDITORIAL:comprehensive:general",
+      "selected_trial": 0
+    },
+    "08461eebe9d46b8a": {
+      "system": "article21_light",
+      "case_id": "IV-EDITORIAL:balanced:supported",
+      "selected_trial": 0
+    },
+    "32f7510b7b64b12d": {
+      "system": "article21_light",
+      "case_id": "IV-EDITORIAL:balanced:partial",
+      "selected_trial": 0
+    },
+    "146889b6addfde14": {
+      "system": "article21_light",
+      "case_id": "IV-EDITORIAL:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "4c50b6c859e4552d": {
+      "system": "article21_light",
+      "case_id": "IV-EDUCATION:very_brief:general",
+      "selected_trial": 0
+    },
+    "571668b53948cc32": {
+      "system": "article21_light",
+      "case_id": "IV-EDUCATION:brief:general",
+      "selected_trial": 0
+    },
+    "ef2668c2d45de428": {
+      "system": "article21_light",
+      "case_id": "IV-EDUCATION:short:general",
+      "selected_trial": 0
+    },
+    "2f822efa7e71e7e8": {
+      "system": "article21_light",
+      "case_id": "IV-EDUCATION:balanced:general",
+      "selected_trial": 0
+    },
+    "d86d199bd2b51d0d": {
+      "system": "article21_light",
+      "case_id": "IV-EDUCATION:detailed:general",
+      "selected_trial": 0
+    },
+    "91d4de18de5d18c6": {
+      "system": "article21_light",
+      "case_id": "IV-EDUCATION:comprehensive:general",
+      "selected_trial": 0
+    },
+    "ac5ccedaa50ea3e5": {
+      "system": "article21_light",
+      "case_id": "IV-EDUCATION:balanced:supported",
+      "selected_trial": 0
+    },
+    "5c36d79c58df332f": {
+      "system": "article21_light",
+      "case_id": "IV-EDUCATION:balanced:partial",
+      "selected_trial": 0
+    },
+    "1f1acc922ac1a456": {
+      "system": "article21_light",
+      "case_id": "IV-EDUCATION:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "903391654de60bb6": {
+      "system": "article21_light",
+      "case_id": "IV-FEATURE:very_brief:general",
+      "selected_trial": 0
+    },
+    "b529cf390c513aaa": {
+      "system": "article21_light",
+      "case_id": "IV-FEATURE:brief:general",
+      "selected_trial": 0
+    },
+    "3939eebb4ecf91fe": {
+      "system": "article21_light",
+      "case_id": "IV-FEATURE:short:general",
+      "selected_trial": 0
+    },
+    "de6957a83a664e96": {
+      "system": "article21_light",
+      "case_id": "IV-FEATURE:balanced:general",
+      "selected_trial": 0
+    },
+    "08e5c07614ab39c0": {
+      "system": "article21_light",
+      "case_id": "IV-FEATURE:detailed:general",
+      "selected_trial": 0
+    },
+    "7cbe22d4b50921d1": {
+      "system": "article21_light",
+      "case_id": "IV-FEATURE:comprehensive:general",
+      "selected_trial": 0
+    },
+    "2ec0a44def6023e7": {
+      "system": "article21_light",
+      "case_id": "IV-FEATURE:balanced:supported",
+      "selected_trial": 0
+    },
+    "ad24a493f5e5d394": {
+      "system": "article21_light",
+      "case_id": "IV-FEATURE:balanced:partial",
+      "selected_trial": 0
+    },
+    "119cc45957daf9a8": {
+      "system": "article21_light",
+      "case_id": "IV-FEATURE:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "3529715bcccc74fe": {
+      "system": "article21_light",
+      "case_id": "IV-NEWS:very_brief:general",
+      "selected_trial": 2
+    },
+    "13987101c4b2f362": {
+      "system": "article21_light",
+      "case_id": "IV-NEWS:brief:general",
+      "selected_trial": 0
+    },
+    "e7645d73dfcd83f0": {
+      "system": "article21_light",
+      "case_id": "IV-NEWS:short:general",
+      "selected_trial": 0
+    },
+    "9f6fb0b9a69575c7": {
+      "system": "article21_light",
+      "case_id": "IV-NEWS:balanced:general",
+      "selected_trial": 0
+    },
+    "0318260188350269": {
+      "system": "article21_light",
+      "case_id": "IV-NEWS:detailed:general",
+      "selected_trial": 0
+    },
+    "ebda53d1b6aa0e94": {
+      "system": "article21_light",
+      "case_id": "IV-NEWS:comprehensive:general",
+      "selected_trial": 0
+    },
+    "ac581421e93dfd3a": {
+      "system": "article21_light",
+      "case_id": "IV-NEWS:balanced:supported",
+      "selected_trial": 0
+    },
+    "472fad09a9064394": {
+      "system": "article21_light",
+      "case_id": "IV-NEWS:balanced:partial",
+      "selected_trial": 0
+    },
+    "d08f599ca367b491": {
+      "system": "article21_light",
+      "case_id": "IV-NEWS:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "a838374614f3273f": {
+      "system": "article21_light",
+      "case_id": "IV-RESEARCH:very_brief:general",
+      "selected_trial": 0
+    },
+    "dfa5fbbca028045a": {
+      "system": "article21_light",
+      "case_id": "IV-RESEARCH:brief:general",
+      "selected_trial": 0
+    },
+    "ae7775f34ab10483": {
+      "system": "article21_light",
+      "case_id": "IV-RESEARCH:short:general",
+      "selected_trial": 0
+    },
+    "457fbb5909d673b1": {
+      "system": "article21_light",
+      "case_id": "IV-RESEARCH:balanced:general",
+      "selected_trial": 0
+    },
+    "df4bbb6d6ead9a47": {
+      "system": "article21_light",
+      "case_id": "IV-RESEARCH:detailed:general",
+      "selected_trial": 0
+    },
+    "3221cab6313b43f7": {
+      "system": "article21_light",
+      "case_id": "IV-RESEARCH:comprehensive:general",
+      "selected_trial": 0
+    },
+    "68cba052befb775f": {
+      "system": "article21_light",
+      "case_id": "IV-RESEARCH:balanced:supported",
+      "selected_trial": 0
+    },
+    "be61a88b730407bb": {
+      "system": "article21_light",
+      "case_id": "IV-RESEARCH:balanced:partial",
+      "selected_trial": 0
+    },
+    "e8b3cae557c31652": {
+      "system": "article21_light",
+      "case_id": "IV-RESEARCH:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "0a2ab014b6e05d67": {
+      "system": "article21_light",
+      "case_id": "IV-SCIENCE:very_brief:general",
+      "selected_trial": 2
+    },
+    "b790101651b564b6": {
+      "system": "article21_light",
+      "case_id": "IV-SCIENCE:brief:general",
+      "selected_trial": 1
+    },
+    "111fac66d1416d87": {
+      "system": "article21_light",
+      "case_id": "IV-SCIENCE:short:general",
+      "selected_trial": 0
+    },
+    "b6cba71c437f226c": {
+      "system": "article21_light",
+      "case_id": "IV-SCIENCE:balanced:general",
+      "selected_trial": 3
+    },
+    "51f6d3a2eaf383e3": {
+      "system": "article21_light",
+      "case_id": "IV-SCIENCE:detailed:general",
+      "selected_trial": 3
+    },
+    "4f6b05681e1d0a55": {
+      "system": "article21_light",
+      "case_id": "IV-SCIENCE:comprehensive:general",
+      "selected_trial": 1
+    },
+    "3c9287ffb04c1373": {
+      "system": "article21_light",
+      "case_id": "IV-SCIENCE:balanced:supported",
+      "selected_trial": 3
+    },
+    "3b495aeebad6edfe": {
+      "system": "article21_light",
+      "case_id": "IV-SCIENCE:balanced:partial",
+      "selected_trial": 2
+    },
+    "f28752d0805d4edb": {
+      "system": "article21_light",
+      "case_id": "IV-SCIENCE:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "198bab8c7220dee1": {
+      "system": "article21_light",
+      "case_id": "IV-TECHNICAL:very_brief:general",
+      "selected_trial": 0
+    },
+    "4f431f180ba12d7b": {
+      "system": "article21_light",
+      "case_id": "IV-TECHNICAL:brief:general",
+      "selected_trial": 0
+    },
+    "3679ef16570cf197": {
+      "system": "article21_light",
+      "case_id": "IV-TECHNICAL:short:general",
+      "selected_trial": 0
+    },
+    "adc03f7d9a997d0d": {
+      "system": "article21_light",
+      "case_id": "IV-TECHNICAL:balanced:general",
+      "selected_trial": 0
+    },
+    "bd9eb2db60142466": {
+      "system": "article21_light",
+      "case_id": "IV-TECHNICAL:detailed:general",
+      "selected_trial": 0
+    },
+    "03dc6461c0a72a46": {
+      "system": "article21_light",
+      "case_id": "IV-TECHNICAL:comprehensive:general",
+      "selected_trial": 0
+    },
+    "2b08668c3dd8c834": {
+      "system": "article21_light",
+      "case_id": "IV-TECHNICAL:balanced:supported",
+      "selected_trial": 0
+    },
+    "6b840d13dd4feecb": {
+      "system": "article21_light",
+      "case_id": "IV-TECHNICAL:balanced:partial",
+      "selected_trial": 0
+    },
+    "f82c9ac1ac2fee71": {
+      "system": "article21_light",
+      "case_id": "IV-TECHNICAL:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "c2815435d2b3b5fe": {
+      "system": "article21_enhanced",
+      "case_id": "IV-BUSINESS:very_brief:general",
+      "selected_trial": 0
+    },
+    "278bf98ce5514a78": {
+      "system": "article21_enhanced",
+      "case_id": "IV-BUSINESS:brief:general",
+      "selected_trial": 0
+    },
+    "e710220e6e4eea74": {
+      "system": "article21_enhanced",
+      "case_id": "IV-BUSINESS:short:general",
+      "selected_trial": 0
+    },
+    "dfa2baffcfdb0ae1": {
+      "system": "article21_enhanced",
+      "case_id": "IV-BUSINESS:balanced:general",
+      "selected_trial": 0
+    },
+    "079510486e93bbef": {
+      "system": "article21_enhanced",
+      "case_id": "IV-BUSINESS:detailed:general",
+      "selected_trial": 0
+    },
+    "2bff3aff27433dc2": {
+      "system": "article21_enhanced",
+      "case_id": "IV-BUSINESS:comprehensive:general",
+      "selected_trial": 0
+    },
+    "def2da812a2bf6d3": {
+      "system": "article21_enhanced",
+      "case_id": "IV-BUSINESS:balanced:supported",
+      "selected_trial": 0
+    },
+    "9280f31e378e9a46": {
+      "system": "article21_enhanced",
+      "case_id": "IV-BUSINESS:balanced:partial",
+      "selected_trial": 0
+    },
+    "04a6f6cf02a4ec47": {
+      "system": "article21_enhanced",
+      "case_id": "IV-BUSINESS:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "5f8a9b19c7182c62": {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDITORIAL:very_brief:general",
+      "selected_trial": 0
+    },
+    "deddddd22fdbcf03": {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDITORIAL:brief:general",
+      "selected_trial": 0
+    },
+    "9715c08e56c29255": {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDITORIAL:short:general",
+      "selected_trial": 0
+    },
+    "ca32e026962febc3": {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDITORIAL:balanced:general",
+      "selected_trial": 0
+    },
+    "bc48d0cafb9d115f": {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDITORIAL:detailed:general",
+      "selected_trial": 0
+    },
+    "9933839e8813bf11": {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDITORIAL:comprehensive:general",
+      "selected_trial": 0
+    },
+    "a959171fcced0448": {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDITORIAL:balanced:supported",
+      "selected_trial": 0
+    },
+    "4b6aa8005250c1e2": {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDITORIAL:balanced:partial",
+      "selected_trial": 0
+    },
+    "771ca361a17b5b6a": {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDITORIAL:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "517e083d3525601b": {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDUCATION:very_brief:general",
+      "selected_trial": 0
+    },
+    "794a7e082be6a2db": {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDUCATION:brief:general",
+      "selected_trial": 0
+    },
+    "d55529298564c6d7": {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDUCATION:short:general",
+      "selected_trial": 0
+    },
+    "abe9808aa7b1a9f4": {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDUCATION:balanced:general",
+      "selected_trial": 0
+    },
+    "9dc96ae152e9c3c4": {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDUCATION:detailed:general",
+      "selected_trial": 0
+    },
+    "5a4b92813348c5b7": {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDUCATION:comprehensive:general",
+      "selected_trial": 0
+    },
+    "c1a404b817d1c220": {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDUCATION:balanced:supported",
+      "selected_trial": 0
+    },
+    "420488ad706e8742": {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDUCATION:balanced:partial",
+      "selected_trial": 0
+    },
+    "c90e1583eac3e6e0": {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDUCATION:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "391ec96dbf6644a3": {
+      "system": "article21_enhanced",
+      "case_id": "IV-FEATURE:very_brief:general",
+      "selected_trial": 0
+    },
+    "7478569dc7c182a5": {
+      "system": "article21_enhanced",
+      "case_id": "IV-FEATURE:brief:general",
+      "selected_trial": 0
+    },
+    "9aedff2d88c75c7c": {
+      "system": "article21_enhanced",
+      "case_id": "IV-FEATURE:short:general",
+      "selected_trial": 0
+    },
+    "bb95dee99e8ff24d": {
+      "system": "article21_enhanced",
+      "case_id": "IV-FEATURE:balanced:general",
+      "selected_trial": 0
+    },
+    "946623d2cca1be2c": {
+      "system": "article21_enhanced",
+      "case_id": "IV-FEATURE:detailed:general",
+      "selected_trial": 0
+    },
+    "6cd6559b7ec876fa": {
+      "system": "article21_enhanced",
+      "case_id": "IV-FEATURE:comprehensive:general",
+      "selected_trial": 0
+    },
+    "e78864822665b2fe": {
+      "system": "article21_enhanced",
+      "case_id": "IV-FEATURE:balanced:supported",
+      "selected_trial": 0
+    },
+    "5dd8569dc74b4909": {
+      "system": "article21_enhanced",
+      "case_id": "IV-FEATURE:balanced:partial",
+      "selected_trial": 0
+    },
+    "83e117cbc91bed85": {
+      "system": "article21_enhanced",
+      "case_id": "IV-FEATURE:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "7898fe2a2bc6bb82": {
+      "system": "article21_enhanced",
+      "case_id": "IV-NEWS:very_brief:general",
+      "selected_trial": 2
+    },
+    "7de3fe6dcede567c": {
+      "system": "article21_enhanced",
+      "case_id": "IV-NEWS:brief:general",
+      "selected_trial": 0
+    },
+    "91f052fed02007bc": {
+      "system": "article21_enhanced",
+      "case_id": "IV-NEWS:short:general",
+      "selected_trial": 0
+    },
+    "633ac6a05c17b360": {
+      "system": "article21_enhanced",
+      "case_id": "IV-NEWS:balanced:general",
+      "selected_trial": 0
+    },
+    "912bb70c8ca6d680": {
+      "system": "article21_enhanced",
+      "case_id": "IV-NEWS:detailed:general",
+      "selected_trial": 0
+    },
+    "8faed379388aaf38": {
+      "system": "article21_enhanced",
+      "case_id": "IV-NEWS:comprehensive:general",
+      "selected_trial": 0
+    },
+    "99d050459b9efc3e": {
+      "system": "article21_enhanced",
+      "case_id": "IV-NEWS:balanced:supported",
+      "selected_trial": 0
+    },
+    "d515ff222526d51f": {
+      "system": "article21_enhanced",
+      "case_id": "IV-NEWS:balanced:partial",
+      "selected_trial": 0
+    },
+    "75fe94efb59f98fb": {
+      "system": "article21_enhanced",
+      "case_id": "IV-NEWS:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "ca7c777dd383d6e0": {
+      "system": "article21_enhanced",
+      "case_id": "IV-RESEARCH:very_brief:general",
+      "selected_trial": 0
+    },
+    "b0c8bb3d6d6bf242": {
+      "system": "article21_enhanced",
+      "case_id": "IV-RESEARCH:brief:general",
+      "selected_trial": 0
+    },
+    "ee7bfddff10ddb2c": {
+      "system": "article21_enhanced",
+      "case_id": "IV-RESEARCH:short:general",
+      "selected_trial": 0
+    },
+    "64ecf6b46cc2b493": {
+      "system": "article21_enhanced",
+      "case_id": "IV-RESEARCH:balanced:general",
+      "selected_trial": 0
+    },
+    "89b3a3f52b248318": {
+      "system": "article21_enhanced",
+      "case_id": "IV-RESEARCH:detailed:general",
+      "selected_trial": 0
+    },
+    "2cc48d7762fef2ab": {
+      "system": "article21_enhanced",
+      "case_id": "IV-RESEARCH:comprehensive:general",
+      "selected_trial": 0
+    },
+    "ae002d408cd12ba5": {
+      "system": "article21_enhanced",
+      "case_id": "IV-RESEARCH:balanced:supported",
+      "selected_trial": 0
+    },
+    "f73e4399c23de704": {
+      "system": "article21_enhanced",
+      "case_id": "IV-RESEARCH:balanced:partial",
+      "selected_trial": 0
+    },
+    "e6be900b92e03be4": {
+      "system": "article21_enhanced",
+      "case_id": "IV-RESEARCH:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "ed8f017086867970": {
+      "system": "article21_enhanced",
+      "case_id": "IV-SCIENCE:very_brief:general",
+      "selected_trial": 3
+    },
+    "0852bcb5af89ce75": {
+      "system": "article21_enhanced",
+      "case_id": "IV-SCIENCE:brief:general",
+      "selected_trial": 1
+    },
+    "361cd7bafeb7fd7e": {
+      "system": "article21_enhanced",
+      "case_id": "IV-SCIENCE:short:general",
+      "selected_trial": 0
+    },
+    "d9aedbccefe0e37a": {
+      "system": "article21_enhanced",
+      "case_id": "IV-SCIENCE:balanced:general",
+      "selected_trial": 3
+    },
+    "2fa139258fd1adbc": {
+      "system": "article21_enhanced",
+      "case_id": "IV-SCIENCE:detailed:general",
+      "selected_trial": 3
+    },
+    "2a0747288722ac91": {
+      "system": "article21_enhanced",
+      "case_id": "IV-SCIENCE:comprehensive:general",
+      "selected_trial": 1
+    },
+    "acae08463c081f07": {
+      "system": "article21_enhanced",
+      "case_id": "IV-SCIENCE:balanced:supported",
+      "selected_trial": 3
+    },
+    "bc43a2b3d66b3e41": {
+      "system": "article21_enhanced",
+      "case_id": "IV-SCIENCE:balanced:partial",
+      "selected_trial": 2
+    },
+    "7aafea9afb386305": {
+      "system": "article21_enhanced",
+      "case_id": "IV-SCIENCE:balanced:unsupported",
+      "selected_trial": 0
+    },
+    "34fcba1e9551df82": {
+      "system": "article21_enhanced",
+      "case_id": "IV-TECHNICAL:very_brief:general",
+      "selected_trial": 0
+    },
+    "a3e393d7641b2138": {
+      "system": "article21_enhanced",
+      "case_id": "IV-TECHNICAL:brief:general",
+      "selected_trial": 0
+    },
+    "56e0b32d5d2c811e": {
+      "system": "article21_enhanced",
+      "case_id": "IV-TECHNICAL:short:general",
+      "selected_trial": 0
+    },
+    "9f838a07095f09b8": {
+      "system": "article21_enhanced",
+      "case_id": "IV-TECHNICAL:balanced:general",
+      "selected_trial": 0
+    },
+    "6f287209380314f3": {
+      "system": "article21_enhanced",
+      "case_id": "IV-TECHNICAL:detailed:general",
+      "selected_trial": 0
+    },
+    "07175a5ece4f7fa1": {
+      "system": "article21_enhanced",
+      "case_id": "IV-TECHNICAL:comprehensive:general",
+      "selected_trial": 0
+    },
+    "433cf1fb381f0ac1": {
+      "system": "article21_enhanced",
+      "case_id": "IV-TECHNICAL:balanced:supported",
+      "selected_trial": 0
+    },
+    "0d1bfe847fd1c3c2": {
+      "system": "article21_enhanced",
+      "case_id": "IV-TECHNICAL:balanced:partial",
+      "selected_trial": 0
+    },
+    "2543ebb7f530831b": {
+      "system": "article21_enhanced",
+      "case_id": "IV-TECHNICAL:balanced:unsupported",
+      "selected_trial": 0
+    }
+  }
+}

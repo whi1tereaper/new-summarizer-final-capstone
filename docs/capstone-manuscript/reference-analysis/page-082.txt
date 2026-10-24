@@ -1,0 +1,32 @@
+   The process begins with        4.1 Create System
+Folders, where authorized users create and
+organize folders according to accreditation
+requirements and document classifications. The
+folder information is stored in the Folders (D2)
+data store, providing a structured repository
+for records and supporting efficient document
+organization.
+   The 4.2 Log Uploaded Files          process allows
+users to upload and store accreditation-related
+documents within the designated folders. The
+system records file details, including document
+information and storage references, in the Files
+(D3)  data store. This process ensures that
+documents are properly cataloged and readily
+accessible when needed.
+   The   4.3  Track  Checklist  Status          process
+monitors the completion and availability of
+required accreditation documents. The system
+retrieves and updates checklist information
+stored in the Folder Checklists (D4) data store
+and associates supporting documents through the
+Checklist File Link (D5)          data store. This
+enables users to determine whether all required
+documents have been submitted and organized
+within their respective folders.
+   The 4.4 Audit System Activity process records
+and monitors actions performed within the Record
+
+
+
+                                                      63

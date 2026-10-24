@@ -1,0 +1,37 @@
+Archiving System assessed by the IT consultants
+that consist of      four  (4) sub-characteristics,
+namely: maturity, availability, fault tolerance
+and recoverability.
+
+
+   Table 14. Assessment of the IT consultants on
+the Usability of the developed system
+     Software                                     Verbal
+      Product           Weighted Mean        Interpretation
+    Categories
+
+     Maturity                 3.3             Very Reliable
+
+
+   Availability               3.3             Very Reliable
+
+
+ Fault tolerance              2.9                Reliable
+
+
+  Recoverability              3.5             Very Reliable
+
+
+    Reliability               3.25            Very Reliable
+
+
+   The evaluation results for the Reliability
+category indicate a weighted mean of 3.25 and a
+verbal rating of “Very Reliable”.
+5.6 Security
+   Table 15 shows the Security of the developed
+AccredX: Record Management and Archiving System
+assessed by the IT consultants that consist of
+
+
+                                                        95

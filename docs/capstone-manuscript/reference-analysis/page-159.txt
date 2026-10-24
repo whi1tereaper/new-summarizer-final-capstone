@@ -1,0 +1,57 @@
+   •   Archived Accounts:
+
+
+
+
+
+
+
+
+
+
+
+
+
+       Archiving users is for when the users won’t be
+       using the system anymore. An admin can unarchive
+       a user as well.
+
+L. Registering Users (Admin Only)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   •   In the top right corner of the users page, the
+       admin can click on the gear button to show a list
+       of options.
+   •   Click the “Add Account” option.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                   140

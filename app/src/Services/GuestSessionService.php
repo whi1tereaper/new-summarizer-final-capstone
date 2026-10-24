@@ -77,13 +77,9 @@ class GuestSessionService
             $migratedSummaries = $summaryStatement->rowCount();
 
             $feedbackStatement = $this->db->prepare(
-                'UPDATE feedback AS feedback
-                 INNER JOIN summaries AS summaries ON summaries.id = feedback.summary_id
-                 SET feedback.user_id = :set_user_id,
-                     feedback.guest_token = NULL
-                 WHERE feedback.user_id IS NULL
-                   AND feedback.guest_token = :guest_token
-                   AND summaries.user_id = :where_user_id'
+                'UPDATE feedback SET user_id = :set_user_id, guest_token = NULL
+                 WHERE user_id IS NULL AND guest_token = :guest_token
+                   AND summary_id IN (SELECT id FROM summaries WHERE user_id = :where_user_id)'
             );
             $feedbackStatement->execute([
                 'set_user_id' => $userId,
@@ -195,27 +191,17 @@ class GuestSessionService
 
     private function touchGuest(string $guestToken): void
     {
-        $now = date('Y-m-d H:i:s');
-        $expiresAt = date('Y-m-d H:i:s', time() + self::GUEST_TTL_SECONDS);
-        $isPg = \App\Src\Database::getInstance()->isPostgres();
+        $dateFormat = 'Y-m-d H:i:s';
+        $now = date($dateFormat);
+        $expiresAt = date($dateFormat, time() + self::GUEST_TTL_SECONDS);
 
-        if ($isPg) {
-            $statement = $this->db->prepare(
-                'INSERT INTO guest_sessions (guest_token, created_at, last_activity, expires_at)
-                 VALUES (:guest_token, :created_at, :last_activity, :expires_at)
-                 ON CONFLICT (guest_token) DO UPDATE SET
-                    last_activity = EXCLUDED.last_activity,
-                    expires_at = EXCLUDED.expires_at'
-            );
-        } else {
-            $statement = $this->db->prepare(
-                'INSERT INTO guest_sessions (guest_token, created_at, last_activity, expires_at)
+        $statement = $this->db->prepare(
+            'INSERT INTO guest_sessions (guest_token, created_at, last_activity, expires_at)
                  VALUES (:guest_token, :created_at, :last_activity, :expires_at)
                  ON DUPLICATE KEY UPDATE
                     last_activity = VALUES(last_activity),
                     expires_at = VALUES(expires_at)'
-            );
-        }
+        );
 
         $statement->execute([
             'guest_token' => $guestToken,

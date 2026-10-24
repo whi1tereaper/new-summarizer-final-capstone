@@ -1,0 +1,5323 @@
+{
+    "status": "VERIFIED metadata read only",
+    "server_version": "10.4.32-MariaDB",
+    "schema_label": "configured application database",
+    "captured_at": "2026-10-17T06:57:30+02:00",
+    "note": "No application row values, credentials, or private user information are included.",
+    "tables": [
+        {
+            "TABLE_NAME": "admin_audit_logs",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "admin_security_challenges",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "documents",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "document_summaries",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "evaluation_audit_log",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "evaluation_challenge_cases",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "evaluation_content_units",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "evaluation_content_unit_reviews",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "evaluation_datasets",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "evaluation_documents",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "evaluation_errors",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "evaluation_metrics",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "evaluation_ratings",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "evaluation_references",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_general_ci"
+        },
+        {
+            "TABLE_NAME": "feedback_comments",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "guest_sessions",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "landing_page_events",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "landing_page_sessions",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "password_resets",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_general_ci"
+        },
+        {
+            "TABLE_NAME": "rate_limits",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_general_ci"
+        },
+        {
+            "TABLE_NAME": "schema_migrations",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_general_ci"
+        },
+        {
+            "TABLE_NAME": "summary_artifacts",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_general_ci"
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "users",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_general_ci"
+        },
+        {
+            "TABLE_NAME": "user_tokens",
+            "TABLE_TYPE": "BASE TABLE",
+            "ENGINE": "InnoDB",
+            "TABLE_COLLATION": "utf8mb4_unicode_ci"
+        }
+    ],
+    "columns": [
+        {
+            "TABLE_NAME": "admin_audit_logs",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "admin_audit_logs",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "admin_id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "admin_audit_logs",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "action",
+            "COLUMN_TYPE": "varchar(100)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "admin_audit_logs",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "entity_type",
+            "COLUMN_TYPE": "varchar(100)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "admin_audit_logs",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "entity_id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "admin_audit_logs",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "ip_address",
+            "COLUMN_TYPE": "varchar(45)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "admin_audit_logs",
+            "ORDINAL_POSITION": 7,
+            "COLUMN_NAME": "user_agent",
+            "COLUMN_TYPE": "varchar(255)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "admin_audit_logs",
+            "ORDINAL_POSITION": 8,
+            "COLUMN_NAME": "details",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "admin_audit_logs",
+            "ORDINAL_POSITION": 9,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "admin_security_challenges",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "admin_security_challenges",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "user_id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "UNI",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "admin_security_challenges",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "challenge_hash",
+            "COLUMN_TYPE": "varchar(255)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "admin_security_challenges",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "failed_attempts",
+            "COLUMN_TYPE": "int(10) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "0",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "admin_security_challenges",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "locked_until",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "admin_security_challenges",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "admin_security_challenges",
+            "ORDINAL_POSITION": 7,
+            "COLUMN_NAME": "updated_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "documents",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "documents",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "content",
+            "COLUMN_TYPE": "longtext",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "documents",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "user_id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "documents",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "guest_token",
+            "COLUMN_TYPE": "varchar(64)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "documents",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "timestamp",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "document_summaries",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "document_summaries",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "document_id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "document_summaries",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "profile",
+            "COLUMN_TYPE": "varchar(32)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "document_summaries",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "length",
+            "COLUMN_TYPE": "varchar(32)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "document_summaries",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "summary",
+            "COLUMN_TYPE": "longtext",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "document_summaries",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "word_count",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "document_summaries",
+            "ORDINAL_POSITION": 7,
+            "COLUMN_NAME": "source_word_count",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "document_summaries",
+            "ORDINAL_POSITION": 8,
+            "COLUMN_NAME": "compression_ratio",
+            "COLUMN_TYPE": "decimal(5,2)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "document_summaries",
+            "ORDINAL_POSITION": 9,
+            "COLUMN_NAME": "estimated_reading_time_seconds",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "document_summaries",
+            "ORDINAL_POSITION": 10,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "timestamp",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "assignment_token",
+            "COLUMN_TYPE": "char(48)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "UNI",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "run_id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "output_id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "evaluator_user_id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "evaluator_code",
+            "COLUMN_TYPE": "varchar(20)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "ORDINAL_POSITION": 7,
+            "COLUMN_NAME": "blind_label",
+            "COLUMN_TYPE": "varchar(50)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "ORDINAL_POSITION": 8,
+            "COLUMN_NAME": "presentation_order",
+            "COLUMN_TYPE": "int(10) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "ORDINAL_POSITION": 9,
+            "COLUMN_NAME": "randomization_seed",
+            "COLUMN_TYPE": "char(64)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "ORDINAL_POSITION": 10,
+            "COLUMN_NAME": "status",
+            "COLUMN_TYPE": "varchar(20)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "'assigned'",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "ORDINAL_POSITION": 11,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "ORDINAL_POSITION": 12,
+            "COLUMN_NAME": "submitted_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_audit_log",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_audit_log",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "actor_id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_audit_log",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "action",
+            "COLUMN_TYPE": "varchar(100)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_audit_log",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "entity_type",
+            "COLUMN_TYPE": "varchar(50)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_audit_log",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "entity_id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_audit_log",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "previous_json",
+            "COLUMN_TYPE": "longtext",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_audit_log",
+            "ORDINAL_POSITION": 7,
+            "COLUMN_NAME": "replacement_json",
+            "COLUMN_TYPE": "longtext",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_audit_log",
+            "ORDINAL_POSITION": 8,
+            "COLUMN_NAME": "reason",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_audit_log",
+            "ORDINAL_POSITION": 9,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_challenge_cases",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_challenge_cases",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "document_id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_challenge_cases",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "category",
+            "COLUMN_TYPE": "varchar(100)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_challenge_cases",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "expected_facts_json",
+            "COLUMN_TYPE": "longtext",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_challenge_cases",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "prohibited_distortions_json",
+            "COLUMN_TYPE": "longtext",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_challenge_cases",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "notes",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_challenge_cases",
+            "ORDINAL_POSITION": 7,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_content_units",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_content_units",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "document_id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_content_units",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "unit_text",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_content_units",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "unit_type",
+            "COLUMN_TYPE": "varchar(100)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "'essential_information'",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_content_units",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "created_by",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_content_units",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_content_unit_reviews",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_content_unit_reviews",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "output_id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_content_unit_reviews",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "unit_id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_content_unit_reviews",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "represented",
+            "COLUMN_TYPE": "tinyint(1)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_content_unit_reviews",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "notes",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_content_unit_reviews",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "reviewer_id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_content_unit_reviews",
+            "ORDINAL_POSITION": 7,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_datasets",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_datasets",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "version",
+            "COLUMN_TYPE": "varchar(100)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "UNI",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_datasets",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "name",
+            "COLUMN_TYPE": "varchar(255)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_datasets",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "notes",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_datasets",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "target_count",
+            "COLUMN_TYPE": "int(10) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "48",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_datasets",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "active",
+            "COLUMN_TYPE": "tinyint(1)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "1",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_datasets",
+            "ORDINAL_POSITION": 7,
+            "COLUMN_NAME": "sealed_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_datasets",
+            "ORDINAL_POSITION": 8,
+            "COLUMN_NAME": "created_by",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_datasets",
+            "ORDINAL_POSITION": 9,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_documents",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_documents",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "dataset_id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_documents",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "title",
+            "COLUMN_TYPE": "varchar(255)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_documents",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "category",
+            "COLUMN_TYPE": "varchar(100)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_documents",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "source_text",
+            "COLUMN_TYPE": "longtext",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_documents",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "source_hash",
+            "COLUMN_TYPE": "char(64)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_documents",
+            "ORDINAL_POSITION": 7,
+            "COLUMN_NAME": "source_reference",
+            "COLUMN_TYPE": "varchar(500)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_documents",
+            "ORDINAL_POSITION": 8,
+            "COLUMN_NAME": "original_word_count",
+            "COLUMN_TYPE": "int(10) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_documents",
+            "ORDINAL_POSITION": 9,
+            "COLUMN_NAME": "profile",
+            "COLUMN_TYPE": "varchar(32)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_documents",
+            "ORDINAL_POSITION": 10,
+            "COLUMN_NAME": "dataset_split",
+            "COLUMN_TYPE": "varchar(20)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_documents",
+            "ORDINAL_POSITION": 11,
+            "COLUMN_NAME": "provenance",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_documents",
+            "ORDINAL_POSITION": 12,
+            "COLUMN_NAME": "notes",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_documents",
+            "ORDINAL_POSITION": 13,
+            "COLUMN_NAME": "active",
+            "COLUMN_TYPE": "tinyint(1)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "1",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_documents",
+            "ORDINAL_POSITION": 14,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_errors",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_errors",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "output_id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_errors",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "category",
+            "COLUMN_TYPE": "varchar(100)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_errors",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "notes",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_errors",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "reviewer_id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_errors",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_metrics",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_metrics",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "output_id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_metrics",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "metric_name",
+            "COLUMN_TYPE": "varchar(100)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_metrics",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "metric_version",
+            "COLUMN_TYPE": "varchar(100)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_metrics",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "status",
+            "COLUMN_TYPE": "varchar(30)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_metrics",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "metric_value",
+            "COLUMN_TYPE": "double",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_metrics",
+            "ORDINAL_POSITION": 7,
+            "COLUMN_NAME": "precision_value",
+            "COLUMN_TYPE": "double",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_metrics",
+            "ORDINAL_POSITION": 8,
+            "COLUMN_NAME": "recall_value",
+            "COLUMN_TYPE": "double",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_metrics",
+            "ORDINAL_POSITION": 9,
+            "COLUMN_NAME": "f1_value",
+            "COLUMN_TYPE": "double",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_metrics",
+            "ORDINAL_POSITION": 10,
+            "COLUMN_NAME": "details_json",
+            "COLUMN_TYPE": "longtext",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_metrics",
+            "ORDINAL_POSITION": 11,
+            "COLUMN_NAME": "error_message",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_metrics",
+            "ORDINAL_POSITION": 12,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "run_id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "document_id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "profile",
+            "COLUMN_TYPE": "varchar(32)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "mode",
+            "COLUMN_TYPE": "varchar(32)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "system_name",
+            "COLUMN_TYPE": "varchar(50)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "ORDINAL_POSITION": 7,
+            "COLUMN_NAME": "ablation",
+            "COLUMN_TYPE": "varchar(100)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "''",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "ORDINAL_POSITION": 8,
+            "COLUMN_NAME": "status",
+            "COLUMN_TYPE": "varchar(30)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "'queued'",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "ORDINAL_POSITION": 9,
+            "COLUMN_NAME": "summary_text",
+            "COLUMN_TYPE": "longtext",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "ORDINAL_POSITION": 10,
+            "COLUMN_NAME": "word_count",
+            "COLUMN_TYPE": "int(10) unsigned",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "ORDINAL_POSITION": 11,
+            "COLUMN_NAME": "source_word_count",
+            "COLUMN_TYPE": "int(10) unsigned",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "ORDINAL_POSITION": 12,
+            "COLUMN_NAME": "target_words",
+            "COLUMN_TYPE": "int(10) unsigned",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "ORDINAL_POSITION": 13,
+            "COLUMN_NAME": "processing_seconds",
+            "COLUMN_TYPE": "double",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "ORDINAL_POSITION": 14,
+            "COLUMN_NAME": "timings_json",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "ORDINAL_POSITION": 15,
+            "COLUMN_NAME": "configuration_hash",
+            "COLUMN_TYPE": "char(64)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "ORDINAL_POSITION": 16,
+            "COLUMN_NAME": "configuration_json",
+            "COLUMN_TYPE": "longtext",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "ORDINAL_POSITION": 17,
+            "COLUMN_NAME": "provenance_json",
+            "COLUMN_TYPE": "longtext",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "ORDINAL_POSITION": 18,
+            "COLUMN_NAME": "warnings_json",
+            "COLUMN_TYPE": "longtext",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "ORDINAL_POSITION": 19,
+            "COLUMN_NAME": "error_message",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "ORDINAL_POSITION": 20,
+            "COLUMN_NAME": "generated_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_ratings",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_ratings",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "assignment_id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "UNI",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_ratings",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "relevance",
+            "COLUMN_TYPE": "tinyint(3) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_ratings",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "factual_consistency",
+            "COLUMN_TYPE": "tinyint(3) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_ratings",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "coverage",
+            "COLUMN_TYPE": "tinyint(3) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_ratings",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "coherence",
+            "COLUMN_TYPE": "tinyint(3) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_ratings",
+            "ORDINAL_POSITION": 7,
+            "COLUMN_NAME": "readability",
+            "COLUMN_TYPE": "tinyint(3) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_ratings",
+            "ORDINAL_POSITION": 8,
+            "COLUMN_NAME": "conciseness",
+            "COLUMN_TYPE": "tinyint(3) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_ratings",
+            "ORDINAL_POSITION": 9,
+            "COLUMN_NAME": "non_redundancy",
+            "COLUMN_TYPE": "tinyint(3) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_ratings",
+            "ORDINAL_POSITION": 10,
+            "COLUMN_NAME": "overall_usefulness",
+            "COLUMN_TYPE": "tinyint(3) unsigned",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_ratings",
+            "ORDINAL_POSITION": 11,
+            "COLUMN_NAME": "comments",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_ratings",
+            "ORDINAL_POSITION": 12,
+            "COLUMN_NAME": "content_unit_verification_json",
+            "COLUMN_TYPE": "longtext",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_ratings",
+            "ORDINAL_POSITION": 13,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_ratings",
+            "ORDINAL_POSITION": 14,
+            "COLUMN_NAME": "corrected_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_references",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_references",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "document_id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_references",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "reference_text",
+            "COLUMN_TYPE": "longtext",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_references",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "reference_version",
+            "COLUMN_TYPE": "varchar(100)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_references",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "author_code",
+            "COLUMN_TYPE": "varchar(100)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_references",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "review_status",
+            "COLUMN_TYPE": "varchar(20)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "'draft'",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_references",
+            "ORDINAL_POSITION": 7,
+            "COLUMN_NAME": "created_by",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_references",
+            "ORDINAL_POSITION": 8,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "run_uuid",
+            "COLUMN_TYPE": "char(32)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "UNI",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "name",
+            "COLUMN_TYPE": "varchar(255)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "dataset_id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "dataset_version",
+            "COLUMN_TYPE": "varchar(100)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "dataset_split",
+            "COLUMN_TYPE": "varchar(20)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 7,
+            "COLUMN_NAME": "summarizer_version",
+            "COLUMN_TYPE": "varchar(100)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "'pending-worker'",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 8,
+            "COLUMN_NAME": "evaluation_version",
+            "COLUMN_TYPE": "varchar(30)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "'1.0.0'",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 9,
+            "COLUMN_NAME": "configuration_hash",
+            "COLUMN_TYPE": "char(64)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 10,
+            "COLUMN_NAME": "configuration_json",
+            "COLUMN_TYPE": "longtext",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 11,
+            "COLUMN_NAME": "dataset_snapshot_json",
+            "COLUMN_TYPE": "longtext",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 12,
+            "COLUMN_NAME": "snapshot_hash",
+            "COLUMN_TYPE": "char(64)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 13,
+            "COLUMN_NAME": "provenance_json",
+            "COLUMN_TYPE": "longtext",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 14,
+            "COLUMN_NAME": "report_json",
+            "COLUMN_TYPE": "longtext",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 15,
+            "COLUMN_NAME": "report_pending",
+            "COLUMN_TYPE": "tinyint(1)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "1",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 16,
+            "COLUMN_NAME": "report_error",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 17,
+            "COLUMN_NAME": "status",
+            "COLUMN_TYPE": "varchar(30)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "'queued'",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 18,
+            "COLUMN_NAME": "documents_total",
+            "COLUMN_TYPE": "int(10) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 19,
+            "COLUMN_NAME": "documents_processed",
+            "COLUMN_TYPE": "int(10) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "0",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 20,
+            "COLUMN_NAME": "outputs_total",
+            "COLUMN_TYPE": "int(10) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 21,
+            "COLUMN_NAME": "generated_summaries",
+            "COLUMN_TYPE": "int(10) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "0",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 22,
+            "COLUMN_NAME": "failed_summaries",
+            "COLUMN_TYPE": "int(10) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "0",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 23,
+            "COLUMN_NAME": "created_by",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 24,
+            "COLUMN_NAME": "notes",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 25,
+            "COLUMN_NAME": "error_message",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 26,
+            "COLUMN_NAME": "started_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 27,
+            "COLUMN_NAME": "completed_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 28,
+            "COLUMN_NAME": "heartbeat_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "ORDINAL_POSITION": 29,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "summary_id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "user_id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "guest_token",
+            "COLUMN_TYPE": "varchar(64)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "rating",
+            "COLUMN_TYPE": "tinyint(4)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "name",
+            "COLUMN_TYPE": "varchar(100)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "ORDINAL_POSITION": 7,
+            "COLUMN_NAME": "email",
+            "COLUMN_TYPE": "varchar(150)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "ORDINAL_POSITION": 8,
+            "COLUMN_NAME": "impression",
+            "COLUMN_TYPE": "varchar(50)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "ORDINAL_POSITION": 9,
+            "COLUMN_NAME": "reasons",
+            "COLUMN_TYPE": "longtext",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "ORDINAL_POSITION": 10,
+            "COLUMN_NAME": "comment",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "ORDINAL_POSITION": 11,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "timestamp",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "ORDINAL_POSITION": 12,
+            "COLUMN_NAME": "updated_at",
+            "COLUMN_TYPE": "timestamp",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "",
+            "EXTRA": "on update current_timestamp()",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "feedback_comments",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "feedback_comments",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "summary_id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "feedback_comments",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "rating",
+            "COLUMN_TYPE": "tinyint(4)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "feedback_comments",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "reasons",
+            "COLUMN_TYPE": "longtext",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "feedback_comments",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "comment",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "feedback_comments",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "timestamp",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "guest_sessions",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "guest_token",
+            "COLUMN_TYPE": "varchar(64)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "guest_sessions",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "guest_sessions",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "last_activity",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "guest_sessions",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "expires_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "landing_page_events",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "landing_page_events",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "session_id",
+            "COLUMN_TYPE": "varchar(64)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "landing_page_events",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "event_type",
+            "COLUMN_TYPE": "varchar(50)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "landing_page_events",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "event_label",
+            "COLUMN_TYPE": "varchar(100)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "landing_page_events",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "event_value",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "landing_page_events",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "timestamp",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "landing_page_sessions",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "session_id",
+            "COLUMN_TYPE": "varchar(64)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "landing_page_sessions",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "user_id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "landing_page_sessions",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "guest_token",
+            "COLUMN_TYPE": "varchar(64)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "landing_page_sessions",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "ip_hash",
+            "COLUMN_TYPE": "char(64)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "landing_page_sessions",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "user_agent",
+            "COLUMN_TYPE": "varchar(255)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "landing_page_sessions",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "device_category",
+            "COLUMN_TYPE": "enum('mobile','tablet','desktop')",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "'desktop'",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "landing_page_sessions",
+            "ORDINAL_POSITION": 7,
+            "COLUMN_NAME": "referrer",
+            "COLUMN_TYPE": "varchar(512)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "landing_page_sessions",
+            "ORDINAL_POSITION": 8,
+            "COLUMN_NAME": "lcp_ms",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "landing_page_sessions",
+            "ORDINAL_POSITION": 9,
+            "COLUMN_NAME": "fid_ms",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "landing_page_sessions",
+            "ORDINAL_POSITION": 10,
+            "COLUMN_NAME": "inp_ms",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "landing_page_sessions",
+            "ORDINAL_POSITION": 11,
+            "COLUMN_NAME": "cls_score",
+            "COLUMN_TYPE": "decimal(6,4)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "landing_page_sessions",
+            "ORDINAL_POSITION": 12,
+            "COLUMN_NAME": "max_scroll_percent",
+            "COLUMN_TYPE": "tinyint(3) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "0",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "landing_page_sessions",
+            "ORDINAL_POSITION": 13,
+            "COLUMN_NAME": "dwell_time_seconds",
+            "COLUMN_TYPE": "smallint(5) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "0",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "landing_page_sessions",
+            "ORDINAL_POSITION": 14,
+            "COLUMN_NAME": "converted",
+            "COLUMN_TYPE": "tinyint(1)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "0",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "landing_page_sessions",
+            "ORDINAL_POSITION": 15,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "timestamp",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "landing_page_sessions",
+            "ORDINAL_POSITION": 16,
+            "COLUMN_NAME": "updated_at",
+            "COLUMN_TYPE": "timestamp",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "",
+            "EXTRA": "on update current_timestamp()",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "summary_id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "user_id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "guest_token",
+            "COLUMN_TYPE": "varchar(64)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "input_type",
+            "COLUMN_TYPE": "varchar(20)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "'text'",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "nutshell_text",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "ORDINAL_POSITION": 7,
+            "COLUMN_NAME": "status",
+            "COLUMN_TYPE": "enum('completed','failed')",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "'completed'",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "ORDINAL_POSITION": 8,
+            "COLUMN_NAME": "failure_reason",
+            "COLUMN_TYPE": "varchar(80)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "ORDINAL_POSITION": 9,
+            "COLUMN_NAME": "analysis_mode",
+            "COLUMN_TYPE": "varchar(24)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "'general'",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "ORDINAL_POSITION": 10,
+            "COLUMN_NAME": "output_format",
+            "COLUMN_TYPE": "varchar(24)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "'paragraph'",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "ORDINAL_POSITION": 11,
+            "COLUMN_NAME": "word_count",
+            "COLUMN_TYPE": "int(10) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "0",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "ORDINAL_POSITION": 12,
+            "COLUMN_NAME": "source_word_count",
+            "COLUMN_TYPE": "int(10) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "0",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "ORDINAL_POSITION": 13,
+            "COLUMN_NAME": "primary_summary_word_count",
+            "COLUMN_TYPE": "int(10) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "0",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "ORDINAL_POSITION": 14,
+            "COLUMN_NAME": "compression_ratio",
+            "COLUMN_TYPE": "decimal(8,4)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "0.0000",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "ORDINAL_POSITION": 15,
+            "COLUMN_NAME": "processing_time_ms",
+            "COLUMN_TYPE": "int(10) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "0",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "ORDINAL_POSITION": 16,
+            "COLUMN_NAME": "algorithm_version",
+            "COLUMN_TYPE": "varchar(32)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "'nutshell-extractive-v2'",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "ORDINAL_POSITION": 17,
+            "COLUMN_NAME": "idempotency_key",
+            "COLUMN_TYPE": "char(64)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "UNI",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "ORDINAL_POSITION": 18,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "timestamp",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "password_resets",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "password_resets",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "user_id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "password_resets",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "token_hash",
+            "COLUMN_TYPE": "varchar(64)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "password_resets",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "expires_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "password_resets",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "used_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "rate_limits",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "rate_limits",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "action_type",
+            "COLUMN_TYPE": "varchar(30)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "rate_limits",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "identifier",
+            "COLUMN_TYPE": "varchar(255)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "rate_limits",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "attempts",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "0",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "rate_limits",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "window_start",
+            "COLUMN_TYPE": "timestamp",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "schema_migrations",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "schema_migrations",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "migration",
+            "COLUMN_TYPE": "varchar(255)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "UNI",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "schema_migrations",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "applied_at",
+            "COLUMN_TYPE": "timestamp",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "user_id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "guest_token",
+            "COLUMN_TYPE": "varchar(64)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "share_token",
+            "COLUMN_TYPE": "varchar(64)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "UNI",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "article_title",
+            "COLUMN_TYPE": "varchar(255)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "author_name",
+            "COLUMN_TYPE": "varchar(255)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "ORDINAL_POSITION": 7,
+            "COLUMN_NAME": "input_type",
+            "COLUMN_TYPE": "enum('text','pdf','docx','url')",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "ORDINAL_POSITION": 8,
+            "COLUMN_NAME": "summary_style",
+            "COLUMN_TYPE": "enum('standard_paragraph','bullet_points','hybrid','academic_summary','simple_summary','executive_summary')",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "'standard_paragraph'",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "ORDINAL_POSITION": 9,
+            "COLUMN_NAME": "summary_length",
+            "COLUMN_TYPE": "varchar(32)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "ORDINAL_POSITION": 10,
+            "COLUMN_NAME": "original_word_count",
+            "COLUMN_TYPE": "int(10) unsigned",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "ORDINAL_POSITION": 11,
+            "COLUMN_NAME": "summary_word_count",
+            "COLUMN_TYPE": "int(10) unsigned",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "ORDINAL_POSITION": 12,
+            "COLUMN_NAME": "processing_time",
+            "COLUMN_TYPE": "decimal(10,3)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "ORDINAL_POSITION": 13,
+            "COLUMN_NAME": "article_category",
+            "COLUMN_TYPE": "varchar(100)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "ORDINAL_POSITION": 14,
+            "COLUMN_NAME": "status",
+            "COLUMN_TYPE": "enum('pending','processing','completed','failed')",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "'completed'",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "ORDINAL_POSITION": 15,
+            "COLUMN_NAME": "error_message",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "ORDINAL_POSITION": 16,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "timestamp",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "ORDINAL_POSITION": 17,
+            "COLUMN_NAME": "nutshell_text",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "ORDINAL_POSITION": 18,
+            "COLUMN_NAME": "nutshell_word_count",
+            "COLUMN_TYPE": "int(10) unsigned",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "ORDINAL_POSITION": 19,
+            "COLUMN_NAME": "nutshell_generated_at",
+            "COLUMN_TYPE": "timestamp",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summary_artifacts",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summary_artifacts",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "summary_id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summary_artifacts",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "original_text",
+            "COLUMN_TYPE": "longtext",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summary_artifacts",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "generated_summary",
+            "COLUMN_TYPE": "longtext",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "job_id",
+            "COLUMN_TYPE": "varchar(64)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "UNI",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "user_id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "guest_token",
+            "COLUMN_TYPE": "varchar(64)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "state",
+            "COLUMN_TYPE": "enum('queued','processing','completed','failed','cancelled','timed_out')",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "'queued'",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "payload",
+            "COLUMN_TYPE": "longtext",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "ORDINAL_POSITION": 7,
+            "COLUMN_NAME": "idempotency_key",
+            "COLUMN_TYPE": "varchar(128)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "UNI",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "ORDINAL_POSITION": 8,
+            "COLUMN_NAME": "result_id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "ORDINAL_POSITION": 9,
+            "COLUMN_NAME": "error_message",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "ORDINAL_POSITION": 10,
+            "COLUMN_NAME": "error_details",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "ORDINAL_POSITION": 11,
+            "COLUMN_NAME": "worker_pid",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "ORDINAL_POSITION": 12,
+            "COLUMN_NAME": "retry_count",
+            "COLUMN_TYPE": "tinyint(3) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "0",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "ORDINAL_POSITION": 13,
+            "COLUMN_NAME": "started_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "ORDINAL_POSITION": 14,
+            "COLUMN_NAME": "completed_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "ORDINAL_POSITION": 15,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "timestamp",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "ORDINAL_POSITION": 16,
+            "COLUMN_NAME": "updated_at",
+            "COLUMN_TYPE": "timestamp",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "",
+            "EXTRA": "on update current_timestamp()",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "users",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "users",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "username",
+            "COLUMN_TYPE": "varchar(50)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "UNI",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "users",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "email",
+            "COLUMN_TYPE": "varchar(100)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "UNI",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "users",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "password_hash",
+            "COLUMN_TYPE": "varchar(255)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "users",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "role",
+            "COLUMN_TYPE": "enum('user','admin')",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "'user'",
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "users",
+            "ORDINAL_POSITION": 6,
+            "COLUMN_NAME": "active",
+            "COLUMN_TYPE": "tinyint(1)",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "1",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "users",
+            "ORDINAL_POSITION": 7,
+            "COLUMN_NAME": "terms_accepted",
+            "COLUMN_TYPE": "tinyint(1)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "0",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "users",
+            "ORDINAL_POSITION": 8,
+            "COLUMN_NAME": "terms_accepted_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "YES",
+            "COLUMN_DEFAULT": "NULL",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "users",
+            "ORDINAL_POSITION": 9,
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "timestamp",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": "current_timestamp()",
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "user_tokens",
+            "ORDINAL_POSITION": 1,
+            "COLUMN_NAME": "id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "PRI",
+            "EXTRA": "auto_increment",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "user_tokens",
+            "ORDINAL_POSITION": 2,
+            "COLUMN_NAME": "user_id",
+            "COLUMN_TYPE": "int(11)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "MUL",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "user_tokens",
+            "ORDINAL_POSITION": 3,
+            "COLUMN_NAME": "selector",
+            "COLUMN_TYPE": "varchar(255)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "UNI",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "user_tokens",
+            "ORDINAL_POSITION": 4,
+            "COLUMN_NAME": "hashed_validator",
+            "COLUMN_TYPE": "varchar(255)",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        },
+        {
+            "TABLE_NAME": "user_tokens",
+            "ORDINAL_POSITION": 5,
+            "COLUMN_NAME": "expires",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "NO",
+            "COLUMN_DEFAULT": null,
+            "COLUMN_KEY": "",
+            "EXTRA": "",
+            "COLUMN_COMMENT": ""
+        }
+    ],
+    "indexes": [
+        {
+            "TABLE_NAME": "admin_audit_logs",
+            "INDEX_NAME": "idx_admin_audit_entity",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "entity_type",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "admin_audit_logs",
+            "INDEX_NAME": "idx_admin_audit_entity",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "entity_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "admin_audit_logs",
+            "INDEX_NAME": "idx_admin_audit_logs_action",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "action",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "admin_audit_logs",
+            "INDEX_NAME": "idx_admin_audit_logs_admin_id",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "admin_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "admin_audit_logs",
+            "INDEX_NAME": "idx_admin_audit_logs_created_at",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "created_at",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "admin_audit_logs",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "admin_security_challenges",
+            "INDEX_NAME": "idx_admin_security_locked_until",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "locked_until",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "admin_security_challenges",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "admin_security_challenges",
+            "INDEX_NAME": "uq_admin_security_user",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "user_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "documents",
+            "INDEX_NAME": "idx_documents_created_at",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "created_at",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "documents",
+            "INDEX_NAME": "idx_documents_guest",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "guest_token",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "documents",
+            "INDEX_NAME": "idx_documents_user",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "user_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "documents",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "document_summaries",
+            "INDEX_NAME": "idx_document_id",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "document_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "document_summaries",
+            "INDEX_NAME": "idx_doc_summaries_created_at",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "created_at",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "document_summaries",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "document_summaries",
+            "INDEX_NAME": "uq_doc_profile_length",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "document_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "document_summaries",
+            "INDEX_NAME": "uq_doc_profile_length",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "profile",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "document_summaries",
+            "INDEX_NAME": "uq_doc_profile_length",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 3,
+            "COLUMN_NAME": "length",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "INDEX_NAME": "assignment_token",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "assignment_token",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "INDEX_NAME": "fk_eval_assignment_run",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "run_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "INDEX_NAME": "idx_eval_assignment_user",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "evaluator_user_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "INDEX_NAME": "idx_eval_assignment_user",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "status",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "INDEX_NAME": "idx_eval_assignment_user",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 3,
+            "COLUMN_NAME": "presentation_order",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "INDEX_NAME": "uq_eval_assignment",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "output_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "INDEX_NAME": "uq_eval_assignment",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "evaluator_user_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_audit_log",
+            "INDEX_NAME": "fk_eval_audit_user",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "actor_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_audit_log",
+            "INDEX_NAME": "idx_eval_audit_entity",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "entity_type",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_audit_log",
+            "INDEX_NAME": "idx_eval_audit_entity",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "entity_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_audit_log",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_challenge_cases",
+            "INDEX_NAME": "fk_eval_challenge_doc",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "document_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_challenge_cases",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_content_units",
+            "INDEX_NAME": "fk_eval_unit_doc",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "document_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_content_units",
+            "INDEX_NAME": "fk_eval_unit_user",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "created_by",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_content_units",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_content_unit_reviews",
+            "INDEX_NAME": "fk_eval_review_unit",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "unit_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_content_unit_reviews",
+            "INDEX_NAME": "fk_eval_review_user",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "reviewer_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_content_unit_reviews",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_content_unit_reviews",
+            "INDEX_NAME": "uq_eval_unit_review",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "output_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_content_unit_reviews",
+            "INDEX_NAME": "uq_eval_unit_review",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "unit_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_datasets",
+            "INDEX_NAME": "fk_eval_dataset_user",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "created_by",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_datasets",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_datasets",
+            "INDEX_NAME": "version",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "version",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_documents",
+            "INDEX_NAME": "idx_eval_doc_dataset",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "dataset_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_documents",
+            "INDEX_NAME": "idx_eval_doc_dataset",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "dataset_split",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_documents",
+            "INDEX_NAME": "idx_eval_doc_dataset",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 3,
+            "COLUMN_NAME": "active",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_documents",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_errors",
+            "INDEX_NAME": "fk_eval_error_output",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "output_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_errors",
+            "INDEX_NAME": "fk_eval_error_user",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "reviewer_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_errors",
+            "INDEX_NAME": "idx_eval_error_category",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "category",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_errors",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_metrics",
+            "INDEX_NAME": "idx_eval_metric_name",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "metric_name",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_metrics",
+            "INDEX_NAME": "idx_eval_metric_name",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "status",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_metrics",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_metrics",
+            "INDEX_NAME": "uq_eval_metric",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "output_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_metrics",
+            "INDEX_NAME": "uq_eval_metric",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "metric_name",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "INDEX_NAME": "fk_eval_output_doc",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "document_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "INDEX_NAME": "idx_eval_output_run_status",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "run_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "INDEX_NAME": "idx_eval_output_run_status",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "status",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "INDEX_NAME": "uq_eval_output",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "run_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "INDEX_NAME": "uq_eval_output",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "document_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "INDEX_NAME": "uq_eval_output",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 3,
+            "COLUMN_NAME": "mode",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "INDEX_NAME": "uq_eval_output",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 4,
+            "COLUMN_NAME": "system_name",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "INDEX_NAME": "uq_eval_output",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 5,
+            "COLUMN_NAME": "ablation",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_ratings",
+            "INDEX_NAME": "assignment_id",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "assignment_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_ratings",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_references",
+            "INDEX_NAME": "fk_eval_reference_user",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "created_by",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_references",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_references",
+            "INDEX_NAME": "uq_eval_reference",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "document_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_references",
+            "INDEX_NAME": "uq_eval_reference",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "reference_version",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "INDEX_NAME": "fk_eval_run_dataset",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "dataset_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "INDEX_NAME": "fk_eval_run_user",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "created_by",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "INDEX_NAME": "idx_eval_run_status",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "status",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "INDEX_NAME": "idx_eval_run_status",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "created_at",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "INDEX_NAME": "run_uuid",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "run_uuid",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "INDEX_NAME": "idx_guest_owner",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "guest_token",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "INDEX_NAME": "idx_guest_owner",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "user_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "INDEX_NAME": "idx_summary",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "summary_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "INDEX_NAME": "uq_guest_summary",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "summary_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "INDEX_NAME": "uq_guest_summary",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "guest_token",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "INDEX_NAME": "uq_user_summary",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "summary_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "INDEX_NAME": "uq_user_summary",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "user_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "INDEX_NAME": "user_id",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "user_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "feedback_comments",
+            "INDEX_NAME": "idx_fc_created",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "created_at",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "feedback_comments",
+            "INDEX_NAME": "idx_fc_summary",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "summary_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "feedback_comments",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "guest_sessions",
+            "INDEX_NAME": "idx_guest_sessions_activity",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "last_activity",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "guest_sessions",
+            "INDEX_NAME": "idx_guest_sessions_expires",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "expires_at",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "guest_sessions",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "guest_token",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "landing_page_events",
+            "INDEX_NAME": "idx_lpe_created",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "created_at",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "landing_page_events",
+            "INDEX_NAME": "idx_lpe_session",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "session_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "landing_page_events",
+            "INDEX_NAME": "idx_lpe_session",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "event_type",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "landing_page_events",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "landing_page_sessions",
+            "INDEX_NAME": "idx_lps_converted",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "converted",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "landing_page_sessions",
+            "INDEX_NAME": "idx_lps_created",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "created_at",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "landing_page_sessions",
+            "INDEX_NAME": "idx_lps_device",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "device_category",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "landing_page_sessions",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "session_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "INDEX_NAME": "idx_ng_created",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "created_at",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "INDEX_NAME": "idx_ng_status_created",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "status",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "INDEX_NAME": "idx_ng_status_created",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "created_at",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "INDEX_NAME": "idx_ng_summary",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "summary_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "INDEX_NAME": "idx_ng_user_created",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "user_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "INDEX_NAME": "idx_ng_user_created",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "created_at",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "INDEX_NAME": "uq_ng_idempotency_key",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "idempotency_key",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "password_resets",
+            "INDEX_NAME": "idx_token",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "token_hash",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "password_resets",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "password_resets",
+            "INDEX_NAME": "user_id",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "user_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "rate_limits",
+            "INDEX_NAME": "idx_window",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "window_start",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "rate_limits",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "rate_limits",
+            "INDEX_NAME": "uq_action_id",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "action_type",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "rate_limits",
+            "INDEX_NAME": "uq_action_id",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "identifier",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "schema_migrations",
+            "INDEX_NAME": "migration",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "migration",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "schema_migrations",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "INDEX_NAME": "idx_created_owner",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "created_at",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "INDEX_NAME": "idx_created_owner",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "user_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "INDEX_NAME": "idx_guest",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "guest_token",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "INDEX_NAME": "idx_guest_owner",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "guest_token",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "INDEX_NAME": "idx_guest_owner",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "user_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "INDEX_NAME": "idx_status",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "status",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "INDEX_NAME": "idx_summaries_analytics_user_created",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "user_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "INDEX_NAME": "idx_summaries_analytics_user_created",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "created_at",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "INDEX_NAME": "idx_summaries_created_at",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "created_at",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "INDEX_NAME": "idx_summaries_guest_token",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "guest_token",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "INDEX_NAME": "idx_summaries_nutshell_generated",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "nutshell_generated_at",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "INDEX_NAME": "idx_summaries_status_created",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "status",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "INDEX_NAME": "idx_summaries_status_created",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "created_at",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "INDEX_NAME": "idx_summaries_user_id",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "user_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "INDEX_NAME": "idx_user",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "user_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "INDEX_NAME": "uq_share_token",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "share_token",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summary_artifacts",
+            "INDEX_NAME": "fk_summary_artifacts_summary_id",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "summary_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summary_artifacts",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "INDEX_NAME": "idx_summary_jobs_created",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "created_at",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "INDEX_NAME": "idx_summary_jobs_guest",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "guest_token",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "INDEX_NAME": "idx_summary_jobs_result",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "result_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "INDEX_NAME": "idx_summary_jobs_state",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "state",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "INDEX_NAME": "idx_summary_jobs_user",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "user_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "INDEX_NAME": "uq_summary_jobs_idempotency",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "idempotency_key",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "INDEX_NAME": "uq_summary_jobs_job_id",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "job_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "users",
+            "INDEX_NAME": "email",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "email",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "users",
+            "INDEX_NAME": "idx_role",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "role",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "users",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "users",
+            "INDEX_NAME": "username",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "username",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "user_tokens",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "user_tokens",
+            "INDEX_NAME": "selector_idx",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "selector",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        },
+        {
+            "TABLE_NAME": "user_tokens",
+            "INDEX_NAME": "user_id",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "user_id",
+            "SUB_PART": null,
+            "INDEX_TYPE": "BTREE"
+        }
+    ],
+    "foreign_keys": [
+        {
+            "TABLE_NAME": "admin_security_challenges",
+            "CONSTRAINT_NAME": "fk_admin_security_challenges_user",
+            "COLUMN_NAME": "user_id",
+            "REFERENCED_TABLE_NAME": "users",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "CASCADE",
+            "DELETE_RULE": "CASCADE"
+        },
+        {
+            "TABLE_NAME": "document_summaries",
+            "CONSTRAINT_NAME": "fk_doc_summaries_document",
+            "COLUMN_NAME": "document_id",
+            "REFERENCED_TABLE_NAME": "documents",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "CASCADE"
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "CONSTRAINT_NAME": "fk_eval_assignment_output",
+            "COLUMN_NAME": "output_id",
+            "REFERENCED_TABLE_NAME": "evaluation_outputs",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "RESTRICT"
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "CONSTRAINT_NAME": "fk_eval_assignment_run",
+            "COLUMN_NAME": "run_id",
+            "REFERENCED_TABLE_NAME": "evaluation_runs",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "RESTRICT"
+        },
+        {
+            "TABLE_NAME": "evaluation_assignments",
+            "CONSTRAINT_NAME": "fk_eval_assignment_user",
+            "COLUMN_NAME": "evaluator_user_id",
+            "REFERENCED_TABLE_NAME": "users",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "RESTRICT"
+        },
+        {
+            "TABLE_NAME": "evaluation_audit_log",
+            "CONSTRAINT_NAME": "fk_eval_audit_user",
+            "COLUMN_NAME": "actor_id",
+            "REFERENCED_TABLE_NAME": "users",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "SET NULL"
+        },
+        {
+            "TABLE_NAME": "evaluation_challenge_cases",
+            "CONSTRAINT_NAME": "fk_eval_challenge_doc",
+            "COLUMN_NAME": "document_id",
+            "REFERENCED_TABLE_NAME": "evaluation_documents",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "RESTRICT"
+        },
+        {
+            "TABLE_NAME": "evaluation_content_units",
+            "CONSTRAINT_NAME": "fk_eval_unit_doc",
+            "COLUMN_NAME": "document_id",
+            "REFERENCED_TABLE_NAME": "evaluation_documents",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "RESTRICT"
+        },
+        {
+            "TABLE_NAME": "evaluation_content_units",
+            "CONSTRAINT_NAME": "fk_eval_unit_user",
+            "COLUMN_NAME": "created_by",
+            "REFERENCED_TABLE_NAME": "users",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "SET NULL"
+        },
+        {
+            "TABLE_NAME": "evaluation_content_unit_reviews",
+            "CONSTRAINT_NAME": "fk_eval_review_output",
+            "COLUMN_NAME": "output_id",
+            "REFERENCED_TABLE_NAME": "evaluation_outputs",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "RESTRICT"
+        },
+        {
+            "TABLE_NAME": "evaluation_content_unit_reviews",
+            "CONSTRAINT_NAME": "fk_eval_review_unit",
+            "COLUMN_NAME": "unit_id",
+            "REFERENCED_TABLE_NAME": "evaluation_content_units",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "RESTRICT"
+        },
+        {
+            "TABLE_NAME": "evaluation_content_unit_reviews",
+            "CONSTRAINT_NAME": "fk_eval_review_user",
+            "COLUMN_NAME": "reviewer_id",
+            "REFERENCED_TABLE_NAME": "users",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "SET NULL"
+        },
+        {
+            "TABLE_NAME": "evaluation_datasets",
+            "CONSTRAINT_NAME": "fk_eval_dataset_user",
+            "COLUMN_NAME": "created_by",
+            "REFERENCED_TABLE_NAME": "users",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "SET NULL"
+        },
+        {
+            "TABLE_NAME": "evaluation_documents",
+            "CONSTRAINT_NAME": "fk_eval_doc_dataset",
+            "COLUMN_NAME": "dataset_id",
+            "REFERENCED_TABLE_NAME": "evaluation_datasets",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "RESTRICT"
+        },
+        {
+            "TABLE_NAME": "evaluation_errors",
+            "CONSTRAINT_NAME": "fk_eval_error_output",
+            "COLUMN_NAME": "output_id",
+            "REFERENCED_TABLE_NAME": "evaluation_outputs",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "RESTRICT"
+        },
+        {
+            "TABLE_NAME": "evaluation_errors",
+            "CONSTRAINT_NAME": "fk_eval_error_user",
+            "COLUMN_NAME": "reviewer_id",
+            "REFERENCED_TABLE_NAME": "users",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "SET NULL"
+        },
+        {
+            "TABLE_NAME": "evaluation_metrics",
+            "CONSTRAINT_NAME": "fk_eval_metric_output",
+            "COLUMN_NAME": "output_id",
+            "REFERENCED_TABLE_NAME": "evaluation_outputs",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "RESTRICT"
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "CONSTRAINT_NAME": "fk_eval_output_doc",
+            "COLUMN_NAME": "document_id",
+            "REFERENCED_TABLE_NAME": "evaluation_documents",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "RESTRICT"
+        },
+        {
+            "TABLE_NAME": "evaluation_outputs",
+            "CONSTRAINT_NAME": "fk_eval_output_run",
+            "COLUMN_NAME": "run_id",
+            "REFERENCED_TABLE_NAME": "evaluation_runs",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "RESTRICT"
+        },
+        {
+            "TABLE_NAME": "evaluation_ratings",
+            "CONSTRAINT_NAME": "fk_eval_rating_assignment",
+            "COLUMN_NAME": "assignment_id",
+            "REFERENCED_TABLE_NAME": "evaluation_assignments",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "RESTRICT"
+        },
+        {
+            "TABLE_NAME": "evaluation_references",
+            "CONSTRAINT_NAME": "fk_eval_reference_doc",
+            "COLUMN_NAME": "document_id",
+            "REFERENCED_TABLE_NAME": "evaluation_documents",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "RESTRICT"
+        },
+        {
+            "TABLE_NAME": "evaluation_references",
+            "CONSTRAINT_NAME": "fk_eval_reference_user",
+            "COLUMN_NAME": "created_by",
+            "REFERENCED_TABLE_NAME": "users",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "SET NULL"
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "CONSTRAINT_NAME": "fk_eval_run_dataset",
+            "COLUMN_NAME": "dataset_id",
+            "REFERENCED_TABLE_NAME": "evaluation_datasets",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "RESTRICT"
+        },
+        {
+            "TABLE_NAME": "evaluation_runs",
+            "CONSTRAINT_NAME": "fk_eval_run_user",
+            "COLUMN_NAME": "created_by",
+            "REFERENCED_TABLE_NAME": "users",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "SET NULL"
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "CONSTRAINT_NAME": "feedback_ibfk_1",
+            "COLUMN_NAME": "summary_id",
+            "REFERENCED_TABLE_NAME": "summaries",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "CASCADE"
+        },
+        {
+            "TABLE_NAME": "feedback",
+            "CONSTRAINT_NAME": "feedback_ibfk_2",
+            "COLUMN_NAME": "user_id",
+            "REFERENCED_TABLE_NAME": "users",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "CASCADE"
+        },
+        {
+            "TABLE_NAME": "feedback_comments",
+            "CONSTRAINT_NAME": "fk_fc_summary",
+            "COLUMN_NAME": "summary_id",
+            "REFERENCED_TABLE_NAME": "summaries",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "CASCADE"
+        },
+        {
+            "TABLE_NAME": "landing_page_events",
+            "CONSTRAINT_NAME": "fk_lpe_session",
+            "COLUMN_NAME": "session_id",
+            "REFERENCED_TABLE_NAME": "landing_page_sessions",
+            "REFERENCED_COLUMN_NAME": "session_id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "CASCADE"
+        },
+        {
+            "TABLE_NAME": "nutshell_generations",
+            "CONSTRAINT_NAME": "fk_ng_summary",
+            "COLUMN_NAME": "summary_id",
+            "REFERENCED_TABLE_NAME": "summaries",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "SET NULL"
+        },
+        {
+            "TABLE_NAME": "password_resets",
+            "CONSTRAINT_NAME": "password_resets_ibfk_1",
+            "COLUMN_NAME": "user_id",
+            "REFERENCED_TABLE_NAME": "users",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "CASCADE"
+        },
+        {
+            "TABLE_NAME": "summaries",
+            "CONSTRAINT_NAME": "summaries_ibfk_1",
+            "COLUMN_NAME": "user_id",
+            "REFERENCED_TABLE_NAME": "users",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "CASCADE"
+        },
+        {
+            "TABLE_NAME": "summary_artifacts",
+            "CONSTRAINT_NAME": "fk_summary_artifacts_summary_id",
+            "COLUMN_NAME": "summary_id",
+            "REFERENCED_TABLE_NAME": "summaries",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "CASCADE"
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "CONSTRAINT_NAME": "fk_summary_jobs_result",
+            "COLUMN_NAME": "result_id",
+            "REFERENCED_TABLE_NAME": "summaries",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "SET NULL"
+        },
+        {
+            "TABLE_NAME": "summary_jobs",
+            "CONSTRAINT_NAME": "fk_summary_jobs_user",
+            "COLUMN_NAME": "user_id",
+            "REFERENCED_TABLE_NAME": "users",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "SET NULL"
+        },
+        {
+            "TABLE_NAME": "user_tokens",
+            "CONSTRAINT_NAME": "user_tokens_ibfk_1",
+            "COLUMN_NAME": "user_id",
+            "REFERENCED_TABLE_NAME": "users",
+            "REFERENCED_COLUMN_NAME": "id",
+            "UPDATE_RULE": "RESTRICT",
+            "DELETE_RULE": "CASCADE"
+        }
+    ],
+    "checks": [
+        {
+            "TABLE_NAME": "evaluation_ratings",
+            "CONSTRAINT_NAME": "ck_eval_rating_range",
+            "CHECK_CLAUSE": "`relevance` between 1 and 5 and `factual_consistency` between 1 and 5 and `coverage` between 1 and 5 and `coherence` between 1 and 5 and `readability` between 1 and 5 and `conciseness` between 1 and 5 and `non_redundancy` between 1 and 5 and (`overall_usefulness` is null or `overall_usefulness` between 1 and 5)"
+        }
+    ]
+}

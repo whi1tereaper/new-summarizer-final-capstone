@@ -1,0 +1,33 @@
+   5.7 Portability
+   Table  16     shows  the     Portability     of  the
+developed  AccredX:  Record  Management  and
+Archiving System assessed by the IT consultants
+that consist of three (3) sub-characteristics,
+namely:     adaptability,   installability   and
+replaceability.
+   Table 16. Assessment of the IT consultants on
+the Security of the developed system
+     Software                                    Verbal
+      Product           Weighted Mean       Interpretation
+    Categories
+   Adaptability               3.3            Very Portable
+  Installability              3.7            Very Portable
+  Replaceability              3.1               Portable
+   Portability               3.37            Very Portable
+
+   The evaluation results for the Reliability
+category indicate a weighted mean of 3.37 and a
+verbal rating of “Very Portable”.
+
+   5.8 IT Consultants Evaluation Summary
+   The following table displays the overall
+summary result of the evaluation conducted by
+the IT Consultants on the developed system,
+AccredX: Record Management and Archiving System.
+
+
+
+
+
+
+                                                       97

@@ -25,7 +25,7 @@ final class HistoryRepository
         $statement = $this->db->prepare(
             'SELECT s.*, a.original_text, a.generated_summary
              FROM summaries s
-             LEFT JOIN summary_artifacts a ON s.id = a.summary_id
+             LEFT JOIN summary_artifacts a ON s.id = a.summary_id AND a.original_text IS NOT NULL AND a.generated_summary IS NOT NULL
              WHERE s.id = :id
              LIMIT 1'
         );
@@ -40,7 +40,7 @@ final class HistoryRepository
     {
         $query = 'SELECT s.*, a.original_text, a.generated_summary
                   FROM summaries s
-                  LEFT JOIN summary_artifacts a ON s.id = a.summary_id
+                  LEFT JOIN summary_artifacts a ON s.id = a.summary_id AND a.original_text IS NOT NULL AND a.generated_summary IS NOT NULL
                   WHERE 1=1';
         $params = [];
 
@@ -72,7 +72,7 @@ final class HistoryRepository
         $query = 'SELECT n.*, s.article_title, s.share_token
                   FROM nutshell_generations n
                   LEFT JOIN summaries s ON s.id = n.summary_id
-                  WHERE n.status = "completed" AND ';
+                  WHERE n.status = \'completed\' AND ';
         $params = [];
 
         if ($userId !== null) {

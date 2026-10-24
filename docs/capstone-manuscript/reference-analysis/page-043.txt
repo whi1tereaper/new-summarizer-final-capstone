@@ -1,0 +1,39 @@
+Continuous integration practices are employed
+to preserve system stability as new components
+are added.
+
+   Maintenance Stage: After initial deployment,
+the system enters a maintenance phase wherein
+minor updates, bug fixes, and enhancements are
+implemented. User feedback and evolving
+operational requirements drive further
+iterations to ensure the system remains
+responsive and effective.
+
+   The Agile approach reflects a shift from
+rigid, traditional models toward a more
+flexible, collaborative, and user-focused
+development paradigm. By breaking the project
+into smaller, time-bound iterations or
+"sprints," the methodology allows for rapid
+feedback cycles, increased user involvement,
+and the delivery of high-quality, value-driven
+outcomes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                        24

@@ -1,0 +1,32 @@
+Functional Suitability of the Developed System
+........................................... 100
+Table 19. Assessment of the End Users on the
+Performance Efficiency of the Developed System
+........................................... 101
+Table 20. Assessment of the End Users on the
+Usability of the Developed System.......... 102
+Table 21. End-users’ Evaluation Summary Result
+........................................... 103
+
+List of Figures
+Figure 1. Research Paradigm................. 11
+Figure 2. SDLC Model........................ 22
+Figure 3. Front View of NEUST Peñaranda Off-
+Campus...................................... 26
+Figure 4. Location Map...................... 26
+Figure 5. Gantt Chart of Activities......... 48
+Figure 6. Use Case Diagram.................. 50
+Figure 7. Context Diagram................... 52
+Figure 8. DFD Level 1....................... 54
+Figure 9. DFD Level 2 – User Management..... 57
+Figure 10. Level 2 – Login Management....... 59
+Figure 11. Level 2 – Profile Management..... 60
+Figure 12. Level 2 – Records Management..... 62
+Figure 13. Level 2 – Archive Management..... 64
+Figure 14. Level 2 – Report Generation...... 66
+Figure 15. Unnormalized Form (UNF).......... 69
+Figure 16. First Normal Form (1NF).......... 70
+
+
+
+                                                        xv

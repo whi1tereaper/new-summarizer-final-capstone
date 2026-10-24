@@ -1,0 +1,20 @@
+[
+  {
+    "full_diagram": "dfd-level1",
+    "edges": 33,
+    "edges_in_print_panels": 33,
+    "missing_edges": []
+  },
+  {
+    "full_diagram": "dfd-level2-summary",
+    "edges": 14,
+    "edges_in_print_panels": 14,
+    "missing_edges": []
+  },
+  {
+    "full_diagram": "dfd-level2-auth",
+    "edges": 12,
+    "edges_in_print_panels": 12,
+    "missing_edges": []
+  }
+]

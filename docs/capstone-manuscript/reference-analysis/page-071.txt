@@ -1,0 +1,36 @@
+another (using a flowchart). The context diagram
+of the system is displayed in Figure 7 below.
+
+
+
+
+
+
+
+
+
+
+              Figure 7. Context Diagram
+
+   The Data Flow Diagram (DFD) of the AccredX:
+Record   Management   and   Archiving   System
+illustrates how data moves between the three
+main user types—Admin, Teacher and Assistant
+(Grouped into Compliance Manager since they have
+the same capabilities in the system)            and the
+system’s core processes. As shown in Figure 7,
+the   admin    has  full  control  over  system
+operations, including user management, file and
+folder  creation,  checklist  management,  and
+report generation. Data from the Admin flows
+into the system, where it is processed, stored,
+and made accessible according to defined roles.
+Compliance Managers      interact with the system
+through limited access features, allowing them
+to upload and organize their own folders and
+
+
+
+
+
+                                                       52

@@ -1,0 +1,16 @@
+%% Proposed Input-Process-Output-Feedback research paradigm
+%% PROPOSED DRAFT; research organization, not completed human evaluation.
+flowchart TB
+    I["INPUT<br/>Academic articles and user requirements<br/>Actual system design and constraints<br/>Approved evaluation criteria: pending"]
+    P("PROCESS<br/>Refine and verify LIGHT summarizer<br/>Apply implemented NLP workflows<br/>Conduct human evaluation: pending")
+    O["OUTPUT<br/>LIGHT article summaries and features<br/>User and maintenance documentation<br/>Human evaluation findings: pending"]
+    F["FEEDBACK<br/>Use technical findings and future<br/>participant responses to refine<br/>the system and research account"]
+    I -->|"inputs"| P
+    P -->|"documented results"| O
+    O -->|"review"| F
+    F -->|"revised requirements"| I
+    classDef process fill:#edf1f5,stroke:#222,color:#111;
+    classDef store fill:#f6f6f6,stroke:#222,color:#111;
+    classDef entity fill:#fff,stroke:#222,color:#111;
+    class P process;
+    class I,O,F entity;

@@ -66,6 +66,8 @@ class SummarizationRequest:
     use_llm_synthesis: bool = False # per-request opt-in; server configuration must also enable it
     target_word_budget: int = 0     # optional evaluation-only comparison budget
     focus_query: str = ""           # query-focused summarization query/topic
+    # Optional integration input; automatic routing can reuse one extraction.
+    source_document: SourceDocument | None = field(default=None, repr=False, compare=False)
 
 
 @dataclass(frozen=True)

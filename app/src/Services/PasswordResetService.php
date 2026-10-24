@@ -72,7 +72,7 @@ class PasswordResetService
     private function getLatestActiveToken($userId)
     {
         $statement = $this->db->prepare(
-            'SELECT id, token_hash FROM password_resets WHERE user_id = ? AND used_at IS NULL AND expires_at > NOW() ORDER BY id DESC LIMIT 1'
+            'SELECT id, token_hash FROM password_resets WHERE user_id = ? AND used_at IS NULL AND expires_at > NOW() ORDER BY id DESC LIMIT 1'.($this->db->inTransaction()?' FOR UPDATE':'')
         );
         $statement->execute([$userId]);
 

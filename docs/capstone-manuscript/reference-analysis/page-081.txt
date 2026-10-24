@@ -1,0 +1,15 @@
+    Figure 12. Level 2 – Records Management
+
+   Figure 12 illustrates the Level 2 Data Flow
+Diagram (DFD) for the Record Management process
+of the AccredX: Record Management and Archiving
+System. This process enables the Administrator
+and   Compliance Manager       to organize, store,
+monitor,  and  manage  accreditation-related
+documents through the system's data stores,
+namely    Folders  (D2),  Files  (D3),  Folder
+Checklists (D4), and Checklist File Link (D5).
+
+
+
+                                                       62

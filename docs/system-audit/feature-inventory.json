@@ -1,0 +1,3351 @@
+{
+  "counting_rule": "One row per distinct user capability or independent backend/engine/operational facility. Alternative formats, modes, depths and sub-actions are enumerated within their parent capability; repeated frontend/backend sightings are merged. This is a scoped capability inventory, not a count of functions or endpoints.",
+  "count": 69,
+  "breakdown": {
+    "Verified working": 5,
+    "Partially working": 18,
+    "Not working": 0,
+    "Implemented but not verified": 46,
+    "UI only": 0,
+    "Not implemented": 0,
+    "Not applicable": 0
+  },
+  "features": [
+    {
+      "id": "F001",
+      "source_id": "UI-001",
+      "name": "Landing information and navigation",
+      "module": "Entry",
+      "roles": "visitor",
+      "route": "index.php",
+      "purpose": "learn the purpose and open the summarizer or account forms",
+      "problem": "Provides the named landing information and navigation action within its stated role and route.",
+      "explanation": "As visitor, I can learn the purpose and open the summarizer or account forms.",
+      "steps": [
+        "Open the landing page",
+        "Read About LIGHT and use Start/Summarize",
+        "Use footer terms or navigation account links"
+      ],
+      "inputs": "Navigation links; scroll",
+      "behavior": "Render project information and navigation links",
+      "outputs": "Landing sections; target page",
+      "related": "Navigation and result presentation",
+      "frontend": [
+        "app/public/index.php",
+        "app/public/partials/site-nav.php",
+        "app/public/assets/js/nex-landing.js"
+      ],
+      "backend": [
+        "app/public/about.php"
+      ],
+      "functions": [],
+      "tables": [],
+      "database_operations": "No persistent database operation in this capability; browser/session/file state may apply as described.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "VERIFIED_UI_IN_ISOLATION",
+      "observed": "browser-readonly-results.json (template/local interaction scope only); source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Admin landing requests redirect; footer social links lead to generic social-platform homepages, not verified project accounts.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F002",
+      "source_id": "UI-002",
+      "name": "Responsive mobile menu",
+      "module": "Navigation",
+      "roles": "visitor",
+      "route": "all main templates",
+      "purpose": "open and close site navigation on small screens",
+      "problem": "Provides the named responsive mobile menu action within its stated role and route.",
+      "explanation": "As visitor, I can open and close site navigation on small screens.",
+      "steps": [
+        "Press the menu button",
+        "Choose a link or press Escape"
+      ],
+      "inputs": "Menu button; Escape",
+      "behavior": "Toggle menu visibility and aria-expanded; close on Escape",
+      "outputs": "Expanded navigation with aria-expanded state",
+      "related": "Navigation and result presentation",
+      "frontend": [
+        "app/public/partials/site-nav.php",
+        "app/public/assets/css/site-nav.css"
+      ],
+      "backend": [],
+      "functions": [],
+      "tables": [],
+      "database_operations": "No persistent database operation in this capability; browser/session/file state may apply as described.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Verified working",
+      "tested": "Isolated local interaction / static route only",
+      "observed": "browser-readonly-results.json (template/local interaction scope only); the named local interaction passed; no server persistence is claimed.",
+      "limitations": "Opening and Escape verified at 390px; complete keyboard/screen-reader audit not performed.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F003",
+      "source_id": "UI-003",
+      "name": "Light/dark theme preference",
+      "module": "Appearance",
+      "roles": "visitor",
+      "route": "nonlanding templates and result.php",
+      "purpose": "switch the reading theme",
+      "problem": "Provides the named light/dark theme preference action within its stated role and route.",
+      "explanation": "As visitor, I can switch the reading theme.",
+      "steps": [
+        "Use the theme control",
+        " revisit a supported page to reuse preference"
+      ],
+      "inputs": "Theme button; saved localStorage preference",
+      "behavior": "Toggle supported page theme and retain browser preference",
+      "outputs": "Light or dark document data-theme",
+      "related": "Navigation and result presentation",
+      "frontend": [
+        "app/public/assets/js/theme-toggle.js",
+        "app/public/assets/js/result.js",
+        "app/public/assets/css/design-tokens.css"
+      ],
+      "backend": [],
+      "functions": [],
+      "tables": [],
+      "database_operations": "No persistent database operation in this capability; browser/session/file state may apply as described.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Verified working",
+      "tested": "Isolated local interaction / static route only",
+      "observed": "browser-readonly-results.json supplementalInteractions; synthetic data/client-only action; the named local interaction passed; no server persistence is claimed.",
+      "limitations": "Source inspection; theme persists locally, not as a saved account preference.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F004",
+      "source_id": "UI-004",
+      "name": "Create account",
+      "module": "Accounts",
+      "roles": "visitor",
+      "route": "register.php → auth.php?action=register",
+      "purpose": "register with an email and password",
+      "problem": "Provides the named create account action within its stated role and route.",
+      "explanation": "As visitor, I can register with an email and password.",
+      "steps": [
+        "Open Create Account",
+        "Enter the required fields",
+        "Review and accept terms",
+        "Submit Create Account"
+      ],
+      "inputs": "Username; email; password; confirmation; terms acceptance; CSRF",
+      "behavior": "Validate account inputs and password policy; check uniqueness; create the account",
+      "outputs": "Validation feedback or account/session redirect",
+      "related": "Account registration",
+      "frontend": [
+        "app/public/register.php"
+      ],
+      "backend": [
+        "app/public/auth.php",
+        "app/src/Controllers/AuthController.php",
+        "app/src/Repositories/UserRepository.php",
+        "app/src/Utils/PasswordPolicy.php"
+      ],
+      "functions": [
+        "AuthController::register (app/src/Controllers/AuthController.php:240)",
+        "AuthController::forgotPassword (app/src/Controllers/AuthController.php:409)",
+        "AuthController::resetPassword (app/src/Controllers/AuthController.php:453)",
+        "UserRepository::updatePasswordHash (app/src/Repositories/UserRepository.php:168)"
+      ],
+      "tables": [
+        "users"
+      ],
+      "database_operations": "Read and/or write through the cited service; exact method and constraints are recorded in the backend audit: users.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "No account was created. Registration form copy mentions custom profiles; dedicated editable saved-profile UI was not found.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F005",
+      "source_id": "UI-005",
+      "name": "Sign in and remember session",
+      "module": "Accounts",
+      "roles": "registered user",
+      "route": "login.php → auth.php?action=login",
+      "purpose": "sign in to account features",
+      "problem": "Provides the named sign in and remember session action within its stated role and route.",
+      "explanation": "As registered user, I can sign in to account features.",
+      "steps": [
+        "Enter your username/email and password",
+        "Choose remember-me only on a trusted device if desired",
+        "Submit sign-in"
+      ],
+      "inputs": "Username or email; password; optional remember-me; CSRF",
+      "behavior": "Check credentials and status; regenerate session; optionally issue or rotate a remembered user token",
+      "outputs": "Session or validation error",
+      "related": "Login and logout; Remembered login",
+      "frontend": [
+        "app/public/login.php"
+      ],
+      "backend": [
+        "app/public/auth.php",
+        "app/src/Controllers/AuthController.php",
+        "app/src/Services/RememberMeService.php",
+        "app/src/Utils/SessionManager.php"
+      ],
+      "functions": [
+        "AuthController::login (app/src/Controllers/AuthController.php:44)",
+        "AuthController::verifyAdminLoginCode (app/src/Controllers/AuthController.php:165)",
+        "RememberMeService::loginFromCookie (app/src/Services/RememberMeService.php:83)"
+      ],
+      "tables": [
+        "users",
+        "rate_limits",
+        "user_tokens"
+      ],
+      "database_operations": "Read and/or write through the cited service; exact method and constraints are recorded in the backend audit: users, rate_limits, user_tokens.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Credential and remember-cookie flows not exercised.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F006",
+      "source_id": "UI-006",
+      "name": "Administrator email code verification",
+      "module": "Accounts",
+      "roles": "administrator",
+      "route": "login.php → auth.php?action=verifyAdminLoginCode",
+      "purpose": "complete the additional administrator login step",
+      "problem": "Provides the named administrator email code verification action within its stated role and route.",
+      "explanation": "As administrator, I can complete the additional administrator login step.",
+      "steps": [
+        "Sign in with administrator credentials",
+        "Enter the emailed one-time code",
+        "Submit verification or cancel to sign in again"
+      ],
+      "inputs": "Pending admin session; emailed code; CSRF",
+      "behavior": "Create pending administrator-code session state; send and verify time-limited code; rate-limit attempts; record security activity",
+      "outputs": "Verified login or code error",
+      "related": "Administrator email OTP",
+      "frontend": [
+        "app/public/login.php"
+      ],
+      "backend": [
+        "app/src/Controllers/AuthController.php",
+        "app/src/Services/AdminSecurityService.php",
+        "app/src/Services/EmailService.php"
+      ],
+      "functions": [
+        "AuthController::verifyAdminLoginCode (app/src/Controllers/AuthController.php:165)",
+        "AdminSecurityService::isVerifiedAdmin (app/src/Services/AdminSecurityService.php:11)",
+        "AdminSecurityService::requireVerifiedAdmin (app/src/Services/AdminSecurityService.php:17)",
+        "AdminSecurityService::requireVerifiedAdminApi (app/src/Services/AdminSecurityService.php:25)",
+        "EmailService::sendAdminLoginCodeEmail (app/src/Services/EmailService.php:75)"
+      ],
+      "tables": [
+        "users",
+        "rate_limits",
+        "admin_audit_logs"
+      ],
+      "database_operations": "Read and/or write through the cited service; exact method and constraints are recorded in the backend audit: users, rate_limits, admin_audit_logs.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed. Configured SMTP/mail service for code delivery.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Source-supported conditional UI only; no email sent; retired challenge routes are redirects, not an active challenge feature.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F007",
+      "source_id": "UI-007",
+      "name": "Password recovery",
+      "module": "Accounts",
+      "roles": "account holder",
+      "route": "forgot_password.php → auth.php?action=forgotPassword",
+      "purpose": "request a password-reset code",
+      "problem": "Provides the named password recovery action within its stated role and route.",
+      "explanation": "As account holder, I can request a password-reset code.",
+      "steps": [
+        "Open Recover Password",
+        "Enter email",
+        "Choose Send OTP and follow the response"
+      ],
+      "inputs": "Email; CSRF",
+      "behavior": "Locate eligible account; issue a time-limited reset code; request email delivery",
+      "outputs": "Generic recovery outcome and reset flow",
+      "related": "Password reset",
+      "frontend": [
+        "app/public/forgot_password.php"
+      ],
+      "backend": [
+        "app/src/Controllers/AuthController.php",
+        "app/src/Services/PasswordResetService.php",
+        "app/src/Services/EmailService.php"
+      ],
+      "functions": [
+        "AuthController::resetPassword (app/src/Controllers/AuthController.php:453)",
+        "EmailService::sendPasswordResetEmail (app/src/Services/EmailService.php:41)"
+      ],
+      "tables": [
+        "users",
+        "password_resets",
+        "rate_limits"
+      ],
+      "database_operations": "Read and/or write through the cited service; exact method and constraints are recorded in the backend audit: users, password_resets, rate_limits.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed. Configured SMTP/mail service for code delivery.",
+      "implemented": "Yes",
+      "status": "Partially working",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication. See the reproduced or source-confirmed limitation below.",
+      "limitations": "Recovery form rendered; sending, delivery and account existence outcomes not tested. Reset-token storage differs between the live database and clean-install SQL; email delivery was not exercised.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F008",
+      "source_id": "UI-008",
+      "name": "Reset password using OTP",
+      "module": "Accounts",
+      "roles": "account holder",
+      "route": "reset_password.php → auth.php?action=resetPassword",
+      "purpose": "replace a forgotten password after verification",
+      "problem": "Provides the named reset password using otp action within its stated role and route.",
+      "explanation": "As account holder, I can replace a forgotten password after verification.",
+      "steps": [
+        "Open reset form after requesting a code",
+        "Enter email and code",
+        "Enter matching new passwords",
+        "Submit reset"
+      ],
+      "inputs": "Email; OTP; new password; confirmation; CSRF",
+      "behavior": "Validate reset code and new password; replace password hash and consume reset token",
+      "outputs": "Reset success or validation/code error",
+      "related": "Password reset",
+      "frontend": [
+        "app/public/reset_password.php"
+      ],
+      "backend": [
+        "app/src/Controllers/AuthController.php",
+        "app/src/Services/PasswordResetService.php"
+      ],
+      "functions": [
+        "AuthController::forgotPassword (app/src/Controllers/AuthController.php:409)",
+        "AuthController::resetPassword (app/src/Controllers/AuthController.php:453)"
+      ],
+      "tables": [
+        "users",
+        "password_resets"
+      ],
+      "database_operations": "Read and/or write through the cited service; exact method and constraints are recorded in the backend audit: users, password_resets.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed. Configured SMTP/mail service for code delivery.",
+      "implemented": "Yes",
+      "status": "Partially working",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication. See the reproduced or source-confirmed limitation below.",
+      "limitations": "No password changed. A password change does not revoke existing remembered tokens or active sessions; the fresh-install reset schema also differs.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F009",
+      "source_id": "UI-009",
+      "name": "Password visibility and strength hints",
+      "module": "Accounts",
+      "roles": "visitor",
+      "route": "login.php/register.php/reset_password.php",
+      "purpose": "review password entry before submitting",
+      "problem": "Provides the named password visibility and strength hints action within its stated role and route.",
+      "explanation": "As visitor, I can review password entry before submitting.",
+      "steps": [
+        "Enter a password",
+        "Use eye button to toggle visibility",
+        "Read available strength/mismatch hint"
+      ],
+      "inputs": "Password input and visibility button",
+      "behavior": "Toggle the password input masking and display local password-strength hints",
+      "outputs": "Plain/masked password; client strength/match hints",
+      "related": "Registration and password reset",
+      "frontend": [
+        "app/public/login.php",
+        "app/public/register.php",
+        "app/public/reset_password.php"
+      ],
+      "backend": [
+        "app/src/Utils/PasswordPolicy.php"
+      ],
+      "functions": [
+        "PasswordPolicy::validate (app/src/Utils/PasswordPolicy.php:6)",
+        "PasswordPolicy::getStrength (app/src/Utils/PasswordPolicy.php:31)"
+      ],
+      "tables": [],
+      "database_operations": "No direct SQL for the input/control action; a later submitted summary workflow persists through F019/F021.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Partially working",
+      "tested": "VERIFIED_UI_IN_ISOLATION",
+      "observed": "browser-readonly-results.json (template/local interaction scope only); source inspection establishes implementation; template rendering does not establish successful persistence or authentication. See the reproduced or source-confirmed limitation below.",
+      "limitations": "Click toggle verified on registration; eye buttons tabindex=-1 excludes keyboard Tab navigation. The visibility control responds to clicks but uses tabindex=-1, excluding normal keyboard tab access.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F010",
+      "source_id": "UI-010",
+      "name": "Read and accept terms",
+      "module": "Terms",
+      "roles": "visitor or registered user",
+      "route": "terms.php / accept_terms.php",
+      "purpose": "review usage conditions and continue after agreement",
+      "problem": "Provides the named read and accept terms action within its stated role and route.",
+      "explanation": "As visitor or registered user, I can review usage conditions and continue after agreement.",
+      "steps": [
+        "Open Terms and Conditions",
+        "Read the sections",
+        "Check agreement and confirm; choose decline if not agreeing"
+      ],
+      "inputs": "Acceptance checkbox; accept/decline action; CSRF",
+      "behavior": "Display the current terms and record an authenticated acceptance",
+      "outputs": "Session/account acceptance or exit/login redirect",
+      "related": "Terms acceptance",
+      "frontend": [
+        "app/public/terms.php",
+        "app/public/accept_terms.php"
+      ],
+      "backend": [
+        "app/src/Utils/TermsContent.php",
+        "app/src/Services/TermsAcceptanceService.php"
+      ],
+      "functions": [
+        "TermsAcceptanceService::storeTermsStateInSession (app/src/Services/TermsAcceptanceService.php:55)",
+        "TermsAcceptanceService::acceptCurrentUserTerms (app/src/Services/TermsAcceptanceService.php:63)",
+        "TermsAcceptanceService::currentAuthenticatedUserHasAccepted (app/src/Services/TermsAcceptanceService.php:89)",
+        "TermsAcceptanceService::currentUserNeedsAcceptance (app/src/Services/TermsAcceptanceService.php:108)",
+        "TermsAcceptanceService::redirectAuthenticatedUserIfTermsPending (app/src/Services/TermsAcceptanceService.php:117)",
+        "TermsAcceptanceService::redirectAfterTermsAcceptance (app/src/Services/TermsAcceptanceService.php:162)"
+      ],
+      "tables": [
+        "users"
+      ],
+      "database_operations": "Read and/or write through the cited service; exact method and constraints are recorded in the backend audit: users.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Partially working",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication. See the reproduced or source-confirmed limitation below.",
+      "limitations": "Reading rendered; acceptance/decline not executed; two terms pages have different guest actions. The decline link does not submit the server-side decline action; terms enforcement also depends on the route allowlist.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F011",
+      "source_id": "UI-011",
+      "name": "Upload PDF or DOCX",
+      "module": "Summary input",
+      "roles": "guest or registered user",
+      "route": "summarizer.php",
+      "purpose": "supply a supported local document",
+      "problem": "Provides the named upload pdf or docx action within its stated role and route.",
+      "explanation": "As guest or registered user, I can supply a supported local document.",
+      "steps": [
+        "Choose Upload File",
+        "Browse or drag a file",
+        "Use Replace/Remove to correct the selection"
+      ],
+      "inputs": "One PDF/DOCX; optional title",
+      "behavior": "Select PDF/DOCX; on submission validate multipart origin, extension, MIME, signature and package structure; store a randomized upload file",
+      "outputs": "Selected filename or input error",
+      "related": "Input and preference normalization; Upload acceptance",
+      "frontend": [
+        "app/public/partials/summarizer-form.php",
+        "app/public/assets/js/nex-landing.js"
+      ],
+      "backend": [
+        "app/src/Services/FileUploadService.php",
+        "app/src/Services/SourceResolver.php",
+        "app/src/Services/ArticleService.php",
+        "app/src/Controllers/ArticleController.php"
+      ],
+      "functions": [
+        "FileUploadService::effectiveUploadLimit (app/src/Services/FileUploadService.php:30)",
+        "FileUploadService::assertUploadedFile (app/src/Services/FileUploadService.php:37)",
+        "FileUploadService::validateUploadedFile (app/src/Services/FileUploadService.php:90)",
+        "FileUploadService::saveUploadedFile (app/src/Services/FileUploadService.php:108)",
+        "FileUploadService::removeUploadedFile (app/src/Services/FileUploadService.php:143)",
+        "SourceResolver::resolve (app/src/Services/SourceResolver.php:66)",
+        "ArticleService::resolvePendingSummarySource (app/src/Services/ArticleService.php:183)"
+      ],
+      "tables": [],
+      "database_operations": "No direct SQL for the input/control action; a later submitted summary workflow persists through F019/F021.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed. Python process and relevant installed packages.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "No file uploaded. Effective limit depends on PHP/config; renderer displayed 2.0 MiB for its PHP environment.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F012",
+      "source_id": "UI-012",
+      "name": "Paste text source",
+      "module": "Summary input",
+      "roles": "guest or registered user",
+      "route": "summarizer.php",
+      "purpose": "summarize readable pasted text",
+      "problem": "Provides the named paste text source action within its stated role and route.",
+      "explanation": "As guest or registered user, I can summarize readable pasted text.",
+      "steps": [
+        "Choose Paste Text",
+        "Paste permitted document text",
+        "Review source and settings"
+      ],
+      "inputs": "Text up to server-provided byte cap",
+      "behavior": "Accept pasted text; on submission normalize and validate source length",
+      "outputs": "Text selected as source",
+      "related": "Input and preference normalization",
+      "frontend": [
+        "app/public/partials/summarizer-form.php",
+        "app/public/assets/js/index.js"
+      ],
+      "backend": [
+        "app/src/Services/ArticleService.php",
+        "app/src/Services/SourceResolver.php",
+        "app/src/Controllers/ArticleController.php"
+      ],
+      "functions": [
+        "ArticleService::resolvePendingSummarySource (app/src/Services/ArticleService.php:183)",
+        "ArticleService::normalizeSummaryLength (app/src/Services/ArticleService.php:550)",
+        "ArticleService::normalizeAnalysisMode (app/src/Services/ArticleService.php:586)",
+        "ArticleService::normalizeOutputFormat (app/src/Services/ArticleService.php:605)",
+        "SourceResolver::resolve (app/src/Services/SourceResolver.php:66)",
+        "SourceResolver::validateUrl (app/src/Services/SourceResolver.php:87)"
+      ],
+      "tables": [],
+      "database_operations": "No direct SQL for the input/control action; a later submitted summary workflow persists through F019/F021.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "VERIFIED_UI_IN_ISOLATION",
+      "observed": "browser-readonly-results.json (template/local interaction scope only); source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Source-selector interaction verified; extraction/model processing not run.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F013",
+      "source_id": "UI-013",
+      "name": "Article URL source",
+      "module": "Summary input",
+      "roles": "guest or registered user",
+      "route": "summarizer.php",
+      "purpose": "request summarization of an accessible article URL",
+      "problem": "Provides the named article url source action within its stated role and route.",
+      "explanation": "As guest or registered user, I can request summarization of an accessible article URL.",
+      "steps": [
+        "Choose URL",
+        "Paste the complete public address",
+        "Submit when source/settings are ready"
+      ],
+      "inputs": "HTTP(S) URL without embedded credentials",
+      "behavior": "Accept an HTTP(S) article address; validate destination and redirects; acquire bounded source content",
+      "outputs": "URL source or validation error",
+      "related": "Input and preference normalization; URL acquisition",
+      "frontend": [
+        "app/public/partials/summarizer-form.php",
+        "app/public/assets/js/index.js"
+      ],
+      "backend": [
+        "app/src/Services/SourceResolver.php",
+        "app/src/Services/ArticleService.php",
+        "app/src/Controllers/ArticleController.php"
+      ],
+      "functions": [
+        "SourceResolver::resolve (app/src/Services/SourceResolver.php:66)",
+        "SourceResolver::validateUrl (app/src/Services/SourceResolver.php:87)",
+        "ArticleService::resolvePendingSummarySource (app/src/Services/ArticleService.php:183)"
+      ],
+      "tables": [],
+      "database_operations": "No direct SQL for the input/control action; a later submitted summary workflow persists through F019/F021.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed. Reachable public source server and PHP cURL/DNS.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "VERIFIED_UI_IN_ISOLATION",
+      "observed": "browser-readonly-results.json (template/local interaction scope only); source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Selection and invalid-empty-URL rejection verified locally; fetching and safety policy not exercised.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F014",
+      "source_id": "UI-014",
+      "name": "Optional document title and focus",
+      "module": "Summary controls",
+      "roles": "guest or registered user",
+      "route": "summarizer.php",
+      "purpose": "name a result and prioritize a topic/question",
+      "problem": "Provides the named optional document title and focus action within its stated role and route.",
+      "explanation": "As guest or registered user, I can name a result and prioritize a topic/question.",
+      "steps": [
+        "Optionally enter Document Title",
+        "Optionally enter Focus / Topic / Question"
+      ],
+      "inputs": "Optional title; optional focus text (UI maxlength 300)",
+      "behavior": "Accept optional title and focus and validate their length for the processing request",
+      "outputs": "Selected title/focus in request",
+      "related": "Input and preference normalization",
+      "frontend": [
+        "app/public/partials/summarizer-form.php"
+      ],
+      "backend": [
+        "app/src/Services/ArticleService.php",
+        "app/src/Services/SummarizerPromptTemplate.php",
+        "app/src/Controllers/ArticleController.php"
+      ],
+      "functions": [
+        "ArticleService::buildPendingSummary (app/src/Services/ArticleService.php:57)",
+        "ArticleService::normalizeSummaryLength (app/src/Services/ArticleService.php:550)",
+        "ArticleService::normalizeAnalysisMode (app/src/Services/ArticleService.php:586)",
+        "ArticleService::normalizeOutputFormat (app/src/Services/ArticleService.php:605)"
+      ],
+      "tables": [],
+      "database_operations": "No direct SQL for the input/control action; a later submitted summary workflow persists through F019/F021.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Focus changes requested prioritization; cannot promise answer accuracy.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F015",
+      "source_id": "UI-015",
+      "name": "Five output organizations",
+      "module": "Summary controls",
+      "roles": "guest or registered user",
+      "route": "summarizer.php",
+      "purpose": "choose paragraph, bullets, hybrid, structured sections or key takeaways",
+      "problem": "Provides the named five output organizations action within its stated role and route.",
+      "explanation": "As guest or registered user, I can choose paragraph, bullets, hybrid, structured sections or key takeaways.",
+      "steps": [
+        "Open Output Format",
+        "Choose one format and read its description"
+      ],
+      "inputs": "output_format select",
+      "behavior": "Select one of five output organizations and pass its validated value to generation",
+      "outputs": "Updated description and request setting",
+      "related": "Input and preference normalization",
+      "frontend": [
+        "app/public/partials/summarizer-form.php",
+        "app/public/assets/js/index.js"
+      ],
+      "backend": [
+        "app/src/Services/ArticleService.php",
+        "app/src/Controllers/ArticleController.php"
+      ],
+      "functions": [
+        "ArticleService::normalizeSummaryLength (app/src/Services/ArticleService.php:550)",
+        "ArticleService::normalizeAnalysisMode (app/src/Services/ArticleService.php:586)",
+        "ArticleService::normalizeOutputFormat (app/src/Services/ArticleService.php:605)"
+      ],
+      "tables": [],
+      "database_operations": "No direct SQL for the input/control action; a later submitted summary workflow persists through F019/F021.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "VERIFIED_UI_IN_ISOLATION",
+      "observed": "browser-readonly-results.json (template/local interaction scope only); source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Structured selection verified; output quality not evaluated.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F016",
+      "source_id": "UI-016",
+      "name": "Eight analysis modes",
+      "module": "Summary controls",
+      "roles": "guest or registered user",
+      "route": "summarizer.php",
+      "purpose": "choose general, academic, executive, technical, study, news, legal or scientific emphasis",
+      "problem": "Provides the named eight analysis modes action within its stated role and route.",
+      "explanation": "As guest or registered user, I can choose general, academic, executive, technical, study, news, legal or scientific emphasis.",
+      "steps": [
+        "Open Analysis Mode",
+        "Choose the intended emphasis"
+      ],
+      "inputs": "analysis_mode select",
+      "behavior": "Select one of eight analysis modes and pass its validated value to generation",
+      "outputs": "Updated mode description and request setting",
+      "related": "Input and preference normalization",
+      "frontend": [
+        "app/public/partials/summarizer-form.php",
+        "app/public/assets/js/index.js"
+      ],
+      "backend": [
+        "app/src/Services/ArticleService.php",
+        "app/src/Controllers/ArticleController.php"
+      ],
+      "functions": [
+        "ArticleService::normalizeSummaryLength (app/src/Services/ArticleService.php:550)",
+        "ArticleService::normalizeAnalysisMode (app/src/Services/ArticleService.php:586)",
+        "ArticleService::normalizeOutputFormat (app/src/Services/ArticleService.php:605)"
+      ],
+      "tables": [],
+      "database_operations": "No direct SQL for the input/control action; a later submitted summary workflow persists through F019/F021.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "VERIFIED_UI_IN_ISOLATION",
+      "observed": "browser-readonly-results.json (template/local interaction scope only); source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Academic selection verified; modes do not establish domain correctness.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F017",
+      "source_id": "UI-017",
+      "name": "Six summary depths",
+      "module": "Summary controls",
+      "roles": "guest or registered user",
+      "route": "summarizer.php",
+      "purpose": "choose very brief, brief, short, balanced, detailed or comprehensive depth",
+      "problem": "Provides the named six summary depths action within its stated role and route.",
+      "explanation": "As guest or registered user, I can choose very brief, brief, short, balanced, detailed or comprehensive depth.",
+      "steps": [
+        "Select a Summary Depth button",
+        "Read the depth explanation"
+      ],
+      "inputs": "Depth button",
+      "behavior": "Select one of six main-interface depths and pass its validated value to generation",
+      "outputs": "aria-pressed and hidden depth fields update",
+      "related": "Input and preference normalization",
+      "frontend": [
+        "app/public/partials/summarizer-form.php",
+        "app/public/assets/js/index.js"
+      ],
+      "backend": [
+        "app/src/Services/ArticleService.php",
+        "app/src/Controllers/ArticleController.php"
+      ],
+      "functions": [
+        "ArticleService::normalizeSummaryLength (app/src/Services/ArticleService.php:550)",
+        "ArticleService::normalizeAnalysisMode (app/src/Services/ArticleService.php:586)",
+        "ArticleService::normalizeOutputFormat (app/src/Services/ArticleService.php:605)"
+      ],
+      "tables": [],
+      "database_operations": "No direct SQL for the input/control action; a later submitted summary workflow persists through F019/F021.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "VERIFIED_UI_IN_ISOLATION",
+      "observed": "browser-readonly-results.json (template/local interaction scope only); source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Comprehensive selection verified; exact word length is not guaranteed.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F018",
+      "source_id": "UI-018",
+      "name": "Optional evidence-controlled synthesis",
+      "module": "Summary controls",
+      "roles": "guest or registered user when configured",
+      "route": "summarizer.php",
+      "purpose": "opt in to configured language-model synthesis",
+      "problem": "Provides the named optional evidence-controlled synthesis action within its stated role and route.",
+      "explanation": "As guest or registered user when configured, I can opt in to configured language-model synthesis.",
+      "steps": [
+        "When Generation Method is displayed, read the data-transfer notice",
+        "Opt in only when authorized to process the source there"
+      ],
+      "inputs": "Conditional use_llm_synthesis checkbox",
+      "behavior": "Request optional synthesis only when both request flag and server configuration permit the configured provider",
+      "outputs": "Requested synthesis path or extractive fallback behavior",
+      "related": "Input and preference normalization; Python integration",
+      "frontend": [
+        "app/public/partials/summarizer-form.php",
+        "app/public/assets/js/index.js"
+      ],
+      "backend": [
+        "app/src/Services/ArticleService.php",
+        "app/src/Services/LocalPythonBridge.php",
+        "app/src/Controllers/ArticleController.php"
+      ],
+      "functions": [
+        "ArticleService::buildPendingSummary (app/src/Services/ArticleService.php:57)",
+        "ArticleService::requestSummary (app/src/Services/ArticleService.php:203)",
+        "LocalPythonBridge::summarize (app/src/Services/LocalPythonBridge.php:31)",
+        "LocalPythonBridge::summarizeV2 (app/src/Services/LocalPythonBridge.php:36)"
+      ],
+      "tables": [],
+      "database_operations": "No direct SQL for the input/control action; a later submitted summary workflow persists through F019/F021.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed. Python process and relevant installed packages. Optional configured LLM endpoint; currently disabled.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Conditional source only; flag disabled in synthetic renderer; external synthesis not invoked.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F019",
+      "source_id": "UI-019",
+      "name": "Submit summary request",
+      "module": "Summarization",
+      "roles": "guest or registered user",
+      "route": "summarize.php",
+      "purpose": "start processing a selected source",
+      "problem": "Provides the named submit summary request action within its stated role and route.",
+      "explanation": "As guest or registered user, I can start processing a selected source.",
+      "steps": [
+        "Review source and settings",
+        "Choose Summarize Document",
+        "Follow processing/status feedback"
+      ],
+      "inputs": "Source; title; focus; format; mode; depth; CSRF; request token",
+      "behavior": "Validate request; resolve source; create or reuse a job; dispatch processing and persist successful output",
+      "outputs": "Processing redirect or recoverable error",
+      "related": "Input and preference normalization; Recoverable summary jobs; Python integration; Summary persistence",
+      "frontend": [
+        "app/public/assets/js/index.js"
+      ],
+      "backend": [
+        "app/public/summarize.php",
+        "app/src/Controllers/ArticleController.php",
+        "app/src/Services/ArticleService.php",
+        "app/src/Services/SummaryJobService.php",
+        "app/src/Services/LocalPythonBridge.php"
+      ],
+      "functions": [
+        "ArticleController::process (app/src/Controllers/ArticleController.php:25)",
+        "ArticleController::execute (app/src/Controllers/ArticleController.php:69)",
+        "ArticleService::resolvePendingSummarySource (app/src/Services/ArticleService.php:183)",
+        "ArticleService::storeSummary (app/src/Services/ArticleService.php:263)",
+        "LocalPythonBridge::summarize (app/src/Services/LocalPythonBridge.php:31)",
+        "LocalPythonBridge::summarizeV2 (app/src/Services/LocalPythonBridge.php:36)"
+      ],
+      "tables": [
+        "summary_jobs",
+        "summaries",
+        "summary_artifacts"
+      ],
+      "database_operations": "Read and/or write through the cited service; exact method and constraints are recorded in the backend audit: summary_jobs, summaries, summary_artifacts.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed. Python process and relevant installed packages.",
+      "implemented": "Yes",
+      "status": "Partially working",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication. See the reproduced or source-confirmed limitation below.",
+      "limitations": "Submission not executed; all harness POSTs blocked. The legacy cleaner can discard legitimate prose containing register. Upload word-count and processing-time persistence are incomplete.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F020",
+      "source_id": "UI-020",
+      "name": "Source validation and one-hour draft recovery",
+      "module": "Recovery",
+      "roles": "guest or registered user",
+      "route": "summarizer.php",
+      "purpose": "correct invalid input and recover tab-local source/settings",
+      "problem": "Provides the named source validation and one-hour draft recovery action within its stated role and route.",
+      "explanation": "As guest or registered user, I can correct invalid input and recover tab-local source/settings.",
+      "steps": [
+        "Correct the named field",
+        "Use retry only where offered",
+        "For file recovery, select the file again"
+      ],
+      "inputs": "Input errors; saved sessionStorage fields",
+      "behavior": "Validate browser inputs; display catalogued errors; retain and recover an eligible one-hour browser draft",
+      "outputs": "Friendly explanation, recovery action and restored settings",
+      "related": "Input and preference normalization",
+      "frontend": [
+        "app/public/assets/js/index.js",
+        "app/public/assets/js/light-errors.js",
+        "app/public/partials/error-support.php"
+      ],
+      "backend": [
+        "app/src/Support/ProcessingError.php",
+        "app/src/Services/ArticleService.php",
+        "app/src/Controllers/ArticleController.php"
+      ],
+      "functions": [
+        "ArticleService::resolvePendingSummarySource (app/src/Services/ArticleService.php:183)",
+        "ArticleService::normalizeSummaryLength (app/src/Services/ArticleService.php:550)",
+        "ArticleService::normalizeAnalysisMode (app/src/Services/ArticleService.php:586)",
+        "ArticleService::normalizeOutputFormat (app/src/Services/ArticleService.php:605)"
+      ],
+      "tables": [],
+      "database_operations": "No direct SQL for the input/control action; a later submitted summary workflow persists through F019/F021.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "VERIFIED_UI_IN_ISOLATION",
+      "observed": "browser-readonly-results.json (template/local interaction scope only); source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Empty URL validation verified; file bytes cannot be restored; source text is retained in browser tab storage for up to one hour.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F021",
+      "source_id": "UI-021",
+      "name": "Job progress, retry and cancel",
+      "module": "Processing",
+      "roles": "visitor with pending job",
+      "route": "processing.php",
+      "purpose": "follow an asynchronous summary and recover from failure",
+      "problem": "Provides the named job progress, retry and cancel action within its stated role and route.",
+      "explanation": "As visitor with pending job, I can follow an asynchronous summary and recover from failure.",
+      "steps": [
+        "Remain on the processing page",
+        "If offered, check connection/status or retry",
+        "Use cancel when available to return to settings"
+      ],
+      "inputs": "Existing job/session; retry or cancel controls",
+      "behavior": "Resolve owned job; inspect or update state; execute, retry or cancel through guarded actions",
+      "outputs": "Status, completion redirect or recovery message",
+      "related": "Recoverable summary jobs",
+      "frontend": [
+        "app/public/processing.php",
+        "app/public/assets/js/processing.js"
+      ],
+      "backend": [
+        "app/src/Controllers/ArticleController.php",
+        "app/src/Services/SummaryJobService.php"
+      ],
+      "functions": [
+        "ArticleController::process (app/src/Controllers/ArticleController.php:25)",
+        "ArticleController::execute (app/src/Controllers/ArticleController.php:69)",
+        "ArticleController::status (app/src/Controllers/ArticleController.php:84)",
+        "ArticleController::retry (app/src/Controllers/ArticleController.php:90)",
+        "ArticleController::handleBackgroundJob (app/src/Controllers/ArticleController.php:104)",
+        "ArticleController::cancel (app/src/Controllers/ArticleController.php:137)",
+        "SummaryJobService::completeJob (app/src/Services/SummaryJobService.php:143)",
+        "SummaryJobService::failJob (app/src/Services/SummaryJobService.php:149)",
+        "SummaryJobService::cancelJob (app/src/Services/SummaryJobService.php:163)",
+        "SummaryJobService::failureForJob (app/src/Services/SummaryJobService.php:279)",
+        "SummaryJobService::retryJob (app/src/Services/SummaryJobService.php:301)"
+      ],
+      "tables": [
+        "summary_jobs",
+        "summaries"
+      ],
+      "database_operations": "Read and/or write through the cited service; exact method and constraints are recorded in the backend audit: summary_jobs, summaries.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed. Python process and relevant installed packages.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Only synthetic pending page rendered; automatic execute/poll requests deliberately blocked.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F022",
+      "source_id": "UI-022",
+      "name": "Generate and copy concise nutshell",
+      "module": "Nutshell",
+      "roles": "registered active account",
+      "route": "nutshell_generate.php",
+      "purpose": "produce a short standalone rendition from an eligible source",
+      "problem": "Provides the named generate and copy concise nutshell action within its stated role and route.",
+      "explanation": "As registered active account, I can produce a short standalone rendition from an eligible source.",
+      "steps": [
+        "Prepare a source",
+        "Choose Generate Nutshell",
+        "Read the panel and use Copy after success"
+      ],
+      "inputs": "Selected source/mode; CSRF; idempotency key",
+      "behavior": "Require a registered account; request concise generation; record successful Nutshell activity and expose copy controls",
+      "outputs": "Nutshell text, not-needed notice or recovery error",
+      "related": "Python integration; Usage analytics",
+      "frontend": [
+        "app/public/assets/js/index.js",
+        "app/public/partials/summarizer-form.php"
+      ],
+      "backend": [
+        "app/public/nutshell_generate.php",
+        "app/src/Services/LocalPythonBridge.php",
+        "app/src/Controllers/AnalyticsController.php",
+        "app/src/Repositories/UserRepository.php"
+      ],
+      "functions": [
+        "AnalyticsController::getDashboardData (app/src/Controllers/AnalyticsController.php:330)"
+      ],
+      "tables": [
+        "nutshell_generations"
+      ],
+      "database_operations": "Read and/or write through the cited service; exact method and constraints are recorded in the backend audit: nutshell_generations.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed. Python process and relevant installed packages.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Guest redirect verified. Generation not run. Backend supports six mode labels; legal/scientific selections are normalized to general by this endpoint. The synthetic direct call returned insufficient_content with an empty nutshell; it did not demonstrate a successful concise summary. Web saving was not run.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F023",
+      "source_id": "UI-023",
+      "name": "Read structured summary and details",
+      "module": "Results",
+      "roles": "authorized owner or shared-link viewer",
+      "route": "result.php?id=…",
+      "purpose": "read the summary and available metadata",
+      "problem": "Provides the named read structured summary and details action within its stated role and route.",
+      "explanation": "As authorized owner or shared-link viewer, I can read the summary and available metadata.",
+      "steps": [
+        "Open an accessible result",
+        "Read the primary summary",
+        "Expand available source/details sections"
+      ],
+      "inputs": "Authorized summary id; optional share token",
+      "behavior": "Resolve owner, guest or bearer access; load summary/artifact and render supported result sections",
+      "outputs": "Summary, key points, keywords, section analysis and details when stored",
+      "related": "History and sharing; Structured display",
+      "frontend": [
+        "app/public/result.php"
+      ],
+      "backend": [
+        "app/src/Controllers/HistoryHandler.php",
+        "app/src/Services/HistoryService.php",
+        "app/src/Utils/Formatter.php",
+        "app/src/Repositories/HistoryRepository.php"
+      ],
+      "functions": [
+        "HistoryHandler::getSummaryById (app/src/Controllers/HistoryHandler.php:17)",
+        "HistoryService::getSummaryById (app/src/Services/HistoryService.php:35)",
+        "HistoryRepository::findSummaryById (app/src/Repositories/HistoryRepository.php:23)"
+      ],
+      "tables": [
+        "summaries",
+        "summary_artifacts"
+      ],
+      "database_operations": "SELECT for display/aggregation: summaries, summary_artifacts.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Synthetic prose rendered; optional rich sections depend on saved output and were not all populated.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F024",
+      "source_id": "UI-024",
+      "name": "Inspect source and evidence passages",
+      "module": "Results",
+      "roles": "authorized result viewer",
+      "route": "result.php",
+      "purpose": "compare output with retained source passages",
+      "problem": "Provides the named inspect source and evidence passages action within its stated role and route.",
+      "explanation": "As authorized result viewer, I can compare output with retained source passages.",
+      "steps": [
+        "Choose Check source",
+        "Expand original text",
+        "Follow numbered evidence references if present"
+      ],
+      "inputs": "Source disclosure and evidence anchor clicks",
+      "behavior": "Display available source text and evidence metadata from an accessible result",
+      "outputs": "Source text, evidence/coverage blocks where stored",
+      "related": "History and sharing; Structured display",
+      "frontend": [
+        "app/public/result.php",
+        "app/public/assets/js/result.js"
+      ],
+      "backend": [
+        "app/src/Utils/Formatter.php",
+        "app/src/Services/HistoryService.php",
+        "app/src/Repositories/HistoryRepository.php",
+        "app/src/Controllers/HistoryHandler.php"
+      ],
+      "functions": [
+        "HistoryService::getSummaryById (app/src/Services/HistoryService.php:35)",
+        "HistoryRepository::findSummaryById (app/src/Repositories/HistoryRepository.php:23)",
+        "HistoryHandler::getSummaryById (app/src/Controllers/HistoryHandler.php:17)"
+      ],
+      "tables": [
+        "summaries",
+        "summary_artifacts"
+      ],
+      "database_operations": "SELECT for display/aggregation: summaries, summary_artifacts.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Source-backed evidence links do not prove factual accuracy; populated metadata not end-to-end tested.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F025",
+      "source_id": "UI-025",
+      "name": "Copy summary",
+      "module": "Results",
+      "roles": "authorized result viewer",
+      "route": "result.php",
+      "purpose": "copy the displayed summary",
+      "problem": "Provides the named copy summary action within its stated role and route.",
+      "explanation": "As authorized result viewer, I can copy the displayed summary.",
+      "steps": [
+        "Open a completed result",
+        "Choose Copy"
+      ],
+      "inputs": "Copy button",
+      "behavior": "Copy the rendered summary text to the browser clipboard",
+      "outputs": "Clipboard text and status",
+      "related": "Navigation and result presentation",
+      "frontend": [
+        "app/public/assets/js/result.js"
+      ],
+      "backend": [],
+      "functions": [],
+      "tables": [],
+      "database_operations": "No persistent database operation in this capability; browser/session/file state may apply as described.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Verified working",
+      "tested": "Isolated local interaction / static route only",
+      "observed": "browser-readonly-results.json supplementalInteractions; synthetic data/client-only action; the named local interaction passed; no server persistence is claimed.",
+      "limitations": "Clipboard success verified on loopback with explicit browser permission and synthetic content; other browser permission contexts untested.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F026",
+      "source_id": "UI-026",
+      "name": "Print or save PDF",
+      "module": "Results",
+      "roles": "authorized result viewer",
+      "route": "result.php",
+      "purpose": "open browser print output for a completed summary",
+      "problem": "Provides the named print or save pdf action within its stated role and route.",
+      "explanation": "As authorized result viewer, I can open browser print output for a completed summary.",
+      "steps": [
+        "Choose PDF",
+        "Review the browser print preview",
+        "Select a printer or Save as PDF"
+      ],
+      "inputs": "PDF button; browser print dialog",
+      "behavior": "Invoke browser printing with the result print stylesheet; PDF saving depends on browser options",
+      "outputs": "Printed output or browser Save as PDF",
+      "related": "Navigation and result presentation",
+      "frontend": [
+        "app/public/assets/js/result.js",
+        "app/public/assets/css/result.css"
+      ],
+      "backend": [],
+      "functions": [],
+      "tables": [],
+      "database_operations": "No persistent database operation in this capability; browser/session/file state may apply as described.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Uses window.print(), not a server-generated PDF endpoint; print dialog not exercised.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F027",
+      "source_id": "UI-027",
+      "name": "Download text",
+      "module": "Results",
+      "roles": "authorized result viewer",
+      "route": "result.php",
+      "purpose": "save summary text locally",
+      "problem": "Provides the named download text action within its stated role and route.",
+      "explanation": "As authorized result viewer, I can save summary text locally.",
+      "steps": [
+        "Choose Text export",
+        "Save the generated download"
+      ],
+      "inputs": "Text export button",
+      "behavior": "Create a local text download containing the rendered summary",
+      "outputs": "Client-generated .txt file",
+      "related": "Navigation and result presentation",
+      "frontend": [
+        "app/public/assets/js/result.js"
+      ],
+      "backend": [],
+      "functions": [],
+      "tables": [],
+      "database_operations": "No persistent database operation in this capability; browser/session/file state may apply as described.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Verified working",
+      "tested": "Isolated local interaction / static route only",
+      "observed": "browser-readonly-results.json supplementalInteractions; synthetic data/client-only action; the named local interaction passed; no server persistence is claimed.",
+      "limitations": "Synthetic result exported to evidence/synthetic-summary-download.txt and exact text checked; no real summary exported.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F028",
+      "source_id": "UI-028",
+      "name": "Listen to summary audio",
+      "module": "Results",
+      "roles": "authorized result viewer with session",
+      "route": "tts_generate.php / tts_audio.php",
+      "purpose": "request and listen to generated speech",
+      "problem": "Provides the named listen to summary audio action within its stated role and route.",
+      "explanation": "As authorized result viewer with session, I can request and listen to generated speech.",
+      "steps": [
+        "Choose Listen on a completed summary",
+        "Use audio controls after successful generation"
+      ],
+      "inputs": "Summary id; share token if applicable; CSRF",
+      "behavior": "Validate permitted audio request; normalize text; generate or reuse Piper output; serve token-controlled file with byte-range handling",
+      "outputs": "Audio player/status or service error",
+      "related": "Audio generation and delivery",
+      "frontend": [
+        "app/public/result.php",
+        "app/public/assets/js/result.js"
+      ],
+      "backend": [
+        "app/public/tts_generate.php",
+        "app/public/tts_audio.php",
+        "app/src/Services/BarkTtsService.php"
+      ],
+      "functions": [
+        "BarkTtsService::buildCacheFileName (app/src/Services/BarkTtsService.php:51)",
+        "BarkTtsService::buildLegacyCacheFileName (app/src/Services/BarkTtsService.php:57)",
+        "BarkTtsService::generate (app/src/Services/BarkTtsService.php:91)",
+        "BarkTtsService::buildAudioProxyUrl (app/src/Services/BarkTtsService.php:119)",
+        "BarkTtsService::buildAudioAccessToken (app/src/Services/BarkTtsService.php:135)",
+        "BarkTtsService::verifyAudioAccessToken (app/src/Services/BarkTtsService.php:150)",
+        "BarkTtsService::fetchAudioStream (app/src/Services/BarkTtsService.php:169)"
+      ],
+      "tables": [],
+      "database_operations": "No persistent database operation in this capability; browser/session/file state may apply as described.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed. Python process and relevant installed packages. Piper and provisioned voice; initial voice download may need network.",
+      "implemented": "Yes",
+      "status": "Partially working",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication. See the reproduced or source-confirmed limitation below.",
+      "limitations": "Local worker availability required; no audio generated or fetched. The isolated suffix-range request returned the whole file; audio delivery declares public cacheability. Real Piper synthesis and listening were not performed.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json",
+        "evidence/backend-isolated-checks.json"
+      ]
+    },
+    {
+      "id": "F029",
+      "source_id": "UI-029",
+      "name": "Filipino translation",
+      "module": "Results",
+      "roles": "session-bearing result viewer",
+      "route": "translate_proxy.php",
+      "purpose": "request a Filipino rendition of displayed summary text",
+      "problem": "Provides the named filipino translation action within its stated role and route.",
+      "explanation": "As session-bearing result viewer, I can request a Filipino rendition of displayed summary text.",
+      "steps": [
+        "Choose Translate on a completed result",
+        "Read returned Filipino translation with original as reference"
+      ],
+      "inputs": "Text; target language tl; CSRF",
+      "behavior": "Validate translation request; call configured translation provider through Python; return translated text",
+      "outputs": "Translation panel or error",
+      "related": "Python integration",
+      "frontend": [
+        "app/public/result.php",
+        "app/public/assets/js/result.js"
+      ],
+      "backend": [
+        "app/public/translate_proxy.php",
+        "app/src/Services/LocalPythonBridge.php"
+      ],
+      "functions": [],
+      "tables": [],
+      "database_operations": "No persistent database operation in this capability; browser/session/file state may apply as described.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed. Python process and relevant installed packages. External translation provider; selected text leaves the local runtime.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Worker not invoked. Endpoint accepts en/tl; UI requests Filipino.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F030",
+      "source_id": "UI-030",
+      "name": "Rate, comment and update feedback",
+      "module": "Feedback",
+      "roles": "guest/user with summary access",
+      "route": "feedback_submit.php",
+      "purpose": "submit a usefulness rating with optional reasons/comment",
+      "problem": "Provides the named rate, comment and update feedback action within its stated role and route.",
+      "explanation": "As guest/user with summary access, I can submit a usefulness rating with optional reasons/comment.",
+      "steps": [
+        "Choose a star rating",
+        "Optionally add reasons and a short comment",
+        "Submit feedback; use Update feedback for an existing response"
+      ],
+      "inputs": "1–5 stars; optional reasons; comment up to 500 UI characters; CSRF",
+      "behavior": "Validate one-to-five rating and permitted summary context; update latest rating and append comment events",
+      "outputs": "Saved/updated feedback confirmation or error",
+      "related": "Rating and comments",
+      "frontend": [
+        "app/public/partials/rating-widget.php",
+        "app/public/assets/js/result.js"
+      ],
+      "backend": [
+        "app/public/feedback_submit.php",
+        "app/src/Services/FeedbackService.php",
+        "app/src/Repositories/FeedbackRepository.php",
+        "app/src/Controllers/FeedbackHandler.php"
+      ],
+      "functions": [
+        "FeedbackService::submitFeedback (app/src/Services/FeedbackService.php:33)",
+        "FeedbackService::submitFullFeedback (app/src/Services/FeedbackService.php:148)",
+        "FeedbackHandler::submitFeedback (app/src/Controllers/FeedbackHandler.php:12)",
+        "FeedbackHandler::submitFullFeedback (app/src/Controllers/FeedbackHandler.php:24)"
+      ],
+      "tables": [
+        "feedback",
+        "feedback_comments",
+        "summaries"
+      ],
+      "database_operations": "Read and/or write through the cited service; exact method and constraints are recorded in the backend audit: feedback, feedback_comments, summaries.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "No rating submitted; anonymous presentation does not mean no user/guest identifier is stored.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F031",
+      "source_id": "UI-031",
+      "name": "Unavailable result recovery",
+      "module": "Results",
+      "roles": "visitor",
+      "route": "result.php?id=…",
+      "purpose": "receive a safe unavailable-result message",
+      "problem": "Provides the named unavailable result recovery action within its stated role and route.",
+      "explanation": "As visitor, I can receive a safe unavailable-result message.",
+      "steps": [
+        "Review the unavailable message",
+        "Use Back to summary settings or obtain an authorized link"
+      ],
+      "inputs": "Missing, unauthorized or inaccessible result id",
+      "behavior": "Resolve requested result; render unavailable or recovery view when it cannot be returned",
+      "outputs": "404 recovery view or missing-id redirect",
+      "related": "History and sharing",
+      "frontend": [
+        "app/public/result.php"
+      ],
+      "backend": [
+        "app/src/Services/HistoryService.php",
+        "app/src/Support/ProcessingError.php",
+        "app/src/Repositories/HistoryRepository.php",
+        "app/src/Controllers/HistoryHandler.php"
+      ],
+      "functions": [
+        "HistoryService::getSummaryById (app/src/Services/HistoryService.php:35)",
+        "HistoryRepository::findSummaryById (app/src/Repositories/HistoryRepository.php:23)",
+        "HistoryHandler::getSummaryById (app/src/Controllers/HistoryHandler.php:17)"
+      ],
+      "tables": [
+        "summaries",
+        "summary_artifacts"
+      ],
+      "database_operations": "SELECT for display/aggregation: summaries, summary_artifacts.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "VERIFIED_UI_IN_ISOLATION",
+      "observed": "browser-readonly-results.json (template/local interaction scope only); source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "404 template verified with synthetic absent id; live authorization not tested.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F032",
+      "source_id": "UI-032",
+      "name": "Personal dashboard and recent summaries",
+      "module": "Dashboard",
+      "roles": "registered non-admin",
+      "route": "dashboard.php",
+      "purpose": "return to recent work and inspect personal activity",
+      "problem": "Provides the named personal dashboard and recent summaries action within its stated role and route.",
+      "explanation": "As registered non-admin, I can return to recent work and inspect personal activity.",
+      "steps": [
+        "Open Dashboard after signing in",
+        "Choose an available recent result or start a summary"
+      ],
+      "inputs": "Account session",
+      "behavior": "Read recent summaries and Nutshell activity; calculate account dashboard counters and display recent work",
+      "outputs": "Recent five summaries and aggregate/empty dashboard",
+      "related": "Personal summary/Nutshell history and activity; administrator scope where stated",
+      "frontend": [
+        "app/public/dashboard.php",
+        "app/public/partials/analytics-graphs-card.php"
+      ],
+      "backend": [
+        "app/src/Controllers/AnalyticsController.php",
+        "app/src/Repositories/HistoryRepository.php",
+        "app/src/Services/HistoryService.php",
+        "app/src/Controllers/HistoryHandler.php",
+        "app/src/Repositories/UserRepository.php"
+      ],
+      "functions": [
+        "AnalyticsController::getDashboardData (app/src/Controllers/AnalyticsController.php:330)",
+        "HistoryService::getSummaryHistory (app/src/Services/HistoryService.php:24)",
+        "HistoryHandler::getSummaryHistory (app/src/Controllers/HistoryHandler.php:12)"
+      ],
+      "tables": [
+        "summaries",
+        "summary_artifacts",
+        "nutshell_generations"
+      ],
+      "database_operations": "SELECT for display/aggregation: summaries, summary_artifacts, nutshell_generations.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Empty state rendered; no live account statistics read.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F033",
+      "source_id": "UI-033",
+      "name": "Reuse inferred preferred settings",
+      "module": "Dashboard",
+      "roles": "registered non-admin",
+      "route": "dashboard.php → summarizer.php",
+      "purpose": "reuse settings inferred from previous completed summaries",
+      "problem": "Provides the named reuse inferred preferred settings action within its stated role and route.",
+      "explanation": "As registered non-admin, I can reuse settings inferred from previous completed summaries.",
+      "steps": [
+        "If preferred settings are shown, choose the reuse link",
+        "Review the resulting controls before submitting"
+      ],
+      "inputs": "Preferred-settings link",
+      "behavior": "Infer frequently used settings from the account’s saved summary/artifact history and expose reuse controls",
+      "outputs": "Validated mode/format/depth preselection",
+      "related": "Personal summary/Nutshell history and activity; administrator scope where stated",
+      "frontend": [
+        "app/public/dashboard.php",
+        "app/public/partials/summarizer-form.php"
+      ],
+      "backend": [
+        "app/src/Controllers/AnalyticsController.php",
+        "app/src/Repositories/UserRepository.php"
+      ],
+      "functions": [
+        "AnalyticsController::getUserPreferredSettings (app/src/Controllers/AnalyticsController.php:519)"
+      ],
+      "tables": [
+        "summaries",
+        "summary_artifacts"
+      ],
+      "database_operations": "SELECT for display/aggregation: summaries, summary_artifacts.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "No separate editable custom-profile storage interface found; history-derived preference is conditional.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F034",
+      "source_id": "UI-034",
+      "name": "Browse summary and nutshell history",
+      "module": "History",
+      "roles": "registered user or admin",
+      "route": "history.php",
+      "purpose": "reopen retained results and read prior nutshells",
+      "problem": "Provides the named browse summary and nutshell history action within its stated role and route.",
+      "explanation": "As registered user or admin, I can reopen retained results and read prior nutshells.",
+      "steps": [
+        "Open History",
+        "Choose a title or Access Full Report",
+        "Read Nutshell History when available"
+      ],
+      "inputs": "Account; optional page query",
+      "behavior": "Read the requested history page and list summary and Nutshell records for the current context",
+      "outputs": "History previews and full-report links",
+      "related": "Personal summary/Nutshell history and activity; administrator scope where stated",
+      "frontend": [
+        "app/public/history.php"
+      ],
+      "backend": [
+        "app/src/Controllers/HistoryHandler.php",
+        "app/src/Repositories/HistoryRepository.php",
+        "app/src/Services/HistoryService.php",
+        "app/src/Controllers/AnalyticsController.php",
+        "app/src/Repositories/UserRepository.php"
+      ],
+      "functions": [
+        "HistoryHandler::getSummaryHistory (app/src/Controllers/HistoryHandler.php:12)",
+        "HistoryHandler::getNutshellHistory (app/src/Controllers/HistoryHandler.php:22)",
+        "HistoryService::getSummaryHistory (app/src/Services/HistoryService.php:24)",
+        "HistoryService::getNutshellHistory (app/src/Services/HistoryService.php:56)"
+      ],
+      "tables": [
+        "summaries",
+        "summary_artifacts",
+        "nutshell_generations"
+      ],
+      "database_operations": "SELECT for display/aggregation: summaries, summary_artifacts, nutshell_generations.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Partially working",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication. See the reproduced or source-confirmed limitation below.",
+      "limitations": "The history page displays 10 summaries per page by default (service cap 50) and 20 Nutshell records; no visible history pagination controls are supplied. Saved history was not exercised against production records.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F035",
+      "source_id": "UI-035",
+      "name": "Personal/system activity and date filters",
+      "module": "Analytics",
+      "roles": "registered user or admin",
+      "route": "analytics.php",
+      "purpose": "inspect activity over a chosen period",
+      "problem": "Provides the named personal/system activity and date filters action within its stated role and route.",
+      "explanation": "As registered user or admin, I can inspect activity over a chosen period.",
+      "steps": [
+        "Open Analytics through an available dashboard link",
+        "Choose a preset or From/To dates",
+        "Apply filter and review available charts"
+      ],
+      "inputs": "7d/30d/3m/year/custom dates; role",
+      "behavior": "Apply date bounds and role context to summary/Nutshell activity counts, distributions and trends",
+      "outputs": "Counts, reduction, charts, performance and recent activity",
+      "related": "Personal summary/Nutshell history and activity; administrator scope where stated",
+      "frontend": [
+        "app/public/analytics.php",
+        "app/public/assets/js/analytics.js"
+      ],
+      "backend": [
+        "app/src/Controllers/AnalyticsController.php",
+        "app/src/Repositories/UserRepository.php"
+      ],
+      "functions": [
+        "AnalyticsController::getDashboardData (app/src/Controllers/AnalyticsController.php:330)"
+      ],
+      "tables": [
+        "summaries",
+        "nutshell_generations",
+        "users"
+      ],
+      "database_operations": "SELECT for display/aggregation: summaries, nutshell_generations, users.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Partially working",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication. See the reproduced or source-confirmed limitation below.",
+      "limitations": "Empty state rendered; populated charts not validated; admin scope differs from personal scope. Stored upload source counts and elapsed times can be incomplete, affecting derived activity measures.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F036",
+      "source_id": "UI-036",
+      "name": "View account details",
+      "module": "Profile",
+      "roles": "registered account",
+      "route": "profile.php",
+      "purpose": "view username, email and join date",
+      "problem": "Provides the named view account details action within its stated role and route.",
+      "explanation": "As registered account, I can view username, email and join date.",
+      "steps": [
+        "Open Profile",
+        "Review account details",
+        "Use sidebar to return to dashboard or history"
+      ],
+      "inputs": "Authenticated account",
+      "behavior": "Find the current account profile and render stored account details",
+      "outputs": "Read-only identity card",
+      "related": "Account display, self-deactivation and logout",
+      "frontend": [
+        "app/public/profile.php"
+      ],
+      "backend": [
+        "app/src/Repositories/UserRepository.php",
+        "app/src/Controllers/AuthController.php",
+        "app/src/Utils/PasswordPolicy.php"
+      ],
+      "functions": [
+        "UserRepository::findProfileById (app/src/Repositories/UserRepository.php:63)"
+      ],
+      "tables": [
+        "users"
+      ],
+      "database_operations": "SELECT for display/aggregation: users.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Synthetic identity rendered; no edit username/email/photo form exists.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F037",
+      "source_id": "UI-037",
+      "name": "Deactivate own account",
+      "module": "Profile",
+      "roles": "registered account subject to backend protections",
+      "route": "profile.php → auth.php?action=deactivateAccount",
+      "purpose": "deactivate account after confirming password",
+      "problem": "Provides the named deactivate own account action within its stated role and route.",
+      "explanation": "As registered account subject to backend protections, I can deactivate account after confirming password.",
+      "steps": [
+        "Read the deactivation description",
+        "Enter current password",
+        "Submit only when deactivation is intended"
+      ],
+      "inputs": "Current password; CSRF",
+      "behavior": "Validate authenticated account action; deactivate the account and end applicable access",
+      "outputs": "Inactive account and sign-out; summaries retained",
+      "related": "Login and logout; Account administration",
+      "frontend": [
+        "app/public/profile.php"
+      ],
+      "backend": [
+        "app/src/Controllers/AuthController.php",
+        "app/src/Repositories/UserRepository.php",
+        "app/src/Utils/SessionManager.php",
+        "app/src/Controllers/AdminController.php",
+        "app/public/admin_dashboard.php"
+      ],
+      "functions": [
+        "AuthController::logout (app/src/Controllers/AuthController.php:337)",
+        "AuthController::deactivateAccount (app/src/Controllers/AuthController.php:354)",
+        "UserRepository::deactivateAccount (app/src/Repositories/UserRepository.php:91)",
+        "AdminController::deactivateUser (app/src/Controllers/AdminController.php:262)"
+      ],
+      "tables": [
+        "users",
+        "user_tokens"
+      ],
+      "database_operations": "Read and/or write through the cited service; exact method and constraints are recorded in the backend audit: users, user_tokens.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Not executed; backend has administrator protections; source retention is not hard deletion.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F038",
+      "source_id": "UI-038",
+      "name": "Logout confirmation",
+      "module": "Accounts",
+      "roles": "signed-in account",
+      "route": "auth.php?action=logout",
+      "purpose": "confirm leaving the active session",
+      "problem": "Provides the named logout confirmation action within its stated role and route.",
+      "explanation": "As signed-in account, I can confirm leaving the active session.",
+      "steps": [
+        "Choose Logout",
+        "Choose Cancel to remain or Log out to leave"
+      ],
+      "inputs": "Logout link; Cancel/Log out",
+      "behavior": "Confirm logout in the browser; clear session and applicable remembered-login state",
+      "outputs": "Cancelled modal or logout redirect",
+      "related": "Login and logout; Remembered login",
+      "frontend": [
+        "app/public/assets/js/logout-confirmation.js"
+      ],
+      "backend": [
+        "app/public/auth.php",
+        "app/src/Controllers/AuthController.php",
+        "app/src/Utils/SessionManager.php",
+        "app/src/Services/RememberMeService.php"
+      ],
+      "functions": [
+        "AuthController::logout (app/src/Controllers/AuthController.php:337)",
+        "RememberMeService::clearCookie (app/src/Services/RememberMeService.php:55)"
+      ],
+      "tables": [
+        "user_tokens"
+      ],
+      "database_operations": "Read and/or write through the cited service; exact method and constraints are recorded in the backend audit: user_tokens.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "VERIFIED_UI_IN_ISOLATION",
+      "observed": "browser-readonly-results.json supplementalInteractions; synthetic data/client-only action; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Escape closed modal on desktop/mobile; actual logout not executed; GET logout target remains source-supported only.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F039",
+      "source_id": "UI-039",
+      "name": "System overview and storage counters",
+      "module": "Administration",
+      "roles": "administrator",
+      "route": "admin_dashboard.php",
+      "purpose": "inspect aggregate system and upload counters",
+      "problem": "Provides the named system overview and storage counters action within its stated role and route.",
+      "explanation": "As administrator, I can inspect aggregate system and upload counters.",
+      "steps": [
+        "Open Admin",
+        "Choose a statistics period",
+        "Review overview and storage cards"
+      ],
+      "inputs": "Stats-period select",
+      "behavior": "Read aggregate system counters and inspect upload storage totals for the administrator",
+      "outputs": "User/summary/guest/rating counts; storage size/count",
+      "related": "Usage analytics; Storage administration",
+      "frontend": [
+        "app/public/admin_dashboard.php"
+      ],
+      "backend": [
+        "app/src/Controllers/AdminController.php",
+        "app/src/Controllers/AnalyticsController.php",
+        "app/src/Repositories/UserRepository.php"
+      ],
+      "functions": [
+        "AdminController::getSystemStats (app/src/Controllers/AdminController.php:59)",
+        "AdminController::getUploadOrphanStats (app/src/Controllers/AdminController.php:121)"
+      ],
+      "tables": [
+        "users",
+        "summaries",
+        "feedback"
+      ],
+      "database_operations": "SELECT aggregate users, summaries and feedback; inspect filesystem upload counts. Cleanup is a separate action in F055.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "All captured zeros are synthetic; cleanup/delete-file dispatcher actions exist but visible maintenance buttons were not found.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F040",
+      "source_id": "UI-040",
+      "name": "Search and filter users",
+      "module": "Administration",
+      "roles": "administrator",
+      "route": "admin_dashboard.php",
+      "purpose": "filter the displayed account table",
+      "problem": "Provides the named search and filter users action within its stated role and route.",
+      "explanation": "As administrator, I can filter the displayed account table.",
+      "steps": [
+        "Enter username/email/id text",
+        "Choose role and status",
+        "Use Clear filters to reset"
+      ],
+      "inputs": "Search text; role; active-status filters",
+      "behavior": "Retrieve and filter the administrator’s account list by supplied search/status criteria",
+      "outputs": "Visible rows and count",
+      "related": "Account administration",
+      "frontend": [
+        "app/public/assets/js/admin-user-filters.js",
+        "app/public/admin_dashboard.php"
+      ],
+      "backend": [
+        "app/src/Controllers/AdminController.php",
+        "app/public/admin_dashboard.php"
+      ],
+      "functions": [
+        "AdminController::getAllUsers (app/src/Controllers/AdminController.php:49)"
+      ],
+      "tables": [
+        "users"
+      ],
+      "database_operations": "SELECT for display/aggregation: users.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Client-side filter over loaded rows; fixture had no users, so nonempty match behavior not browser-tested.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F041",
+      "source_id": "UI-041",
+      "name": "Deactivate managed user",
+      "module": "Administration",
+      "roles": "administrator",
+      "route": "admin_dashboard.php?action=deactivate_user",
+      "purpose": "disable an eligible user account",
+      "problem": "Provides the named deactivate managed user action within its stated role and route.",
+      "explanation": "As administrator, I can disable an eligible user account.",
+      "steps": [
+        "Find the intended account",
+        "Read the confirmation on Deactivate",
+        "Confirm only when intended"
+      ],
+      "inputs": "User id; CSRF; confirmation",
+      "behavior": "Validate administrator status-changing request and update target account status; dedicated and alternate paths have different safeguards",
+      "outputs": "Account deactivation or error",
+      "related": "Account administration",
+      "frontend": [
+        "app/public/admin_dashboard.php"
+      ],
+      "backend": [
+        "app/src/Controllers/AdminController.php",
+        "app/public/admin_dashboard.php"
+      ],
+      "functions": [
+        "AdminController::toggleUserStatus (app/src/Controllers/AdminController.php:112)",
+        "AdminController::deactivateUser (app/src/Controllers/AdminController.php:262)"
+      ],
+      "tables": [
+        "users",
+        "admin_audit_logs"
+      ],
+      "database_operations": "Read and/or write through the cited service; exact method and constraints are recorded in the backend audit: users, admin_audit_logs.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Partially working",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication. See the reproduced or source-confirmed limitation below.",
+      "limitations": "Destructive/stateful action source-inspected only; not executed. The alternate toggle-status action bypasses protections present in the dedicated deactivation method.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F042",
+      "source_id": "UI-042",
+      "name": "Permanently delete managed user",
+      "module": "Administration",
+      "roles": "administrator",
+      "route": "admin_dashboard.php?action=delete_user",
+      "purpose": "remove an eligible account and associated data",
+      "problem": "Provides the named permanently delete managed user action within its stated role and route.",
+      "explanation": "As administrator, I can remove an eligible account and associated data.",
+      "steps": [
+        "Find and verify the intended account",
+        "Read the explicit permanent-deletion warning",
+        "Confirm only under approved administration procedures"
+      ],
+      "inputs": "User id; CSRF; confirmation",
+      "behavior": "Validate authorized hard-delete action; remove target account and process related cleanup according to source and constraints",
+      "outputs": "Deletion or protected-account/error result",
+      "related": "Account administration",
+      "frontend": [
+        "app/public/admin_dashboard.php"
+      ],
+      "backend": [
+        "app/src/Controllers/AdminController.php",
+        "app/public/admin_dashboard.php"
+      ],
+      "functions": [
+        "AdminController::hardDeleteUser (app/src/Controllers/AdminController.php:212)"
+      ],
+      "tables": [
+        "users",
+        "admin_audit_logs"
+      ],
+      "database_operations": "Read and/or write through the cited service; exact method and constraints are recorded in the backend audit: users, admin_audit_logs.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Not executed; deletion is distinct from deactivation and may remove linked data.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F043",
+      "source_id": "UI-043",
+      "name": "Filter feedback and quality telemetry",
+      "module": "Administration",
+      "roles": "administrator",
+      "route": "admin_dashboard.php",
+      "purpose": "review anonymous-presented feedback and summary setting patterns",
+      "problem": "Provides the named filter feedback and quality telemetry action within its stated role and route.",
+      "explanation": "As administrator, I can review anonymous-presented feedback and summary setting patterns.",
+      "steps": [
+        "Review quality telemetry",
+        "Filter rating/comment state and sort order",
+        "Open a result link where authorized"
+      ],
+      "inputs": "Rating filter; has-comment filter; sort",
+      "behavior": "Filter and aggregate feedback and retrieve related summary information for administrator display",
+      "outputs": "Feedback/comment tables; mode/depth/reason aggregates",
+      "related": "Rating and comments",
+      "frontend": [
+        "app/public/admin_dashboard.php"
+      ],
+      "backend": [
+        "app/src/Controllers/FeedbackHandler.php",
+        "app/src/Repositories/FeedbackRepository.php",
+        "app/src/Services/FeedbackService.php"
+      ],
+      "functions": [
+        "FeedbackHandler::getSystemFeedbackStats (app/src/Controllers/FeedbackHandler.php:59)",
+        "FeedbackHandler::getAllFeedbackForAdmin (app/src/Controllers/FeedbackHandler.php:64)",
+        "FeedbackHandler::getFeedbackTelemetryBreakdown (app/src/Controllers/FeedbackHandler.php:69)",
+        "FeedbackRepository::getSystemFeedbackStats (app/src/Repositories/FeedbackRepository.php:83)",
+        "FeedbackRepository::getAllFeedbackForAdmin (app/src/Repositories/FeedbackRepository.php:115)",
+        "FeedbackRepository::getFeedbackTelemetryBreakdown (app/src/Repositories/FeedbackRepository.php:183)",
+        "FeedbackService::getSystemFeedbackStats (app/src/Services/FeedbackService.php:287)",
+        "FeedbackService::getAllFeedbackForAdmin (app/src/Services/FeedbackService.php:298)",
+        "FeedbackService::getFeedbackTelemetryBreakdown (app/src/Services/FeedbackService.php:309)"
+      ],
+      "tables": [
+        "feedback",
+        "summaries"
+      ],
+      "database_operations": "SELECT/filter feedback LEFT JOIN summaries; the displayed administrator sections do not read the append-only feedback_comments ledger.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Empty fixture only; underlying records are linkable internally despite anonymous display.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F044",
+      "source_id": "UI-044",
+      "name": "Landing telemetry dashboard",
+      "module": "Administration",
+      "roles": "administrator",
+      "route": "admin_dashboard.php",
+      "purpose": "inspect landing engagement metrics",
+      "problem": "Provides the named landing telemetry dashboard action within its stated role and route.",
+      "explanation": "As administrator, I can inspect landing engagement metrics.",
+      "steps": [
+        "Scroll to Landing Page Analytics",
+        "Read labels and applicable date periods",
+        "Interpret missing values as unavailable"
+      ],
+      "inputs": "Stored landing sessions/events",
+      "behavior": "Collect permitted landing session/event telemetry and aggregate visit/conversion/device/referrer indicators",
+      "outputs": "Session, CTA, dwell, LCP, device, scroll, trend and referrer panels",
+      "related": "Usage analytics",
+      "frontend": [
+        "app/public/admin_dashboard.php",
+        "app/public/assets/js/landing-analytics.js"
+      ],
+      "backend": [
+        "app/public/api/track_landing.php",
+        "app/src/Controllers/AnalyticsController.php",
+        "app/src/Repositories/UserRepository.php"
+      ],
+      "functions": [
+        "AnalyticsController::getKpis (app/src/Controllers/AnalyticsController.php:35)",
+        "AnalyticsController::getDeviceBreakdown (app/src/Controllers/AnalyticsController.php:125)",
+        "AnalyticsController::getScrollFunnel (app/src/Controllers/AnalyticsController.php:155)",
+        "AnalyticsController::getDailyTrend (app/src/Controllers/AnalyticsController.php:185)",
+        "AnalyticsController::getTopReferrers (app/src/Controllers/AnalyticsController.php:492)"
+      ],
+      "tables": [
+        "landing_page_sessions",
+        "landing_page_events"
+      ],
+      "database_operations": "INSERT/UPDATE landing_page_sessions and INSERT landing_page_events during permitted ingestion; displayed visit/device/scroll/referrer charts SELECT landing_page_sessions.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "No telemetry emitted; the landing view itself normally sends beacons; counters are not human survey evaluation.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F045",
+      "source_id": "UI-045",
+      "name": "Audit log viewer",
+      "module": "Administration",
+      "roles": "administrator",
+      "route": "admin_audit_logs.php",
+      "purpose": "review privileged action logs",
+      "problem": "Provides the named audit log viewer action within its stated role and route.",
+      "explanation": "As administrator, I can review privileged action logs.",
+      "steps": [
+        "Open Audit Logs",
+        "Choose filters and submit",
+        "Use pagination when present"
+      ],
+      "inputs": "Action/admin/date filters; page",
+      "behavior": "Require administrator access; filter audit records and join actor identity for display",
+      "outputs": "Filtered log rows and pagination",
+      "related": "Administrative action accountability",
+      "frontend": [
+        "app/public/admin_audit_logs.php"
+      ],
+      "backend": [
+        "app/src/Services/AdminSecurityService.php",
+        "app/src/Controllers/AuthController.php",
+        "app/src/Services/EmailService.php"
+      ],
+      "functions": [],
+      "tables": [
+        "admin_audit_logs",
+        "users"
+      ],
+      "database_operations": "SELECT for display/aggregation: admin_audit_logs, users.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Synthetic missing-table empty state captured; real audit log contents not read.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F046",
+      "source_id": "UI-046",
+      "name": "Database health JSON",
+      "module": "Administration",
+      "roles": "administrator",
+      "route": "admin_db_health.php",
+      "purpose": "check required-table/column presence",
+      "problem": "Provides the named database health json action within its stated role and route.",
+      "explanation": "As administrator, I can check required-table/column presence.",
+      "steps": [
+        "Open the diagnostic endpoint under administrator access and interpret status fields"
+      ],
+      "inputs": "Authenticated administrator session",
+      "behavior": "Require administrator context; query database metadata and return health information",
+      "outputs": "Status JSON and development-dependent detail",
+      "related": "Navigation and result presentation",
+      "frontend": [
+        "app/public/admin_db_health.php"
+      ],
+      "backend": [
+        "app/src/Database.php"
+      ],
+      "functions": [
+        "Database::getInstance (app/src/Database.php:38)",
+        "Database::getConnection (app/src/Database.php:45)",
+        "Database::__wakeup (app/src/Database.php:51)"
+      ],
+      "tables": [
+        "information_schema (metadata only)"
+      ],
+      "database_operations": "SELECT for display/aggregation: information_schema (metadata only).",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Anonymous isolated 403 verified; authenticated database health not checked against live schema.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F047",
+      "source_id": "UI-047",
+      "name": "Assigned independent summary review",
+      "module": "Evaluation",
+      "roles": "active account with assignment",
+      "route": "evaluate.php",
+      "purpose": "read an assigned source/summary and score it independently",
+      "problem": "Provides the named assigned independent summary review action within its stated role and route.",
+      "explanation": "As active account with assignment, I can read an assigned source/summary and score it independently.",
+      "steps": [
+        "Open the assigned review link while signed in",
+        "Read source and blinded summary",
+        "Score each criterion separately",
+        "Submit once; contact administrator for corrections"
+      ],
+      "inputs": "Assignment token; seven 1–5 criteria; optional comment; CSRF",
+      "behavior": "Check current assignment access; display blinded output and accept the required review criteria when submitted",
+      "outputs": "Submitted-and-locked assessment or error",
+      "related": "Blind evaluation assignments",
+      "frontend": [
+        "app/public/evaluate.php",
+        "app/public/partials/evaluation-ui.php"
+      ],
+      "backend": [
+        "app/src/Services/EvaluationAccess.php",
+        "app/src/Services/EvaluationService.php",
+        "app/public/evaluate.php"
+      ],
+      "functions": [
+        "EvaluationService::createAssignments (app/src/Services/EvaluationService.php:366)",
+        "EvaluationService::listAssignments (app/src/Services/EvaluationService.php:395)",
+        "EvaluationService::getBlindAssignment (app/src/Services/EvaluationService.php:399)",
+        "EvaluationService::validateRatings (app/src/Services/EvaluationService.php:408)",
+        "EvaluationService::submitRating (app/src/Services/EvaluationService.php:419)",
+        "EvaluationService::getAssignmentsForRun (app/src/Services/EvaluationService.php:446)"
+      ],
+      "tables": [
+        "evaluation_assignments",
+        "evaluation_ratings",
+        "evaluation_outputs"
+      ],
+      "database_operations": "Read and/or write through the cited service; exact method and constraints are recorded in the backend audit: evaluation_assignments, evaluation_ratings, evaluation_outputs.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "Empty/denied UI captured; no assignment or rating created; this 1–5 content rubric is not the capstone ISO usability instrument.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F048",
+      "source_id": "UI-048",
+      "name": "Evaluation export and report rendering",
+      "module": "Evaluation",
+      "roles": "administrator",
+      "route": "evaluation_export.php?run=…&format=json|csv|html",
+      "purpose": "export an existing evaluation run",
+      "problem": "Provides the named evaluation export and report rendering action within its stated role and route.",
+      "explanation": "As administrator, I can export an existing evaluation run.",
+      "steps": [
+        "Use an existing approved run identifier",
+        " request the selected format",
+        " protect exported records"
+      ],
+      "inputs": "Positive run id; json/csv/html format",
+      "behavior": "Require administrator access; build available evaluation report/export with supported identifier removal and spreadsheet safeguards",
+      "outputs": "Download or HTML report",
+      "related": "Evaluation reports and export",
+      "frontend": [
+        "app/public/evaluation_export.php",
+        "app/public/partials/evaluation-report.php",
+        "app/public/partials/evaluation-output.php"
+      ],
+      "backend": [
+        "app/src/Services/EvaluationService.php",
+        "app/public/evaluation_export.php"
+      ],
+      "functions": [
+        "EvaluationService::getRunReport (app/src/Services/EvaluationService.php:474)",
+        "EvaluationService::exportRun (app/src/Services/EvaluationService.php:481)",
+        "EvaluationService::saveReport (app/src/Services/EvaluationService.php:625)",
+        "EvaluationService::reportFailure (app/src/Services/EvaluationService.php:639)"
+      ],
+      "tables": [
+        "evaluation_runs",
+        "evaluation_outputs",
+        "evaluation_metrics",
+        "evaluation_ratings",
+        "evaluation_errors"
+      ],
+      "database_operations": "SELECT for display/aggregation: evaluation_runs, evaluation_outputs, evaluation_metrics, evaluation_ratings, evaluation_errors.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Partially working",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication. See the reproduced or source-confirmed limitation below.",
+      "limitations": "No real run exported; only anonymous 403 tested. evaluation.php now redirects, so legacy management tabs are not operational entry points. Export code exists, but links to the retired evaluation-management page redirect; no real evaluation report was generated.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F049",
+      "source_id": "UI-049",
+      "name": "Document Q&A endpoint",
+      "module": "API-only",
+      "roles": "authorized summary viewer",
+      "route": "api/qa.php",
+      "purpose": "request source-grounded answers through the API",
+      "problem": "Provides the named document q&a endpoint action within its stated role and route.",
+      "explanation": "As authorized summary viewer, I can request source-grounded answers through the API.",
+      "steps": [
+        "Use an authorized API client",
+        " provide an accessible source summary and question",
+        " inspect source evidence"
+      ],
+      "inputs": "POST JSON summary_id, question, optional share_token; no CSRF check found in this endpoint",
+      "behavior": "Accept a source-related question; obtain permitted source context; rank passages and return a grounded answer or unavailable result",
+      "outputs": "Answer/passage/confidence JSON or error",
+      "related": "Python integration; History and sharing",
+      "frontend": [
+        "app/public/api/qa.php"
+      ],
+      "backend": [
+        "app/src/Services/LocalPythonBridge.php",
+        "app/src/Services/HistoryService.php",
+        "app/src/Repositories/HistoryRepository.php",
+        "app/src/Controllers/HistoryHandler.php"
+      ],
+      "functions": [
+        "HistoryService::getSummaryById (app/src/Services/HistoryService.php:35)",
+        "HistoryRepository::findSummaryById (app/src/Repositories/HistoryRepository.php:23)",
+        "HistoryHandler::getSummaryById (app/src/Controllers/HistoryHandler.php:17)"
+      ],
+      "tables": [
+        "summaries",
+        "summary_artifacts"
+      ],
+      "database_operations": "Read and/or write through the cited service; exact method and constraints are recorded in the backend audit: summaries, summary_artifacts.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed. Python process and relevant installed packages.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication.",
+      "limitations": "No Q&A interaction widget found in current result.js/result.php. Do not advertise a visible chat feature. The API-only endpoint has no main-interface chat widget; a source-grounded Python answer passed in isolation. The route lacks a CSRF check and may disclose raw exception detail.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F050",
+      "source_id": "UI-050",
+      "name": "Document and multi-document REST operations",
+      "module": "API-only",
+      "roles": "Intended document caller; dispatcher does not enforce authentication or ownership",
+      "route": "api/router.php and aliases",
+      "purpose": "access document operations through routed API",
+      "problem": "Provides the named document and multi-document rest operations action within its stated role and route.",
+      "explanation": "As session/role controlled by dispatcher, I can access document operations through routed API.",
+      "steps": [
+        "Consult controller dispatch contract before using an integration"
+      ],
+      "inputs": "Method/path and controller-specific payload",
+      "behavior": "Dispatch document creation, retrieval, cached-summary combinations, listing, batch or streaming operations; ownership enforcement is missing",
+      "outputs": "Document/status/summary response",
+      "related": "Document combination API",
+      "frontend": [
+        "app/public/api/router.php",
+        "app/public/api/documents.php",
+        "app/public/api/index.php"
+      ],
+      "backend": [
+        "app/src/Controllers/DocumentSummaryController.php",
+        "app/src/Services/DocumentSummaryService.php",
+        "app/src/Services/SummarizerPromptTemplate.php"
+      ],
+      "functions": [
+        "DocumentSummaryController::getLastStatusCode (app/src/Controllers/DocumentSummaryController.php:26)",
+        "DocumentSummaryController::dispatch (app/src/Controllers/DocumentSummaryController.php:34)",
+        "DocumentSummaryController::handleCreateDocument (app/src/Controllers/DocumentSummaryController.php:115)",
+        "DocumentSummaryController::handleGetOrGenerateSummary (app/src/Controllers/DocumentSummaryController.php:142)",
+        "DocumentSummaryController::handleGetSummaries (app/src/Controllers/DocumentSummaryController.php:163)",
+        "DocumentSummaryController::handleBatchSummaries (app/src/Controllers/DocumentSummaryController.php:172)",
+        "DocumentSummaryService::createDocument (app/src/Services/DocumentSummaryService.php:40)",
+        "DocumentSummaryService::getDocument (app/src/Services/DocumentSummaryService.php:62)",
+        "DocumentSummaryService::validateProfileAndLength (app/src/Services/DocumentSummaryService.php:78)",
+        "DocumentSummaryService::isNonsenseRequest (app/src/Services/DocumentSummaryService.php:101)",
+        "DocumentSummaryService::countWords (app/src/Services/DocumentSummaryService.php:122)",
+        "DocumentSummaryService::calculateCompressionRatio (app/src/Services/DocumentSummaryService.php:135)",
+        "DocumentSummaryService::calculateReadingTimeSeconds (app/src/Services/DocumentSummaryService.php:147)",
+        "DocumentSummaryService::generateSummary (app/src/Services/DocumentSummaryService.php:158)",
+        "DocumentSummaryService::getOrGenerateSummary (app/src/Services/DocumentSummaryService.php:216)",
+        "DocumentSummaryService::createDocumentWithDefaultSummary (app/src/Services/DocumentSummaryService.php:284)",
+        "DocumentSummaryService::getSummaries (app/src/Services/DocumentSummaryService.php:299)",
+        "DocumentSummaryService::batchGetOrGenerateSummaries (app/src/Services/DocumentSummaryService.php:323)",
+        "SummarizerPromptTemplate::isAllowedProfile (app/src/Services/SummarizerPromptTemplate.php:77)",
+        "SummarizerPromptTemplate::isAllowedLength (app/src/Services/SummarizerPromptTemplate.php:82)",
+        "SummarizerPromptTemplate::getProfileInstruction (app/src/Services/SummarizerPromptTemplate.php:87)",
+        "SummarizerPromptTemplate::getLengthInstruction (app/src/Services/SummarizerPromptTemplate.php:93)",
+        "SummarizerPromptTemplate::renderPrompt (app/src/Services/SummarizerPromptTemplate.php:102)"
+      ],
+      "tables": [
+        "documents",
+        "document_summaries"
+      ],
+      "database_operations": "Read and/or write through the cited service; exact method and constraints are recorded in the backend audit: documents, document_summaries.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed. Python process and relevant installed packages.",
+      "implemented": "Yes",
+      "status": "Partially working",
+      "tested": "SOURCE-SUPPORTED",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; source inspection establishes implementation; template rendering does not establish successful persistence or authentication. See the reproduced or source-confirmed limitation below.",
+      "limitations": "No multi-file selector in main form; result can render multi_document metadata when present. Actual controller/service fixtures returned another owner’s document and an anonymous document with HTTP 200. The dispatcher also lacks a CSRF check.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json",
+        "evidence/backend-isolated-checks.json"
+      ]
+    },
+    {
+      "id": "F051",
+      "source_id": "UI-051",
+      "name": "Static service health",
+      "module": "Health",
+      "roles": "visitor or monitor",
+      "route": "health.php",
+      "purpose": "confirm the PHP health endpoint responds",
+      "problem": "Provides the named static service health action within its stated role and route.",
+      "explanation": "As visitor or monitor, I can confirm the PHP health endpoint responds.",
+      "steps": [
+        "Request health.php",
+        "Check HTTP status and JSON service label"
+      ],
+      "inputs": "GET only in this audit",
+      "behavior": "Return a static JSON health response without loading the application bootstrap",
+      "outputs": "status ok / service ai-summarizer JSON",
+      "related": "Navigation and result presentation",
+      "frontend": [
+        "app/public/health.php"
+      ],
+      "backend": [],
+      "functions": [],
+      "tables": [],
+      "database_operations": "No persistent database operation in this capability; browser/session/file state may apply as described.",
+      "dependencies": "Browser and PHP runtime; MariaDB where tables are listed.",
+      "implemented": "Yes",
+      "status": "Verified working",
+      "tested": "Isolated local interaction / static route only",
+      "observed": "Source inspection; UI rendered in isolation where listed in screenshot register; the named local interaction passed; no server persistence is claimed.",
+      "limitations": "This static check does not establish database, NLP worker or full application readiness.",
+      "evidence": [
+        "ui-feature-notes.json",
+        "browser-readonly-results.json",
+        "UI_UX_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F052",
+      "source_id": "B07",
+      "name": "Guest lifecycle",
+      "module": "Backend services",
+      "roles": "guest, user",
+      "route": "Session start, account sign-in or expiry processing",
+      "purpose": "Guest access keeps a temporary session so eligible results can be retrieved before an account is used.",
+      "problem": "Supports guest lifecycle.",
+      "explanation": "Guest access keeps a temporary session so eligible results can be retrieved before an account is used.",
+      "steps": [
+        "Use the named authorized entry point in an isolated deployment",
+        "Provide the specified inputs",
+        "Inspect the response and related records"
+      ],
+      "inputs": "Temporary token and existing guest-owned records",
+      "behavior": "create token; touch expiry; claim summaries/feedback; purge expired guest data",
+      "outputs": "Guest access token; eligible records transferred or expired",
+      "related": "Main processing, administration and reproducible operation",
+      "frontend": [],
+      "backend": [
+        "app/src/Services/GuestSessionService.php",
+        "app/src/whitereaper.php"
+      ],
+      "functions": [
+        "GuestSessionService::getCurrentGuestToken (app/src/Services/GuestSessionService.php:38)",
+        "GuestSessionService::getOrCreateGuestToken (app/src/Services/GuestSessionService.php:48)",
+        "GuestSessionService::claimGuestDataForUser (app/src/Services/GuestSessionService.php:58)",
+        "GuestSessionService::clearGuestIdentity (app/src/Services/GuestSessionService.php:108)",
+        "GuestSessionService::purgeExpiredGuests (app/src/Services/GuestSessionService.php:118)"
+      ],
+      "tables": [
+        "guest_sessions",
+        "summaries",
+        "feedback"
+      ],
+      "database_operations": "create token; touch expiry; claim summaries/feedback; purge expired guest data against guest_sessions, summaries, feedback.",
+      "dependencies": "Configured PHP/Python/database runtime as applicable; worker and model dependencies must be provisioned separately.",
+      "implemented": "Yes",
+      "status": "Partially working",
+      "tested": "Source inspection; method existence is not an executed workflow",
+      "observed": "Source-confirmed; GET bootstrap mutates state; lifecycle incomplete for other stores.",
+      "limitations": "Source-confirmed; GET bootstrap mutates state; lifecycle incomplete for other stores.",
+      "evidence": [
+        "BACKEND_AND_DATABASE_AUDIT.md",
+        "SECURITY_AND_RELIABILITY_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F053",
+      "source_id": "B12",
+      "name": "Python integration",
+      "module": "Backend services",
+      "roles": "internal",
+      "route": "Internal request via LocalPythonBridge",
+      "purpose": "The PHP application passes processing work to Python and interprets its response.",
+      "problem": "Supports python integration.",
+      "explanation": "The PHP application passes processing work to Python and interprets its response.",
+      "steps": [
+        "Use the named authorized entry point in an isolated deployment",
+        "Provide the specified inputs",
+        "Inspect the response and related records"
+      ],
+      "inputs": "Action, normalized payload and worker configuration",
+      "behavior": "daemon dispatch; CLI dispatch; structured response; timeout; terminate child tree",
+      "outputs": "Structured Python response or bounded error",
+      "related": "Main processing, administration and reproducible operation",
+      "frontend": [],
+      "backend": [
+        "app/src/Services/LocalPythonBridge.php"
+      ],
+      "functions": [
+        "LocalPythonBridge::summarize (app/src/Services/LocalPythonBridge.php:31)",
+        "LocalPythonBridge::summarizeV2 (app/src/Services/LocalPythonBridge.php:36)"
+      ],
+      "tables": [],
+      "database_operations": "daemon dispatch; CLI dispatch; structured response; timeout; terminate child tree against process/filesystem state.",
+      "dependencies": "Configured PHP/Python/database runtime as applicable; worker and model dependencies must be provisioned separately.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "Source inspection; method existence is not an executed workflow",
+      "observed": "Source-confirmed; authenticated loopback protocol3; Python behavior separately audited.",
+      "limitations": "Source-confirmed; authenticated loopback protocol3; Python behavior separately audited.",
+      "evidence": [
+        "BACKEND_AND_DATABASE_AUDIT.md",
+        "SECURITY_AND_RELIABILITY_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F054",
+      "source_id": "B13",
+      "name": "Summary persistence",
+      "module": "Backend services",
+      "roles": "internal",
+      "route": "Successful background summary completion",
+      "purpose": "Successful processing is intended to save a summary and supporting source for later display.",
+      "problem": "Supports summary persistence.",
+      "explanation": "Successful processing is intended to save a summary and supporting source for later display.",
+      "steps": [
+        "Use the named authorized entry point in an isolated deployment",
+        "Provide the specified inputs",
+        "Inspect the response and related records"
+      ],
+      "inputs": "Normalized output, source and metadata",
+      "behavior": "normalize worker contract; store summary; store source/artifact; attach metadata",
+      "outputs": "Saved summary identifier and artifact",
+      "related": "Main processing, administration and reproducible operation",
+      "frontend": [],
+      "backend": [
+        "app/src/Services/ArticleService.php"
+      ],
+      "functions": [
+        "ArticleService::storeSummary (app/src/Services/ArticleService.php:263)"
+      ],
+      "tables": [
+        "summaries",
+        "summary_artifacts",
+        "users"
+      ],
+      "database_operations": "SELECT users to verify account existence; INSERT summaries and summary_artifacts and attach normalized metadata.",
+      "dependencies": "Configured PHP/Python/database runtime as applicable; worker and model dependencies must be provisioned separately.",
+      "implemented": "Yes",
+      "status": "Partially working",
+      "tested": "Source inspection; method existence is not an executed workflow",
+      "observed": "Source-confirmed; uploaded source word counts and processing time incomplete.",
+      "limitations": "Source-confirmed; uploaded source word counts and processing time incomplete.",
+      "evidence": [
+        "BACKEND_AND_DATABASE_AUDIT.md",
+        "SECURITY_AND_RELIABILITY_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F055",
+      "source_id": "B21",
+      "name": "Storage administration",
+      "module": "Backend services",
+      "roles": "admin",
+      "route": "Administrator storage controls",
+      "purpose": "Administrators can inspect upload storage and invoke cleanup controls.",
+      "problem": "Supports storage administration.",
+      "explanation": "Administrators can inspect upload storage and invoke cleanup controls.",
+      "steps": [
+        "Use the named authorized entry point in an isolated deployment",
+        "Provide the specified inputs",
+        "Inspect the response and related records"
+      ],
+      "inputs": "Authorized cleanup action and upload directory",
+      "behavior": "count uploads; delete aged uploads; delete all uploads",
+      "outputs": "File counts or deletion outcome",
+      "related": "Main processing, administration and reproducible operation",
+      "frontend": [],
+      "backend": [
+        "app/src/Controllers/AdminController.php",
+        "app/src/Services/AdminSecurityService.php"
+      ],
+      "functions": [
+        "AdminController::getUploadOrphanStats (app/src/Controllers/AdminController.php:121)",
+        "AdminController::cleanOrphanedFiles (app/src/Controllers/AdminController.php:144)",
+        "AdminController::deleteAllFiles (app/src/Controllers/AdminController.php:175)"
+      ],
+      "tables": [
+        "admin_audit_logs"
+      ],
+      "database_operations": "Inspect or delete upload files as requested; record successful administrator cleanup in admin_audit_logs. No database-reference check establishes orphan status.",
+      "dependencies": "Configured PHP/Python/database runtime as applicable; worker and model dependencies must be provisioned separately.",
+      "implemented": "Yes",
+      "status": "Partially working",
+      "tested": "Source inspection; method existence is not an executed workflow",
+      "observed": "Source-confirmed destructive capability; age-only cleanup is not reference-aware orphan detection; not executed.",
+      "limitations": "Source-confirmed destructive capability; age-only cleanup is not reference-aware orphan detection; not executed.",
+      "evidence": [
+        "BACKEND_AND_DATABASE_AUDIT.md",
+        "SECURITY_AND_RELIABILITY_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F056",
+      "source_id": "B22",
+      "name": "Evaluation dataset preparation",
+      "module": "Evaluation",
+      "roles": "admin service caller, CLI maintainer",
+      "route": "EvaluationService and scripts/evaluation_import.php",
+      "purpose": "A maintainer can prepare material for controlled algorithm evaluation through implemented services and import tools.",
+      "problem": "Supports evaluation dataset preparation.",
+      "explanation": "A maintainer can prepare material for controlled algorithm evaluation through implemented services and import tools.",
+      "steps": [
+        "Use the named authorized entry point in an isolated deployment",
+        "Provide the specified inputs",
+        "Inspect the response and related records"
+      ],
+      "inputs": "Dataset metadata, source documents and reference annotations",
+      "behavior": "create dataset; add document/provenance/split; add references; add content units; add challenge cases; activate/deactivate",
+      "outputs": "Dataset, reference and content-unit records",
+      "related": "Main processing, administration and reproducible operation",
+      "frontend": [],
+      "backend": [
+        "app/src/Services/EvaluationService.php",
+        "scripts/evaluation_import.php"
+      ],
+      "functions": [
+        "EvaluationService::createDataset (app/src/Services/EvaluationService.php:144)",
+        "EvaluationService::addDocument (app/src/Services/EvaluationService.php:158)",
+        "EvaluationService::addReference (app/src/Services/EvaluationService.php:177)",
+        "EvaluationService::addContentUnit (app/src/Services/EvaluationService.php:191)",
+        "EvaluationService::addChallengeCase (app/src/Services/EvaluationService.php:202)",
+        "EvaluationService::listDatasets (app/src/Services/EvaluationService.php:216)",
+        "EvaluationService::listDocuments (app/src/Services/EvaluationService.php:217)",
+        "EvaluationService::getDocument (app/src/Services/EvaluationService.php:218)",
+        "EvaluationService::setDatasetActive (app/src/Services/EvaluationService.php:227)",
+        "EvaluationService::setDocumentActive (app/src/Services/EvaluationService.php:236)",
+        "EvaluationService::verifyContentUnit (app/src/Services/EvaluationService.php:461)"
+      ],
+      "tables": [
+        "evaluation_datasets",
+        "evaluation_documents",
+        "evaluation_references",
+        "evaluation_content_units",
+        "evaluation_challenge_cases",
+        "evaluation_audit_log"
+      ],
+      "database_operations": "create dataset; add document/provenance/split; add references; add content units; add challenge cases; activate/deactivate against evaluation_datasets, evaluation_documents, evaluation_references, evaluation_content_units, evaluation_challenge_cases, evaluation_audit_log.",
+      "dependencies": "Configured PHP/Python/database runtime as applicable; worker and model dependencies must be provisioned separately.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "Source inspection; method existence is not an executed workflow",
+      "observed": "Source-confirmed service/CLI; not evidence of reachable browser controls or completed research corpus.",
+      "limitations": "Source-confirmed service/CLI; not evidence of reachable browser controls or completed research corpus.",
+      "evidence": [
+        "BACKEND_AND_DATABASE_AUDIT.md",
+        "SECURITY_AND_RELIABILITY_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F057",
+      "source_id": "B23",
+      "name": "Evaluation run control",
+      "module": "Evaluation",
+      "roles": "admin service caller",
+      "route": "EvaluationService run methods",
+      "purpose": "Evaluation run control records the settings used for a comparison so results can be traced to their inputs.",
+      "problem": "Supports evaluation run control.",
+      "explanation": "Evaluation run control records the settings used for a comparison so results can be traced to their inputs.",
+      "steps": [
+        "Use the named authorized entry point in an isolated deployment",
+        "Provide the specified inputs",
+        "Inspect the response and related records"
+      ],
+      "inputs": "Dataset, profile/length/system combinations and configuration",
+      "behavior": "queue immutable snapshot; cancel; resume; code fingerprint; bounded combinations",
+      "outputs": "Queued immutable run snapshot and output work items",
+      "related": "Main processing, administration and reproducible operation",
+      "frontend": [],
+      "backend": [
+        "app/src/Services/EvaluationService.php"
+      ],
+      "functions": [
+        "EvaluationService::queueRun (app/src/Services/EvaluationService.php:245)",
+        "EvaluationService::cancelRun (app/src/Services/EvaluationService.php:335)",
+        "EvaluationService::resumeRun (app/src/Services/EvaluationService.php:344)"
+      ],
+      "tables": [
+        "evaluation_runs",
+        "evaluation_outputs",
+        "evaluation_audit_log",
+        "evaluation_datasets",
+        "evaluation_documents",
+        "evaluation_references",
+        "evaluation_content_units",
+        "evaluation_challenge_cases"
+      ],
+      "database_operations": "Read dataset/document/reference/unit/challenge snapshot, seal the dataset, and write run/output/audit state. Profiles are supplied by evaluation-document settings.",
+      "dependencies": "Configured PHP/Python/database runtime as applicable; worker and model dependencies must be provisioned separately.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "Source inspection; method existence is not an executed workflow",
+      "observed": "Source-confirmed; five lengths/eight profiles/five systems/ten ablations; optionalLLM may unavailable.",
+      "limitations": "Source-confirmed; five lengths/eight profiles/five systems/ten ablations; optionalLLM may unavailable.",
+      "evidence": [
+        "BACKEND_AND_DATABASE_AUDIT.md",
+        "SECURITY_AND_RELIABILITY_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F058",
+      "source_id": "B24",
+      "name": "Offline evaluation worker",
+      "module": "Evaluation",
+      "roles": "CLI maintainer",
+      "route": "scripts/evaluation_worker.php",
+      "purpose": "An offline worker processes queued comparison items and records available measurements.",
+      "problem": "Supports offline evaluation worker.",
+      "explanation": "An offline worker processes queued comparison items and records available measurements.",
+      "steps": [
+        "Use the named authorized entry point in an isolated deployment",
+        "Provide the specified inputs",
+        "Inspect the response and related records"
+      ],
+      "inputs": "Queued run and installed evaluation dependencies",
+      "behavior": "single-database lock; generate outputs; persist metrics; record failures; refresh report",
+      "outputs": "Generated outputs, metric records and error states",
+      "related": "Main processing, administration and reproducible operation",
+      "frontend": [],
+      "backend": [
+        "scripts/evaluation_worker.php",
+        "app/src/Services/EvaluationPythonBridge.php",
+        "app/src/Services/EvaluationService.php"
+      ],
+      "functions": [
+        "EvaluationPythonBridge::request (app/src/Services/EvaluationPythonBridge.php:19)",
+        "EvaluationPythonBridge::close (app/src/Services/EvaluationPythonBridge.php:80)",
+        "EvaluationService::getOutputs (app/src/Services/EvaluationService.php:304)",
+        "EvaluationService::getOutputDetail (app/src/Services/EvaluationService.php:308)",
+        "EvaluationService::getRunReport (app/src/Services/EvaluationService.php:474)",
+        "EvaluationService::pendingOutputs (app/src/Services/EvaluationService.php:515)",
+        "EvaluationService::workerPayload (app/src/Services/EvaluationService.php:517)",
+        "EvaluationService::persistOutput (app/src/Services/EvaluationService.php:534)",
+        "EvaluationService::failOutput (app/src/Services/EvaluationService.php:571)",
+        "EvaluationService::saveReport (app/src/Services/EvaluationService.php:625)",
+        "EvaluationService::reportFailure (app/src/Services/EvaluationService.php:639)"
+      ],
+      "tables": [
+        "evaluation_runs",
+        "evaluation_outputs",
+        "evaluation_metrics"
+      ],
+      "database_operations": "single-database lock; generate outputs; persist metrics; record failures; refresh report against evaluation_runs, evaluation_outputs, evaluation_metrics.",
+      "dependencies": "Configured PHP/Python/database runtime as applicable; worker and model dependencies must be provisioned separately.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "Source inspection; method existence is not an executed workflow",
+      "observed": "Source-confirmed; production worker not run; missing metric statuses retained.",
+      "limitations": "Source-confirmed; production worker not run; missing metric statuses retained.",
+      "evidence": [
+        "BACKEND_AND_DATABASE_AUDIT.md",
+        "SECURITY_AND_RELIABILITY_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F059",
+      "source_id": "B26",
+      "name": "Evaluation review and correction",
+      "module": "Evaluation",
+      "roles": "admin service caller",
+      "route": "EvaluationService review methods",
+      "purpose": "Authorized review services record corrections and detailed analysis without treating automatic measurements as human ratings.",
+      "problem": "Supports evaluation review and correction.",
+      "explanation": "Authorized review services record corrections and detailed analysis without treating automatic measurements as human ratings.",
+      "steps": [
+        "Use the named authorized entry point in an isolated deployment",
+        "Provide the specified inputs",
+        "Inspect the response and related records"
+      ],
+      "inputs": "Output, rating correction reason, error label or content-unit review",
+      "behavior": "correct rating with reason; classify error; verify content unit representation",
+      "outputs": "Recorded correction/review with audit history",
+      "related": "Main processing, administration and reproducible operation",
+      "frontend": [],
+      "backend": [
+        "app/src/Services/EvaluationService.php"
+      ],
+      "functions": [
+        "EvaluationService::validateRatings (app/src/Services/EvaluationService.php:408)",
+        "EvaluationService::correctRating (app/src/Services/EvaluationService.php:435)",
+        "EvaluationService::classifyError (app/src/Services/EvaluationService.php:450)",
+        "EvaluationService::verifyContentUnit (app/src/Services/EvaluationService.php:461)"
+      ],
+      "tables": [
+        "evaluation_ratings",
+        "evaluation_errors",
+        "evaluation_content_unit_reviews",
+        "evaluation_audit_log",
+        "evaluation_runs",
+        "evaluation_assignments",
+        "evaluation_outputs"
+      ],
+      "database_operations": "Read run, output and assignment context; record reviewed/corrected rows and audit events; update run report_pending state.",
+      "dependencies": "Configured PHP/Python/database runtime as applicable; worker and model dependencies must be provisioned separately.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "Source inspection; method existence is not an executed workflow",
+      "observed": "Source-confirmed; source method existence does not establish current UI reachability.",
+      "limitations": "Source-confirmed; source method existence does not establish current UI reachability.",
+      "evidence": [
+        "BACKEND_AND_DATABASE_AUDIT.md",
+        "SECURITY_AND_RELIABILITY_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F060",
+      "source_id": "B28",
+      "name": "Migration and installation",
+      "module": "Operations",
+      "roles": "CLI maintainer",
+      "route": "tools/import_schema.php and tools/migrate.php",
+      "purpose": "Installation tools establish or update database structures; they must be rehearsed against a disposable database.",
+      "problem": "Supports migration and installation.",
+      "explanation": "Installation tools establish or update database structures; they must be rehearsed against a disposable database.",
+      "steps": [
+        "Use the named authorized entry point in an isolated deployment",
+        "Provide the specified inputs",
+        "Inspect the response and related records"
+      ],
+      "inputs": "Database configuration and checked-in SQL/migrations",
+      "behavior": "import base schemas; apply migrations; migration ledger/status",
+      "outputs": "Schema changes and migration ledger",
+      "related": "Main processing, administration and reproducible operation",
+      "frontend": [],
+      "backend": [
+        "tools/import_schema.php",
+        "tools/migrate.php"
+      ],
+      "functions": [],
+      "tables": [
+        "schema_migrations"
+      ],
+      "database_operations": "Installer and migration DDL can create/alter the full application schema; schema_migrations records the ledger. Status initialization can also write ledger/baseline state.",
+      "dependencies": "Configured PHP/Python/database runtime as applicable; worker and model dependencies must be provisioned separately.",
+      "implemented": "Yes",
+      "status": "Partially working",
+      "tested": "Source inspection; method existence is not an executed workflow",
+      "observed": "Source-confirmed; status maywrite; passwordresetfreshinstalldrift; not executed.",
+      "limitations": "Source-confirmed; status maywrite; passwordresetfreshinstalldrift; not executed.",
+      "evidence": [
+        "BACKEND_AND_DATABASE_AUDIT.md",
+        "SECURITY_AND_RELIABILITY_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F061",
+      "source_id": "B29",
+      "name": "Retention cleanup",
+      "module": "Operations",
+      "roles": "CLI maintainer, bootstrap",
+      "route": "Cleanup CLI scripts and guest lifecycle",
+      "purpose": "Retention helpers limit selected old telemetry, comments and temporary recovery material.",
+      "problem": "Supports retention cleanup.",
+      "explanation": "Retention helpers limit selected old telemetry, comments and temporary recovery material.",
+      "steps": [
+        "Use the named authorized entry point in an isolated deployment",
+        "Provide the specified inputs",
+        "Inspect the response and related records"
+      ],
+      "inputs": "Retention interval or expiry timestamps",
+      "behavior": "landing90day default; audit90day default; feedbackcomments90day default; expired job payloads; guest expiry",
+      "outputs": "Pruned eligible records/payloads",
+      "related": "Main processing, administration and reproducible operation",
+      "frontend": [],
+      "backend": [
+        "scripts/cleanup_landing_analytics.php",
+        "scripts/cleanup_admin_audit_logs.php",
+        "scripts/cleanup_feedback_events.php",
+        "scripts/cleanup_summary_recovery.php",
+        "app/src/Services/GuestSessionService.php",
+        "app/src/Services/SummaryJobService.php",
+        "app/src/Services/FeedbackService.php"
+      ],
+      "functions": [],
+      "tables": [
+        "landing_page_sessions",
+        "admin_audit_logs",
+        "feedback_comments",
+        "summary_jobs",
+        "guest_sessions",
+        "summaries",
+        "feedback",
+        "landing_page_events"
+      ],
+      "database_operations": "Delete or prune eligible telemetry, audit, feedback-comment, job and guest records; guest purge includes summaries/feedback and landing session deletion can cascade to events. Coverage is incomplete for other stores.",
+      "dependencies": "Configured PHP/Python/database runtime as applicable; worker and model dependencies must be provisioned separately.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "Source inspection; method existence is not an executed workflow",
+      "observed": "Source-confirmed; notproofscheduled; dryrunbootstrapcanwrite; no automaticbackupfound.",
+      "limitations": "Source-confirmed; notproofscheduled; dryrunbootstrapcanwrite; no automaticbackupfound.",
+      "evidence": [
+        "BACKEND_AND_DATABASE_AUDIT.md",
+        "SECURITY_AND_RELIABILITY_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F062",
+      "source_id": "B30",
+      "name": "Windows worker supervision",
+      "module": "Operations",
+      "roles": "CLI maintainer",
+      "route": "Windows worker PowerShell scripts",
+      "purpose": "Maintainers can start, monitor and stop the local Python worker using supplied Windows scripts.",
+      "problem": "Supports windows worker supervision.",
+      "explanation": "Maintainers can start, monitor and stop the local Python worker using supplied Windows scripts.",
+      "steps": [
+        "Use the named authorized entry point in an isolated deployment",
+        "Provide the specified inputs",
+        "Inspect the response and related records"
+      ],
+      "inputs": "Python executable, worker paths and task settings",
+      "behavior": "install logon task; healthcheck30seconds; hidden launch; selftest; verify process before stop; remove task",
+      "outputs": "Worker lifecycle, health checks and scheduled-task configuration",
+      "related": "Main processing, administration and reproducible operation",
+      "frontend": [],
+      "backend": [
+        "scripts/install_nlp_worker_task.ps1",
+        "scripts/start_nlp_worker.ps1",
+        "scripts/monitor_nlp_worker.ps1",
+        "scripts/stop_stale_nlp_workers.ps1",
+        "scripts/remove_nlp_worker_task.ps1"
+      ],
+      "functions": [],
+      "tables": [],
+      "database_operations": "install logon task; healthcheck30seconds; hidden launch; selftest; verify process before stop; remove task against process/filesystem state.",
+      "dependencies": "Configured PHP/Python/database runtime as applicable; worker and model dependencies must be provisioned separately.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "Source inspection; method existence is not an executed workflow",
+      "observed": "Source-confirmed; installed/runningtaskstate not inspected.",
+      "limitations": "Source-confirmed; installed/runningtaskstate not inspected.",
+      "evidence": [
+        "BACKEND_AND_DATABASE_AUDIT.md",
+        "SECURITY_AND_RELIABILITY_AUDIT.md",
+        "evidence/backend-feature-notes.json"
+      ]
+    },
+    {
+      "id": "F063",
+      "source_id": "SHARE",
+      "name": "Bearer-token result access",
+      "module": "Results",
+      "roles": "owner and share-token holder",
+      "route": "result.php share-token lookup",
+      "purpose": "A person holding an authorized share link can retrieve its associated result without becoming its owner.",
+      "problem": "Supports bearer-token result access.",
+      "explanation": "A person holding an authorized share link can retrieve its associated result without becoming its owner.",
+      "steps": [
+        "Open the relevant result or call the documented internal action through its intended boundary",
+        "Provide the required source or access token",
+        "Inspect the resulting output and any warnings"
+      ],
+      "inputs": "Summary identifier and bearer share token",
+      "behavior": "Look up matching token and summary; load result artifact",
+      "outputs": "Result display for token holder",
+      "related": "Source intake, processing and result retrieval",
+      "frontend": [
+        "app/public/result.php"
+      ],
+      "backend": [
+        "app/src/Services/HistoryService.php",
+        "app/src/Repositories/HistoryRepository.php"
+      ],
+      "functions": [
+        "HistoryService::getSummaryById / viewerOwnsSummary / viewerHasSharedAccess",
+        "HistoryRepository::findSummaryById"
+      ],
+      "tables": [
+        "summaries",
+        "summary_artifacts"
+      ],
+      "database_operations": "SELECT summaries and summary_artifacts for bearer retrieval.",
+      "dependencies": "PHP session/context handling and MariaDB; no Python computation is required to retrieve a saved result.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "Source inspection only; live bearer access and revocation not exercised",
+      "observed": "Source-supported; live share-link lifecycle and revocation were not exercised.",
+      "limitations": "Source-supported; live share-link lifecycle and revocation were not exercised.",
+      "evidence": [
+        "BACKEND_AND_DATABASE_AUDIT.md",
+        "evidence/backend-feature-notes.json",
+        "app/src/Services/HistoryService.php"
+      ]
+    },
+    {
+      "id": "F064",
+      "source_id": "ENGINE",
+      "name": "PDF and DOCX source extraction",
+      "module": "Processing",
+      "roles": "internal Python process / maintainer",
+      "route": "local_cli / summarizer_core extraction",
+      "purpose": "The engine converts supported document content into text and structural hints before summarization.",
+      "problem": "Supports pdf and docx source extraction.",
+      "explanation": "The engine converts supported document content into text and structural hints before summarization.",
+      "steps": [
+        "Open the relevant result or call the documented internal action through its intended boundary",
+        "Provide the required source or access token",
+        "Inspect the resulting output and any warnings"
+      ],
+      "inputs": "Supported source document",
+      "behavior": "Read pages/paragraphs/tables; reconstruct text; apply readability checks",
+      "outputs": "Extracted source and document context",
+      "related": "Source intake, processing and result retrieval",
+      "frontend": [],
+      "backend": [
+        "python-engine/local_cli.py",
+        "python-engine/summarizer_core/extraction.py"
+      ],
+      "functions": [
+        "extraction.load_source_document:456",
+        "extraction.extract_pdf_source:137",
+        "extraction.extract_pdf_source_from_reader:63"
+      ],
+      "tables": [],
+      "database_operations": "No direct SQL in this Python capability; PHP handles persistence separately.",
+      "dependencies": "PHP/MariaDB for retrieval; installed Python packages and optional model/OCR resources for processing.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "Scoped existing Python tests and/or source review; see evidence",
+      "observed": "Parsing fixtures run in isolation; representative real uploads were not submitted. Blank-first-page alignment probe was inconclusive.",
+      "limitations": "Parsing fixtures run in isolation; representative real uploads were not submitted. Blank-first-page alignment probe was inconclusive.",
+      "evidence": [
+        "PYTHON_ENGINE_AUDIT.md",
+        "evidence/python-test-case-register.csv"
+      ]
+    },
+    {
+      "id": "F065",
+      "source_id": "ENGINE",
+      "name": "Bounded OCR fallback",
+      "module": "Processing",
+      "roles": "internal Python process / maintainer",
+      "route": "summarizer_core extraction OCR helpers",
+      "purpose": "Image-only PDF content can be passed to an OCR fallback when suitable local tools are installed.",
+      "problem": "Supports bounded ocr fallback.",
+      "explanation": "Image-only PDF content can be passed to an OCR fallback when suitable local tools are installed.",
+      "steps": [
+        "Open the relevant result or call the documented internal action through its intended boundary",
+        "Provide the required source or access token",
+        "Inspect the resulting output and any warnings"
+      ],
+      "inputs": "Unreadable selected PDF pages",
+      "behavior": "Select at most 12 pages; render at 150 DPI; use a 15-second OCR-call timeout and check a 55-second elapsed budget between pages",
+      "outputs": "Recovered text or a controlled unreadable-content error",
+      "related": "Source intake, processing and result retrieval",
+      "frontend": [],
+      "backend": [
+        "python-engine/summarizer_core/extraction.py"
+      ],
+      "functions": [
+        "extraction.select_ocr_page_numbers:195",
+        "extraction.extract_pdf_source_with_ocr:215"
+      ],
+      "tables": [],
+      "database_operations": "No direct SQL in this Python capability; PHP handles persistence separately.",
+      "dependencies": "PHP/MariaDB for retrieval; installed Python packages and optional model/OCR resources for processing.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "Scoped existing Python tests and/or source review; see evidence",
+      "observed": "Source-supported only. The 55-second value is a between-page elapsed-budget check, not a hard total deadline: rasterization has no local timeout. Real OCR tools and scanned-document accuracy were not demonstrated.",
+      "limitations": "Source-supported only. The 55-second value is a between-page elapsed-budget check, not a hard total deadline: rasterization has no local timeout. Real OCR tools and scanned-document accuracy were not demonstrated.",
+      "evidence": [
+        "PYTHON_ENGINE_AUDIT.md",
+        "evidence/python-test-case-register.csv"
+      ]
+    },
+    {
+      "id": "F066",
+      "source_id": "ENGINE",
+      "name": "Source cleaning and reconstruction",
+      "module": "Processing",
+      "roles": "internal Python process / maintainer",
+      "route": "summarizer_core cleaning",
+      "purpose": "The engine attempts to remove navigation and extraction noise while preserving useful paragraphs.",
+      "problem": "Supports source cleaning and reconstruction.",
+      "explanation": "The engine attempts to remove navigation and extraction noise while preserving useful paragraphs.",
+      "steps": [
+        "Open the relevant result or call the documented internal action through its intended boundary",
+        "Provide the required source or access token",
+        "Inspect the resulting output and any warnings"
+      ],
+      "inputs": "Extracted or pasted text",
+      "behavior": "Normalize and classify blocks; remove detected noise; retain readable content",
+      "outputs": "Cleaned paragraphs or an error when content is unavailable",
+      "related": "Source intake, processing and result retrieval",
+      "frontend": [],
+      "backend": [
+        "python-engine/summarizer_core/cleaning.py",
+        "python-engine/summarizer_core/constants.py"
+      ],
+      "functions": [
+        "cleaning.prepare_document_paragraphs:1196",
+        "cleaning.should_drop_paragraph:1134",
+        "cleaning.looks_like_navigation_noise:977"
+      ],
+      "tables": [],
+      "database_operations": "No direct SQL in this Python capability; PHP handles persistence separately.",
+      "dependencies": "PHP/MariaDB for retrieval; installed Python packages and optional model/OCR resources for processing.",
+      "implemented": "Yes",
+      "status": "Partially working",
+      "tested": "Scoped existing Python tests and/or source review; see evidence",
+      "observed": "A synthetic valid paragraph containing register was discarded. Rewording or paragraph separation retained content; this is a confirmed over-filtering defect.",
+      "limitations": "A synthetic valid paragraph containing register was discarded. Rewording or paragraph separation retained content; this is a confirmed over-filtering defect.",
+      "evidence": [
+        "PYTHON_ENGINE_AUDIT.md",
+        "evidence/isolated-smoke-followup.json"
+      ]
+    },
+    {
+      "id": "F067",
+      "source_id": "ENGINE",
+      "name": "Default legacy summary selection",
+      "module": "Processing",
+      "roles": "internal Python process / maintainer",
+      "route": "local_cli.handle_summarize",
+      "purpose": "The configured engine ranks and organizes source passages using text statistics, document hints and length constraints.",
+      "problem": "Supports default legacy summary selection.",
+      "explanation": "The configured engine ranks and organizes source passages using text statistics, document hints and length constraints.",
+      "steps": [
+        "Open the relevant result or call the documented internal action through its intended boundary",
+        "Provide the required source or access token",
+        "Inspect the resulting output and any warnings"
+      ],
+      "inputs": "Source, mode, format, depth, title and focus",
+      "behavior": "Extract; clean; rank sentence candidates; select; simplify; check heuristic facts; format",
+      "outputs": "Structured summary payload and evidence metadata",
+      "related": "Source intake, processing and result retrieval",
+      "frontend": [],
+      "backend": [
+        "python-engine/local_cli.py",
+        "python-engine/summarizer_core/pipeline.py"
+      ],
+      "functions": [
+        "local_cli.handle_summarize:633",
+        "SummarizationPipeline.summarize:140"
+      ],
+      "tables": [],
+      "database_operations": "No direct SQL in this Python capability; PHP handles persistence separately.",
+      "dependencies": "PHP/MariaDB for retrieval; installed Python packages and optional model/OCR resources for processing.",
+      "implemented": "Yes",
+      "status": "Partially working",
+      "tested": "Scoped existing Python tests and/or source review; see evidence",
+      "observed": "The checked-in NIST fixture returned a nonempty summary. General quality, omission rates and saved web workflows remain unverified; the preceding cleaning stage has a reproduced defect.",
+      "limitations": "The checked-in NIST fixture returned a nonempty summary. General quality, omission rates and saved web workflows remain unverified; the preceding cleaning stage has a reproduced defect.",
+      "evidence": [
+        "PYTHON_ENGINE_AUDIT.md",
+        "evidence/isolated-smoke-followup.json"
+      ]
+    },
+    {
+      "id": "F068",
+      "source_id": "ENGINE",
+      "name": "Optional v2 summary engine",
+      "module": "Processing",
+      "roles": "internal Python process / maintainer",
+      "route": "light_engine / light_engine_cli",
+      "purpose": "An alternative engine implementation provides a configurable experimental processing path.",
+      "problem": "Supports optional v2 summary engine.",
+      "explanation": "An alternative engine implementation provides a configurable experimental processing path.",
+      "steps": [
+        "Open the relevant result or call the documented internal action through its intended boundary",
+        "Provide the required source or access token",
+        "Inspect the resulting output and any warnings"
+      ],
+      "inputs": "Document and supported engine configuration",
+      "behavior": "Build evidence representation and compose output under the alternative engine contract",
+      "outputs": "Alternative summary result",
+      "related": "Source intake, processing and result retrieval",
+      "frontend": [],
+      "backend": [
+        "python-engine/light_engine_cli.py",
+        "python-engine/light_engine/__init__.py",
+        "python-engine/light_engine/pipeline.py"
+      ],
+      "functions": [
+        "light_engine.pipeline.summarize:81"
+      ],
+      "tables": [],
+      "database_operations": "No direct SQL in this Python capability; PHP handles persistence separately.",
+      "dependencies": "PHP/MariaDB for retrieval; installed Python packages and optional model/OCR resources for processing.",
+      "implemented": "Yes",
+      "status": "Partially working",
+      "tested": "Scoped existing Python tests and/or source review; see evidence",
+      "observed": "Not enabled by the audited default configuration. One regression failed because an inline-heading fixture omitted the introductory outlier definition.",
+      "limitations": "Not enabled by the audited default configuration. One regression failed because an inline-heading fixture omitted the introductory outlier definition.",
+      "evidence": [
+        "PYTHON_ENGINE_AUDIT.md",
+        "evidence/python-tests-confirmation.xml"
+      ]
+    },
+    {
+      "id": "F069",
+      "source_id": "ENGINE",
+      "name": "Automated comparison metrics and statistics",
+      "module": "Processing",
+      "roles": "internal Python process / maintainer",
+      "route": "evaluation_cli and evaluation package",
+      "purpose": "Evaluation helpers compare generated text with supplied references and summarize available measurements.",
+      "problem": "Supports automated comparison metrics and statistics.",
+      "explanation": "Evaluation helpers compare generated text with supplied references and summarize available measurements.",
+      "steps": [
+        "Open the relevant result or call the documented internal action through its intended boundary",
+        "Provide the required source or access token",
+        "Inspect the resulting output and any warnings"
+      ],
+      "inputs": "Sources, outputs, references and paired document-level observations",
+      "behavior": "Compute supported overlap/fact proxies; report unavailable metrics; group comparisons; apply statistical helpers",
+      "outputs": "Metric records and statistical report payload",
+      "related": "Source intake, processing and result retrieval",
+      "frontend": [],
+      "backend": [
+        "python-engine/evaluation_cli.py",
+        "python-engine/evaluation/runner.py",
+        "python-engine/evaluation/statistics.py"
+      ],
+      "functions": [
+        "evaluation_cli.dispatch:22",
+        "evaluation.runner.evaluate_item:146",
+        "evaluation.statistics.build_statistical_report:236",
+        "evaluation.statistics.descriptive_statistics:35",
+        "evaluation.statistics.paired_comparison:110",
+        "evaluation.statistics.holm_adjust:92",
+        "evaluation.statistics.krippendorff_alpha:176"
+      ],
+      "tables": [],
+      "database_operations": "No direct SQL in this Python capability; PHP handles persistence separately.",
+      "dependencies": "PHP/MariaDB for retrieval; installed Python packages and optional model/OCR resources for processing.",
+      "implemented": "Yes",
+      "status": "Implemented but not verified",
+      "tested": "Scoped existing Python tests and/or source review; see evidence",
+      "observed": "Tests establish selected contracts in isolation. No human survey responses or approved research dataset were collected; optional metrics require their resources.",
+      "limitations": "Tests establish selected contracts in isolation. No human survey responses or approved research dataset were collected; optional metrics require their resources.",
+      "evidence": [
+        "PYTHON_ENGINE_AUDIT.md",
+        "evidence/python-test-case-register.csv"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+ structured digital record-keeping, search and
+ filtering  capabilities,  and  file  tracking
+ mechanisms.     Specifically, the study seeks to
+ answer the following questions:
+
+ A. Problem   Identification   and   Contextual
+    Questions:
+1. How do staff members at NEUST Peñaranda Off-
+   Campus   currently   manage   and   archive
+   accreditation records, and what challenges do
+   they face?
+
+2. How can a Record Management and Archiving
+   System improve file retrieval, security, and
+   overall   efficiency        when   it   comes   to
+   accreditation processes?
+
+ B. Technical   Development   and   Evaluation
+    Questions:
+3. What   are   the   essential   features   and
+   functionalities needed for an effective Record
+   Management and Archiving System?
+
+4. How can the system be developed following the
+   Software Development Life Cycle (SDLC) stages:
+      4.1   planning;
+      4.2   analysis;
+      4.3   design;
+
+
+
+                                                         14

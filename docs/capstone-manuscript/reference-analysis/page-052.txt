@@ -1,0 +1,35 @@
+   percentage,   the   researchers           used   the
+   following formula:
+
+
+
+
+
+
+   Where: P = Percentage
+          F = Frequency
+          N = Total population
+
+   Weighted Arithmetic Mean.
+      It  is  an  average        computed  by  giving
+   different weights to some individual values.
+
+
+
+
+
+
+
+   Where: ∑   = denotes the sum
+          w = weight
+          x = value
+
+
+   Table  2.     Ranges  of  Weighted  Mean  and
+Interpretation for End Users’ Evaluation
+
+
+
+
+
+                                                        33

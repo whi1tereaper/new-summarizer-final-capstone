@@ -1,0 +1,62 @@
+[
+  {
+    "name": "registration form enabled with configured privacy contact and secure key",
+    "passed": true
+  },
+  {
+    "name": "anonymous registry access still denied",
+    "passed": true
+  },
+  {
+    "name": "ordinary user registry access still denied",
+    "passed": true
+  },
+  {
+    "name": "admin password alone does not bypass the existing login challenge",
+    "passed": true
+  },
+  {
+    "name": "authorized administrator completes second-factor login",
+    "passed": true
+  },
+  {
+    "name": "both authorization-closed messages absent from registry page",
+    "passed": true
+  },
+  {
+    "name": "unlisted registration remains pending",
+    "passed": true
+  },
+  {
+    "name": "administrator import succeeds without the launch-hold error",
+    "passed": true
+  },
+  {
+    "name": "pending account approved by the imported registry match",
+    "passed": true
+  },
+  {
+    "name": "new matching registration automatically verified",
+    "passed": true
+  },
+  {
+    "name": "matching account receives continued summarizer access",
+    "passed": true
+  },
+  {
+    "name": "verified status is shown without another manual approval",
+    "passed": true
+  },
+  {
+    "name": "duplicate student-number claim remains blocked",
+    "passed": true
+  },
+  {
+    "name": "client role/status cannot grant unlisted students continued access",
+    "passed": true
+  },
+  {
+    "name": "CSRF-protected imports remain enforced",
+    "passed": true
+  }
+]

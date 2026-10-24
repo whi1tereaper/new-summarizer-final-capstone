@@ -23,6 +23,10 @@ class RateLimiter
         'landing_beacon' => ['max' => 30, 'window' => 60],   // telemetry batches per minute
         'nutshell'      => ['max' => 10, 'window' => 3600],  // 10 new generations per hour
         'feedback'      => ['max' => 10, 'window' => 60],    // 10 feedback submissions per minute
+        'student_submit' => ['max' => 5, 'window' => 900],
+        'student_review' => ['max' => 20, 'window' => 60],
+        'registry_import' => ['max' => 10, 'window' => 900],
+        'registry_status' => ['max' => 20, 'window' => 60],
     ];
 
     public function __construct()
@@ -69,23 +73,7 @@ class RateLimiter
         }
 
         // insert first attempt or bump the current window
-        if (\App\Src\Database::getInstance()->isPostgres()) {
-            $stmt = $this->db->prepare("
-                INSERT INTO rate_limits (action_type, identifier, attempts, window_start)
-                VALUES (?, ?, 1, NOW())
-                ON CONFLICT (action_type, identifier) DO UPDATE SET
-                    attempts = CASE
-                        WHEN EXTRACT(EPOCH FROM (NOW() - rate_limits.window_start)) >= ? THEN 1
-                        ELSE rate_limits.attempts + 1
-                    END,
-                    window_start = CASE
-                        WHEN EXTRACT(EPOCH FROM (NOW() - rate_limits.window_start)) >= ? THEN NOW()
-                        ELSE rate_limits.window_start
-                    END
-            ");
-            $stmt->execute([$action, $identifier, $config['window'], $config['window']]);
-        } else {
-            $stmt = $this->db->prepare("
+        $stmt = $this->db->prepare("
                 INSERT INTO rate_limits (action_type, identifier, attempts, window_start)
                 VALUES (?, ?, 1, NOW())
                 ON DUPLICATE KEY UPDATE
@@ -100,8 +88,7 @@ class RateLimiter
                         window_start
                     )
             ");
-            $stmt->execute([$action, $identifier, $config['window'], $config['window']]);
-        }
+        $stmt->execute([$action, $identifier, $config['window'], $config['window']]);
 
         // clean stale rows once in a while
         if (random_int(1, 100) === 1) {

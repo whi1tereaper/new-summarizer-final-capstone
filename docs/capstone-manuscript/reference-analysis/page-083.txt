@@ -1,0 +1,40 @@
+Management module, such as folder creation, file
+uploads, updates, and other document-related
+activities. Audit information helps maintain
+accountability, supports monitoring of system
+usage,  and  provides  a  history  of  record
+management transactions.
+   Overall,  the  Record  Management  process
+serves as the central component of the AccredX
+platform by facilitating document organization,
+file  storage,  checklist  monitoring,  and
+activity tracking. These functions improve the
+efficiency, accessibility, and reliability of
+accreditation record management within NEUST
+Peñaranda Off-Campus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      Figure 13. Level 2 – Archive Management
+
+
+
+
+
+
+                                                       64

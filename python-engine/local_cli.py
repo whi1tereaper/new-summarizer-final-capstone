@@ -21,8 +21,8 @@ import time
 from email.utils import parsedate_to_datetime
 from failure_contract import ProcessingFailure, failure_response
 
-def load_project_env() -> None:
-    env_path = Path(__file__).resolve().parent.parent / ".env"
+def load_project_env(env_path: Path | None = None) -> None:
+    env_path = env_path or Path(__file__).resolve().parent.parent / ".env"
     if not env_path.is_file():
         return
 
@@ -40,7 +40,9 @@ def load_project_env() -> None:
         if len(cleaned) >= 2 and cleaned[0] == cleaned[-1] and cleaned[0] in {'"', "'"}:
             cleaned = cleaned[1:-1]
 
-        os.environ[name] = cleaned
+        # Match PHP's configuration precedence: service-owned runtime settings
+        # must not be overwritten by a repository development .env file.
+        os.environ.setdefault(name, cleaned)
 
 
 load_project_env()
@@ -639,15 +641,17 @@ def handle_summarize(request: dict) -> dict:
         raise ProcessingFailure("INPUT_EMPTY")
     from summarizer_core.runtime import request_scope, stage
     profile = request.get("performance_profile") is True
-    with request_scope(profile=profile) as runtime:
+    correlation = request.get("job_id", "")
+    with request_scope(profile=profile, correlation=correlation if isinstance(correlation, str) else "") as runtime:
         with stage("summary_request"):
-            result = _summarize_request(request)
+            from summary_engine_router import route_summary
+            result = route_summary(request, _summarize_request)
         if profile:
             result.setdefault("source_metadata", {})["performance"] = runtime.report()
         return result
 
 
-def _summarize_request(request: dict) -> dict:
+def _summarize_request(request: dict, source_document=None) -> dict:
     """Run the single structured pipeline used by every output style.
 
     The previous compatibility path ignored the requested length and style,
@@ -665,6 +669,7 @@ def _summarize_request(request: dict) -> dict:
         sentence_count = 8
 
     result = SummarizationPipeline().summarize(SummarizationRequest(
+        source_document=source_document,
         text=str(request.get("text", "")),
         file_path=str(request.get("file_path", "")),
         sentence_count=max(3, min(15, sentence_count)),

@@ -19,6 +19,16 @@ class AnalyticsController
         $this->db = Database::getInstance()->getConnection();
     }
 
+    private function calendarDate(string $expression): string
+    {
+        return 'DATE('.$expression.')';
+    }
+
+    private function weekStart(): string
+    {
+        return 'DATE_SUB(NOW(), INTERVAL 7 DAY)';
+    }
+
     /**
      * Top-level KPI summary.
      *
@@ -34,17 +44,18 @@ class AnalyticsController
      */
     public function getKpis(): array
     {
+        $day=$this->calendarDate('created_at');$today=$this->calendarDate('CURRENT_TIMESTAMP');$week=$this->weekStart();
         // All-time totals + 7-day window in one pass.
         $row = $this->db->query("
             SELECT
                 COUNT(*)                                                        AS total_sessions,
-                SUM(created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY))             AS sessions_7d,
-                SUM(DATE(created_at) = CURDATE())                              AS sessions_today,
+                SUM(CASE WHEN created_at >= {$week} THEN 1 ELSE 0 END) AS sessions_7d,
+                SUM(CASE WHEN {$day} = {$today} THEN 1 ELSE 0 END) AS sessions_today,
                 ROUND(AVG(converted) * 100, 1)                                 AS conversion_rate,
                 ROUND(AVG(NULLIF(dwell_time_seconds, 0)), 1)                   AS avg_dwell_seconds,
                 ROUND(
-                    SUM(max_scroll_percent < 25 AND dwell_time_seconds < 5) /
-                    NULLIF(COUNT(*), 0) * 100
+                    100.0 * SUM(CASE WHEN max_scroll_percent < 25 AND dwell_time_seconds < 5 THEN 1 ELSE 0 END) /
+                    NULLIF(COUNT(*), 0)
                 , 1)                                                            AS bounce_rate
             FROM landing_page_sessions
         ")->fetch();
@@ -157,10 +168,10 @@ class AnalyticsController
         $row = $this->db->query("
             SELECT
                 COUNT(*)                                       AS total,
-                SUM(max_scroll_percent >= 25)                  AS s25,
-                SUM(max_scroll_percent >= 50)                  AS s50,
-                SUM(max_scroll_percent >= 75)                  AS s75,
-                SUM(max_scroll_percent >= 100)                 AS s100
+                SUM(CASE WHEN max_scroll_percent >= 25 THEN 1 ELSE 0 END) AS s25,
+                SUM(CASE WHEN max_scroll_percent >= 50 THEN 1 ELSE 0 END) AS s50,
+                SUM(CASE WHEN max_scroll_percent >= 75 THEN 1 ELSE 0 END) AS s75,
+                SUM(CASE WHEN max_scroll_percent >= 100 THEN 1 ELSE 0 END) AS s100
             FROM landing_page_sessions
         ")->fetch();
 
@@ -184,15 +195,18 @@ class AnalyticsController
      */
     public function getDailyTrend(): array
     {
-        $rows = $this->db->query("
+        $day=$this->calendarDate('created_at');
+        $statement = $this->db->prepare("
             SELECT
-                DATE(created_at) AS date,
+                {$day} AS date,
                 COUNT(*)         AS sessions
             FROM landing_page_sessions
-            WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 13 DAY)
-            GROUP BY DATE(created_at)
+            WHERE created_at >= :cutoff
+            GROUP BY {$day}
             ORDER BY date ASC
-        ")->fetchAll();
+        ");
+        $statement->execute(['cutoff'=>(new \DateTimeImmutable('today'))->modify('-13 days')->format('Y-m-d H:i:s')]);
+        $rows=$statement->fetchAll();
 
         // Fill in missing days with zero so the sparkline is always 14 points.
         $indexed = [];
@@ -226,11 +240,12 @@ class AnalyticsController
      */
     public function getSidebarSnapshot(): array
     {
+        $day=$this->calendarDate('created_at');$today=$this->calendarDate('CURRENT_TIMESTAMP');$week=$this->weekStart();
         // --- summaries table ---
         $sumRow = $this->db->query("
             SELECT
                 COUNT(*)                                    AS total_summaries,
-                SUM(DATE(created_at) = CURDATE())           AS summaries_today
+                SUM(CASE WHEN {$day} = {$today} THEN 1 ELSE 0 END) AS summaries_today
             FROM summaries
         ")->fetch();
 
@@ -247,15 +262,15 @@ class AnalyticsController
         try {
             $sessRow = $this->db->query("
                 SELECT
-                    SUM(DATE(created_at) = CURDATE())                           AS sessions_today,
+                    SUM(CASE WHEN {$day} = {$today} THEN 1 ELSE 0 END) AS sessions_today,
                     COUNT(*)                                                    AS sessions_7d,
                     ROUND(AVG(converted) * 100, 1)                             AS conversion_rate,
                     ROUND(
-                        SUM(max_scroll_percent < 25 AND dwell_time_seconds < 5)
-                        / NULLIF(COUNT(*), 0) * 100
+                        100.0 * SUM(CASE WHEN max_scroll_percent < 25 AND dwell_time_seconds < 5 THEN 1 ELSE 0 END)
+                        / NULLIF(COUNT(*), 0)
                     , 1)                                                        AS bounce_rate
                 FROM landing_page_sessions
-                WHERE created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)
+                WHERE created_at >= {$week}
             ")->fetch();
             $sessions7d = $sessRow;
 
@@ -301,6 +316,7 @@ class AnalyticsController
      */
     public function getUserSidebarStats(int $userId, ?string $guestToken = null): array
     {
+        $day=$this->calendarDate('created_at');$today=$this->calendarDate('CURRENT_TIMESTAMP');
         $identityColumn = $userId > 0 ? 'user_id' : 'guest_token';
         $identityValue = $userId > 0 ? $userId : $guestToken;
         if ($identityValue === null || $identityValue === '') {
@@ -309,7 +325,7 @@ class AnalyticsController
         $myRow = $this->db->prepare("
             SELECT
                 COUNT(*)                              AS my_summaries,
-                SUM(DATE(created_at) = CURDATE())     AS my_today
+                SUM(CASE WHEN {$day} = {$today} THEN 1 ELSE 0 END) AS my_today
             FROM summaries
             WHERE {$identityColumn} = :uid
         ");
@@ -345,12 +361,7 @@ class AnalyticsController
 
         $completedWhere = $where . " AND status = 'completed'";
         $monthlyTrend = (strtotime($to) - strtotime($from)) > (90 * 86400);
-        $isPg = \App\Src\Database::getInstance()->isPostgres();
-        if ($isPg) {
-            $trendBucket = $monthlyTrend ? "TO_CHAR(created_at, 'YYYY-MM')" : 'CAST(created_at AS date)';
-        } else {
-            $trendBucket = $monthlyTrend ? "DATE_FORMAT(created_at, '%Y-%m')" : 'DATE(created_at)';
-        }
+        $trendBucket = $monthlyTrend ? "DATE_FORMAT(created_at, '%Y-%m')" : 'DATE(created_at)';
         $nutshellWhere = "status = 'completed' AND created_at >= :from AND created_at < :to_next";
         if (!$isAdmin) {
             $nutshellWhere .= $userId !== null && $userId > 0
@@ -367,7 +378,7 @@ class AnalyticsController
         $kpiRows = $query("SELECT COUNT(*) AS articles, COALESCE(SUM(original_word_count), 0) AS words,
             AVG(NULLIF(original_word_count, 0)) AS original_avg, AVG(NULLIF(summary_word_count, 0)) AS summary_avg,
                 COALESCE(AVG(CASE WHEN original_word_count > 0 THEN
-                    (CAST(original_word_count AS SIGNED) - CAST(summary_word_count AS SIGNED)) / original_word_count * 100 END), NULL) AS reduction
+                    (CAST(original_word_count AS DECIMAL(20,0)) - CAST(summary_word_count AS DECIMAL(20,0))) / original_word_count * 100 END), NULL) AS reduction
             FROM summaries WHERE {$completedWhere}");
         $kpis = $kpiRows[0] ?? [];
 
@@ -378,7 +389,7 @@ class AnalyticsController
             FROM summaries WHERE {$completedWhere} GROUP BY summary_style ORDER BY total DESC");
         $lengths = $query("SELECT summary_length AS label, COUNT(*) AS total
             FROM summaries WHERE {$completedWhere} AND summary_length IS NOT NULL
-            GROUP BY summary_length ORDER BY FIELD(summary_length, 'brief', 'short', 'balanced', 'detailed', 'comprehensive')");
+            GROUP BY summary_length ORDER BY CASE summary_length WHEN 'brief' THEN 1 WHEN 'short' THEN 2 WHEN 'balanced' THEN 3 WHEN 'detailed' THEN 4 WHEN 'comprehensive' THEN 5 WHEN 'exhaustive' THEN 6 ELSE 0 END");
         $words = $query("SELECT COALESCE(SUM(original_word_count), 0) AS original_words,
                 COALESCE(SUM(summary_word_count), 0) AS summary_words
             FROM summaries WHERE {$completedWhere}");
@@ -394,10 +405,12 @@ class AnalyticsController
         $nutshell = ['generated' => 0, 'stored' => 0, 'average_words' => null];
         $nutshellTrend = [];
         try {
-            $nutshell = $nutshellQuery("SELECT COUNT(*) AS generated, AVG(NULLIF(word_count, 0)) AS average_words,
-                    COUNT(*) AS stored
+            $nutshell = $nutshellQuery("SELECT COUNT(*) AS generated_count, AVG(NULLIF(word_count, 0)) AS average_words,
+                    COUNT(*) AS stored_count
                 FROM nutshell_generations
                 WHERE {$nutshellWhere}")[0] ?? $nutshell;
+            if(array_key_exists('generated_count',$nutshell)){$nutshell['generated']=$nutshell['generated_count'];unset($nutshell['generated_count']);}
+            if(array_key_exists('stored_count',$nutshell)){$nutshell['stored']=$nutshell['stored_count'];unset($nutshell['stored_count']);}
             $nutshellTrend = $this->fillTimeBuckets($nutshellQuery("SELECT {$nutshellTrendBucket} AS bucket, COUNT(*) AS total
                 FROM nutshell_generations
                 WHERE {$nutshellWhere}
@@ -408,8 +421,8 @@ class AnalyticsController
         $recent = $query("SELECT article_title, input_type, summary_style, summary_length, created_at
             FROM summaries WHERE {$completedWhere} ORDER BY created_at DESC LIMIT 10");
         $performance = $query("SELECT AVG(processing_time) AS average_time, MIN(processing_time) AS fastest_time,
-                MAX(processing_time) AS slowest_time, SUM(status = 'completed') AS successful,
-                SUM(status = 'failed') AS failed FROM summaries WHERE {$where}");
+                MAX(processing_time) AS slowest_time, SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) AS successful,
+                SUM(CASE WHEN status = 'failed' THEN 1 ELSE 0 END) AS failed FROM summaries WHERE {$where}");
 
         $result = [
             'kpis' => [
@@ -495,9 +508,10 @@ class AnalyticsController
      */
     public function getTopReferrers(): array
     {
+        $domain="LOWER(SUBSTRING_INDEX(SUBSTRING_INDEX(referrer, '://', -1), '/', 1))";
         $rows = $this->db->query("
             SELECT
-                LOWER(SUBSTRING_INDEX(SUBSTRING_INDEX(referrer, '://', -1), '/', 1)) AS domain,
+                {$domain} AS domain,
                 COUNT(*)        AS sessions,
                 SUM(converted)  AS conversions
             FROM landing_page_sessions
@@ -528,8 +542,8 @@ class AnalyticsController
         $stmt = $this->db->prepare(
             'SELECT s.summary_style, s.summary_length, a.generated_summary
              FROM summaries s
-             LEFT JOIN summary_artifacts a ON a.summary_id = s.id
-             WHERE s.user_id = :user_id AND s.status = "completed"
+             LEFT JOIN summary_artifacts a ON a.summary_id = s.id AND a.original_text IS NOT NULL AND a.generated_summary IS NOT NULL
+             WHERE s.user_id = :user_id AND s.status = \'completed\'
              ORDER BY s.created_at DESC LIMIT 1000'
         );
         $stmt->execute(['user_id' => $userId]);

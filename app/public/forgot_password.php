@@ -32,7 +32,7 @@ $csrf_token = generateCsrfToken();
                             <h2>Recover Password</h2>
                         </div>
                     </div>
-                    <p style="font-family:'Inter', sans-serif; font-size:0.9rem; color:rgba(8,8,8,0.65); line-height:1.55; margin-bottom:24px;">Enter your email address and we will send you a verification code to reset your password.</p>
+                    <p class="auth-card-desc">Enter your email address and we will send you a verification code to reset your password.</p>
                     
                     <?php if (!empty($_SESSION['error'])): ?>
                         <div class="message message-error">

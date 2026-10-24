@@ -6,18 +6,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const chartInstances = [];
-    const _style   = getComputedStyle(document.documentElement);
-    const _accent  = (_style.getPropertyValue('--color-accent')         || '#a43d2f').trim();
-    const _inkSec  = (_style.getPropertyValue('--color-text-secondary') || '#4f554d').trim();
-    const _muted   = (_style.getPropertyValue('--color-text-muted')     || '#6e756b').trim();
-    const _border  = (_style.getPropertyValue('--color-border')         || '#c8c5bb').trim();
-    const chartColors = [_accent, '#3B82F6', '#10B981', '#F59E0B', '#8B5CF6'];
 
-    function _alpha(hex, a) {
-        const r = parseInt(hex.slice(1, 3), 16) || 164;
-        const g = parseInt(hex.slice(3, 5), 16) || 61;
-        const b = parseInt(hex.slice(5, 7), 16) || 47;
-        return `rgba(${r},${g},${b},${a})`;
+    function _alpha(color, a) {
+        if (!color) return `rgba(127, 0, 255, ${a})`;
+        color = color.trim();
+        if (color.startsWith('#')) {
+            let hex = color.slice(1);
+            if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+            const r = parseInt(hex.slice(0, 2), 16) || 0;
+            const g = parseInt(hex.slice(2, 4), 16) || 0;
+            const b = parseInt(hex.slice(4, 6), 16) || 0;
+            return `rgba(${r},${g},${b},${a})`;
+        }
+        const match = color.match(/^rgba?\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
+        if (match) {
+            return `rgba(${match[1]},${match[2]},${match[3]},${a})`;
+        }
+        return color;
     }
 
     const chartLabels = rows => (rows || []).map(row => row.label || 'Other');
@@ -38,7 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return map[m] || m.replace(/_/g, ' ');
     };
 
+    let latestData = sidebarData;
+
     const renderCharts = data => {
+        latestData = data;
         const empty = Number(data.kpis?.summaries || 0) === 0;
         const emptyMsg = container.querySelector('.analytics-sidebar__empty');
         if (emptyMsg) {
@@ -63,15 +71,28 @@ document.addEventListener('DOMContentLoaded', () => {
         chartInstances.splice(0).forEach(chart => chart.destroy());
         if (empty) return;
 
+        const isDark  = document.documentElement.dataset.theme === 'dark';
+        const _style  = getComputedStyle(document.documentElement);
+        const _accent = (_style.getPropertyValue('--color-accent')         || (isDark ? '#9d87f5' : '#7F00FF')).trim();
+        const _inkSec = (_style.getPropertyValue('--color-text-secondary') || (isDark ? '#cdd1c9' : '#4f554d')).trim();
+        const _muted  = (_style.getPropertyValue('--color-text-muted')     || (isDark ? '#a6afa1' : '#6e756b')).trim();
+        const _border = (_style.getPropertyValue('--color-border')         || (isDark ? '#3d4339' : '#c8c5bb')).trim();
+        const _grid   = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(8, 8, 8, 0.05)';
+        const chartColors = isDark
+            ? [_accent, '#38bdf8', '#34d399', '#fbbf24', '#f472b6']
+            : [_accent, '#3B82F6', '#10B981', '#F59E0B', '#8B5CF6'];
+
         const base = {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
                 legend: { display: false },
                 tooltip: {
-                    backgroundColor: '#080808',
+                    backgroundColor: isDark ? '#242723' : '#080808',
                     titleColor: '#ffffff',
                     bodyColor: '#ffffff',
+                    borderColor: _border,
+                    borderWidth: isDark ? 1 : 0,
                     padding: 8,
                     cornerRadius: 4,
                     titleFont: { size: 10, family: 'Inter, sans-serif', weight: '600' },
@@ -89,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     datasets: [{
                         data: chartValues(data.trend),
                         borderColor: _accent,
-                        backgroundColor: _alpha(_accent, 0.1),
+                        backgroundColor: _alpha(_accent, 0.12),
                         fill: true,
                         tension: 0.3,
                         borderWidth: 2,
@@ -108,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         y: {
                             beginAtZero: true,
                             ticks: { precision: 0, color: _muted, font: { size: 9, family: 'Inter, sans-serif' } },
-                            grid: { color: 'rgba(8, 8, 8, 0.05)' }
+                            grid: { color: _grid }
                         }
                     }
                 }
@@ -122,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 data: {
                     labels: ['Words'],
                     datasets: [
-                        { label: 'Original', data: [Number(data.words_comparison.original_words || 0)], backgroundColor: 'rgba(8, 8, 8, 0.25)', borderRadius: 3, borderSkipped: false },
+                        { label: 'Original', data: [Number(data.words_comparison.original_words || 0)], backgroundColor: isDark ? 'rgba(255, 255, 255, 0.22)' : 'rgba(8, 8, 8, 0.25)', borderRadius: 3, borderSkipped: false },
                         { label: 'Summary', data: [Number(data.words_comparison.summary_words || 0)], backgroundColor: _accent, borderRadius: 3, borderSkipped: false }
                     ]
                 },
@@ -134,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     },
                     scales: {
                         x: { ticks: { color: _muted, font: { size: 9, family: 'Inter, sans-serif' } }, grid: { display: false } },
-                        y: { beginAtZero: true, ticks: { color: _muted, font: { size: 9, family: 'Inter, sans-serif' } }, grid: { color: 'rgba(8, 8, 8, 0.05)' } }
+                        y: { beginAtZero: true, ticks: { color: _muted, font: { size: 9, family: 'Inter, sans-serif' } }, grid: { color: _grid } }
                     }
                 }
             }));
@@ -171,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ...base,
                     indexAxis: 'y',
                     scales: {
-                        x: { beginAtZero: true, ticks: { precision: 0, color: _muted, font: { size: 9, family: 'Inter, sans-serif' } }, grid: { color: 'rgba(8, 8, 8, 0.05)' } },
+                        x: { beginAtZero: true, ticks: { precision: 0, color: _muted, font: { size: 9, family: 'Inter, sans-serif' } }, grid: { color: _grid } },
                         y: { ticks: { color: _muted, font: { size: 9, family: 'Inter, sans-serif' } }, grid: { display: false } }
                     }
                 }
@@ -180,6 +201,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     renderCharts(sidebarData);
+
+    window.addEventListener('themechange', () => {
+        if (latestData) {
+            renderCharts(latestData);
+        }
+    });
 
     container.querySelectorAll('.analytics-range').forEach(button => {
         button.addEventListener('click', async () => {

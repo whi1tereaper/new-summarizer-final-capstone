@@ -1,0 +1,32 @@
+                      Chapter IV
+    SUMMARY, CONCLUSIONS AND RECOMMENDATIONS
+
+Summary
+   This study aimed to develop AccredX: Record
+Management  and  Archiving  System  for  NEUST
+Peñaranda  Off-Campus  in  response  to  the
+institution’s need for a more efficient, secure,
+and organized method of managing academic and
+administrative documents. The existing manual
+and semi-digital processes, including reliance
+on    Google    Drive    without    structured
+categorization or checklist tracking, resulted
+in misplaced files, retrieval delays, limited
+security measures, and inefficiencies during
+accreditation.
+
+   To address these concerns, the researchers
+designed and developed a digital system using
+the Software Development Life Cycle (SDLC) under
+the Agile methodology. The system integrated
+essential features such as         advanced   search    &
+filtering    and  retrieval,  folder  and  file
+management,  version  control,  audit  trails,
+role-based   access   control,   accreditation
+checklists, and report generation. Visual tools
+including Use Case Diagrams, Data Flow Diagrams
+(DFD), Entity Relationship Diagrams (ERD), and
+
+
+
+                                                      104

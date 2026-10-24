@@ -1,0 +1,1381 @@
+{
+  "featureCountingRule": "One row per distinct UI capability/action or clearly identified API-only companion. Rows are frontend contribution, not total-system count. All evidence scopes distinguish source from isolated execution.",
+  "count": 51,
+  "features": [
+    {
+      "id": "UI-001",
+      "module": "Entry",
+      "name": "Landing information and navigation",
+      "roles": "visitor",
+      "userStory": "As visitor, I can learn the purpose and open the summarizer or account forms.",
+      "purpose": "learn the purpose and open the summarizer or account forms",
+      "route": "index.php",
+      "steps": [
+        "Open the landing page",
+        "Read About LIGHT and use Start/Summarize",
+        "Use footer terms or navigation account links"
+      ],
+      "inputs": "Navigation links; scroll",
+      "outputs": "Landing sections; target page",
+      "frontend": [
+        "app/public/index.php",
+        "app/public/partials/site-nav.php",
+        "app/public/assets/js/nex-landing.js"
+      ],
+      "backend": [
+        "app/public/about.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "VERIFIED_UI_IN_ISOLATION",
+      "verificationEvidence": "browser-readonly-results.json (template/local interaction scope only)",
+      "limits": "Admin landing requests redirect; footer social links lead to generic social-platform homepages, not verified project accounts."
+    },
+    {
+      "id": "UI-002",
+      "module": "Navigation",
+      "name": "Responsive mobile menu",
+      "roles": "visitor",
+      "userStory": "As visitor, I can open and close site navigation on small screens.",
+      "purpose": "open and close site navigation on small screens",
+      "route": "all main templates",
+      "steps": [
+        "Press the menu button",
+        "Choose a link or press Escape"
+      ],
+      "inputs": "Menu button; Escape",
+      "outputs": "Expanded navigation with aria-expanded state",
+      "frontend": [
+        "app/public/partials/site-nav.php",
+        "app/public/assets/css/site-nav.css"
+      ],
+      "backend": [
+        ""
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "VERIFIED_UI_IN_ISOLATION",
+      "verificationEvidence": "browser-readonly-results.json (template/local interaction scope only)",
+      "limits": "Opening and Escape verified at 390px; complete keyboard/screen-reader audit not performed."
+    },
+    {
+      "id": "UI-003",
+      "module": "Appearance",
+      "name": "Light/dark theme preference",
+      "roles": "visitor",
+      "userStory": "As visitor, I can switch the reading theme.",
+      "purpose": "switch the reading theme",
+      "route": "nonlanding templates and result.php",
+      "steps": [
+        "Use the theme control",
+        " revisit a supported page to reuse preference"
+      ],
+      "inputs": "Theme button; saved localStorage preference",
+      "outputs": "Light or dark document data-theme",
+      "frontend": [
+        "app/public/assets/js/theme-toggle.js",
+        "app/public/assets/js/result.js",
+        "app/public/assets/css/design-tokens.css"
+      ],
+      "backend": [
+        ""
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "VERIFIED_UI_IN_ISOLATION",
+      "verificationEvidence": "browser-readonly-results.json supplementalInteractions; synthetic data/client-only action",
+      "limits": "Source inspection; theme persists locally, not as a saved account preference."
+    },
+    {
+      "id": "UI-004",
+      "module": "Accounts",
+      "name": "Create account",
+      "roles": "visitor",
+      "userStory": "As visitor, I can register with an email and password.",
+      "purpose": "register with an email and password",
+      "route": "register.php → auth.php?action=register",
+      "steps": [
+        "Open Create Account",
+        "Enter the required fields",
+        "Review and accept terms",
+        "Submit Create Account"
+      ],
+      "inputs": "Username; email; password; confirmation; terms acceptance; CSRF",
+      "outputs": "Validation feedback or account/session redirect",
+      "frontend": [
+        "app/public/register.php"
+      ],
+      "backend": [
+        "app/public/auth.php",
+        "app/src/Controllers/AuthController.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "No account was created. Registration form copy mentions custom profiles; dedicated editable saved-profile UI was not found."
+    },
+    {
+      "id": "UI-005",
+      "module": "Accounts",
+      "name": "Sign in and remember session",
+      "roles": "registered user",
+      "userStory": "As registered user, I can sign in to account features.",
+      "purpose": "sign in to account features",
+      "route": "login.php → auth.php?action=login",
+      "steps": [
+        "Enter your username/email and password",
+        "Choose remember-me only on a trusted device if desired",
+        "Submit sign-in"
+      ],
+      "inputs": "Username or email; password; optional remember-me; CSRF",
+      "outputs": "Session or validation error",
+      "frontend": [
+        "app/public/login.php"
+      ],
+      "backend": [
+        "app/public/auth.php",
+        "app/src/Controllers/AuthController.php",
+        "app/src/Services/RememberMeService.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Credential and remember-cookie flows not exercised."
+    },
+    {
+      "id": "UI-006",
+      "module": "Accounts",
+      "name": "Administrator email code verification",
+      "roles": "administrator",
+      "userStory": "As administrator, I can complete the additional administrator login step.",
+      "purpose": "complete the additional administrator login step",
+      "route": "login.php → auth.php?action=verifyAdminLoginCode",
+      "steps": [
+        "Sign in with administrator credentials",
+        "Enter the emailed one-time code",
+        "Submit verification or cancel to sign in again"
+      ],
+      "inputs": "Pending admin session; emailed code; CSRF",
+      "outputs": "Verified login or code error",
+      "frontend": [
+        "app/public/login.php"
+      ],
+      "backend": [
+        "app/src/Controllers/AuthController.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Source-supported conditional UI only; no email sent; retired challenge routes are redirects, not an active challenge feature."
+    },
+    {
+      "id": "UI-007",
+      "module": "Accounts",
+      "name": "Password recovery",
+      "roles": "account holder",
+      "userStory": "As account holder, I can request a password-reset code.",
+      "purpose": "request a password-reset code",
+      "route": "forgot_password.php → auth.php?action=forgotPassword",
+      "steps": [
+        "Open Recover Password",
+        "Enter email",
+        "Choose Send OTP and follow the response"
+      ],
+      "inputs": "Email; CSRF",
+      "outputs": "Generic recovery outcome and reset flow",
+      "frontend": [
+        "app/public/forgot_password.php"
+      ],
+      "backend": [
+        "app/src/Controllers/AuthController.php",
+        "app/src/Services/PasswordResetService.php",
+        "app/src/Services/EmailService.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Recovery form rendered; sending, delivery and account existence outcomes not tested."
+    },
+    {
+      "id": "UI-008",
+      "module": "Accounts",
+      "name": "Reset password using OTP",
+      "roles": "account holder",
+      "userStory": "As account holder, I can replace a forgotten password after verification.",
+      "purpose": "replace a forgotten password after verification",
+      "route": "reset_password.php → auth.php?action=resetPassword",
+      "steps": [
+        "Open reset form after requesting a code",
+        "Enter email and code",
+        "Enter matching new passwords",
+        "Submit reset"
+      ],
+      "inputs": "Email; OTP; new password; confirmation; CSRF",
+      "outputs": "Reset success or validation/code error",
+      "frontend": [
+        "app/public/reset_password.php"
+      ],
+      "backend": [
+        "app/src/Controllers/AuthController.php",
+        "app/src/Services/PasswordResetService.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "No password changed."
+    },
+    {
+      "id": "UI-009",
+      "module": "Accounts",
+      "name": "Password visibility and strength hints",
+      "roles": "visitor",
+      "userStory": "As visitor, I can review password entry before submitting.",
+      "purpose": "review password entry before submitting",
+      "route": "login.php/register.php/reset_password.php",
+      "steps": [
+        "Enter a password",
+        "Use eye button to toggle visibility",
+        "Read available strength/mismatch hint"
+      ],
+      "inputs": "Password input and visibility button",
+      "outputs": "Plain/masked password; client strength/match hints",
+      "frontend": [
+        "app/public/login.php",
+        "app/public/register.php",
+        "app/public/reset_password.php"
+      ],
+      "backend": [
+        "app/src/Utils/PasswordPolicy.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "VERIFIED_UI_IN_ISOLATION",
+      "verificationEvidence": "browser-readonly-results.json (template/local interaction scope only)",
+      "limits": "Click toggle verified on registration; eye buttons tabindex=-1 excludes keyboard Tab navigation."
+    },
+    {
+      "id": "UI-010",
+      "module": "Terms",
+      "name": "Read and accept terms",
+      "roles": "visitor or registered user",
+      "userStory": "As visitor or registered user, I can review usage conditions and continue after agreement.",
+      "purpose": "review usage conditions and continue after agreement",
+      "route": "terms.php / accept_terms.php",
+      "steps": [
+        "Open Terms and Conditions",
+        "Read the sections",
+        "Check agreement and confirm; choose decline if not agreeing"
+      ],
+      "inputs": "Acceptance checkbox; accept/decline action; CSRF",
+      "outputs": "Session/account acceptance or exit/login redirect",
+      "frontend": [
+        "app/public/terms.php",
+        "app/public/accept_terms.php"
+      ],
+      "backend": [
+        "app/src/Utils/TermsContent.php",
+        "app/src/Services/TermsAcceptanceService.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Reading rendered; acceptance/decline not executed; two terms pages have different guest actions."
+    },
+    {
+      "id": "UI-011",
+      "module": "Summary input",
+      "name": "Upload PDF or DOCX",
+      "roles": "guest or registered user",
+      "userStory": "As guest or registered user, I can supply a supported local document.",
+      "purpose": "supply a supported local document",
+      "route": "summarizer.php",
+      "steps": [
+        "Choose Upload File",
+        "Browse or drag a file",
+        "Use Replace/Remove to correct the selection"
+      ],
+      "inputs": "One PDF/DOCX; optional title",
+      "outputs": "Selected filename or input error",
+      "frontend": [
+        "app/public/partials/summarizer-form.php",
+        "app/public/assets/js/nex-landing.js"
+      ],
+      "backend": [
+        "app/src/Services/FileUploadService.php",
+        "app/src/Services/SourceResolver.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "No file uploaded. Effective limit depends on PHP/config; renderer displayed 2.0 MiB for its PHP environment."
+    },
+    {
+      "id": "UI-012",
+      "module": "Summary input",
+      "name": "Paste text source",
+      "roles": "guest or registered user",
+      "userStory": "As guest or registered user, I can summarize readable pasted text.",
+      "purpose": "summarize readable pasted text",
+      "route": "summarizer.php",
+      "steps": [
+        "Choose Paste Text",
+        "Paste permitted document text",
+        "Review source and settings"
+      ],
+      "inputs": "Text up to server-provided byte cap",
+      "outputs": "Text selected as source",
+      "frontend": [
+        "app/public/partials/summarizer-form.php",
+        "app/public/assets/js/index.js"
+      ],
+      "backend": [
+        "app/src/Services/ArticleService.php",
+        "app/src/Services/SourceResolver.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "VERIFIED_UI_IN_ISOLATION",
+      "verificationEvidence": "browser-readonly-results.json (template/local interaction scope only)",
+      "limits": "Source-selector interaction verified; extraction/model processing not run."
+    },
+    {
+      "id": "UI-013",
+      "module": "Summary input",
+      "name": "Article URL source",
+      "roles": "guest or registered user",
+      "userStory": "As guest or registered user, I can request summarization of an accessible article URL.",
+      "purpose": "request summarization of an accessible article URL",
+      "route": "summarizer.php",
+      "steps": [
+        "Choose URL",
+        "Paste the complete public address",
+        "Submit when source/settings are ready"
+      ],
+      "inputs": "HTTP(S) URL without embedded credentials",
+      "outputs": "URL source or validation error",
+      "frontend": [
+        "app/public/partials/summarizer-form.php",
+        "app/public/assets/js/index.js"
+      ],
+      "backend": [
+        "app/src/Services/SourceResolver.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "VERIFIED_UI_IN_ISOLATION",
+      "verificationEvidence": "browser-readonly-results.json (template/local interaction scope only)",
+      "limits": "Selection and invalid-empty-URL rejection verified locally; fetching and safety policy not exercised."
+    },
+    {
+      "id": "UI-014",
+      "module": "Summary controls",
+      "name": "Optional document title and focus",
+      "roles": "guest or registered user",
+      "userStory": "As guest or registered user, I can name a result and prioritize a topic/question.",
+      "purpose": "name a result and prioritize a topic/question",
+      "route": "summarizer.php",
+      "steps": [
+        "Optionally enter Document Title",
+        "Optionally enter Focus / Topic / Question"
+      ],
+      "inputs": "Optional title; optional focus text (UI maxlength 300)",
+      "outputs": "Selected title/focus in request",
+      "frontend": [
+        "app/public/partials/summarizer-form.php"
+      ],
+      "backend": [
+        "app/src/Services/ArticleService.php",
+        "app/src/Services/SummarizerPromptTemplate.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Focus changes requested prioritization; cannot promise answer accuracy."
+    },
+    {
+      "id": "UI-015",
+      "module": "Summary controls",
+      "name": "Five output organizations",
+      "roles": "guest or registered user",
+      "userStory": "As guest or registered user, I can choose paragraph, bullets, hybrid, structured sections or key takeaways.",
+      "purpose": "choose paragraph, bullets, hybrid, structured sections or key takeaways",
+      "route": "summarizer.php",
+      "steps": [
+        "Open Output Format",
+        "Choose one format and read its description"
+      ],
+      "inputs": "output_format select",
+      "outputs": "Updated description and request setting",
+      "frontend": [
+        "app/public/partials/summarizer-form.php",
+        "app/public/assets/js/index.js"
+      ],
+      "backend": [
+        "app/src/Services/ArticleService.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "VERIFIED_UI_IN_ISOLATION",
+      "verificationEvidence": "browser-readonly-results.json (template/local interaction scope only)",
+      "limits": "Structured selection verified; output quality not evaluated."
+    },
+    {
+      "id": "UI-016",
+      "module": "Summary controls",
+      "name": "Eight analysis modes",
+      "roles": "guest or registered user",
+      "userStory": "As guest or registered user, I can choose general, academic, executive, technical, study, news, legal or scientific emphasis.",
+      "purpose": "choose general, academic, executive, technical, study, news, legal or scientific emphasis",
+      "route": "summarizer.php",
+      "steps": [
+        "Open Analysis Mode",
+        "Choose the intended emphasis"
+      ],
+      "inputs": "analysis_mode select",
+      "outputs": "Updated mode description and request setting",
+      "frontend": [
+        "app/public/partials/summarizer-form.php",
+        "app/public/assets/js/index.js"
+      ],
+      "backend": [
+        "app/src/Services/ArticleService.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "VERIFIED_UI_IN_ISOLATION",
+      "verificationEvidence": "browser-readonly-results.json (template/local interaction scope only)",
+      "limits": "Academic selection verified; modes do not establish domain correctness."
+    },
+    {
+      "id": "UI-017",
+      "module": "Summary controls",
+      "name": "Six summary depths",
+      "roles": "guest or registered user",
+      "userStory": "As guest or registered user, I can choose very brief, brief, short, balanced, detailed or comprehensive depth.",
+      "purpose": "choose very brief, brief, short, balanced, detailed or comprehensive depth",
+      "route": "summarizer.php",
+      "steps": [
+        "Select a Summary Depth button",
+        "Read the depth explanation"
+      ],
+      "inputs": "Depth button",
+      "outputs": "aria-pressed and hidden depth fields update",
+      "frontend": [
+        "app/public/partials/summarizer-form.php",
+        "app/public/assets/js/index.js"
+      ],
+      "backend": [
+        "app/src/Services/ArticleService.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "VERIFIED_UI_IN_ISOLATION",
+      "verificationEvidence": "browser-readonly-results.json (template/local interaction scope only)",
+      "limits": "Comprehensive selection verified; exact word length is not guaranteed."
+    },
+    {
+      "id": "UI-018",
+      "module": "Summary controls",
+      "name": "Optional evidence-controlled synthesis",
+      "roles": "guest or registered user when configured",
+      "userStory": "As guest or registered user when configured, I can opt in to configured language-model synthesis.",
+      "purpose": "opt in to configured language-model synthesis",
+      "route": "summarizer.php",
+      "steps": [
+        "When Generation Method is displayed, read the data-transfer notice",
+        "Opt in only when authorized to process the source there"
+      ],
+      "inputs": "Conditional use_llm_synthesis checkbox",
+      "outputs": "Requested synthesis path or extractive fallback behavior",
+      "frontend": [
+        "app/public/partials/summarizer-form.php",
+        "app/public/assets/js/index.js"
+      ],
+      "backend": [
+        "app/src/Services/ArticleService.php",
+        "app/src/Services/LocalPythonBridge.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Conditional source only; flag disabled in synthetic renderer; external synthesis not invoked."
+    },
+    {
+      "id": "UI-019",
+      "module": "Summarization",
+      "name": "Submit summary request",
+      "roles": "guest or registered user",
+      "userStory": "As guest or registered user, I can start processing a selected source.",
+      "purpose": "start processing a selected source",
+      "route": "summarize.php",
+      "steps": [
+        "Review source and settings",
+        "Choose Summarize Document",
+        "Follow processing/status feedback"
+      ],
+      "inputs": "Source; title; focus; format; mode; depth; CSRF; request token",
+      "outputs": "Processing redirect or recoverable error",
+      "frontend": [
+        "app/public/assets/js/index.js"
+      ],
+      "backend": [
+        "app/public/summarize.php",
+        "app/src/Controllers/ArticleController.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Submission not executed; all harness POSTs blocked."
+    },
+    {
+      "id": "UI-020",
+      "module": "Recovery",
+      "name": "Source validation and one-hour draft recovery",
+      "roles": "guest or registered user",
+      "userStory": "As guest or registered user, I can correct invalid input and recover tab-local source/settings.",
+      "purpose": "correct invalid input and recover tab-local source/settings",
+      "route": "summarizer.php",
+      "steps": [
+        "Correct the named field",
+        "Use retry only where offered",
+        "For file recovery, select the file again"
+      ],
+      "inputs": "Input errors; saved sessionStorage fields",
+      "outputs": "Friendly explanation, recovery action and restored settings",
+      "frontend": [
+        "app/public/assets/js/index.js",
+        "app/public/assets/js/light-errors.js",
+        "app/public/partials/error-support.php"
+      ],
+      "backend": [
+        "app/src/Support/ProcessingError.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "VERIFIED_UI_IN_ISOLATION",
+      "verificationEvidence": "browser-readonly-results.json (template/local interaction scope only)",
+      "limits": "Empty URL validation verified; file bytes cannot be restored; source text is retained in browser tab storage for up to one hour."
+    },
+    {
+      "id": "UI-021",
+      "module": "Processing",
+      "name": "Job progress, retry and cancel",
+      "roles": "visitor with pending job",
+      "userStory": "As visitor with pending job, I can follow an asynchronous summary and recover from failure.",
+      "purpose": "follow an asynchronous summary and recover from failure",
+      "route": "processing.php",
+      "steps": [
+        "Remain on the processing page",
+        "If offered, check connection/status or retry",
+        "Use cancel when available to return to settings"
+      ],
+      "inputs": "Existing job/session; retry or cancel controls",
+      "outputs": "Status, completion redirect or recovery message",
+      "frontend": [
+        "app/public/processing.php",
+        "app/public/assets/js/processing.js"
+      ],
+      "backend": [
+        "app/src/Controllers/ArticleController.php",
+        "app/src/Services/SummaryJobService.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Only synthetic pending page rendered; automatic execute/poll requests deliberately blocked."
+    },
+    {
+      "id": "UI-022",
+      "module": "Nutshell",
+      "name": "Generate and copy concise nutshell",
+      "roles": "registered active account",
+      "userStory": "As registered active account, I can produce a short standalone rendition from an eligible source.",
+      "purpose": "produce a short standalone rendition from an eligible source",
+      "route": "nutshell_generate.php",
+      "steps": [
+        "Prepare a source",
+        "Choose Generate Nutshell",
+        "Read the panel and use Copy after success"
+      ],
+      "inputs": "Selected source/mode; CSRF; idempotency key",
+      "outputs": "Nutshell text, not-needed notice or recovery error",
+      "frontend": [
+        "app/public/assets/js/index.js",
+        "app/public/partials/summarizer-form.php"
+      ],
+      "backend": [
+        "app/public/nutshell_generate.php",
+        "app/src/Services/LocalPythonBridge.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Guest redirect verified. Generation not run. Backend supports six mode labels; legal/scientific selections are normalized to general by this endpoint."
+    },
+    {
+      "id": "UI-023",
+      "module": "Results",
+      "name": "Read structured summary and details",
+      "roles": "authorized owner or shared-link viewer",
+      "userStory": "As authorized owner or shared-link viewer, I can read the summary and available metadata.",
+      "purpose": "read the summary and available metadata",
+      "route": "result.php?id=…",
+      "steps": [
+        "Open an accessible result",
+        "Read the primary summary",
+        "Expand available source/details sections"
+      ],
+      "inputs": "Authorized summary id; optional share token",
+      "outputs": "Summary, key points, keywords, section analysis and details when stored",
+      "frontend": [
+        "app/public/result.php"
+      ],
+      "backend": [
+        "app/src/Controllers/HistoryHandler.php",
+        "app/src/Services/HistoryService.php",
+        "app/src/Utils/Formatter.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Synthetic prose rendered; optional rich sections depend on saved output and were not all populated."
+    },
+    {
+      "id": "UI-024",
+      "module": "Results",
+      "name": "Inspect source and evidence passages",
+      "roles": "authorized result viewer",
+      "userStory": "As authorized result viewer, I can compare output with retained source passages.",
+      "purpose": "compare output with retained source passages",
+      "route": "result.php",
+      "steps": [
+        "Choose Check source",
+        "Expand original text",
+        "Follow numbered evidence references if present"
+      ],
+      "inputs": "Source disclosure and evidence anchor clicks",
+      "outputs": "Source text, evidence/coverage blocks where stored",
+      "frontend": [
+        "app/public/result.php",
+        "app/public/assets/js/result.js"
+      ],
+      "backend": [
+        "app/src/Utils/Formatter.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Source-backed evidence links do not prove factual accuracy; populated metadata not end-to-end tested."
+    },
+    {
+      "id": "UI-025",
+      "module": "Results",
+      "name": "Copy summary",
+      "roles": "authorized result viewer",
+      "userStory": "As authorized result viewer, I can copy the displayed summary.",
+      "purpose": "copy the displayed summary",
+      "route": "result.php",
+      "steps": [
+        "Open a completed result",
+        "Choose Copy"
+      ],
+      "inputs": "Copy button",
+      "outputs": "Clipboard text and status",
+      "frontend": [
+        "app/public/assets/js/result.js"
+      ],
+      "backend": [
+        ""
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "VERIFIED_UI_IN_ISOLATION",
+      "verificationEvidence": "browser-readonly-results.json supplementalInteractions; synthetic data/client-only action",
+      "limits": "Clipboard success verified on loopback with explicit browser permission and synthetic content; other browser permission contexts untested."
+    },
+    {
+      "id": "UI-026",
+      "module": "Results",
+      "name": "Print or save PDF",
+      "roles": "authorized result viewer",
+      "userStory": "As authorized result viewer, I can open browser print output for a completed summary.",
+      "purpose": "open browser print output for a completed summary",
+      "route": "result.php",
+      "steps": [
+        "Choose PDF",
+        "Review the browser print preview",
+        "Select a printer or Save as PDF"
+      ],
+      "inputs": "PDF button; browser print dialog",
+      "outputs": "Printed output or browser Save as PDF",
+      "frontend": [
+        "app/public/assets/js/result.js",
+        "app/public/assets/css/result.css"
+      ],
+      "backend": [
+        ""
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Uses window.print(), not a server-generated PDF endpoint; print dialog not exercised."
+    },
+    {
+      "id": "UI-027",
+      "module": "Results",
+      "name": "Download text",
+      "roles": "authorized result viewer",
+      "userStory": "As authorized result viewer, I can save summary text locally.",
+      "purpose": "save summary text locally",
+      "route": "result.php",
+      "steps": [
+        "Choose Text export",
+        "Save the generated download"
+      ],
+      "inputs": "Text export button",
+      "outputs": "Client-generated .txt file",
+      "frontend": [
+        "app/public/assets/js/result.js"
+      ],
+      "backend": [
+        ""
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "VERIFIED_UI_IN_ISOLATION",
+      "verificationEvidence": "browser-readonly-results.json supplementalInteractions; synthetic data/client-only action",
+      "limits": "Synthetic result exported to evidence/synthetic-summary-download.txt and exact text checked; no real summary exported."
+    },
+    {
+      "id": "UI-028",
+      "module": "Results",
+      "name": "Listen to summary audio",
+      "roles": "authorized result viewer with session",
+      "userStory": "As authorized result viewer with session, I can request and listen to generated speech.",
+      "purpose": "request and listen to generated speech",
+      "route": "tts_generate.php / tts_audio.php",
+      "steps": [
+        "Choose Listen on a completed summary",
+        "Use audio controls after successful generation"
+      ],
+      "inputs": "Summary id; share token if applicable; CSRF",
+      "outputs": "Audio player/status or service error",
+      "frontend": [
+        "app/public/result.php",
+        "app/public/assets/js/result.js"
+      ],
+      "backend": [
+        "app/public/tts_generate.php",
+        "app/public/tts_audio.php",
+        "app/src/Services/BarkTtsService.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Local worker availability required; no audio generated or fetched."
+    },
+    {
+      "id": "UI-029",
+      "module": "Results",
+      "name": "Filipino translation",
+      "roles": "session-bearing result viewer",
+      "userStory": "As session-bearing result viewer, I can request a Filipino rendition of displayed summary text.",
+      "purpose": "request a Filipino rendition of displayed summary text",
+      "route": "translate_proxy.php",
+      "steps": [
+        "Choose Translate on a completed result",
+        "Read returned Filipino translation with original as reference"
+      ],
+      "inputs": "Text; target language tl; CSRF",
+      "outputs": "Translation panel or error",
+      "frontend": [
+        "app/public/result.php",
+        "app/public/assets/js/result.js"
+      ],
+      "backend": [
+        "app/public/translate_proxy.php",
+        "app/src/Services/LocalPythonBridge.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Worker not invoked. Endpoint accepts en/tl; UI requests Filipino."
+    },
+    {
+      "id": "UI-030",
+      "module": "Feedback",
+      "name": "Rate, comment and update feedback",
+      "roles": "guest/user with summary access",
+      "userStory": "As guest/user with summary access, I can submit a usefulness rating with optional reasons/comment.",
+      "purpose": "submit a usefulness rating with optional reasons/comment",
+      "route": "feedback_submit.php",
+      "steps": [
+        "Choose a star rating",
+        "Optionally add reasons and a short comment",
+        "Submit feedback; use Update feedback for an existing response"
+      ],
+      "inputs": "1–5 stars; optional reasons; comment up to 500 UI characters; CSRF",
+      "outputs": "Saved/updated feedback confirmation or error",
+      "frontend": [
+        "app/public/partials/rating-widget.php",
+        "app/public/assets/js/result.js"
+      ],
+      "backend": [
+        "app/public/feedback_submit.php",
+        "app/src/Services/FeedbackService.php",
+        "app/src/Repositories/FeedbackRepository.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "No rating submitted; anonymous presentation does not mean no user/guest identifier is stored."
+    },
+    {
+      "id": "UI-031",
+      "module": "Results",
+      "name": "Unavailable result recovery",
+      "roles": "visitor",
+      "userStory": "As visitor, I can receive a safe unavailable-result message.",
+      "purpose": "receive a safe unavailable-result message",
+      "route": "result.php?id=…",
+      "steps": [
+        "Review the unavailable message",
+        "Use Back to summary settings or obtain an authorized link"
+      ],
+      "inputs": "Missing, unauthorized or inaccessible result id",
+      "outputs": "404 recovery view or missing-id redirect",
+      "frontend": [
+        "app/public/result.php"
+      ],
+      "backend": [
+        "app/src/Services/HistoryService.php",
+        "app/src/Support/ProcessingError.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "VERIFIED_UI_IN_ISOLATION",
+      "verificationEvidence": "browser-readonly-results.json (template/local interaction scope only)",
+      "limits": "404 template verified with synthetic absent id; live authorization not tested."
+    },
+    {
+      "id": "UI-032",
+      "module": "Dashboard",
+      "name": "Personal dashboard and recent summaries",
+      "roles": "registered non-admin",
+      "userStory": "As registered non-admin, I can return to recent work and inspect personal activity.",
+      "purpose": "return to recent work and inspect personal activity",
+      "route": "dashboard.php",
+      "steps": [
+        "Open Dashboard after signing in",
+        "Choose an available recent result or start a summary"
+      ],
+      "inputs": "Account session",
+      "outputs": "Recent five summaries and aggregate/empty dashboard",
+      "frontend": [
+        "app/public/dashboard.php",
+        "app/public/partials/analytics-graphs-card.php"
+      ],
+      "backend": [
+        "app/src/Controllers/AnalyticsController.php",
+        "app/src/Repositories/HistoryRepository.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Empty state rendered; no live account statistics read."
+    },
+    {
+      "id": "UI-033",
+      "module": "Dashboard",
+      "name": "Reuse inferred preferred settings",
+      "roles": "registered non-admin",
+      "userStory": "As registered non-admin, I can reuse settings inferred from previous completed summaries.",
+      "purpose": "reuse settings inferred from previous completed summaries",
+      "route": "dashboard.php → summarizer.php",
+      "steps": [
+        "If preferred settings are shown, choose the reuse link",
+        "Review the resulting controls before submitting"
+      ],
+      "inputs": "Preferred-settings link",
+      "outputs": "Validated mode/format/depth preselection",
+      "frontend": [
+        "app/public/dashboard.php",
+        "app/public/partials/summarizer-form.php"
+      ],
+      "backend": [
+        "app/src/Controllers/AnalyticsController.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "No separate editable custom-profile storage interface found; history-derived preference is conditional."
+    },
+    {
+      "id": "UI-034",
+      "module": "History",
+      "name": "Browse summary and nutshell history",
+      "roles": "registered user or admin",
+      "userStory": "As registered user or admin, I can reopen retained results and read prior nutshells.",
+      "purpose": "reopen retained results and read prior nutshells",
+      "route": "history.php",
+      "steps": [
+        "Open History",
+        "Choose a title or Access Full Report",
+        "Read Nutshell History when available"
+      ],
+      "inputs": "Account; optional page query",
+      "outputs": "History previews and full-report links",
+      "frontend": [
+        "app/public/history.php"
+      ],
+      "backend": [
+        "app/src/Controllers/HistoryHandler.php",
+        "app/src/Repositories/HistoryRepository.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Backend pages summaries but template has no next/previous controls; older pages require manual query; no delete/edit action found."
+    },
+    {
+      "id": "UI-035",
+      "module": "Analytics",
+      "name": "Personal/system activity and date filters",
+      "roles": "registered user or admin",
+      "userStory": "As registered user or admin, I can inspect activity over a chosen period.",
+      "purpose": "inspect activity over a chosen period",
+      "route": "analytics.php",
+      "steps": [
+        "Open Analytics through an available dashboard link",
+        "Choose a preset or From/To dates",
+        "Apply filter and review available charts"
+      ],
+      "inputs": "7d/30d/3m/year/custom dates; role",
+      "outputs": "Counts, reduction, charts, performance and recent activity",
+      "frontend": [
+        "app/public/analytics.php",
+        "app/public/assets/js/analytics.js"
+      ],
+      "backend": [
+        "app/src/Controllers/AnalyticsController.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Empty state rendered; populated charts not validated; admin scope differs from personal scope."
+    },
+    {
+      "id": "UI-036",
+      "module": "Profile",
+      "name": "View account details",
+      "roles": "registered account",
+      "userStory": "As registered account, I can view username, email and join date.",
+      "purpose": "view username, email and join date",
+      "route": "profile.php",
+      "steps": [
+        "Open Profile",
+        "Review account details",
+        "Use sidebar to return to dashboard or history"
+      ],
+      "inputs": "Authenticated account",
+      "outputs": "Read-only identity card",
+      "frontend": [
+        "app/public/profile.php"
+      ],
+      "backend": [
+        "app/src/Repositories/UserRepository.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Synthetic identity rendered; no edit username/email/photo form exists."
+    },
+    {
+      "id": "UI-037",
+      "module": "Profile",
+      "name": "Deactivate own account",
+      "roles": "registered account subject to backend protections",
+      "userStory": "As registered account subject to backend protections, I can deactivate account after confirming password.",
+      "purpose": "deactivate account after confirming password",
+      "route": "profile.php → auth.php?action=deactivateAccount",
+      "steps": [
+        "Read the deactivation description",
+        "Enter current password",
+        "Submit only when deactivation is intended"
+      ],
+      "inputs": "Current password; CSRF",
+      "outputs": "Inactive account and sign-out; summaries retained",
+      "frontend": [
+        "app/public/profile.php"
+      ],
+      "backend": [
+        "app/src/Controllers/AuthController.php",
+        "app/src/Repositories/UserRepository.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Not executed; backend has administrator protections; source retention is not hard deletion."
+    },
+    {
+      "id": "UI-038",
+      "module": "Accounts",
+      "name": "Logout confirmation",
+      "roles": "signed-in account",
+      "userStory": "As signed-in account, I can confirm leaving the active session.",
+      "purpose": "confirm leaving the active session",
+      "route": "auth.php?action=logout",
+      "steps": [
+        "Choose Logout",
+        "Choose Cancel to remain or Log out to leave"
+      ],
+      "inputs": "Logout link; Cancel/Log out",
+      "outputs": "Cancelled modal or logout redirect",
+      "frontend": [
+        "app/public/assets/js/logout-confirmation.js"
+      ],
+      "backend": [
+        "app/public/auth.php",
+        "app/src/Controllers/AuthController.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "VERIFIED_UI_IN_ISOLATION",
+      "verificationEvidence": "browser-readonly-results.json supplementalInteractions; synthetic data/client-only action",
+      "limits": "Escape closed modal on desktop/mobile; actual logout not executed; GET logout target remains source-supported only."
+    },
+    {
+      "id": "UI-039",
+      "module": "Administration",
+      "name": "System overview and storage counters",
+      "roles": "administrator",
+      "userStory": "As administrator, I can inspect aggregate system and upload counters.",
+      "purpose": "inspect aggregate system and upload counters",
+      "route": "admin_dashboard.php",
+      "steps": [
+        "Open Admin",
+        "Choose a statistics period",
+        "Review overview and storage cards"
+      ],
+      "inputs": "Stats-period select",
+      "outputs": "User/summary/guest/rating counts; storage size/count",
+      "frontend": [
+        "app/public/admin_dashboard.php"
+      ],
+      "backend": [
+        "app/src/Controllers/AdminController.php",
+        "app/src/Controllers/AnalyticsController.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "All captured zeros are synthetic; cleanup/delete-file dispatcher actions exist but visible maintenance buttons were not found."
+    },
+    {
+      "id": "UI-040",
+      "module": "Administration",
+      "name": "Search and filter users",
+      "roles": "administrator",
+      "userStory": "As administrator, I can filter the displayed account table.",
+      "purpose": "filter the displayed account table",
+      "route": "admin_dashboard.php",
+      "steps": [
+        "Enter username/email/id text",
+        "Choose role and status",
+        "Use Clear filters to reset"
+      ],
+      "inputs": "Search text; role; active-status filters",
+      "outputs": "Visible rows and count",
+      "frontend": [
+        "app/public/assets/js/admin-user-filters.js",
+        "app/public/admin_dashboard.php"
+      ],
+      "backend": [
+        "app/src/Controllers/AdminController.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Client-side filter over loaded rows; fixture had no users, so nonempty match behavior not browser-tested."
+    },
+    {
+      "id": "UI-041",
+      "module": "Administration",
+      "name": "Deactivate managed user",
+      "roles": "administrator",
+      "userStory": "As administrator, I can disable an eligible user account.",
+      "purpose": "disable an eligible user account",
+      "route": "admin_dashboard.php?action=deactivate_user",
+      "steps": [
+        "Find the intended account",
+        "Read the confirmation on Deactivate",
+        "Confirm only when intended"
+      ],
+      "inputs": "User id; CSRF; confirmation",
+      "outputs": "Account deactivation or error",
+      "frontend": [
+        "app/public/admin_dashboard.php"
+      ],
+      "backend": [
+        "app/src/Controllers/AdminController.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Destructive/stateful action source-inspected only; not executed."
+    },
+    {
+      "id": "UI-042",
+      "module": "Administration",
+      "name": "Permanently delete managed user",
+      "roles": "administrator",
+      "userStory": "As administrator, I can remove an eligible account and associated data.",
+      "purpose": "remove an eligible account and associated data",
+      "route": "admin_dashboard.php?action=delete_user",
+      "steps": [
+        "Find and verify the intended account",
+        "Read the explicit permanent-deletion warning",
+        "Confirm only under approved administration procedures"
+      ],
+      "inputs": "User id; CSRF; confirmation",
+      "outputs": "Deletion or protected-account/error result",
+      "frontend": [
+        "app/public/admin_dashboard.php"
+      ],
+      "backend": [
+        "app/src/Controllers/AdminController.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Not executed; deletion is distinct from deactivation and may remove linked data."
+    },
+    {
+      "id": "UI-043",
+      "module": "Administration",
+      "name": "Filter feedback and quality telemetry",
+      "roles": "administrator",
+      "userStory": "As administrator, I can review anonymous-presented feedback and summary setting patterns.",
+      "purpose": "review anonymous-presented feedback and summary setting patterns",
+      "route": "admin_dashboard.php",
+      "steps": [
+        "Review quality telemetry",
+        "Filter rating/comment state and sort order",
+        "Open a result link where authorized"
+      ],
+      "inputs": "Rating filter; has-comment filter; sort",
+      "outputs": "Feedback/comment tables; mode/depth/reason aggregates",
+      "frontend": [
+        "app/public/admin_dashboard.php"
+      ],
+      "backend": [
+        "app/src/Controllers/FeedbackHandler.php",
+        "app/src/Repositories/FeedbackRepository.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Empty fixture only; underlying records are linkable internally despite anonymous display."
+    },
+    {
+      "id": "UI-044",
+      "module": "Administration",
+      "name": "Landing telemetry dashboard",
+      "roles": "administrator",
+      "userStory": "As administrator, I can inspect landing engagement metrics.",
+      "purpose": "inspect landing engagement metrics",
+      "route": "admin_dashboard.php",
+      "steps": [
+        "Scroll to Landing Page Analytics",
+        "Read labels and applicable date periods",
+        "Interpret missing values as unavailable"
+      ],
+      "inputs": "Stored landing sessions/events",
+      "outputs": "Session, CTA, dwell, LCP, device, scroll, trend and referrer panels",
+      "frontend": [
+        "app/public/admin_dashboard.php",
+        "app/public/assets/js/landing-analytics.js"
+      ],
+      "backend": [
+        "app/public/api/track_landing.php",
+        "app/src/Controllers/AnalyticsController.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "No telemetry emitted; the landing view itself normally sends beacons; counters are not human survey evaluation."
+    },
+    {
+      "id": "UI-045",
+      "module": "Administration",
+      "name": "Audit log viewer",
+      "roles": "administrator",
+      "userStory": "As administrator, I can review privileged action logs.",
+      "purpose": "review privileged action logs",
+      "route": "admin_audit_logs.php",
+      "steps": [
+        "Open Audit Logs",
+        "Choose filters and submit",
+        "Use pagination when present"
+      ],
+      "inputs": "Action/admin/date filters; page",
+      "outputs": "Filtered log rows and pagination",
+      "frontend": [
+        "app/public/admin_audit_logs.php"
+      ],
+      "backend": [
+        "app/src/Services/AdminSecurityService.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Synthetic missing-table empty state captured; real audit log contents not read."
+    },
+    {
+      "id": "UI-046",
+      "module": "Administration",
+      "name": "Database health JSON",
+      "roles": "administrator",
+      "userStory": "As administrator, I can check required-table/column presence.",
+      "purpose": "check required-table/column presence",
+      "route": "admin_db_health.php",
+      "steps": [
+        "Open the diagnostic endpoint under administrator access and interpret status fields"
+      ],
+      "inputs": "Authenticated administrator session",
+      "outputs": "Status JSON and development-dependent detail",
+      "frontend": [
+        "app/public/admin_db_health.php"
+      ],
+      "backend": [
+        "app/src/Database.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Anonymous isolated 403 verified; authenticated database health not checked against live schema."
+    },
+    {
+      "id": "UI-047",
+      "module": "Evaluation",
+      "name": "Assigned independent summary review",
+      "roles": "active account with assignment",
+      "userStory": "As active account with assignment, I can read an assigned source/summary and score it independently.",
+      "purpose": "read an assigned source/summary and score it independently",
+      "route": "evaluate.php",
+      "steps": [
+        "Open the assigned review link while signed in",
+        "Read source and blinded summary",
+        "Score each criterion separately",
+        "Submit once; contact administrator for corrections"
+      ],
+      "inputs": "Assignment token; seven 1–5 criteria; optional comment; CSRF",
+      "outputs": "Submitted-and-locked assessment or error",
+      "frontend": [
+        "app/public/evaluate.php",
+        "app/public/partials/evaluation-ui.php"
+      ],
+      "backend": [
+        "app/src/Services/EvaluationAccess.php",
+        "app/src/Services/EvaluationService.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "Empty/denied UI captured; no assignment or rating created; this 1–5 content rubric is not the capstone ISO usability instrument."
+    },
+    {
+      "id": "UI-048",
+      "module": "Evaluation",
+      "name": "Evaluation export and report rendering",
+      "roles": "administrator",
+      "userStory": "As administrator, I can export an existing evaluation run.",
+      "purpose": "export an existing evaluation run",
+      "route": "evaluation_export.php?run=…&format=json|csv|html",
+      "steps": [
+        "Use an existing approved run identifier",
+        " request the selected format",
+        " protect exported records"
+      ],
+      "inputs": "Positive run id; json/csv/html format",
+      "outputs": "Download or HTML report",
+      "frontend": [
+        "app/public/evaluation_export.php",
+        "app/public/partials/evaluation-report.php",
+        "app/public/partials/evaluation-output.php"
+      ],
+      "backend": [
+        "app/src/Services/EvaluationService.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "No real run exported; only anonymous 403 tested. evaluation.php now redirects, so legacy management tabs are not operational entry points."
+    },
+    {
+      "id": "UI-049",
+      "module": "API-only",
+      "name": "Document Q&A endpoint",
+      "roles": "authorized summary viewer",
+      "userStory": "As authorized summary viewer, I can request source-grounded answers through the API.",
+      "purpose": "request source-grounded answers through the API",
+      "route": "api/qa.php",
+      "steps": [
+        "Use an authorized API client",
+        " provide an accessible source summary and question",
+        " inspect source evidence"
+      ],
+      "inputs": "POST JSON summary_id, question, optional share_token; no CSRF check found in this endpoint",
+      "outputs": "Answer/passage/confidence JSON or error",
+      "frontend": [
+        "app/public/api/qa.php"
+      ],
+      "backend": [
+        "app/src/Services/LocalPythonBridge.php",
+        "app/src/Services/HistoryService.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "No Q&A interaction widget found in current result.js/result.php. Do not advertise a visible chat feature."
+    },
+    {
+      "id": "UI-050",
+      "module": "API-only",
+      "name": "Document and multi-document REST operations",
+      "roles": "session/role controlled by dispatcher",
+      "userStory": "As session/role controlled by dispatcher, I can access document operations through routed API.",
+      "purpose": "access document operations through routed API",
+      "route": "api/router.php and aliases",
+      "steps": [
+        "Consult controller dispatch contract before using an integration"
+      ],
+      "inputs": "Method/path and controller-specific payload",
+      "outputs": "Document/status/summary response",
+      "frontend": [
+        "app/public/api/router.php",
+        "app/public/api/documents.php",
+        "app/public/api/index.php"
+      ],
+      "backend": [
+        "app/src/Controllers/DocumentSummaryController.php",
+        "app/src/Services/DocumentSummaryService.php"
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "No multi-file selector in main form; result can render multi_document metadata when present."
+    },
+    {
+      "id": "UI-051",
+      "module": "Health",
+      "name": "Static service health",
+      "roles": "visitor or monitor",
+      "userStory": "As visitor or monitor, I can confirm the PHP health endpoint responds.",
+      "purpose": "confirm the PHP health endpoint responds",
+      "route": "health.php",
+      "steps": [
+        "Request health.php",
+        "Check HTTP status and JSON service label"
+      ],
+      "inputs": "GET only in this audit",
+      "outputs": "status ok / service ai-summarizer JSON",
+      "frontend": [
+        "app/public/health.php"
+      ],
+      "backend": [
+        ""
+      ],
+      "database": "See backend schema/data-flow inventory; synthetic UI capture did not access production data.",
+      "verificationStatus": "SOURCE-SUPPORTED",
+      "verificationEvidence": "Source inspection; UI rendered in isolation where listed in screenshot register",
+      "limits": "This static check does not establish database, NLP worker or full application readiness."
+    }
+  ]
+}

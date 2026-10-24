@@ -1,0 +1,34 @@
+   Table 19. Assessment of the end users on the
+Performance Efficiency of the developed system
+     Software                                    Verbal
+      Product          Weighted Mean        Interpretation
+    Categories
+
+  Time behavior              3.6            Very Efficient
+
+     Resource                3.4            Very Efficient
+   Utilization
+
+     Capacity                3.4            Very Efficient
+
+   Performance               3.46           Very Efficient
+    Efficiency
+
+   It   demonstrates   very   high-performance
+efficiency. The system performs efficiently in
+terms of time, effectively utilizing resources,
+and handling capacity requirements.
+
+
+   6.3 Usability
+   Table 20 shows the usability of the developed
+AccredX: Record Management and Archiving System
+assessed by the end users that consist of             six
+(6)        sub-characteristics,        namely:
+appropriateness recognizability, learnability,
+operability,  user  error  protection,  user
+interface aesthetics and accessibility.
+
+
+
+                                                       101

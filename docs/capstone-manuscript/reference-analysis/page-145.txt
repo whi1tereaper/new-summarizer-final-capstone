@@ -1,0 +1,53 @@
+                          Appendix F.
+   AccredX: Record Management and Archiving System for
+           NEUST Penaranda Off-Campus User Manual
+
+A. Landing Page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   •   Here you can see a brief overview of the AccredX
+       system.
+   •   Brief overview of the system’s features and our
+       contact information.
+   •   Click the “Get Started” button to Login to the
+       system.
+   •   You can “Watch Demo” to watch a short preview of
+       the AccredX system and its features.
+   •   You can generate a compliance report that
+       displays the accreditation progress.
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                   126

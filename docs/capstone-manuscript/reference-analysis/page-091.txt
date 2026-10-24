@@ -1,0 +1,36 @@
+   projects.  To  better  understand  these  data
+   elements, a data dictionary is created, which
+   contains   their   names,   definitions,   and
+   properties.  The  developed  system's  data
+   dictionary is displayed in the following tables.
+
+      Table 4. users Table
+
+
+Fields Name           Description     Type/Length     Constraint
+
+id                    Unique          int (11)        Primary
+                      Identifier                      key
+                      for each
+                      user
+username              Username of     varchar(255)
+                      the user
+password              Password of     varchar(255)
+                      the user
+email                 Email of the    varchar(255)
+                      user
+status                Status of       tinyint(4)
+                      the user
+                      account,
+                      whether
+                      Enabled or
+                      Disabled
+role                  Role of the     varchar(50)
+                      user (Admin,
+                      Teacher,
+                      Assistant)
+
+
+
+
+                                                              72

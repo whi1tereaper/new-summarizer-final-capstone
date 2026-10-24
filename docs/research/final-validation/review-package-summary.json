@@ -1,0 +1,21 @@
+{
+  "unique_masked_outputs": 385,
+  "native_focus_outputs": 192,
+  "focus_output_views_including_registered_selected": 288,
+  "focus_sentence_occurrences": 2329,
+  "unique_focus_sentence_rating_items": 1560,
+  "human_output_rating_rows": 770,
+  "human_sentence_rating_rows": 3120,
+  "human_review_completed": false,
+  "independently_identified_source_units": null,
+  "draft_roles": {
+    "direct_answer_evidence_candidate": 411,
+    "unresolved_nonverbatim_or_partial_alignment": 168,
+    "unresolved_requires_semantic_review": 315,
+    "supporting_context_candidate_necessity_unreviewed": 423,
+    "unrelated_to_requested_answer_under_agent_support_draft": 756,
+    "unresolved_fragment_or_incomplete_proposition": 14,
+    "unresolved_ambiguous_scope": 242
+  },
+  "note": "Unresolved draft roles are explicit; no complete independent semantic determination has been fabricated."
+}

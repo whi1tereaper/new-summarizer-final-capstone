@@ -1,0 +1,1586 @@
+{
+  "date": "2026-10-17",
+  "scope": "All app/public PHP entry points and partials, JavaScript and CSS including bundled vendor asset; root index is separately inventoried as safe redirect",
+  "counts": {
+    "entryPoints": 41,
+    "partials": 13,
+    "scripts": 16,
+    "stylesheets": 19
+  },
+  "items": [
+    {
+      "path": "app/public/about.php",
+      "lineCount": 4,
+      "sha256": "e734f4c2d7ac4b47892df96ce523545c4f10e6af8d4943b446025979fbf1e53f",
+      "category": "entry-point",
+      "role": "Public compatibility redirect",
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/accept_terms.php",
+      "lineCount": 151,
+      "sha256": "4f8e4e6357ccb3de9857568e7443edd919a2d3d51912e7923e851f97b9b82183",
+      "category": "entry-point",
+      "role": "Public reading; authenticated pending-terms confirmation",
+      "usesBootstrap": true,
+      "forms": [
+        {
+          "line": 103,
+          "markup": "<form method=\"POST\" action=\"accept_terms.php\" class=\"terms-actions\">"
+        }
+      ],
+      "namedFields": [
+        "viewport",
+        "csrf_token",
+        "accept_terms"
+      ],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../vendor/autoload.php'",
+        "require_once __DIR__ . '/../src/Utils/validation.php'",
+        "require_once __DIR__ . '/../src/Utils/TermsContent.php'",
+        "require_once __DIR__ . '/../src/Services/TermsAcceptanceService.php'",
+        "require_once __DIR__ . '/../src/Services/RememberMeService.php'",
+        "require_once __DIR__ . '/../src/Services/GuestSessionService.php'",
+        "href=\"assets/css/design-tokens.css",
+        "href=\"assets/css/style.css?v=<?= filemtime(__DIR__ . ",
+        "href=\"assets/css/site-footer.css?v=nex-8",
+        "require __DIR__ . '/partials/site-nav.php'",
+        "required data-terms-checkbox>",
+        "src=\"assets/js/index.js?v=<?= filemtime(__DIR__ . ",
+        "require __DIR__ . '/partials/site-footer.php'"
+      ]
+    },
+    {
+      "path": "app/public/admin_audit_logs.php",
+      "lineCount": 264,
+      "sha256": "9620b3e088af742ad5fd4aad3f8b6463f278fec2cb899c20cb5c22265f6b7bfb",
+      "category": "entry-point",
+      "role": "Administrator",
+      "usesBootstrap": true,
+      "forms": [
+        {
+          "line": 185,
+          "markup": "<form method=\"GET\" class=\"filter-form\">"
+        }
+      ],
+      "namedFields": [
+        "viewport",
+        "action",
+        "admin_id",
+        "date_from",
+        "date_to"
+      ],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../src/Database.php'",
+        "require_once __DIR__ . '/../src/Services/AdminSecurityService.php'",
+        "requireVerifiedAdmin('login.php?context=admin')",
+        "src=\"assets/js/theme-toggle.js?v=1",
+        "href=\"assets/css/style.css?v=<?= filemtime(__DIR__ . ",
+        "href=\"assets/css/theme-toggle.css?v=2",
+        "require __DIR__ . '/partials/theme-toggle-button.php'",
+        "require __DIR__ . '/partials/site-footer.php'"
+      ]
+    },
+    {
+      "path": "app/public/admin_challenge_change.php",
+      "lineCount": 4,
+      "sha256": "18687c50567aef1f2a1f6340cd9f9b6e514394a43bf8d6f1c4c06c120d438eeb",
+      "category": "entry-point",
+      "role": "Retired challenge redirect",
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "require __DIR__ . '/admin_verify.php'"
+      ]
+    },
+    {
+      "path": "app/public/admin_challenge_setup.php",
+      "lineCount": 4,
+      "sha256": "18687c50567aef1f2a1f6340cd9f9b6e514394a43bf8d6f1c4c06c120d438eeb",
+      "category": "entry-point",
+      "role": "Retired challenge redirect",
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "require __DIR__ . '/admin_verify.php'"
+      ]
+    },
+    {
+      "path": "app/public/admin_dashboard.php",
+      "lineCount": 1285,
+      "sha256": "aa37d93945fc18fcd8c3e9fe544e0cdba699c90539581a5677f572868e408167",
+      "category": "entry-point",
+      "role": "Administrator",
+      "usesBootstrap": true,
+      "forms": [
+        {
+          "line": 554,
+          "markup": "<form class=\"admin-stats-range\" id=\"admin-stats-range-form\" method=\"get\" action=\"admin_dashboard.php\">"
+        },
+        {
+          "line": 679,
+          "markup": "<form method=\"POST\" action=\"admin_dashboard.php?action=deactivate_user\" style=\"display:inline;\">"
+        },
+        {
+          "line": 689,
+          "markup": "<form method=\"POST\" action=\"admin_dashboard.php?action=delete_user\" style=\"display:inline;\">"
+        },
+        {
+          "line": 783,
+          "markup": "<form method=\"GET\" action=\"admin_dashboard.php\" style=\"display: flex; gap: 8px; flex-wrap: wrap; align-items: center;\">"
+        }
+      ],
+      "namedFields": [
+        "viewport",
+        "stats_range",
+        "csrf_token",
+        "user_id",
+        "fb_rating",
+        "fb_comment",
+        "fb_sort"
+      ],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../src/Services/AdminSecurityService.php'",
+        "requireVerifiedAdmin('login.php?context=admin')",
+        "require_once __DIR__ . '/../../vendor/autoload.php'",
+        "require_once __DIR__ . '/../src/Controllers/AdminController.php'",
+        "require_once __DIR__ . '/../src/Controllers/AnalyticsController.php'",
+        "require_once __DIR__ . '/../src/Utils/validation.php'",
+        "href=\"assets/css/style.css?v=navbar-3-<?= filemtime(__DIR__ . ",
+        "href=\"assets/css/dashboard-charts.css?v=<?= file_exists(__DIR__ . ",
+        "require __DIR__ . '/partials/site-nav.php'",
+        "require __DIR__ . '/partials/analytics-graphs-card.php'",
+        "src=\"assets/js/vendor/chart.umd.min.js",
+        "src=\"assets/js/dashboard-charts.js?v=<?= file_exists(__DIR__ . ",
+        "src=\"assets/js/admin-user-filters.js?v=<?= file_exists(__DIR__ . ",
+        "src=\"assets/js/index.js?v=<?= filemtime(__DIR__ . ",
+        "require __DIR__ . '/partials/site-footer.php'"
+      ]
+    },
+    {
+      "path": "app/public/admin_db_health.php",
+      "lineCount": 88,
+      "sha256": "0feebeb277c61c70db2fa9b865a5ab727e27b61a07db72f49c45740a90c7cf96",
+      "category": "entry-point",
+      "role": "Administrator API",
+      "usesBootstrap": true,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../src/Database.php'",
+        "require_once __DIR__ . '/../src/Services/AdminSecurityService.php'",
+        "requires an authenticated user with the administrator role.",
+        "requiredTables = [",
+        "requiredTables as $table => $columns) {"
+      ]
+    },
+    {
+      "path": "app/public/admin_feedback_feed.php",
+      "lineCount": 27,
+      "sha256": "5ae1e582ac53f7bacf077ee4f0b20838ee37066dacbf45e4c4769f72e114ee29",
+      "category": "entry-point",
+      "role": "Administrator API",
+      "usesBootstrap": true,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../src/Services/AdminSecurityService.php'",
+        "require_once __DIR__ . '/../src/Controllers/FeedbackHandler.php'",
+        "requireVerifiedAdminApi()"
+      ]
+    },
+    {
+      "path": "app/public/admin_verify.php",
+      "lineCount": 13,
+      "sha256": "635907078bee8b8b5ffbfe6d74c81b194e9414d4a9040cd5cf8158acb2f9f844",
+      "category": "entry-point",
+      "role": "Retired challenge redirect",
+      "usesBootstrap": true,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../src/Services/AdminSecurityService.php'"
+      ]
+    },
+    {
+      "path": "app/public/analytics.php",
+      "lineCount": 155,
+      "sha256": "0907fbcd1aead234d198faca0e8d1bbce6deff44d6d40c8a81546b9e6b07bcd1",
+      "category": "entry-point",
+      "role": "Registered user; administrator sees system scope",
+      "usesBootstrap": true,
+      "forms": [
+        {
+          "line": 116,
+          "markup": "<form class=\"date-filter\" method=\"get\" aria-label=\"Analytics date filter\">"
+        }
+      ],
+      "namedFields": [
+        "viewport",
+        "period",
+        "from",
+        "to"
+      ],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../vendor/autoload.php'",
+        "require_once __DIR__ . '/../src/Controllers/AnalyticsController.php'",
+        "href=\"assets/css/design-tokens.css",
+        "href=\"assets/css/style.css?v=navbar-2-<?= filemtime(__DIR__ . ",
+        "href=\"assets/css/index.css?v=navbar-2",
+        "href=\"assets/css/analytics.css?v=navbar-2",
+        "href=\"assets/css/site-nav.css?v=3",
+        "href=\"assets/css/site-footer.css?v=nex-8",
+        "href=\"assets/css/global-button-effects.css?v=2",
+        "require __DIR__ . '/partials/site-nav.php'",
+        "src=\"assets/js/vendor/chart.umd.min.js",
+        "src=\"assets/js/analytics.js",
+        "require __DIR__ . '/partials/site-footer.php'"
+      ]
+    },
+    {
+      "path": "app/public/api/documents.php",
+      "lineCount": 5,
+      "sha256": "24d8f4c3f4fc773a4fa161ee85896cc099bf9a97f9c2777a66e27ec2d16e2107",
+      "category": "entry-point",
+      "role": "Document API compatibility router; per-dispatch guard",
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "require_once __DIR__ . '/router.php'"
+      ]
+    },
+    {
+      "path": "app/public/api/index.php",
+      "lineCount": 5,
+      "sha256": "24d8f4c3f4fc773a4fa161ee85896cc099bf9a97f9c2777a66e27ec2d16e2107",
+      "category": "entry-point",
+      "role": "Document API compatibility router; per-dispatch guard",
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "require_once __DIR__ . '/router.php'"
+      ]
+    },
+    {
+      "path": "app/public/api/qa.php",
+      "lineCount": 106,
+      "sha256": "5d1720d482f1c5aefa17d7adcdb22e05ebc8c8de8a0278ab7533824674df5034",
+      "category": "entry-point",
+      "role": "Summary access; POST JSON",
+      "usesBootstrap": true,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "require_once __DIR__ . '/../../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../../vendor/autoload.php'",
+        "require_once __DIR__ . '/../../src/Controllers/HistoryHandler.php'",
+        "require_once __DIR__ . '/../../src/Services/LocalPythonBridge.php'",
+        "require_once __DIR__ . '/../../src/Utils/validation.php'",
+        "required.'], JSON_UNESCAPED_UNICODE)"
+      ]
+    },
+    {
+      "path": "app/public/api/router.php",
+      "lineCount": 13,
+      "sha256": "93cab19eb16397dc47bf2bf13f3c06f6f86abbedc14072aae3de08247e6b945f",
+      "category": "entry-point",
+      "role": "Document API dispatcher; per-dispatch guard",
+      "usesBootstrap": true,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "require_once __DIR__ . '/../../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../src/Controllers/DocumentSummaryController.php'"
+      ]
+    },
+    {
+      "path": "app/public/api/track_landing.php",
+      "lineCount": 221,
+      "sha256": "8796308e626a89900497bc2d96d6c73ba3fcdb31e88eed5cf777a960e02eb169",
+      "category": "entry-point",
+      "role": "Public POST telemetry with size and rate limits",
+      "usesBootstrap": true,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "require_once __DIR__ . '/../../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../src/Services/RateLimiter.php'"
+      ]
+    },
+    {
+      "path": "app/public/assets/css/about.css",
+      "lineCount": 295,
+      "sha256": "b6c73c4edadfe61805ad4c9da334526a1e11dc2f8c227b66837f0e6c9c2cf004",
+      "category": "stylesheet",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/css/analytics.css",
+      "lineCount": 122,
+      "sha256": "5cb82b417462f2b6d7b945a357b955cd5d307c6f8688c273624bf9914adb40fc",
+      "category": "stylesheet",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/css/background-component.css",
+      "lineCount": 35,
+      "sha256": "6db02b2bc78643176276d4d2a18ee0b8e378cf4d8f906212b88fd797a8db146a",
+      "category": "stylesheet",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/css/dashboard-charts.css",
+      "lineCount": 165,
+      "sha256": "15022f0ff51874fd707486855356d608bc500ef33c13309f871670e2c9085868",
+      "category": "stylesheet",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/css/design-tokens.css",
+      "lineCount": 162,
+      "sha256": "257d849f2378e816af78cf35e93c987e58de7ed96c1e1dee476c61044dc2d91b",
+      "category": "stylesheet",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/css/evaluation.css",
+      "lineCount": 61,
+      "sha256": "d400238a5c5446569c7304552990009079263202e92070643046d27c3752e727",
+      "category": "stylesheet",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/css/global-button-effects.css",
+      "lineCount": 27,
+      "sha256": "9665e26d7201658843eee9710c04972e3b42ab04ba27ba8e156fcaf1e7e092a7",
+      "category": "stylesheet",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/css/index.css",
+      "lineCount": 1097,
+      "sha256": "d8f4816a3f1fea0819c2eb96715e6e6355f23192af14171c91fbb10d54bec7cc",
+      "category": "stylesheet",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/css/landing.css",
+      "lineCount": 273,
+      "sha256": "5b8f7b844d32f1310d855b1d8ef8989bcf14647169698f3850b937d2323c0258",
+      "category": "stylesheet",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/css/light-errors.css",
+      "lineCount": 27,
+      "sha256": "962657faab5f373d27e393a716b6052e1a43d078ebfbe5ef0e33578990be0d05",
+      "category": "stylesheet",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/css/mesh-text-hover.css",
+      "lineCount": 60,
+      "sha256": "92dc780f9ad0af13620ba0ca473a42a043023fc2135fe732b25f777bf29c2b29",
+      "category": "stylesheet",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/css/nex-landing.css",
+      "lineCount": 2393,
+      "sha256": "ba1290245b2b4f05a444c6d3c754d62c73d76b0ca042b7b940d0d5cbee0eb064",
+      "category": "stylesheet",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/css/processing.css",
+      "lineCount": 189,
+      "sha256": "16a9295c3eb3cf441f2091fc3c6a42d9410615b3227cb0aa1b546ef9fdbe1973",
+      "category": "stylesheet",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/css/profile.css",
+      "lineCount": 274,
+      "sha256": "8f979b4fe7cd4856f7fd48e4a169a22b7dd908454ffd202e5812069d186bb7d9",
+      "category": "stylesheet",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/css/result.css",
+      "lineCount": 2584,
+      "sha256": "c3ffebbb446e39accef8bb8685d1cbfa389ca363a8f2b88ac581e7d3108b97de",
+      "category": "stylesheet",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/css/site-footer.css",
+      "lineCount": 316,
+      "sha256": "6a7ab99438c06f9d40c0b29a3b0155f2f30e652b5bf83263962e3617d0bcb37c",
+      "category": "stylesheet",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/css/site-nav.css",
+      "lineCount": 212,
+      "sha256": "6937e2a75bb525ec32bb6b54d451271c7fb2bbcb6e8e80eadcf56ac9ba10f72d",
+      "category": "stylesheet",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/css/style.css",
+      "lineCount": 1096,
+      "sha256": "885299cd2590ce3bc9943932fbb99061124351abd5a9aff2519fd33852f25e36",
+      "category": "stylesheet",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/css/theme-toggle.css",
+      "lineCount": 59,
+      "sha256": "7fea4d52136a48aa3d0534e8e3dafde2925a80ef4b8db172f7c2c9c68da63dc1",
+      "category": "stylesheet",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/js/admin-user-filters.js",
+      "lineCount": 46,
+      "sha256": "42d884c821aa6e9a8a72e987c9321a6d6bd7fc936b5d33e59040091d3b5d499e",
+      "category": "script",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "includes(query)"
+      ]
+    },
+    {
+      "path": "app/public/assets/js/analytics.js",
+      "lineCount": 111,
+      "sha256": "58c398de6299a800fd915b4c747b0945a7d44ee7a4bda07893957b603dfd7266",
+      "category": "script",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/js/dashboard-charts.js",
+      "lineCount": 224,
+      "sha256": "bb6689f1b09f28dd96e0391158cc3012874ec7a45bc080d14f2805688a86bbba",
+      "category": "script",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [
+        "stats_range"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/js/evaluation.js",
+      "lineCount": 25,
+      "sha256": "a7b0aad8a9fac3a0780c0885850d9b7e6f21308a4fbf6a478930215a520b7562",
+      "category": "script",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/js/footer-mesh-text.js",
+      "lineCount": 556,
+      "sha256": "eb4467a2e29f60fbc307e783f88823ebe499f6b02c82d9d6b3970efb72fcd781",
+      "category": "script",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/js/index.js",
+      "lineCount": 392,
+      "sha256": "0884ec0294d6e9b6f577bcdf7a0aa706ef45e83bb9849ae3ba88c1de32d055ff",
+      "category": "script",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [
+        "csrf_token"
+      ],
+      "dependencies": [
+        "includes(file.name.split('.').pop().toLowerCase())) code = 'FILE_UNSUPPORTED'",
+        "includes(parsed.protocol) || !parsed.hostname || parsed.username || parsed.password) code = 'URL_INVALID'",
+        "includes(currentFailure.category) || /^(URL|FILE)_/.test(currentFailure.code)) || button.dataset.recoverySource === sourceType?.value",
+        "includes(target.pathname)) {",
+        "requiresRegistrationForNutshell) {"
+      ]
+    },
+    {
+      "path": "app/public/assets/js/landing-analytics.js",
+      "lineCount": 192,
+      "sha256": "d6c0e352544d01bab098a2cb85217775c4531162422b30abd90010226d457461",
+      "category": "script",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/js/light-errors.js",
+      "lineCount": 61,
+      "sha256": "45de76a1e6bd2db1b60c0004c5a1356908b70ca443403c4e82045c0089f1646d",
+      "category": "script",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/js/logout-confirmation.js",
+      "lineCount": 82,
+      "sha256": "12cc9d52d22b8b26c7b197997bfe5ae28efeddc1fb8a6588e867f7ea3912fbd8",
+      "category": "script",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/js/mesh-text-hover.js",
+      "lineCount": 702,
+      "sha256": "d705221d169686427045ae1748ae735c548f6517b3a9810e0cd92eeaa0674d85",
+      "category": "script",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/js/mesh-text.js",
+      "lineCount": 611,
+      "sha256": "bdaa65c5ae7f3bdc315239810cb5a8dafb91cf7c851828d4ba254f341974d3ef",
+      "category": "script",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/js/nex-landing.js",
+      "lineCount": 667,
+      "sha256": "5b83f808651d8c1b1488204106f13d5d353623be2c9041ca75a6403101fbbf3d",
+      "category": "script",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/js/processing.js",
+      "lineCount": 141,
+      "sha256": "fcf8d98822ed17252306ca3278159cea2bc7d6b847a91a85e4e7f8c9de586b40",
+      "category": "script",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "includes(data?.status)) {"
+      ]
+    },
+    {
+      "path": "app/public/assets/js/result.js",
+      "lineCount": 908,
+      "sha256": "2bd3fd42ce4420afc7d886292b1a3d9b3ad038b55e5aaf5117906c5b6aa9682e",
+      "category": "script",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [
+        "feedback_reason"
+      ],
+      "dependencies": [
+        "includes(event.key)) return"
+      ]
+    },
+    {
+      "path": "app/public/assets/js/theme-toggle.js",
+      "lineCount": 50,
+      "sha256": "b2beccf6d01ee4ce3821faa0c901e605a523d140d9a2ed8bc6efa5c4805629e3",
+      "category": "script",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/assets/js/vendor/chart.umd.min.js",
+      "lineCount": 21,
+      "sha256": "b38076762f7363bc9e912b68b8e034826798db5df26bb61f000ec2e7a3137bc7",
+      "category": "script",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "includes(s)||e>.8*i.length?oe.numeric.call(this,t,e,i):\"\"}}",
+        "includeInvisible:!1},this.maintainAspectRatio=!0,this.onHover=null,this.onClick=null,this.parsing=!0,this.plugins={},this.responsive=!0,this.scale=void 0,this.scales={},this.showLine=!0,this.drawActiveElementsOnTop=!0,this.describe(t),this.apply(e)}set(t,e){return ce(this,t,e)}get(t){return he(this,t)}describe(t,e){return ce(le,t,e)}override(t,e){return ce(re,t,e)}route(t,e,i,s){const n=he(this,t),a=he(this,i),r=\"_\"+e",
+        "includes(e),ownKeys:t=>ei(t),set(t,e,i){const s=t._storage||(t._storage=n())",
+        "includes(e)||i.push(e),i.indexOf(e)):e}",
+        "includeInvisible||!1,r=i.intersect?ji(t,n,o,s,a):Yi(t,n,o,!1,s,a),l=[]",
+        "includeInvisible||!1",
+        "includeInvisible||!1),nearest(t,e,i,s){const n=ve(e,t),o=i.axis||\"xy\",a=i.includeInvisible||!1",
+        "includes(s))continue",
+        "includeOptions(t,e){return!e||Bs(t)||this.chart._animationsDisabled}_getSharedOptions(t,e){const i=this.resolveDataElementOptions(t,e),s=this._sharedOptions,n=this.getSharedOptions(i),o=this.includeOptions(e,n)||n!==s",
+        "includeOptions:o}}updateElement(t,e,i,s){Bs(s)?Object.assign(t,i):this._resolveAnimations(e,s).update(t,i)}updateSharedOptions(t,e,i){t&&!Bs(e)&&this._resolveAnimations(void 0,e).update(t,i)}_setStyle(t,e,i,s){t.active=s",
+        "includes(\"hover\")))},s.set(n,o)}return o}const _n=t=>o(t)&&Object.getOwnPropertyNames(t).some((e=>S(t[e])))",
+        "includes(t.native.type)",
+        "includeOptions:g}=this._getSharedOptions(e,s)",
+        "includeOptions:u}=this._getSharedOptions(e,n)",
+        "includeOptions:l}=this._getSharedOptions(e,s),h=o.axis,c=a.axis",
+        "includeOptions:d}=this._getSharedOptions(e,n),u=a.axis,f=r.axis,{spanGaps:g,segment:p}=this.options,m=N(g)?g:Number.POSITIVE_INFINITY,x=this.chart._animationsDisabled||o||\"none\"===n,b=e+i,_=t.length",
+        "includeOptions(n,d),f=a.axis,g=r.axis,{spanGaps:p,segment:m}=this.options,x=N(p)?p:Number.POSITIVE_INFINITY,b=this.chart._animationsDisabled||o||\"none\"===n",
+        "includeBounds:u}=t,f=o||1,g=c-1,{min:p,max:m}=e,x=!s(a),b=!s(r),_=!s(h),y=(m-p)/(d+1)",
+        "includeBounds:!1!==e.includeBounds},this._range||this)",
+        "includes(t)&&i.length||i.splice(0,0,t),i.includes(e)&&1!==i.length||i.push(e),i.sort(((t,e)=>t-e))}_getTimestampsForTable(){let t=this._cache.all||[]",
+        "includes(t)}}}"
+      ]
+    },
+    {
+      "path": "app/public/auth.php",
+      "lineCount": 53,
+      "sha256": "b473cd30ca62e89b66b7e5deb99e100362b7270b52267d14383fb95fea30c866",
+      "category": "entry-point",
+      "role": "Authentication action dispatcher; per-action guards",
+      "usesBootstrap": true,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../vendor/autoload.php'",
+        "require_once __DIR__ . '/../src/Controllers/AuthController.php'"
+      ]
+    },
+    {
+      "path": "app/public/check_status.php",
+      "lineCount": 44,
+      "sha256": "cca3f797ec775c92ec3e1cedc5ec6bfa265bc29be2a31379600fd3b27a2d572e",
+      "category": "entry-point",
+      "role": "Summary owner guest/user or valid share token",
+      "usesBootstrap": true,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../vendor/autoload.php'",
+        "require_once __DIR__ . '/../src/Controllers/HistoryHandler.php'",
+        "required.',"
+      ]
+    },
+    {
+      "path": "app/public/dashboard.php",
+      "lineCount": 128,
+      "sha256": "f391205ba2ec1ae0b5cffd853d0628d741907589a7309c3e693a8cb667386a48",
+      "category": "entry-point",
+      "role": "Registered non-admin; admin redirects",
+      "usesBootstrap": true,
+      "forms": [],
+      "namedFields": [
+        "viewport"
+      ],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../vendor/autoload.php'",
+        "require_once __DIR__ . '/../src/Controllers/AnalyticsController.php'",
+        "require_once __DIR__ . '/../src/Repositories/HistoryRepository.php'",
+        "href=\"assets/css/design-tokens.css",
+        "href=\"assets/css/style.css?v=<?= filemtime(__DIR__ . ",
+        "href=\"assets/css/site-nav.css",
+        "href=\"assets/css/global-button-effects.css",
+        "href=\"assets/css/dashboard-charts.css?v=<?= filemtime(__DIR__ . ",
+        "require __DIR__ . '/partials/site-nav.php'",
+        "require __DIR__ . '/partials/analytics-graphs-card.php'",
+        "require __DIR__ . '/partials/nex-footer.php'",
+        "src=\"assets/js/vendor/chart.umd.min.js",
+        "src=\"assets/js/dashboard-charts.js?v=<?= filemtime(__DIR__ . "
+      ]
+    },
+    {
+      "path": "app/public/evaluate.php",
+      "lineCount": 60,
+      "sha256": "acd9e507efc84a787a596ced59d37c44e4500388ce42dbfe7d75e126f0e3f762",
+      "category": "entry-point",
+      "role": "Active registered account plus assigned review token",
+      "usesBootstrap": true,
+      "forms": [
+        {
+          "line": 54,
+          "markup": "<form method=\"post\" class=\"evaluation-form\">"
+        }
+      ],
+      "namedFields": [
+        "csrf_token",
+        "assignment"
+      ],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../vendor/autoload.php'",
+        "require_once __DIR__ . '/../src/Utils/validation.php'",
+        "require_once __DIR__ . '/../src/Services/EvaluationAccess.php'",
+        "require_once __DIR__ . '/../src/Services/EvaluationService.php'",
+        "require_once __DIR__ . '/partials/evaluation-ui.php'",
+        "requireEvaluator()",
+        "required to access assigned reviews.</p><p><a href=\"login.php\">Sign in</a></p>'",
+        "requirePost()"
+      ]
+    },
+    {
+      "path": "app/public/evaluation.php",
+      "lineCount": 10,
+      "sha256": "d71771afa66dc488e47a9867f39810da2cfd3766730a484eed892803628d1858",
+      "category": "entry-point",
+      "role": "Administrator redirect to dashboard; retired admin evaluation page",
+      "usesBootstrap": true,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../src/Services/AdminSecurityService.php'",
+        "requireVerifiedAdmin('login.php?context=admin')"
+      ]
+    },
+    {
+      "path": "app/public/evaluation_export.php",
+      "lineCount": 64,
+      "sha256": "533be1377364ba108832b7c2610e6d0056ee7b934e58adf8409cf020dac3107b",
+      "category": "entry-point",
+      "role": "Administrator",
+      "usesBootstrap": true,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../vendor/autoload.php'",
+        "require_once __DIR__ . '/../src/Utils/validation.php'",
+        "require_once __DIR__ . '/../src/Services/EvaluationAccess.php'",
+        "require_once __DIR__ . '/../src/Services/EvaluationService.php'",
+        "require_once __DIR__ . '/partials/evaluation-ui.php'",
+        "requireAdmin()",
+        "require __DIR__ . '/partials/evaluation-report.php'",
+        "requires administrator access.' : 'The requested evaluation export is unavailable.'"
+      ]
+    },
+    {
+      "path": "app/public/feedback_submit.php",
+      "lineCount": 227,
+      "sha256": "3fdf1a393f393a8d37099b686c8d40d4648b6f4a6e479eeb155f25cd87cb65de",
+      "category": "entry-point",
+      "role": "Guest/user with summary access",
+      "usesBootstrap": true,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../vendor/autoload.php'",
+        "require_once __DIR__ . '/../src/Utils/validation.php'",
+        "require_once __DIR__ . '/../src/Services/RateLimiter.php'",
+        "require_once __DIR__ . '/../src/Controllers/FeedbackHandler.php'"
+      ]
+    },
+    {
+      "path": "app/public/forgot_password.php",
+      "lineCount": 74,
+      "sha256": "03aaf54bca64cc44c07a14781127a81270927a29b5f0cb6961734b4b6335f0c0",
+      "category": "entry-point",
+      "role": "Public recovery form",
+      "usesBootstrap": true,
+      "forms": [
+        {
+          "line": 51,
+          "markup": "<form method=\"POST\" action=\"auth.php?action=forgotPassword\">"
+        }
+      ],
+      "namedFields": [
+        "viewport",
+        "csrf_token",
+        "email"
+      ],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../vendor/autoload.php'",
+        "require_once __DIR__ . '/../src/Utils/validation.php'",
+        "href=\"assets/css/design-tokens.css",
+        "href=\"assets/css/style.css?v=<?= filemtime(__DIR__ . ",
+        "href=\"assets/css/site-footer.css?v=nex-8",
+        "require __DIR__ . '/partials/site-nav.php'",
+        "required autofocus placeholder=\"name@example.com\">",
+        "require __DIR__ . '/partials/site-footer.php'"
+      ]
+    },
+    {
+      "path": "app/public/health.php",
+      "lineCount": 12,
+      "sha256": "5fa3eec5cbae6088b9e98867f0c8bf6469f57a9315972a351c608702a7ccbeb4",
+      "category": "entry-point",
+      "role": "Public static health response",
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/history.php",
+      "lineCount": 423,
+      "sha256": "0e24d37711effe1aced88e37be915a3cf36921afa60491e7b479e035398753e7",
+      "category": "entry-point",
+      "role": "Registered account",
+      "usesBootstrap": true,
+      "forms": [],
+      "namedFields": [
+        "viewport"
+      ],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../vendor/autoload.php'",
+        "require_once '../src/Controllers/HistoryHandler.php'",
+        "require_once '../src/Utils/Formatter.php'",
+        "href=\"assets/css/design-tokens.css",
+        "href=\"assets/css/style.css?v=navbar-3-<?= filemtime(__DIR__ . ",
+        "href=\"assets/css/site-nav.css?v=3",
+        "href=\"assets/css/site-footer.css?v=nex-8",
+        "href=\"assets/css/global-button-effects.css?v=2",
+        "require __DIR__ . '/partials/site-nav.php'",
+        "require __DIR__ . '/partials/site-footer.php'"
+      ]
+    },
+    {
+      "path": "app/public/index.php",
+      "lineCount": 166,
+      "sha256": "959b6eee2f3c091108c744a32ea878e42c634533cad65c9f3a39506bc4f3fa46",
+      "category": "entry-point",
+      "role": "Public landing; administrator redirects to summarizer",
+      "usesBootstrap": true,
+      "forms": [],
+      "namedFields": [
+        "viewport",
+        "description"
+      ],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "href=\"assets/css/design-tokens.css",
+        "href=\"assets/css/style.css?v=<?= filemtime(__DIR__ . ",
+        "href=\"assets/css/site-footer.css?v=nex-8",
+        "href=\"assets/css/nex-landing.css?v=20",
+        "require __DIR__ . '/partials/site-nav.php'",
+        "require __DIR__ . '/partials/nex-footer.php'",
+        "src=\"assets/js/nex-landing.js",
+        "src=\"assets/js/landing-analytics.js"
+      ]
+    },
+    {
+      "path": "app/public/login.php",
+      "lineCount": 220,
+      "sha256": "ed367c1e64ef486687f6308c040eca4e09efa1e170a41533ffbed6fd8cbd5407",
+      "category": "entry-point",
+      "role": "Public sign-in and pending admin code form",
+      "usesBootstrap": true,
+      "forms": [
+        {
+          "line": 93,
+          "markup": "<form method=\"POST\" action=\"auth.php?action=verifyAdminLoginCode\" id=\"admin-code-form\">"
+        },
+        {
+          "line": 121,
+          "markup": "<form method=\"POST\" action=\"auth.php?action=login\" id=\"login-form\" novalidate>"
+        }
+      ],
+      "namedFields": [
+        "viewport",
+        "description",
+        "csrf_token",
+        "code",
+        "login_context",
+        "username",
+        "password",
+        "remember_me"
+      ],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../vendor/autoload.php'",
+        "require_once __DIR__ . '/../src/Utils/validation.php'",
+        "href=\"assets/css/design-tokens.css",
+        "href=\"assets/css/style.css?v=<?= filemtime(__DIR__ . ",
+        "href=\"assets/css/site-footer.css?v=nex-8",
+        "require __DIR__ . '/partials/site-nav.php'",
+        "required",
+        "required placeholder=\"Enter username or email\" autocomplete=\"username\" autofocus>",
+        "required placeholder=\"Enter your password\" autocomplete=\"current-password\">",
+        "require __DIR__ . '/partials/site-footer.php'"
+      ]
+    },
+    {
+      "path": "app/public/logout.php",
+      "lineCount": 4,
+      "sha256": "d2813be2d5b7515bc7d1e06dfe9788dad1b073af2c8abd50f8d736d1a238b2b4",
+      "category": "entry-point",
+      "role": "Compatibility redirect to logout action",
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/nutshell_generate.php",
+      "lineCount": 264,
+      "sha256": "c3a3eb16f727a62e4611d9a40028197130825e60c10725d6c513fa683f630ecc",
+      "category": "entry-point",
+      "role": "Active registered account",
+      "usesBootstrap": true,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../vendor/autoload.php'",
+        "require_once __DIR__ . '/../src/Database.php'",
+        "require_once __DIR__ . '/../src/Services/LocalPythonBridge.php'",
+        "require_once __DIR__ . '/../src/Services/FileUploadService.php'",
+        "require_once __DIR__ . '/../src/Services/SourceResolver.php'",
+        "require_once __DIR__ . '/../src/Services/RateLimiter.php'",
+        "require_once __DIR__ . '/../src/Services/TermsAcceptanceService.php'",
+        "require_once __DIR__ . '/../src/Utils/Formatter.php'",
+        "require_once __DIR__ . '/../src/Utils/validation.php'",
+        "require_once __DIR__ . '/../src/Support/ProcessingError.php'",
+        "required' => 'AUTH_REQUIRED',",
+        "required' => 'TERMS_REQUIRED',",
+        "required.')",
+        "required', 'Create an account to use Nutshell.')",
+        "required', 'Accept the Terms and Conditions before using Nutshell.')"
+      ]
+    },
+    {
+      "path": "app/public/partials/analytics-graphs-card.php",
+      "lineCount": 63,
+      "sha256": "ea7a94a3cb96e95050d74ecb71a147809428c8b36b2c9952fcd9f43d8d82cba2",
+      "category": "partial",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/partials/background-component.php",
+      "lineCount": 10,
+      "sha256": "7b0fa8b5ee955932ab25e239a9c819be39a1ccc064649fb0a9a4c2afa0c3ac17",
+      "category": "partial",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/partials/error-support.php",
+      "lineCount": 8,
+      "sha256": "ddaeb0326bc4e85da39ef66e51ac7a276aa9c81e4d7c688a25f11141701fd76f",
+      "category": "partial",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "href=\"assets/css/light-errors.css?v=<?= filemtime(__DIR__ . ",
+        "src=\"assets/js/light-errors.js?v=<?= filemtime(__DIR__ . "
+      ]
+    },
+    {
+      "path": "app/public/partials/evaluation-output.php",
+      "lineCount": 15,
+      "sha256": "2c58c81442d9845c21f45bf5e5d7aefa89f8b66e1e37c3cc6ad5182b3c3a77a0",
+      "category": "partial",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "included in this run.</p><?php endif",
+        "required')))) ?></p><?php endforeach"
+      ]
+    },
+    {
+      "path": "app/public/partials/evaluation-report.php",
+      "lineCount": 57,
+      "sha256": "f4b1a80516145ab926fb9931f99ac5dd21d6c4bc745af7ae8dcfa70d1b39912f",
+      "category": "partial",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "src=\"assets/js/vendor/chart.umd.min.js",
+        "src=\"assets/js/evaluation.js"
+      ]
+    },
+    {
+      "path": "app/public/partials/evaluation-ui.php",
+      "lineCount": 82,
+      "sha256": "8c20ff5e6307d9af4d52ee29820282a73a8d176cdfb05290d9a9d90a66dd3865",
+      "category": "partial",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [
+        {
+          "line": 24,
+          "markup": "<form method=\"post\" class=\"evaluation-form\">"
+        }
+      ],
+      "namedFields": [
+        "csrf_token",
+        "action",
+        "viewport",
+        "robots",
+        "ratings["
+      ],
+      "dependencies": [
+        "required.')",
+        "required = true): void {\r",
+        "required ? ' required' : '') . ($type === 'number' ? ' min=\"1\"' : ' maxlength=\"2000\"') . '></div>'",
+        "required = true, string $value = ''): void {\r",
+        "required ? ' required' : '') . ' maxlength=\"1000000\">' . ev_h($value) . '</textarea></div>'",
+        "required>'",
+        "href=\"assets/css/design-tokens.css",
+        "href=\"assets/css/style.css?v=<?= filemtime(dirname(__DIR__) . ",
+        "href=\"assets/css/analytics.css",
+        "href=\"assets/css/evaluation.css",
+        "href=\"assets/css/site-nav.css",
+        "href=\"assets/css/site-footer.css",
+        "href=\"assets/css/global-button-effects.css",
+        "require __DIR__ . '/site-nav.php'",
+        "require __DIR__ . '/site-footer.php'",
+        "include the essential information appropriate to its displayed length?'],\r",
+        "required aria-describedby=\"help-' . ev_h($helpId) . '\"' . ((int) ($values[$key] ?? 0) === $score ? ' checked' : '') . '>' . $score . ' · ' . $label . '</label>'"
+      ]
+    },
+    {
+      "path": "app/public/partials/nex-footer.php",
+      "lineCount": 70,
+      "sha256": "f53a14c9b96a310cf2ddab3f1e93a4e57512bcffa25ccdbff5d4882811803374",
+      "category": "partial",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "href=\"assets/css/site-footer.css?v=<?= filemtime(__DIR__ . "
+      ]
+    },
+    {
+      "path": "app/public/partials/rating-widget.php",
+      "lineCount": 80,
+      "sha256": "97956c4e457457bf7dbda94a56f6eb9c0f3acb90350c448575468e979bdaec5d",
+      "category": "partial",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [
+        "feedback_reason"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/partials/site-footer.php",
+      "lineCount": 5,
+      "sha256": "68fd0ed5f0e98a94e5046075f6944695231587770dd60057b18b4901df2907ab",
+      "category": "partial",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "require __DIR__ . '/nex-footer.php'"
+      ]
+    },
+    {
+      "path": "app/public/partials/site-nav.php",
+      "lineCount": 88,
+      "sha256": "20a6a4e803648615b37c105d9291dfb596a1db3755ce531f43f2af56b060c342",
+      "category": "partial",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "href=\"assets/css/site-nav.css?v=nex-13",
+        "src=\"assets/js/logout-confirmation.js?v=<?= filemtime(__DIR__ . ",
+        "href=\"assets/css/theme-toggle.css?v=2",
+        "src=\"assets/js/theme-toggle.js?v=1",
+        "require __DIR__ . '/theme-toggle-button.php'"
+      ]
+    },
+    {
+      "path": "app/public/partials/summarizer-form.php",
+      "lineCount": 250,
+      "sha256": "6ce8706dcabaebf8eb5a1235cc2623adf1f0372e8e9cde7309aa18c01a98ec4b",
+      "category": "partial",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [
+        {
+          "line": 71,
+          "markup": "<form id=\"summarize-form\" action=\"summarize.php\" method=\"POST\" enctype=\"multipart/form-data\" novalidate class=\"summary-workspace workspace-page__form\" data-initial-failure=\"<?= htmlspecialchars(json_encode($initialFailure, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8') ?>"
+        }
+      ],
+      "namedFields": [
+        "csrf_token",
+        "request_token",
+        "document_title",
+        "focus_query",
+        "source_type",
+        "pdf_file",
+        "original_text",
+        "source_url",
+        "output_format",
+        "analysis_mode",
+        "summary_depth",
+        "summary_length",
+        "sentence_count",
+        "summary_style",
+        "use_llm_synthesis"
+      ],
+      "dependencies": [
+        "require __DIR__ . '/error-support.php'"
+      ]
+    },
+    {
+      "path": "app/public/partials/summarizer-scripts.php",
+      "lineCount": 4,
+      "sha256": "6c1a5564529d8a8a6c32edcdd533de42cabb2e2b456965cf1874dd325f1fbf58",
+      "category": "partial",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "requiresRegistrationForNutshell' => !$canUseRegisteredFeatures, 'registerUrl' => 'register.php'], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>",
+        "src=\"assets/js/index.js?v=<?= filemtime(__DIR__ . "
+      ]
+    },
+    {
+      "path": "app/public/partials/theme-toggle-button.php",
+      "lineCount": 12,
+      "sha256": "0b1f916ebc9547fc9ba5cdaeb7eedc30a16c647ad046dd3beb33eaf2490f54fb",
+      "category": "partial",
+      "role": null,
+      "usesBootstrap": false,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": []
+    },
+    {
+      "path": "app/public/processing.php",
+      "lineCount": 135,
+      "sha256": "9371a7bd8a2b8166fc8351044ea4246884a76c33f707adbbdb22829316160a7b",
+      "category": "entry-point",
+      "role": "Visitor with pending summary session",
+      "usesBootstrap": true,
+      "forms": [],
+      "namedFields": [
+        "viewport"
+      ],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../src/Utils/validation.php'",
+        "src=\"assets/js/theme-toggle.js?v=1",
+        "href=\"assets/css/design-tokens.css?v=<?= filemtime(__DIR__ . ",
+        "href=\"assets/css/theme-toggle.css?v=2",
+        "href=\"assets/css/processing.css?v=<?= filemtime(__DIR__ . ",
+        "href=\"assets/css/global-button-effects.css?v=4",
+        "require __DIR__ . '/partials/error-support.php'",
+        "src=\"assets/js/processing.js?v=<?= filemtime(__DIR__ . ",
+        "require __DIR__ . '/partials/theme-toggle-button.php'"
+      ]
+    },
+    {
+      "path": "app/public/profile.php",
+      "lineCount": 133,
+      "sha256": "ca5f94da0bb30d0bff6eb7ed08baab3cdcf40f8543103fb9b40903c238ab253c",
+      "category": "entry-point",
+      "role": "Registered account",
+      "usesBootstrap": true,
+      "forms": [
+        {
+          "line": 102,
+          "markup": "<form method=\"post\" action=\"auth.php?action=deactivateAccount\">"
+        }
+      ],
+      "namedFields": [
+        "viewport",
+        "description",
+        "csrf_token",
+        "password"
+      ],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../vendor/autoload.php'",
+        "require_once __DIR__ . '/../src/Repositories/UserRepository.php'",
+        "require_once __DIR__ . '/../src/Utils/validation.php'",
+        "href=\"assets/css/design-tokens.css",
+        "href=\"assets/css/style.css?v=<?= filemtime(__DIR__ . ",
+        "href=\"assets/css/site-nav.css",
+        "href=\"assets/css/site-footer.css?v=nex-8",
+        "href=\"assets/css/profile.css?v=<?= filemtime(__DIR__ . ",
+        "require __DIR__ . '/partials/site-nav.php'",
+        "required\r",
+        "require __DIR__ . '/partials/site-footer.php'"
+      ]
+    },
+    {
+      "path": "app/public/register.php",
+      "lineCount": 226,
+      "sha256": "fba94b14857d4316d54af66015bf9d07a3f287588010a4f5d979047e346028e5",
+      "category": "entry-point",
+      "role": "Public registration form",
+      "usesBootstrap": true,
+      "forms": [
+        {
+          "line": 51,
+          "markup": "<form method=\"POST\" action=\"auth.php?action=register\" id=\"register-form\" novalidate>"
+        }
+      ],
+      "namedFields": [
+        "viewport",
+        "description",
+        "csrf_token",
+        "username",
+        "email",
+        "password",
+        "confirm_password",
+        "terms_accept"
+      ],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../vendor/autoload.php'",
+        "require_once __DIR__ . '/../src/Utils/validation.php'",
+        "href=\"assets/css/design-tokens.css",
+        "href=\"assets/css/style.css?v=<?= filemtime(__DIR__ . ",
+        "href=\"assets/css/site-footer.css?v=nex-8",
+        "require __DIR__ . '/partials/site-nav.php'",
+        "required placeholder=\"At least 3 characters\" autocomplete=\"username\" autofocus>",
+        "required placeholder=\"name@example.com\" autocomplete=\"email\">",
+        "required placeholder=\"8+ chars, incl. numbers\" autocomplete=\"new-password\">",
+        "required placeholder=\"Retype password\" autocomplete=\"new-password\">",
+        "required>",
+        "includes numbers and uppercase letters or symbols.')",
+        "require __DIR__ . '/partials/site-footer.php'"
+      ]
+    },
+    {
+      "path": "app/public/reset_password.php",
+      "lineCount": 173,
+      "sha256": "830b406e4d6e8e96809f955d92e355d7c6cb980605226751295c21b3a606d794",
+      "category": "entry-point",
+      "role": "Public reset form; OTP required by action",
+      "usesBootstrap": true,
+      "forms": [
+        {
+          "line": 45,
+          "markup": "<form method=\"POST\" action=\"auth.php?action=resetPassword\">"
+        }
+      ],
+      "namedFields": [
+        "viewport",
+        "csrf_token",
+        "email",
+        "otp",
+        "password",
+        "confirm_password"
+      ],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../vendor/autoload.php'",
+        "require_once __DIR__ . '/../src/Utils/validation.php'",
+        "href=\"assets/css/design-tokens.css",
+        "href=\"assets/css/style.css?v=<?= filemtime(__DIR__ . ",
+        "href=\"assets/css/site-footer.css?v=nex-8",
+        "require __DIR__ . '/partials/site-nav.php'",
+        "required <?= empty($prefilledEmail) ? 'autofocus' : '' ?> placeholder=\"Verify your email\">\r",
+        "required <?= !empty($prefilledEmail) ? 'autofocus' : '' ?> placeholder=\"Enter 6-digit code from email\">\r",
+        "required placeholder=\"8+ chars, incl. numbers\" autocomplete=\"new-password\">\r",
+        "required placeholder=\"Retype new password\" autocomplete=\"new-password\">\r",
+        "require __DIR__ . '/partials/site-footer.php'"
+      ]
+    },
+    {
+      "path": "app/public/result.php",
+      "lineCount": 867,
+      "sha256": "62b698ecfebb176b5ad205418597f7172d9e307c733e56629c269a6f38adb9b6",
+      "category": "entry-point",
+      "role": "Summary owner guest/user or valid share token",
+      "usesBootstrap": true,
+      "forms": [],
+      "namedFields": [
+        "viewport",
+        "description"
+      ],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../vendor/autoload.php'",
+        "require_once __DIR__ . '/../src/Controllers/FeedbackHandler.php'",
+        "require_once __DIR__ . '/../src/Controllers/HistoryHandler.php'",
+        "require_once __DIR__ . '/../src/Utils/Formatter.php'",
+        "require_once __DIR__ . '/../src/Utils/validation.php'",
+        "href=\"assets/css/design-tokens.css?v=<?= filemtime(__DIR__ . ",
+        "href=\"assets/css/result.css?v=<?= filemtime(__DIR__ . ",
+        "href=\"assets/css/global-button-effects.css?v=4",
+        "href=\"assets/css/site-footer.css?v=<?= filemtime(__DIR__ . ",
+        "require __DIR__ . '/partials/error-support.php'",
+        "require __DIR__ . '/partials/rating-widget.php'",
+        "src=\"assets/js/result.js?v=<?= filemtime(__DIR__ . ",
+        "require __DIR__ . '/partials/nex-footer.php'"
+      ]
+    },
+    {
+      "path": "app/public/summarize.php",
+      "lineCount": 34,
+      "sha256": "a8d53d306bc6059f266cb9a8138cb95a8e81a6ca8a9aaecf662d625869f09b66",
+      "category": "entry-point",
+      "role": "Guest/user summary lifecycle; per-action guards",
+      "usesBootstrap": true,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/Support/ProcessingError.php'",
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../vendor/autoload.php'",
+        "require_once __DIR__ . '/../src/Controllers/ArticleController.php'"
+      ]
+    },
+    {
+      "path": "app/public/summarizer.php",
+      "lineCount": 76,
+      "sha256": "4a141da3ed526b2a12fd9651346accece95a92aa9f01e23990ce1908d803a285",
+      "category": "entry-point",
+      "role": "Guest/user/admin",
+      "usesBootstrap": true,
+      "forms": [],
+      "namedFields": [
+        "viewport"
+      ],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once '../src/Utils/validation.php'",
+        "require_once __DIR__ . '/../../vendor/autoload.php'",
+        "href=\"assets/css/design-tokens.css",
+        "href=\"assets/css/style.css?v=<?= filemtime(__DIR__ . ",
+        "href=\"assets/css/site-footer.css?v=nex-8",
+        "href=\"assets/css/nex-landing.css?v=<?= filemtime(__DIR__ . ",
+        "href=\"assets/css/global-button-effects.css?v=3",
+        "require __DIR__ . '/partials/site-nav.php'",
+        "require __DIR__ . '/partials/summarizer-form.php'",
+        "require __DIR__ . '/partials/nex-footer.php'",
+        "require __DIR__ . '/partials/summarizer-scripts.php'",
+        "src=\"assets/js/nex-landing.js?v=<?= filemtime(__DIR__ . "
+      ]
+    },
+    {
+      "path": "app/public/summary_worker.php",
+      "lineCount": 19,
+      "sha256": "4f695bfe1766f1157436767bc603b9d794b5f39697715107c536a9483ee08d73",
+      "category": "entry-point",
+      "role": "CLI only",
+      "usesBootstrap": true,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../src/Controllers/ArticleController.php'"
+      ]
+    },
+    {
+      "path": "app/public/terms.php",
+      "lineCount": 167,
+      "sha256": "35c0b205e14a673543efe3e471c67efff0232b6d0ab76a8d010e0004642aa7f6",
+      "category": "entry-point",
+      "role": "Public reading and guest/session or registered acceptance",
+      "usesBootstrap": true,
+      "forms": [
+        {
+          "line": 116,
+          "markup": "<form method=\"POST\" action=\"terms.php?return=<?= htmlspecialchars(urlencode($returnTarget)) ?>"
+        }
+      ],
+      "namedFields": [
+        "viewport",
+        "csrf_token",
+        "return_to",
+        "accept_terms"
+      ],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../vendor/autoload.php'",
+        "require_once __DIR__ . '/../src/Utils/validation.php'",
+        "require_once __DIR__ . '/../src/Utils/TermsContent.php'",
+        "require_once __DIR__ . '/../src/Services/RememberMeService.php'",
+        "require_once __DIR__ . '/../src/Services/GuestSessionService.php'",
+        "href=\"assets/css/design-tokens.css",
+        "href=\"assets/css/style.css?v=terms-3-<?= filemtime(__DIR__ . ",
+        "href=\"assets/css/site-footer.css?v=nex-8",
+        "require __DIR__ . '/partials/site-nav.php'",
+        "required data-terms-checkbox>",
+        "require __DIR__ . '/partials/site-footer.php'"
+      ]
+    },
+    {
+      "path": "app/public/translate_proxy.php",
+      "lineCount": 93,
+      "sha256": "fc2612f815415b930006a398dfe2143ae010c6159a6fd6c65b58cfe901b2bcd4",
+      "category": "entry-point",
+      "role": "Session and CSRF; text provided by caller",
+      "usesBootstrap": true,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../vendor/autoload.php'",
+        "require_once __DIR__ . '/../src/Utils/validation.php'",
+        "required.'])"
+      ]
+    },
+    {
+      "path": "app/public/tts_audio.php",
+      "lineCount": 118,
+      "sha256": "023e013dfa05e165c4496b5fd8868d7786adba1bb0386f27eb28164e23c4c4a1",
+      "category": "entry-point",
+      "role": "Summary access and validated filename/token",
+      "usesBootstrap": true,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../vendor/autoload.php'",
+        "require_once __DIR__ . '/../src/Controllers/HistoryHandler.php'",
+        "require_once __DIR__ . '/../src/Services/BarkTtsService.php'",
+        "require_once __DIR__ . '/../src/Utils/Formatter.php'"
+      ]
+    },
+    {
+      "path": "app/public/tts_generate.php",
+      "lineCount": 144,
+      "sha256": "afca3a94f16e357b97b29da790377370a72cbc41e6a5ca8a836a5683a2d7ea13",
+      "category": "entry-point",
+      "role": "Session and summary access",
+      "usesBootstrap": true,
+      "forms": [],
+      "namedFields": [],
+      "dependencies": [
+        "require_once __DIR__ . '/../src/whitereaper.php'",
+        "require_once __DIR__ . '/../../vendor/autoload.php'",
+        "require_once __DIR__ . '/../src/Controllers/HistoryHandler.php'",
+        "require_once __DIR__ . '/../src/Services/BarkTtsService.php'",
+        "require_once __DIR__ . '/../src/Utils/Formatter.php'",
+        "require_once __DIR__ . '/../src/Utils/validation.php'",
+        "required.',"
+      ]
+    }
+  ]
+}

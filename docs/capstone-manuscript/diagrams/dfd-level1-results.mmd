@@ -1,0 +1,21 @@
+%% DFD Level 1: results and reading helpers
+%% SOURCE-SUPPORTED design; operation is separately verified.
+flowchart TB
+    U["Visitor / registered user<br/>eligible requests only"]
+    P3("3.0 Results and<br/>reading helpers")
+    T["Translation provider"]
+    D2@{ shape: datastore, label: "D2 Main summary stores<br/>summaries; summary_artifacts;<br/>summary_jobs; temporary files" }
+    D3@{ shape: datastore, label: "D3 Reading-helper stores<br/>documents; document_summaries;<br/>nutshell_generations; audio files" }
+    U -->|"result / helper request"| P3
+    P3 -->|"authorized reading<br/>output"| U
+    D2 -->|"owned or shared summary"| P3
+    P3 -->|"helper cache / audio"| D3
+    D3 -->|"cached source / helper<br/>data"| P3
+    P3 -->|"text and target language"| T
+    T -->|"translation / error"| P3
+    classDef process fill:#edf1f5,stroke:#222,color:#111;
+    classDef store fill:#f6f6f6,stroke:#222,color:#111;
+    classDef entity fill:#fff,stroke:#222,color:#111;
+    class P3 process;
+    class D2,D3 store;
+    class U,T entity;

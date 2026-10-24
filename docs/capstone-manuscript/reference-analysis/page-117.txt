@@ -1,0 +1,33 @@
+   Table 17. IT Consultants’ Evaluation Summary
+Result
+   Software Product          Weighted           Verbal
+       Categories               Mean       Interpretation
+       Functional               3.53             Very
+      suitability                           Satisfactory
+      Performance               3.43             Very
+       Efficiency                           Satisfactory
+     Compatibility              3.3              Very
+                                            Satisfactory
+        Usability               3.32             Very
+                                            Satisfactory
+      Reliability               3.25             Very
+                                            Satisfactory
+        Security                3.48             Very
+                                            Satisfactory
+      Portability               3.37             Very
+                                            Satisfactory
+Overall                         3.38             Very
+                                            Satisfactory
+
+6.  End users’ Evaluation Results of AccredX:
+Record Management and Archiving System
+
+   The end users assessed the performance and
+qualities of the developed AccredX: Record
+Management and Archiving System based on the
+
+
+
+
+
+                                                       98

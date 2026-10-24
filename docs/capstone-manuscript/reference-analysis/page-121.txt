@@ -1,0 +1,31 @@
+   Table 20. Assessment of the end users on the
+Usability of the developed system
+ Software Product        Weighted Mean             Verbal
+    Categories                                Interpretation
+ Appropriateness               3.4              Very Usable
+ recognizability
+   Learnability                3.5              Very Usable
+    Operability                3.7              Very Usable
+    User error                 3.6              Very Usable
+    protection
+  User interface               3.6              Very Usable
+    aesthetics
+   Accessibility               3.6              Very Usable
+     Usability                3.55              Very Usable
+
+   The system is very usable. The system excels
+in areas such as recognizability, learnability,
+and operability, ensuring users
+can easily understand, navigate, and interact
+with it.
+
+
+6.4 End-users’ Evaluation Summary
+   Table 21 displays the overall result of the
+evaluation conducted by the End Users on the
+developed  AccredX:  Record  Management  and
+Archiving System.
+
+
+
+                                                       102

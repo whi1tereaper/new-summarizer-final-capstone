@@ -1,0 +1,34 @@
+   4.2   Design Stage
+
+   After the initial study of the researchers,
+they now proceed to the Design Stage. Here,
+diagrams are presented as a guide to the
+development of the system. These tools became
+essential   for   creating   the   system's
+functionalities,   front-end   and   back-end
+interfaces, and database. The visual diagrams
+included in this stage are the Use Case Diagram,
+Entity    Relationship    Diagram,            Database
+Normalization, Data Dictionary, and          Data Flow
+Diagram.
+
+   Use Case Diagram
+   Use case diagrams provide an overview of a
+complete  system  or  its  key  components,
+showcasing  the  relationship  between  system
+users and the various system activities. The
+developed system's use-case diagram is shown in
+Figure 6 below.
+
+
+
+
+
+
+
+
+
+
+
+
+                                                      49

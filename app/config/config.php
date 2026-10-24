@@ -39,8 +39,20 @@ foreach ($trustedProxies as $trustedProxy) {
     }
 }
 $trustedProxies = array_values(array_unique($trustedProxies));
+$studentPrivacyContact=trim(Env::string('STUDENT_PRIVACY_CONTACT',''));
+if($studentPrivacyContact==='')$studentPrivacyContact=trim(Env::string('SMTP_FROM',''));
 
 return [
+    'student_access' => [
+        'privacy_contact' => $studentPrivacyContact,
+        'enrollment_authorized' => Env::bool('STUDENT_ENROLLMENT_AUTHORIZED', false),
+        'number_secret' => Env::string('STUDENT_NUMBER_SECRET', ''),
+        // Syntax safety only until the operator supplies a confirmed format.
+        'number_pattern' => Env::string('STUDENT_NUMBER_PATTERN', '~\A[A-Z0-9][A-Z0-9-]{3,39}\z~D'),
+        'retention_days' => 3,
+        'concurrent_limit' => Env::int('STUDENT_CONCURRENT_SUMMARIES', 2),
+        'enrollment_url' => Env::string('NEUST_ENROLLMENT_URL', 'https://neust.edu.ph/enrollment-procedure-and-qualifications/'),
+    ],
     'session' => [
         'name' => Env::string('SESSION_NAME', 'LIGHT_SESSID'),
     ],
@@ -57,8 +69,7 @@ return [
     ],
 
     'database' => [
-        'url' => Env::string('DATABASE_URL', ''),
-        'unpooled_url' => Env::string('DATABASE_URL_UNPOOLED', ''),
+        'driver' => 'mysql',
         'host' => Env::string('DB_HOST', '127.0.0.1'),
         'port' => Env::string('DB_PORT', '3306'),
         'name' => Env::string('DB_NAME', 'ai_summarizer'),
@@ -67,12 +78,6 @@ return [
         'charset' => Env::string('DB_CHARSET', 'utf8mb4'),
         'ssl_enabled' => Env::bool('DB_SSL_ENABLED', false),
         'ssl_ca' => Env::string('DB_SSL_CA', ''),
-    ],
-
-    'neon_auth' => [
-        'base_url' => Env::string('NEON_AUTH_BASE_URL', ''),
-        'jwks_url' => Env::string('NEON_AUTH_JWKS_URL', ''),
-        'enabled'  => Env::string('NEON_AUTH_BASE_URL', '') !== '',
     ],
 
     'python' => [
@@ -86,6 +91,7 @@ return [
 
     'summarizer' => [
         'engine_version' => $summarizerEngineVersion,
+        'automatic_article_routing' => Env::bool('SUMMARIZER_AUTO_ARTICLE_ROUTING', false),
         'local_embedding_model' => Env::string('SUMMARIZER_LOCAL_EMBEDDING_MODEL', ''),
         'llm_enabled' => $llmEnabled,
         'llm_provider' => $llmProvider,
@@ -134,5 +140,7 @@ return [
         'user' => Env::requireString('SMTP_USER'),
         'pass' => Env::requireString('SMTP_PASS'),
         'from' => Env::requireString('SMTP_FROM'),
+        'auth' => Env::bool('SMTP_AUTH', true),
+        'encryption' => Env::string('SMTP_ENCRYPTION', 'tls'),
     ],
 ];

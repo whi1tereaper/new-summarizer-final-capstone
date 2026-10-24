@@ -1,0 +1,128 @@
+[
+  {
+    "name": "isolated setup and verified rollback",
+    "exit": 0,
+    "seconds": 9.69,
+    "output": "{\"database\":\"qa_light_5c1df01f\",\"migrations\":18,\"production_counts\":{\"admin_audit_logs\":165,\"admin_security_challenges\":1,\"document_summaries\":125,\"documents\":25,\"evaluation_assignments\":0,\"evaluation_audit_log\":87,\"evaluation_challenge_cases\":24,\"evaluation_content_unit_reviews\":0,\"evaluation_content_units\":0,\"evaluation_datasets\":4,\"evaluation_documents\":36,\"evaluation_errors\":5,\"evaluation_metrics\":3652,\"evaluation_outputs\":428,\"evaluation_ratings\":0,\"evaluation_references\":0,\"evaluation_runs\":6,\"feedback\":103,\"feedback_comments\":110,\"guest_sessions\":100,\"landing_page_events\":8206,\"landing_page_sessions\":180,\"nutshell_generations\":24,\"password_resets\":25,\"rate_limits\":9,\"schema_migrations\":16,\"student_applications\":0,\"student_review_events\":0,\"student_trial_links\":0,\"summaries\":255,\"summary_access_reservations\":13,\"summary_access_subjects\":26,\"summary_artifacts\":246,\"summary_jobs\":230,\"user_tokens\":2,\"users\":35}}",
+    "stderr": ""
+  },
+  {
+    "name": "restricted credentials deny production",
+    "exit": 0,
+    "seconds": 0.09,
+    "output": "",
+    "stderr": ""
+  },
+  {
+    "name": "repeatable MySQL access migration",
+    "exit": 0,
+    "seconds": 0.12,
+    "output": "{\"driver\":\"mysql\",\"apply\":true,\"migration\":\"017_student_number_access.sql\",\"note\":\"Access tables present. Existing accounts were not reset; migration ledger is unchanged.\"}\n",
+    "stderr": ""
+  },
+  {
+    "name": "replay MySQL access migration",
+    "exit": 0,
+    "seconds": 0.09,
+    "output": "{\"driver\":\"mysql\",\"apply\":true,\"migration\":\"017_student_number_access.sql\",\"note\":\"Access tables present. Existing accounts were not reset; migration ledger is unchanged.\"}\n",
+    "stderr": ""
+  },
+  {
+    "name": "test_phase1_security.php",
+    "exit": 0,
+    "seconds": 0.12,
+    "output": "====================================================\nPHASE 1 SECURITY STABILIZATION VERIFICATION SUITE\n====================================================\n\n--- TEST GROUP 1: .env Runtime Behavior ---\n[PASS] Local .env exists on disk\n[PASS] config('app.name') loads - App Name loaded\n[PASS] config('app.env') loads - Current: testing\n[PASS] config('smtp.host') loads - SMTP Host loaded\n[PASS] Database connects successfully via .env\n\n--- TEST GROUP 2: Admin Security Verification Helper ---\n[PASS] isVerifiedAdmin: Anonymous session rejected\n[PASS] isVerifiedAdmin: Normal user rejected\n[PASS] isVerifiedAdmin: Legacy pending admin without full login rejected\n[PASS] isVerifiedAdmin: Authenticated admin with stale false challenge flag accepted\n[PASS] isVerifiedAdmin: Authenticated admin without challenge flag accepted\n\n--- TEST GROUP 3: Diagnostic Endpoint (admin_db_health.php) Access Control ---\n[PASS] admin_db_health: anonymous + development DENIED\n[PASS] admin_db_health: anonymous + production DENIED\n[PASS] admin_db_health: normal user + development DENIED\n[PASS] admin_db_health: normal user + production DENIED\n[PASS] admin_db_health: legacy pending-only session + development DENIED\n[PASS] admin_db_health: admin without challenge flag + development ALLOWED\n[PASS] admin_db_health: admin with stale false flag + production ALLOWED (details suppressed)\n\n--- TEST GROUP 4: Administrator Role Boundaries ---\n[PASS] isVerifiedAdmin: Legacy true challenge flag cannot elevate ordinary user\n[PASS] isVerifiedAdmin: Admin role without authenticated identity rejected\n\n====================================================\nTEST RESULTS: 19 PASSED, 0 FAILED\n====================================================\n",
+    "stderr": ""
+  },
+  {
+    "name": "test_phase2_decoupling.php",
+    "exit": 0,
+    "seconds": 22.58,
+    "output": "====================================================\nPHASE 2 DECOUPLING & REQUEST BOUNDARY VERIFICATION\n====================================================\n\n--- TEST GROUP 1: Include Safety (Zero File-Scope Execution) ---\n[PASS] Including ArticleController.php produces no output or premature exit - Exit code: 0, Output: OK\n[PASS] Including AuthController.php produces no output or premature exit - Exit code: 0, Output: OK\n\n--- TEST GROUP 2: Controller Instantiation Safety ---\n[PASS] ArticleController can be instantiated without triggering actions\n[PASS] AuthController can be instantiated without triggering actions\n\n--- TEST GROUP 3: Explicit Dispatch - summarize.php ---\n[PASS] summarize.php with GET redirects non-POST requests\n[PASS] summarize.php?action=execute returns 400 JSON when no pending summary - {\"success\":false,\"error\":\"Some required request information is missing or invalid.\",\"failure\":{\"code\":\"REQUEST_INVALID\",\"category\":\"input\",\"http_status\":400,\"retryable\":false,\"title\":\"This request could not be read.\",\"explanation\":\"Some required request information is missing or invalid.\",\"recovery\":\"Return to the form and submit your source again.\",\"reference\":\"68911977e2e27e2e174f8d7c\"}}\n\n--- TEST GROUP 4: Explicit Dispatch - auth.php ---\n[PASS] auth.php without action safely redirects to login.php\n[PASS] auth.php with unknown action deliberately rejects with Bad Request (400)\n[PASS] auth.php?action=login enforces CSRF token verification\n[PASS] auth.php?action=logout executes session logout and redirect\n\n--- TEST GROUP 5: History Analytics Cleanup ---\n[PASS] history.php contains no AnalyticsController import or reference\n[PASS] history.php contains no getKpis() call\n[PASS] history.php contains no getDeviceBreakdown() call\n[PASS] history.php contains no getScrollFunnel() call\n[PASS] history.php contains no getDailyTrend() call\n[PASS] history.php contains no getTopReferrers() call\n\n--- TEST GROUP 6: Summarization Stage 1 & Stage 2 Execution ---\n[PASS] Stage 1 prepares pending summary in session - Staged: YES\n[PASS] Stage 2 executes summarizer and returns valid redirect contract - Redirect: result.php?id=1\n\n--- TEST GROUP 7: Administrator Role Authorization ---\n[PASS] Authenticated administrator needs no legacy challenge flag\n[PASS] Legacy pending-only session is not elevated\n[PASS] Ordinary user with legacy true flag is not elevated\n\n====================================================\nTEST RESULTS: 21 PASSED, 0 FAILED\n====================================================\n",
+    "stderr": "[LIGHT failure] reference=68911977e2e27e2e174f8d7c code=REQUEST_INVALID exception=App\\Src\\Support\\ProcessingError\n"
+  },
+  {
+    "name": "test_phase3_admin_analytics.php",
+    "exit": 0,
+    "seconds": 2.31,
+    "output": "====================================================\nPHASE 3 ADMIN DISPATCH & ANALYTICS VERIFICATION\n====================================================\n\n--- TEST GROUP 1: AdminController Include Safety ---\n[PASS] Including AdminController.php produces no output, no action execution, and no exit - Exit code: 0, Output: OK\n\n--- TEST GROUP 2: AdminController Instantiation Safety ---\n[PASS] Instantiating AdminController in authenticated admin session without a challenge flag triggers no side-effect actions - Output: CONSTRUCTED_OK\n\n--- TEST GROUP 3: Admin Action Authorization Matrix ---\n[PASS] Anonymous request to admin_dashboard.php?action is denied\n[PASS] Normal user request to admin_dashboard.php?action is denied\n[PASS] Legacy pending-only admin request to admin_dashboard.php?action is denied\n[PASS] Authenticated admin without a challenge flag GET request to state-changing action rejected with Method Not Allowed (405)\n[PASS] Authenticated admin without a challenge flag request with invalid CSRF token rejected with Invalid CSRF token (403)\n[PASS] Authenticated admin without a challenge flag request with unknown action rejected with Invalid admin action (400)\n\n--- TEST GROUP 4: Admin Action Execution Verification ---\n[PASS] Action clean_files dispatches and redirects to admin_dashboard.php\n[PASS] Action delete_files dispatches and redirects to admin_dashboard.php\n[PASS] Action toggle_status mutates user status correctly in database\n[PASS] Action deactivate_user deactivates user in database\n[PASS] Action delete_user permanently removes user from database\n\n--- TEST GROUP 5: MariaDB Analytics Portability & KPI Verification ---\n[PASS] AnalyticsController::getKpis() executes on MariaDB without SQLSTATE 42000 - Elapsed: 2.08 ms\n[PASS] getKpis() returns all 7 expected contract keys\n[PASS] getKpis() value types strictly match contract (int, float, ?int)\n\n--- TEST GROUP 6: Median Calculation Edge Cases ---\n[PASS] Median of 0 rows is null\n[PASS] Median with all NULL values is null\n[PASS] Median of 1 row [500] is 500\n[PASS] Median of odd rows [100, 200, 300, 400, 500] is 300\n[PASS] Median of even rows [100, 200, 300, 400] is 250\n[PASS] Median of duplicates [200, 200, 200, 200] is 200\n\n====================================================\nTEST RESULTS: 22 PASSED, 0 FAILED\n====================================================\n",
+    "stderr": ""
+  },
+  {
+    "name": "test_phase4_database_lifecycle.php",
+    "exit": 0,
+    "seconds": 2.61,
+    "output": "====================================================\nPHASE 4 DATABASE LIFECYCLE & RUNTIME DDL TEST SUITE\n====================================================\n\n--- TEST GROUP 1: Static DDL Scan in Application Code ---\n [PASS] Zero runtime DDL statements remain in app/ codebase - 0 hits found\n\n--- TEST GROUP 2: Migration Catalog & Deterministic Ordering ---\n [PASS] All sequential migrations exist in database/migrations/ - Count: 18\n [PASS] Migration 010_user_tokens.sql defines user_tokens table\n [PASS] Migration 011_document_summaries.sql defines documents and document_summaries tables\n\n--- TEST GROUP 3: Live Database State & Schema Integrity ---\n [PASS] Isolated database contains all required tables - All present\n [PASS] users table contains terms_accepted and terms_accepted_at\n [PASS] summaries table contains summary_length and nutshell_text\n [PASS] landing_page_sessions table contains inp_ms\n [PASS] user_tokens table contains selector, hashed_validator, and expires\n\n--- TEST GROUP 4: Fresh Installation in Temporary Database ---\n [PASS] Fresh install: All base schemas and sequential migrations apply with 0 errors - 18/18 migrations passed\n [PASS] Fresh install: Temporary database contains all required tables - Exact match\n [PASS] Migration ledger reports 0 pending migrations after full application - Pending: 0\n [PASS] Temporary test database cleaned up safely\n\n--- TEST GROUP 5: Runtime Services Function Without DDL ---\n [PASS] TermsAcceptanceService::ensureSchema() executes as safe no-op without error\n [PASS] RememberMeService::ensureSchema() executes as safe no-op without error\n [PASS] RememberMeService::createCookieForUser stores token in user_tokens - Token ID: 1\n [PASS] RateLimiter::isLimited() queries rate_limits without DDL\n [PASS] AdminController instantiates cleanly without triggering ensureSchema DDL\n\n====================================================\nPHASE 4 TEST RESULTS: 18 PASSED, 0 FAILED\n====================================================\n",
+    "stderr": ""
+  },
+  {
+    "name": "test_feedback_hardening.php",
+    "exit": 0,
+    "seconds": 0.49,
+    "output": "Running Summary Feedback Hardening & Telemetry Verification Suite...\n\n  [PASS] Strict positive int accepts integer 42\n  [PASS] Strict positive int accepts digit string \"42\"\n  [PASS] Strict positive int rejects integer 0\n  [PASS] Strict positive int rejects negative integer -5\n  [PASS] Strict positive int rejects float 2.9\n  [PASS] Strict positive int rejects float string \"2.9\"\n  [PASS] Strict positive int rejects scientific notation \"1e2\"\n  [PASS] Strict positive int rejects signed string \"+3\"\n  [PASS] Strict positive int rejects null\n  [PASS] Strict positive int rejects array\n  [PASS] Strict rating int accepts integer 1\n  [PASS] Strict rating int accepts integer 5\n  [PASS] Strict rating int accepts string \"3\"\n  [PASS] Strict rating int rejects integer 0\n  [PASS] Strict rating int rejects integer 6\n  [PASS] Strict rating int rejects float 2.9\n  [PASS] Strict rating int rejects float string \"2.9\"\n  [PASS] Strict rating int rejects scientific notation \"1e2\"\n  [PASS] Strict rating int rejects signed string \"+3\"\n  [PASS] Rating 1 accepted\n  [PASS] Rating 5 accepted\n  [PASS] Rating 0 rejected\n  [PASS] Rating 6 rejected\n  [PASS] >500 Unicode characters rejected\n  [PASS] Whitespace comment accepted\n  [PASS] Whitespace-only comment stored as NULL in database\n  [PASS] Unauthorized summary access without share token rejected\n  [PASS] Non-existent summary ID rejected\n  [PASS] Authorized viewer with valid share token accepted\n  [PASS] Service strictly rejects improvement reason tags when rating > 3 (rating = 5)\n  [PASS] Service strictly rejects improvement reason tags when rating > 3 (rating = 4)\n  [PASS] Submission with reason tags succeeds for rating <= 3\n  [PASS] Valid reason tags whitelist-filtered and stored as clean JSON (invalid tag rejected)\n  [PASS] Canonical feedback table maintains 1 logical state per guest + summary\n  [PASS] feedback_comments behaves as an append-only event ledger capturing revision history\n  [PASS] feedback_comments ledger contains ZERO direct user identifiers (user_id, guest_token, ip, email)\n  [PASS] feedback_comments retains summary_id for research telemetry and result correlation (pseudonymous / identity-hidden)\n  [PASS] Test aged event row successfully seeded\n  [PASS] pruneFeedbackEvents(90) pruned aged events (>90 days)\n  [PASS] Aged event row was deleted by retention policy\n  [PASS] Recent event row (<90 days) safely retained\n  [PASS] RateLimiter strictly blocks feedback submissions exceeding max attempts (10/min)\n  [PASS] RateLimiter reports positive retry_after window\n  [PASS] getAllFeedbackForAdmin returns array with newest feedback first\n  [PASS] Admin feedback feed strictly conceals user_id, guest_token, account_username, and account_email\n  [PASS] getFeedbackTelemetryBreakdown computes style, length, and reasons breakdown\n  [PASS] CLI cleanup script (cleanup_feedback_events.php --dry-run) executed with exit code 0\n  [PASS] CLI cleanup script reports dry run mode and retention metrics\n\nSummary: 48 passed, 0 failed.\n",
+    "stderr": ""
+  },
+  {
+    "name": "test_history_repository_boundary.php",
+    "exit": 0,
+    "seconds": 0.2,
+    "output": "[PASS] User-owned summary list returns a populated result set\n[PASS] Guest-owned summary list returns a populated result set\n[PASS] Owner can fetch a summary by id via the repository-backed path\n[PASS] Guest can fetch summary by id when the summary is guest-owned\n[PASS] Share token grants authorized access to the summary\n[PASS] Invalid share token is rejected\n[PASS] Nutshell history can be fetched through the repository-backed service\n\nHistory repository verification: 7 passed, 0 failed.\n",
+    "stderr": ""
+  },
+  {
+    "name": "reset migration both historical schemas",
+    "exit": 0,
+    "seconds": 0.2,
+    "output": "PASS boolean-used and timestamp-used schemas, consumed-token preservation, and repeat application.\n",
+    "stderr": ""
+  },
+  {
+    "name": "student access and eight concurrent clients",
+    "exit": 0,
+    "seconds": 1.14,
+    "output": "PASS new guest has exactly three\nPASS failure costs zero\nPASS result rollback rolls back debit\nPASS idempotent successful debit exactly one\nPASS fourth generation denied\nPASS student number only accepted without name email or photos\nPASS registration starts pending\nPASS registration never resets exhausted trial\nPASS password hash preserved\nPASS duplicate student claim refused\nPASS missing student number refused\nPASS unsafe student number refused\nPASS name XSS rejected\nPASS number syntax is configurable safety only\nPASS unprivileged review refused\nPASS no evidence means no approval\nPASS evidenced human approval grants access\nPASS repeated stale decision refused\nPASS student notification and audit are real\nPASS verified generation does not debit trial\nPASS revocation checked again before persistence\nPASS correction reuses existing account\nPASS overdue details hidden before cleanup\nPASS retention dry run read only\nPASS three day physical detail erasure\nPASS minimal approval retained\nPASS old review detail erased\nPASS cleanup idempotent\nPASS expiry enforced without scheduler\nPASS admin role checked from database\nPASS eight concurrent requests admit exactly three\nPASS concurrency only produces expected denials\nPASS document API consumes shared allowance\nPASS cache does not consume allowance\nPASS generation failure returned\nPASS generation failure costs zero\nPASS batch larger than allowance rolls back\nPASS failed batch has no hidden charge\nPASS direct API missing CSRF denied\nPASS valid CSRF API request succeeds\nPASS API cannot bypass exhausted limit\nPASS existing results readable at zero\nPASS document IDOR blocked\nPASS main pipeline result and debit atomic\nPASS expired reservation cannot persist\nPASS expired lease restores capacity without debit\nPASS stale worker release cannot release new attempt\nPASS old pending account binding survives fresh browser\nPASS existing account never automatically verified\nPASS client role cannot grant continued access\nPASS inactive account is denied\nPASS owner cannot read other review history\nPASS expired pending details require correction, not approval\nPASS erased unapproved claim releases duplicate identifier\nPASS mismatched persistence identity rejected\nPASS persistence failure rolls back result and debit\nPASS exhausted text is gated before extraction/upload\nPASS exhausted url is gated before extraction/upload\nPASS exhausted file is gated before extraction/upload\nPASS request budget exhaustion is controlled and never debits\n{\n    \"driver\": \"mysql\",\n    \"passed\": 60,\n    \"failed\": 0,\n    \"failures\": [],\n    \"race_outcomes\": [\n        \"completed\",\n        \"completed\",\n        \"ACCESS_BUSY\",\n        \"completed\",\n        \"ACCESS_BUSY\",\n        \"ACCESS_BUSY\",\n        \"ACCESS_BUSY\",\n        \"ACCESS_BUSY\"\n    ]\n}\n",
+    "stderr": "[DocumentSummaryService] Worker generation failed: RuntimeException\n"
+  },
+  {
+    "name": "isolated Apache configuration",
+    "exit": 0,
+    "seconds": 0.47,
+    "output": "",
+    "stderr": "Syntax OK\n"
+  },
+  {
+    "name": "real Apache HTTP workflows",
+    "exit": 0,
+    "seconds": 61.42,
+    "output": "PASS Apache registration renders ID only\nPASS existing controlled account authenticates\nPASS ordinary account denied admin\nPASS actual registration without name email images\nPASS pending student restricted\nPASS pending owner status\nPASS duplicate registration rejected safely\nPASS anonymous review denied\nPASS admin password requires second factor\nPASS admin captured-mail second factor login\nPASS complete admin dashboard renders\nPASS student cannot inspect admin detail\nPASS admin CSRF enforced\nPASS admin approval with required evidence\nPASS approved account gains access without relogin\nPASS stale review cannot reverse approval\nPASS admin decline and student notification\nPASS declined account has no continued privilege\nPASS admin page admin_audit_logs.php\nPASS admin page admin_db_health.php\nPASS admin database health payload\nPASS admin page analytics.php\nPASS admin page admin_feedback_feed.php\nPASS admin page dashboard.php\nPASS text result HTTP and saved title\nPASS text real NLP completes\nPASS history persists own summary\nPASS foreign result ownership blocked\nPASS real Filipino translation\nPASS real local audio generation\nPASS audio playback response contains WAV\nPASS audio supports browser seeking ranges\nPASS audio URL denies foreign session\nPASS HTTP feedback submission\nPASS pdf result HTTP and saved title\nPASS pdf real NLP completes\nPASS docx result HTTP and saved title\nPASS docx real NLP completes\nPASS url result HTTP and saved title\nPASS url real NLP completes\nPASS invalid summary consumes zero guest attempts\nPASS text result HTTP and saved title\nPASS guest successful quota 1\nPASS text result HTTP and saved title\nPASS guest successful quota 2\nPASS text result HTTP and saved title\nPASS guest successful quota 3\nPASS fourth guest request denied before NLP\nPASS alternate document API enforces exhausted quota\nPASS anonymous Nutshell retains account requirement\nPASS registering after trial exhaustion preserves zero quota\nPASS pending Nutshell cannot bypass exhausted quota\nPASS password reset through captured OTP\nPASS reset controlled credentials authenticate\nPASS used reset OTP cannot be replayed\nPASS student number password login\nPASS login rotates session ID\nPASS logout removes account privilege\nPASS session cookie security\n",
+    "stderr": ""
+  },
+  {
+    "name": "browser workflows",
+    "exit": 0,
+    "seconds": 15.24,
+    "output": "{\"passed\":true,\"checks\":[\"mobile student-ID form has no name or image requirements\",\"mobile registration has no horizontal overflow\",\"real browser password login\",\"authenticated dashboard renders\",\"history renders\",\"browser login using student ID\",\"existing audio button WAV fallback decoded by browser (Web Speech unavailable simulated)\",\"browser admin login with captured email second factor and verification dashboard\",\"no browser script exceptions\"]}\n",
+    "stderr": ""
+  },
+  {
+    "name": "public exposure and runtime dependency checks",
+    "exit": 0,
+    "seconds": 3.92,
+    "output": "PASS HTTP protection .env\nPASS HTTP protection .git/config\nPASS HTTP protection storage/backups/ai_summarizer_xampp_20261023_190448.sql\nPASS HTTP protection scripts/qa/control.php\nPASS HTTP protection .venv-nlp/pyvenv.cfg\nPASS Git ignores .env\nPASS Git ignores storage/backups/qa.sql\nPASS no tracked active credentials or SQL backups\nPASS application PHP has no removed database/container runtime branches\nPASS unavailable local MySQL fails safely without fallback\n",
+    "stderr": ""
+  },
+  {
+    "name": "production all-table integrity",
+    "exit": 0,
+    "seconds": 1.77,
+    "output": "{\"production_unchanged\":true}",
+    "stderr": ""
+  },
+  {
+    "name": "isolated fixture cleanup",
+    "exit": 0,
+    "seconds": 1.33,
+    "output": "QA databases and restricted user removed.",
+    "stderr": ""
+  }
+]

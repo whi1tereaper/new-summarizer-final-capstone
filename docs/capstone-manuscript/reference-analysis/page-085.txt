@@ -1,0 +1,15 @@
+      Figure 14. Level 2 – Report Generation
+
+   Figure   14  presents the Level 2 Data Flow
+Diagram (DFD) for the Report Generation process
+of the AccredX: Record Management and Archiving
+System. This process enables the Administrator
+and Compliance Manager to generate reports and
+analytical  summaries  based  on  information
+stored  in  the  system's  data  repositories,
+including    Folders (D2),       Files (D3),      Folder
+Checklist (D4), and Checklist File Link (D5).
+   The process begins with 6.1 Formulate System
+Analytics, where the Administrator generates
+
+                                                       66

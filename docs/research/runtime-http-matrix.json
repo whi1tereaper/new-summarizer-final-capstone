@@ -1,0 +1,82 @@
+{
+  "kind": "actual_local_apache_http_guest_matrix",
+  "cases": [
+    {
+      "name": "very_brief",
+      "passed": true,
+      "seconds": 1.6522854999930132,
+      "output_tail": "Accepted isolated job 990aa790ad73bf47b41a44fe1b00aa4a\n{\n  \"test_kind\": \"real_apache_http_guest_session\",\n  \"input\": \"text\",\n  \"base\": \"http://127.0.0.1/app/public/\",\n  \"fixture_nonarticle\": false,\n  \"depth\": \"very_brief\",\n  \"job_id\": \"990aa790ad73bf47b41a44fe1b00aa4a\",\n  \"accept_http\": 200,\n  \"observations\": [\n    {\n      \"success\": true,\n      \"job_id\": \"990aa790ad73bf47b41a44fe1b00aa4a\",\n      \"status\": \"processing\",\n      \"can_retry\": false\n    },\n    {\n      \"success\": true,\n      \"job_id\": \"990aa790ad73bf47b41a44fe1b00aa4a\",\n      \"status\": \"completed\",\n      \"can_retry\": false,\n      \"redirect\": \"result.php?id=707\"\n    }\n  ],\n  \"seconds\": 1.153045099999872,\n  \"expected_original_file_match_not_assumed\": true,\n  \"result_http\": 200,\n  \"result_contains_title\": true,\n  \"completed\": true,\n  \"poll_count\": 3\n}\n",
+      "error_tail": ""
+    },
+    {
+      "name": "brief",
+      "passed": true,
+      "seconds": 1.6811753999936627,
+      "output_tail": "Accepted isolated job f788a03a826240ab88808e162731c74e\n{\n  \"test_kind\": \"real_apache_http_guest_session\",\n  \"input\": \"text\",\n  \"base\": \"http://127.0.0.1/app/public/\",\n  \"fixture_nonarticle\": false,\n  \"depth\": \"brief\",\n  \"job_id\": \"f788a03a826240ab88808e162731c74e\",\n  \"accept_http\": 200,\n  \"observations\": [\n    {\n      \"success\": true,\n      \"job_id\": \"f788a03a826240ab88808e162731c74e\",\n      \"status\": \"processing\",\n      \"can_retry\": false\n    },\n    {\n      \"success\": true,\n      \"job_id\": \"f788a03a826240ab88808e162731c74e\",\n      \"status\": \"completed\",\n      \"can_retry\": false,\n      \"redirect\": \"result.php?id=708\"\n    }\n  ],\n  \"seconds\": 1.2644049000082305,\n  \"expected_original_file_match_not_assumed\": true,\n  \"result_http\": 200,\n  \"result_contains_title\": true,\n  \"completed\": true,\n  \"poll_count\": 3\n}\n",
+      "error_tail": ""
+    },
+    {
+      "name": "short",
+      "passed": true,
+      "seconds": 1.683373499996378,
+      "output_tail": "Accepted isolated job 2caecee79ade7d35e5dc875591dbc40d\n{\n  \"test_kind\": \"real_apache_http_guest_session\",\n  \"input\": \"text\",\n  \"base\": \"http://127.0.0.1/app/public/\",\n  \"fixture_nonarticle\": false,\n  \"depth\": \"short\",\n  \"job_id\": \"2caecee79ade7d35e5dc875591dbc40d\",\n  \"accept_http\": 200,\n  \"observations\": [\n    {\n      \"success\": true,\n      \"job_id\": \"2caecee79ade7d35e5dc875591dbc40d\",\n      \"status\": \"processing\",\n      \"can_retry\": false\n    },\n    {\n      \"success\": true,\n      \"job_id\": \"2caecee79ade7d35e5dc875591dbc40d\",\n      \"status\": \"completed\",\n      \"can_retry\": false,\n      \"redirect\": \"result.php?id=709\"\n    }\n  ],\n  \"seconds\": 1.2475726999982726,\n  \"expected_original_file_match_not_assumed\": true,\n  \"result_http\": 200,\n  \"result_contains_title\": true,\n  \"completed\": true,\n  \"poll_count\": 3\n}\n",
+      "error_tail": ""
+    },
+    {
+      "name": "balanced",
+      "passed": true,
+      "seconds": 2.678696899994975,
+      "output_tail": "Accepted isolated job 6ae35391fae4e6b08c3b58a382a59fbe\n{\n  \"test_kind\": \"real_apache_http_guest_session\",\n  \"input\": \"text\",\n  \"base\": \"http://127.0.0.1/app/public/\",\n  \"fixture_nonarticle\": false,\n  \"depth\": \"balanced\",\n  \"job_id\": \"6ae35391fae4e6b08c3b58a382a59fbe\",\n  \"accept_http\": 200,\n  \"observations\": [\n    {\n      \"success\": true,\n      \"job_id\": \"6ae35391fae4e6b08c3b58a382a59fbe\",\n      \"status\": \"processing\",\n      \"can_retry\": false\n    },\n    {\n      \"success\": true,\n      \"job_id\": \"6ae35391fae4e6b08c3b58a382a59fbe\",\n      \"status\": \"completed\",\n      \"can_retry\": false,\n      \"redirect\": \"result.php?id=710\"\n    }\n  ],\n  \"seconds\": 2.2759446000127355,\n  \"expected_original_file_match_not_assumed\": true,\n  \"result_http\": 200,\n  \"result_contains_title\": true,\n  \"completed\": true,\n  \"poll_count\": 4\n}\n",
+      "error_tail": ""
+    },
+    {
+      "name": "detailed",
+      "passed": true,
+      "seconds": 2.685597699994105,
+      "output_tail": "Accepted isolated job 8b6e588e4a2acd99969faf01e5fe08f2\n{\n  \"test_kind\": \"real_apache_http_guest_session\",\n  \"input\": \"text\",\n  \"base\": \"http://127.0.0.1/app/public/\",\n  \"fixture_nonarticle\": false,\n  \"depth\": \"detailed\",\n  \"job_id\": \"8b6e588e4a2acd99969faf01e5fe08f2\",\n  \"accept_http\": 200,\n  \"observations\": [\n    {\n      \"success\": true,\n      \"job_id\": \"8b6e588e4a2acd99969faf01e5fe08f2\",\n      \"status\": \"processing\",\n      \"can_retry\": false\n    },\n    {\n      \"success\": true,\n      \"job_id\": \"8b6e588e4a2acd99969faf01e5fe08f2\",\n      \"status\": \"completed\",\n      \"can_retry\": false,\n      \"redirect\": \"result.php?id=711\"\n    }\n  ],\n  \"seconds\": 2.270797400007723,\n  \"expected_original_file_match_not_assumed\": true,\n  \"result_http\": 200,\n  \"result_contains_title\": true,\n  \"completed\": true,\n  \"poll_count\": 4\n}\n",
+      "error_tail": ""
+    },
+    {
+      "name": "comprehensive",
+      "passed": true,
+      "seconds": 2.7015824999980396,
+      "output_tail": "Accepted isolated job eea242190ca3d41cfa73f5165a2acdcd\n{\n  \"test_kind\": \"real_apache_http_guest_session\",\n  \"input\": \"text\",\n  \"base\": \"http://127.0.0.1/app/public/\",\n  \"fixture_nonarticle\": false,\n  \"depth\": \"comprehensive\",\n  \"job_id\": \"eea242190ca3d41cfa73f5165a2acdcd\",\n  \"accept_http\": 200,\n  \"observations\": [\n    {\n      \"success\": true,\n      \"job_id\": \"eea242190ca3d41cfa73f5165a2acdcd\",\n      \"status\": \"processing\",\n      \"can_retry\": false\n    },\n    {\n      \"success\": true,\n      \"job_id\": \"eea242190ca3d41cfa73f5165a2acdcd\",\n      \"status\": \"completed\",\n      \"can_retry\": false,\n      \"redirect\": \"result.php?id=712\"\n    }\n  ],\n  \"seconds\": 2.283451499999501,\n  \"expected_original_file_match_not_assumed\": true,\n  \"result_http\": 200,\n  \"result_contains_title\": true,\n  \"completed\": true,\n  \"poll_count\": 4\n}\n",
+      "error_tail": ""
+    },
+    {
+      "name": "DOCX upload",
+      "passed": true,
+      "seconds": 3.085016099998029,
+      "output_tail": "Accepted isolated job f48b1d2ebb809f444d04ddacf55254d5\n{\n  \"test_kind\": \"real_apache_http_guest_session\",\n  \"input\": \"docx\",\n  \"base\": \"http://127.0.0.1/app/public/\",\n  \"fixture_nonarticle\": false,\n  \"depth\": \"brief\",\n  \"job_id\": \"f48b1d2ebb809f444d04ddacf55254d5\",\n  \"accept_http\": 200,\n  \"observations\": [\n    {\n      \"success\": true,\n      \"job_id\": \"f48b1d2ebb809f444d04ddacf55254d5\",\n      \"status\": \"processing\",\n      \"can_retry\": false\n    },\n    {\n      \"success\": true,\n      \"job_id\": \"f48b1d2ebb809f444d04ddacf55254d5\",\n      \"status\": \"completed\",\n      \"can_retry\": false,\n      \"redirect\": \"result.php?id=713\"\n    }\n  ],\n  \"seconds\": 2.294217899994692,\n  \"expected_original_file_match_not_assumed\": true,\n  \"result_http\": 200,\n  \"result_contains_title\": true,\n  \"completed\": true,\n  \"poll_count\": 4\n}\n",
+      "error_tail": ""
+    },
+    {
+      "name": "PDF upload",
+      "passed": true,
+      "seconds": 4.112805600001593,
+      "output_tail": "Accepted isolated job 1e8d7e64c54e4b50cad8d38ca48fe56b\n{\n  \"test_kind\": \"real_apache_http_guest_session\",\n  \"input\": \"pdf\",\n  \"base\": \"http://127.0.0.1/app/public/\",\n  \"fixture_nonarticle\": false,\n  \"depth\": \"brief\",\n  \"job_id\": \"1e8d7e64c54e4b50cad8d38ca48fe56b\",\n  \"accept_http\": 200,\n  \"observations\": [\n    {\n      \"success\": true,\n      \"job_id\": \"1e8d7e64c54e4b50cad8d38ca48fe56b\",\n      \"status\": \"processing\",\n      \"can_retry\": false\n    },\n    {\n      \"success\": true,\n      \"job_id\": \"1e8d7e64c54e4b50cad8d38ca48fe56b\",\n      \"status\": \"completed\",\n      \"can_retry\": false,\n      \"redirect\": \"result.php?id=714\"\n    }\n  ],\n  \"seconds\": 1.2407508999895072,\n  \"expected_original_file_match_not_assumed\": true,\n  \"result_http\": 200,\n  \"result_contains_title\": true,\n  \"completed\": true,\n  \"poll_count\": 3\n}\n",
+      "error_tail": ""
+    },
+    {
+      "name": "supported Focus",
+      "passed": true,
+      "seconds": 1.6433379999944009,
+      "output_tail": "Accepted isolated job 78601f17daec87f1a53bf47dfc923c01\n{\n  \"test_kind\": \"real_apache_http_guest_session\",\n  \"input\": \"text\",\n  \"base\": \"http://127.0.0.1/app/public/\",\n  \"fixture_nonarticle\": false,\n  \"depth\": \"brief\",\n  \"job_id\": \"78601f17daec87f1a53bf47dfc923c01\",\n  \"accept_http\": 200,\n  \"observations\": [\n    {\n      \"success\": true,\n      \"job_id\": \"78601f17daec87f1a53bf47dfc923c01\",\n      \"status\": \"processing\",\n      \"can_retry\": false\n    },\n    {\n      \"success\": true,\n      \"job_id\": \"78601f17daec87f1a53bf47dfc923c01\",\n      \"status\": \"completed\",\n      \"can_retry\": false,\n      \"redirect\": \"result.php?id=715\"\n    }\n  ],\n  \"seconds\": 1.2128232999966713,\n  \"expected_original_file_match_not_assumed\": true,\n  \"result_http\": 200,\n  \"result_contains_title\": true,\n  \"completed\": true,\n  \"poll_count\": 3\n}\n",
+      "error_tail": ""
+    },
+    {
+      "name": "absent Focus",
+      "passed": true,
+      "seconds": 1.5967986999894492,
+      "output_tail": "Accepted isolated job 1aedb62f14bd8441e7fb4babdeb25a9d\n{\n  \"test_kind\": \"real_apache_http_guest_session\",\n  \"input\": \"text\",\n  \"base\": \"http://127.0.0.1/app/public/\",\n  \"fixture_nonarticle\": false,\n  \"depth\": \"brief\",\n  \"job_id\": \"1aedb62f14bd8441e7fb4babdeb25a9d\",\n  \"accept_http\": 200,\n  \"observations\": [\n    {\n      \"success\": true,\n      \"job_id\": \"1aedb62f14bd8441e7fb4babdeb25a9d\",\n      \"status\": \"processing\",\n      \"can_retry\": false\n    },\n    {\n      \"success\": true,\n      \"job_id\": \"1aedb62f14bd8441e7fb4babdeb25a9d\",\n      \"status\": \"completed\",\n      \"can_retry\": false,\n      \"redirect\": \"result.php?id=716\"\n    }\n  ],\n  \"seconds\": 1.2226692999975057,\n  \"expected_original_file_match_not_assumed\": true,\n  \"result_http\": 200,\n  \"result_contains_title\": true,\n  \"completed\": true,\n  \"poll_count\": 3\n}\n",
+      "error_tail": ""
+    },
+    {
+      "name": "live NASA article URL",
+      "passed": true,
+      "seconds": 14.052646500000264,
+      "output_tail": "Accepted isolated job 005295e781831dc7f7685fee84b99503\n{\n  \"test_kind\": \"real_apache_http_guest_session\",\n  \"input\": \"url\",\n  \"base\": \"http://127.0.0.1/app/public/\",\n  \"fixture_nonarticle\": false,\n  \"depth\": \"brief\",\n  \"job_id\": \"005295e781831dc7f7685fee84b99503\",\n  \"accept_http\": 200,\n  \"observations\": [\n    {\n      \"success\": true,\n      \"job_id\": \"005295e781831dc7f7685fee84b99503\",\n      \"status\": \"processing\",\n      \"can_retry\": false\n    },\n    {\n      \"success\": true,\n      \"job_id\": \"005295e781831dc7f7685fee84b99503\",\n      \"status\": \"completed\",\n      \"can_retry\": false,\n      \"redirect\": \"result.php?id=717\"\n    }\n  ],\n  \"seconds\": 13.606457200003206,\n  \"expected_original_file_match_not_assumed\": true,\n  \"result_http\": 200,\n  \"result_contains_title\": true,\n  \"completed\": true,\n  \"poll_count\": 14\n}\n",
+      "error_tail": ""
+    }
+  ]
+}

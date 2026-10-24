@@ -1,0 +1,196 @@
+{
+    "recorded_utc": "2026-10-23T02:33:44+00:00",
+    "apply": false,
+    "files": [
+        {
+            "migration": "018_summary_contract_compat.sql",
+            "sha256": "f5f79c2130d9a8a1cbf51d0a07a67d504f2761e8685e59ad7a1b97bccd149903"
+        },
+        {
+            "migration": "019_auth_audit_contract_compat.sql",
+            "sha256": "1e58c0702fb7e1d2df4d7667c87c8c96581ca18d8b3eef8e768b4015728f5411"
+        },
+        {
+            "migration": "017_student_number_access.sql",
+            "sha256": "73d54fd8e05933ee191d47f25edd1e399309631e4f148060d67a30e269695a7b"
+        }
+    ],
+    "versions": [
+        {
+            "migration": "018_summary_contract_compat.sql",
+            "status": "pending"
+        },
+        {
+            "migration": "019_auth_audit_contract_compat.sql",
+            "status": "pending"
+        },
+        {
+            "migration": "017_student_number_access.sql",
+            "status": "pending"
+        }
+    ],
+    "contract": {
+        "compatible": false,
+        "issues": [
+            {
+                "kind": "missing_column",
+                "table": "summaries",
+                "column": "article_category"
+            },
+            {
+                "kind": "missing_column",
+                "table": "summaries",
+                "column": "original_word_count"
+            },
+            {
+                "kind": "missing_column",
+                "table": "summaries",
+                "column": "summary_word_count"
+            },
+            {
+                "kind": "missing_column",
+                "table": "summaries",
+                "column": "processing_time"
+            },
+            {
+                "kind": "missing_column",
+                "table": "summaries",
+                "column": "nutshell_word_count"
+            },
+            {
+                "kind": "missing_column",
+                "table": "summaries",
+                "column": "nutshell_generated_at"
+            },
+            {
+                "kind": "missing_column",
+                "table": "summary_artifacts",
+                "column": "original_text"
+            },
+            {
+                "kind": "missing_column",
+                "table": "summary_artifacts",
+                "column": "generated_summary"
+            },
+            {
+                "kind": "missing_column",
+                "table": "password_resets",
+                "column": "used_at"
+            },
+            {
+                "kind": "missing_column",
+                "table": "user_tokens",
+                "column": "selector"
+            },
+            {
+                "kind": "missing_column",
+                "table": "user_tokens",
+                "column": "hashed_validator"
+            },
+            {
+                "kind": "missing_column",
+                "table": "user_tokens",
+                "column": "expires"
+            },
+            {
+                "kind": "missing_column",
+                "table": "admin_audit_logs",
+                "column": "admin_id"
+            },
+            {
+                "kind": "missing_column",
+                "table": "admin_audit_logs",
+                "column": "entity_type"
+            },
+            {
+                "kind": "missing_column",
+                "table": "admin_audit_logs",
+                "column": "entity_id"
+            },
+            {
+                "kind": "missing_column",
+                "table": "admin_audit_logs",
+                "column": "user_agent"
+            },
+            {
+                "kind": "missing_column",
+                "table": "nutshell_generations",
+                "column": "input_type"
+            },
+            {
+                "kind": "missing_column",
+                "table": "nutshell_generations",
+                "column": "word_count"
+            },
+            {
+                "kind": "missing_table",
+                "table": "student_applications"
+            },
+            {
+                "kind": "missing_table",
+                "table": "student_review_events"
+            },
+            {
+                "kind": "missing_table",
+                "table": "summary_access_subjects"
+            },
+            {
+                "kind": "missing_table",
+                "table": "student_trial_links"
+            },
+            {
+                "kind": "missing_table",
+                "table": "summary_access_reservations"
+            },
+            {
+                "kind": "legacy_not_null_blocks_new_writer",
+                "table": "summaries",
+                "column": "original_text"
+            },
+            {
+                "kind": "legacy_not_null_blocks_new_writer",
+                "table": "summaries",
+                "column": "generated_summary"
+            },
+            {
+                "kind": "legacy_not_null_blocks_new_writer",
+                "table": "summary_artifacts",
+                "column": "artifact_type"
+            },
+            {
+                "kind": "legacy_not_null_blocks_new_writer",
+                "table": "summary_artifacts",
+                "column": "storage_path"
+            },
+            {
+                "kind": "legacy_not_null_blocks_new_writer",
+                "table": "user_tokens",
+                "column": "token_hash"
+            },
+            {
+                "kind": "legacy_not_null_blocks_new_writer",
+                "table": "user_tokens",
+                "column": "token_type"
+            },
+            {
+                "kind": "legacy_not_null_blocks_new_writer",
+                "table": "user_tokens",
+                "column": "expires_at"
+            },
+            {
+                "kind": "column_too_short",
+                "table": "password_resets",
+                "column": "token_hash",
+                "minimum": 255
+            },
+            {
+                "kind": "missing_unique_key",
+                "table": "user_tokens",
+                "columns": "selector"
+            }
+        ],
+        "data_counts": [],
+        "checked_tables": 21
+    },
+    "configured_database_modified": false
+}

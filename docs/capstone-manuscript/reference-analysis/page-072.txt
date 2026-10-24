@@ -1,0 +1,45 @@
+files, as well as access and submit files for
+checklists.
+   This structured flow of information ensures
+that data is efficiently managed, securely
+stored,    and    easily    retrievable    for
+accreditation and administrative purposes. The
+DFD    emphasizes    clear    boundaries    of
+responsibility and data access among user types,
+promoting data integrity, accountability, and
+streamlined   communication   within   NEUST
+Peñaranda Off-Campus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                       53

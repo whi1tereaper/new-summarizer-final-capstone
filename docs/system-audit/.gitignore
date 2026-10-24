@@ -1,0 +1,4 @@
+# Local execution dependencies/copies are reproducible working material.
+evidence/tool-dependencies/
+evidence/isolated-project/
+evidence/__pycache__/

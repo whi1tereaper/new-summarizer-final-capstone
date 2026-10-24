@@ -1,0 +1,19 @@
+    Figure 9. DFD Level 2 – User Management
+
+   Figure 9 illustrates      the Level 2 Data Flow
+Diagram (DFD) for the       User Management     process
+of the AccredX: Record Management and Archiving
+System. This diagram provides a more detailed
+view of how user accounts are managed within the
+system by the Administrator through the           Users
+(D1) data store.
+   The process begins with         1.1 Register New
+Account, where the Administrator enters the
+necessary  user  information  such  as  name,
+username, password, role, and other account
+details. The system validates the information
+and stores the new user account in the            Users
+(D1)   database.  This  process  ensures  that
+
+
+                                                      57

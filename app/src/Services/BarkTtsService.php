@@ -186,7 +186,7 @@ class BarkTtsService
         $status = 200;
         $headers = [
             'accept-ranges' => 'bytes',
-            'cache-control' => 'public, max-age=31536000, immutable',
+            'cache-control' => 'private, no-store',
             'last-modified' => gmdate('D, d M Y H:i:s', $lastModified) . ' GMT',
         ];
 

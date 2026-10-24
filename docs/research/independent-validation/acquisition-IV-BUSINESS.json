@@ -1,0 +1,23 @@
+{
+  "id": "IV-BUSINESS",
+  "category": "business",
+  "publisher": "US EIA",
+  "url": "https://www.eia.gov/TodayinEnergy/detail.php?id=65524",
+  "license": "US federal government-authored prose; public domain in the US",
+  "license_url": "https://www.eia.gov/about/copyrights_reuse.php",
+  "authors": [],
+  "publication_dates": [],
+  "visible_times": [],
+  "license_statement": null,
+  "title": "U.S. primary energy production, consumption, and exports increased in 2024",
+  "source_text": "U.S. primary energy production, consumption, and exports increased in 2024\n\nThe United States continued to produce more energy than it consumed in 2024. This surplus energy production helped energy exports grow to a record high 30.9 quadrillion British thermal units (quads) in 2024, up 4% from 2023. Energy imports stayed flat at 21.7 quads in 2024, meaning the United States exported 9.3 quads more energy than it imported, the highest net exports in our records, which date back to 1949 .\n\nEnergy consumption in the United States totaled 94.2 quads in 2024, remaining below the peak of 99.0 quads set in 2007. Petroleum remained the largest source of primary energy consumption in the United States in 2024, totaling 35.3 quads, about the same as in the three previous years. Natural gas consumption reached an all-time high in 2024 at 34.2 quads, driven by growth in natural gas used for electricity generation .\n\nRenewable energy consumption increased by 5% to hit a new record of 8.6 quads in 2024, largely due to growth in biofuels, wind, and solar. Nuclear energy consumption remained flat at 8.2 quads. Coal consumption fell to 7.9 quads, the least in our records dating back to 1949.\n\nPrimary energy production in the United States increased to a record 103.3 quads in 2024, the third consecutive year that production has surpassed a previous record. Natural gas, crude oil, natural gas plant liquids, wind, biofuels, and solar all reached or tied record production in 2024.\n\nU.S. exports of petroleum products , crude oil, and natural gas each reached records in 2024. Petroleum product exports totaled 11.5 quads and accounted for 37% of total U.S. exports across all energy sources. Crude oil exports totaled 8.6 quads, making up 28% of the total. Natural gas exports grew to 7.8 quads, driven by continued growth in liquefied natural gas exports . Coal exports totaled 2.6 quads and have increased every year since 2020. Other energy sources such as biomass, electricity, and coal coke combined accounted for 1% of exports.\n\nCrude oil has been the largest source of U.S. energy imports every year on record since 1973, accounting for 67% of energy imports in 2024. Crude oil is often imported and then refined into other petroleum products such as motor gasoline, distillate fuel oil, or jet fuel and then exported as petroleum products.\n\nIn our Monthly Energy Review , we convert sources of energy to common units of heat, called British thermal units (Btu), to compare different types of energy that are usually measured in units that are not directly comparable, such as barrels of crude oil and cubic feet of natural gas. Appendix A of our Monthly Energy Review has the conversion factors that we use for each energy source.",
+  "prose_words": 472,
+  "retrieved_utc": "2026-10-22T14:23:00.168694+00:00",
+  "http_final_url": "https://www.eia.gov/TodayinEnergy/detail.php?id=65524",
+  "http_sha256": "82fff68d3a82babd8a58070d40ca5bd2fc75d6ffbb412b63e378342957208a85",
+  "source_sha256": "4aa55dcf3b760e1b104c701383a20565e6dabecc9eaba8c6fc42950f73debe78",
+  "extraction_selector": ".tie-article",
+  "partition": "prospective_external_non_tuning_pilot",
+  "independent_annotation_status": "pending",
+  "profile": "general"
+}

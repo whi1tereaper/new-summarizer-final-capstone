@@ -1,0 +1,32 @@
+management and archiving. These insights guided
+the development of the system.
+
+   After the system prototype was developed, the
+researchers prepared the evaluation instruments
+and  secured  permission  from  the  school
+administration  to  conduct  the  study.  The
+questionnaires were then distributed to the
+identified respondents. IT consultants received
+digital copies of the evaluation forms, while
+end-users were provided with both printed and
+online versions for convenience.
+
+   Respondents  were  given  adequate  time  to
+explore   the   system   and   assess   its
+functionalities    before    completing    the
+questionnaires. The researchers also provided
+demonstrations and guidance, especially for the
+end-users, to ensure that they could navigate
+and evaluate the system properly.
+
+   Once  the  responses  were  collected,  the
+researchers consolidated and analyzed the data
+to  determine  the  system’s  effectiveness
+according to the specified software quality
+standards. The feedback was used to validate the
+strengths of the system and identify              areas
+requiring further refinement.
+
+
+
+                                                       31

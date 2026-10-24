@@ -1,0 +1,54 @@
+{
+  "dataset_version": "independent-article-pilot-20261013",
+  "dataset_split": "exploratory_pilot",
+  "purpose": "Exploratory comparison on three independently published, publicly accessible NASA news/article texts. Convenience sample from one publisher; engineering-selected facts/units are unverified. Not a confirmatory test set or evidence of general article superiority.",
+  "license_note": "NASA-authored prose is generally a U.S. federal government work in the public domain in the United States; source attribution is retained. Third-party linked source claims are retained only as attribution/context in the NASA Earth Observatory story.",
+  "include_corpora": [
+    {
+      "path": "../../tests/fixtures/evaluation_validation_documents.json",
+      "ids": ["NASA-RELEASE-25-002"]
+    }
+  ],
+  "documents": [
+    {
+      "id": "NASA-CRS35-HEALTH-RESEARCH",
+      "category": "news",
+      "profile": "general",
+      "title": "NASA’s SpaceX CRS-35 Mission to Launch Health Research",
+      "source_url": "https://science.nasa.gov/missions/station/nasas-spacex-crs-35-mission-to-launch-health-research/",
+      "source_provenance": "NASA, published 2026-10-12. Full article text with navigation and link markup removed; source wording retained.",
+      "license": "NASA-authored federal agency prose; public domain in the United States.",
+      "source_text": "NASA experiments focused on human and plant health and drug-resistant organisms will travel to the International Space Station aboard SpaceX’s 35th Commercial Resupply Services mission for the agency from Cape Canaveral Space Force Station in Florida, advancing research that benefits life on Earth and future exploration.\n\nThis research supports astronaut health during long-duration missions through four investigations from the agency’s Biological and Physical Sciences division, including 3D models of the human brain, a crop disease study, a faster way to assess astronaut health, and an analysis of antibiotic-resistant bacteria aboard the space station.\n\nTiny brain models, big questions\n\nA new precision health investigation helps address a key question: What happens to the human brain in space?\n\nThe experiment sends small, lab-grown models of the human brain to the orbiting laboratory for five weeks. Researchers compare tissue models that traveled to space with identical ones kept on Earth to determine how a short spaceflight affects the human brain at the cellular level.\n\nThe effort could deepen our understanding of how the human brain responds to stress and help lay the groundwork for methods that counter risks to brain health that astronauts may face on future missions to the Moon and beyond.\n\nDisease-resistant crops for space\n\nA space crops investigation tests whether crop diseases develop faster and more severely in microgravity.\n\nThe experiment compares molecular and structural changes between Earth-grown and space station-grown plants infected with a disease-causing fungus. The findings could guide plant breeding on Earth to produce disease-resistant crops and help minimize yield losses in future space agriculture systems.\n\nSpace crops provide nutrition, increase dietary variety, and offer psychological benefits for astronauts during extended missions. They also absorb carbon dioxide, produce oxygen, and recycle water, which will become increasingly important as human missions extend farther from Earth.\n\nAnalysis helps astronauts thrive\n\nThe spacecraft also carries the first test of a compact microplate reader that arrived aboard the space station earlier this year.\n\nThe Commercially Enabled Rapid Space Science initiative experiment tests the device’s ability to detect and measure certain biomarkers such as antibodies, antigens, and proteins.\n\nUse of the plate reader would allow scientists to analyze samples aboard the space station and obtain data quickly, rather than wait for the samples to return to Earth for analysis.\n\nUltimately, the research aims to support the timely detection of infections and other health issues in astronauts while expanding science capabilities in remote exploration locations where resupply will be more difficult.\n\nTracking antibiotic-resistant bacteria\n\nA precision health investigation returns for its fourth and final planned stay aboard the space station to study how antibiotic-resistant bacteria survive and evolve in microgravity.\n\nAs part of the investigation, astronauts repeatedly sample surfaces throughout the space station to monitor for drug-resistant organisms.\n\nThe work could help develop ways to protect astronauts against bacterial infections during long-duration missions. On Earth, the findings could provide insight into how superbugs develop from the overuse of antibiotics.\n\nTo learn more about NASA’s biological and physical research in space, visit NASA’s Biological and Physical Sciences division.",
+      "key_units": [
+        {"id": "mission_and_purpose", "all_of": ["SpaceX", "health", "research"]},
+        {"id": "four_investigations", "all_of": ["four", "investigations"]},
+        {"id": "brain_experiment", "all_of": ["brain", "five weeks"]},
+        {"id": "crop_disease", "all_of": ["crops", "microgravity"]},
+        {"id": "rapid_health_testing", "all_of": ["microplate", "biomarkers"]},
+        {"id": "bacteria_study", "all_of": ["antibiotic-resistant", "fourth"]}
+      ],
+      "critical_facts": ["35th Commercial Resupply Services mission", "four investigations", "five weeks", "fourth and final planned stay", "antibodies, antigens, and proteins"],
+      "prohibited": ["the experiments proved", "the studies found that astronauts"]
+    },
+    {
+      "id": "NASA-EARTH-OBSERVATORY-THAILAND-FLOODS",
+      "category": "news",
+      "profile": "news",
+      "title": "Floodwaters Overwhelm Thailand",
+      "source_url": "https://science.nasa.gov/earth/earth-observatory/floodwaters-overwhelm-thailand/",
+      "source_provenance": "NASA Earth Observatory, story by Lindsey Doermann, 2026-10; NASA/USGS Landsat images described in article.",
+      "license": "NASA-authored federal agency prose; public domain in the United States. Claims attributed in the article to external sources remain attributed.",
+      "source_text": "September falls in the heart of the monsoon season in Thailand, where cities and towns are accustomed to the afternoon rains and thunderstorms that frequently roll through. But throughout late September and early October 2026, persistent heavy rains punctuated by intense downpours left low-lying areas across the country in Southeast Asia under sustained flooding.\n\nPrachin Buri province was among the areas where flooding was widespread. The right image above shows land along the Bang Pakong River and nearby agricultural areas and aquaculture facilities inundated on October 2, 2026. The left image shows the same area at the same time of year in 2025. Acquired with NASA-USGS Landsat satellites, the images are false-color to better distinguish water from vegetation, developed land, and other surfaces. The bright red shapes are floating solar arrays.\n\nSome of the flooding likely stemmed from a low-pressure system that stalled over the area for several days in late September. Stoked by moisture and energy from the warm Gulf of Thailand nearby, the system delivered especially intense rains to the region. About 100 kilometers (60 miles) to the west, Bangkok received nearly 300 millimeters (11.8 inches) of rain over a 48-hour period, according to news reports, close to the average monthly rainfall total for September of 344 millimeters (13.5 inches).\n\nSince mid-September, flooding has occurred in 50 provinces across the country, affecting over 4 million people and causing dozens of deaths, according to the International Federation of Red Cross and Red Crescent Societies. Government agencies estimate about 270,000 hectares (670,000 acres) of farmland, including rice fields and fruit orchards, have been damaged.\n\nNASA Earth Observatory images by Lauren Dauphin, using Landsat data from the U.S. Geological Survey. Story by Lindsey Doermann.",
+      "key_units": [
+        {"id": "event_and_time", "all_of": ["flooding", "late September"]},
+        {"id": "location", "all_of": ["Thailand", "Prachin Buri"]},
+        {"id": "qualified_cause", "all_of": ["likely", "low-pressure"]},
+        {"id": "rainfall_measurement", "all_of": ["300 millimeters", "48-hour"]},
+        {"id": "people_affected", "all_of": ["4 million"]},
+        {"id": "agricultural_damage", "all_of": ["270,000 hectares"]}
+      ],
+      "critical_facts": ["October 2, 2026", "2025", "100 kilometers", "300 millimeters", "48-hour period", "344 millimeters", "50 provinces", "4 million people", "270,000 hectares"],
+      "prohibited": ["flooding was caused by climate change", "all 77 provinces", "300 millimeters in one hour"]
+    }
+  ]
+}

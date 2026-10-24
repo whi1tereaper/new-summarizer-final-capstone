@@ -1,0 +1,23 @@
+%% DFD 1.1-1.2: account request and verification
+%% Focused account-flow view; repeated process 1.2 links the two panels. All verification/session state remains D1.
+flowchart TB
+    U["Visitor / registered user<br/>eligible requests only"]
+    M["Configured email service"]
+    D1@{ shape: datastore, label: "D1 Account / session stores<br/>users; password_resets;<br/>user_tokens; guest_sessions;<br/>rate_limits; PHP session state" }
+    P11("1.1 Validate account request<br/>Apply rate limits and<br/>choose authentication flow")
+    P12("1.2 Check required identity<br/>Password, applicable code<br/>or existing session state")
+    U -->|"account request"| P11
+    P11 -->|"validation failure"| U
+    P11 -->|"verification / reset<br/>mail"| M
+    M -->|"delivery status"| P11
+    D1 -->|"rate / account state"| P11
+    P11 -->|"rate / verification<br/>state"| D1
+    P11 -->|"validated request"| P12
+    D1 -->|"hash / code / account<br/>state"| P12
+    P12 -->|"consumed verification<br/>code"| D1
+    classDef process fill:#edf1f5,stroke:#222,color:#111;
+    classDef store fill:#f6f6f6,stroke:#222,color:#111;
+    classDef entity fill:#fff,stroke:#222,color:#111;
+    class P11,P12 process;
+    class D1 store;
+    class U,M entity;

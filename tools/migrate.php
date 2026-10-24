@@ -28,7 +28,7 @@ if (isset($options['help'])) {
 try {
     $database = \App\Src\Database::getInstance();
     if ($database->getDriver() !== 'mysql') {
-        throw new RuntimeException('This migration runner is MySQL-only. Use database/schema.postgres.sql and the PostgreSQL importer for PostgreSQL.');
+        throw new RuntimeException('This installation supports XAMPP MySQL/MariaDB migrations only.');
     }
     $db = $database->getConnection();
 

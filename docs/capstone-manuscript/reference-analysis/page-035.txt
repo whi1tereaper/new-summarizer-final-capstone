@@ -1,0 +1,33 @@
+Scope and Delimitation
+
+  This  project  focuses  on  developing  and
+implementing a record management and archiving
+system for NEUST Peñaranda Off-Campus. The
+system is intended to handle academic and
+administrative documents by offering a single
+digital platform for storing, organizing, and
+retrieving data. It is specifically designed to
+improve   the   efficiency,   security,   and
+accessibility of papers used by school personnel.
+  The primary users of the system include school
+administrators, staff, and faculty, who will
+benefit from features such as fast document
+search, version tracking, audit trails, and
+role-based access. The scope also covers the
+system’s role in supporting the         accreditation
+process, ensuring that required documentation
+is  readily  available,  complete,  and  well-
+organized.
+  The study is delimited to the Peñaranda Off-
+Campus of NEUST and does not encompass other
+branches or external institutions. It focuses
+only on document management functions and does
+not address other administrative operations
+such as financial systems, student grading, or
+enrollment. Additionally, this study is limited
+to the system’s design, development, and basic
+functional testing.
+
+
+
+                                                      16

@@ -1,0 +1,35 @@
+{
+  "test_kind": "real_apache_http_guest_session",
+  "input": "pdf",
+  "base": "http://127.0.0.1/app/public/",
+  "fixture_nonarticle": false,
+  "depth": "brief",
+  "job_id": "1e8d7e64c54e4b50cad8d38ca48fe56b",
+  "accept_http": 200,
+  "observations": [
+    {
+      "success": true,
+      "job_id": "1e8d7e64c54e4b50cad8d38ca48fe56b",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "1e8d7e64c54e4b50cad8d38ca48fe56b",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "1e8d7e64c54e4b50cad8d38ca48fe56b",
+      "status": "completed",
+      "can_retry": false,
+      "redirect": "result.php?id=714"
+    }
+  ],
+  "seconds": 1.2407508999895072,
+  "expected_original_file_match_not_assumed": true,
+  "result_http": 200,
+  "result_contains_title": true,
+  "completed": true
+}

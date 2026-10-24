@@ -1,0 +1,32 @@
+they have the same capabilities in the system).
+The   admin   serves  as  the  system’s  primary
+controller  with  full  access  to  all  major
+functions, including managing user accounts,
+creating and uploading folders and files            and
+checklists, archiving and deleting records,
+viewing  analytics  in  the  dashboard,  and
+generating    accreditation    reports.    The
+Compliance Manager share similar privileges but
+with  limited  access,  focusing  mainly  on
+uploading, organizing, and managing their own
+folders and files within the system. They can
+also view the dashboard for their respective
+activities and generate accreditation reports.
+This  use  case  setup  ensures  a  structured
+workflow and access control, supporting the
+institution’s goal of maintaining an efficient
+and secure record management process.
+
+
+   Data Flow Diagram
+    A data flow diagram (DFD) is a graphical
+representation of data flow through a system.
+It’s  employed  to  understand  how  data  is
+processed, stored, and communicated within a
+system. Moreover, DFD is used to support the
+analysis of how the data flows in existing or
+proposed systems from one page or module to
+
+
+
+                                                      51

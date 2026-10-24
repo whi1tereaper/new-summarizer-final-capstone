@@ -1,0 +1,1987 @@
+{
+  "engine": "recipe-article-2.1",
+  "input_lock_sha256": "e9c1169bc653ed834dffe727e31e8ab4c130915d258f71794e3d88aaf5010fb2",
+  "human_review": {
+    "status": "pending",
+    "reviewers": [],
+    "scores": null
+  },
+  "general_native": {
+    "legacy": {
+      "cases": 48,
+      "words": 13598,
+      "execution_failures": 0,
+      "draft_main_hits": 16,
+      "draft_unit_hits": 56,
+      "draft_unit_denominator": 252,
+      "source_exact_sentences": 402,
+      "output_sentences": 504,
+      "draft_context_flags": 5,
+      "exact_duplicates": 0,
+      "matched_cases": 48,
+      "independent_human_scores": null
+    },
+    "guide_lsa": {
+      "cases": 48,
+      "words": 8521,
+      "execution_failures": 0,
+      "draft_main_hits": 11,
+      "draft_unit_hits": 55,
+      "draft_unit_denominator": 252,
+      "source_exact_sentences": 357,
+      "output_sentences": 358,
+      "draft_context_flags": 0,
+      "exact_duplicates": 0,
+      "matched_cases": 10,
+      "independent_human_scores": null
+    },
+    "article21_light": {
+      "cases": 48,
+      "words": 6137,
+      "execution_failures": 0,
+      "draft_main_hits": 18,
+      "draft_unit_hits": 47,
+      "draft_unit_denominator": 252,
+      "source_exact_sentences": 343,
+      "output_sentences": 343,
+      "draft_context_flags": 8,
+      "exact_duplicates": 0,
+      "matched_cases": 9,
+      "independent_human_scores": null
+    },
+    "article21_enhanced": {
+      "cases": 48,
+      "words": 6168,
+      "execution_failures": 0,
+      "draft_main_hits": 18,
+      "draft_unit_hits": 45,
+      "draft_unit_denominator": 252,
+      "source_exact_sentences": 342,
+      "output_sentences": 342,
+      "draft_context_flags": 7,
+      "exact_duplicates": 0,
+      "matched_cases": 9,
+      "independent_human_scores": null
+    }
+  },
+  "general_selected": {
+    "legacy": {
+      "cases": 48,
+      "words": 13598,
+      "execution_failures": 0,
+      "draft_main_hits": 16,
+      "draft_unit_hits": 56,
+      "draft_unit_denominator": 252,
+      "source_exact_sentences": 402,
+      "output_sentences": 504,
+      "draft_context_flags": 5,
+      "exact_duplicates": 0,
+      "matched_cases": 48,
+      "independent_human_scores": null
+    },
+    "guide_lsa": {
+      "cases": 48,
+      "words": 8027,
+      "execution_failures": 0,
+      "draft_main_hits": 10,
+      "draft_unit_hits": 51,
+      "draft_unit_denominator": 252,
+      "source_exact_sentences": 340,
+      "output_sentences": 341,
+      "draft_context_flags": 0,
+      "exact_duplicates": 0,
+      "matched_cases": 10,
+      "independent_human_scores": null
+    },
+    "article21_light": {
+      "cases": 48,
+      "words": 6300,
+      "execution_failures": 0,
+      "draft_main_hits": 18,
+      "draft_unit_hits": 49,
+      "draft_unit_denominator": 252,
+      "source_exact_sentences": 348,
+      "output_sentences": 348,
+      "draft_context_flags": 7,
+      "exact_duplicates": 0,
+      "matched_cases": 9,
+      "independent_human_scores": null
+    },
+    "article21_enhanced": {
+      "cases": 48,
+      "words": 6347,
+      "execution_failures": 0,
+      "draft_main_hits": 18,
+      "draft_unit_hits": 46,
+      "draft_unit_denominator": 252,
+      "source_exact_sentences": 348,
+      "output_sentences": 348,
+      "draft_context_flags": 6,
+      "exact_duplicates": 0,
+      "matched_cases": 9,
+      "independent_human_scores": null
+    }
+  },
+  "per_category": {
+    "business": {
+      "legacy": {
+        "cases": 6,
+        "words": 1265,
+        "execution_failures": 0,
+        "draft_main_hits": 0,
+        "draft_unit_hits": 9,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 36,
+        "output_sentences": 50,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 6,
+        "independent_human_scores": null
+      },
+      "guide_lsa": {
+        "cases": 6,
+        "words": 1022,
+        "execution_failures": 0,
+        "draft_main_hits": 1,
+        "draft_unit_hits": 11,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 45,
+        "output_sentences": 45,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 2,
+        "independent_human_scores": null
+      },
+      "article21_light": {
+        "cases": 6,
+        "words": 975,
+        "execution_failures": 0,
+        "draft_main_hits": 0,
+        "draft_unit_hits": 11,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 44,
+        "output_sentences": 44,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 1,
+        "independent_human_scores": null
+      },
+      "article21_enhanced": {
+        "cases": 6,
+        "words": 949,
+        "execution_failures": 0,
+        "draft_main_hits": 0,
+        "draft_unit_hits": 11,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 44,
+        "output_sentences": 44,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 1,
+        "independent_human_scores": null
+      }
+    },
+    "editorial": {
+      "legacy": {
+        "cases": 6,
+        "words": 2057,
+        "execution_failures": 0,
+        "draft_main_hits": 2,
+        "draft_unit_hits": 4,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 54,
+        "output_sentences": 72,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 6,
+        "independent_human_scores": null
+      },
+      "guide_lsa": {
+        "cases": 6,
+        "words": 1070,
+        "execution_failures": 0,
+        "draft_main_hits": 0,
+        "draft_unit_hits": 0,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 44,
+        "output_sentences": 44,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 0,
+        "independent_human_scores": null
+      },
+      "article21_light": {
+        "cases": 6,
+        "words": 924,
+        "execution_failures": 0,
+        "draft_main_hits": 0,
+        "draft_unit_hits": 0,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 44,
+        "output_sentences": 44,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 1,
+        "independent_human_scores": null
+      },
+      "article21_enhanced": {
+        "cases": 6,
+        "words": 944,
+        "execution_failures": 0,
+        "draft_main_hits": 0,
+        "draft_unit_hits": 0,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 44,
+        "output_sentences": 44,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 1,
+        "independent_human_scores": null
+      }
+    },
+    "educational": {
+      "legacy": {
+        "cases": 6,
+        "words": 2005,
+        "execution_failures": 0,
+        "draft_main_hits": 4,
+        "draft_unit_hits": 5,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 66,
+        "output_sentences": 71,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 6,
+        "independent_human_scores": null
+      },
+      "guide_lsa": {
+        "cases": 6,
+        "words": 887,
+        "execution_failures": 0,
+        "draft_main_hits": 0,
+        "draft_unit_hits": 0,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 44,
+        "output_sentences": 44,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 0,
+        "independent_human_scores": null
+      },
+      "article21_light": {
+        "cases": 6,
+        "words": 707,
+        "execution_failures": 0,
+        "draft_main_hits": 0,
+        "draft_unit_hits": 0,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 44,
+        "output_sentences": 44,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 1,
+        "independent_human_scores": null
+      },
+      "article21_enhanced": {
+        "cases": 6,
+        "words": 664,
+        "execution_failures": 0,
+        "draft_main_hits": 0,
+        "draft_unit_hits": 0,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 44,
+        "output_sentences": 44,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 0,
+        "independent_human_scores": null
+      }
+    },
+    "feature": {
+      "legacy": {
+        "cases": 6,
+        "words": 1717,
+        "execution_failures": 0,
+        "draft_main_hits": 1,
+        "draft_unit_hits": 10,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 70,
+        "output_sentences": 72,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 6,
+        "independent_human_scores": null
+      },
+      "guide_lsa": {
+        "cases": 6,
+        "words": 889,
+        "execution_failures": 0,
+        "draft_main_hits": 0,
+        "draft_unit_hits": 3,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 45,
+        "output_sentences": 45,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 0,
+        "independent_human_scores": null
+      },
+      "article21_light": {
+        "cases": 6,
+        "words": 853,
+        "execution_failures": 0,
+        "draft_main_hits": 0,
+        "draft_unit_hits": 2,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 44,
+        "output_sentences": 44,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 0,
+        "independent_human_scores": null
+      },
+      "article21_enhanced": {
+        "cases": 6,
+        "words": 858,
+        "execution_failures": 0,
+        "draft_main_hits": 0,
+        "draft_unit_hits": 2,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 44,
+        "output_sentences": 44,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 1,
+        "independent_human_scores": null
+      }
+    },
+    "news": {
+      "legacy": {
+        "cases": 6,
+        "words": 1427,
+        "execution_failures": 0,
+        "draft_main_hits": 2,
+        "draft_unit_hits": 13,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 48,
+        "output_sentences": 55,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 6,
+        "independent_human_scores": null
+      },
+      "guide_lsa": {
+        "cases": 6,
+        "words": 1127,
+        "execution_failures": 0,
+        "draft_main_hits": 5,
+        "draft_unit_hits": 9,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 42,
+        "output_sentences": 42,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 2,
+        "independent_human_scores": null
+      },
+      "article21_light": {
+        "cases": 6,
+        "words": 1003,
+        "execution_failures": 0,
+        "draft_main_hits": 6,
+        "draft_unit_hits": 10,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 43,
+        "output_sentences": 43,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 2,
+        "independent_human_scores": null
+      },
+      "article21_enhanced": {
+        "cases": 6,
+        "words": 1008,
+        "execution_failures": 0,
+        "draft_main_hits": 6,
+        "draft_unit_hits": 9,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 43,
+        "output_sentences": 43,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 2,
+        "independent_human_scores": null
+      }
+    },
+    "research": {
+      "legacy": {
+        "cases": 6,
+        "words": 2250,
+        "execution_failures": 0,
+        "draft_main_hits": 2,
+        "draft_unit_hits": 4,
+        "draft_unit_denominator": 36,
+        "source_exact_sentences": 57,
+        "output_sentences": 73,
+        "draft_context_flags": 3,
+        "exact_duplicates": 0,
+        "matched_cases": 6,
+        "independent_human_scores": null
+      },
+      "guide_lsa": {
+        "cases": 6,
+        "words": 1165,
+        "execution_failures": 0,
+        "draft_main_hits": 0,
+        "draft_unit_hits": 5,
+        "draft_unit_denominator": 36,
+        "source_exact_sentences": 43,
+        "output_sentences": 43,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 1,
+        "independent_human_scores": null
+      },
+      "article21_light": {
+        "cases": 6,
+        "words": 483,
+        "execution_failures": 0,
+        "draft_main_hits": 6,
+        "draft_unit_hits": 7,
+        "draft_unit_denominator": 36,
+        "source_exact_sentences": 44,
+        "output_sentences": 44,
+        "draft_context_flags": 6,
+        "exact_duplicates": 0,
+        "matched_cases": 0,
+        "independent_human_scores": null
+      },
+      "article21_enhanced": {
+        "cases": 6,
+        "words": 555,
+        "execution_failures": 0,
+        "draft_main_hits": 6,
+        "draft_unit_hits": 7,
+        "draft_unit_denominator": 36,
+        "source_exact_sentences": 44,
+        "output_sentences": 44,
+        "draft_context_flags": 6,
+        "exact_duplicates": 0,
+        "matched_cases": 0,
+        "independent_human_scores": null
+      }
+    },
+    "scientific": {
+      "legacy": {
+        "cases": 6,
+        "words": 963,
+        "execution_failures": 0,
+        "draft_main_hits": 5,
+        "draft_unit_hits": 11,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 28,
+        "output_sentences": 39,
+        "draft_context_flags": 2,
+        "exact_duplicates": 0,
+        "matched_cases": 6,
+        "independent_human_scores": null
+      },
+      "guide_lsa": {
+        "cases": 6,
+        "words": 920,
+        "execution_failures": 0,
+        "draft_main_hits": 4,
+        "draft_unit_hits": 21,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 34,
+        "output_sentences": 34,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 4,
+        "independent_human_scores": null
+      },
+      "article21_light": {
+        "cases": 6,
+        "words": 911,
+        "execution_failures": 0,
+        "draft_main_hits": 6,
+        "draft_unit_hits": 19,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 41,
+        "output_sentences": 41,
+        "draft_context_flags": 1,
+        "exact_duplicates": 0,
+        "matched_cases": 4,
+        "independent_human_scores": null
+      },
+      "article21_enhanced": {
+        "cases": 6,
+        "words": 916,
+        "execution_failures": 0,
+        "draft_main_hits": 6,
+        "draft_unit_hits": 17,
+        "draft_unit_denominator": 30,
+        "source_exact_sentences": 41,
+        "output_sentences": 41,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 4,
+        "independent_human_scores": null
+      }
+    },
+    "technical": {
+      "legacy": {
+        "cases": 6,
+        "words": 1914,
+        "execution_failures": 0,
+        "draft_main_hits": 0,
+        "draft_unit_hits": 0,
+        "draft_unit_denominator": 36,
+        "source_exact_sentences": 43,
+        "output_sentences": 72,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 6,
+        "independent_human_scores": null
+      },
+      "guide_lsa": {
+        "cases": 6,
+        "words": 947,
+        "execution_failures": 0,
+        "draft_main_hits": 0,
+        "draft_unit_hits": 2,
+        "draft_unit_denominator": 36,
+        "source_exact_sentences": 43,
+        "output_sentences": 44,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 1,
+        "independent_human_scores": null
+      },
+      "article21_light": {
+        "cases": 6,
+        "words": 444,
+        "execution_failures": 0,
+        "draft_main_hits": 0,
+        "draft_unit_hits": 0,
+        "draft_unit_denominator": 36,
+        "source_exact_sentences": 44,
+        "output_sentences": 44,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 0,
+        "independent_human_scores": null
+      },
+      "article21_enhanced": {
+        "cases": 6,
+        "words": 453,
+        "execution_failures": 0,
+        "draft_main_hits": 0,
+        "draft_unit_hits": 0,
+        "draft_unit_denominator": 36,
+        "source_exact_sentences": 44,
+        "output_sentences": 44,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 0,
+        "independent_human_scores": null
+      }
+    }
+  },
+  "per_depth": {
+    "very_brief": {
+      "legacy": {
+        "cases": 8,
+        "words": 381,
+        "execution_failures": 0,
+        "draft_main_hits": 0,
+        "draft_unit_hits": 1,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 10,
+        "output_sentences": 15,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 8,
+        "independent_human_scores": null
+      },
+      "guide_lsa": {
+        "cases": 8,
+        "words": 355,
+        "execution_failures": 0,
+        "draft_main_hits": 0,
+        "draft_unit_hits": 1,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 16,
+        "output_sentences": 16,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 3,
+        "independent_human_scores": null
+      },
+      "article21_light": {
+        "cases": 8,
+        "words": 311,
+        "execution_failures": 0,
+        "draft_main_hits": 3,
+        "draft_unit_hits": 5,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 15,
+        "output_sentences": 15,
+        "draft_context_flags": 2,
+        "exact_duplicates": 0,
+        "matched_cases": 4,
+        "independent_human_scores": null
+      },
+      "article21_enhanced": {
+        "cases": 8,
+        "words": 325,
+        "execution_failures": 0,
+        "draft_main_hits": 3,
+        "draft_unit_hits": 4,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 15,
+        "output_sentences": 15,
+        "draft_context_flags": 1,
+        "exact_duplicates": 0,
+        "matched_cases": 4,
+        "independent_human_scores": null
+      }
+    },
+    "brief": {
+      "legacy": {
+        "cases": 8,
+        "words": 808,
+        "execution_failures": 0,
+        "draft_main_hits": 1,
+        "draft_unit_hits": 3,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 19,
+        "output_sentences": 31,
+        "draft_context_flags": 2,
+        "exact_duplicates": 0,
+        "matched_cases": 8,
+        "independent_human_scores": null
+      },
+      "guide_lsa": {
+        "cases": 8,
+        "words": 586,
+        "execution_failures": 0,
+        "draft_main_hits": 1,
+        "draft_unit_hits": 4,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 23,
+        "output_sentences": 23,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 2,
+        "independent_human_scores": null
+      },
+      "article21_light": {
+        "cases": 8,
+        "words": 436,
+        "execution_failures": 0,
+        "draft_main_hits": 3,
+        "draft_unit_hits": 5,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 24,
+        "output_sentences": 24,
+        "draft_context_flags": 1,
+        "exact_duplicates": 0,
+        "matched_cases": 1,
+        "independent_human_scores": null
+      },
+      "article21_enhanced": {
+        "cases": 8,
+        "words": 433,
+        "execution_failures": 0,
+        "draft_main_hits": 3,
+        "draft_unit_hits": 4,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 24,
+        "output_sentences": 24,
+        "draft_context_flags": 1,
+        "exact_duplicates": 0,
+        "matched_cases": 1,
+        "independent_human_scores": null
+      }
+    },
+    "short": {
+      "legacy": {
+        "cases": 8,
+        "words": 1260,
+        "execution_failures": 0,
+        "draft_main_hits": 2,
+        "draft_unit_hits": 6,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 32,
+        "output_sentences": 47,
+        "draft_context_flags": 2,
+        "exact_duplicates": 0,
+        "matched_cases": 8,
+        "independent_human_scores": null
+      },
+      "guide_lsa": {
+        "cases": 8,
+        "words": 952,
+        "execution_failures": 0,
+        "draft_main_hits": 2,
+        "draft_unit_hits": 7,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 39,
+        "output_sentences": 39,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 1,
+        "independent_human_scores": null
+      },
+      "article21_light": {
+        "cases": 8,
+        "words": 694,
+        "execution_failures": 0,
+        "draft_main_hits": 3,
+        "draft_unit_hits": 6,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 40,
+        "output_sentences": 40,
+        "draft_context_flags": 1,
+        "exact_duplicates": 0,
+        "matched_cases": 0,
+        "independent_human_scores": null
+      },
+      "article21_enhanced": {
+        "cases": 8,
+        "words": 676,
+        "execution_failures": 0,
+        "draft_main_hits": 3,
+        "draft_unit_hits": 6,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 40,
+        "output_sentences": 40,
+        "draft_context_flags": 1,
+        "exact_duplicates": 0,
+        "matched_cases": 0,
+        "independent_human_scores": null
+      }
+    },
+    "balanced": {
+      "legacy": {
+        "cases": 8,
+        "words": 2189,
+        "execution_failures": 0,
+        "draft_main_hits": 2,
+        "draft_unit_hits": 7,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 58,
+        "output_sentences": 78,
+        "draft_context_flags": 1,
+        "exact_duplicates": 0,
+        "matched_cases": 8,
+        "independent_human_scores": null
+      },
+      "guide_lsa": {
+        "cases": 8,
+        "words": 1433,
+        "execution_failures": 0,
+        "draft_main_hits": 2,
+        "draft_unit_hits": 9,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 62,
+        "output_sentences": 62,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 1,
+        "independent_human_scores": null
+      },
+      "article21_light": {
+        "cases": 8,
+        "words": 1108,
+        "execution_failures": 0,
+        "draft_main_hits": 3,
+        "draft_unit_hits": 8,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 64,
+        "output_sentences": 64,
+        "draft_context_flags": 1,
+        "exact_duplicates": 0,
+        "matched_cases": 1,
+        "independent_human_scores": null
+      },
+      "article21_enhanced": {
+        "cases": 8,
+        "words": 1125,
+        "execution_failures": 0,
+        "draft_main_hits": 3,
+        "draft_unit_hits": 8,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 64,
+        "output_sentences": 64,
+        "draft_context_flags": 1,
+        "exact_duplicates": 0,
+        "matched_cases": 1,
+        "independent_human_scores": null
+      }
+    },
+    "detailed": {
+      "legacy": {
+        "cases": 8,
+        "words": 3563,
+        "execution_failures": 0,
+        "draft_main_hits": 5,
+        "draft_unit_hits": 17,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 108,
+        "output_sentences": 128,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 8,
+        "independent_human_scores": null
+      },
+      "guide_lsa": {
+        "cases": 8,
+        "words": 1949,
+        "execution_failures": 0,
+        "draft_main_hits": 2,
+        "draft_unit_hits": 13,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 85,
+        "output_sentences": 85,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 1,
+        "independent_human_scores": null
+      },
+      "article21_light": {
+        "cases": 8,
+        "words": 1586,
+        "execution_failures": 0,
+        "draft_main_hits": 3,
+        "draft_unit_hits": 11,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 88,
+        "output_sentences": 88,
+        "draft_context_flags": 1,
+        "exact_duplicates": 0,
+        "matched_cases": 1,
+        "independent_human_scores": null
+      },
+      "article21_enhanced": {
+        "cases": 8,
+        "words": 1573,
+        "execution_failures": 0,
+        "draft_main_hits": 3,
+        "draft_unit_hits": 11,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 88,
+        "output_sentences": 88,
+        "draft_context_flags": 1,
+        "exact_duplicates": 0,
+        "matched_cases": 1,
+        "independent_human_scores": null
+      }
+    },
+    "comprehensive": {
+      "legacy": {
+        "cases": 8,
+        "words": 5397,
+        "execution_failures": 0,
+        "draft_main_hits": 6,
+        "draft_unit_hits": 22,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 175,
+        "output_sentences": 205,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 8,
+        "independent_human_scores": null
+      },
+      "guide_lsa": {
+        "cases": 8,
+        "words": 2752,
+        "execution_failures": 0,
+        "draft_main_hits": 3,
+        "draft_unit_hits": 17,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 115,
+        "output_sentences": 116,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 2,
+        "independent_human_scores": null
+      },
+      "article21_light": {
+        "cases": 8,
+        "words": 2165,
+        "execution_failures": 0,
+        "draft_main_hits": 3,
+        "draft_unit_hits": 14,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 117,
+        "output_sentences": 117,
+        "draft_context_flags": 1,
+        "exact_duplicates": 0,
+        "matched_cases": 2,
+        "independent_human_scores": null
+      },
+      "article21_enhanced": {
+        "cases": 8,
+        "words": 2215,
+        "execution_failures": 0,
+        "draft_main_hits": 3,
+        "draft_unit_hits": 13,
+        "draft_unit_denominator": 42,
+        "source_exact_sentences": 117,
+        "output_sentences": 117,
+        "draft_context_flags": 1,
+        "exact_duplicates": 0,
+        "matched_cases": 2,
+        "independent_human_scores": null
+      }
+    }
+  },
+  "matched_pairs": {
+    "guide_lsa": {
+      "candidate": {
+        "cases": 10,
+        "words": 1501,
+        "execution_failures": 0,
+        "draft_main_hits": 6,
+        "draft_unit_hits": 23,
+        "draft_unit_denominator": 52,
+        "source_exact_sentences": 56,
+        "output_sentences": 56,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 10,
+        "independent_human_scores": null
+      },
+      "paired_legacy": {
+        "cases": 10,
+        "words": 1515,
+        "execution_failures": 0,
+        "draft_main_hits": 4,
+        "draft_unit_hits": 13,
+        "draft_unit_denominator": 52,
+        "source_exact_sentences": 43,
+        "output_sentences": 64,
+        "draft_context_flags": 1,
+        "exact_duplicates": 0,
+        "matched_cases": 10,
+        "independent_human_scores": null
+      },
+      "case_ids": [
+        "IV-BUSINESS:very_brief:general",
+        "IV-BUSINESS:comprehensive:general",
+        "IV-NEWS:brief:general",
+        "IV-NEWS:short:general",
+        "IV-RESEARCH:very_brief:general",
+        "IV-SCIENCE:brief:general",
+        "IV-SCIENCE:balanced:general",
+        "IV-SCIENCE:detailed:general",
+        "IV-SCIENCE:comprehensive:general",
+        "IV-TECHNICAL:very_brief:general"
+      ]
+    },
+    "article21_light": {
+      "candidate": {
+        "cases": 9,
+        "words": 1299,
+        "execution_failures": 0,
+        "draft_main_hits": 6,
+        "draft_unit_hits": 19,
+        "draft_unit_denominator": 45,
+        "source_exact_sentences": 56,
+        "output_sentences": 56,
+        "draft_context_flags": 1,
+        "exact_duplicates": 0,
+        "matched_cases": 9,
+        "independent_human_scores": null
+      },
+      "paired_legacy": {
+        "cases": 9,
+        "words": 1345,
+        "execution_failures": 0,
+        "draft_main_hits": 3,
+        "draft_unit_hits": 11,
+        "draft_unit_denominator": 45,
+        "source_exact_sentences": 42,
+        "output_sentences": 56,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 9,
+        "independent_human_scores": null
+      },
+      "case_ids": [
+        "IV-BUSINESS:comprehensive:general",
+        "IV-EDITORIAL:very_brief:general",
+        "IV-EDUCATION:very_brief:general",
+        "IV-NEWS:very_brief:general",
+        "IV-NEWS:brief:general",
+        "IV-SCIENCE:very_brief:general",
+        "IV-SCIENCE:balanced:general",
+        "IV-SCIENCE:detailed:general",
+        "IV-SCIENCE:comprehensive:general"
+      ]
+    },
+    "article21_enhanced": {
+      "candidate": {
+        "cases": 9,
+        "words": 1297,
+        "execution_failures": 0,
+        "draft_main_hits": 6,
+        "draft_unit_hits": 18,
+        "draft_unit_denominator": 45,
+        "source_exact_sentences": 56,
+        "output_sentences": 56,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 9,
+        "independent_human_scores": null
+      },
+      "paired_legacy": {
+        "cases": 9,
+        "words": 1335,
+        "execution_failures": 0,
+        "draft_main_hits": 3,
+        "draft_unit_hits": 12,
+        "draft_unit_denominator": 45,
+        "source_exact_sentences": 42,
+        "output_sentences": 56,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 9,
+        "independent_human_scores": null
+      },
+      "case_ids": [
+        "IV-BUSINESS:comprehensive:general",
+        "IV-EDITORIAL:very_brief:general",
+        "IV-FEATURE:very_brief:general",
+        "IV-NEWS:very_brief:general",
+        "IV-NEWS:brief:general",
+        "IV-SCIENCE:very_brief:general",
+        "IV-SCIENCE:balanced:general",
+        "IV-SCIENCE:detailed:general",
+        "IV-SCIENCE:comprehensive:general"
+      ]
+    }
+  },
+  "common_intersection": {
+    "case_ids": [
+      "IV-BUSINESS:comprehensive:general",
+      "IV-NEWS:brief:general",
+      "IV-SCIENCE:balanced:general",
+      "IV-SCIENCE:comprehensive:general",
+      "IV-SCIENCE:detailed:general"
+    ],
+    "systems": {
+      "legacy": {
+        "cases": 5,
+        "words": 1154,
+        "execution_failures": 0,
+        "draft_main_hits": 3,
+        "draft_unit_hits": 11,
+        "draft_unit_denominator": 25,
+        "source_exact_sentences": 36,
+        "output_sentences": 49,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 5,
+        "independent_human_scores": null
+      },
+      "guide_lsa": {
+        "cases": 5,
+        "words": 1143,
+        "execution_failures": 0,
+        "draft_main_hits": 5,
+        "draft_unit_hits": 20,
+        "draft_unit_denominator": 25,
+        "source_exact_sentences": 42,
+        "output_sentences": 42,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 5,
+        "independent_human_scores": null
+      },
+      "article21_light": {
+        "cases": 5,
+        "words": 1118,
+        "execution_failures": 0,
+        "draft_main_hits": 4,
+        "draft_unit_hits": 16,
+        "draft_unit_denominator": 25,
+        "source_exact_sentences": 49,
+        "output_sentences": 49,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 5,
+        "independent_human_scores": null
+      },
+      "article21_enhanced": {
+        "cases": 5,
+        "words": 1118,
+        "execution_failures": 0,
+        "draft_main_hits": 4,
+        "draft_unit_hits": 16,
+        "draft_unit_denominator": 25,
+        "source_exact_sentences": 49,
+        "output_sentences": 49,
+        "draft_context_flags": 0,
+        "exact_duplicates": 0,
+        "matched_cases": 5,
+        "independent_human_scores": null
+      }
+    }
+  },
+  "matching_sensitivity": {
+    "0.05": {
+      "legacy": 48,
+      "guide_lsa": 8,
+      "article21_light": 8,
+      "article21_enhanced": 8
+    },
+    "0.1": {
+      "legacy": 48,
+      "guide_lsa": 10,
+      "article21_light": 9,
+      "article21_enhanced": 9
+    },
+    "0.2": {
+      "legacy": 48,
+      "guide_lsa": 17,
+      "article21_light": 10,
+      "article21_enhanced": 13
+    }
+  },
+  "generation_trials": 1220,
+  "trial_failures": 0,
+  "unmatched_general_cases": [
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-BUSINESS:brief:general",
+      "target_words": 108,
+      "absolute_word_difference": 48,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-BUSINESS:short:general",
+      "target_words": 152,
+      "absolute_word_difference": 30,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-BUSINESS:balanced:general",
+      "target_words": 253,
+      "absolute_word_difference": 79,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-BUSINESS:detailed:general",
+      "target_words": 334,
+      "absolute_word_difference": 87,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-EDITORIAL:very_brief:general",
+      "target_words": 43,
+      "absolute_word_difference": 10,
+      "selected_trial": 2
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-EDITORIAL:brief:general",
+      "target_words": 98,
+      "absolute_word_difference": 18,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-EDITORIAL:short:general",
+      "target_words": 163,
+      "absolute_word_difference": 38,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-EDITORIAL:balanced:general",
+      "target_words": 289,
+      "absolute_word_difference": 110,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-EDITORIAL:detailed:general",
+      "target_words": 562,
+      "absolute_word_difference": 329,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-EDITORIAL:comprehensive:general",
+      "target_words": 902,
+      "absolute_word_difference": 502,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-EDUCATION:very_brief:general",
+      "target_words": 56,
+      "absolute_word_difference": 9,
+      "selected_trial": 2
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-EDUCATION:brief:general",
+      "target_words": 113,
+      "absolute_word_difference": 44,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-EDUCATION:short:general",
+      "target_words": 180,
+      "absolute_word_difference": 72,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-EDUCATION:balanced:general",
+      "target_words": 300,
+      "absolute_word_difference": 142,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-EDUCATION:detailed:general",
+      "target_words": 520,
+      "absolute_word_difference": 309,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-EDUCATION:comprehensive:general",
+      "target_words": 836,
+      "absolute_word_difference": 542,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-FEATURE:very_brief:general",
+      "target_words": 46,
+      "absolute_word_difference": 7,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-FEATURE:brief:general",
+      "target_words": 92,
+      "absolute_word_difference": 39,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-FEATURE:short:general",
+      "target_words": 151,
+      "absolute_word_difference": 53,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-FEATURE:balanced:general",
+      "target_words": 272,
+      "absolute_word_difference": 117,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-FEATURE:detailed:general",
+      "target_words": 450,
+      "absolute_word_difference": 223,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-FEATURE:comprehensive:general",
+      "target_words": 706,
+      "absolute_word_difference": 403,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-NEWS:very_brief:general",
+      "target_words": 43,
+      "absolute_word_difference": 21,
+      "selected_trial": 1
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-NEWS:balanced:general",
+      "target_words": 268,
+      "absolute_word_difference": 56,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-NEWS:detailed:general",
+      "target_words": 424,
+      "absolute_word_difference": 148,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-NEWS:comprehensive:general",
+      "target_words": 477,
+      "absolute_word_difference": 68,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-RESEARCH:brief:general",
+      "target_words": 150,
+      "absolute_word_difference": 47,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-RESEARCH:short:general",
+      "target_words": 201,
+      "absolute_word_difference": 53,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-RESEARCH:balanced:general",
+      "target_words": 317,
+      "absolute_word_difference": 102,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-RESEARCH:detailed:general",
+      "target_words": 561,
+      "absolute_word_difference": 271,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-RESEARCH:comprehensive:general",
+      "target_words": 979,
+      "absolute_word_difference": 610,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-SCIENCE:very_brief:general",
+      "target_words": 49,
+      "absolute_word_difference": 17,
+      "selected_trial": 2
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-SCIENCE:short:general",
+      "target_words": 121,
+      "absolute_word_difference": 19,
+      "selected_trial": 4
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-TECHNICAL:brief:general",
+      "target_words": 87,
+      "absolute_word_difference": 16,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-TECHNICAL:short:general",
+      "target_words": 156,
+      "absolute_word_difference": 41,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-TECHNICAL:balanced:general",
+      "target_words": 313,
+      "absolute_word_difference": 135,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-TECHNICAL:detailed:general",
+      "target_words": 473,
+      "absolute_word_difference": 242,
+      "selected_trial": 0
+    },
+    {
+      "system": "guide_lsa",
+      "case_id": "IV-TECHNICAL:comprehensive:general",
+      "target_words": 838,
+      "absolute_word_difference": 534,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-BUSINESS:very_brief:general",
+      "target_words": 55,
+      "absolute_word_difference": 15,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-BUSINESS:brief:general",
+      "target_words": 108,
+      "absolute_word_difference": 52,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-BUSINESS:short:general",
+      "target_words": 152,
+      "absolute_word_difference": 34,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-BUSINESS:balanced:general",
+      "target_words": 253,
+      "absolute_word_difference": 77,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-BUSINESS:detailed:general",
+      "target_words": 334,
+      "absolute_word_difference": 77,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-EDITORIAL:brief:general",
+      "target_words": 98,
+      "absolute_word_difference": 45,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-EDITORIAL:short:general",
+      "target_words": 163,
+      "absolute_word_difference": 53,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-EDITORIAL:balanced:general",
+      "target_words": 289,
+      "absolute_word_difference": 117,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-EDITORIAL:detailed:general",
+      "target_words": 562,
+      "absolute_word_difference": 333,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-EDITORIAL:comprehensive:general",
+      "target_words": 902,
+      "absolute_word_difference": 583,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-EDUCATION:brief:general",
+      "target_words": 113,
+      "absolute_word_difference": 52,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-EDUCATION:short:general",
+      "target_words": 180,
+      "absolute_word_difference": 101,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-EDUCATION:balanced:general",
+      "target_words": 300,
+      "absolute_word_difference": 182,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-EDUCATION:detailed:general",
+      "target_words": 520,
+      "absolute_word_difference": 353,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-EDUCATION:comprehensive:general",
+      "target_words": 836,
+      "absolute_word_difference": 605,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-FEATURE:very_brief:general",
+      "target_words": 46,
+      "absolute_word_difference": 12,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-FEATURE:brief:general",
+      "target_words": 92,
+      "absolute_word_difference": 31,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-FEATURE:short:general",
+      "target_words": 151,
+      "absolute_word_difference": 45,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-FEATURE:balanced:general",
+      "target_words": 272,
+      "absolute_word_difference": 119,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-FEATURE:detailed:general",
+      "target_words": 450,
+      "absolute_word_difference": 230,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-FEATURE:comprehensive:general",
+      "target_words": 706,
+      "absolute_word_difference": 427,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-NEWS:short:general",
+      "target_words": 136,
+      "absolute_word_difference": 33,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-NEWS:balanced:general",
+      "target_words": 268,
+      "absolute_word_difference": 96,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-NEWS:detailed:general",
+      "target_words": 424,
+      "absolute_word_difference": 179,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-NEWS:comprehensive:general",
+      "target_words": 477,
+      "absolute_word_difference": 116,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-RESEARCH:very_brief:general",
+      "target_words": 42,
+      "absolute_word_difference": 6,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-RESEARCH:brief:general",
+      "target_words": 150,
+      "absolute_word_difference": 112,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-RESEARCH:short:general",
+      "target_words": 201,
+      "absolute_word_difference": 159,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-RESEARCH:balanced:general",
+      "target_words": 317,
+      "absolute_word_difference": 253,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-RESEARCH:detailed:general",
+      "target_words": 561,
+      "absolute_word_difference": 451,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-RESEARCH:comprehensive:general",
+      "target_words": 979,
+      "absolute_word_difference": 786,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-SCIENCE:brief:general",
+      "target_words": 81,
+      "absolute_word_difference": 17,
+      "selected_trial": 1
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-SCIENCE:short:general",
+      "target_words": 121,
+      "absolute_word_difference": 31,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-TECHNICAL:very_brief:general",
+      "target_words": 47,
+      "absolute_word_difference": 27,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-TECHNICAL:brief:general",
+      "target_words": 87,
+      "absolute_word_difference": 63,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-TECHNICAL:short:general",
+      "target_words": 156,
+      "absolute_word_difference": 110,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-TECHNICAL:balanced:general",
+      "target_words": 313,
+      "absolute_word_difference": 240,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-TECHNICAL:detailed:general",
+      "target_words": 473,
+      "absolute_word_difference": 361,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-TECHNICAL:comprehensive:general",
+      "target_words": 838,
+      "absolute_word_difference": 669,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-BUSINESS:very_brief:general",
+      "target_words": 55,
+      "absolute_word_difference": 15,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-BUSINESS:brief:general",
+      "target_words": 108,
+      "absolute_word_difference": 50,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-BUSINESS:short:general",
+      "target_words": 152,
+      "absolute_word_difference": 65,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-BUSINESS:balanced:general",
+      "target_words": 253,
+      "absolute_word_difference": 74,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-BUSINESS:detailed:general",
+      "target_words": 334,
+      "absolute_word_difference": 77,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDITORIAL:brief:general",
+      "target_words": 98,
+      "absolute_word_difference": 45,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDITORIAL:short:general",
+      "target_words": 163,
+      "absolute_word_difference": 53,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDITORIAL:balanced:general",
+      "target_words": 289,
+      "absolute_word_difference": 116,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDITORIAL:detailed:general",
+      "target_words": 562,
+      "absolute_word_difference": 330,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDITORIAL:comprehensive:general",
+      "target_words": 902,
+      "absolute_word_difference": 567,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDUCATION:very_brief:general",
+      "target_words": 56,
+      "absolute_word_difference": 6,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDUCATION:brief:general",
+      "target_words": 113,
+      "absolute_word_difference": 54,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDUCATION:short:general",
+      "target_words": 180,
+      "absolute_word_difference": 102,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDUCATION:balanced:general",
+      "target_words": 300,
+      "absolute_word_difference": 193,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDUCATION:detailed:general",
+      "target_words": 520,
+      "absolute_word_difference": 369,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDUCATION:comprehensive:general",
+      "target_words": 836,
+      "absolute_word_difference": 617,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-FEATURE:brief:general",
+      "target_words": 92,
+      "absolute_word_difference": 38,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-FEATURE:short:general",
+      "target_words": 151,
+      "absolute_word_difference": 62,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-FEATURE:balanced:general",
+      "target_words": 272,
+      "absolute_word_difference": 107,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-FEATURE:detailed:general",
+      "target_words": 450,
+      "absolute_word_difference": 237,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-FEATURE:comprehensive:general",
+      "target_words": 706,
+      "absolute_word_difference": 414,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-NEWS:short:general",
+      "target_words": 136,
+      "absolute_word_difference": 19,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-NEWS:balanced:general",
+      "target_words": 268,
+      "absolute_word_difference": 99,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-NEWS:detailed:general",
+      "target_words": 424,
+      "absolute_word_difference": 186,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-NEWS:comprehensive:general",
+      "target_words": 477,
+      "absolute_word_difference": 115,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-RESEARCH:very_brief:general",
+      "target_words": 42,
+      "absolute_word_difference": 6,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-RESEARCH:brief:general",
+      "target_words": 150,
+      "absolute_word_difference": 112,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-RESEARCH:short:general",
+      "target_words": 201,
+      "absolute_word_difference": 151,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-RESEARCH:balanced:general",
+      "target_words": 317,
+      "absolute_word_difference": 239,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-RESEARCH:detailed:general",
+      "target_words": 561,
+      "absolute_word_difference": 431,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-RESEARCH:comprehensive:general",
+      "target_words": 979,
+      "absolute_word_difference": 756,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-SCIENCE:brief:general",
+      "target_words": 81,
+      "absolute_word_difference": 16,
+      "selected_trial": 1
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-SCIENCE:short:general",
+      "target_words": 121,
+      "absolute_word_difference": 31,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-TECHNICAL:very_brief:general",
+      "target_words": 47,
+      "absolute_word_difference": 27,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-TECHNICAL:brief:general",
+      "target_words": 87,
+      "absolute_word_difference": 60,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-TECHNICAL:short:general",
+      "target_words": 156,
+      "absolute_word_difference": 101,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-TECHNICAL:balanced:general",
+      "target_words": 313,
+      "absolute_word_difference": 239,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-TECHNICAL:detailed:general",
+      "target_words": 473,
+      "absolute_word_difference": 367,
+      "selected_trial": 0
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-TECHNICAL:comprehensive:general",
+      "target_words": 838,
+      "absolute_word_difference": 667,
+      "selected_trial": 0
+    }
+  ],
+  "freeze_verification": {
+    "protected_files": 191,
+    "evaluation_relevant_changes": [],
+    "concurrent_unrelated_ui_changes_preserved": [
+      "app/public/analytics.php",
+      "app/public/assets/js/analytics.js",
+      "app/public/assets/js/theme-toggle.js",
+      "app/public/partials/site-nav.php"
+    ],
+    "protocol_unchanged": true
+  },
+  "limitations": [
+    "Eight convenience-sampled articles, one per genre; no category replication.",
+    "Draft unit hits require entire source evidence and are NOT independent accuracy or semantic judgments.",
+    "Repeated depths and outputs are clustered within articles; no independent-review statistical test exists.",
+    "Guide LSA ignores Focus. Complete-output length matching cannot always succeed."
+  ]
+}

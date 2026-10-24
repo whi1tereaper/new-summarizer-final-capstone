@@ -1,0 +1,36 @@
+Data Gathering Procedure.................... 30
+Data Analysis Technique..................... 32
+
+
+
+CHAPTER III................................. 35
+RESULTS AND DISCUSSION...................... 35
+
+   1. Problems  Encountered  in  the  Existing
+      System................................. 35
+
+   2. How  AccredX  Improves  File  Retrieval,
+      Security, and Efficiency in Accreditation
+      Processes.............................. 36
+      2.1 Improvement in File Retrieval...... 36
+      2.2 Improvement in Security............ 38
+      2.3 Improvement in Overall Efficiency for
+      Accreditation.......................... 39
+
+   3. Essential Features and Functionalities of
+      an  Effective  Record  Management  and
+      Archiving System....................... 40
+      3.1 Core Features Identified as Essential
+      ....................................... 41
+      3.2  Security  Features  Identified  as
+      Essential.............................. 44
+      3.3 User Experience Features Identified as
+      Essential.............................. 44
+
+   4. The Design and Development of AccredX:
+      Record Management and Archiving System
+      through the use of Agile Development Life
+      Cycle.................................. 45
+
+
+                                                        xi

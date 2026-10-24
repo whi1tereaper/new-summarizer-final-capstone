@@ -1,0 +1,40 @@
+{
+  "recorded_utc": "2026-10-23T01:51:14.815Z",
+  "isolated_fixture": true,
+  "checks": [
+    {
+      "name": "mobile registration contains required accessible fields",
+      "passed": true
+    },
+    {
+      "name": "mobile registration has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "all six existing summary depths remain",
+      "passed": true
+    },
+    {
+      "name": "exhausted counter and encouragement visible",
+      "passed": true
+    },
+    {
+      "name": "exhausted form cannot be submitted in browser",
+      "passed": true
+    },
+    {
+      "name": "desktop dark trial text differs from surface",
+      "passed": true
+    },
+    {
+      "name": "durable trial cookie issued without JavaScript",
+      "passed": true
+    },
+    {
+      "name": "exhaustion interface enforced without JavaScript",
+      "passed": true
+    }
+  ],
+  "passed": 8,
+  "failed": 0
+}

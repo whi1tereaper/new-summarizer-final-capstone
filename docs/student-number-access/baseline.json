@@ -1,0 +1,319 @@
+{
+    "recorded_utc": "2026-10-23T01:08:31+00:00",
+    "driver": "pgsql",
+    "read_only": true,
+    "columns": {
+        "users": [
+            {
+                "column_name": "id",
+                "data_type": "integer"
+            },
+            {
+                "column_name": "username",
+                "data_type": "character varying"
+            },
+            {
+                "column_name": "email",
+                "data_type": "character varying"
+            },
+            {
+                "column_name": "password_hash",
+                "data_type": "character varying"
+            },
+            {
+                "column_name": "role",
+                "data_type": "character varying"
+            },
+            {
+                "column_name": "active",
+                "data_type": "smallint"
+            },
+            {
+                "column_name": "terms_accepted",
+                "data_type": "smallint"
+            },
+            {
+                "column_name": "terms_accepted_at",
+                "data_type": "timestamp with time zone"
+            },
+            {
+                "column_name": "created_at",
+                "data_type": "timestamp with time zone"
+            }
+        ],
+        "guest_sessions": [
+            {
+                "column_name": "guest_token",
+                "data_type": "character varying"
+            },
+            {
+                "column_name": "created_at",
+                "data_type": "timestamp with time zone"
+            },
+            {
+                "column_name": "last_activity",
+                "data_type": "timestamp with time zone"
+            },
+            {
+                "column_name": "expires_at",
+                "data_type": "timestamp with time zone"
+            }
+        ],
+        "summaries": [
+            {
+                "column_name": "id",
+                "data_type": "integer"
+            },
+            {
+                "column_name": "user_id",
+                "data_type": "integer"
+            },
+            {
+                "column_name": "guest_token",
+                "data_type": "character varying"
+            },
+            {
+                "column_name": "share_token",
+                "data_type": "character varying"
+            },
+            {
+                "column_name": "article_title",
+                "data_type": "character varying"
+            },
+            {
+                "column_name": "author_name",
+                "data_type": "character varying"
+            },
+            {
+                "column_name": "input_type",
+                "data_type": "character varying"
+            },
+            {
+                "column_name": "original_text",
+                "data_type": "text"
+            },
+            {
+                "column_name": "generated_summary",
+                "data_type": "text"
+            },
+            {
+                "column_name": "summary_style",
+                "data_type": "character varying"
+            },
+            {
+                "column_name": "status",
+                "data_type": "character varying"
+            },
+            {
+                "column_name": "error_message",
+                "data_type": "text"
+            },
+            {
+                "column_name": "summary_length",
+                "data_type": "character varying"
+            },
+            {
+                "column_name": "nutshell_text",
+                "data_type": "text"
+            },
+            {
+                "column_name": "created_at",
+                "data_type": "timestamp with time zone"
+            }
+        ],
+        "summary_artifacts": [
+            {
+                "column_name": "id",
+                "data_type": "integer"
+            },
+            {
+                "column_name": "summary_id",
+                "data_type": "integer"
+            },
+            {
+                "column_name": "artifact_type",
+                "data_type": "character varying"
+            },
+            {
+                "column_name": "storage_path",
+                "data_type": "character varying"
+            },
+            {
+                "column_name": "created_at",
+                "data_type": "timestamp with time zone"
+            }
+        ],
+        "summary_jobs": [
+            {
+                "column_name": "id",
+                "data_type": "bigint"
+            },
+            {
+                "column_name": "job_id",
+                "data_type": "character varying"
+            },
+            {
+                "column_name": "user_id",
+                "data_type": "integer"
+            },
+            {
+                "column_name": "guest_token",
+                "data_type": "character varying"
+            },
+            {
+                "column_name": "state",
+                "data_type": "character varying"
+            },
+            {
+                "column_name": "payload",
+                "data_type": "text"
+            },
+            {
+                "column_name": "idempotency_key",
+                "data_type": "character varying"
+            },
+            {
+                "column_name": "result_id",
+                "data_type": "integer"
+            },
+            {
+                "column_name": "error_message",
+                "data_type": "text"
+            },
+            {
+                "column_name": "error_details",
+                "data_type": "text"
+            },
+            {
+                "column_name": "retry_count",
+                "data_type": "smallint"
+            },
+            {
+                "column_name": "worker_pid",
+                "data_type": "integer"
+            },
+            {
+                "column_name": "started_at",
+                "data_type": "timestamp with time zone"
+            },
+            {
+                "column_name": "completed_at",
+                "data_type": "timestamp with time zone"
+            },
+            {
+                "column_name": "created_at",
+                "data_type": "timestamp with time zone"
+            },
+            {
+                "column_name": "updated_at",
+                "data_type": "timestamp with time zone"
+            }
+        ],
+        "documents": [
+            {
+                "column_name": "id",
+                "data_type": "integer"
+            },
+            {
+                "column_name": "content",
+                "data_type": "text"
+            },
+            {
+                "column_name": "user_id",
+                "data_type": "integer"
+            },
+            {
+                "column_name": "guest_token",
+                "data_type": "character varying"
+            },
+            {
+                "column_name": "created_at",
+                "data_type": "timestamp with time zone"
+            }
+        ],
+        "document_summaries": [
+            {
+                "column_name": "id",
+                "data_type": "integer"
+            },
+            {
+                "column_name": "document_id",
+                "data_type": "integer"
+            },
+            {
+                "column_name": "profile",
+                "data_type": "character varying"
+            },
+            {
+                "column_name": "length",
+                "data_type": "character varying"
+            },
+            {
+                "column_name": "summary",
+                "data_type": "text"
+            },
+            {
+                "column_name": "word_count",
+                "data_type": "integer"
+            },
+            {
+                "column_name": "source_word_count",
+                "data_type": "integer"
+            },
+            {
+                "column_name": "compression_ratio",
+                "data_type": "numeric"
+            },
+            {
+                "column_name": "estimated_reading_time_seconds",
+                "data_type": "integer"
+            },
+            {
+                "column_name": "created_at",
+                "data_type": "timestamp with time zone"
+            }
+        ],
+        "student_applications": []
+    },
+    "account_counts_by_role": [],
+    "nlp_sha256": {
+        "python-engine/article_engine/baseline.py": "f046b1971dd741a6340149178ad03cc60853b24309cad1a876467c629019ad76",
+        "python-engine/article_engine/core.py": "fda4c8390eb35627dd4fbe07fbccd2faf199c14d1a54449dc7cdbd3ac4542db6",
+        "python-engine/article_engine/coverage.py": "902f8d40ea5a4736edeb868826cb2c1415f851c561d33c000358ee28f23f7a2d",
+        "python-engine/article_engine/coverage_parameters.json": "0b32db081e0c7366ad6f82e94faea7041726790fef07b85cd31736c01a8b18e9",
+        "python-engine/article_engine/detection_calibration.json": "86a210f3d4363ead584f1c72c69894bbde1145f900bfb1d371dc9e7acbb001ed",
+        "python-engine/article_engine/focus.py": "6f81fd9218e18bc9804448311a2832446c8702e1bee15691bdadf9494b04d667",
+        "python-engine/article_engine/preprocessing.py": "807a498ec33a53afe70e9ee8adafe6809b1a89cb3eef2a0918ef5e85896d4a71",
+        "python-engine/article_engine/ranking.py": "98503b913a6caaf909a0716778cffada466da1cd48d4ac51f1cdfeee9a518162",
+        "python-engine/article_engine/refinement_parameters.json": "9acfb2d2ce845f2290631c0bf530e01ed8fc47c2d418b4c62d8f5e0d7d12e195",
+        "python-engine/article_engine/selection.py": "893d348a8fe5d41d859b9a0a4a49a9fbaf618a375cfcc6462e0fc19fdd73b982",
+        "python-engine/article_engine/summarizer.py": "a282a416d85d6367a69e86302d5776f1909104b1ecc61812655f921453167012",
+        "python-engine/article_engine/validation.py": "003a0e3b75f76dcb5fa859ae74ecb196a1c60940ff8ccd6f4788a8278e28f531",
+        "python-engine/article_engine/__init__.py": "ddd4efaa2f07fef7f30571b74c7bede7aa6b9411767b69737f22e0a596ad00aa",
+        "python-engine/summarizer_core/chunking.py": "1f8cba2d404dfbafd1f67f5874afd3420cd237cb3c8686cbcfb76b2409bdda3b",
+        "python-engine/summarizer_core/cleaning.py": "73cd1fca65f30f08d5cbda82394b8f05746341c5110cfb230fe7dc859e806923",
+        "python-engine/summarizer_core/constants.py": "98dd99f24f5c65764cfcae5a465339fb385e2df122c0e6068e021d2ea174a9ac",
+        "python-engine/summarizer_core/document_analysis.py": "6874ef51460a4a15e7f350fa330fe2d06c0053ee7eb269841a551f730c1be4e7",
+        "python-engine/summarizer_core/embeddings.py": "e2c37dd540cbc8545a7564f52e71a3d6167ebac9cac9bd75e8fa8bfd5d0c0d51",
+        "python-engine/summarizer_core/extraction.py": "7ac7819144c7dc0f5410a7b76f92b1700806228497e929eae58b60e8d89b81c4",
+        "python-engine/summarizer_core/fact_ledger.py": "ff32df1d94f0777fc09c343e4f645913e3278e78724920a968bea9f56942b2e7",
+        "python-engine/summarizer_core/grammar_check.py": "46b253c52d1b1c304353b41f432f4ddb0e69bc41c0c5b9e0a1a90b5d5620d800",
+        "python-engine/summarizer_core/models.py": "57a5cefce0fb6422111e7ba4b23c02f136b8cc70b87ff6e5d129093f56de55cb",
+        "python-engine/summarizer_core/normalization.py": "a70efd2460dcb02239bcce3c78d7dc91fb726503cc8ec9942fc8c6ee00c3ca5e",
+        "python-engine/summarizer_core/nutshell.py": "2c6eba784021fe2f411f595624e11cd91bf2ebbeff5e6a19ce89088753a95494",
+        "python-engine/summarizer_core/pipeline.py": "94b6641ac5b230979ef04e734fcf40aa2f77cfb71b4b3021297858feb1053efb",
+        "python-engine/summarizer_core/profiles.py": "ea2d1066052a0570e6827ac9a30a22658e667655f66768b8d96352b66b5dbeaa",
+        "python-engine/summarizer_core/prompts.py": "f1ef9b50fc9d14c09131027d27230290c7d9615aeb9888ca711326f076aecb59",
+        "python-engine/summarizer_core/retrieval.py": "b3fdb2389680369a279e98ea17b399e4270c81bb89ba30361551232109e79fa9",
+        "python-engine/summarizer_core/retrieval_models.py": "6765d6080d82cd833629a5beddd9d630207e3b13a239707b28bc74dbefa43471",
+        "python-engine/summarizer_core/runtime.py": "163eac7d692e6fd9cef47fb046c1aee08dbce0e5edde0a1f52425494fc599ddd",
+        "python-engine/summarizer_core/scoring.py": "eac9c6ea9d3428704de7645fbf30c30711b2519db91de0903114d522154d87be",
+        "python-engine/summarizer_core/selection.py": "bf9db9b96f619eacdda31fe28f6b217ae16a386c77b8540d811be10e6c294f6f",
+        "python-engine/summarizer_core/simplification.py": "7af6b766fc7f29be506a65b943ced461b4a8a2e2820e58131cce19d262f2632a",
+        "python-engine/summarizer_core/structure.py": "64cd1bdb3c45b5826db11e0e64d1cbd359364d8e9ca29d3d0cacf9a4cb80960b",
+        "python-engine/summarizer_core/synthesis.py": "6d71d83b18444140fb71ff50e438b82d78ff070af8720f7fffe62e4584dfb1d1",
+        "python-engine/summarizer_core/text_utils.py": "426a2de1c32580aaf1f6a8269e00c83b4a5ffae9c55f68ce483d447349d0b48b",
+        "python-engine/summarizer_core/tokenization.py": "4d379b832dbaf5d706fe4bb34b2648b1092b2ef5c0773d6806e6876c5b07628f",
+        "python-engine/summarizer_core/__init__.py": "60b471e4d1ac7cd9d295a17ff8d0aec609ecb75c7e52afb7210d1b3912bdce74"
+    }
+}

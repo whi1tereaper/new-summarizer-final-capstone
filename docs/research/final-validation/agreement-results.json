@@ -1,0 +1,11 @@
+{
+  "status": "pending",
+  "enrolled_reviewers": 0,
+  "submitted_output_dimension_ratings": 0,
+  "submitted_sentence_dimension_ratings": 0,
+  "output_agreement": null,
+  "sentence_agreement": null,
+  "disagreements": [],
+  "independent_source_unit_adjudication": "pending; not inferred from output agreement",
+  "interpretation": "Agreement is not accuracy. No inference from blank/unpaired rows; few pairs may be unstable."
+}

@@ -3,6 +3,7 @@ namespace App\Src\Services;
 
 require_once __DIR__ . '/../Database.php';
 require_once __DIR__ . '/../Support/ProcessingError.php';
+require_once __DIR__ . '/CampusAccessService.php';
 
 use App\Src\Database;
 use PDO;
@@ -13,6 +14,8 @@ class SummaryJobService
     private const STALE_PROCESSING_SECONDS = 600;
 
     private PDO $db;
+
+    private function cutoffSql(int $seconds): string { return 'DATE_SUB(NOW(), INTERVAL '.$seconds.' SECOND)'; }
 
     public function __construct()
     {
@@ -52,7 +55,7 @@ class SummaryJobService
         ]);
         } catch (\PDOException $error) {
             // The unique key is authoritative if two identical submissions race.
-            if ($error->getCode() !== '23000') throw $error;
+            if (!in_array($error->getCode(), ['23000','23505'], true)) throw $error;
             $existing = $this->findByIdempotencyKey($idempotency);
             if ($existing !== null) return $existing;
             throw $error;
@@ -69,7 +72,7 @@ class SummaryJobService
     public function getJob(string $jobId): ?array
     {
         $statement = $this->db->prepare(
-            'SELECT *, (updated_at < DATE_SUB(NOW(), INTERVAL ' . self::STALE_PROCESSING_SECONDS . ' SECOND)) AS is_stale
+            'SELECT *, (updated_at < ' . $this->cutoffSql(self::STALE_PROCESSING_SECONDS) . ') AS is_stale
              FROM summary_jobs WHERE job_id = :job_id LIMIT 1'
         );
         $statement->execute(['job_id' => $jobId]);
@@ -83,7 +86,7 @@ class SummaryJobService
                 'UPDATE summary_jobs
                  SET state = :state, error_message = :error_message, error_details = :error_details, completed_at = NOW(), updated_at = NOW()
                  WHERE job_id = :job_id AND state = :processing_state AND updated_at = :observed_updated_at
-                   AND updated_at < DATE_SUB(NOW(), INTERVAL ' . self::STALE_PROCESSING_SECONDS . ' SECOND)'
+                   AND updated_at < ' . $this->cutoffSql(self::STALE_PROCESSING_SECONDS)
             );
             $recovery->execute([
                 'state' => 'timed_out',
@@ -94,6 +97,9 @@ class SummaryJobService
                 'observed_updated_at' => $row['updated_at'],
             ]);
             if ($recovery->rowCount() === 1) {
+                (new CampusAccessService($this->db))->releaseRequest(CampusAccessService::jobReference($jobId, (int)$row['worker_pid']));
+                \App\Src\Support\ProcessingDiagnostics::stage('job_timeout', self::class, 'getJob');
+                $failure->log();
                 $row['state'] = 'timed_out';
                 $row['error_message'] = $message;
                 $row['error_details'] = json_encode($failure->toArray());
@@ -157,13 +163,17 @@ class SummaryJobService
         $sql = "UPDATE summary_jobs SET state = :state, error_message = :error_message, error_details = :details, payload = :payload, completed_at = NOW(), updated_at = NOW() WHERE job_id = :job_id AND state IN ('queued','processing')";
         $params = ['state' => $finalState, 'error_message' => $failure->getMessage(), 'details' => json_encode($failure->toArray()), 'payload' => $retain ? $job['payload'] : '{}', 'job_id' => $jobId];
         if ($expectedPid !== null) { $sql .= ' AND worker_pid = :pid'; $params['pid'] = $expectedPid; }
-        $this->db->prepare($sql)->execute($params);
+        $statement = $this->db->prepare($sql);
+        $statement->execute($params);
+        if ($statement->rowCount() === 1) (new CampusAccessService($this->db))->releaseRequest(CampusAccessService::jobReference($jobId, (int)($job['worker_pid'] ?? 0)));
     }
 
     public function cancelJob(string $jobId): void
     {
+        $job = $this->getJob($jobId);
         $statement = $this->db->prepare("UPDATE summary_jobs SET state = :state, payload = '{}', completed_at = NOW(), updated_at = NOW() WHERE job_id = :job_id AND state IN ('queued','processing')");
         $statement->execute(['state' => 'cancelled', 'job_id' => $jobId]);
+        if ($statement->rowCount() === 1) (new CampusAccessService($this->db))->releaseRequest(CampusAccessService::jobReference($jobId, (int)($job['worker_pid'] ?? 0)));
     }
 
     public function startBackgroundWorker(string $jobId): bool
@@ -196,9 +206,10 @@ class SummaryJobService
         }
 
         $scriptPath = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'summary_worker.php';
+        $databaseDriver = (string)$this->db->getAttribute(PDO::ATTR_DRIVER_NAME);
 
         if (DIRECTORY_SEPARATOR === '\\') {
-            $command = $this->buildDetachedWindowsCommand($cliPhpBinary, $scriptPath, $jobId);
+            $command = $this->buildDetachedWindowsCommand($cliPhpBinary, $scriptPath, $jobId, $databaseDriver);
             $handle = @popen($command, 'r');
             if (!is_resource($handle)) {
                 $this->failJob($jobId, new ProcessingError('WORKER_UNAVAILABLE'));
@@ -208,7 +219,8 @@ class SummaryJobService
             return true;
         }
 
-        $command = escapeshellarg(PHP_BINARY) . ' ' . escapeshellarg($scriptPath) . ' ' . escapeshellarg($jobId) . ' >/dev/null 2>&1 &';
+        $command = escapeshellarg(PHP_BINARY) . ' ' . escapeshellarg($scriptPath) . ' ' . escapeshellarg($jobId)
+            . ' ' . escapeshellarg('--database-driver=' . $databaseDriver) . ' >/dev/null 2>&1 &';
         @exec($command);
         return true;
     }
@@ -245,13 +257,15 @@ class SummaryJobService
         $statement->execute(['queued' => 'queued', 'processing' => 'processing', 'job_id' => $jobId]);
     }
 
-    private function buildDetachedWindowsCommand(string $phpBinary, string $scriptPath, string $jobId): string
+    private function buildDetachedWindowsCommand(string $phpBinary, string $scriptPath, string $jobId, string $databaseDriver = 'mysql'): string
     {
+        if ($databaseDriver !== 'mysql') throw new \RuntimeException('Only the XAMPP MySQL worker is supported.');
         return sprintf(
-            'start "" /B "%s" "%s" "%s" > NUL 2>&1',
+            'start "" /B "%s" "%s" "%s" "--database-driver=%s" > NUL 2>&1',
             $phpBinary,
             $scriptPath,
-            $jobId
+            $jobId,
+            $databaseDriver
         );
     }
 
@@ -281,10 +295,12 @@ class SummaryJobService
         $stored = json_decode((string)($job['error_details'] ?? ''), true);
         if (is_array($stored)) return ProcessingError::fromWorker($stored);
         // Historical free-form messages are untrusted and cannot prove a specific cause.
-        return new ProcessingError(match ($job['state'] ?? '') {
+        $failure = new ProcessingError(match ($job['state'] ?? '') {
             'cancelled' => 'PROCESSING_CANCELLED', 'timed_out' => 'PROCESSING_TIMEOUT',
             default => 'PROCESSING_FAILED',
         }, null, substr(hash('sha256', (string)($job['job_id'] ?? '')), 0, 24));
+        $failure->log();
+        return $failure;
     }
 
     public function canRetry(array $job): bool
@@ -309,11 +325,11 @@ class SummaryJobService
     public function purgeExpiredPayloads(): void
     {
         $expired = new ProcessingError('REQUEST_EXPIRED');
-        $this->db->prepare("UPDATE summary_jobs SET state = 'cancelled', error_message = ?, error_details = ?, completed_at = NOW(), updated_at = NOW() WHERE state = 'queued' AND created_at < DATE_SUB(NOW(), INTERVAL 1 HOUR)")
+        $this->db->prepare("UPDATE summary_jobs SET state = 'cancelled', error_message = ?, error_details = ?, completed_at = NOW(), updated_at = NOW() WHERE state = 'queued' AND created_at < ".$this->cutoffSql(3600))
             ->execute([$expired->getMessage(), json_encode($expired->toArray())]);
-        $staleIds = $this->db->query("SELECT job_id FROM summary_jobs WHERE state = 'processing' AND updated_at < DATE_SUB(NOW(), INTERVAL " . self::STALE_PROCESSING_SECONDS . " SECOND)")->fetchAll(PDO::FETCH_COLUMN);
+        $staleIds = $this->db->query("SELECT job_id FROM summary_jobs WHERE state = 'processing' AND updated_at < ".$this->cutoffSql(self::STALE_PROCESSING_SECONDS))->fetchAll(PDO::FETCH_COLUMN);
         foreach ($staleIds as $staleId) $this->getJob($staleId);
-        $rows = $this->db->query("SELECT payload FROM summary_jobs WHERE state IN ('completed','failed','timed_out','cancelled') AND payload <> '{}' AND created_at < DATE_SUB(NOW(), INTERVAL 1 HOUR)")->fetchAll(PDO::FETCH_ASSOC);
+        $rows = $this->db->query("SELECT payload FROM summary_jobs WHERE state IN ('completed','failed','timed_out','cancelled') AND payload <> '{}' AND created_at < ".$this->cutoffSql(3600))->fetchAll(PDO::FETCH_ASSOC);
         require_once __DIR__ . '/../Support/RuntimePaths.php';
         $uploadRoot = realpath(\App\Src\Support\RuntimePaths::uploadsDirectory());
         foreach ($rows as $row) {
@@ -324,6 +340,6 @@ class SummaryJobService
                 @unlink($path);
             }
         }
-        $this->db->exec("UPDATE summary_jobs SET payload = '{}', updated_at = updated_at WHERE state IN ('completed','failed','timed_out','cancelled') AND payload <> '{}' AND created_at < DATE_SUB(NOW(), INTERVAL 1 HOUR)");
+        $this->db->exec("UPDATE summary_jobs SET payload = '{}', updated_at = updated_at WHERE state IN ('completed','failed','timed_out','cancelled') AND payload <> '{}' AND created_at < ".$this->cutoffSql(3600));
     }
 }

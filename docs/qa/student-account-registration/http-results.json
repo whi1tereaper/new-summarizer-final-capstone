@@ -1,0 +1,318 @@
+[
+  {
+    "name": "HTTP runs PHP 8.3 Apache with production-denied MySQL credentials",
+    "passed": true
+  },
+  {
+    "name": "registration has a noneditable PEN prefix and suffix field",
+    "passed": true
+  },
+  {
+    "name": "registration has no student photo document OTP or email-verification fields",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 1 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 2 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 3 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 4 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 5 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 6 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 7 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 8 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 9 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 10 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 11 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 12 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 13 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 14 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 15 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 16 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 17 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 18 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 19 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 20 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 21 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 22 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 23 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 24 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 25 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 26 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 27 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 28 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 29 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 30 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 31 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 32 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 33 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 34 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 35 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 36 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 37 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "initial approved ID 38 authenticates and has continued HTTP access",
+    "passed": true
+  },
+  {
+    "name": "student Profile reports approved without a second identity form",
+    "passed": true
+  },
+  {
+    "name": "obsolete student GET redirects to Profile and POST is retired",
+    "passed": true
+  },
+  {
+    "name": "obsolete Verification link is absent from active navigation",
+    "passed": true
+  },
+  {
+    "name": "anonymous registry GET and POST are denied",
+    "passed": true
+  },
+  {
+    "name": "ordinary approved student cannot manage Student IDs",
+    "passed": true
+  },
+  {
+    "name": "administrator password does not bypass existing second factor",
+    "passed": true
+  },
+  {
+    "name": "normal administrator second-factor authentication succeeds",
+    "passed": true
+  },
+  {
+    "name": "Student ID Management differentiates all seven database statistics",
+    "passed": true
+  },
+  {
+    "name": "manual student approval endpoint cannot mutate accounts",
+    "passed": true
+  },
+  {
+    "name": "management imports require valid CSRF",
+    "passed": true
+  },
+  {
+    "name": "single-ID preview does not insert an approved record",
+    "passed": true
+  },
+  {
+    "name": "preview requires explicit import confirmation",
+    "passed": true
+  },
+  {
+    "name": "confirmed individual insertion enables a real registry record",
+    "passed": true
+  },
+  {
+    "name": "suffix signup approves immediately then redirects to normal sign-in",
+    "passed": true
+  },
+  {
+    "name": "newly registered student receives continued access after password sign-in",
+    "passed": true
+  },
+  {
+    "name": "claimed ID cannot create a second account",
+    "passed": true
+  },
+  {
+    "name": "unlisted negative ID 1 rejects by HTTP without creating an account",
+    "passed": true
+  },
+  {
+    "name": "unlisted negative ID 2 rejects by HTTP without creating an account",
+    "passed": true
+  },
+  {
+    "name": "unlisted negative ID 3 rejects by HTTP without creating an account",
+    "passed": true
+  },
+  {
+    "name": "unlisted negative ID 4 rejects by HTTP without creating an account",
+    "passed": true
+  },
+  {
+    "name": "PEN prefix alone cannot register",
+    "passed": true
+  },
+  {
+    "name": "registration CSRF remains enforced",
+    "passed": true
+  },
+  {
+    "name": "actual CSV multipart upload produces a validated preview",
+    "passed": true
+  },
+  {
+    "name": "CSV confirmation preserves complete string IDs",
+    "passed": true
+  },
+  {
+    "name": "TXT import reports valid duplicate and rejected rows",
+    "passed": true
+  },
+  {
+    "name": "executable extension is rejected safely",
+    "passed": true
+  },
+  {
+    "name": "PHP disguised as TXT is rejected safely",
+    "passed": true
+  },
+  {
+    "name": "binary contents is rejected safely",
+    "passed": true
+  },
+  {
+    "name": "oversized file is rejected safely",
+    "passed": true
+  },
+  {
+    "name": "broken CSV quotes is rejected safely",
+    "passed": true
+  },
+  {
+    "name": "private exact search shows actual registered account status",
+    "passed": true
+  },
+  {
+    "name": "active filter and pagination render",
+    "passed": true
+  },
+  {
+    "name": "disputed historical claims are displayed as restricted rather than unclaimed",
+    "passed": true
+  },
+  {
+    "name": "administrator revocation blocks an existing student session immediately",
+    "passed": true
+  },
+  {
+    "name": "administrator reauthorization restores registry-only access without a second form",
+    "passed": true
+  },
+  {
+    "name": "working administrator reconciliation control preserves normal accounts",
+    "passed": true
+  },
+  {
+    "name": "old user still logs in but has no unearned student privileges",
+    "passed": true
+  },
+  {
+    "name": "registration rate limit remains enforced",
+    "passed": true
+  }
+]

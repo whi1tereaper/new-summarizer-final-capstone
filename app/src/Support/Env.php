@@ -48,7 +48,7 @@ final class Env
             self::$values[$name] = $cleanedValue;
 
             // Process-level values are authoritative in production. Do not
-            // overwrite Render/Docker environment variables with a local .env.
+            // overwrite server environment variables with a local .env.
             if (!array_key_exists($name, self::$processValues)) {
                 $_ENV[$name] = $cleanedValue;
                 $_SERVER[$name] = $cleanedValue;

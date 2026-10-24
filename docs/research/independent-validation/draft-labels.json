@@ -1,0 +1,133 @@
+{
+  "status": "agent_prepared_source_first_drafts_not_independent_gold",
+  "reviewers": [],
+  "IV-NEWS": {
+    "units": [
+      ["main", "USGS deploys sensors after the New Jersey earthquake", [[0]]],
+      ["deployment", "Five kits measure aftershock origins, duration and magnitude", [[1]]],
+      ["forecast", "Observed aftershocks and probabilistic near-term forecast", [[4,5]]],
+      ["instruments", "Sensors, communication and real-time analysis", [[17,18]]],
+      ["uncertainty", "Exact earthquake prediction is not possible", [[20]]]
+    ],
+    "queries": [
+      ["supported", "aftershock forecast", ["forecast"], "Source gives probabilities, not deterministic earthquake prediction."],
+      ["partial", "aftershock forecast and evacuation orders", ["forecast"], "Forecast exists; no evacuation orders are reported."],
+      ["unsupported", "evacuation orders following the earthquake", [], "Near-topic disaster response, but no evacuation directive exists in this article."]
+    ],
+    "context_rules": []
+  },
+  "IV-SCIENCE": {
+    "units": [
+      ["main", "No lower mortality risk associated with daily multivitamins", [[0],[9]]],
+      ["population", "Three prospective cohorts, 390124 generally healthy adults over 20 years", [[5,6]]],
+      ["uncertainty", "Benefits and harms remain unclear beyond measured association", [[3]]],
+      ["specific_causes", "No mortality differences for cancer, heart or cerebrovascular disease", [[10]]],
+      ["late_scope", "Other populations and health conditions require evaluation", [[12]]]
+    ],
+    "queries": [
+      ["supported", "multivitamin mortality association", ["main","specific_causes"], "Mortality association is the reported outcome."],
+      ["partial", "mortality and cognitive improvement from multivitamins", ["main"], "Mortality studied; no measured cognitive improvement reported."],
+      ["unsupported", "multivitamin prevention of dementia", [], "Age-related outcomes are proposed for future investigation, not evidence of dementia prevention."]
+    ],
+    "context_rules": [
+      {"id":"healthy_population_scope","trigger_any":[0,9],"required_any":[[6]],"meaning":"Main result applies to generally healthy adults; omission is a review flag, not automatically a false claim."}
+    ]
+  },
+  "IV-BUSINESS": {
+    "units": [
+      ["main", "US energy surplus accompanied record exports in 2024", [[0,1]]],
+      ["trade", "Net exports hit 9.3 quads while imports stayed flat", [[2]]],
+      ["demand", "Consumption was 94.2 quads below the 2007 peak", [[3]]],
+      ["production", "Production reached record 103.3 quads", [[9]]],
+      ["late_trade_context", "Crude imports are refined and re-exported as products", [[17,18]]]
+    ],
+    "queries": [
+      ["supported", "energy exports", ["main","trade"], "Exports and trade balance are explicit."],
+      ["partial", "energy exports and company profit", ["main","trade"], "Trade volumes exist; corporate profit does not."],
+      ["unsupported", "energy company profit margins", [], "Sector energy volumes do not establish corporate earnings or margins."]
+    ],
+    "context_rules": []
+  },
+  "IV-EDUCATION": {
+    "units": [
+      ["main", "Nuclear and modern renewables are safer and cleaner than fossil fuels", [[1],[2],[123]]],
+      ["comparison", "Normalize deaths by electricity output rather than total deaths", [[22,23]]],
+      ["no_zero_risk", "No source is completely safe; short and long-term harms remain", [[15,16]]],
+      ["data_limit", "Existing fossil-fuel death-rate estimates are likely conservative", [[73]]],
+      ["late_gap", "No timely accident dataset and comparability remains uncertain", [[101,102,103],[110,114,115]]]
+    ],
+    "queries": [
+      ["supported", "nuclear safety", ["main","no_zero_risk"], "Comparative safety is discussed, not universal zero risk."],
+      ["partial", "nuclear safety and reactor construction costs", ["main"], "Safety discussed; no reactor construction-cost analysis."],
+      ["unsupported", "nuclear reactor construction costs", [], "Construction accidents are not construction-cost estimates."]
+    ],
+    "context_rules": []
+  },
+  "IV-TECHNICAL": {
+    "units": [
+      ["main", "Interpreter isolation enables a per-interpreter GIL and multicore parallelism", [[3,4]]],
+      ["state", "Protected runtime-global state must move to interpreter-local state", [[6,8]]],
+      ["compatibility", "Multiphase-init compatibility and strict import failure", [[120,121,123]]],
+      ["thread_safety", "Thread-unsafe linked library state still needs locking", [[166,168]]],
+      ["legacy_api", "Old interpreter API retains current behavior", [[154],[159]]],
+      ["maintainer_burden", "Some extensions require substantial maintainer effort", [[175,176,177]]]
+    ],
+    "queries": [
+      ["supported", "extension module compatibility", ["compatibility","thread_safety","legacy_api"], "Compatibility restrictions and old API behavior are covered."],
+      ["partial", "extension module compatibility and GPU benchmarks", ["compatibility"], "Compatibility discussed; no GPU measurements."],
+      ["unsupported", "GPU performance benchmarks", [], "Multicore CPU parallelism does not establish GPU performance."]
+    ],
+    "context_rules": [
+      {"id":"thread_safety_caveat","trigger_any":[136],"required_any":[[137],[166,168]],"meaning":"Broad multi-interpreter compatibility claim has a linked-library thread-safety caveat."}
+    ]
+  },
+  "IV-EDITORIAL": {
+    "units": [
+      ["main", "Net-zero decision support must address uncertainty, complexity and emergence", [[1,2],[51,52]]],
+      ["resilience", "Least-cost plans should give way to attention to resilient plans", [[11,12,13]]],
+      ["uncertainty_gap", "Half of reviewed tools neglect uncertainty and transformative effects", [[16,17,18]]],
+      ["policy_interface", "Co-development and participatory dialogue needed in policy design", [[29,30]]],
+      ["late_prescription", "Connect niches and co-evolve methods with policy makers", [[53,54,55,56]]]
+    ],
+    "queries": [
+      ["supported", "decision making under uncertainty", ["main","late_prescription"], "The authors argue for a mindset and institutional shift."],
+      ["partial", "decision making and carbon tax rates", ["main"], "Decision support exists; no carbon tax schedule is given."],
+      ["unsupported", "optimal carbon tax rates", [], "Net-zero policy discussion does not supply an optimal tax rate."]
+    ],
+    "context_rules": []
+  },
+  "IV-FEATURE": {
+    "units": [
+      ["main", "Hektoria rapidly lost grounded ice enabled by its geometry", [[2,4]]],
+      ["extreme_retreat", "Eight km grounded retreat in two months was unprecedented", [[3]]],
+      ["mechanism", "Ice-plain buoyancy-driven calving is a proposed cause", [[22,23,24,25]]],
+      ["sea_level", "Loss of grounded ice contributes to sea-level rise", [[6]]],
+      ["late_qualification", "Dramatic retreat is likely over and slower retreat expected", [[36,37,38]]]
+    ],
+    "queries": [
+      ["supported", "glacier retreat causes", ["main","mechanism"], "Geometry and proposed buoyancy-driven calving are reported."],
+      ["partial", "glacier retreat and future sea level forecasts", ["main","sea_level"], "Grounded-ice loss contributes to sea level; no quantitative future forecast."],
+      ["unsupported", "global sea level rise forecasts for 2100", [], "Current glacier loss is not a global projection for 2100."]
+    ],
+    "context_rules": []
+  },
+  "IV-RESEARCH": {
+    "units": [
+      ["main", "High-intensity walking improved frailty classification more than casual walking", [[15],[225,226]]],
+      ["design", "Cluster trial, analytic attrition and 16-week three-session intervention", [[2,3,4,7]]],
+      ["result", "69.6 versus 46.4 percent improved, OR 2.91 and confidence interval", [[11],[140,141]]],
+      ["imputation", "Imputed analyses did not retain statistical significance", [[145],[146],[219]]],
+      ["attrition", "36 percent enrollment-to-analysis attrition", [[216]]],
+      ["late_limit", "No longer-term outcomes or co-interventions measured", [[220,221]]]
+    ],
+    "queries": [
+      ["supported", "walking intensity and frailty", ["main","result","imputation"], "Direct experimental comparison with missing-data limitations."],
+      ["partial", "walking intensity and hospitalization rates", ["main","result"], "Walking outcomes exist; hospitalization mentioned as background risk, not a measured intervention benefit."],
+      ["unsupported", "walking effects on hospital admissions", [], "Background association of frailty with hospitalization is not an intervention estimate of admissions."]
+    ],
+    "context_rules": [
+      {"id":"missing_data_significance","trigger_any":[11,15,140,141,225],"required_any":[[144],[145],[146],[219]],"meaning":"Favorable complete-case trial finding must be considered alongside nonsignificant missing-data sensitivity analyses; human severity pending."}
+    ],
+    "source_inconsistencies": ["Abstract versus discussion differ in female percentage (79 versus 89).", "Trial registration text and linked identifier differ; source inconsistency is not automatically an engine hallucination."]
+  }
+}

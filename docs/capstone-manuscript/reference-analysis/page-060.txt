@@ -1,0 +1,32 @@
+   implemented in AccredX, the following are the
+   essential   features   and   functionalities
+   required for an effective Record Management
+   and Archiving System.
+
+   3.1 Core Features Identified as Essential
+
+   A truly effective record management system
+   must  first  provide  centralized  document
+   storage, creating a single digital repository
+   where all records are kept. This eliminates
+   scattered file locations and establishes a
+   single source of truth for the institution.
+   Closely related is folder and file management,
+   which allows users to create, rename, move,
+   and  delete  folders  and  files,  enabling
+   logical organization of records by category
+   such as accreditation Areas.
+
+   To address retrieval delays, the system must
+   include  advanced  search  and  filtering
+   capabilities, including keyword search, date
+   filters, file type filters, and sort options.
+   This feature significantly reduces the time
+   spent locating specific documents. Document
+   version control is another critical feature,
+   as it tracks file versions and allows users
+   to  access  previous  versions,  preserving
+
+
+
+                                                       41

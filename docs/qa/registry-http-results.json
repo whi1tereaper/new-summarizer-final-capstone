@@ -1,0 +1,110 @@
+[
+  {
+    "name": "anonymous registry GET and POST denied",
+    "passed": true
+  },
+  {
+    "name": "published support/privacy contact comes from environment without an official DPO claim",
+    "passed": true
+  },
+  {
+    "name": "ordinary account cannot list or import registry",
+    "passed": true
+  },
+  {
+    "name": "password-only admin session cannot access registry",
+    "passed": true
+  },
+  {
+    "name": "admin second factor unlocks private registry",
+    "passed": true
+  },
+  {
+    "name": "registry responses prohibit caching and referrer leakage",
+    "passed": true
+  },
+  {
+    "name": "forged CSRF import denied before processing",
+    "passed": true
+  },
+  {
+    "name": "campus list authorization acknowledgement required",
+    "passed": true
+  },
+  {
+    "name": "real multipart CSV upload preview accepted",
+    "passed": true
+  },
+  {
+    "name": "CSV confirmation inserts valid strings",
+    "passed": true
+  },
+  {
+    "name": "real multipart TXT upload accepted",
+    "passed": true
+  },
+  {
+    "name": "TXT confirmation inserts two records",
+    "passed": true
+  },
+  {
+    "name": "preview reports invalid IDs and batch duplicates",
+    "passed": true
+  },
+  {
+    "name": "partial import reports exact insert skip and invalid counts",
+    "passed": true
+  },
+  {
+    "name": "executable extension upload rejected without execution",
+    "passed": true
+  },
+  {
+    "name": "PHP disguised as text upload rejected without execution",
+    "passed": true
+  },
+  {
+    "name": "binary CSV upload rejected without execution",
+    "passed": true
+  },
+  {
+    "name": "malformed CSV upload rejected without execution",
+    "passed": true
+  },
+  {
+    "name": "oversized upload upload rejected without execution",
+    "passed": true
+  },
+  {
+    "name": "expired eligibility date rejected",
+    "passed": true
+  },
+  {
+    "name": "admin exact search masks identifiers",
+    "passed": true
+  },
+  {
+    "name": "SQL injection search rejected safely",
+    "passed": true
+  },
+  {
+    "name": "filter and pagination render without private identifiers in URL",
+    "passed": true
+  },
+  {
+    "name": "matched registration grants continued access through real HTTP",
+    "passed": true
+  },
+  {
+    "name": "admin revocation suspends current session access immediately",
+    "passed": true
+  },
+  {
+    "name": "unmatched registration stays restricted with privacy-preserving message",
+    "passed": true
+  },
+  {
+    "name": "administrator import rate limiting enforced",
+    "passed": true
+  }
+]

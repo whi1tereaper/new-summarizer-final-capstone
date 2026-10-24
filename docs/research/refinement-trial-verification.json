@@ -1,0 +1,271 @@
+{
+  "purpose": "Independent replay of failed tight-budget trials only; original successful outputs/scores unchanged.",
+  "python": "3.11.9",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "versions": {
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "scikit-learn": "1.9.1",
+    "nltk": "3.10.3",
+    "sumy": "0.11.0",
+    "spacy": "3.8.16",
+    "en_core_web_sm": "3.8.0",
+    "psutil": "7.2.2",
+    "sentence-transformers": "6.1.0"
+  },
+  "checks": [
+    {
+      "system": "article_v2",
+      "case_id": "CE-HO-TECH:very_brief:general",
+      "budget": 11,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "article_v2",
+      "case_id": "CE-HO-OPINION:very_brief:general",
+      "budget": 10,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "article_v2",
+      "case_id": "CE-HO-SCIENCE:very_brief:general",
+      "budget": 5,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "article_v2",
+      "case_id": "CE-HO-BUSINESS:very_brief:general",
+      "budget": 3,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "article_v2",
+      "case_id": "HO-TECH-QUEUE:very_brief:general",
+      "budget": 6,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "article_v2",
+      "case_id": "HO-ESSAY-HOMEWORK:very_brief:general",
+      "budget": 7,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "article_v2_enhanced",
+      "case_id": "CE-HO-TECH:very_brief:general",
+      "budget": 11,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "article_v2_enhanced",
+      "case_id": "CE-HO-OPINION:very_brief:general",
+      "budget": 10,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "article_v2_enhanced",
+      "case_id": "CE-HO-SCIENCE:very_brief:general",
+      "budget": 5,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "article_v2_enhanced",
+      "case_id": "CE-HO-BUSINESS:very_brief:general",
+      "budget": 3,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "article_v2_enhanced",
+      "case_id": "HO-TECH-QUEUE:very_brief:general",
+      "budget": 6,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "article_v2_enhanced",
+      "case_id": "HO-ESSAY-HOMEWORK:very_brief:general",
+      "budget": 7,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_light",
+      "case_id": "CE-HO-TECH:very_brief:general",
+      "budget": 11,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_light",
+      "case_id": "CE-HO-OPINION:very_brief:general",
+      "budget": 10,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_light",
+      "case_id": "CE-HO-SCIENCE:very_brief:general",
+      "budget": 5,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_light",
+      "case_id": "CE-HO-BUSINESS:very_brief:general",
+      "budget": 3,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_light",
+      "case_id": "HO-TECH-QUEUE:very_brief:general",
+      "budget": 6,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_light",
+      "case_id": "HO-ESSAY-HOMEWORK:very_brief:general",
+      "budget": 7,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_enhanced",
+      "case_id": "CE-HO-TECH:very_brief:general",
+      "budget": 11,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_enhanced",
+      "case_id": "CE-HO-OPINION:very_brief:general",
+      "budget": 10,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_enhanced",
+      "case_id": "CE-HO-SCIENCE:very_brief:general",
+      "budget": 5,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_enhanced",
+      "case_id": "CE-HO-BUSINESS:very_brief:general",
+      "budget": 3,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_enhanced",
+      "case_id": "HO-TECH-QUEUE:very_brief:general",
+      "budget": 6,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_enhanced",
+      "case_id": "HO-ESSAY-HOMEWORK:very_brief:general",
+      "budget": 7,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_no_core",
+      "case_id": "CE-HO-TECH:very_brief:general",
+      "budget": 11,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_no_core",
+      "case_id": "CE-HO-OPINION:very_brief:general",
+      "budget": 10,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_no_core",
+      "case_id": "CE-HO-SCIENCE:very_brief:general",
+      "budget": 5,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_no_core",
+      "case_id": "CE-HO-BUSINESS:very_brief:general",
+      "budget": 3,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_no_core",
+      "case_id": "HO-TECH-QUEUE:very_brief:general",
+      "budget": 6,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_no_core",
+      "case_id": "HO-ESSAY-HOMEWORK:very_brief:general",
+      "budget": 7,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_no_mmr",
+      "case_id": "CE-HO-TECH:very_brief:general",
+      "budget": 11,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_no_mmr",
+      "case_id": "CE-HO-OPINION:very_brief:general",
+      "budget": 10,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_no_mmr",
+      "case_id": "CE-HO-SCIENCE:very_brief:general",
+      "budget": 5,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_no_mmr",
+      "case_id": "CE-HO-BUSINESS:very_brief:general",
+      "budget": 3,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_no_mmr",
+      "case_id": "HO-TECH-QUEUE:very_brief:general",
+      "budget": 6,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    },
+    {
+      "system": "refined_no_mmr",
+      "case_id": "HO-ESSAY-HOMEWORK:very_brief:general",
+      "budget": 7,
+      "reproduced": true,
+      "failure_code": "NLP_NO_VALID_CANDIDATES"
+    }
+  ],
+  "all_reproduced": true
+}

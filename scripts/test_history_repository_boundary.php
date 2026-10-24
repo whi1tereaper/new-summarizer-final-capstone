@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+require_once __DIR__ . '/qa/isolation.php';
 require_once __DIR__ . '/../app/src/whitereaper.php';
 require_once __DIR__ . '/../app/src/Database.php';
 require_once __DIR__ . '/../app/src/Services/HistoryService.php';
@@ -29,7 +30,8 @@ function assertHistory(string $name, bool $condition): void
 
 $guestToken = bin2hex(random_bytes(32));
 $shareToken = bin2hex(random_bytes(16));
-$ownerId = 12;
+$db->prepare('INSERT INTO users(username,email,password_hash)VALUES(?,?,?)')->execute(['history_'.bin2hex(random_bytes(4)),bin2hex(random_bytes(4)).'@example.invalid','fixture-only']);
+$ownerId = (int)$db->lastInsertId();
 
 $ownerShareToken = bin2hex(random_bytes(16));
 $insertOwnerSummary = $db->prepare(
@@ -120,6 +122,7 @@ assertHistory('Nutshell history can be fetched through the repository-backed ser
 $db->prepare('DELETE FROM nutshell_generations WHERE summary_id IN (?, ?)')->execute([$userSummaryId, $guestSummaryId]);
 $db->prepare('DELETE FROM summary_artifacts WHERE summary_id IN (?, ?)')->execute([$userSummaryId, $guestSummaryId]);
 $db->prepare('DELETE FROM summaries WHERE id IN (?, ?)')->execute([$userSummaryId, $guestSummaryId]);
+$db->prepare('DELETE FROM users WHERE id=?')->execute([$ownerId]);
 
 echo "\nHistory repository verification: {$passCount} passed, {$failCount} failed.\n";
 if ($failCount > 0) {

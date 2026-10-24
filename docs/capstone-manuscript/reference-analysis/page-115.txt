@@ -1,0 +1,39 @@
+five      (5)    sub-characteristics,    namely:
+confidentiality,  integrity,  non-repudiation,
+accountability and authenticity.
+
+
+   Table 15. Assessment of the IT consultants
+on the Security of the developed system
+     Software                                    Verbal
+      Product          Weighted Mean        Interpretation
+    Categories
+
+ Confidentiality              3.6            Very Secured
+
+
+     Integrity                3.5            Very Secured
+
+
+ Non-repudiation              3.6            Very Secured
+
+
+ Accountability               3.4            Very Secured
+
+
+   Authenticity               3.3            Very Secured
+
+
+     Security                3.48            Very Secured
+
+
+   As shown in Table 15, the evaluation results
+for the   Security    category indicate a weighted
+mean of 3.48, and a verbal rating of “Very
+Secured”.
+
+
+
+
+
+                                                        96

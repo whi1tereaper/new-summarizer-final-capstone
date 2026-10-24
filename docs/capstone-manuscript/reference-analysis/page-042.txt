@@ -1,0 +1,32 @@
+management, which inform the direction of the
+system’s development.
+
+   Analysis Stage: The development team
+analyzes the gathered requirements to
+determine the features to be implemented in
+the current cycle. User stories are broken
+down into actionable tasks, and acceptance
+criteria are established. Continuous
+communication with stakeholders ensures a
+clear understanding of expectations.
+
+   Design Stage: A lightweight system design is
+formulated based on the requirements of the
+current iteration. This stage emphasizes
+simplicity, functionality, and alignment with
+user needs.
+
+   Implementation Stage: Developers construct
+the code that realizes the planned features.
+Agile practices such as pair programming and
+early-stage testing are integrated to ensure
+code reliability and maintainability.
+
+   Testing and Integration Stage: Testing is
+conducted concurrently with development. Each
+feature undergoes unit and integration testing
+to detect and resolve issues promptly.
+
+
+
+                                                        23

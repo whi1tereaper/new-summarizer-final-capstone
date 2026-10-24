@@ -1,0 +1,29 @@
+erDiagram
+    direction LR
+    users {
+        int id PK
+    }
+    evaluation_datasets {
+        bigint id PK
+        int created_by FK
+    }
+    evaluation_runs {
+        bigint id PK
+        bigint dataset_id FK
+        int created_by FK
+    }
+    evaluation_references {
+        bigint id PK
+        bigint document_id FK
+        int created_by FK
+    }
+    evaluation_content_units {
+        bigint id PK
+        bigint document_id FK
+        int created_by FK
+    }
+    users |o--o{ evaluation_content_units : "created_by"
+    users |o--o{ evaluation_datasets : "created_by"
+    users |o--o{ evaluation_references : "created_by"
+    evaluation_datasets ||--o{ evaluation_runs : "dataset_id"
+    users |o--o{ evaluation_runs : "created_by"

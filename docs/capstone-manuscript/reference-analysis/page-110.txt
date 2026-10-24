@@ -1,0 +1,32 @@
+Archiving System assessed by the IT consultants
+that consists of three (3) sub-characteristics
+namely:  functional  completeness,  functional
+correctness, and functional appropriateness.
+
+   Table 10. Assessment of the IT consultants on
+the Functional Suitability of the developed
+system
+ Software Product       Weighted Mean             Verbal
+    Categories                               Interpretation
+    Functional                3.5            Very Functional
+   Completeness
+    Functional                3.7            Very Functional
+    Correctness
+    Functional                3.4            Very Functional
+ Appropriateness
+    Functional                3.53           Very Functional
+    Suitability
+
+   Effectively  meets  user  requirements  by
+ensuring all necessary features, operates as
+expected without      errors, and is well-aligned
+with the intended purpose, making it a reliable
+and efficient solution for users.
+
+   5.2 Performance Efficiency
+   Table 11 shows the performance efficiency of
+the developed AccredX: Record Management and
+
+
+
+                                                       91

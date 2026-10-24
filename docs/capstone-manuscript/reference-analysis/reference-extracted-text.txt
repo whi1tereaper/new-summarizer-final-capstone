@@ -1,0 +1,6686 @@
+
+
+===== PDF PAGE 1 =====
+    AccredX: Record Management and Archiving
+                         System
+          For NEUST Peñaranda Off-Campus
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         A CAPSTONE AND RESEARCH PROJECT
+                           OF
+            BSIT WITH SPECIALIZATION IN
+               WEB SYSTEMS TECHNOLOGY
+
+                           BY:
+                JULIUS CESAR P. REYES
+                JOHN PAULO P. SAMSON
+              CHRISTOPHER A RAMOSO JR.
+             GREGORY GRANT C. ALARILLA
+
+                     DECEMBER 2025
+
+===== PDF PAGE 2 =====
+   AccredX: Record Management and
+               Archiving System
+   For NEUST Peñaranda Off-Campus
+
+         A Capstone and Research Project
+         presented to the faculty of the
+   College of Information and Communications
+       Technology, Peñaranda, Nueva Ecija
+
+In partial fulfillment of the requirements for
+              the Degree Bachelor of
+     Science in Information Technology with
+    Specialization in Web System Technology
+
+                          BY:
+               JULIUS CESAR P. REYES
+                JOHN PAULO P. SAMSON
+             CHRISTOPHER A RAMOSO JR.
+            GREGORY GRANT C. ALARILLA
+
+
+                    Submitted to:
+             Jodell R. Bulaclac, MSIT
+        Capstone and Research Instructor
+
+                    DECEMBER 2025
+
+
+
+
+
+
+
+                                                       ii
+
+
+===== PDF PAGE 3 =====
+             Republic of the Philippines
+               Nueva Ecija University of
+                Science and Technology
+
+                      APPROVAL SHEET
+      This capstone and research project entitled
+AccredX: Record Management and Archiving System for
+NEUST Peñaranda Off-Campus, prepared and submitted
+by  Julius Cesar P. Reyes,         John Paulo P. Samson,
+Christopher A. Ramoso Jr., Gregory Grant C. Alarilla
+in partial fulfillment of the requirements for the
+degree,  Bachelor  of  Science  in  Information
+Technology  with  Specialization  in  Web  System
+Technology is hereby recommended for approval and
+acceptance.
+
+JODELL R. BULACLAC, MSIT    JODELL R. BULACLAC, MSIT
+   Capstone Teacher                      Adviser
+Date:________________       Date:________________
+
+Approved in partial fulfillment of the requirements
+for the degree, Bachelor of Science in Information
+Technology  with  Specialization  in  Web  System
+Technology by the Examining Committee.
+
+                 JUSTINE FROI S. GALICIA
+                          Chairman
+
+JIM M. GONZALES                          MICHAEL R. JACOB
+      Member                                   Member
+
+Accepted in partial fulfillment of the requirements
+for the degree, Bachelor of Science in Information
+Technology  with  Specialization  in  Web  System
+Technology
+JODELL R. BULACLAC, MSIT   ATTY. EMMANUEL G. SANTIAGO
+Program Chairman               Campus Administrator
+ Date:________________           Date:_____________
+
+
+
+
+
+
+                                                             iii
+
+
+===== PDF PAGE 4 =====
+Republic of the Philippines
+_______________________SS.
+Province of Nueva Ecija
+JOINT UNDERTAKING
+
+We, Julius Cesar P. Reyes, John Paulo P. Samson, Christopher A. Ramoso Jr., Gregory Grant C. Alarilla of all
+members, all of legal age, Filipino, and students of Nueva Ecija University of Science and Technology (NEUST), after
+having been duly sworn in accordance with law, do hereby state and depose:
+       1.      That the undersigned are the authors/researchers of an academic project entitled ACCREDX: RECORD
+               MANAGEMENT  AND  ARCHIVING  SYSTEM  FOR  NEUST  PENARANDA  OFF-CAMPUS,  in  partial
+               fulfillment of the requirements for the degree of Bachelor of Science in Information Technology at Nueva
+               Ecija University of Science and Technology (NEUST). This project was completed with the guidance and
+               contribution of our adviser and course teacher, Mr. Jodell R. Bulaclac, MSIT, who are hereby recognized
+               as co-authors of this work in acknowledgment of their valuable intellectual and professional support
+               throughout the development of the project.
+       2.      That the manuscript, attachments, models, system software/enterprise resource plan, source code, algorithms,
+               or any part of the above-mentioned project have not been copyrighted, published, or are under consideration
+               for publication prior to or upon submission thereof.
+       3.      That the manuscript, attachments, models, system software/enterprise resource plan, source code, algorithms,
+               or any part of the above-mentioned project have not been plagiarized, copyrighted, submitted, or published
+               elsewhere by the authors.
+       4.      That the College of Information and Communications Technology and the Nueva Ecija University shall not
+               be held liable for any consequences, damages, loss of life and/or property or financial gain resulting from
+               the authors’ misrepresentation, plagiarism or inclusion of plagiarized work. Furthermore, this manuscript
+               should be thoroughly reviewed and edited by a competent editor, ensuring clarity, coherence, and adherence
+               to academic writing standards.
+       5.      The authors hereby retain full ownership of the above-mentioned project, including all moral and economic
+               rights  under  Philippine  law.  However,  the  authors  grant the  Nueva  Ecija  University  of  Science  and
+               Technology an exclusive, irrevocable right to utilize, modify, reverse engineer, and disseminate the project
+               for academic, institutional, community extension, and production purposes, subject to the condition that the
+               authors’ moral rights, including the right to be credited as the creators and the right to object to any
+               derogatory treatment of the work, shall be upheld. This exclusive right does not transfer ownership of the
+               copyright to the university but allows it to utilize the work for its institutional needs.
+       6.      The project thus submitted, and upon acceptance by the College of Information and Communications
+               Technology, shall grant the Nueva Ecija University of Science and Technology exclusive rights to use,
+               reproduce, and distribute the work for academic, institutional and extension purposes, to the exclusion of all
+               others.
+       7.      The authors shall not commercially use or distribute the project without the written consent of the President
+               of Nueva Ecija University of Science and Technology, but they retain the right to use the project for personal,
+               academic, or non-commercial purposes, provided that the university’s exclusive rights are respected.
+       8.      Additionally, the authors grant permission to their adviser and course teacher, Mr. Jodell R. Bulaclac,
+               MSIT, as co-authors, to present the project in various research conferences, seminars, and fora. However,
+               it is recognized that the student-researchers are the senior authors of this project, and their contribution shall
+               be duly acknowledged in any presentation or publication related to this work.
+
+IN WITNESS WHEREOF, we have hereunto set on our hands this ____ day of _______, 20___ in the City of General
+Tinio, Nueva Ecija, Philippines.
+Name                                                 ID No.                                                Address
+Julius Cesar P. Reyes                                PEN2021-00062                                         Sinasajan, Peñaranda, Nueva Ecija
+John Paulo P. Samson                                 PEN2021-00763                                         San Josef, Peñaranda, Nueva Ecija
+Christopher A. Ramoso Jr.                            PEN2021-00085                                         Las Piñas, Peñaranda, Nueva Ecija
+Gregory Grant C. Alarilla                            PEN2021-00780                                         Poblacion I, Peñaranda, Nueva Ecija
+
+SUBSCRIBED AND SWORN to before us this_______ day of ___________, 20_____ in the City of General Tinio,
+Nueva Ecija, Philippines.
+
+Doc No. _____
+Page No. ____
+Book No. ____
+Series of. ____
+
+
+
+
+
+
+
+
+                                                                                                                                              iv
+
+
+===== PDF PAGE 5 =====
+          CERTIFICATION OF ENGLISH CRITIC
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                            v
+
+
+===== PDF PAGE 6 =====
+                   ACKNOWLEDGEMENT
+
+   The researchers would like to express their
+sincere gratitude and heartfelt appreciation to
+all the individuals who contributed to the
+successful completion of this capstone project.
+
+   Above  all,  the  researchers  offer  their
+deepest thanks to Almighty God for His guidance,
+wisdom,  strength,  and  countless  blessings
+throughout the conduct of this study. His grace
+enabled the researchers to overcome challenges
+and persevere in accomplishing this endeavor.
+
+   Special recognition is given to Mr. Jodell R.
+Bulaclac,  MSIT,  the  researchers’  Capstone
+Teacher and Adviser, for his continuous guidance,
+encouragement,  professional  expertise,  and
+unwavering support throughout the development
+of the project. His mentorship and valuable
+insights played a significant role in the
+successful completion of this study.
+
+   The researchers would also like to express
+their sincere appreciation to Ma’am Johannah Mae
+V. Pastorfide, their English Critic, for her
+careful  review  of  the  manuscript  and  for
+providing   valuable   linguistic   guidance,
+recommendations, and constructive feedback that
+enhanced the clarity, coherence, and overall
+quality of the research paper.
+
+   Gratitude  is  likewise  extended  to  the
+administrators,   faculty   members,   staff,
+assistants,  and  IT  consultants  of  NEUST
+Peñaranda Off-Campus who willingly participated
+in the interviews, surveys, and evaluation
+activities conducted during the study. Their
+cooperation,  insights,  and  feedback  were
+
+
+                                                       vi
+
+
+===== PDF PAGE 7 =====
+instrumental in the development and assessment
+of the system.
+
+   The researchers are deeply grateful to their
+families   for   their   unconditional   love,
+understanding,  encouragement,  prayers,  and
+unwavering support throughout their academic
+journey. Their sacrifices and motivation served
+as a constant source of inspiration during the
+completion of this project.
+
+   The researchers also acknowledge their own
+dedication,   teamwork,   perseverance,   and
+commitment  in  overcoming  the  challenges
+encountered during the development of the system.
+Through collaboration and determination, they
+were able to achieve the objectives of the study.
+
+   Finally,  the  researchers  extend  their
+sincere gratitude to the Nueva Ecija University
+of Science and Technology – Peñaranda Off-Campus
+for providing them with quality education,
+opportunities for learning, and a supportive
+academic environment that made this capstone
+project possible.
+
+   To all who contributed directly or indirectly
+to the completion of this study, the researchers
+offer their deepest appreciation and gratitude.
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                       vii
+
+
+===== PDF PAGE 8 =====
+                      DEDICATION
+
+    This  capstone  and  research  project  is
+lovingly dedicated to our parents and families,
+whose unconditional love, unwavering support,
+endless sacrifices, encouragement, and prayers
+served as the foundation of our perseverance and
+determination throughout the completion of this
+study.
+
+    We also dedicate this work to our adviser,
+instructors, professors, and the faculty of
+Nueva Ecija University of Science and Technology
+–   Peñaranda  Off-Campus,  whose  knowledge,
+guidance, patience, and commitment to academic
+excellence have greatly influenced our growth
+as students and future Information Technology
+professionals.
+
+    This study is likewise dedicated to the
+administrators, faculty members, and staff of
+NEUST Peñaranda Off-Campus, whose cooperation
+and participation inspired the development of
+AccredX. It is our hope that this system will
+contribute  to  improving  the  management,
+organization, security, and accessibility of
+institutional  records,  particularly  during
+accreditation processes.
+
+    To our classmates, friends, and colleagues,
+we dedicate this work in appreciation of the
+support,   encouragement,   friendship,   and
+memorable experiences we shared throughout our
+academic journey.
+
+    Above all, we dedicate this project to
+Almighty God, whose infinite wisdom, guidance,
+strength, and blessings made this achievement
+possible. Through His grace, we were able to
+
+                                                      viii
+
+
+===== PDF PAGE 9 =====
+face   every   challenge   and   successfully
+accomplish this endeavor.
+    Finally, this study is dedicated to future
+researchers,    students,    educators,    and
+Information Technology professionals who may
+benefit from its findings. May this work serve
+as a useful reference and inspire continued
+innovation, learning, and improvement in the
+field of records management and information
+systems.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                       ix
+
+
+===== PDF PAGE 10 =====
+                     TABLE OF CONTENTS
+APPROVAL SHEET............................. iii
+JOINT UNDERTAKING........................... iv
+CERTIFICATION OF ENGLISH CRITIC.............. v
+ACKNOWLEDGEMENT............................. vi
+DEDICATION................................ viii
+TABLE OF CONTENTS............................ x
+LIST OF TABLES............................ xiii
+LIST OF FIGURES............................. xv
+ABSTRACT.................................. xvii
+
+
+CHAPTER I.................................... 1
+
+Introduction................................. 1
+Review of Related Literature................. 4
+Conceptual Framework........................ 11
+Statement of the Problem.................... 13
+Scope and Delimitation...................... 16
+Significance of the Study................... 17
+Definition of Terms......................... 18
+
+
+
+CHAPTER II.................................. 21
+
+METHODS AND PROCEDURES...................... 21
+Research Design............................. 21
+Research Locale............................. 25
+Research Respondents........................ 27
+Sample and Sampling Procedure............... 28
+Research Instruments........................ 29
+
+
+                                                         x
+
+
+===== PDF PAGE 11 =====
+Data Gathering Procedure.................... 30
+Data Analysis Technique..................... 32
+
+
+
+CHAPTER III................................. 35
+RESULTS AND DISCUSSION...................... 35
+
+   1. Problems  Encountered  in  the  Existing
+      System................................. 35
+
+   2. How  AccredX  Improves  File  Retrieval,
+      Security, and Efficiency in Accreditation
+      Processes.............................. 36
+      2.1 Improvement in File Retrieval...... 36
+      2.2 Improvement in Security............ 38
+      2.3 Improvement in Overall Efficiency for
+      Accreditation.......................... 39
+
+   3. Essential Features and Functionalities of
+      an  Effective  Record  Management  and
+      Archiving System....................... 40
+      3.1 Core Features Identified as Essential
+      ....................................... 41
+      3.2  Security  Features  Identified  as
+      Essential.............................. 44
+      3.3 User Experience Features Identified as
+      Essential.............................. 44
+
+   4. The Design and Development of AccredX:
+      Record Management and Archiving System
+      through the use of Agile Development Life
+      Cycle.................................. 45
+
+
+                                                        xi
+
+
+===== PDF PAGE 12 =====
+      4.1 Planning Stage..................... 45
+      Gantt Chart............................ 47
+      4.2 Design Stage....................... 49
+      Use Case Diagram....................... 49
+      Data Flow Diagram...................... 51
+      Database Normalization................. 68
+      Entity Relationship Diagram............ 70
+      Data Dictionary........................ 71
+      4.3 Development Stage.................. 81
+      4.4 Testing Stage...................... 88
+      4.5 Deployment Stage................... 88
+      4.6 Operational Stage.................. 90
+
+   5. IT  Consultants’  Evaluation  Results  of
+      AccredX: Record Management and Archiving
+      System................................. 90
+      5.1 Functional Suitability............. 90
+      5.2 Performance Efficiency............. 91
+      5.3 Compatibility...................... 92
+      5.4 Usability.......................... 93
+      5.5 Reliability........................ 94
+      5.6 Security........................... 95
+      5.7 Portability........................ 97
+      5.8 IT Consultants Evaluation Summary.. 97
+
+   6. End Users’ Evaluation Results of AccredX:
+      Record Management and Archiving System. 98
+      6.1 Functional Suitability............. 99
+      6.2 Performance Efficiency............ 100
+
+
+
+
+                                                        xii
+
+
+===== PDF PAGE 13 =====
+      6.3 Usability......................... 101
+      6.4 End-users’ Evaluation Summary..... 102
+
+
+
+CHAPTER IV................................. 104
+Summary.................................... 104
+Conclusion................................. 106
+Recommendations............................ 108
+References................................. 111
+
+
+
+APPENDIX A. Research Adviser Request Letter 119
+APPENDIX B. Data Gathering Request Letter.. 120
+APPENDIX C. English Critic Request Letter.. 122
+APPENDIX   D. Consultation and Monitoring Form
+........................................... 123
+APPENDIX E. Research Adviser Approval Letter
+........................................... 125
+APPENDIX F. AccredX User Manual............ 126
+APPENDIX G. AccredX Maintenance Manual..... 142
+APPENDIX H. Survey Instrument for IT Consultants
+........................................... 145
+APPENDIX I. Survey Instrument for End-Users 153
+APPENDIX J. Pictures of Data Gathering..... 157
+APPENDIX K. Curriculum Vitae............... 158
+
+
+List of Tables
+Table 1. Distribution of Respondents........ 28
+Table    2.  Ranges  of  Weighted  Mean  and
+
+
+                                                        xiii
+
+
+===== PDF PAGE 14 =====
+Interpretation for End Users’ Evaluation.... 34
+Table  3.  Ranges  of  Weighted  Mean  and
+Interpretation for Consultants’ Evaluation.. 34
+Table 4. users Table........................ 72
+Table 5. folders Table...................... 74
+Table 6. folder_checklists Table............ 76
+Table 7. checklist_file_links Table......... 78
+Table 8. files Table........................ 78
+Table 9. Estimated Project Cost............. 89
+Table 10. Assessment of the IT Consultants on
+the Functional Suitability of the Developed
+System...................................... 91
+Table 11. Assessment of the IT Consultants on
+the Performance Efficiency of the Developed
+System...................................... 92
+Table 12. Assessment of the IT Consultants on
+the Compatibility of the Developed System... 93
+Table 13. Assessment of the IT Consultants on
+the Usability of the Developed System....... 94
+Table 14. Assessment of the IT Consultants on
+the Reliability of the Developed System..... 95
+Table 15. Assessment of the IT Consultants on
+the Security of the Developed System........ 96
+Table 16. Assessment of the IT Consultants on
+the Portability of the Developed System..... 97
+Table 17. IT Consultants’ Evaluation Summary
+Result...................................... 98
+Table 18. Assessment of the End Users on the
+
+
+
+                                                       xiv
+
+
+===== PDF PAGE 15 =====
+Functional Suitability of the Developed System
+........................................... 100
+Table 19. Assessment of the End Users on the
+Performance Efficiency of the Developed System
+........................................... 101
+Table 20. Assessment of the End Users on the
+Usability of the Developed System.......... 102
+Table 21. End-users’ Evaluation Summary Result
+........................................... 103
+
+List of Figures
+Figure 1. Research Paradigm................. 11
+Figure 2. SDLC Model........................ 22
+Figure 3. Front View of NEUST Peñaranda Off-
+Campus...................................... 26
+Figure 4. Location Map...................... 26
+Figure 5. Gantt Chart of Activities......... 48
+Figure 6. Use Case Diagram.................. 50
+Figure 7. Context Diagram................... 52
+Figure 8. DFD Level 1....................... 54
+Figure 9. DFD Level 2 – User Management..... 57
+Figure 10. Level 2 – Login Management....... 59
+Figure 11. Level 2 – Profile Management..... 60
+Figure 12. Level 2 – Records Management..... 62
+Figure 13. Level 2 – Archive Management..... 64
+Figure 14. Level 2 – Report Generation...... 66
+Figure 15. Unnormalized Form (UNF).......... 69
+Figure 16. First Normal Form (1NF).......... 70
+
+
+
+                                                        xv
+
+
+===== PDF PAGE 16 =====
+Figure 17. Entity Relationship Diagram...... 71
+Figure 18. Visual Studio Code............... 81
+Figure 19. XAMPP Control Panel.............. 82
+Figure 20. phpMyAdmin Page.................. 83
+Figure 21. Homepage of the System........... 83
+Figure 22. Login Page....................... 84
+Figure 23. Dashboard Page................... 84
+Figure 24. Folders Page..................... 85
+Figure 25. My Uploads Page.................. 85
+Figure 26. Archives Page.................... 86
+Figure 27. Bin Page......................... 86
+Figure 28. Users Page (Admin Only).......... 87
+Figure 29. Profile Page..................... 87
+Figure 30. System Successfully Deployed..... 89
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                        xvi
+
+
+===== PDF PAGE 17 =====
+                       Abstract
+
+    This study presents the design, development,
+and evaluation of AccredX: A Record Management
+and  Archiving  System  for  the  Nueva  Ecija
+University of Science and Technology (NEUST)
+Peñaranda   Off-Campus.   The   institution's
+existing record-keeping practices, which rely
+heavily on manual processes and unstructured
+Google Drive storage, have led to chronic issues
+including misplaced files, delayed document
+retrieval, inadequate security controls, and
+significant operational inefficiencies during
+accreditation   periods.   These   persistent
+challenges underscore the critical need for a
+structured and dedicated digital solution.
+
+    AccredX  was  developed  following  the
+Software Development Life Cycle (SDLC) using the
+Agile methodology, which allowed for iterative
+refinement  based  on  continuous  stakeholder
+feedback.   The   system   integrates   key
+functionalities including centralized document
+storage, advanced search and filtering, folder
+and file management, version control, role-
+based   access   control,   audit   trails,
+accreditation folder checklists, and compliance
+report generation. These features collectively
+address the document organization, security,
+
+
+                                                      xvii
+
+
+===== PDF PAGE 18 =====
+and   accessibility   requirements   of   the
+institution.
+
+    The system was evaluated by two groups of
+respondents:  ten  (10)  IT  consultants  who
+assessed technical quality based on ISO/IEC
+25010:2011 standards, and twenty-three (23)
+end-users composed of administrative staff,
+teachers, and assistants. IT consultants          rated
+the system with an overall weighted mean of 3.38
+(Very Satisfactory), with strong performance
+across  all  criteria  including  functional
+suitability, security, performance efficiency,
+compatibility,  usability,  reliability,  and
+portability.  End-users  similarly  gave  the
+system an overall weighted mean of 3.49 (Very
+Satisfactory), with particularly high marks in
+usability,   functional   correctness,   and
+performance efficiency.
+
+    The   findings   confirm   that   AccredX
+effectively    addresses    the    documented
+shortcomings of the institution's prior record
+management  approach.  The  system  enhances
+document   integrity,   strengthens   security
+through controlled access, and significantly
+improves  the  institution's  readiness  for
+accreditation. This study contributes to a
+
+
+
+                                                     xviii
+
+
+===== PDF PAGE 19 =====
+scalable and practical model for digital records
+management  that  can  be  adopted  by  other
+educational   institutions   facing   similar
+challenges.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                        xix
+
+
+===== PDF PAGE 20 =====
+                      Chapter I
+          THE PROBLEM AND ITS BACKGROUND
+
+Introduction
+
+  In  today's  digital  age,  proper  document
+management and archiving are critical to the
+efficiency,  security,  and  compliance  of
+organizational operations. Records management
+is the systematic control of records from
+creation to disposal, ensuring that critical
+information is available, protected, and kept
+(Dearstyne, 2020; Bailey, 2021).
+
+ As technology has advanced, organizations have
+switched from conventional manual procedures to
+electronic    records    management    systems
+(ERMS), that automate classification, retrieval,
+and storage processes. These modern systems help
+reduce manual effort, improve security through
+encryption and access control, and support
+compliance   with   legal   and   regulatory
+requirements (Smith & Johnson, 2020; Patterson,
+2022).
+
+ According  to  trends,  digital  archiving
+solutions are especially beneficial to the
+education  industry.  Academic  institutions
+manage massive amounts of crucial papers, and
+
+
+
+                                                       1
+
+
+===== PDF PAGE 21 =====
+the necessity for secure, organized, and easily
+available data is especially important during
+accreditation processes (Mitchell & Carter,
+2020).   Implementing   a   reliable   record
+management system ensures that accreditation
+documents are well-organized, secure from data
+loss,  and  easily  accessible  for  review.
+According to studies, organizations that use
+cloud-based archiving benefit from increased
+collaboration, faster information retrieval,
+and lower infrastructure expenses (Harris, 2021;
+Thomassen, 2021).     However, challenges remain,
+particularly in smaller academic institutions
+like Nueva Ecija University of Science and
+Technology   (NEUST)   Peñaranda   Off-Campus.
+Current manual or semi-digital record-keeping
+processes have resulted in inefficiencies such
+as missing data, retrieval delays, and security
+issues. These issues not only affect           everyday
+administrative operations, but also compromise
+the     institution's     preparedness     for
+accreditation and review processes.
+
+  This study aims to create a Record Management
+and Archiving System for NEUST Peñaranda Off-
+Campus. The system will replace manual or semi-
+digital processes, improve document retrieval,
+storage, and organization, and strengthen the
+
+
+
+                                                       2
+
+
+===== PDF PAGE 22 =====
+security  of  sensitive  academic  and  office
+documents  with  access  control  and              user
+authentication. Furthermore, the system is to
+be  evaluated     based  on     ISO/IEC  25010:2011
+software quality standards, with a focus on
+usability,   performance   efficiency,   and
+maintainability.
+
+  This study makes a valuable contribution by
+giving an innovative yet practical solution to
+academic institutions' pressing documentation
+and  preservation  difficulties.  The  project
+provides    ongoing    quality    assurance,
+institutional   accreditation,   and   general
+administrative improvement through the use of
+digital  technologies  and  organized  system
+development. The solution serves as a scalable
+structure for other educational institutions
+looking to improve their records management
+procedures while maintaining long-term data
+integrity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                       3
+
+
+===== PDF PAGE 23 =====
+Review of Related Literature
+
+   Record management and archiving are essential
+for maintaining organizational efficiency and
+compliance with regulations. Records management
+involves the systematic control of records
+throughout their life-cycle. Effective record
+management ensures compliance, security, and
+accessibility    (Dearstyne,    2020).    The
+development of records management and archiving
+systems has significantly evolved with the
+advancement of digital technology. A well-
+organized   records   management   system   is
+essential for businesses and         institutions to
+store, retrieve, and secure essential documents
+efficiently. According to Bailey (2021), modern
+electronic records management systems (ERMS)
+enable   organizations   to   automate   the
+classification,  storage,  and  retrieval  of
+records, reducing manual effort and improving
+document security.
+   Records  management  and  archiving  systems
+ensure compliance with legal and regulatory
+requirements. As stated by Smith & Johnson
+(2020), organizations that implement electronic
+records  management  can  improve  regulatory
+compliance by automatically tracking document
+retention schedules and ensuring that sensitive
+records are disposed of properly. Additionally,
+
+
+                                                       4
+
+
+===== PDF PAGE 24 =====
+automated archiving reduces the risk of document
+misplacement and enhances information retrieval
+speed.    Digital  archives  ensure  long-term
+preservation   and   retrieval   of   critical
+documents (Thomassen, 2021).
+   Digital records management also enhances data
+security  and  accessibility.  According  to
+Patterson   (2022),   cloud-based   archiving
+solutions provide organizations with encrypted
+storage and role-based access, ensuring that
+only authorized personnel can access sensitive
+records. Furthermore, implementing a structured
+digital archiving system minimizes data loss and
+ensures disaster recovery (Thompson & Lee, 2020).
+Studies indicate that organizations using cloud
+storage experience improved collaboration and
+reduce infrastructure costs (Harris, 2021). In
+the educational sector, a study by Mitchell &
+Carter   (2020)   highlighted   that   digital
+archiving systems help academic institutions
+manage student records efficiently, ensuring
+long-term   storage   and   easy   retrieval.
+Additionally,   digital   solutions   prevent
+unauthorized   alterations,   ensuring   data
+integrity.   Encryption,   role-based   access
+control (RBAC), and audit trails are crucial for
+protecting sensitive records (Anderson, 2022).
+
+
+
+
+                                                        5
+
+
+===== PDF PAGE 25 =====
+   The adoption of standardized frameworks and
+best practices in records management further
+improves efficiency and compliance. According
+to Wilson (2021), implementing international
+standards  such  as  ISO  15489  for  records
+management  ensures  systematic  control  over
+document creation, maintenance, and disposal.
+Proper  indexing  and  metadata  tagging  also
+enhance  the  retrieval  process,  allowing
+organizations to locate records quickly and
+accurately (Miller & Adams, 2022). Additionally,
+digitization of paper records reduces physical
+storage  requirements  and  mitigates  risks
+associated with document deterioration or loss
+(Clark, 2020). Effective training programs for
+staff  on  records  management  policies  and
+procedures  are  essential  in  maintaining
+consistency  and  preventing  mishandling  of
+sensitive   information   (Henderson,   2021).
+Moreover, backup strategies, such as redundant
+storage and offsite archiving, play a crucial
+role  in  disaster  recovery  and  business
+continuity (Turner & Scott, 2022).
+   The  integration  of  electronic  document
+management systems (EDMS) has further enhanced
+the efficiency of records management. According
+to Ramirez (2021), EDMS allows organizations to
+store, categorize, and retrieve records with
+
+
+
+                                                       6
+
+
+===== PDF PAGE 26 =====
+greater accuracy and speed. The use of version
+control mechanisms ensures that the latest
+document  revisions  are  accessible  while
+preserving historical records for reference
+(Collins   &   Hayes,   2020).   Additionally,
+implementing  automated  retention  schedules
+helps  organizations  comply  with  legal  and
+regulatory  requirements  by  systematically
+disposing of outdated records (Stewart, 2022).
+Regular system maintenance and data migration
+strategies are also essential to ensure long-
+term accessibility and prevent data corruption
+or loss (Foster, 2021).
+
+   Recent  studies  reinforce  that  records
+management has shifted from a clerical support
+function to a strategic system for efficiency,
+accountability, and compliance in both public
+and  private  organizations  (Anike,  2025;
+Savchenko et al., 2024). Contemporary          digital
+records systems are designed not only to store
+documents, but also to support searchability,
+secure sharing, auditability, and long-term
+accessibility across the records life cycle
+(Qaddoumi, 2025; Anike, 2025; Benmakhlouf &
+Chouaou, 2024). This broader role is especially
+important as institutions manage increasing
+document  volumes  and  face  stronger  legal,
+
+
+
+                                                       7
+
+
+===== PDF PAGE 27 =====
+operational,  and  transparency  requirements
+(Chode,  2025;  Savchenko  et  al.,  2024;
+Benmakhlouf & Chouaou, 2024).
+   Across sectors, digital archiving systems
+consistently  report  better retrieval  speed,
+storage    efficiency,    and    operational
+control than manual or paper-based approaches
+(Yulianti et al., 2025; Erin et al., 2025;
+Pratiwi et al., 2025). Manual systems are
+repeatedly  associated  with  slow  retrieval,
+misplaced  files,  redundancy,  damaged  paper
+records,  and  higher  administrative  burden
+(Justina et al., 2022; Kustiningsih et al.,
+2026).  Electronic  archivation  also  reduces
+physical storage needs and can cut storage costs
+substantially  through  automation  and  cloud
+technologies,   with   one   recent   study
+estimating 40–60% lower storage costs (Moaiyad,
+2025).  In  addition,  centralized  digital
+repositories support faster decision-making,
+smoother workflows, and better continuity after
+disruptive events such as fires or floods
+(Savchenko et al., 2024; Benmakhlouf & Chouaou,
+2024; Kustiningsih et al., 2026).
+   Recent literature also emphasizes that secure
+digital archiving depends on access control,
+encryption, backup, and audit functions rather
+than simple file storage alone (Qaddoumi, 2025;
+
+
+
+                                                       8
+
+
+===== PDF PAGE 28 =====
+Yulianti et al., 2025; Pratiwi et al., 2025).
+Cloud-based document systems are used because
+they allow unified upload, download, sharing,
+auditing, retrieval, and role setting while
+improving scalability and reducing operational
+costs (Han et al., 2021; Sipahutar et al., 2025).
+A secured cloud-based EDMS for a university
+records  unit  used AES  encryption and  was
+reported to be effective in storing, retrieving,
+and sharing documents securely (Justina et al.,
+2022). More recent intelligent document systems
+extend these features with OCR, semantic search,
+automated metadata extraction, audit logging,
+and  policy-based  retention  to  strengthen
+compliance readiness and reduce manual handling
+time (Chode, 2025).
+   In educational institutions, the evidence
+especially supports ERMS adoption for academic
+records, archives, and accountability (Oktarina
+et al., 2025; Jannah et al., 2023; Suripto et
+al., 2025). Digital systems in schools and
+universities improve document          accessibility,
+retrieval speed, and monitoring, while also
+producing  clearer  audit  trails  and  more
+transparent administration (Oktarina et al.,
+2025;  Suripto  et  al.,  2025).  One  higher-
+education accountability study found that most
+archivists using ERMS could retrieve documents
+
+
+
+                                                       9
+
+
+===== PDF PAGE 29 =====
+in less  than  one  minute,  while  document
+availability and completeness remained high
+across education standards (Oktarina et al.,
+2025).  A  registrar  archiving  system  also
+received excellent user ratings for accuracy,
+user-friendliness,  reliability,  operability,
+and cross-platform performance (Mallares et al.,
+2024). These findings indicate that digital
+archiving in education supports both daily
+administrative  efficiency  and  compliance-
+oriented documentation.
+   The recent literature is equally clear that
+implementation problems remain. Common barriers
+include high installation costs, infrastructure
+limitations, weak policies, legal requirements,
+staff     resistance,     and     inadequate
+training (Jannah et al., 2023; Suripto et al.,
+2025). Reviews of higher education records
+management also identify lack of digital skills,
+resource constraints, poor strategic alignment,
+and  security  risks  as  major  obstacles  to
+effective adoption (P. & E., 2025). Several
+studies  therefore  recommend  formal  SOPs,
+continuing   staff   development,   stronger
+managerial support, periodic audits, and phased
+infrastructure improvement to sustain system
+use and compliance (Yulianti et al., 2025;
+Oktarina et al., 2025; Suripto et al., 2025).
+
+
+
+                                                      10
+
+
+===== PDF PAGE 30 =====
+Overall, recent evidence from 2021 to 2026
+supports adding digital records and archiving
+literature to your paper because these systems
+consistently  improve  retrieval,  security,
+transparency,  and  compliance,  while  their
+success still depends on policy, training, and
+organizational readiness.
+
+Conceptual Framework
+
+              INPUT                                     PROCESS
+ • Identified Challenges                       •  Software Development
+    o Current manual and digital                  Life Cycle (SDLC)
+      systems used.                                o  Planning
+    o Misplaced/lost files                         o  Analysis
+    o Slow retrieval and difficulty                o  Design
+      securing files                               o  Implementation
+    o Inefficiency during                          o  Testing &
+      accreditation                                   Integration
+    o Duplication in files                         o  Maintenance
+ • Desired Features &
+  Functionalities
+    o Advanced Search and retrieval
+    o Secure file storage
+    o Document version control
+    o Role-based access
+    o Audit trails                                      OUTPUT
+    o Folder Checklist                         •   Record Management
+    o Download & Print
+    o General Reports                              and Archiving
+                                                   System
+
+
+
+
+
+
+                                                     FEEDBACK
+
+
+              Figure 1. Research Paradigm
+
+
+
+                                                                   11
+
+
+===== PDF PAGE 31 =====
+   As  shown  in  Figure  1,  the  researchers
+identified key challenges in the current record-
+keeping practices at NEUST Peñaranda Off-Campus
+during the input phase. These challenges include
+misplaced files, delayed retrieval, limited
+security  measures,  and  inefficiencies  in
+managing   accreditation-related   documents.
+Additionally,  user  needs  such  as          advanced
+searching   & filtering    and retrieval, document
+version control, role-based access, and audit
+trails were considered essential in guiding
+system development.
+
+   For  the  process  phase,  the  researchers
+applied the Software Development Life Cycle
+(SDLC)  as  the  guiding  methodology.  This
+framework consists of six stages: Requirements
+Analysis,   Design,   Development,   Testing,
+Deployment, and Maintenance. Each step was
+followed to ensure that the system would meet
+both  technical  and  user-centered  quality
+standards.
+
+   The output of the process is a fully developed
+Record Management and Archiving System designed
+to digitize and streamline the institution’s
+document  storage,  retrieval,  and  security
+
+
+
+                                                      12
+
+
+===== PDF PAGE 32 =====
+processes.  By  automating  file  management,
+implementing  robust  access  control,  and
+ensuring auditability, the system addresses the
+current  inefficiencies  and  supports  the
+university’s  accreditation  processes.  This
+leads to improved organizational efficiency,
+data integrity, and ease of access to vital
+records.
+
+
+   Statement of the Problem
+
+   NEUST Peñaranda Off-Campus faces challenges
+in managing and archiving important documents.
+The current manual or semi-digital record-
+keeping process leads to inefficiencies in file
+organization, retrieval delays, security risks,
+and tracking document history. These challenges
+reduce the overall efficiency of administrative
+tasks and accreditation processes, resulting in
+misplaced files, inconsistent record updates,
+and time-consuming searches.
+To address these issues, the goal of this study
+is to develop a Record Management and Archiving
+System that will improve document organization,
+accessibility, and security during storage and
+retrieval.   The   system   will   streamline
+administrative    processes    by             providing
+
+
+
+                                                       13
+
+
+===== PDF PAGE 33 =====
+ structured digital record-keeping, search and
+ filtering  capabilities,  and  file  tracking
+ mechanisms.     Specifically, the study seeks to
+ answer the following questions:
+
+ A. Problem   Identification   and   Contextual
+    Questions:
+1. How do staff members at NEUST Peñaranda Off-
+   Campus   currently   manage   and   archive
+   accreditation records, and what challenges do
+   they face?
+
+2. How can a Record Management and Archiving
+   System improve file retrieval, security, and
+   overall   efficiency        when   it   comes   to
+   accreditation processes?
+
+ B. Technical   Development   and   Evaluation
+    Questions:
+3. What   are   the   essential   features   and
+   functionalities needed for an effective Record
+   Management and Archiving System?
+
+4. How can the system be developed following the
+   Software Development Life Cycle (SDLC) stages:
+      4.1   planning;
+      4.2   analysis;
+      4.3   design;
+
+
+
+                                                         14
+
+
+===== PDF PAGE 34 =====
+      4.4   implementation;
+      4.5   testing and integration;
+      4.6   maintenance;
+5. How may the Record Management and Archiving
+   System be evaluated by IT consultants based on
+   ISO/IEC 25010:2011 standards for the following
+   criteria:
+      5.1   Functional suitability
+      5.2   Performance efficiency
+      5.3   Compatibility
+      5.4   Usability
+      5.5   Reliability
+      5.6   Security
+      5.7   Portability
+
+6. How may the system be evaluated by end users
+   in terms of:
+       6.1   functional suitability;
+       6.2   performance efficiency; and
+       6.3   usability?
+
+    By addressing these questions, the study aims
+ to develop a structured and efficient record-
+ keeping   system   that   enhances   document
+ management,  security,  and  accessibility  at
+ NEUST Peñaranda Off-Campus.
+
+
+
+
+
+                                                          15
+
+
+===== PDF PAGE 35 =====
+Scope and Delimitation
+
+  This  project  focuses  on  developing  and
+implementing a record management and archiving
+system for NEUST Peñaranda Off-Campus. The
+system is intended to handle academic and
+administrative documents by offering a single
+digital platform for storing, organizing, and
+retrieving data. It is specifically designed to
+improve   the   efficiency,   security,   and
+accessibility of papers used by school personnel.
+  The primary users of the system include school
+administrators, staff, and faculty, who will
+benefit from features such as fast document
+search, version tracking, audit trails, and
+role-based access. The scope also covers the
+system’s role in supporting the         accreditation
+process, ensuring that required documentation
+is  readily  available,  complete,  and  well-
+organized.
+  The study is delimited to the Peñaranda Off-
+Campus of NEUST and does not encompass other
+branches or external institutions. It focuses
+only on document management functions and does
+not address other administrative operations
+such as financial systems, student grading, or
+enrollment. Additionally, this study is limited
+to the system’s design, development, and basic
+functional testing.
+
+
+
+                                                      16
+
+
+===== PDF PAGE 36 =====
+Significance of the Study
+
+   The significance of this study lies in its
+potential to address the challenges of managing
+and  organizing  documents  within  the  NEUST
+Peñaranda Off-Campus. By introducing a Record
+Management   and   Archiving   System,   the
+researchers aim to enhance the efficiency,
+security, and accessibility of school records.
+
+   The school: The system allows for centralized
+control  and  management  of  academic  and
+administrative documents. It improves the way
+records are stored, retrieved, and maintained—
+supporting institutional operations, especially
+during evaluations and audits. With features
+like audit trails and role-based access, the
+system also promotes accountability and data
+integrity.
+
+   Staff and Teachers:      The system reduces the
+time and effort required for manual filing and
+record  searching.  With        advanced     search    &
+filtering    functions, folder checklists, and
+version control, staff can perform their tasks
+more efficiently. The ability to access files
+digitally   minimizes   delays   in   document
+
+
+
+
+
+                                                      17
+
+
+===== PDF PAGE 37 =====
+processing,  helping  them  focus  more  on
+instruction and academic responsibilities.
+   Accreditation Process: During accreditation,
+the availability and organization of school
+records play a critical role. This system
+ensures that required documents are complete,
+up-to-date,  and  easy  to  locate,  thereby
+simplifying the preparation for accreditation
+visits. The improved document control also
+contributes to the institution’s credibility
+and compliance with quality standards.
+
+   Overall,  this  study  contributes  to  the
+school’s goal of achieving a more systematic,
+secure, and responsive approach to document
+management.
+Definition of Terms
+
+   Accreditation – a formal recognition that an
+institution meets certain standards of quality.
+In the context of NEUST, it involves reviewing
+documents to assess academic and administrative
+practices.
+
+   Archiving   –  the process of storing records
+and documents, either digitally or physically,
+for long-term preservation and future reference.
+
+
+
+
+                                                      18
+
+
+===== PDF PAGE 38 =====
+   Audit Trail    –  a feature of the system that
+records every activity or modification made to
+documents, helping to track changes and ensure
+accountability.
+
+   Document Management – a structured method for
+handling documents, including creation, storage,
+retrieval, and disposal.
+
+   Electronic Records Management System (ERMS)
+– a software-based system designed to manage
+records in digital format, automate document
+workflows,   and   enhance   security   and
+accessibility.
+
+   File Retrieval – The process of locating and
+accessing   stored   documents   quickly   and
+efficiently.
+   ISO/IEC  25010:2011        –    an  international
+standard used to evaluate software quality based
+on  criteria  like  usability,  reliability,
+maintainability, and performance.
+
+   Record Management – the systematic control of
+records from creation through maintenance to
+disposal. It ensures records are accurate,
+secure, and accessible when needed.
+
+
+
+
+
+                                                       19
+
+
+===== PDF PAGE 39 =====
+   Role-Based Access Control (RBAC)         – a system
+security feature that grants or restricts access
+to documents based on the user's role (e.g.,
+admin, teacher, staff).
+
+   SDLC (Software Development Life Cycle)           –  a
+structured process for developing software that
+includes  phases  such  as  planning,  design,
+development,    testing,    deployment,    and
+maintenance.
+
+   System Evaluation – the process of assessing
+a system’s performance and usability based on
+specific standards or user feedback.
+
+   Version Control      –   a system feature that
+tracks changes to documents and maintains a
+history of previous versions, ensuring data
+consistency.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                       20
+
+
+===== PDF PAGE 40 =====
+                      Chapter II
+               METHODS AND PROCEDURES
+
+
+Research Design
+   The research design serves as a structured
+framework  that  guides  the  selection  and
+application   of   appropriate   methods   and
+strategies in the development of the study. This
+study adopts a developmental research design,
+which emphasizes the iterative creation              and
+refinement of a functional prototype of              the
+AccredX: Record Management and Archiving System.
+The approach centers on continuous feedback from
+end-users  and  stakeholders  to  inform  each
+development cycle, ensuring that the system
+evolves  in  response  to  actual  needs  and
+practical challenges.
+
+   To structure the development process, the
+study applies the Software Development Life
+Cycle (SDLC), particularly utilizing the Agile
+Methodology. Agile is well-suited for dynamic
+and  user-centered  systems,  as  it  promotes
+adaptability,   close   collaboration,               and
+incremental delivery of functional components.
+
+
+
+
+
+
+
+                                                       21
+
+
+===== PDF PAGE 41 =====
+Figure 2 below shows the study of the Record
+Management and Archiving System developed
+using the SDLC.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  Figure 2. SDLC Model
+
+   The Agile methodology in this study consists
+of the following phases:
+
+   Planning Stage: This phase involves
+collecting requirements through consultations
+and interviews with the business owner and
+staff. It aims to identify existing challenges
+in sales transactions and inventory
+
+
+
+
+                                                        22
+
+
+===== PDF PAGE 42 =====
+management, which inform the direction of the
+system’s development.
+
+   Analysis Stage: The development team
+analyzes the gathered requirements to
+determine the features to be implemented in
+the current cycle. User stories are broken
+down into actionable tasks, and acceptance
+criteria are established. Continuous
+communication with stakeholders ensures a
+clear understanding of expectations.
+
+   Design Stage: A lightweight system design is
+formulated based on the requirements of the
+current iteration. This stage emphasizes
+simplicity, functionality, and alignment with
+user needs.
+
+   Implementation Stage: Developers construct
+the code that realizes the planned features.
+Agile practices such as pair programming and
+early-stage testing are integrated to ensure
+code reliability and maintainability.
+
+   Testing and Integration Stage: Testing is
+conducted concurrently with development. Each
+feature undergoes unit and integration testing
+to detect and resolve issues promptly.
+
+
+
+                                                        23
+
+
+===== PDF PAGE 43 =====
+Continuous integration practices are employed
+to preserve system stability as new components
+are added.
+
+   Maintenance Stage: After initial deployment,
+the system enters a maintenance phase wherein
+minor updates, bug fixes, and enhancements are
+implemented. User feedback and evolving
+operational requirements drive further
+iterations to ensure the system remains
+responsive and effective.
+
+   The Agile approach reflects a shift from
+rigid, traditional models toward a more
+flexible, collaborative, and user-focused
+development paradigm. By breaking the project
+into smaller, time-bound iterations or
+"sprints," the methodology allows for rapid
+feedback cycles, increased user involvement,
+and the delivery of high-quality, value-driven
+outcomes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                        24
+
+
+===== PDF PAGE 44 =====
+Research Locale
+
+  This  study  takes  place  at  Nueva  Ecija
+University of Science and Technology (NEUST)
+Peñaranda  Off-Campus,  with  a  particular
+emphasis on the accreditation process. The
+researchers are undergraduate students enrolled
+in the Bachelor of Science in Information
+Technology (BSIT) program, majoring in Web
+Systems Technology.
+
+  Located in Pob. 1, Peñaranda, Nueva Ecija,
+Central Luzon, Philippines, NEUST Peñaranda
+Off-Campus  is  an  educational  institution
+offering various degree programs, including
+BSIT,  Bachelor  of  Science  in  Business
+Administration (BSBA), and Bachelor of Science
+in Secondary Education (BSEd).
+
+  Figure 3     shows   the front view of CNEUST
+Peñaranda  Off-Campus.      Figure  4  provides  a
+detailed map and location of the NEUST Peñaranda
+Off-Campus.
+
+
+
+
+
+
+
+
+
+
+
+
+                                                     25
+
+
+===== PDF PAGE 45 =====
+   Figure 3. Front view of NEUST Peñaranda Off-
+                          Campus
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 Figure 4. Location Map
+
+
+
+
+
+                                                          26
+
+
+===== PDF PAGE 46 =====
+Research Respondents
+
+   The researchers identify two (2) sets of
+respondents involved in this study. These are:
+(1) the IT    consultants    who will evaluate the
+technical aspects of the developed system based
+on software quality standards; and (2) the end-
+users who will evaluate the usability and
+functionality of the developed system.
+
+   The first set of respondents consists of ten
+(10) IT   consultants, selected based on their
+expertise in software development and system
+analysis. Their role is to assess the technical
+and functional quality of the system.
+
+   The second set of respondents consists of
+twenty-three (23) end-users, composed of three
+(3) administrative staff, five (5) teachers, and
+fifteen (15)    assistants. These end-users will
+provide feedback based on their experience in
+using   the   system   in   an   academic   or
+administrative setting.
+
+   Table 1 below shows the distribution of the
+respondents   for   the   developed   system’s
+evaluation according to its category.
+
+
+
+
+
+                                                       27
+
+
+===== PDF PAGE 47 =====
+Table 1. Distribution of Respondents
+
+ CLASSIFICATION       POPULATION         PERCENTAGE
+
+ IT CONSULTANT             10              30.30%
+ END-USER                  23              69.70%
+            ADMIN           3
+          TEACHER           5
+       ASSISTANT           15
+
+       TOTAL               33               100%
+
+Sample and Sampling Procedure
+
+   The researchers employed a purposive sampling
+technique in selecting the respondents for this
+study. Two groups of respondents were identified
+based on their relevance and expertise in
+evaluating the developed Record Management and
+Archiving System.
+
+   The first group consists of           ten   (10) IT
+consultants. They were chosen according to the
+following criteria: (a) professional background
+in Information Technology, (b) knowledge and
+experience in software evaluation and system
+development, and (c) specialization in areas
+such  as  usability,  security,  and  system
+performance. Their evaluation is necessary to
+
+
+
+
+
+                                                       28
+
+
+===== PDF PAGE 48 =====
+assess the system based on technical quality
+standards.
+
+   The second group is composed of twenty-three
+(23) end-users, distributed as follows: three
+(3) administrative staff, five (5) teachers, and
+fifteen (15) assistants. These respondents were
+selected based on their direct involvement in
+the academic and administrative operations of
+NEUST Peñaranda Off-Campus. Their role is to
+evaluate the developed system in terms of
+usability,   functional   suitability,   and
+performance   efficiency,   reflecting   its
+applicability  in  the  actual  institutional
+setting.
+
+   This purposive selection ensured that the
+system was evaluated both from a technical
+perspective (IT     consultants) and a practical
+user perspective (end-users).
+
+Research Instruments
+
+   The primary research instrument used in this
+study   was   a   structured   questionnaire
+distributed in both printed and digital (Google
+Forms) formats. The questionnaire was designed
+to gather quantitative and qualitative feedback
+from respondents regarding the developed system.
+
+
+
+                                                      29
+
+
+===== PDF PAGE 49 =====
+   For the IT     consultants, the questionnaire
+covered  the  following  criteria:  functional
+suitability, performance efficiency, security,
+usability, maintainability, and reliability.
+
+   For the end-users, the questionnaire focused
+on user-centered criteria such as functional
+suitability,   usability,   and   performance
+efficiency, aligned with their experience in
+using the system for record management and
+archiving tasks.
+
+   The questionnaire consisted of a 5-point
+Likert scale ranging from “Strongly Disagree”
+to “Strongly Agree,” supplemented with open-
+ended questions to allow respondents to provide
+additional  insights  and  suggestions  for
+improvement.
+
+
+Data Gathering Procedure
+
+   The data gathering process followed several
+stages. First, the researchers conducted an
+initial  needs  assessment  through  informal
+consultations with NEUST Peñaranda Off-Campus
+staff to identify existing issues in record
+
+
+
+                                                      30
+
+
+===== PDF PAGE 50 =====
+management and archiving. These insights guided
+the development of the system.
+
+   After the system prototype was developed, the
+researchers prepared the evaluation instruments
+and  secured  permission  from  the  school
+administration  to  conduct  the  study.  The
+questionnaires were then distributed to the
+identified respondents. IT consultants received
+digital copies of the evaluation forms, while
+end-users were provided with both printed and
+online versions for convenience.
+
+   Respondents  were  given  adequate  time  to
+explore   the   system   and   assess   its
+functionalities    before    completing    the
+questionnaires. The researchers also provided
+demonstrations and guidance, especially for the
+end-users, to ensure that they could navigate
+and evaluate the system properly.
+
+   Once  the  responses  were  collected,  the
+researchers consolidated and analyzed the data
+to  determine  the  system’s  effectiveness
+according to the specified software quality
+standards. The feedback was used to validate the
+strengths of the system and identify              areas
+requiring further refinement.
+
+
+
+                                                       31
+
+
+===== PDF PAGE 51 =====
+Data Analysis Technique
+
+   After  gathering  the  required  data,  the
+researchers  employed  both  descriptive  and
+statistical techniques to analyze and interpret
+the results of the system evaluation.                For
+Statement of the Problem (SOP) numbers 1 and 2,
+the researchers applied qualitative description
+and narrative analysis to present the existing
+challenges in records management and to describe
+the development process of the proposed system.
+For SOP numbers 3, 4, 5, and 6, the researchers
+utilized frequency distribution and weighted
+mean to summarize and interpret the feedback of
+the respondents. The IT        consultants    evaluated
+the system in terms of functional suitability,
+performance     efficiency,             compatibility,
+usability,    reliability,            security       and
+portability, while the end-users assessed it
+mainly in terms of         functional suitability,
+performance efficiency and usability.
+
+   Percentage.
+      It is used to determine the          rate of the
+   responses for each question. To         compute the
+
+
+
+
+
+
+
+
+
+                                                       32
+
+
+===== PDF PAGE 52 =====
+   percentage,   the   researchers           used   the
+   following formula:
+
+
+
+
+
+
+   Where: P = Percentage
+          F = Frequency
+          N = Total population
+
+   Weighted Arithmetic Mean.
+      It  is  an  average        computed  by  giving
+   different weights to some individual values.
+
+
+
+
+
+
+
+   Where: ∑   = denotes the sum
+          w = weight
+          x = value
+
+
+   Table  2.     Ranges  of  Weighted  Mean  and
+Interpretation for End Users’ Evaluation
+
+
+
+
+
+                                                        33
+
+
+===== PDF PAGE 53 =====
+    RANGE OF WEIGHTED         INTERPRETATION
+          MEAN
+    3.25 – 4.00               Very      Functional/
+                           Efficient/ Usable
+    2.50 – 3.24               Functional/
+                           Efficient/ Usable
+
+    1.75 – 2.49               Needs Improvement
+
+    1.00 – 1.74               Poor
+
+
+   Table    3.   Ranges  of  Weighted  Mean  and
+Interpretation for Consultants’ Evaluation
+
+   RANGE OF WEIGHTED              INTERPRETATION
+           MEAN
+                            Very Functional/
+       3.25 – 4.00          Efficient/ Compatible/
+                            Usable/ Reliable/
+                            Secured/ Portable
+                            Functional/ Efficient/
+       2.50 – 3.24          Compatible/ Usable/
+                            Reliable/ Secured/
+                            Portable
+       1.75 – 2.49          Needs Improvement
+       1.00 – 1.74          Poor
+
+
+
+
+
+
+
+                                                        34
+
+
+===== PDF PAGE 54 =====
+                     Chapter III
+              RESULTS AND DISCUSSION
+   This  chapter  explains  the  analysis  and
+interpretation of the data on the development
+and evaluation of AccredX: Record Management and
+Archiving System. It also addresses the issues
+identified in the study’s Statement of the
+Problem:
+
+   1. Problems Encountered in the Existing
+      System.
+      The existing system of record management
+at NEUST Peñaranda Off-Campus still relies
+heavily on manual and semi-digital processes
+that make document organization, retrieval, and
+archiving inefficient.       While Google Drive is
+used to store and share files, it lacks a
+centralized structure, proper categorization
+for academic and administrative records, and a
+checklist  feature  for  tracking  required
+documents or completion status. This results in
+difficulties in locating specific documents and
+monitoring file requirements when needed. File
+duplication, inconsistent naming conventions,
+and the absence of version control further
+complicate the process. Moreover, since Google
+Drive  access  depends  on  individual  user
+management,  data  security  and  control  are
+limited, increasing the risk of          unauthorized
+
+
+                                                      35
+
+
+===== PDF PAGE 55 =====
+access or accidental deletion. There is also no
+automated tracking or monitoring of uploaded
+files,   making   it   challenging   for   the
+administration to ensure accountability and
+proper record maintenance. These inefficiencies
+highlight the need for a more structured, secure,
+and dedicated Record Management and Archiving
+System   tailored   to   the   institution’s
+operational needs.
+
+2. How AccredX Improves File Retrieval, Security,
+   and Efficiency in Accreditation Processes
+The AccredX system addresses the inefficiencies
+of the existing record management practices at
+NEUST  Peñaranda  Off-Campus  by  introducing
+features that directly enhance file retrieval,
+security, and overall efficiency, particularly
+for accreditation processes.
+
+2.1 Improvement in File Retrieval
+The   system   significantly   improves   file
+retrieval through the following mechanisms:
+
+   •  Advanced Search and Filtering: Users can
+      quickly locate documents using keywords,
+      file  names,  date  ranges,  or  folder
+      locations.  This  eliminates  the  time-
+      consuming  manual  searching  previously
+
+
+
+
+
+                                                        36
+
+
+===== PDF PAGE 56 =====
+      required   when   files   were   stored
+      unstructured in Google Drive.
+
+   •  Centralized       Folder       Structure:
+      Accreditation documents are organized by
+      Area (e.g., Area I      –  Vision and Mission,
+      Area II   –  Faculty, etc.), allowing users
+      to  navigate  directly  to  the  relevant
+      section without guesswork.
+
+   •  Version Control: Users can access previous
+      versions of a document, ensuring that
+      historical  records  are  not  lost  when
+      updates are made. This is particularly
+      valuable  during  accreditation,  where
+      earlier drafts or supporting documents may
+      be required for review.
+
+   •  Folder Checklist Feature: Each folder can
+      have an associated checklist of required
+      documents. Users can immediately see which
+      files have been uploaded and which are
+      still pending, reducing the time spent
+      verifying completeness.
+
+   •  Sort & Filter Options: Items can be sorted
+      by folders only, files only, marked, or
+      unmarked,  enabling  users  to  focus  on
+      specific  document  types  or  pending
+      requirements.
+These features collectively reduce retrieval
+time from minutes or hours to seconds, directly
+
+
+
+                                                       37
+
+
+===== PDF PAGE 57 =====
+supporting   the   efficiency   demands   of
+accreditation preparation.
+
+2.2 Improvement in Security
+The system enhances document security through
+multiple layers of control:
+
+   •  Role-Based Access Control (RBAC): Users
+      are  assigned  roles  (Admin,  Teacher,
+      Assistant) that determine which folders
+      and files they can access. Teachers and
+      assistants  (Compliance  Managers)  are
+      limited to the specific Areas assigned to
+      them by the Admin, preventing unauthorized
+      viewing  or  modification  of  sensitive
+      records.
+
+   •  User Authentication: Secure login with
+      email  and  password  ensures  that  only
+      registered users can access the system. The
+      password reset feature adds an additional
+      layer of account recovery security.
+
+   •  Audit Trails: The system tracks who created,
+      viewed, modified, archived, or deleted
+      each file. This accountability ensures
+      that   any   changes   to   accreditation
+      documents are logged and traceable.
+
+   •  Archiving and Bin Recovery: Deleted files
+      are moved to a Bin and retained for 90 days
+      before  permanent  deletion,  preventing
+
+
+
+                                                       38
+
+
+===== PDF PAGE 58 =====
+      accidental data loss. Admins can restore
+      or permanently delete items as needed.
+
+   •  Account Management Controls: Admins can
+      enable or disable user accounts, archive
+      inactive  users,  and  control  folder
+      assignments, ensuring that access rights
+      are always current and appropriate.
+These  security  features  address  the  risks
+identified in the existing Google Drive setup,
+where access was individually managed and lacked
+centralized oversight.
+2.3  Improvement  in  Overall  Efficiency  for
+Accreditation
+The  system  directly  supports  accreditation
+processes by:
+
+   •  Automated   Compliance   Tracking:   The
+      dashboard  displays  compliance  status
+      percentages, pending documents counts, and
+      accreditation  readiness  graphs,  giving
+      administrators real-time visibility into
+      preparation progress.
+
+   •  Checklist  Completion  Monitoring:  Each
+      accreditation folder can have checklists
+      with required file counts. As files are
+      uploaded   and   marked,   the   system
+      automatically updates completion status,
+      reducing manual verification work.
+
+
+
+
+
+                                                       39
+
+
+===== PDF PAGE 59 =====
+   •  Compliance Report Generation: Users can
+      generate accreditation reports summarizing
+      compliance status across all Areas. These
+      reports can be downloaded and shared with
+      accreditation teams or external evaluators.
+
+   •  Reduced Duplication and Errors: Version
+      control and centralized storage eliminate
+      the problem of multiple conflicting copies
+      of  the  same  document,  ensuring  that
+      everyone accesses the most current and
+      accurate files.
+
+   •  Streamlined  Workflows:  The  structured
+      folder hierarchy, combined with role-based
+      access, ensures that the right people have
+      access to the right documents at the right
+      time, reducing coordination overhead.
+In    summary,    AccredX    transforms    the
+accreditation document management process from
+a fragmented, manual effort into an organized,
+automated, and auditable workflow, directly
+answering how the system improves retrieval,
+security, and efficiency.
+
+   3. Essential Features and Functionalities of
+      an  Effective  Record  Management  and
+      Archiving System
+   Based  on  the  needs  identified  at  NEUST
+   Peñaranda  Off-Campus  and  the  features
+
+
+
+                                                       40
+
+
+===== PDF PAGE 60 =====
+   implemented in AccredX, the following are the
+   essential   features   and   functionalities
+   required for an effective Record Management
+   and Archiving System.
+
+   3.1 Core Features Identified as Essential
+
+   A truly effective record management system
+   must  first  provide  centralized  document
+   storage, creating a single digital repository
+   where all records are kept. This eliminates
+   scattered file locations and establishes a
+   single source of truth for the institution.
+   Closely related is folder and file management,
+   which allows users to create, rename, move,
+   and  delete  folders  and  files,  enabling
+   logical organization of records by category
+   such as accreditation Areas.
+
+   To address retrieval delays, the system must
+   include  advanced  search  and  filtering
+   capabilities, including keyword search, date
+   filters, file type filters, and sort options.
+   This feature significantly reduces the time
+   spent locating specific documents. Document
+   version control is another critical feature,
+   as it tracks file versions and allows users
+   to  access  previous  versions,  preserving
+
+
+
+                                                       41
+
+
+===== PDF PAGE 61 =====
+   document history and preventing data loss
+   from updates.
+
+   For security and proper access, role-based
+   access control (RBAC) is essential. This
+   provides different permission levels based on
+   user  roles  such  as  Admin,  Teacher,  or
+   Assistant, ensuring document security and
+   preventing       unauthorized       access.
+   Complementing this is user account management,
+   which gives administrators the ability to
+   create, enable, disable, and archive user
+   accounts, maintaining control over who can
+   access the system.
+
+   Accountability is supported through audit
+   trails, which log all user actions including
+   create,  view,  edit,  delete,  and  archive
+   activities. This provides transparency and
+   supports   compliance   reviews.   Checklist
+   management  is  particularly  important  for
+   accreditation, as it allows the creation of
+   required document checklists within folders,
+   tracking completeness of requirements in real
+   time.
+
+   The system must also include archiving and
+   retention features, enabling users to archive
+
+
+
+                                                       42
+
+
+===== PDF PAGE 62 =====
+   old records and recover deleted items with a
+   retention  period  (e.g.,  90  days  before
+   permanent deletion). This supports long-term
+   preservation and prevents accidental data
+   loss. Compliance reporting is another vital
+   function,  generating  reports  that  show
+   document status, completion percentages, and
+   accreditation readiness, directly supporting
+   decision-making      and      accreditation
+   preparation.
+
+   A dashboard with analytics provides at-a-
+   glance   visibility   into   system   and
+   accreditation   status,   displaying   total
+   folders,  total  files,  archived  items,
+   compliance status, and pending documents.
+   File upload with conflict resolution (options
+   to cancel, replace, or keep both files when
+   uploading  duplicates)  prevents  accidental
+   overwriting and preserves file integrity.
+   Finally, user profile management allows users
+   to update profile pictures, email addresses,
+   and passwords, supporting personalization and
+   account security.
+
+
+
+
+
+
+
+                                                       43
+
+
+===== PDF PAGE 63 =====
+   3.2 Security Features Identified as Essential
+
+   Beyond the core features, several security-
+   specific functionalities are essential. The
+   system must implement secure authentication
+   using email and password-based login with
+   password reset functionality. Account status
+   control enables administrators to enable or
+   disable user accounts as needed. Assigned
+   folder restrictions limit user access to only
+   the folders assigned to them, preventing
+   unauthorized viewing of sensitive records.
+   Audit logging records all user activities for
+   accountability, and a bin and recovery system
+   with a 90-day retention period ensures that
+   accidentally deleted items can be restored
+   before permanent removal.
+
+   3.3 User Experience Features Identified as
+   Essential
+
+   To ensure the system is actually adopted and
+   used effectively, certain user experience
+   features are necessary. The interface should
+   provide intuitive navigation with a clear
+   folder hierarchy and easy-to-locate action
+   buttons. Progress indicators such as upload
+   progress bars give users visual feedback
+
+
+
+                                                      44
+
+
+===== PDF PAGE 64 =====
+   during file operations. Clear error handling
+   with  user-friendly  messages  helps  users
+   understand  and  resolve  issues  such  as
+   duplicate file uploads. Finally, the system
+   must prioritize accessibility, ensuring that
+   staff  with  varying  levels  of  technical
+   proficiency can use it without difficulty.
+
+   These   essential   features   formed   the
+   foundation of the AccredX system and directly
+   address the challenges identified in the
+   existing record management practices at NEUST
+   Peñaranda Off-Campus.
+
+
+   4. The Design and Development of            AccredX:
+      Record Management and Archiving System
+      through the use of Agile Development Life
+      Cycle.
+      The  researchers  applied  the  different
+phases of the Agile Model for the practical
+completion of the AccredX: Record Management and
+Archiving System. Each stage of the Agile Model
+is defined and explained as follows:
+
+   4.1   Planning Stage
+   The researchers began the planning stage by
+identifying the need to improve the existing
+
+
+
+                                                       45
+
+
+===== PDF PAGE 65 =====
+record management and archiving processes at
+NEUST Peñaranda Off-Campus. The starting point
+for this research stemmed from the recurring
+issues   encountered   during   accreditation
+processes,  where  locating  and  organizing
+necessary documents proved time-consuming and
+inefficient. To gain a clearer understanding of
+these challenges, the researchers conducted
+interviews and discussions with the school staff
+and faculty members who were directly involved
+in  managing  institutional  records.  Through
+these consultations, they were able to identify
+specific concerns such as document misplacement,
+lack of centralized access, and difficulties in
+retrieving accreditation files.
+
+   Furthermore, the researchers collaborated to
+define  the  study’s  objectives,  scope,  and
+limitations, ensuring that the proposed system
+would effectively address the identified issues.
+Brainstorming  sessions  were  conducted  to
+determine the most essential features of the
+system, including file categorization, secure
+data   storage,   and   streamlined   document
+retrieval.  The  researchers  also  reviewed
+existing digital record management tools and
+practices  to  gather  insights  on  effective
+methods   of   organizing   and   safeguarding
+
+
+
+                                                       46
+
+
+===== PDF PAGE 66 =====
+institutional data. Based on these findings,
+they formulated a system design that would not
+only
+support accreditation requirements but also
+enhance the overall efficiency and reliability
+of record handling within the campus.
+
+Gantt Chart
+   As a result of the planning, the Gantt Chart
+was produced. It contains the Agile Model stages
+which are the following:         Planning, Analysis,
+Design, Implementation, Testing and Integration,
+and Maintenance.
+   The schedule of activities performed by the
+researchers  every  stage  and  during  the
+development of the      AccredX: Record Management
+and Archiving System is depicted in Figure 5.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                       47
+
+
+===== PDF PAGE 67 =====
+       Figure 5. Gantt Chart of Activities
+
+
+
+
+
+                                                           48
+
+
+===== PDF PAGE 68 =====
+   4.2   Design Stage
+
+   After the initial study of the researchers,
+they now proceed to the Design Stage. Here,
+diagrams are presented as a guide to the
+development of the system. These tools became
+essential   for   creating   the   system's
+functionalities,   front-end   and   back-end
+interfaces, and database. The visual diagrams
+included in this stage are the Use Case Diagram,
+Entity    Relationship    Diagram,            Database
+Normalization, Data Dictionary, and          Data Flow
+Diagram.
+
+   Use Case Diagram
+   Use case diagrams provide an overview of a
+complete  system  or  its  key  components,
+showcasing  the  relationship  between  system
+users and the various system activities. The
+developed system's use-case diagram is shown in
+Figure 6 below.
+
+
+
+
+
+
+
+
+
+
+
+
+                                                      49
+
+
+===== PDF PAGE 69 =====
+              Figure 6. Use Case Diagram
+
+   The Use Case Diagram of the AccredX: Record
+Management and Archiving System illustrates the
+interaction between the system and its three
+main users    — the Admin, Teacher and Assistant
+(Which is grouped into Compliance Manager since
+
+
+                                                        50
+
+
+===== PDF PAGE 70 =====
+they have the same capabilities in the system).
+The   admin   serves  as  the  system’s  primary
+controller  with  full  access  to  all  major
+functions, including managing user accounts,
+creating and uploading folders and files            and
+checklists, archiving and deleting records,
+viewing  analytics  in  the  dashboard,  and
+generating    accreditation    reports.    The
+Compliance Manager share similar privileges but
+with  limited  access,  focusing  mainly  on
+uploading, organizing, and managing their own
+folders and files within the system. They can
+also view the dashboard for their respective
+activities and generate accreditation reports.
+This  use  case  setup  ensures  a  structured
+workflow and access control, supporting the
+institution’s goal of maintaining an efficient
+and secure record management process.
+
+
+   Data Flow Diagram
+    A data flow diagram (DFD) is a graphical
+representation of data flow through a system.
+It’s  employed  to  understand  how  data  is
+processed, stored, and communicated within a
+system. Moreover, DFD is used to support the
+analysis of how the data flows in existing or
+proposed systems from one page or module to
+
+
+
+                                                      51
+
+
+===== PDF PAGE 71 =====
+another (using a flowchart). The context diagram
+of the system is displayed in Figure 7 below.
+
+
+
+
+
+
+
+
+
+
+              Figure 7. Context Diagram
+
+   The Data Flow Diagram (DFD) of the AccredX:
+Record   Management   and   Archiving   System
+illustrates how data moves between the three
+main user types—Admin, Teacher and Assistant
+(Grouped into Compliance Manager since they have
+the same capabilities in the system)            and the
+system’s core processes. As shown in Figure 7,
+the   admin    has  full  control  over  system
+operations, including user management, file and
+folder  creation,  checklist  management,  and
+report generation. Data from the Admin flows
+into the system, where it is processed, stored,
+and made accessible according to defined roles.
+Compliance Managers      interact with the system
+through limited access features, allowing them
+to upload and organize their own folders and
+
+
+
+
+
+                                                       52
+
+
+===== PDF PAGE 72 =====
+files, as well as access and submit files for
+checklists.
+   This structured flow of information ensures
+that data is efficiently managed, securely
+stored,    and    easily    retrievable    for
+accreditation and administrative purposes. The
+DFD    emphasizes    clear    boundaries    of
+responsibility and data access among user types,
+promoting data integrity, accountability, and
+streamlined   communication   within   NEUST
+Peñaranda Off-Campus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                       53
+
+
+===== PDF PAGE 73 =====
+                 Figure 8. DFD Level 1
+
+   Figure 8 illustrates       the Level 1 Data Flow
+Diagram (DFD) of the AccredX: Record Management
+and Archiving System. The diagram illustrates
+the major processes performed by the system and
+
+
+
+
+                                                        54
+
+
+===== PDF PAGE 74 =====
+the interaction between its two primary users:
+the Administrator and the Compliance Manager.
+   The system begins with       1.0 User Management,
+where the Administrator creates, updates, and
+manages user accounts and access privileges.
+This process ensures that authorized personnel
+can  access  the  system  according  to  their
+assigned roles and responsibilities.
+   The  2.0 Log In Management        process handles
+user authentication. Both the Administrator and
+Compliance   Manager   provide   their   login
+credentials, which are verified by the system
+before access is granted. This process helps
+maintain the security and confidentiality of
+institutional records.
+   In 3.0 Profile Management, users can view and
+update their personal account information. The
+system  stores  profile  details  and  allows
+authorized users to modify necessary account
+information to keep records current and accurate.
+   The  4.0 Record Management process serves as
+the core function of the system. Through this
+process, users can upload, organize, search,
+retrieve, update, and manage accreditation-
+related  documents  and  records.  The  system
+maintains  these  records  in  a  centralized
+repository for efficient access and document
+tracking.
+
+
+
+                                                       55
+
+
+===== PDF PAGE 75 =====
+   The  5.0 Archive Management        process handles
+inactive, completed, or historical records.
+Documents that are no longer actively used may
+be transferred to the archive while remaining
+accessible for future reference, audits, and
+accreditation purposes.
+   Lastly,   6.0 Report Generation enables users
+to generate reports based on stored records and
+system  activities.  The  generated  reports
+provide  summaries  and  documentation  that
+support   decision-making,   monitoring,   and
+accreditation compliance requirements.
+   Overall, the Level 1 DFD demonstrates how
+AccredX manages user access, maintains records,
+archives documents, and generates reports to
+improve  the  efficiency,  organization,  and
+accessibility     of     accreditation-related
+information within NEUST Peñaranda Off-Campus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                       56
+
+
+===== PDF PAGE 76 =====
+    Figure 9. DFD Level 2 – User Management
+
+   Figure 9 illustrates      the Level 2 Data Flow
+Diagram (DFD) for the       User Management     process
+of the AccredX: Record Management and Archiving
+System. This diagram provides a more detailed
+view of how user accounts are managed within the
+system by the Administrator through the           Users
+(D1) data store.
+   The process begins with         1.1 Register New
+Account, where the Administrator enters the
+necessary  user  information  such  as  name,
+username, password, role, and other account
+details. The system validates the information
+and stores the new user account in the            Users
+(D1)   database.  This  process  ensures  that
+
+
+                                                      57
+
+
+===== PDF PAGE 77 =====
+authorized personnel can be granted access to
+the system.
+   The  1.2 Modify User Configuration           process
+allows the Administrator to update existing user
+information and account settings. Through this
+process,  user  roles,  permissions,  account
+status, and profile details can be modified as
+needed. The updated information is then saved
+to the    Users (D1)      data store to maintain
+accurate and current user records.
+   The 1.3 Fetch Account Records process enables
+the Administrator to retrieve and view stored
+user account information from the          Users (D1)
+database.  This  process  supports  account
+monitoring, verification, and management by
+providing  access  to  existing  user  records
+whenever needed.
+   The  User  Management  process  ensures  the
+proper creation, maintenance, and retrieval of
+user  accounts,  allowing  the  system  to
+effectively   control   access   and   manage
+authorized users within the AccredX platform.
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                      58
+
+
+===== PDF PAGE 78 =====
+       Figure 10. Level 2 – Login Management
+
+   The Log In Management process, illustrated in
+Figure 10, manages user authentication, session
+creation, and password recovery for both the
+Administrator and Compliance Manager             through
+the Users (D1) data store.
+   The process begins with         2.1 Verify Access
+Credentials, where users enter their username
+and password to access the system. The submitted
+credentials are compared with the records stored
+in the Users (D1) database. If the credentials
+are valid, the system grants access to the
+appropriate user dashboard based on the assigned
+role. If the credentials are invalid, the system
+denies access and prompts the user to try again.
+
+
+                                                        59
+
+
+===== PDF PAGE 79 =====
+   Once  the  user's  credentials  have  been
+successfully verified, the system proceeds to
+2.2 Generate Session Tokens. In this process,
+the system creates and assigns a session token
+that maintains the user's authenticated session
+while using the platform. This helps ensure
+secure access to system resources and prevents
+unauthorized use during active sessions.
+   The 2.3 Process Password Reset process allows
+users who have forgotten their passwords to
+request account recovery. The system verifies
+the user's account information using the records
+stored  in  the        Users  (D1)      database  and
+facilitates the password reset procedure. Once
+the password has been successfully updated, the
+new credentials are stored in the database and
+can be used for future logins.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      Figure 11. Level 2 – Profile Management
+
+                                                       60
+
+
+===== PDF PAGE 80 =====
+   Figure 11    presents the Level 2 Data Flow
+Diagram (DFD) for the Profile Management process
+of the AccredX: Record Management and Archiving
+System.   This   process   allows   both   the
+Administrator and Compliance Manager to view and
+maintain their personal account information
+through the Users (D1) data store.
+   The process begins with         3.1 Fetch Profile
+Metadata,    where the user requests access to
+their profile information. The system retrieves
+the relevant account details from the Users (D1)
+database,  including  personal  information,
+account settings, and role-related data. The
+retrieved information is then displayed to the
+user for viewing and verification.
+   The  3.2 Update Profile Info process enables
+users to modify their profile details whenever
+necessary. Information such as name, contact
+details, username, and other authorized profile
+attributes may be updated through this process.
+Once the modifications are submitted, the system
+validates  the  changes  and  updates  the
+corresponding records in the Users (D1) database
+to ensure that user information remains accurate
+and current.
+
+
+
+
+
+
+
+
+                                                       61
+
+
+===== PDF PAGE 81 =====
+    Figure 12. Level 2 – Records Management
+
+   Figure 12 illustrates the Level 2 Data Flow
+Diagram (DFD) for the Record Management process
+of the AccredX: Record Management and Archiving
+System. This process enables the Administrator
+and   Compliance Manager       to organize, store,
+monitor,  and  manage  accreditation-related
+documents through the system's data stores,
+namely    Folders  (D2),  Files  (D3),  Folder
+Checklists (D4), and Checklist File Link (D5).
+
+
+
+                                                       62
+
+
+===== PDF PAGE 82 =====
+   The process begins with        4.1 Create System
+Folders, where authorized users create and
+organize folders according to accreditation
+requirements and document classifications. The
+folder information is stored in the Folders (D2)
+data store, providing a structured repository
+for records and supporting efficient document
+organization.
+   The 4.2 Log Uploaded Files          process allows
+users to upload and store accreditation-related
+documents within the designated folders. The
+system records file details, including document
+information and storage references, in the Files
+(D3)  data store. This process ensures that
+documents are properly cataloged and readily
+accessible when needed.
+   The   4.3  Track  Checklist  Status          process
+monitors the completion and availability of
+required accreditation documents. The system
+retrieves and updates checklist information
+stored in the Folder Checklists (D4) data store
+and associates supporting documents through the
+Checklist File Link (D5)          data store. This
+enables users to determine whether all required
+documents have been submitted and organized
+within their respective folders.
+   The 4.4 Audit System Activity process records
+and monitors actions performed within the Record
+
+
+
+                                                      63
+
+
+===== PDF PAGE 83 =====
+Management module, such as folder creation, file
+uploads, updates, and other document-related
+activities. Audit information helps maintain
+accountability, supports monitoring of system
+usage,  and  provides  a  history  of  record
+management transactions.
+   Overall,  the  Record  Management  process
+serves as the central component of the AccredX
+platform by facilitating document organization,
+file  storage,  checklist  monitoring,  and
+activity tracking. These functions improve the
+efficiency, accessibility, and reliability of
+accreditation record management within NEUST
+Peñaranda Off-Campus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      Figure 13. Level 2 – Archive Management
+
+
+
+
+
+
+                                                       64
+
+
+===== PDF PAGE 84 =====
+   This is the Level 2 DFD for Archive Management.
+This process enables the Administrator to manage
+inactive records by identifying documents that
+are no longer actively used and maintaining
+their availability for future retrieval. The
+process interacts with the         Folders (D2)      and
+Files (D3) data stores.
+   The process begins with        5.1 Flag Inactive
+Records,    where the Administrator identifies
+folders and files that are no longer part of
+active accreditation activities. The system
+marks these records as inactive and updates
+their status within the Folders (D2) and Files
+(D3) data stores. This process helps organize
+records by separating inactive documents from
+those currently in use while preserving them for
+future reference.
+   The  5.2 Extract Archived Records            process
+allows the Administrator to retrieve archived
+folders and files whenever access to historical
+records is required. The system accesses the
+archived information stored in the Folders (D2)
+and  Files (D3)     data stores and provides the
+requested records for viewing, verification, or
+accreditation-related purposes.
+
+
+
+
+
+
+
+
+
+                                                       65
+
+
+===== PDF PAGE 85 =====
+      Figure 14. Level 2 – Report Generation
+
+   Figure   14  presents the Level 2 Data Flow
+Diagram (DFD) for the Report Generation process
+of the AccredX: Record Management and Archiving
+System. This process enables the Administrator
+and Compliance Manager to generate reports and
+analytical  summaries  based  on  information
+stored  in  the  system's  data  repositories,
+including    Folders (D2),       Files (D3),      Folder
+Checklist (D4), and Checklist File Link (D5).
+   The process begins with 6.1 Formulate System
+Analytics, where the Administrator generates
+
+                                                       66
+
+
+===== PDF PAGE 86 =====
+reports  and  analytical  summaries  regarding
+document  management  activities.  The  system
+retrieves relevant data from the Folders (D2),
+Files (D3), Folder Checklist (D4), and Checklist
+File  Link  (D5)       data  stores  to  produce
+information such as document counts, folder
+status, checklist completion rates, and other
+record management metrics. These reports assist
+administrators in monitoring system performance
+and document organization.
+
+   The 6.2 Formulate Compliance Audits process
+enables the Compliance Manager to generate
+compliance-related reports for accreditation
+purposes. The system gathers and analyzes data
+from the Folders (D2), Files (D3), Folder
+Checklist (D4), and Checklist File          Link (D5)
+data stores to determine the completeness,
+availability,  and  status  of  accreditation
+requirements. The generated reports provide
+valuable information for compliance monitoring,
+accreditation preparation, and institutional
+assessments.
+
+   Overall,  the  Report  Generation  process
+transforms stored system data into meaningful
+reports and summaries that support decision-
+making,     compliance     evaluation,     and
+
+
+
+                                                      67
+
+
+===== PDF PAGE 87 =====
+accreditation activities. This process enhances
+the ability of NEUST Peñaranda Off-Campus to
+monitor document readiness, track accreditation
+requirements, and maintain organized records
+within the AccredX platform.
+
+
+               Database Normalization
+   Database normalization is a principle used to
+organize data clearly and consistently within a
+database.  Its  objectives  are  simplifying
+complexity, removing duplicate information, and
+ensuring consistent data organization (K.Chris,
+2023). The unnormalized form (UNF) of the
+developed system is depicted in Figure below.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                       68
+
+
+===== PDF PAGE 88 =====
+        Figure 15. Unnormalized Form (UNF)
+
+
+
+
+
+
+
+
+
+
+
+
+                                                            69
+
+
+===== PDF PAGE 89 =====
+       Figure 16. First Normal Form (1NF)
+
+Entity Relationship Diagram
+
+   A  visual  depiction  of  the  relationships
+between entries in a database is called an
+entity relationship diagram (ER diagram or ERD).
+ERDs are a specific kind of flowchart that
+illustrates the kinds of relationships that
+exist between various elements in a system.
+
+
+
+                                                       70
+
+
+===== PDF PAGE 90 =====
+   The  provided  set  of  tables  appears  to
+represent an Entity-Relationship Diagram (ERD)
+for the developed system. The relationships
+between these tables are established through the
+primary and foreign keys.
+   The ERD helps visualize how these entities
+are interconnected and how data flows within the
+system, which is crucial for understanding the
+structure and relationships in a database or
+system.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      Figure 17. Entity Relationship Diagram
+
+
+Data Dictionary
+   Data components are used or recorded in
+databases, information systems, and research
+
+
+                                                       71
+
+
+===== PDF PAGE 91 =====
+   projects.  To  better  understand  these  data
+   elements, a data dictionary is created, which
+   contains   their   names,   definitions,   and
+   properties.  The  developed  system's  data
+   dictionary is displayed in the following tables.
+
+      Table 4. users Table
+
+
+Fields Name           Description     Type/Length     Constraint
+
+id                    Unique          int (11)        Primary
+                      Identifier                      key
+                      for each
+                      user
+username              Username of     varchar(255)
+                      the user
+password              Password of     varchar(255)
+                      the user
+email                 Email of the    varchar(255)
+                      user
+status                Status of       tinyint(4)
+                      the user
+                      account,
+                      whether
+                      Enabled or
+                      Disabled
+role                  Role of the     varchar(50)
+                      user (Admin,
+                      Teacher,
+                      Assistant)
+
+
+
+
+                                                              72
+
+
+===== PDF PAGE 92 =====
+reset_token            Token for        varchar(255)
+                       resetting
+                       password
+reset_expires          Date and         datetime
+                       time the
+                       reset token
+                       expires
+archive                Whether user     int(11)
+                       account is
+                       archived or
+                       not
+img                    Profile          varchar(255)
+                       picture of
+                       the user
+assigned_folders       Which            text
+                       folders the
+                       user is
+                       assigned to
+remember_token         Remember         varchar(255)
+                       token
+remember_expiry        Date and         datetime
+                       time
+                       remember
+                       token
+                       expires
+terms_accepted_at      Date and         datetime
+                       time terms
+                       and
+                       conditions
+                       were
+                       accepted at
+
+
+                                                                 73
+
+
+===== PDF PAGE 93 =====
+is_system_account     Whether or       tinyint(1)
+                      not user is
+                      system
+                      account or
+                      not
+
+
+
+
+       Table 5. folders Table
+
+
+    Fields Name          Descripti      Type/Leng     Constrai
+                         on             th            nt
+
+    id                   Unique         int(11)       Primary
+                         Identifie                    key
+                         r
+                         for each
+                         folder
+    name                 Name of        varchar(2
+                         the            55)
+                         folder
+    parent_id            Parent ID      int(11)
+                         of the
+                         folder
+    created_by           User that      varchar(2
+                         created        55)
+                         the
+                         folder
+    last_viewed_by       Which          varchar(2
+                         user last      55)
+                         viewed
+
+
+                                                                74
+
+
+===== PDF PAGE 94 =====
+                      the
+                      folder
+ last_viewed_at       Date and       varchar(2
+                      time the       55)
+                      folder
+                      was last
+                      viewed at
+ archived             Whether        tinyint(1
+                      folder is      )
+                      archived
+                      or not
+ archived_by          User that      int(11)
+                      archived
+                      the
+                      folder
+ archived_ at         Date and       datetime
+                      time the
+                      folder
+                      was
+                      archived
+ deleted_by           User that      int(11)
+                      deleted
+                      the
+                      folder
+ deleted_at           Date and       datetime
+                      time
+                      folder
+                      was
+                      deleted
+ scheduled_delet      Scheduled      datetime
+ e_at                 delete
+
+
+                                                             75
+
+
+===== PDF PAGE 95 =====
+  user_id               User ID       int(11)
+
+  created_at            Time the      timestamp
+                        folder
+                        was
+                        created
+  oid                   OID           int(11)
+
+
+
+
+     Table 6. folder_checklists Table
+
+
+Fields Name        Description      Type/Length     Constraint
+
+id                 Unique           int(11)         Primary
+                   Identifier                       key
+                   for each
+                   checklist
+folder_id          ID of the        int(11)         Foreign
+                   folder the                       Key
+                   checklist is
+                   in
+checklist_name     Name of the      varchar(255)
+                   checklist
+created_at         Date and         timestamp
+                   time
+                   checklist
+                   was created
+is_checkedd        Whether          tinyint(1)
+                   checklist is
+
+
+
+
+
+                                                              76
+
+
+===== PDF PAGE 96 =====
+                   checked or
+                   not
+required_files     Required          int(11)
+                   number of
+                   files for
+                   the
+                   checklist
+uploaded_count     Number of         int(11)
+                   files
+                   uploaded
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                77
+
+
+===== PDF PAGE 97 =====
+   Table 7. checklist_file_links Table
+
+
+Fields Name     Description      Type/Length     Constraint
+
+id              Unique           int(11)         Primary
+                Identifier                       key
+                for each
+                checklist
+                file link
+folder_id       Folder ID        int(11)
+checklist_id    Checklist ID     int(11)         Foreign
+                                                 Key
+file_id         File ID          int(11)         Foreign
+                                                 Key
+created_at      Time             timestamp
+                checklist
+                file link
+                was created
+
+
+   Table 8. files Table
+
+
+ Fields Name          Descripti     Type/Leng     Constrai
+                      on            th            nt
+
+ id                   Unique        int(11)       Primary
+                      Identifie                   key
+                      r
+                      for each
+                      file
+
+
+
+
+                                                            78
+
+
+===== PDF PAGE 98 =====
+ name                 Name of        varchar(2
+                      the file       55)
+ path                 Filepath       varchar(2
+                      where the      55)
+                      file is
+ pdf_path             Filepath       varchar(2
+                      for the        55)
+                      PDF
+                      preview
+                      of the
+                      file
+ relative_path        Relative       varchar(5     Foreign
+                      path of        00)           Key
+                      the file
+ folder_id            Folder ID      int(11)
+
+ created_by           User that      varchar(2
+                      created        55)
+                      the file
+ last_viewed_by       User that      varchar(2
+                      last           55)
+                      viewed
+                      the file
+ last_viewed_at       Date and       varchar(2
+                      time the       55)
+                      folder
+                      was last
+                      viewed
+ archived             File is        tinyint(1
+                      archived       )
+                      or not
+
+
+
+                                                             79
+
+
+===== PDF PAGE 99 =====
+ archived_by          User that      int(11)
+                      archived
+                      the file
+ archived_at          Date and       datetime
+                      time file
+                      was
+                      archived
+ deleted_by           User that      int(11)
+                      deleted
+                      the file
+ deleted_at           Date and       datetime
+                      time the
+                      file was
+                      deleted
+ scheduled_delet      Scheduled      datetime
+ e_at                 delete
+ userid               User ID        int(11)
+
+ created_at           Time file      timestamp
+                      was
+                      created
+ oid                  OID            int(11)
+
+ version_group_i      Version        int(11)
+ d                    group ID
+ version              Version        int(11)
+                      of the
+                      file
+ is_latest            Is the         tinyint(1
+                      latest         )
+                      version
+
+
+
+
+                                                             80
+
+
+===== PDF PAGE 100 =====
+                    of the
+                    file
+last_viewed_by_     Last         int(11)
+id                  viewed by
+                    ID
+
+
+
+4.3 Development Stage
+   The researchers chose Visual Studio Code as
+the text editor for writing the source code of
+the developed system, because it simplifies the
+process of code editing and debugging. The
+sample is shown in Figure 18 below.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            Figure 18. Visual Studio Code
+
+
+
+
+                                                        81
+
+
+===== PDF PAGE 101 =====
+   XAMPP Control Panel was used to test and run
+the developed system, while the output was
+reviewed through browsers Google Chrome and
+Microsoft  Edge.  The  system’s  data  and
+functionality were tested and validated within
+the database using XAMPP.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           Figure 19. XAMPP Control Panel
+   Using phpMyAdmin, the researchers were able
+to create the necessary databases and tables to
+store the system’s data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                      82
+
+
+===== PDF PAGE 102 =====
+              Figure 20. phpMyAdmin Page
+The created system user web pages are shown in
+the figures below.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          Figure 21. Homepage of the System
+
+
+
+
+                                                         83
+
+
+===== PDF PAGE 103 =====
+                  Figure 22. Login Page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+               Figure 23. Dashboard Page
+
+
+                                                           84
+
+
+===== PDF PAGE 104 =====
+                Figure 24. Folders Page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+             Figure 25. My Uploads Page
+
+
+
+
+
+                                                          85
+
+
+===== PDF PAGE 105 =====
+                Figure 26. Archives Page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   Figure 27. Bin Page
+
+
+
+
+
+
+                                                          86
+
+
+===== PDF PAGE 106 =====
+         Figure 28. Users Page (Admin Only)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                Figure 29. Profile Page
+
+
+
+
+
+                                                          87
+
+
+===== PDF PAGE 107 =====
+4.4 Testing Stage
+
+   During this phase, the researchers conducted
+thorough testing of the system to identify and
+resolve any issues, ensuring it functions as
+intended. Adjustments were made to refine the
+system’s performance and align it with the
+project requirements. This testing phase took
+place after completing the development of both
+the system interface and back-end components.
+It involved verifying that all features work
+seamlessly together and that the system meets
+the  expected  usability  and  functionality
+standards. The researchers collaborated with IT
+consultants and end-users to test the system,
+identify errors, and gather recommendations for
+improvement. Their feedback helped refine the
+system’s functionality and usability.
+
+4.5 Deployment Stage
+   In this stage, AccredX: Record Management and
+Archiving System had been thoroughly tested and
+evaluated by the researchers, so it can now be
+put into deployment. The researchers uploaded
+the system online via web hosting under a domain
+name.
+   An  Estimated  Project  Cost  contains  the
+expenses related to the system maintenance upon
+its deployment.
+
+
+                                                       88
+
+
+===== PDF PAGE 108 =====
+      Domain Costing: Domain costing is needed
+      to   maintain   the   system’s   online
+      availability.
+   The total cost to maintain the AccredX:
+Record  Management  and  Archiving  system  is
+1,100.00 as reflected below.
+   Table 9. Estimated Project Cost
+           COMPONENT                           COST
+
+        Domain Costing                      ₱1,100.00
+
+Total  Estimated  Project                   ₱1,100.00
+Cost
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      Figure 30. System Successfully Deployed
+
+
+
+
+
+
+                                                       89
+
+
+===== PDF PAGE 109 =====
+4.6 Operational Stage
+   The researchers continuously monitored the
+system  to  ensure  it  has  been  functioning
+properly from its launch up to the present. The
+researchers   reviewed   and   addressed   any
+potential issues or weaknesses in the system,
+striving  to  make  consistent  improvements.
+Importantly, the researchers listened closely
+to   user   feedback   and          suggestions.   By
+incorporating these insights, they made the
+system  more  intuitive  and  user-friendly,
+ensuring it better meets the needs of those who
+rely on it.
+
+5. IT Consultants’ evaluation results of
+AccredX: Record Management and Archiving
+System
+   The developed system was evaluated by ten (10)
+IT Consultants. The IT Consultants evaluated the
+performance and features of the AccredX: Record
+Management.  The  following  sections  include
+tables that provide a clear view of the data
+collected. These tables highlight the findings
+from the IT consultants’ responses.
+
+   5.1 Functional Suitability
+   Table 10 shows the functional suitability of
+the developed AccredX: Record Management and
+
+
+
+                                                       90
+
+
+===== PDF PAGE 110 =====
+Archiving System assessed by the IT consultants
+that consists of three (3) sub-characteristics
+namely:  functional  completeness,  functional
+correctness, and functional appropriateness.
+
+   Table 10. Assessment of the IT consultants on
+the Functional Suitability of the developed
+system
+ Software Product       Weighted Mean             Verbal
+    Categories                               Interpretation
+    Functional                3.5            Very Functional
+   Completeness
+    Functional                3.7            Very Functional
+    Correctness
+    Functional                3.4            Very Functional
+ Appropriateness
+    Functional                3.53           Very Functional
+    Suitability
+
+   Effectively  meets  user  requirements  by
+ensuring all necessary features, operates as
+expected without      errors, and is well-aligned
+with the intended purpose, making it a reliable
+and efficient solution for users.
+
+   5.2 Performance Efficiency
+   Table 11 shows the performance efficiency of
+the developed AccredX: Record Management and
+
+
+
+                                                       91
+
+
+===== PDF PAGE 111 =====
+Archiving System assessed by the IT consultants
+that consist of three (3) sub-characteristics,
+namely: time behavior, resource utilization and
+capacity.
+
+   Table 11. Assessment of the IT consultants on
+the Performance Efficiency of the developed
+system
+     Software                                    Verbal
+      Product           Weighted Mean       Interpretation
+    Categories
+
+  Time behavior               3.4           Very Efficient
+
+     Resource                 3.6           Very Efficient
+   utilization
+
+     Capacity                 3.3           Very Efficient
+
+   Performance               3.43           Very Efficient
+    Efficiency
+
+   As presented in Table 11, the evaluation
+results for the Performance Efficiency category
+indicate a weighted mean of 3.43, with a verbal
+interpretation of “Very Efficient”.
+
+   5.3 Compatibility
+   Table 11 shows the         compatibility      of the
+developed  AccredX:  Record  Management  and
+Archiving System assessed by the IT consultants
+
+
+                                                       92
+
+
+===== PDF PAGE 112 =====
+that consist of two        (2) sub-characteristics,
+namely: coexistence and interoperability.
+Table 12. Assessment of the IT consultants on
+the Compatibility of the developed system
+
+
+  Software Product          Weighted            Verbal
+      Categories              Mean         Interpretation
+
+
+
+     Co-existence              3.4        Very Compatible
+
+
+
+
+  Inter-operability            3.2        Very Compatible
+
+
+
+
+    Compatibility              3.3        Very Compatible
+
+
+
+   As shown in Table 12, the evaluation results
+for  the  Compatibility  category  indicate  a
+weighted mean of 3.3, and a verbal rating of
+“Very Compatible”.
+
+   5.4 Usability
+   Table 13 shows the usability of the developed
+AccredX: Record Management and Archiving System
+assessed by the IT consultants that consist of
+six      (6)    sub-characteristics,    namely:
+appropriateness recognizability, learnability,
+
+
+                                                        93
+
+
+===== PDF PAGE 113 =====
+operability,  user  error  protection,  user
+interface aesthetics and accessibility.
+
+
+   Table 13. Assessment of the IT consultants on
+the Usability of the developed system
+     Software                                     Verbal
+      Product           Weighted Mean        Interpretation
+    Categories
+ Appropriateness              3.3              Very Usable
+ recognizability
+   Learnability               3.3              Very Usable
+   Operability                3.1                 Usable
+    User error                3.4              Very Usable
+    protection
+  User interface              3.5              Very Usable
+    aesthetics
+  Accessibility               3.3              Very Usable
+     Usability               3.32              Very Usable
+
+   As  presented    in Table 13, the evaluation
+results for the Compatibility category indicate
+a weighted mean of 3.32, and a verbal rating of
+“Very Usable”.
+
+   5.5 Reliability
+   Table  14     shows  the     reliability     of  the
+developed  AccredX:  Record  Management  and
+
+
+
+                                                        94
+
+
+===== PDF PAGE 114 =====
+Archiving System assessed by the IT consultants
+that consist of      four  (4) sub-characteristics,
+namely: maturity, availability, fault tolerance
+and recoverability.
+
+
+   Table 14. Assessment of the IT consultants on
+the Usability of the developed system
+     Software                                     Verbal
+      Product           Weighted Mean        Interpretation
+    Categories
+
+     Maturity                 3.3             Very Reliable
+
+
+   Availability               3.3             Very Reliable
+
+
+ Fault tolerance              2.9                Reliable
+
+
+  Recoverability              3.5             Very Reliable
+
+
+    Reliability               3.25            Very Reliable
+
+
+   The evaluation results for the Reliability
+category indicate a weighted mean of 3.25 and a
+verbal rating of “Very Reliable”.
+5.6 Security
+   Table 15 shows the Security of the developed
+AccredX: Record Management and Archiving System
+assessed by the IT consultants that consist of
+
+
+                                                        95
+
+
+===== PDF PAGE 115 =====
+five      (5)    sub-characteristics,    namely:
+confidentiality,  integrity,  non-repudiation,
+accountability and authenticity.
+
+
+   Table 15. Assessment of the IT consultants
+on the Security of the developed system
+     Software                                    Verbal
+      Product          Weighted Mean        Interpretation
+    Categories
+
+ Confidentiality              3.6            Very Secured
+
+
+     Integrity                3.5            Very Secured
+
+
+ Non-repudiation              3.6            Very Secured
+
+
+ Accountability               3.4            Very Secured
+
+
+   Authenticity               3.3            Very Secured
+
+
+     Security                3.48            Very Secured
+
+
+   As shown in Table 15, the evaluation results
+for the   Security    category indicate a weighted
+mean of 3.48, and a verbal rating of “Very
+Secured”.
+
+
+
+
+
+                                                        96
+
+
+===== PDF PAGE 116 =====
+   5.7 Portability
+   Table  16     shows  the     Portability     of  the
+developed  AccredX:  Record  Management  and
+Archiving System assessed by the IT consultants
+that consist of three (3) sub-characteristics,
+namely:     adaptability,   installability   and
+replaceability.
+   Table 16. Assessment of the IT consultants on
+the Security of the developed system
+     Software                                    Verbal
+      Product           Weighted Mean       Interpretation
+    Categories
+   Adaptability               3.3            Very Portable
+  Installability              3.7            Very Portable
+  Replaceability              3.1               Portable
+   Portability               3.37            Very Portable
+
+   The evaluation results for the Reliability
+category indicate a weighted mean of 3.37 and a
+verbal rating of “Very Portable”.
+
+   5.8 IT Consultants Evaluation Summary
+   The following table displays the overall
+summary result of the evaluation conducted by
+the IT Consultants on the developed system,
+AccredX: Record Management and Archiving System.
+
+
+
+
+
+
+                                                       97
+
+
+===== PDF PAGE 117 =====
+   Table 17. IT Consultants’ Evaluation Summary
+Result
+   Software Product          Weighted           Verbal
+       Categories               Mean       Interpretation
+       Functional               3.53             Very
+      suitability                           Satisfactory
+      Performance               3.43             Very
+       Efficiency                           Satisfactory
+     Compatibility              3.3              Very
+                                            Satisfactory
+        Usability               3.32             Very
+                                            Satisfactory
+      Reliability               3.25             Very
+                                            Satisfactory
+        Security                3.48             Very
+                                            Satisfactory
+      Portability               3.37             Very
+                                            Satisfactory
+Overall                         3.38             Very
+                                            Satisfactory
+
+6.  End users’ Evaluation Results of AccredX:
+Record Management and Archiving System
+
+   The end users assessed the performance and
+qualities of the developed AccredX: Record
+Management and Archiving System based on the
+
+
+
+
+
+                                                       98
+
+
+===== PDF PAGE 118 =====
+selected  criteria:  functional  suitability,
+performance efficiency and usability.
+   The  respondents  were  grouped  into  three
+categories:   administrator,   teachers,   and
+assistants. This grouping reflects their roles
+as  the  primary  users  of  the  system.  The
+developed system was evaluated by 3 admins, 5
+teachers and 15 assistants, with a total of 23
+respondents. The respondents did the evaluation
+of  the  system  by  answering  the  prepared
+questionnaires given by the researchers.             The
+following sections include tables that provide
+a clear view of the data collected. These tables
+highlight the findings from the          system users’
+responses.
+
+
+   6.1 Functional Suitability
+   Table 18 shows the functional suitability of
+the developed AccredX: Record Management and
+Archiving System assessed by the end users that
+consist  of      three    (3)  sub-characteristics,
+namely:    functional  completeness,  functional
+correctness and functional appropriateness.
+
+
+
+
+
+
+
+                                                       99
+
+
+===== PDF PAGE 119 =====
+   Table 18. Assessment of the end users on the
+Functional Suitability of the developed system
+ Software Product       Weighted Mean             Verbal
+    Categories                               Interpretation
+    Functional                3.2            Very Functional
+   Completeness
+    Functional                3.6            Very Functional
+    Correctness
+    Functional                3.6            Very Functional
+ Appropriateness
+    Functional                3.46           Very Functional
+    Suitability
+
+   The system is very functional, with nearly
+complete features, correct functionality, and
+appropriate characteristics for its intended
+use. These ratings suggest that the system
+effectively meets user needs and performs well
+in all key areas of functionality.
+
+   6.2 Performance Efficiency
+   Table 19 shows the performance efficiency of
+the developed AccredX: Record Management and
+Archiving System assessed by the end users that
+consist  of  three  (3)  sub-characteristics,
+namely: time behavior, resource utilization and
+capacity.
+
+
+
+
+                                                      100
+
+
+===== PDF PAGE 120 =====
+   Table 19. Assessment of the end users on the
+Performance Efficiency of the developed system
+     Software                                    Verbal
+      Product          Weighted Mean        Interpretation
+    Categories
+
+  Time behavior              3.6            Very Efficient
+
+     Resource                3.4            Very Efficient
+   Utilization
+
+     Capacity                3.4            Very Efficient
+
+   Performance               3.46           Very Efficient
+    Efficiency
+
+   It   demonstrates   very   high-performance
+efficiency. The system performs efficiently in
+terms of time, effectively utilizing resources,
+and handling capacity requirements.
+
+
+   6.3 Usability
+   Table 20 shows the usability of the developed
+AccredX: Record Management and Archiving System
+assessed by the end users that consist of             six
+(6)        sub-characteristics,        namely:
+appropriateness recognizability, learnability,
+operability,  user  error  protection,  user
+interface aesthetics and accessibility.
+
+
+
+                                                       101
+
+
+===== PDF PAGE 121 =====
+   Table 20. Assessment of the end users on the
+Usability of the developed system
+ Software Product        Weighted Mean             Verbal
+    Categories                                Interpretation
+ Appropriateness               3.4              Very Usable
+ recognizability
+   Learnability                3.5              Very Usable
+    Operability                3.7              Very Usable
+    User error                 3.6              Very Usable
+    protection
+  User interface               3.6              Very Usable
+    aesthetics
+   Accessibility               3.6              Very Usable
+     Usability                3.55              Very Usable
+
+   The system is very usable. The system excels
+in areas such as recognizability, learnability,
+and operability, ensuring users
+can easily understand, navigate, and interact
+with it.
+
+
+6.4 End-users’ Evaluation Summary
+   Table 21 displays the overall result of the
+evaluation conducted by the End Users on the
+developed  AccredX:  Record  Management  and
+Archiving System.
+
+
+
+                                                       102
+
+
+===== PDF PAGE 122 =====
+   Table  21.     End-users’  Evaluation  Summary
+Result
+
+    Software Product           Weighted            Verbal
+        Categories                Mean        Interpretation
+
+        Functional                3.46               Very
+       suitability                              Satisfactory
+
+       Performance                3.46               Very
+        Efficiency                              Satisfactory
+
+         Usability                3.55               Very
+                                                Satisfactory
+
+Overall                           3.49               Very
+                                                Satisfactory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                        103
+
+
+===== PDF PAGE 123 =====
+                      Chapter IV
+    SUMMARY, CONCLUSIONS AND RECOMMENDATIONS
+
+Summary
+   This study aimed to develop AccredX: Record
+Management  and  Archiving  System  for  NEUST
+Peñaranda  Off-Campus  in  response  to  the
+institution’s need for a more efficient, secure,
+and organized method of managing academic and
+administrative documents. The existing manual
+and semi-digital processes, including reliance
+on    Google    Drive    without    structured
+categorization or checklist tracking, resulted
+in misplaced files, retrieval delays, limited
+security measures, and inefficiencies during
+accreditation.
+
+   To address these concerns, the researchers
+designed and developed a digital system using
+the Software Development Life Cycle (SDLC) under
+the Agile methodology. The system integrated
+essential features such as         advanced   search    &
+filtering    and  retrieval,  folder  and  file
+management,  version  control,  audit  trails,
+role-based   access   control,   accreditation
+checklists, and report generation. Visual tools
+including Use Case Diagrams, Data Flow Diagrams
+(DFD), Entity Relationship Diagrams (ERD), and
+
+
+
+                                                      104
+
+
+===== PDF PAGE 124 =====
+Database  Normalization  guided  the  system’s
+structure and functionality.
+
+   Two groups evaluated the system: ten (10) IT
+consultants assessing technical quality based
+on ISO/IEC 25010:2011 and twenty-three (23) end-
+users   evaluating   usability   and   actual
+functionality in an academic context. Both
+groups rated the system highly across all
+criteria.
+
+
+   IT consultants rated the system as Excellent
+overall (WM = 3.38), with high ratings in
+functional suitability, performance efficiency,
+compatibility, usability, reliability, security,
+and portability. End users likewise rated the
+system  Excellent  overall  (WM  =  3.49),
+highlighting  its  ease  of  use,  efficient
+performance, and completeness of features.
+
+   The study successfully delivered a functional,
+secure, and user-friendly record management
+system capable of supporting NEUST Peñaranda
+Off-Campus   in   improving   administrative
+processes, ensuring document integrity, and
+strengthening accreditation preparation.
+
+
+
+
+                                                     105
+
+
+===== PDF PAGE 125 =====
+Conclusion
+  Based on the findings of the study, the
+following conclusions were drawn:
+
+     1.  The existing record management system
+  at NEUST Peñaranda Off-Campus was inadequate
+  for  the  institution's  operational  and
+  accreditation needs. The reliance on Google
+  Drive without structured organization, proper
+  categorization, checklist functionality, or
+  centralized  control  created  significant
+  inefficiencies,    security    risks,    and
+  difficulties  in  document  retrieval  and
+  accountability.
+
+     2.      The Agile methodology and SDLC
+  framework proved effective        in developing a
+  comprehensive    and    responsive    record
+  management system. The iterative development
+  approach allowed for continuous refinement
+  based on stakeholder feedback, ensuring the
+  final   product   aligned   closely   with
+  institutional    requirements    and    user
+  expectations.
+     3.     AccredX successfully addresses the
+  identified     problems            through     its
+  implementation   of   essential   features
+
+
+
+                                                     106
+
+
+===== PDF PAGE 126 =====
+   including  centralized  storage,  role-based
+   access control, audit trails, version control,
+   and accreditation checklist management. These
+   functionalities     collectively     enhance
+   document       organization,       security,
+   accessibility, and accountability.
+
+      4.  The system demonstrates high technical
+   quality    as  evidenced  by  IT  consultants'
+   ratings  across  all  ISO/IEC  25010:2011
+   criteria. Particularly strong performance in
+   functional   suitability,   security,   and
+   performance  efficiency  confirms  that  the
+   system    meets    professional    software
+   development  standards  and        is  technically
+   sound.
+
+      5.     End-users find the system highly
+   functional and usable      in actual operational
+   contexts. The consistently high ratings from
+   administrative    staff,    teachers,    and
+   assistants  indicate  that  the  system  is
+   intuitive, efficient, and well-suited to the
+   daily tasks and workflows of its intended
+   users.
+
+      6.     The system significantly improves
+   accreditation   preparedness          by   ensuring
+
+
+
+                                                      107
+
+
+===== PDF PAGE 127 =====
+   required documents are complete, organized,
+   well-tracked through checklists, and easily
+   retrievable. This structured approach reduces
+   preparation   time   and   enhances   the
+   institution's       credibility       during
+   accreditation reviews.
+
+
+
+Recommendations
+   The conclusions and findings of the study
+have led to the formulation of the following
+recommendations:
+
+   1. Implement Additional Security Enhancements
+      Although the system already meets high
+      security standards, integrating advanced
+      features such as two-factor authentication
+      (2FA), IP logging, and automated security
+      alerts can further strengthen protection
+      against  unauthorized  access  and  data
+      breaches.
+
+   2. Develop a Mobile-Friendly or Mobile App
+      Version
+      Creating a responsive mobile layout or a
+      dedicated mobile application would allow
+      users—especially  teachers  and  staff—to
+
+
+
+                                                      108
+
+
+===== PDF PAGE 128 =====
+      access   records   conveniently   using
+      smartphones or tablets, improving overall
+      accessibility.
+
+
+   3. Integrate  Automated  Backups  and  Cloud
+      Storage Options
+      To ensure long-term data preservation, the
+      system should implement automated backup
+      schedules. Cloud-based backup integration
+      may also be considered to prevent data loss
+      in  the  event  of  system  failures  or
+      disasters.
+
+
+   4. Provide Comprehensive User Training and
+      Documentation
+      Conducting  regular  training  sessions,
+      creating  user  manuals,  and  producing
+      tutorial videos would help ensure that all
+      users—teachers,      assistants,      and
+      administrators—maximize   the   system’s
+      features effectively.
+
+
+   5. Conduct Continuous System Maintenance and
+      Updates
+      Regular updates are recommended to fix
+      emerging bugs, improve the user interface,
+
+
+
+                                                      109
+
+
+===== PDF PAGE 129 =====
+      enhance performance, and incorporate new
+      features based on user feedback.
+
+   6. Explore  Integration        with  Other  NEUST
+      Systems
+      Future studies may focus on integrating the
+      system    with    other    academic    or
+      administrative platforms within NEUST to
+      create a more unified and streamlined
+      workflow across the campus.
+
+
+   7. Expand   the   Checklist   Feature   for
+      Accreditation
+      Enhancing the checklist module by adding
+      automated       reminders,       due-date
+      notifications, and compliance percentage
+      tracking     will     further     improve
+      accreditation    readiness    and    user
+      accountability.
+
+   8. Conduct   Further   Studies   and   User
+      Experience Testing
+      Researchers   may   conduct   additional
+      evaluations, usability testing sessions,
+      and longitudinal studies to assess long-
+      term user satisfaction, system reliability,
+      and its overall impact on institutional
+      efficiency.
+
+
+                                                      110
+
+
+===== PDF PAGE 130 =====
+References
+
+Bailey  (2021).  Modern  electronic  records
+management systems (ERMS) and their impact on
+document  security.  National  Archives  and
+Records Administration (NARA).
+https://ussm.gsa.gov/assets/files/ERM/NARA%20E
+RM%20Overview%20of%20Use%20Cases%20for%20Elect
+ronic%20Records%20March%202021.pdf
+
+Clark, P. (2020). The Advantages of Digitizing
+Paper Records. Records Management Quarterly,
+55(3), 25-33.
+
+Collins, M., & Hayes, J. (2020). Document
+Version Control: A Guide to Effective Version
+Management.
+https://www.sharefile.com/resource/blogs/docum
+ent-version-control-guide
+
+Foster, G. (2021). Document Version Control: A
+Comprehensive Guide for Project Managers.
+https://www.getguru.com/reference/document-
+version-control
+
+Health Care Compliance Brief. (2020). Records
+management and regulatory compliance. Health
+Care Compliance Brief.
+
+
+
+                                                      111
+
+
+===== PDF PAGE 131 =====
+Henderson, L. (2021). The Importance of Staff
+Training in Records Management. Information and
+Records Management Society Journal, 12(1), 15-
+22.
+
+Managed  Outsource  Solutions.  (2021).  Major
+factors driving electronic records management.
+Managed          Outsource          Solutions.
+https://www.managedoutsource.com/blog/key-
+factors-driving-electronic-records-management-
+in-2021/
+
+MES Ltd. (2021). Records management trends for
+2021. MES Ltd. https://blog.mesltd.ca/records-
+management-trends-for-2021
+
+Miller, S., & Adams, R. (2022). Enhancing
+Document Retrieval through Proper Indexing and
+Metadata Tagging. Journal of Documentation,
+78(4), 112-130.
+
+Mitchell, R., & Carter, L. (2020). Digital
+archiving systems in academic institutions:
+Enhancing efficiency and data security. Records
+Management Journal.
+
+
+
+
+
+
+                                                      112
+
+
+===== PDF PAGE 132 =====
+National Archives and Records Administration
+(NARA). (2021). Use cases for electronic records
+management. NARA.
+
+Ramirez, L. (2021). Efficiency of Electronic
+Document Management Systems: A Case Study.
+https://www.academia.edu/88983141/Efficiency_o
+f_Electronic_Document_Management_Systems_A_Cas
+e_Study
+
+Stewart, P. (2022). Best Practices for Document
+Version Control: A Comprehensive Guide for
+Modern Businesses.
+https://www.eisenvault.com/post/best-
+practices-for-document-version-control-a-
+comprehensive-guide-for-modern-businesses
+
+Turner,  M.,  &  Scott,  D.  (2022).  Backup
+Strategies for Disaster Recovery and Business
+Continuity. Journal of Business Continuity &
+Emergency Planning, 16(2), 89-101.
+
+Wilson. (2021). Implementing ISO 15489 for
+Effective  Records  Management.  International
+Journal of Information Management, 37(2), 45-53.
+
+
+
+
+
+
+
+
+
+                                                      113
+
+
+===== PDF PAGE 133 =====
+Qaddoumi, N. A. E. (2025). Development of an
+electronic   records-keeping   with   enhanced
+classification  and  organized  retention  and
+disposal     system     (E-RECORDS).     AIDE
+Interdisciplinary Research Journal.
+
+Yulianti, E., Zainal, V. R., & Hakim, A. (2025).
+The impact of digital archiving on document
+management efficiency in the Directorate of
+Service and Zones Investment Planning, Ministry
+of Investment and Downstreaming/BKPM. Jurnal
+Ekonomi Manajemen Sistem Informasi.
+
+Chode,  B.  (2025).  Next-generation  document
+intelligence: Enabling smart metadata, secure
+access, and regulatory compliance with AI.
+International Journal of Scientific Research in
+Engineering and Management.
+
+Anike, D. O. (2025). Effective strategies for
+managing records in contemporary organizations.
+Journal of Teaching, Learning & Curriculum.
+
+Akuna, Y. P., & E. (2025). Academic records
+management practices in Africa higher education
+institutions: Empirical review. British Journal
+of Contemporary Education.
+
+
+
+
+                                                      114
+
+
+===== PDF PAGE 134 =====
+Al Nukkary, M. (2025). Electronic archivation
+of  documents  as  key  element  of  efficient
+organization  management.  Vestnik  of  the
+Plekhanov Russian University of Economics.
+
+Ikuomola, A. J., Abiodun, O. E., & Orogbemi, O.
+M. (2022). A secured cloud-based electronic
+document  management  system.  International
+Journal of Innovative Research and Development.
+
+Oktarina, N., Suryanto, E., Permana, D., &
+Saeroji, A. (2025). The role of electronic
+records  management  systems  in  enhancing
+accountability  in  educational  institutions.
+Hrvatska i komparativna javna uprava.
+
+Erin, N. P., Wardani, K. D. K. A., & Gorda, A.
+A. N. E. S. (2025). Improving operational
+efficiency through digital archiving: A case
+study of debtor document management at BRI
+Regional Office Denpasar. Jurnal Karya Abdi
+Masyarakat.
+
+Pratiwi, M., Rizqiana, T., Sulistiyani, E.,
+Ramadhanti, N. Y., & Chairunnisa, D. M. (2025).
+Unlocking  digital  archive  efficiency:  ERP
+implementation in the wooden furniture industry.
+
+
+
+
+
+                                                     115
+
+
+===== PDF PAGE 135 =====
+RSF Conference Series: Business, Management and
+Social Sciences.
+
+Savchenko, S. V., Prokofieva, K., & Reshetilova,
+O. (2024). Search for a model of office workflow
+optimisation for institutions, organisations
+and enterprises. Ukrainian Journal of Civil
+Engineering and Architecture.
+
+Jannah, R., Rizkyana, F. W., & Budiantoro, R. A.
+(2023).  Audit  of  a  web-based  electronic
+documents and record management system (WEDRMS):
+Oversight efforts to improve administration in
+higher   educational   institutions.   BISECER
+(Business Economic Entrepreneurship).
+
+Han, J., Wang, C., Miao, J., Lu, M., Wang, Y.,
+&  Shi,  J.  (2021).  Research  on  electronic
+document  management  system  based  on  cloud
+computing. Computers, Materials & Continua.
+
+Sipahutar, M. N. M. B., Linhar, A., & Sipayung,
+S. P. (2025). Security analysis of data storage
+in  cloud-based  digital  archive  management
+systems. Journal of Advanced Computer Knowledge
+and Algorithms.
+
+
+
+
+
+
+                                                       116
+
+
+===== PDF PAGE 136 =====
+Mallares, D., Alegata, W. C., & Bual, J. M.
+(2024). Admission and registrar office (ARO)
+mobile document scanner with archiving system.
+Technium: Romanian Journal of Applied Sciences
+and                                Technology.
+http://doi.org/10.37502/IJSMR.2022.5601
+(Mallares et al.,       2024) Putri, K. D. S., &
+Yulianti, P. (2024). Digitalization document
+control and data records management to support
+business intelligence of integrated documented
+information  control  activities  at  PT  X.
+Transekonomika: Akuntansi, Bisnis dan Keuangan.
+
+Oladejo,  B.  K.,  &  Hadzidedic,  S.  (2021).
+Electronic records management – a state-of-the-
+art review. Records Management Journal.
+
+Suripto, S., Zuhairi, Z., Manurung, S., Astanti,
+A., & Harahap, A. (2025). Effective strategies
+for   digital-based   archive   and   document
+management   in   Labuhanbatu   High   School.
+International  Journal  of  Education,  Social
+Studies, and Management (IJESSM).
+
+Benmakhlouf,  H.,  &  Chouaou,  A.  (2024).
+Electronic document, information, and archive
+management systems in economic institutions: A
+descriptive  study  of  the  OnBase  system.
+
+
+
+                                                      117
+
+
+===== PDF PAGE 137 =====
+International Journal of Professional Business
+Review.
+
+Kustiningsih, S. R. (2026). The implementation
+of  analog-to-digital  records  management  in
+government institutions to support the adoption
+of  an  electronic-based  government  system.
+Riwayat: Educational Journal of History and
+Humanities.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                      118
+
+
+===== PDF PAGE 138 =====
+                       Appendix A.
+          Research Adviser Request Letter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                          119
+
+
+===== PDF PAGE 139 =====
+                       Appendix B.
+           Data Gathering Request Letter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                          120
+
+
+===== PDF PAGE 140 =====
+                                                                                          121
+
+
+===== PDF PAGE 141 =====
+                       Appendix C.
+           English Critic Request Letter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                          122
+
+
+===== PDF PAGE 142 =====
+                       Appendix D.
+         Consultation and Monitoring Form
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                          123
+
+
+===== PDF PAGE 143 =====
+                                                                      124
+
+
+===== PDF PAGE 144 =====
+                       Appendix E.
+         Research Adviser Approval Letter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                          125
+
+
+===== PDF PAGE 145 =====
+                          Appendix F.
+   AccredX: Record Management and Archiving System for
+           NEUST Penaranda Off-Campus User Manual
+
+A. Landing Page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   •   Here you can see a brief overview of the AccredX
+       system.
+   •   Brief overview of the system’s features and our
+       contact information.
+   •   Click the “Get Started” button to Login to the
+       system.
+   •   You can “Watch Demo” to watch a short preview of
+       the AccredX system and its features.
+   •   You can generate a compliance report that
+       displays the accreditation progress.
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                   126
+
+
+===== PDF PAGE 146 =====
+B. Login
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   •   Enter the email and password sent by the system
+       through email.
+   •   Make sure to type the correct login credentials,
+       as any incorrect email or password will not be
+       accepted.
+   •   Click the “Sign In” button to login to the
+       system.
+   •   Click “Forgot password?” if you forgot your
+       account password and it will be sent through
+       email.
+
+
+C. Forgot Password
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   •   Enter your email address
+
+                                                                    127
+
+
+===== PDF PAGE 147 =====
+   •   Click the “Send Reset Link” to receive a password
+       reset link through email.
+   •   Click “Back to Login” to go back to the Login
+       Page.
+
+
+
+C. Registration
+   •   To be registered into the system, kindly ask an
+       admin and send them your email.
+   •   An email will be sent to your email address that
+       contains your username and provided password.
+   •   Use your email and password to login to the
+       system afterwards.
+
+
+D. Dashboard Page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   •   Upon logging in, the system will display the
+       dashboard page.
+   •   Here you can see the Total Folders, Total Files,
+       Archived Items, Compliance Status, Pending
+       Documents, Required Files, and Accreditation
+       Readiness numbers and graphs.
+       -   Total Folders – the total number of folders in
+           the records
+
+
+
+                                                                   128
+
+
+===== PDF PAGE 148 =====
+       -   Total Files – the total number of files in the
+           records
+       -   Archived Items – the number of items archived
+       -   Compliance Status – the percentage of
+           compliance completion and the number of
+           checklists completed
+       -   Pending Documents – the number of documents
+           needed to be complied with
+       -   Accreditation Readiness – shows the overall
+           progress of each Area
+   •   You can also generate a compliance report in this
+       page.
+
+
+E. Folders Page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    •   Here, you can see all the folders of all the
+        Areas you are assigned to.
+    •   You can only access the Folders of the Areas you
+        are assigned to by the Admin.
+    •   Click one of the Folders to open it.
+    •   You can only manage/manipulate all folders in the
+        system if you are an Admin. If you are a
+        compliance manager (teacher or assistant), you
+        can only manage folders you create or upload.
+    •   You can only manage/manipulate files that you
+        have uploaded. Admins can manage all files.
+
+
+
+
+                                                                   129
+
+
+===== PDF PAGE 149 =====
+Once you open a folder, at the top right you can see
+these buttons, respectively;
+
+
+
+
+
+   •   Create Folder
+   •   Upload File
+   •   Checklist
+   •   Sort & Filter
+   •   Select Items
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      1)  Create Folder
+
+
+                                                                     130
+
+
+===== PDF PAGE 150 =====
+       •   Enter a name for the Folder you want to create
+       •   Click the “Create” button to create the
+           Folder.
+      2) Upload File
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       •   You have the option to upload Files or
+           Folders.
+       •   Select a file or folder to upload, or drag it
+           and drop it into the system.
+       •   Click “Upload Files” or “Upload Folders” to
+           upload them.
+       •   Wait for the Files or Folders to be uploaded.
+           A progress bar and percentage will be shown as
+           your folder or file uploads.
+       •   The uploaded folder or file will then be
+           displayed.
+       •   When uploading a file or folder with the same
+           name, a modal will be displayed with the
+           options to Cancel, Replace, or Keep Both.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                    131
+
+
+===== PDF PAGE 151 =====
+       •   Clicking “Replace” will replace the file, but
+           leave the older version of the file which can
+           be downloaded.
+       •   Clicking “Keep Both” will display both files,
+           with the newer file having a suffix (1) in the
+           name.
+
+
+      3) Checklist
+
+
+
+
+
+
+
+
+
+
+
+
+
+               •  You can see the checklist of the Folder.
+               •  Any required documents needed to be
+                  uploaded are shown here.
+               •  You can add an item to the checklist by
+                  typing a name into “Checklist name” and
+                  entering the required number of that item
+                  (eg. 10 COEs) into the “Require” field,
+                  then click the “Add” button.
+               •  Checklist items can be manually ticked by
+                  clicking the box beside the name.
+               •  Checklist items can be automatically
+                  ticked by uploading a file with the same
+                  name.
+               •  Checklist items are also complied with by
+                  marking the files.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                   132
+
+
+===== PDF PAGE 152 =====
+      4) Sort & Filter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+               •  You can sort the items in the Folder by
+                  Folders Only, Files Only, Marked, and
+                  Unmarked.
+               •  Folders Only will only show Folders
+               •  Files Only will only show Files
+               •  Marked will show only files that have
+                  been marked as a checklist item.
+               •  Unmarked will show files that have not
+                  yet been marked as an item in the
+                  checklist.
+
+      5) Select Items
+
+
+
+
+
+
+
+             •   You can see the options to Select All,
+                 Move, Archive, Bin, or Cancel.
+             •   Select All will select all the Files in
+                 the Folder.
+             •   Move will move all the selected files into
+                 another destination folder.
+             •   Archive will archive all the selected
+                 files.
+             •   Bin will bin all the selected files.
+
+
+                                                                    133
+
+
+===== PDF PAGE 153 =====
+F. My Uploads Page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   •   Here you can see all of the folders and files you
+       have uploaded.
+   •   You can sort & filter
+   •   You can use the “Select Items” to select all,
+       move, archive or bin your uploads.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                    134
+
+
+===== PDF PAGE 154 =====
+G. Archives Page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   •   You are viewing all the Archived folders and
+       files in this page.
+   •   Archived folders and files can only be managed by
+       Admins.
+
+
+H. Bin Page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                    135
+
+
+===== PDF PAGE 155 =====
+   •   Here you can see all of the binned folders and
+       files.
+   •   Binned folders and files will automatically be
+       permanently deleted after a 90-day period.
+   •   You can manually permanently delete a folder or
+       file if it is your upload.
+   •   Admins can manually permanently delete all binned
+       folders or files.
+
+I. File Details and Versions
+   •   Upon clicking the information button on a file,
+       (Circle button with an “i”) you can see the
+       details of the file and its versions.
+
+
+
+
+
+   •   You can view the full File Name, the user that
+       created/uploaded the file, the date and time the
+       file was created/uploaded, which user last viewed
+       the file, and last viewed at.
+   •   You can also Manage Versions, which will show you
+       the old and new versions of the file.
+   •   Click the three dots and an option to download
+       that version of the file will be available.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                   136
+
+
+===== PDF PAGE 156 =====
+J. Profile Page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   •   In this page, the user can see their Username,
+       Email and Profile Picture.
+   •   You can set a profile picture by clicking the
+       “Choose a new image” and clicking “Update Image”.
+   •   You can change/update your email address by
+       entering a new email in the textbox and clicking
+       “Update Email”
+   •   You can also change your password to a new one by
+       entering your current password, entering a new
+       password, and typing that same new password to
+       confirm the changes, then click on “Update
+       Password”.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                   137
+
+
+===== PDF PAGE 157 =====
+K. Users Page (Admin Only)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   •   Here, admins can manage all users.
+   •   Admins can view all the users, their usernames,
+       emails, roles, and status.
+   •   Admins can change status of a user to “Enabled”
+       or “Disabled”.
+   •   Enabled status means that the user can login to
+       the system.
+   •   Disabled status means that the user cannot login
+       to the system.
+   •   Admins can click the three dots in the actions to
+       either change a user’s status, edit their
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                    138
+
+
+===== PDF PAGE 158 =====
+       assigned folders, archive the user, or delete the
+       user.
+
+
+
+
+   •   Editing Folders:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       This modal shows the “Edit Assigned Folders”
+       modal.
+       Admins can edit the folders that the users are
+
+
+
+
+
+
+       assigned to.
+       This changed the folders they can access.
+       After selecting the folders to edit, click
+       “Update Folders” to change the assigned folders.
+
+
+
+                                                                   139
+
+
+===== PDF PAGE 159 =====
+   •   Archived Accounts:
+
+
+
+
+
+
+
+
+
+
+
+
+
+       Archiving users is for when the users won’t be
+       using the system anymore. An admin can unarchive
+       a user as well.
+
+L. Registering Users (Admin Only)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   •   In the top right corner of the users page, the
+       admin can click on the gear button to show a list
+       of options.
+   •   Click the “Add Account” option.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                   140
+
+
+===== PDF PAGE 160 =====
+   •   Once clicked, a “Register User” modal will be
+       displayed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   •   Enter the Username and Email of the User you want
+       to register.
+   •   Select a role for the user.
+   •   Admins get access to all Folders and Files.
+   •   For Teachers and Assistants (Compliance
+       Managers), select the Area Folders you want to
+       assign to them.
+   •   Click the “Register” button to register the user.
+   •   An email will be sent to the user with the
+       Username and provided password.
+   •   The system will leave the user with disabled
+       status first. This is so the admin can make sure
+       the user got the email.
+
+
+                                                                    141
+
+
+===== PDF PAGE 161 =====
+                                  Appendix G.
+                    AccredX Maintenance Manual
+
+                AccredX Maintenance Manual
+
+1. Introduction
+AccredX is a web-based Record Management and Archiving System developed to
+streamline accreditation document management. This manual provides
+administrators and future developers with guidance for operating, maintaining,
+updating, and troubleshooting the system. It serves as a reference throughout the
+software lifecycle.
+
+2. System Overview
+AccredX centralizes accreditation files into organized folders, parameters, and
+modules. It supports secure uploads, version control, document preview, search,
+reporting, archive, recycle bin, and RET modules. The objective is to reduce
+manual document handling while improving accessibility, integrity, and security.
+
+3. Major Features
+•   User authentication and role-based access.
+•   Dashboard with statistics and recent activity.
+•   Document upload with metadata.
+•   Folder organization.
+•   Document preview and download.
+•   Version control for replacing or keeping previous revisions.
+•   Archive and recycle bin.
+•   Advanced search including extracted text.
+•   RET (Research, Extension, Training) management.
+•   Reports and activity monitoring.
+
+4. System Requirements
+
+Hardware
+•   Computer (Desktop or Laptop)
+•   8 GB RAM recommended
+•   SSD
+
+                                                                                       142
+
+
+===== PDF PAGE 162 =====
+•   Stable Internet Connection
+
+Software
+•   Windows 10/11
+•   Apache/XAMPP
+•   PHP
+•   MySQL
+•   Modern browser
+
+
+5. Preventive Maintenance Procedures
+
+Database Maintenance
+•   Perform daily backups.
+•   Optimize tables monthly.
+•   Verify integrity after recovery.
+•   Remove obsolete temporary records.
+
+File Storage
+•   Monitor disk usage.
+•   Check upload folders.
+•   Verify permissions.
+•   Scan uploaded files.
+
+Security
+•   Change admin passwords periodically.
+•   Review user permissions.
+•   Enable HTTPS in production.
+•   Update dependencies.
+
+Performance
+•   Review logs.
+•   Monitor response times.
+•   Clear cache.
+•   Test large uploads.
+
+Backup and Recovery
+•   Maintain daily and weekly backups.
+
+
+                                                                                   143
+
+
+===== PDF PAGE 163 =====
+•    Store offsite copies.
+•    Test restoration quarterly.
+
+6. Troubleshooting Guide
+ Problem                        Possible Cause                     Solution
+ Cannot login                   Incorrect                          Reset password and
+                                credentials/database issue         verify DB connection.
+ Upload fails                   File size or permissions           Increase limits and
+                                                                   verify folder
+                                                                   permissions.
+ Preview unavailable            Unsupported/corrupt file           Re-upload or verify
+                                                                   preview service.
+ Slow system                    Large database                     Optimize DB and
+                                                                   archive old records.
+ Search incomplete              Index outdated                     Rebuild extracted text
+                                                                   index.
+
+7. Roles and Responsibilities
+System Administrator: manages users, backups, updates, security, monitoring.
+Staff: upload, organize, and maintain document quality.
+Developers: maintain source code, fix bugs, implement enhancements.
+
+8. Data Security and Privacy
+Follow least-privilege access, maintain audit logs, encrypt credentials, perform
+regular backups, and comply with the Philippine Data Privacy Act of 2012.
+
+9. Maintenance Schedule
+•    Daily: backup database, monitor logs.
+•    Weekly: verify backups, review storage.
+•    Monthly: optimize database and audit accounts.
+•    Quarterly: disaster recovery test.
+•    Yearly: full security and performance review.
+
+
+10. Conclusion
+Consistent preventive maintenance ensures that AccredX remains secure, reliable,
+and capable of supporting accreditation activities. Administrators should
+document every maintenance activity and review procedures regularly.
+
+                                                                                            144
+
+
+===== PDF PAGE 164 =====
+                       Appendix H.
+      Survey Instrument for IT Consultants
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                          145
+
+
+===== PDF PAGE 165 =====
+                                                                            146
+
+
+===== PDF PAGE 166 =====
+                                                                                        147
+
+
+===== PDF PAGE 167 =====
+                                                                                        148
+
+
+===== PDF PAGE 168 =====
+                                                                                        149
+
+
+===== PDF PAGE 169 =====
+                                                                                        150
+
+
+===== PDF PAGE 170 =====
+                                                                                        151
+
+
+===== PDF PAGE 171 =====
+                                                                          152
+
+
+===== PDF PAGE 172 =====
+                       Appendix I.
+          Survey Instrument for End-Users
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                          153
+
+
+===== PDF PAGE 173 =====
+                                                                                        154
+
+
+===== PDF PAGE 174 =====
+                                                                                        155
+
+
+===== PDF PAGE 175 =====
+                                                                    156
+
+
+===== PDF PAGE 176 =====
+                       Appendix J.
+             Pictures of Data Gathering
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                           157
+
+
+===== PDF PAGE 177 =====
+                       Appendix K.
+                    Curriculum Vitae
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                           158
+
+
+===== PDF PAGE 178 =====
+                                                                                  159
+
+
+===== PDF PAGE 179 =====
+                                                                                  160
+
+
+===== PDF PAGE 180 =====
+                                                                                        161
+
+
+===== PDF PAGE 181 =====
+                                                                                          162
+
+
+===== PDF PAGE 182 =====
+                                                                                        163
+
+
+===== PDF PAGE 183 =====
+                                                                                          164
+
+
+===== PDF PAGE 184 =====
+                                                                                          165

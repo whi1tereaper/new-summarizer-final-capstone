@@ -1,0 +1,19 @@
+%% DFD Level 1: account and session management
+%% SOURCE-SUPPORTED design; operation is separately verified.
+flowchart TB
+    U["Visitor / registered user<br/>eligible requests only"]
+    P1("1.0 Account and<br/>session management")
+    M["Configured email service"]
+    D1@{ shape: datastore, label: "D1 Account / session stores<br/>users; password_resets;<br/>user_tokens; guest_sessions;<br/>rate_limits; PHP session state" }
+    U -->|"account request"| P1
+    P1 -->|"account status"| U
+    P1 -->|"verification / reset<br/>mail"| M
+    M -->|"delivery status"| P1
+    P1 -->|"account / session<br/>changes"| D1
+    D1 -->|"identity / session data"| P1
+    classDef process fill:#edf1f5,stroke:#222,color:#111;
+    classDef store fill:#f6f6f6,stroke:#222,color:#111;
+    classDef entity fill:#fff,stroke:#222,color:#111;
+    class P1 process;
+    class D1 store;
+    class U,M entity;

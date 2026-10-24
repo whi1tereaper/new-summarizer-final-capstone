@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+require_once __DIR__ . '/qa/isolation.php';
 require_once __DIR__ . '/../app/src/whitereaper.php';
 require_once __DIR__ . '/../app/src/Database.php';
 
@@ -352,9 +353,12 @@ require_once "app/src/Controllers/ArticleController.php";
 require_once "app/src/Services/SummaryJobService.php";
 
 session_start();
-$guestToken = "test_guest_" . bin2hex(random_bytes(8));
+$guestToken = bin2hex(random_bytes(32));
 $_SESSION["guest_token"] = $guestToken;
+$access = new App\Src\Services\CampusAccessService();
+$visitor = $access->visitorToken();
 $pending = [
+    "access_visitor" => $visitor,
     "original_text" => "Quantum computing harnesses quantum mechanics to solve complex problems exponentially faster than classical computers. Quantum bits or qubits can exist in superposition states. Entanglement enables interconnected processing capabilities.",
     "file_path" => "",
     "sentence_count" => 3,

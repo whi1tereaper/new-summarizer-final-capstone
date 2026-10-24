@@ -1,0 +1,23 @@
+{
+  "scope": "Only source-inspected no-bootstrap static handlers; redirects not followed",
+  "results": [
+    {
+      "url": "http://localhost/ai-summarizer-123%20-%20quality%20upg/index.php",
+      "status": 302,
+      "location": "/ai-summarizer-123 - quality upg/app/public/",
+      "body": ""
+    },
+    {
+      "url": "http://localhost/ai-summarizer-123%20-%20quality%20upg/app/public/about.php",
+      "status": 301,
+      "location": "index.php#about-light",
+      "body": ""
+    },
+    {
+      "url": "http://localhost/ai-summarizer-123%20-%20quality%20upg/app/public/health.php",
+      "status": 200,
+      "location": null,
+      "body": "{\"status\":\"ok\",\"service\":\"ai-summarizer\"}"
+    }
+  ]
+}

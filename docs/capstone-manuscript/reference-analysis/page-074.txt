@@ -1,0 +1,32 @@
+the interaction between its two primary users:
+the Administrator and the Compliance Manager.
+   The system begins with       1.0 User Management,
+where the Administrator creates, updates, and
+manages user accounts and access privileges.
+This process ensures that authorized personnel
+can  access  the  system  according  to  their
+assigned roles and responsibilities.
+   The  2.0 Log In Management        process handles
+user authentication. Both the Administrator and
+Compliance   Manager   provide   their   login
+credentials, which are verified by the system
+before access is granted. This process helps
+maintain the security and confidentiality of
+institutional records.
+   In 3.0 Profile Management, users can view and
+update their personal account information. The
+system  stores  profile  details  and  allows
+authorized users to modify necessary account
+information to keep records current and accurate.
+   The  4.0 Record Management process serves as
+the core function of the system. Through this
+process, users can upload, organize, search,
+retrieve, update, and manage accreditation-
+related  documents  and  records.  The  system
+maintains  these  records  in  a  centralized
+repository for efficient access and document
+tracking.
+
+
+
+                                                       55

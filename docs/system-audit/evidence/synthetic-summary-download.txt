@@ -1,0 +1,1 @@
+This synthetic summary demonstrates the result interface. It is not a model output or an evaluation result.

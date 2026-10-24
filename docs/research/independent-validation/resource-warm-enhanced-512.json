@@ -1,0 +1,461 @@
+{
+  "mode": "enhanced",
+  "persistent_supervisor": true,
+  "memory_limit_mib": 512,
+  "memory_swap_limit_mib": 512,
+  "cpu_limit": 1,
+  "configured_python_timeout_seconds": 180,
+  "outer_http_read_deadline_seconds": 185,
+  "image_id": "sha256:2861f4cf1edfebbfc015c8f9f384fa23b677b7dce9837b7649fd7578417bfcbd",
+  "scope": "isolated actual Apache + PHP ArticleService + bridge + Python extraction/routing/models; excludes database, auth/controller/job persistence and host Docker daemon",
+  "warm_definition": "one authenticated reusable NLP child + supervisor inside same cgroup",
+  "runs": [
+    {
+      "label": "cold_article",
+      "payload": {
+        "id": "IV-RESEARCH"
+      },
+      "http_status": 200,
+      "response": {
+        "ok": true,
+        "seconds": 3.530519962310791,
+        "sentences": 15,
+        "words": 223,
+        "engine": "recipe_article",
+        "engine_version": "recipe-article-2.1",
+        "routing": {
+          "enabled": true,
+          "selected_engine": "recipe_article",
+          "reason": "confirmed_article",
+          "fallback_used": false,
+          "failure_type": "",
+          "detection": {
+            "is_article": true,
+            "article_type": "research",
+            "confidence": 0.916692,
+            "detected_features": {
+              "complete_sentences": 222,
+              "words": 5381,
+              "prose_ratio": 0.9835,
+              "paragraphs": 39,
+              "headings": 6,
+              "title": false,
+              "category_cues": 5,
+              "negative_document_marker": false,
+              "code_ratio": 0,
+              "list_ratio": 0,
+              "eligible": true,
+              "threshold": 0.7,
+              "tokenizer": "nltk_punkt",
+              "detector_version": "article-rules-2"
+            },
+            "classification_reason": "article_structure_and_language"
+          }
+        },
+        "annotation_status": "spacy_pos_lemma_ner",
+        "focus_status": "not_requested",
+        "daemon_elapsed_seconds": 3.1428656539999906
+      },
+      "wall_seconds": 3.5549150000006193,
+      "transport_error": null,
+      "after": {
+        "cgroup_v2": "memory.current\n313368576\nmemory.peak\n317153280\nmemory.max\n536870912\nmemory.swap.max\n0\nmemory.events\nlow 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\ncpu.max\n100000 100000",
+        "container_running": true,
+        "container_exit_code": 0,
+        "container_oom_killed": false
+      }
+    },
+    {
+      "label": "warm_article",
+      "payload": {
+        "id": "IV-RESEARCH"
+      },
+      "http_status": 200,
+      "response": {
+        "ok": true,
+        "seconds": 0.8567459583282471,
+        "sentences": 15,
+        "words": 223,
+        "engine": "recipe_article",
+        "engine_version": "recipe-article-2.1",
+        "routing": {
+          "enabled": true,
+          "selected_engine": "recipe_article",
+          "reason": "confirmed_article",
+          "fallback_used": false,
+          "failure_type": "",
+          "detection": {
+            "is_article": true,
+            "article_type": "research",
+            "confidence": 0.916692,
+            "detected_features": {
+              "complete_sentences": 222,
+              "words": 5381,
+              "prose_ratio": 0.9835,
+              "paragraphs": 39,
+              "headings": 6,
+              "title": false,
+              "category_cues": 5,
+              "negative_document_marker": false,
+              "code_ratio": 0,
+              "list_ratio": 0,
+              "eligible": true,
+              "threshold": 0.7,
+              "tokenizer": "nltk_punkt",
+              "detector_version": "article-rules-2"
+            },
+            "classification_reason": "article_structure_and_language"
+          }
+        },
+        "annotation_status": "spacy_pos_lemma_ner",
+        "focus_status": "not_requested",
+        "daemon_elapsed_seconds": 0.7877795420000098
+      },
+      "wall_seconds": 0.8628422999972827,
+      "transport_error": null,
+      "after": {
+        "cgroup_v2": "memory.current\n328187904\nmemory.peak\n332230656\nmemory.max\n536870912\nmemory.swap.max\n0\nmemory.events\nlow 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\ncpu.max\n100000 100000",
+        "container_running": true,
+        "container_exit_code": 0,
+        "container_oom_killed": false
+      }
+    },
+    {
+      "label": "first_article_focus",
+      "payload": {
+        "id": "IV-RESEARCH",
+        "focus": "walking intensity and frailty"
+      },
+      "http_status": 200,
+      "response": {
+        "ok": true,
+        "seconds": 1.9034299850463867,
+        "sentences": 15,
+        "words": 271,
+        "engine": "recipe_article",
+        "engine_version": "recipe-article-2.1",
+        "routing": {
+          "enabled": true,
+          "selected_engine": "recipe_article",
+          "reason": "confirmed_article",
+          "fallback_used": false,
+          "failure_type": "",
+          "detection": {
+            "is_article": true,
+            "article_type": "research",
+            "confidence": 0.916692,
+            "detected_features": {
+              "complete_sentences": 222,
+              "words": 5381,
+              "prose_ratio": 0.9835,
+              "paragraphs": 39,
+              "headings": 6,
+              "title": false,
+              "category_cues": 5,
+              "negative_document_marker": false,
+              "code_ratio": 0,
+              "list_ratio": 0,
+              "eligible": true,
+              "threshold": 0.7,
+              "tokenizer": "nltk_punkt",
+              "detector_version": "article-rules-2"
+            },
+            "classification_reason": "article_structure_and_language"
+          }
+        },
+        "annotation_status": "spacy_pos_lemma_ner",
+        "focus_status": "semantic_wordnet_supported",
+        "daemon_elapsed_seconds": 1.888970076000021
+      },
+      "wall_seconds": 1.9091019000043161,
+      "transport_error": null,
+      "after": {
+        "cgroup_v2": "memory.current\n426606592\nmemory.peak\n430813184\nmemory.max\n536870912\nmemory.swap.max\n0\nmemory.events\nlow 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\ncpu.max\n100000 100000",
+        "container_running": true,
+        "container_exit_code": 0,
+        "container_oom_killed": false
+      }
+    },
+    {
+      "label": "warm_article_focus",
+      "payload": {
+        "id": "IV-RESEARCH",
+        "focus": "walking intensity and frailty"
+      },
+      "http_status": 200,
+      "response": {
+        "ok": true,
+        "seconds": 1.0892419815063477,
+        "sentences": 15,
+        "words": 271,
+        "engine": "recipe_article",
+        "engine_version": "recipe-article-2.1",
+        "routing": {
+          "enabled": true,
+          "selected_engine": "recipe_article",
+          "reason": "confirmed_article",
+          "fallback_used": false,
+          "failure_type": "",
+          "detection": {
+            "is_article": true,
+            "article_type": "research",
+            "confidence": 0.916692,
+            "detected_features": {
+              "complete_sentences": 222,
+              "words": 5381,
+              "prose_ratio": 0.9835,
+              "paragraphs": 39,
+              "headings": 6,
+              "title": false,
+              "category_cues": 5,
+              "negative_document_marker": false,
+              "code_ratio": 0,
+              "list_ratio": 0,
+              "eligible": true,
+              "threshold": 0.7,
+              "tokenizer": "nltk_punkt",
+              "detector_version": "article-rules-2"
+            },
+            "classification_reason": "article_structure_and_language"
+          }
+        },
+        "annotation_status": "spacy_pos_lemma_ner",
+        "focus_status": "semantic_wordnet_supported",
+        "daemon_elapsed_seconds": 1.0344001199999866
+      },
+      "wall_seconds": 1.0965039000002434,
+      "transport_error": null,
+      "after": {
+        "cgroup_v2": "memory.current\n441663488\nmemory.peak\n445702144\nmemory.max\n536870912\nmemory.swap.max\n0\nmemory.events\nlow 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\ncpu.max\n100000 100000",
+        "container_running": true,
+        "container_exit_code": 0,
+        "container_oom_killed": false
+      }
+    },
+    {
+      "label": "large_pdf",
+      "payload": {
+        "id": "IV-RESEARCH",
+        "pdf": true
+      },
+      "http_status": 200,
+      "response": {
+        "ok": true,
+        "seconds": 0.8222191333770752,
+        "sentences": 15,
+        "words": 237,
+        "engine": "recipe_article",
+        "engine_version": "recipe-article-2.1",
+        "routing": {
+          "enabled": true,
+          "selected_engine": "recipe_article",
+          "reason": "confirmed_article",
+          "fallback_used": false,
+          "failure_type": "",
+          "detection": {
+            "is_article": true,
+            "article_type": "research",
+            "confidence": 0.912857,
+            "detected_features": {
+              "complete_sentences": 216,
+              "words": 5292,
+              "prose_ratio": 0.9643,
+              "paragraphs": 19,
+              "headings": 6,
+              "title": false,
+              "category_cues": 5,
+              "negative_document_marker": false,
+              "code_ratio": 0,
+              "list_ratio": 0,
+              "eligible": true,
+              "threshold": 0.7,
+              "tokenizer": "nltk_punkt",
+              "detector_version": "article-rules-2"
+            },
+            "classification_reason": "article_structure_and_language"
+          }
+        },
+        "annotation_status": "spacy_pos_lemma_ner",
+        "focus_status": "not_requested",
+        "daemon_elapsed_seconds": 0.8074902309999743
+      },
+      "wall_seconds": 0.828620399995998,
+      "transport_error": null,
+      "after": {
+        "cgroup_v2": "memory.current\n443912192\nmemory.peak\n447406080\nmemory.max\n536870912\nmemory.swap.max\n0\nmemory.events\nlow 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\ncpu.max\n100000 100000",
+        "container_running": true,
+        "container_exit_code": 0,
+        "container_oom_killed": false
+      }
+    },
+    {
+      "label": "concurrent_1",
+      "payload": {
+        "id": "IV-RESEARCH"
+      },
+      "http_status": 500,
+      "response": {
+        "ok": false,
+        "seconds": 0.03724789619445801,
+        "exception": "App\\Src\\Support\\ProcessingError",
+        "failure_code": "WORKER_UNAVAILABLE"
+      },
+      "wall_seconds": 0.04473359999974491,
+      "transport_error": null
+    },
+    {
+      "label": "concurrent_2",
+      "payload": {
+        "id": "IV-RESEARCH"
+      },
+      "http_status": 200,
+      "response": {
+        "ok": true,
+        "seconds": 0.8123211860656738,
+        "sentences": 15,
+        "words": 223,
+        "engine": "recipe_article",
+        "engine_version": "recipe-article-2.1",
+        "routing": {
+          "enabled": true,
+          "selected_engine": "recipe_article",
+          "reason": "confirmed_article",
+          "fallback_used": false,
+          "failure_type": "",
+          "detection": {
+            "is_article": true,
+            "article_type": "research",
+            "confidence": 0.916692,
+            "detected_features": {
+              "complete_sentences": 222,
+              "words": 5381,
+              "prose_ratio": 0.9835,
+              "paragraphs": 39,
+              "headings": 6,
+              "title": false,
+              "category_cues": 5,
+              "negative_document_marker": false,
+              "code_ratio": 0,
+              "list_ratio": 0,
+              "eligible": true,
+              "threshold": 0.7,
+              "tokenizer": "nltk_punkt",
+              "detector_version": "article-rules-2"
+            },
+            "classification_reason": "article_structure_and_language"
+          }
+        },
+        "annotation_status": "spacy_pos_lemma_ner",
+        "focus_status": "not_requested",
+        "daemon_elapsed_seconds": 0.7870387159999837
+      },
+      "wall_seconds": 0.8189368999956059,
+      "transport_error": null
+    }
+  ],
+  "startup_seconds": 0.7250892000010936,
+  "supervisor_health": {
+    "status": "ok",
+    "protocol": 3,
+    "supervised": true,
+    "max_workers": 1,
+    "execution_deadline_seconds": 180.0
+  },
+  "installed_packages": [
+    "annotated-doc==0.0.5",
+    "annotated-types==0.8.0",
+    "beautifulsoup4==4.15.0",
+    "blis==1.3.3",
+    "catalogue==2.0.10",
+    "certifi==2026.10.19",
+    "charset-normalizer==3.5.2",
+    "click==8.5.0",
+    "cloudpathlib==0.26.0",
+    "cloudpickle==3.1.2",
+    "confection==0.1.5",
+    "cymem==2.0.13",
+    "deep-translator==1.11.4",
+    "en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl#sha256=1932429db727d4bff3deed6b34cfc05df17794f4a52eeb26cf8928f7c1a0fb85",
+    "flatbuffers==25.12.19",
+    "idna==3.20",
+    "Jinja2==3.1.6",
+    "joblib==1.6.0",
+    "lxml==6.1.3",
+    "markdown-it-py==4.2.0",
+    "MarkupSafe==3.0.4",
+    "mdurl==0.1.2",
+    "murmurhash==1.0.15",
+    "narwhals==2.27.1",
+    "networkx==3.6.1",
+    "nltk==3.8.1",
+    "numpy==1.26.4",
+    "onnxruntime==1.31.0",
+    "packaging==26.3",
+    "pathvalidate==3.3.1",
+    "pdf2image==1.17.0",
+    "pillow==13.0.0",
+    "piper-tts==1.4.2",
+    "preshed==3.0.13",
+    "protobuf==7.36.2",
+    "pydantic==2.14.1",
+    "pydantic_core==2.50.1",
+    "Pygments==2.21.0",
+    "pypdf==4.2.0",
+    "pytesseract==0.3.13",
+    "python-docx==1.2.0",
+    "regex==2026.9.29",
+    "requests==2.34.2",
+    "rich==15.0.0",
+    "scikit-learn==1.9.1",
+    "scipy==1.17.1",
+    "shellingham==1.5.4",
+    "smart_open==7.7.1",
+    "soupsieve==2.10",
+    "spacy==3.8.11",
+    "spacy-legacy==3.0.12",
+    "spacy-loggers==1.0.5",
+    "srsly==2.5.4",
+    "thinc==8.3.11",
+    "threadpoolctl==3.7.0",
+    "tqdm==4.70.1",
+    "typer==0.27.3",
+    "typer-slim==0.24.0",
+    "typing-inspection==0.4.4",
+    "typing_extensions==4.16.0",
+    "urllib3==2.8.0",
+    "wasabi==1.1.3",
+    "weasel==0.4.3",
+    "wrapt==2.5.1"
+  ],
+  "initial": {
+    "cgroup_v2": "memory.current\n30728192\nmemory.peak\n53993472\nmemory.max\n536870912\nmemory.swap.max\n0\nmemory.events\nlow 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\ncpu.max\n100000 100000",
+    "container_running": true,
+    "container_exit_code": 0,
+    "container_oom_killed": false
+  },
+  "after_concurrency": {
+    "cgroup_v2": "memory.current\n447950848\nmemory.peak\n452526080\nmemory.max\n536870912\nmemory.swap.max\n0\nmemory.events\nlow 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\ncpu.max\n100000 100000",
+    "container_running": true,
+    "container_exit_code": 0,
+    "container_oom_killed": false
+  },
+  "final": {
+    "cgroup_v2": "memory.current\n448176128\nmemory.peak\n452526080\nmemory.max\n536870912\nmemory.swap.max\n0\nmemory.events\nlow 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\ncpu.max\n100000 100000",
+    "container_running": true,
+    "container_exit_code": 0,
+    "container_oom_killed": false
+  },
+  "completed": true,
+  "whole_container_wall_seconds": 13.221478500003286,
+  "freeze_verification": {
+    "protected_files": 191,
+    "evaluation_relevant_changes": [],
+    "concurrent_unrelated_ui_changes_preserved": [
+      "app/public/analytics.php",
+      "app/public/assets/js/analytics.js",
+      "app/public/assets/js/theme-toggle.js",
+      "app/public/partials/site-nav.php"
+    ],
+    "protocol_unchanged": true
+  }
+}

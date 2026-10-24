@@ -1,0 +1,32 @@
+   including  centralized  storage,  role-based
+   access control, audit trails, version control,
+   and accreditation checklist management. These
+   functionalities     collectively     enhance
+   document       organization,       security,
+   accessibility, and accountability.
+
+      4.  The system demonstrates high technical
+   quality    as  evidenced  by  IT  consultants'
+   ratings  across  all  ISO/IEC  25010:2011
+   criteria. Particularly strong performance in
+   functional   suitability,   security,   and
+   performance  efficiency  confirms  that  the
+   system    meets    professional    software
+   development  standards  and        is  technically
+   sound.
+
+      5.     End-users find the system highly
+   functional and usable      in actual operational
+   contexts. The consistently high ratings from
+   administrative    staff,    teachers,    and
+   assistants  indicate  that  the  system  is
+   intuitive, efficient, and well-suited to the
+   daily tasks and workflows of its intended
+   users.
+
+      6.     The system significantly improves
+   accreditation   preparedness          by   ensuring
+
+
+
+                                                      107

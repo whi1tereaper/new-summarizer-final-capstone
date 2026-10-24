@@ -19,6 +19,8 @@ storage/models/*
 !storage/models/.gitkeep
 storage/logs/*
 !storage/logs/.gitkeep
+storage/backups/*
+!storage/backups/.gitkeep
 storage/tmp/*
 !storage/tmp/.gitkeep
 /storage/*.token

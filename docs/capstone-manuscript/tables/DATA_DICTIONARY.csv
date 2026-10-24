@@ -1,0 +1,313 @@
+﻿table,field,description,sql_type,constraints
+admin_audit_logs,id,Unique row identifier.,bigint(20) unsigned,NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+admin_audit_logs,admin_id,Admin id.,int(11),NULL allowed; default NULL
+admin_audit_logs,action,Action.,varchar(100),NOT NULL; default SQL NULL / no explicit non-null default
+admin_audit_logs,entity_type,Entity type.,varchar(100),NULL allowed; default NULL
+admin_audit_logs,entity_id,Entity id.,bigint(20) unsigned,NULL allowed; default NULL
+admin_audit_logs,ip_address,Ip address.,varchar(45),NULL allowed; default NULL
+admin_audit_logs,user_agent,User agent.,varchar(255),NULL allowed; default NULL
+admin_audit_logs,details,Details.,text,NULL allowed; default NULL
+admin_audit_logs,created_at,Creation timestamp.,datetime,NOT NULL; default current_timestamp()
+admin_security_challenges,id,Unique row identifier.,bigint(20) unsigned,NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+admin_security_challenges,user_id,Registered account identifier; an enforced relation only where listed below.,int(11),NOT NULL; default SQL NULL / no explicit non-null default; FK → users.id; DELETE CASCADE; UPDATE CASCADE
+admin_security_challenges,challenge_hash,Challenge hash.,varchar(255),NOT NULL; default SQL NULL / no explicit non-null default
+admin_security_challenges,failed_attempts,Failed attempts.,int(10) unsigned,NOT NULL; default 0
+admin_security_challenges,locked_until,Locked until.,datetime,NULL allowed; default NULL
+admin_security_challenges,created_at,Creation timestamp.,datetime,NOT NULL; default current_timestamp()
+admin_security_challenges,updated_at,Most recent update timestamp.,datetime,NULL allowed; default NULL
+documents,id,Unique row identifier.,int(11),NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+documents,content,Stored source document text.,longtext,NOT NULL; default SQL NULL / no explicit non-null default
+documents,user_id,Registered account identifier; an enforced relation only where listed below.,int(11),NULL allowed; default NULL
+documents,guest_token,Anonymous owner/session token; not a foreign key unless explicitly listed.,varchar(64),NULL allowed; default NULL
+documents,created_at,Creation timestamp.,timestamp,NOT NULL; default current_timestamp()
+document_summaries,id,Unique row identifier.,int(11),NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+document_summaries,document_id,Related document identifier in this table’s domain.,int(11),NOT NULL; default SQL NULL / no explicit non-null default; FK → documents.id; DELETE CASCADE; UPDATE RESTRICT
+document_summaries,profile,Content emphasis/profile selection.,varchar(32),NOT NULL; default SQL NULL / no explicit non-null default
+document_summaries,length,Summary depth selection.,varchar(32),NOT NULL; default SQL NULL / no explicit non-null default
+document_summaries,summary,Summary.,longtext,NOT NULL; default SQL NULL / no explicit non-null default
+document_summaries,word_count,Word count.,int(11),NOT NULL; default SQL NULL / no explicit non-null default
+document_summaries,source_word_count,Source word count.,int(11),NOT NULL; default SQL NULL / no explicit non-null default
+document_summaries,compression_ratio,Module-specific compression metric; check service semantics before comparisons.,"decimal(5,2)",NOT NULL; default SQL NULL / no explicit non-null default
+document_summaries,estimated_reading_time_seconds,Estimated reading time seconds.,int(11),NOT NULL; default SQL NULL / no explicit non-null default
+document_summaries,created_at,Creation timestamp.,timestamp,NOT NULL; default current_timestamp()
+evaluation_assignments,id,Unique row identifier.,bigint(20) unsigned,NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+evaluation_assignments,assignment_token,Assignment token.,char(48),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_assignments,run_id,Related evaluation run identifier.,bigint(20) unsigned,NOT NULL; default SQL NULL / no explicit non-null default; FK → evaluation_runs.id; DELETE RESTRICT; UPDATE RESTRICT
+evaluation_assignments,output_id,Related generated evaluation output identifier.,bigint(20) unsigned,NOT NULL; default SQL NULL / no explicit non-null default; FK → evaluation_outputs.id; DELETE RESTRICT; UPDATE RESTRICT
+evaluation_assignments,evaluator_user_id,Evaluator user id.,int(11),NOT NULL; default SQL NULL / no explicit non-null default; FK → users.id; DELETE RESTRICT; UPDATE RESTRICT
+evaluation_assignments,evaluator_code,Evaluator code.,varchar(20),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_assignments,blind_label,Evaluator-visible label that conceals system identity.,varchar(50),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_assignments,presentation_order,Presentation order.,int(10) unsigned,NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_assignments,randomization_seed,Randomization seed.,char(64),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_assignments,status,Domain status marker.,varchar(20),NOT NULL; default 'assigned'
+evaluation_assignments,created_at,Creation timestamp.,datetime,NOT NULL; default current_timestamp()
+evaluation_assignments,submitted_at,Submitted at.,datetime,NULL allowed; default NULL
+evaluation_audit_log,id,Unique row identifier.,bigint(20) unsigned,NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+evaluation_audit_log,actor_id,Actor id.,int(11),NULL allowed; default NULL; FK → users.id; DELETE SET NULL; UPDATE RESTRICT
+evaluation_audit_log,action,Action.,varchar(100),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_audit_log,entity_type,Entity type.,varchar(50),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_audit_log,entity_id,Entity id.,bigint(20) unsigned,NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_audit_log,previous_json,Previous json.,longtext,NULL allowed; default NULL
+evaluation_audit_log,replacement_json,Replacement json.,longtext,NULL allowed; default NULL
+evaluation_audit_log,reason,Reason.,text,NULL allowed; default NULL
+evaluation_audit_log,created_at,Creation timestamp.,datetime,NOT NULL; default current_timestamp()
+evaluation_challenge_cases,id,Unique row identifier.,bigint(20) unsigned,NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+evaluation_challenge_cases,document_id,Related document identifier in this table’s domain.,bigint(20) unsigned,NOT NULL; default SQL NULL / no explicit non-null default; FK → evaluation_documents.id; DELETE RESTRICT; UPDATE RESTRICT
+evaluation_challenge_cases,category,Category.,varchar(100),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_challenge_cases,expected_facts_json,Expected facts json.,longtext,NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_challenge_cases,prohibited_distortions_json,Prohibited distortions json.,longtext,NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_challenge_cases,notes,Notes.,text,NULL allowed; default NULL
+evaluation_challenge_cases,created_at,Creation timestamp.,datetime,NOT NULL; default current_timestamp()
+evaluation_content_units,id,Unique row identifier.,bigint(20) unsigned,NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+evaluation_content_units,document_id,Related document identifier in this table’s domain.,bigint(20) unsigned,NOT NULL; default SQL NULL / no explicit non-null default; FK → evaluation_documents.id; DELETE RESTRICT; UPDATE RESTRICT
+evaluation_content_units,unit_text,Unit text.,text,NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_content_units,unit_type,Unit type.,varchar(100),NOT NULL; default 'essential_information'
+evaluation_content_units,created_by,Created by.,int(11),NULL allowed; default NULL; FK → users.id; DELETE SET NULL; UPDATE RESTRICT
+evaluation_content_units,created_at,Creation timestamp.,datetime,NOT NULL; default current_timestamp()
+evaluation_content_unit_reviews,id,Unique row identifier.,bigint(20) unsigned,NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+evaluation_content_unit_reviews,output_id,Related generated evaluation output identifier.,bigint(20) unsigned,NOT NULL; default SQL NULL / no explicit non-null default; FK → evaluation_outputs.id; DELETE RESTRICT; UPDATE RESTRICT
+evaluation_content_unit_reviews,unit_id,Unit id.,bigint(20) unsigned,NOT NULL; default SQL NULL / no explicit non-null default; FK → evaluation_content_units.id; DELETE RESTRICT; UPDATE RESTRICT
+evaluation_content_unit_reviews,represented,Represented.,tinyint(1),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_content_unit_reviews,notes,Notes.,text,NULL allowed; default NULL
+evaluation_content_unit_reviews,reviewer_id,Reviewer id.,int(11),NULL allowed; default NULL; FK → users.id; DELETE SET NULL; UPDATE RESTRICT
+evaluation_content_unit_reviews,created_at,Creation timestamp.,datetime,NOT NULL; default current_timestamp()
+evaluation_datasets,id,Unique row identifier.,bigint(20) unsigned,NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+evaluation_datasets,version,Version.,varchar(100),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_datasets,name,Name.,varchar(255),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_datasets,notes,Notes.,text,NULL allowed; default NULL
+evaluation_datasets,target_count,Target count.,int(10) unsigned,NOT NULL; default 48
+evaluation_datasets,active,Enabled/active state.,tinyint(1),NOT NULL; default 1
+evaluation_datasets,sealed_at,Sealed at.,datetime,NULL allowed; default NULL
+evaluation_datasets,created_by,Created by.,int(11),NULL allowed; default NULL; FK → users.id; DELETE SET NULL; UPDATE RESTRICT
+evaluation_datasets,created_at,Creation timestamp.,datetime,NOT NULL; default current_timestamp()
+evaluation_documents,id,Unique row identifier.,bigint(20) unsigned,NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+evaluation_documents,dataset_id,Dataset id.,bigint(20) unsigned,NOT NULL; default SQL NULL / no explicit non-null default; FK → evaluation_datasets.id; DELETE RESTRICT; UPDATE RESTRICT
+evaluation_documents,title,Title.,varchar(255),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_documents,category,Category.,varchar(100),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_documents,source_text,Source text.,longtext,NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_documents,source_hash,Hash used to identify source content.,char(64),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_documents,source_reference,Source reference.,varchar(500),NULL allowed; default NULL
+evaluation_documents,original_word_count,Source word count; main file path currently counts the empty input string.,int(10) unsigned,NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_documents,profile,Content emphasis/profile selection.,varchar(32),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_documents,dataset_split,Dataset split.,varchar(20),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_documents,provenance,Provenance.,text,NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_documents,notes,Notes.,text,NULL allowed; default NULL
+evaluation_documents,active,Enabled/active state.,tinyint(1),NOT NULL; default 1
+evaluation_documents,created_at,Creation timestamp.,datetime,NOT NULL; default current_timestamp()
+evaluation_errors,id,Unique row identifier.,bigint(20) unsigned,NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+evaluation_errors,output_id,Related generated evaluation output identifier.,bigint(20) unsigned,NOT NULL; default SQL NULL / no explicit non-null default; FK → evaluation_outputs.id; DELETE RESTRICT; UPDATE RESTRICT
+evaluation_errors,category,Category.,varchar(100),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_errors,notes,Notes.,text,NULL allowed; default NULL
+evaluation_errors,reviewer_id,Reviewer id.,int(11),NULL allowed; default NULL; FK → users.id; DELETE SET NULL; UPDATE RESTRICT
+evaluation_errors,created_at,Creation timestamp.,datetime,NOT NULL; default current_timestamp()
+evaluation_metrics,id,Unique row identifier.,bigint(20) unsigned,NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+evaluation_metrics,output_id,Related generated evaluation output identifier.,bigint(20) unsigned,NOT NULL; default SQL NULL / no explicit non-null default; FK → evaluation_outputs.id; DELETE RESTRICT; UPDATE RESTRICT
+evaluation_metrics,metric_name,Metric name.,varchar(100),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_metrics,metric_version,Metric version.,varchar(100),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_metrics,status,Domain status marker.,varchar(30),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_metrics,metric_value,"Metric value, nullable when unavailable.",double,NULL allowed; default NULL
+evaluation_metrics,precision_value,Precision value.,double,NULL allowed; default NULL
+evaluation_metrics,recall_value,Recall value.,double,NULL allowed; default NULL
+evaluation_metrics,f1_value,F1 value.,double,NULL allowed; default NULL
+evaluation_metrics,details_json,Details json.,longtext,NULL allowed; default NULL
+evaluation_metrics,error_message,Error message.,text,NULL allowed; default NULL
+evaluation_metrics,created_at,Creation timestamp.,datetime,NOT NULL; default current_timestamp()
+evaluation_outputs,id,Unique row identifier.,bigint(20) unsigned,NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+evaluation_outputs,run_id,Related evaluation run identifier.,bigint(20) unsigned,NOT NULL; default SQL NULL / no explicit non-null default; FK → evaluation_runs.id; DELETE RESTRICT; UPDATE RESTRICT
+evaluation_outputs,document_id,Related document identifier in this table’s domain.,bigint(20) unsigned,NOT NULL; default SQL NULL / no explicit non-null default; FK → evaluation_documents.id; DELETE RESTRICT; UPDATE RESTRICT
+evaluation_outputs,profile,Content emphasis/profile selection.,varchar(32),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_outputs,mode,Mode.,varchar(32),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_outputs,system_name,System name.,varchar(50),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_outputs,ablation,Ablation.,varchar(100),NOT NULL; default ''
+evaluation_outputs,status,Domain status marker.,varchar(30),NOT NULL; default 'queued'
+evaluation_outputs,summary_text,Summary text.,longtext,NULL allowed; default NULL
+evaluation_outputs,word_count,Word count.,int(10) unsigned,NULL allowed; default NULL
+evaluation_outputs,source_word_count,Source word count.,int(10) unsigned,NULL allowed; default NULL
+evaluation_outputs,target_words,Target words.,int(10) unsigned,NULL allowed; default NULL
+evaluation_outputs,processing_seconds,Processing seconds.,double,NULL allowed; default NULL
+evaluation_outputs,timings_json,Timings json.,text,NULL allowed; default NULL
+evaluation_outputs,configuration_hash,Hash of canonical run configuration.,char(64),NULL allowed; default NULL
+evaluation_outputs,configuration_json,Configuration json.,longtext,NULL allowed; default NULL
+evaluation_outputs,provenance_json,Serialized execution/source provenance.,longtext,NULL allowed; default NULL
+evaluation_outputs,warnings_json,Warnings json.,longtext,NULL allowed; default NULL
+evaluation_outputs,error_message,Error message.,text,NULL allowed; default NULL
+evaluation_outputs,generated_at,Generated at.,datetime,NULL allowed; default NULL
+evaluation_ratings,id,Unique row identifier.,bigint(20) unsigned,NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+evaluation_ratings,assignment_id,Assignment id.,bigint(20) unsigned,NOT NULL; default SQL NULL / no explicit non-null default; FK → evaluation_assignments.id; DELETE RESTRICT; UPDATE RESTRICT
+evaluation_ratings,relevance,Relevance.,tinyint(3) unsigned,NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_ratings,factual_consistency,Factual consistency.,tinyint(3) unsigned,NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_ratings,coverage,Coverage.,tinyint(3) unsigned,NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_ratings,coherence,Coherence.,tinyint(3) unsigned,NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_ratings,readability,Readability.,tinyint(3) unsigned,NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_ratings,conciseness,Conciseness.,tinyint(3) unsigned,NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_ratings,non_redundancy,Non redundancy.,tinyint(3) unsigned,NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_ratings,overall_usefulness,Overall usefulness.,tinyint(3) unsigned,NULL allowed; default NULL
+evaluation_ratings,comments,Comments.,text,NULL allowed; default NULL
+evaluation_ratings,content_unit_verification_json,Content unit verification json.,longtext,NULL allowed; default NULL
+evaluation_ratings,created_at,Creation timestamp.,datetime,NOT NULL; default current_timestamp()
+evaluation_ratings,corrected_at,Corrected at.,datetime,NULL allowed; default NULL
+evaluation_references,id,Unique row identifier.,bigint(20) unsigned,NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+evaluation_references,document_id,Related document identifier in this table’s domain.,bigint(20) unsigned,NOT NULL; default SQL NULL / no explicit non-null default; FK → evaluation_documents.id; DELETE RESTRICT; UPDATE RESTRICT
+evaluation_references,reference_text,Reference text.,longtext,NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_references,reference_version,Reference version.,varchar(100),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_references,author_code,Author code.,varchar(100),NULL allowed; default NULL
+evaluation_references,review_status,Reference-review lifecycle status.,varchar(20),NOT NULL; default 'draft'
+evaluation_references,created_by,Created by.,int(11),NULL allowed; default NULL; FK → users.id; DELETE SET NULL; UPDATE RESTRICT
+evaluation_references,created_at,Creation timestamp.,datetime,NOT NULL; default current_timestamp()
+evaluation_runs,id,Unique row identifier.,bigint(20) unsigned,NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+evaluation_runs,run_uuid,Run uuid.,char(32),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_runs,name,Name.,varchar(255),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_runs,dataset_id,Dataset id.,bigint(20) unsigned,NOT NULL; default SQL NULL / no explicit non-null default; FK → evaluation_datasets.id; DELETE RESTRICT; UPDATE RESTRICT
+evaluation_runs,dataset_version,Dataset version.,varchar(100),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_runs,dataset_split,Dataset split.,varchar(20),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_runs,summarizer_version,Summarizer version.,varchar(100),NOT NULL; default 'pending-worker'
+evaluation_runs,evaluation_version,Evaluation version.,varchar(30),NOT NULL; default '1.0.0'
+evaluation_runs,configuration_hash,Hash of canonical run configuration.,char(64),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_runs,configuration_json,Configuration json.,longtext,NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_runs,dataset_snapshot_json,Frozen dataset content and reference snapshot.,longtext,NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_runs,snapshot_hash,Snapshot hash.,char(64),NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_runs,provenance_json,Serialized execution/source provenance.,longtext,NULL allowed; default NULL
+evaluation_runs,report_json,Report json.,longtext,NULL allowed; default NULL
+evaluation_runs,report_pending,Report pending.,tinyint(1),NOT NULL; default 1
+evaluation_runs,report_error,Report error.,text,NULL allowed; default NULL
+evaluation_runs,status,Domain status marker.,varchar(30),NOT NULL; default 'queued'
+evaluation_runs,documents_total,Documents total.,int(10) unsigned,NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_runs,documents_processed,Documents processed.,int(10) unsigned,NOT NULL; default 0
+evaluation_runs,outputs_total,Outputs total.,int(10) unsigned,NOT NULL; default SQL NULL / no explicit non-null default
+evaluation_runs,generated_summaries,Generated summaries.,int(10) unsigned,NOT NULL; default 0
+evaluation_runs,failed_summaries,Failed summaries.,int(10) unsigned,NOT NULL; default 0
+evaluation_runs,created_by,Created by.,int(11),NULL allowed; default NULL; FK → users.id; DELETE SET NULL; UPDATE RESTRICT
+evaluation_runs,notes,Notes.,text,NULL allowed; default NULL
+evaluation_runs,error_message,Error message.,text,NULL allowed; default NULL
+evaluation_runs,started_at,Started at.,datetime,NULL allowed; default NULL
+evaluation_runs,completed_at,Completed at.,datetime,NULL allowed; default NULL
+evaluation_runs,heartbeat_at,Heartbeat at.,datetime,NULL allowed; default NULL
+evaluation_runs,created_at,Creation timestamp.,datetime,NOT NULL; default current_timestamp()
+feedback,id,Unique row identifier.,int(11),NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+feedback,summary_id,Related summary identifier.,int(11),NOT NULL; default SQL NULL / no explicit non-null default; FK → summaries.id; DELETE CASCADE; UPDATE RESTRICT
+feedback,user_id,Registered account identifier; an enforced relation only where listed below.,int(11),NULL allowed; default NULL; FK → users.id; DELETE CASCADE; UPDATE RESTRICT
+feedback,guest_token,Anonymous owner/session token; not a foreign key unless explicitly listed.,varchar(64),NULL allowed; default NULL
+feedback,rating,Numeric feedback rating.,tinyint(4),NOT NULL; default SQL NULL / no explicit non-null default
+feedback,name,Name.,varchar(100),NULL allowed; default NULL
+feedback,email,Email.,varchar(150),NULL allowed; default NULL
+feedback,impression,Impression.,varchar(50),NULL allowed; default NULL
+feedback,reasons,Serialized selected feedback reason codes.,longtext,NULL allowed; default NULL
+feedback,comment,Free-text feedback comment.,text,NULL allowed; default NULL
+feedback,created_at,Creation timestamp.,timestamp,NOT NULL; default current_timestamp()
+feedback,updated_at,Most recent update timestamp.,timestamp,NOT NULL; on update current_timestamp(); default current_timestamp()
+feedback_comments,id,Unique row identifier.,int(11),NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+feedback_comments,summary_id,Related summary identifier.,int(11),NOT NULL; default SQL NULL / no explicit non-null default; FK → summaries.id; DELETE CASCADE; UPDATE RESTRICT
+feedback_comments,rating,Numeric feedback rating.,tinyint(4),NULL allowed; default NULL
+feedback_comments,reasons,Serialized selected feedback reason codes.,longtext,NULL allowed; default NULL
+feedback_comments,comment,Free-text feedback comment.,text,NOT NULL; default SQL NULL / no explicit non-null default
+feedback_comments,created_at,Creation timestamp.,timestamp,NOT NULL; default current_timestamp()
+guest_sessions,guest_token,Anonymous owner/session token; not a foreign key unless explicitly listed.,varchar(64),NOT NULL; PRIMARY KEY; default SQL NULL / no explicit non-null default
+guest_sessions,created_at,Creation timestamp.,datetime,NOT NULL; default current_timestamp()
+guest_sessions,last_activity,Last activity.,datetime,NOT NULL; default current_timestamp()
+guest_sessions,expires_at,Expires at.,datetime,NOT NULL; default SQL NULL / no explicit non-null default
+landing_page_events,id,Unique row identifier.,bigint(20) unsigned,NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+landing_page_events,session_id,Session id.,varchar(64),NOT NULL; default SQL NULL / no explicit non-null default; FK → landing_page_sessions.session_id; DELETE CASCADE; UPDATE RESTRICT
+landing_page_events,event_type,Event type.,varchar(50),NOT NULL; default SQL NULL / no explicit non-null default
+landing_page_events,event_label,Event label.,varchar(100),NULL allowed; default NULL
+landing_page_events,event_value,Event value.,int(11),NULL allowed; default NULL
+landing_page_events,created_at,Creation timestamp.,timestamp,NOT NULL; default current_timestamp()
+landing_page_sessions,session_id,Session id.,varchar(64),NOT NULL; PRIMARY KEY; default SQL NULL / no explicit non-null default
+landing_page_sessions,user_id,Registered account identifier; an enforced relation only where listed below.,int(11),NULL allowed; default NULL
+landing_page_sessions,guest_token,Anonymous owner/session token; not a foreign key unless explicitly listed.,varchar(64),NULL allowed; default NULL
+landing_page_sessions,ip_hash,Ip hash.,char(64),NOT NULL; default SQL NULL / no explicit non-null default
+landing_page_sessions,user_agent,User agent.,varchar(255),NULL allowed; default NULL
+landing_page_sessions,device_category,Device category.,"enum('mobile','tablet','desktop')",NOT NULL; default 'desktop'
+landing_page_sessions,referrer,Referrer.,varchar(512),NULL allowed; default NULL
+landing_page_sessions,lcp_ms,Lcp ms.,int(11),NULL allowed; default NULL
+landing_page_sessions,fid_ms,Fid ms.,int(11),NULL allowed; default NULL
+landing_page_sessions,inp_ms,Inp ms.,int(11),NULL allowed; default NULL
+landing_page_sessions,cls_score,Cls score.,"decimal(6,4)",NULL allowed; default NULL
+landing_page_sessions,max_scroll_percent,Max scroll percent.,tinyint(3) unsigned,NOT NULL; default 0
+landing_page_sessions,dwell_time_seconds,Dwell time seconds.,smallint(5) unsigned,NOT NULL; default 0
+landing_page_sessions,converted,Converted.,tinyint(1),NOT NULL; default 0
+landing_page_sessions,created_at,Creation timestamp.,timestamp,NOT NULL; default current_timestamp()
+landing_page_sessions,updated_at,Most recent update timestamp.,timestamp,NOT NULL; on update current_timestamp(); default current_timestamp()
+nutshell_generations,id,Unique row identifier.,bigint(20) unsigned,NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+nutshell_generations,summary_id,Related summary identifier.,int(11),NULL allowed; default NULL; FK → summaries.id; DELETE SET NULL; UPDATE RESTRICT
+nutshell_generations,user_id,Registered account identifier; an enforced relation only where listed below.,int(11),NULL allowed; default NULL
+nutshell_generations,guest_token,Anonymous owner/session token; not a foreign key unless explicitly listed.,varchar(64),NULL allowed; default NULL
+nutshell_generations,input_type,Input type.,varchar(20),NOT NULL; default 'text'
+nutshell_generations,nutshell_text,Nutshell text.,text,NULL allowed; default NULL
+nutshell_generations,status,Domain status marker.,"enum('completed','failed')",NOT NULL; default 'completed'
+nutshell_generations,failure_reason,Failure reason.,varchar(80),NULL allowed; default NULL
+nutshell_generations,analysis_mode,Analysis mode.,varchar(24),NOT NULL; default 'general'
+nutshell_generations,output_format,Output format.,varchar(24),NOT NULL; default 'paragraph'
+nutshell_generations,word_count,Word count.,int(10) unsigned,NOT NULL; default 0
+nutshell_generations,source_word_count,Source word count.,int(10) unsigned,NOT NULL; default 0
+nutshell_generations,primary_summary_word_count,Primary summary word count.,int(10) unsigned,NOT NULL; default 0
+nutshell_generations,compression_ratio,Module-specific compression metric; check service semantics before comparisons.,"decimal(8,4)",NOT NULL; default 0.0000
+nutshell_generations,processing_time_ms,Processing time ms.,int(10) unsigned,NOT NULL; default 0
+nutshell_generations,algorithm_version,Algorithm version.,varchar(32),NOT NULL; default 'nutshell-extractive-v2'
+nutshell_generations,idempotency_key,Idempotency key.,char(64),NULL allowed; default NULL
+nutshell_generations,created_at,Creation timestamp.,timestamp,NOT NULL; default current_timestamp()
+password_resets,id,Unique row identifier.,int(11),NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+password_resets,user_id,Registered account identifier; an enforced relation only where listed below.,int(11),NOT NULL; default SQL NULL / no explicit non-null default; FK → users.id; DELETE CASCADE; UPDATE RESTRICT
+password_resets,token_hash,One-way recovery-code verifier.,varchar(64),NOT NULL; default SQL NULL / no explicit non-null default
+password_resets,expires_at,Expires at.,datetime,NOT NULL; default SQL NULL / no explicit non-null default
+password_resets,used_at,Used at.,datetime,NULL allowed; default NULL
+rate_limits,id,Unique row identifier.,int(11),NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+rate_limits,action_type,Action type.,varchar(30),NOT NULL; default SQL NULL / no explicit non-null default
+rate_limits,identifier,Identifier.,varchar(255),NOT NULL; default SQL NULL / no explicit non-null default
+rate_limits,attempts,Attempts.,int(11),NULL allowed; default 0
+rate_limits,window_start,Window start.,timestamp,NOT NULL; default current_timestamp()
+schema_migrations,id,Unique row identifier.,int(11),NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+schema_migrations,migration,Migration.,varchar(255),NOT NULL; default SQL NULL / no explicit non-null default
+schema_migrations,applied_at,Applied at.,timestamp,NOT NULL; default current_timestamp()
+summaries,id,Unique row identifier.,int(11),NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+summaries,user_id,Registered account identifier; an enforced relation only where listed below.,int(11),NULL allowed; default NULL; FK → users.id; DELETE CASCADE; UPDATE RESTRICT
+summaries,guest_token,Anonymous owner/session token; not a foreign key unless explicitly listed.,varchar(64),NULL allowed; default NULL
+summaries,share_token,Random capability token used by shared-summary links.,varchar(64),NOT NULL; default SQL NULL / no explicit non-null default
+summaries,article_title,Article title.,varchar(255),NOT NULL; default SQL NULL / no explicit non-null default
+summaries,author_name,Author name.,varchar(255),NULL allowed; default NULL
+summaries,input_type,Input type.,"enum('text','pdf','docx','url')",NOT NULL; default SQL NULL / no explicit non-null default
+summaries,summary_style,Summary style.,"enum('standard_paragraph','bullet_points','hybrid','academic_summary','simple_summary','executive_summary')",NULL allowed; default 'standard_paragraph'
+summaries,summary_length,Summary length.,varchar(32),NULL allowed; default NULL
+summaries,original_word_count,Source word count; main file path currently counts the empty input string.,int(10) unsigned,NULL allowed; default NULL
+summaries,summary_word_count,Generated summary word count.,int(10) unsigned,NULL allowed; default NULL
+summaries,processing_time,Elapsed summary processing seconds; current main caller does not supply this value.,"decimal(10,3)",NULL allowed; default NULL
+summaries,article_category,Article category.,varchar(100),NULL allowed; default NULL
+summaries,status,Domain status marker.,"enum('pending','processing','completed','failed')",NOT NULL; default 'completed'
+summaries,error_message,Error message.,text,NULL allowed; default NULL
+summaries,created_at,Creation timestamp.,timestamp,NOT NULL; default current_timestamp()
+summaries,nutshell_text,Nutshell text.,text,NULL allowed; default NULL
+summaries,nutshell_word_count,Nutshell word count.,int(10) unsigned,NULL allowed; default NULL
+summaries,nutshell_generated_at,Nutshell generated at.,timestamp,NULL allowed; default NULL
+summary_artifacts,id,Unique row identifier.,int(11),NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+summary_artifacts,summary_id,Related summary identifier.,int(11),NOT NULL; default SQL NULL / no explicit non-null default; FK → summaries.id; DELETE CASCADE; UPDATE RESTRICT
+summary_artifacts,original_text,Persisted original/source text (main summary service applies pattern masking).,longtext,NOT NULL; default SQL NULL / no explicit non-null default
+summary_artifacts,generated_summary,Structured summary JSON/text payload.,longtext,NOT NULL; default SQL NULL / no explicit non-null default
+summary_jobs,id,Unique row identifier.,bigint(20) unsigned,NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+summary_jobs,job_id,Job id.,varchar(64),NOT NULL; default SQL NULL / no explicit non-null default
+summary_jobs,user_id,Registered account identifier; an enforced relation only where listed below.,int(11),NULL allowed; default NULL; FK → users.id; DELETE SET NULL; UPDATE RESTRICT
+summary_jobs,guest_token,Anonymous owner/session token; not a foreign key unless explicitly listed.,varchar(64),NULL allowed; default NULL
+summary_jobs,state,Current durable work state.,"enum('queued','processing','completed','failed','cancelled','timed_out')",NOT NULL; default 'queued'
+summary_jobs,payload,Job input JSON retained according to processing/retry lifecycle.,longtext,NOT NULL; default SQL NULL / no explicit non-null default
+summary_jobs,idempotency_key,Idempotency key.,varchar(128),NOT NULL; default SQL NULL / no explicit non-null default
+summary_jobs,result_id,Result id.,int(11),NULL allowed; default NULL; FK → summaries.id; DELETE SET NULL; UPDATE RESTRICT
+summary_jobs,error_message,Error message.,text,NULL allowed; default NULL
+summary_jobs,error_details,Error details.,text,NULL allowed; default NULL
+summary_jobs,worker_pid,Worker pid.,int(11),NULL allowed; default NULL
+summary_jobs,retry_count,Retry count.,tinyint(3) unsigned,NOT NULL; default 0
+summary_jobs,started_at,Started at.,datetime,NULL allowed; default NULL
+summary_jobs,completed_at,Completed at.,datetime,NULL allowed; default NULL
+summary_jobs,created_at,Creation timestamp.,timestamp,NOT NULL; default current_timestamp()
+summary_jobs,updated_at,Most recent update timestamp.,timestamp,NOT NULL; on update current_timestamp(); default current_timestamp()
+users,id,Unique row identifier.,int(11),NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+users,username,Username.,varchar(50),NOT NULL; default SQL NULL / no explicit non-null default
+users,email,Email.,varchar(100),NOT NULL; default SQL NULL / no explicit non-null default
+users,password_hash,"One-way password verifier, not a readable password.",varchar(255),NOT NULL; default SQL NULL / no explicit non-null default
+users,role,Account access category.,"enum('user','admin')",NULL allowed; default 'user'
+users,active,Enabled/active state.,tinyint(1),NULL allowed; default 1
+users,terms_accepted,Whether the account accepted terms.,tinyint(1),NOT NULL; default 0
+users,terms_accepted_at,Recorded acceptance time.,datetime,NULL allowed; default NULL
+users,created_at,Creation timestamp.,timestamp,NOT NULL; default current_timestamp()
+user_tokens,id,Unique row identifier.,int(11),NOT NULL; PRIMARY KEY; auto_increment; default SQL NULL / no explicit non-null default
+user_tokens,user_id,Registered account identifier; an enforced relation only where listed below.,int(11),NOT NULL; default SQL NULL / no explicit non-null default; FK → users.id; DELETE CASCADE; UPDATE RESTRICT
+user_tokens,selector,Public lookup part of a persistent sign-in token.,varchar(255),NOT NULL; default SQL NULL / no explicit non-null default
+user_tokens,hashed_validator,Hash of persistent sign-in secret.,varchar(255),NOT NULL; default SQL NULL / no explicit non-null default
+user_tokens,expires,Expires.,datetime,NOT NULL; default SQL NULL / no explicit non-null default

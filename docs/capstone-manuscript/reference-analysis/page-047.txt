@@ -1,0 +1,35 @@
+Table 1. Distribution of Respondents
+
+ CLASSIFICATION       POPULATION         PERCENTAGE
+
+ IT CONSULTANT             10              30.30%
+ END-USER                  23              69.70%
+            ADMIN           3
+          TEACHER           5
+       ASSISTANT           15
+
+       TOTAL               33               100%
+
+Sample and Sampling Procedure
+
+   The researchers employed a purposive sampling
+technique in selecting the respondents for this
+study. Two groups of respondents were identified
+based on their relevance and expertise in
+evaluating the developed Record Management and
+Archiving System.
+
+   The first group consists of           ten   (10) IT
+consultants. They were chosen according to the
+following criteria: (a) professional background
+in Information Technology, (b) knowledge and
+experience in software evaluation and system
+development, and (c) specialization in areas
+such  as  usability,  security,  and  system
+performance. Their evaluation is necessary to
+
+
+
+
+
+                                                       28

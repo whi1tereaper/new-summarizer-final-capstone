@@ -1,0 +1,36 @@
+      required   when   files   were   stored
+      unstructured in Google Drive.
+
+   •  Centralized       Folder       Structure:
+      Accreditation documents are organized by
+      Area (e.g., Area I      –  Vision and Mission,
+      Area II   –  Faculty, etc.), allowing users
+      to  navigate  directly  to  the  relevant
+      section without guesswork.
+
+   •  Version Control: Users can access previous
+      versions of a document, ensuring that
+      historical  records  are  not  lost  when
+      updates are made. This is particularly
+      valuable  during  accreditation,  where
+      earlier drafts or supporting documents may
+      be required for review.
+
+   •  Folder Checklist Feature: Each folder can
+      have an associated checklist of required
+      documents. Users can immediately see which
+      files have been uploaded and which are
+      still pending, reducing the time spent
+      verifying completeness.
+
+   •  Sort & Filter Options: Items can be sorted
+      by folders only, files only, marked, or
+      unmarked,  enabling  users  to  focus  on
+      specific  document  types  or  pending
+      requirements.
+These features collectively reduce retrieval
+time from minutes or hours to seconds, directly
+
+
+
+                                                       37

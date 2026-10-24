@@ -1,0 +1,13 @@
+%% Stored roles are user/admin. Current email OTP is separate from the retired security-question flow.
+flowchart TB
+    ACTOR["Administrator"]
+    subgraph SYSTEM["LIGHT summarizer"]
+    C0(["Use eligible ordinary<br/>account workflows"])
+    C1(["Manage permitted user<br/>account operations"])
+    C2(["Inspect audit history,<br/>system records and analytics"])
+    C3(["Manage evaluation datasets,<br/>runs, assignments and reports"])
+    end
+    ACTOR --- C0
+    ACTOR --- C1
+    ACTOR --- C2
+    ACTOR --- C3

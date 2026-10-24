@@ -1,0 +1,32 @@
+greater accuracy and speed. The use of version
+control mechanisms ensures that the latest
+document  revisions  are  accessible  while
+preserving historical records for reference
+(Collins   &   Hayes,   2020).   Additionally,
+implementing  automated  retention  schedules
+helps  organizations  comply  with  legal  and
+regulatory  requirements  by  systematically
+disposing of outdated records (Stewart, 2022).
+Regular system maintenance and data migration
+strategies are also essential to ensure long-
+term accessibility and prevent data corruption
+or loss (Foster, 2021).
+
+   Recent  studies  reinforce  that  records
+management has shifted from a clerical support
+function to a strategic system for efficiency,
+accountability, and compliance in both public
+and  private  organizations  (Anike,  2025;
+Savchenko et al., 2024). Contemporary          digital
+records systems are designed not only to store
+documents, but also to support searchability,
+secure sharing, auditability, and long-term
+accessibility across the records life cycle
+(Qaddoumi, 2025; Anike, 2025; Benmakhlouf &
+Chouaou, 2024). This broader role is especially
+important as institutions manage increasing
+document  volumes  and  face  stronger  legal,
+
+
+
+                                                       7

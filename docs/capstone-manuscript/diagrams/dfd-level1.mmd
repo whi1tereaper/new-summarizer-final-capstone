@@ -1,0 +1,58 @@
+%% LIGHT summarizer: DFD Level 1
+%% Use focused panels for print. Logical stores group actual tables/files; PHP session state is not a SQL table.
+flowchart TB
+    U["Visitor / registered user<br/>eligible requests only"]
+    A["Administrator /<br/>assigned evaluator"]
+    W["Public source website"]
+    M["Configured email service"]
+    T["Translation provider"]
+    P1("1.0 Account and<br/>session management")
+    P2("2.0 Source intake and<br/>summary processing")
+    P3("3.0 Results and<br/>reading helpers")
+    P4("4.0 Feedback and<br/>usage analytics")
+    P5("5.0 Administration and<br/>research evaluation")
+    D1@{ shape: datastore, label: "D1 Account / session stores<br/>users; password_resets;<br/>user_tokens; guest_sessions;<br/>rate_limits; PHP session state" }
+    D2@{ shape: datastore, label: "D2 Main summary stores<br/>summaries; summary_artifacts;<br/>summary_jobs; temporary files" }
+    D3@{ shape: datastore, label: "D3 Reading-helper stores<br/>documents; document_summaries;<br/>nutshell_generations; audio files" }
+    D4@{ shape: datastore, label: "D4 Feedback / telemetry<br/>feedback; feedback_comments;<br/>landing_page_sessions;<br/>landing_page_events" }
+    D5@{ shape: datastore, label: "D5 Administration audit<br/>admin_audit_logs" }
+    D6@{ shape: datastore, label: "D6 Evaluation stores<br/>13 evaluation_* tables<br/>See complete data dictionary" }
+    U -->|"account request"| P1
+    P1 -->|"account status"| U
+    P1 -->|"verification / reset<br/>mail"| M
+    M -->|"delivery status"| P1
+    P1 -->|"account / session<br/>changes"| D1
+    D1 -->|"identity / session data"| P1
+    U -->|"source and settings"| P2
+    P2 -->|"job status / result ID"| U
+    P2 -->|"URL request"| W
+    W -->|"source content"| P2
+    P2 -->|"job / summary / artifact<br/>records"| D2
+    D2 -->|"job state / existing<br/>result"| P2
+    U -->|"result / helper request"| P3
+    P3 -->|"authorized reading<br/>output"| U
+    D2 -->|"owned or shared summary"| P3
+    P3 -->|"helper cache / audio"| D3
+    D3 -->|"cached source / helper<br/>data"| P3
+    P3 -->|"text and target language"| T
+    T -->|"translation / error"| P3
+    U -->|"feedback / visit event"| P4
+    P4 -->|"confirmation /<br/>statistics"| U
+    P4 -->|"feedback / event records"| D4
+    D4 -->|"feedback / usage data"| P4
+    D2 -->|"summary statistics"| P4
+    A -->|"management / assessment<br/>request"| P5
+    P5 -->|"reports / assigned<br/>outputs"| A
+    P5 -->|"managed account changes"| D1
+    D1 -->|"account records"| P5
+    D4 -->|"feedback / telemetry"| P5
+    P5 -->|"audit entries"| D5
+    D5 -->|"audit history"| P5
+    P5 -->|"dataset / run / review<br/>records"| D6
+    D6 -->|"evaluation outputs /<br/>ratings"| P5
+    classDef process fill:#edf1f5,stroke:#222,color:#111;
+    classDef store fill:#f6f6f6,stroke:#222,color:#111;
+    classDef entity fill:#fff,stroke:#222,color:#111;
+    class P1,P2,P3,P4,P5 process;
+    class D1,D2,D3,D4,D5,D6 store;
+    class U,A,W,M,T entity;

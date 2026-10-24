@@ -1,0 +1,26 @@
+{
+  "id": "IV-SCIENCE",
+  "category": "scientific",
+  "publisher": "NIH/NCI",
+  "url": "https://www.nih.gov/news-events/news-releases/healthy-adults-taking-multivitamins-daily-not-associated-lower-risk-death",
+  "download": "https://www.cancer.gov/news-events/press-releases/2024/multivitamins-do-not-lower-risk-of-death",
+  "license": "NIH federal government-authored prose; public domain in the US",
+  "license_url": "https://www.nih.gov/important-links/website-policies",
+  "authors": [],
+  "publication_dates": [],
+  "visible_times": [
+    "June 26, 2024"
+  ],
+  "license_statement": null,
+  "title": "For healthy adults, taking multivitamins daily is not associated with a lower risk of death",
+  "source_text": "For healthy adults, taking multivitamins daily is not associated with a lower risk of death\n\nWhat\n\nA large analysis of data from nearly 400,000 healthy U.S. adults followed for more than 20 years has found no association between regular multivitamin use and lower risk of death. The study, led by researchers at the National Institutes of Health’s National Cancer Institute, was published June 26, 2024, in JAMA Network Open .\n\nMany adults in the United States take multivitamins with the hope of improving their health. However, the benefits and harms of regular multivitamin use remain unclear. Previous studies of multivitamin use and mortality have yielded mixed results and been limited by short follow-up times.\n\nTo more deeply explore the relationship between long-term regular multivitamin use and overall mortality and death from cardiovascular disease and cancer, the researchers analyzed data from three large, geographically diverse prospective studies involving a total of 390,124 U.S. adults who were followed for more than 20 years. The participants included in this analysis were generally healthy, with no history of cancer or other chronic diseases.\n\nBecause the study population was so large and included lengthy follow-up and extensive information on demographics and lifestyle factors, the researchers were able to mitigate the effects of possible biases that may have influenced the findings of other studies. For example, people who use multivitamins may have healthier lifestyles in general, and sicker patients may be more likely to increase their use of multivitamins.\n\nThe analysis showed that people who took daily multivitamins did not have a lower risk of death from any cause than people who took no multivitamins. There were also no differences in mortality from cancer, heart disease, or cerebrovascular diseases. The results were adjusted for factors such as race and ethnicity, education, and diet quality.\n\nThe researchers noted that it is important to evaluate multivitamin use and risk of death among different kinds of populations, such as those with documented nutritional deficiencies, as well as the potential impact of regular multivitamin use on other health conditions associated with aging.\n\nWho\n\nErikka Loftfield, Ph.D., M.P.H., Division of Cancer Epidemiology and Genetics, National Cancer Institute\n\nThe Study\n\n“Multivitamin Use and Mortality Risk in 3 Prospective US Cohorts” appears June 26, 2024, in JAMA Network Open .\n\nAbout the National Cancer Institute (NCI): NCI leads the National Cancer Program and NIH’s efforts to dramatically reduce the prevalence of cancer and improve the lives of people with cancer. NCI supports a wide range of cancer research and training extramurally through grants and contracts. NCI’s intramural research program conducts innovative, transdisciplinary basic, translational, clinical, and epidemiological research on the causes of cancer, avenues for prevention, risk prediction, early detection, and treatment, including research at the NIH Clinical Center—the world’s largest research hospital. Learn more about the intramural research done in NCI’s Division of Cancer Epidemiology and Genetics . For more information about cancer, please visit the NCI website at cancer.gov or call NCI’s contact center at 1-800-4-CANCER (1-800-422-6237).\n\nAbout the National Institutes of Health (NIH): NIH, the nation's medical research agency, includes 27 Institutes and Centers and is a component of the U.S. Department of Health and Human Services. NIH is the primary federal agency conducting and supporting basic, clinical, and translational medical research, and is investigating the causes, treatments, and cures for both common and rare diseases. For more information about NIH and its programs, visit nih.gov .",
+  "prose_words": 574,
+  "retrieved_utc": "2026-10-22T14:18:25.378889+00:00",
+  "http_final_url": "https://www.cancer.gov/news-events/press-releases/2024/multivitamins-do-not-lower-risk-of-death",
+  "http_sha256": "ba64147a08e37cfeadae81df6e5915ac74d89dea98a9ee5de4950bde84b85040",
+  "source_sha256": "a9aacf75f858d35e8cc28d41a35a3ce1bfddcf96331aa8ff672de732c16709ba",
+  "extraction_selector": "article .usa-prose--ncids-full-html",
+  "partition": "prospective_external_non_tuning_pilot",
+  "independent_annotation_status": "pending",
+  "profile": "general"
+}

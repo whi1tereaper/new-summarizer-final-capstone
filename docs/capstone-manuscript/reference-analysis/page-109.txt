@@ -1,0 +1,32 @@
+4.6 Operational Stage
+   The researchers continuously monitored the
+system  to  ensure  it  has  been  functioning
+properly from its launch up to the present. The
+researchers   reviewed   and   addressed   any
+potential issues or weaknesses in the system,
+striving  to  make  consistent  improvements.
+Importantly, the researchers listened closely
+to   user   feedback   and          suggestions.   By
+incorporating these insights, they made the
+system  more  intuitive  and  user-friendly,
+ensuring it better meets the needs of those who
+rely on it.
+
+5. IT Consultants’ evaluation results of
+AccredX: Record Management and Archiving
+System
+   The developed system was evaluated by ten (10)
+IT Consultants. The IT Consultants evaluated the
+performance and features of the AccredX: Record
+Management.  The  following  sections  include
+tables that provide a clear view of the data
+collected. These tables highlight the findings
+from the IT consultants’ responses.
+
+   5.1 Functional Suitability
+   Table 10 shows the functional suitability of
+the developed AccredX: Record Management and
+
+
+
+                                                       90

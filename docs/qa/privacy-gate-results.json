@@ -1,0 +1,38 @@
+{
+    "checks": [
+        {
+            "name": "all three prerequisites permit synthetic test registration",
+            "passed": true
+        },
+        {
+            "name": "explicit processing hold blocks registration",
+            "passed": true
+        },
+        {
+            "name": "invalid authorization value fails closed",
+            "passed": true
+        },
+        {
+            "name": "blank key cannot be bypassed by authorization",
+            "passed": true
+        },
+        {
+            "name": "short key cannot be bypassed by authorization",
+            "passed": true
+        },
+        {
+            "name": "invalid privacy email blocks registration",
+            "passed": true
+        },
+        {
+            "name": "blank privacy override uses configured project email",
+            "passed": true
+        },
+        {
+            "name": "blank project and override email blocks registration",
+            "passed": true
+        }
+    ],
+    "passed": 8,
+    "failed": 0
+}

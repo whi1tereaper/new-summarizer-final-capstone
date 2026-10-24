@@ -19,6 +19,11 @@ frame-ancestors 'none'"
     Header set X-Frame-Options "DENY"
     Header set X-Content-Type-Options "nosniff"
     Header set Referrer-Policy "strict-origin-when-cross-origin"
+    # Private enrollment/search/review pages must not send their URL as a referrer.
+    <FilesMatch "^(admin_student_registry|admin_student_review|student_verification)\.php$">
+        Header unset Referrer-Policy
+        Header always set Referrer-Policy "no-referrer"
+    </FilesMatch>
     Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
     Header set Strict-Transport-Security "max-age=15768000; includeSubDomains" env=HTTPS
 

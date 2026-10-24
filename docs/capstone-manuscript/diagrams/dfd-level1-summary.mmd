@@ -1,0 +1,19 @@
+%% DFD Level 1: source intake and summarization
+%% SOURCE-SUPPORTED design; operation is separately verified.
+flowchart TB
+    U["Visitor / registered user<br/>eligible requests only"]
+    P2("2.0 Source intake and<br/>summary processing")
+    W["Public source website"]
+    D2@{ shape: datastore, label: "D2 Main summary stores<br/>summaries; summary_artifacts;<br/>summary_jobs; temporary files" }
+    U -->|"source and settings"| P2
+    P2 -->|"job status / result ID"| U
+    P2 -->|"URL request"| W
+    W -->|"source content"| P2
+    P2 -->|"job / summary / artifact<br/>records"| D2
+    D2 -->|"job state / existing<br/>result"| P2
+    classDef process fill:#edf1f5,stroke:#222,color:#111;
+    classDef store fill:#f6f6f6,stroke:#222,color:#111;
+    classDef entity fill:#fff,stroke:#222,color:#111;
+    class P2 process;
+    class D2 store;
+    class U,W entity;

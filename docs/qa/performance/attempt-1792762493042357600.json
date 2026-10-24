@@ -1,0 +1,51 @@
+[
+  {
+    "name": "isolated setup (existing verified rollback retained)",
+    "exit": 0,
+    "seconds": 9.64,
+    "output": "{\"database\":\"qa_light_04be48d3\",\"migrations\":19,\"production_counts\":{\"admin_audit_logs\":165,\"admin_security_challenges\":1,\"document_summaries\":125,\"documents\":25,\"evaluation_assignments\":0,\"evaluation_audit_log\":87,\"evaluation_challenge_cases\":24,\"evaluation_content_unit_reviews\":0,\"evaluation_content_units\":0,\"evaluation_datasets\":4,\"evaluation_documents\":36,\"evaluation_errors\":5,\"evaluation_metrics\":3652,\"evaluation_outputs\":428,\"evaluation_ratings\":0,\"evaluation_references\":0,\"evaluation_runs\":6,\"feedback\":105,\"feedback_comments\":112,\"guest_sessions\":94,\"landing_page_events\":8260,\"landing_page_sessions\":188,\"nutshell_generations\":24,\"password_resets\":25,\"rate_limits\":12,\"schema_migrations\":19,\"student_applications\":0,\"student_enrollment_registry\":0,\"student_registry_batches\":0,\"student_registry_events\":0,\"student_registry_gate\":1,\"student_review_events\":0,\"student_trial_links\":0,\"summaries\":241,\"summary_access_reservations\":21,\"summary_access_subjects\":44,\"summary_artifacts\":232,\"summary_jobs\":238,\"user_tokens\":2,\"users\":35}}",
+    "stderr": ""
+  },
+  {
+    "name": "restricted credentials deny production",
+    "exit": 0,
+    "seconds": 0.27,
+    "output": "",
+    "stderr": ""
+  },
+  {
+    "name": "isolated verified benchmark account",
+    "exit": 0,
+    "seconds": 0.83,
+    "output": "{\"verified\":true}",
+    "stderr": ""
+  },
+  {
+    "name": "isolated Apache configuration",
+    "exit": 0,
+    "seconds": 1.55,
+    "output": "",
+    "stderr": "Syntax OK\n"
+  },
+  {
+    "name": "real HTTP summarization speed",
+    "exit": 1,
+    "seconds": 87.83,
+    "output": "{\"kind\": \"text\", \"run\": 1, \"worker_state\": \"fresh worker / first request\", \"passed\": false, \"submission_seconds\": 0.094, \"completed_seconds\": 85.485, \"end_to_end_seconds\": 85.735, \"elapsed_seconds\": 85.922, \"error\": \"TypeError: float() argument must be a string or a real number, not 'NoneType'\"}\n",
+    "stderr": ""
+  },
+  {
+    "name": "original core data preservation during live activity",
+    "exit": 0,
+    "seconds": 1.49,
+    "output": "{\"original_core_rows_preserved\":true,\"live_activity_observed\":true,\"benchmark_uses_restricted_isolated_database\":true}",
+    "stderr": ""
+  },
+  {
+    "name": "isolated fixture cleanup",
+    "exit": 0,
+    "seconds": 0.7,
+    "output": "QA databases and restricted user removed.",
+    "stderr": ""
+  }
+]

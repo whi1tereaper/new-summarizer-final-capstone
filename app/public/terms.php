@@ -8,7 +8,7 @@ use App\Src\Utils\TermsContent;
 
 $sections = TermsContent::getSections();
 $csrfToken = generateCsrfToken();
-$allowedReturnTargets = ['index.php', 'summarizer.php', 'register.php'];
+$allowedReturnTargets = ['index.php', 'summarizer.php', 'register.php', 'student_verification.php'];
 $requestedReturnTarget = (string)($_POST['return_to'] ?? $_GET['return'] ?? 'index.php');
 $returnTarget = in_array($requestedReturnTarget, $allowedReturnTargets, true) ? $requestedReturnTarget : 'index.php';
 $needsTermsReview = \App\Src\Services\TermsAcceptanceService::currentUserNeedsAcceptance();
@@ -106,7 +106,7 @@ $backLabel = empty($_SESSION['user_id'])
         <section class="terms-card terms-scroll-container" aria-label="Terms and Conditions">
             <?php foreach ($sections as $index => $section): ?>
                 <article class="terms-section">
-                    <h2><?= (int)($index + 1) ?>. <?= htmlspecialchars($section['heading']) ?></h2>
+                    <h2<?= isset($section['id'])?' id="'.htmlspecialchars($section['id'],ENT_QUOTES,'UTF-8').'"':'' ?>><?= (int)($index + 1) ?>. <?= htmlspecialchars($section['heading']) ?></h2>
                     <p><?= htmlspecialchars($section['body']) ?></p>
                 </article>
             <?php endforeach; ?>

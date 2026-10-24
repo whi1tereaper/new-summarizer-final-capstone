@@ -1,0 +1,10 @@
+{
+  "locked_utc": "2026-10-22T14:26:14.729213+00:00",
+  "corpus_sha256": "047c1e15655066f91b01ded03a01f975eec73ea03d1ee0aec4dd5bf5f54526e0",
+  "draft_labels_sha256": "71aa2a1909f0ba258993364572447f93c32cebfda8dbe08c819bc0265a737824",
+  "human_review_completed": false,
+  "independent_gold_units": null,
+  "articles": 8,
+  "draft_units": 42,
+  "no_outputs_generated_before_lock": true
+}

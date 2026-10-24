@@ -1,0 +1,57 @@
+       assigned folders, archive the user, or delete the
+       user.
+
+
+
+
+   •   Editing Folders:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       This modal shows the “Edit Assigned Folders”
+       modal.
+       Admins can edit the folders that the users are
+
+
+
+
+
+
+       assigned to.
+       This changed the folders they can access.
+       After selecting the folders to edit, click
+       “Update Folders” to change the assigned folders.
+
+
+
+                                                                   139

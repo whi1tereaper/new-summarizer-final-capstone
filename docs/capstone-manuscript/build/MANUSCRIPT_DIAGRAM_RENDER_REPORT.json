@@ -1,0 +1,192 @@
+[
+  {
+    "name": "dfd-context",
+    "width": 600,
+    "height": 820,
+    "png_width": 1200,
+    "png_height": 1640,
+    "approximate_node_font_pt_at_manuscript_size": 10.6,
+    "prefer_focused_panel_for_print": false,
+    "title": "LIGHT summarizer: context diagram"
+  },
+  {
+    "name": "dfd-level1",
+    "width": 2431.265625,
+    "height": 2281.59375,
+    "png_width": 4863,
+    "png_height": 4564,
+    "approximate_node_font_pt_at_manuscript_size": 3.3,
+    "prefer_focused_panel_for_print": true,
+    "title": "LIGHT summarizer: DFD Level 1"
+  },
+  {
+    "name": "dfd-level1-accounts",
+    "width": 734.765625,
+    "height": 862.390625,
+    "png_width": 1470,
+    "png_height": 1725,
+    "approximate_node_font_pt_at_manuscript_size": 11,
+    "prefer_focused_panel_for_print": false,
+    "title": "DFD Level 1: account and session management"
+  },
+  {
+    "name": "dfd-level1-summary",
+    "width": 689.3125,
+    "height": 879.1875,
+    "png_width": 1379,
+    "png_height": 1759,
+    "approximate_node_font_pt_at_manuscript_size": 11.7,
+    "prefer_focused_panel_for_print": false,
+    "title": "DFD Level 1: source intake and summarization"
+  },
+  {
+    "name": "dfd-level1-results",
+    "width": 727.875,
+    "height": 879.1875,
+    "png_width": 1456,
+    "png_height": 1759,
+    "approximate_node_font_pt_at_manuscript_size": 11.1,
+    "prefer_focused_panel_for_print": false,
+    "title": "DFD Level 1: results and reading helpers"
+  },
+  {
+    "name": "dfd-level1-feedback",
+    "width": 661.734375,
+    "height": 852.796875,
+    "png_width": 1324,
+    "png_height": 1706,
+    "approximate_node_font_pt_at_manuscript_size": 12.2,
+    "prefer_focused_panel_for_print": false,
+    "title": "DFD Level 1: feedback and usage analytics"
+  },
+  {
+    "name": "dfd-level1-administration",
+    "width": 980.046875,
+    "height": 1049.59375,
+    "png_width": 1961,
+    "png_height": 2100,
+    "approximate_node_font_pt_at_manuscript_size": 8.2,
+    "prefer_focused_panel_for_print": false,
+    "title": "DFD Level 1: administration and research evaluation"
+  },
+  {
+    "name": "dfd-level2-summary",
+    "width": 1248.65625,
+    "height": 2041.59375,
+    "png_width": 2498,
+    "png_height": 4084,
+    "approximate_node_font_pt_at_manuscript_size": 5.8,
+    "prefer_focused_panel_for_print": true,
+    "title": "DFD Level 2: source intake and summary processing"
+  },
+  {
+    "name": "dfd-level2-summary-intake",
+    "width": 971.890625,
+    "height": 1128.390625,
+    "png_width": 1944,
+    "png_height": 2257,
+    "approximate_node_font_pt_at_manuscript_size": 8.3,
+    "prefer_focused_panel_for_print": false,
+    "title": "DFD 2.1-2.2: request and source intake"
+  },
+  {
+    "name": "dfd-level2-summary-output",
+    "width": 788.015625,
+    "height": 1181.1875,
+    "png_width": 1577,
+    "png_height": 2363,
+    "approximate_node_font_pt_at_manuscript_size": 9.9,
+    "prefer_focused_panel_for_print": false,
+    "title": "DFD 2.3-2.5: output persistence and status"
+  },
+  {
+    "name": "dfd-level2-auth",
+    "width": 1111.421875,
+    "height": 1699.1875,
+    "png_width": 2223,
+    "png_height": 3399,
+    "approximate_node_font_pt_at_manuscript_size": 6.9,
+    "prefer_focused_panel_for_print": true,
+    "title": "DFD Level 2: account and session management"
+  },
+  {
+    "name": "dfd-level2-auth-verification",
+    "width": 850.40625,
+    "height": 1361.1875,
+    "png_width": 1701,
+    "png_height": 2723,
+    "approximate_node_font_pt_at_manuscript_size": 8.6,
+    "prefer_focused_panel_for_print": false,
+    "title": "DFD 1.1-1.2: account request and verification"
+  },
+  {
+    "name": "dfd-level2-auth-session",
+    "width": 496.953125,
+    "height": 1361.1875,
+    "png_width": 994,
+    "png_height": 2723,
+    "approximate_node_font_pt_at_manuscript_size": 8.6,
+    "prefer_focused_panel_for_print": false,
+    "title": "DFD 1.2-1.3: identity and session changes"
+  },
+  {
+    "name": "research-paradigm",
+    "width": 600,
+    "height": 830,
+    "png_width": 1200,
+    "png_height": 1660,
+    "approximate_node_font_pt_at_manuscript_size": 10.6,
+    "prefer_focused_panel_for_print": false,
+    "title": "Proposed Input-Process-Output-Feedback research paradigm"
+  },
+  {
+    "name": "use-cases-guests",
+    "width": 600,
+    "height": 885,
+    "png_width": 1200,
+    "png_height": 1770,
+    "approximate_node_font_pt_at_manuscript_size": 10.5,
+    "prefer_focused_panel_for_print": false,
+    "title": "Use cases: Guest visitor"
+  },
+  {
+    "name": "use-cases-registered",
+    "width": 600,
+    "height": 885,
+    "png_width": 1200,
+    "png_height": 1770,
+    "approximate_node_font_pt_at_manuscript_size": 10.5,
+    "prefer_focused_panel_for_print": false,
+    "title": "Use cases: Registered account"
+  },
+  {
+    "name": "use-cases-administrators",
+    "width": 600,
+    "height": 765,
+    "png_width": 1200,
+    "png_height": 1530,
+    "approximate_node_font_pt_at_manuscript_size": 10.6,
+    "prefer_focused_panel_for_print": false,
+    "title": "Use cases: Administrator"
+  },
+  {
+    "name": "use-cases-evaluators",
+    "width": 600,
+    "height": 645,
+    "png_width": 1200,
+    "png_height": 1290,
+    "approximate_node_font_pt_at_manuscript_size": 10.6,
+    "prefer_focused_panel_for_print": false,
+    "title": "Use cases: Assigned evaluator"
+  },
+  {
+    "name": "use-cases",
+    "width": 579,
+    "height": 3636,
+    "png_width": 1158,
+    "png_height": 7272,
+    "approximate_node_font_pt_at_manuscript_size": 3.2,
+    "prefer_focused_panel_for_print": true,
+    "title": "LIGHT summarizer: role and use-case overview"
+  }
+]

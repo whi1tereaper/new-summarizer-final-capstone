@@ -1,0 +1,36 @@
+ archived_by          User that      int(11)
+                      archived
+                      the file
+ archived_at          Date and       datetime
+                      time file
+                      was
+                      archived
+ deleted_by           User that      int(11)
+                      deleted
+                      the file
+ deleted_at           Date and       datetime
+                      time the
+                      file was
+                      deleted
+ scheduled_delet      Scheduled      datetime
+ e_at                 delete
+ userid               User ID        int(11)
+
+ created_at           Time file      timestamp
+                      was
+                      created
+ oid                  OID            int(11)
+
+ version_group_i      Version        int(11)
+ d                    group ID
+ version              Version        int(11)
+                      of the
+                      file
+ is_latest            Is the         tinyint(1
+                      latest         )
+                      version
+
+
+
+
+                                                             80

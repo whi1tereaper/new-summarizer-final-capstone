@@ -1,0 +1,5667 @@
+{
+  "summary": {
+    "article21_light": {
+      "cases": 48,
+      "matched": 9,
+      "sentence_saturated": 44,
+      "unmatched_but_relaxed_searched_feasible": 27,
+      "hard_relaxed_searched_infeasible": 12,
+      "hard_relaxed_full_depth_infeasible": 12,
+      "same_output_all_trials": 38
+    },
+    "article21_enhanced": {
+      "cases": 48,
+      "matched": 9,
+      "sentence_saturated": 43,
+      "unmatched_but_relaxed_searched_feasible": 27,
+      "hard_relaxed_searched_infeasible": 12,
+      "hard_relaxed_full_depth_infeasible": 12,
+      "same_output_all_trials": 37
+    }
+  },
+  "rows": [
+    {
+      "system": "article21_light",
+      "case_id": "IV-BUSINESS:very_brief:general",
+      "category": "business",
+      "depth": "very_brief",
+      "target_legacy_words": 55,
+      "ui_requested_count": 3,
+      "article_effective_count": 2,
+      "article_internal_depth_limit": 2,
+      "native_ceiling_engine_words": 47,
+      "max_searched_ceiling_engine_words": 75,
+      "depth_maximum_engine_words": 80,
+      "native_words": 40,
+      "selected_words": 40,
+      "native_output_count": 2,
+      "selected_output_count": 2,
+      "native_engine_words": 40,
+      "selected_engine_words": 40,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 15,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 77,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 40,
+          "error": null
+        },
+        {
+          "budget": 45,
+          "sentence_request": 3,
+          "words": 40,
+          "error": null
+        },
+        {
+          "budget": 55,
+          "sentence_request": 3,
+          "words": 40,
+          "error": null
+        },
+        {
+          "budget": 65,
+          "sentence_request": 3,
+          "words": 40,
+          "error": null
+        },
+        {
+          "budget": 75,
+          "sentence_request": 3,
+          "words": 40,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-BUSINESS:brief:general",
+      "category": "business",
+      "depth": "brief",
+      "target_legacy_words": 108,
+      "ui_requested_count": 3,
+      "article_effective_count": 3,
+      "article_internal_depth_limit": 4,
+      "native_ceiling_engine_words": 85,
+      "max_searched_ceiling_engine_words": 146,
+      "depth_maximum_engine_words": 150,
+      "native_words": 56,
+      "selected_words": 56,
+      "native_output_count": 3,
+      "selected_output_count": 3,
+      "native_engine_words": 56,
+      "selected_engine_words": 56,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 52,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 112,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 56,
+          "error": null
+        },
+        {
+          "budget": 98,
+          "sentence_request": 3,
+          "words": 56,
+          "error": null
+        },
+        {
+          "budget": 108,
+          "sentence_request": 3,
+          "words": 56,
+          "error": null
+        },
+        {
+          "budget": 118,
+          "sentence_request": 3,
+          "words": 56,
+          "error": null
+        },
+        {
+          "budget": 146,
+          "sentence_request": 3,
+          "words": 56,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-BUSINESS:short:general",
+      "category": "business",
+      "depth": "short",
+      "target_legacy_words": 152,
+      "ui_requested_count": 5,
+      "article_effective_count": 5,
+      "article_internal_depth_limit": 6,
+      "native_ceiling_engine_words": 123,
+      "max_searched_ceiling_engine_words": 206,
+      "depth_maximum_engine_words": 280,
+      "native_words": 118,
+      "selected_words": 118,
+      "native_output_count": 5,
+      "selected_output_count": 5,
+      "native_engine_words": 118,
+      "selected_engine_words": 118,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 34,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 167,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 5,
+          "words": 118,
+          "error": null
+        },
+        {
+          "budget": 142,
+          "sentence_request": 5,
+          "words": 118,
+          "error": null
+        },
+        {
+          "budget": 152,
+          "sentence_request": 5,
+          "words": 118,
+          "error": null
+        },
+        {
+          "budget": 162,
+          "sentence_request": 5,
+          "words": 118,
+          "error": null
+        },
+        {
+          "budget": 206,
+          "sentence_request": 5,
+          "words": 118,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-BUSINESS:balanced:general",
+      "category": "business",
+      "depth": "balanced",
+      "target_legacy_words": 253,
+      "ui_requested_count": 8,
+      "article_effective_count": 8,
+      "article_internal_depth_limit": 10,
+      "native_ceiling_engine_words": 179,
+      "max_searched_ceiling_engine_words": 342,
+      "depth_maximum_engine_words": 500,
+      "native_words": 176,
+      "selected_words": 176,
+      "native_output_count": 8,
+      "selected_output_count": 8,
+      "native_engine_words": 176,
+      "selected_engine_words": 176,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 77,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 244,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 8,
+          "words": 176,
+          "error": null
+        },
+        {
+          "budget": 243,
+          "sentence_request": 8,
+          "words": 176,
+          "error": null
+        },
+        {
+          "budget": 253,
+          "sentence_request": 8,
+          "words": 176,
+          "error": null
+        },
+        {
+          "budget": 263,
+          "sentence_request": 8,
+          "words": 176,
+          "error": null
+        },
+        {
+          "budget": 342,
+          "sentence_request": 8,
+          "words": 176,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-BUSINESS:detailed:general",
+      "category": "business",
+      "depth": "detailed",
+      "target_legacy_words": 334,
+      "ui_requested_count": 11,
+      "article_effective_count": 11,
+      "article_internal_depth_limit": 18,
+      "native_ceiling_engine_words": 260,
+      "max_searched_ceiling_engine_words": 451,
+      "depth_maximum_engine_words": 850,
+      "native_words": 257,
+      "selected_words": 257,
+      "native_output_count": 11,
+      "selected_output_count": 11,
+      "native_engine_words": 257,
+      "selected_engine_words": 257,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 77,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 310,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 11,
+          "words": 257,
+          "error": null
+        },
+        {
+          "budget": 324,
+          "sentence_request": 11,
+          "words": 257,
+          "error": null
+        },
+        {
+          "budget": 334,
+          "sentence_request": 11,
+          "words": 257,
+          "error": null
+        },
+        {
+          "budget": 344,
+          "sentence_request": 11,
+          "words": 257,
+          "error": null
+        },
+        {
+          "budget": 451,
+          "sentence_request": 11,
+          "words": 257,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-BUSINESS:comprehensive:general",
+      "category": "business",
+      "depth": "comprehensive",
+      "target_legacy_words": 363,
+      "ui_requested_count": 15,
+      "article_effective_count": 15,
+      "article_internal_depth_limit": 32,
+      "native_ceiling_engine_words": 354,
+      "max_searched_ceiling_engine_words": 491,
+      "depth_maximum_engine_words": 1600,
+      "native_words": 328,
+      "selected_words": 328,
+      "native_output_count": 15,
+      "selected_output_count": 15,
+      "native_engine_words": 328,
+      "selected_engine_words": 328,
+      "sentence_cap_saturated": true,
+      "matched": true,
+      "absolute_difference": 35,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 381,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 15,
+          "words": 328,
+          "error": null
+        },
+        {
+          "budget": 353,
+          "sentence_request": 15,
+          "words": 328,
+          "error": null
+        },
+        {
+          "budget": 363,
+          "sentence_request": 15,
+          "words": 328,
+          "error": null
+        },
+        {
+          "budget": 373,
+          "sentence_request": 15,
+          "words": 328,
+          "error": null
+        },
+        {
+          "budget": 491,
+          "sentence_request": 15,
+          "words": 328,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-EDITORIAL:very_brief:general",
+      "category": "editorial",
+      "depth": "very_brief",
+      "target_legacy_words": 43,
+      "ui_requested_count": 3,
+      "article_effective_count": 2,
+      "article_internal_depth_limit": 2,
+      "native_ceiling_engine_words": 80,
+      "max_searched_ceiling_engine_words": 80,
+      "depth_maximum_engine_words": 80,
+      "native_words": 41,
+      "selected_words": 41,
+      "native_output_count": 2,
+      "selected_output_count": 2,
+      "native_engine_words": 41,
+      "selected_engine_words": 41,
+      "sentence_cap_saturated": true,
+      "matched": true,
+      "absolute_difference": 2,
+      "distinct_trial_outputs": 2,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 80,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 41,
+          "error": null
+        },
+        {
+          "budget": 33,
+          "sentence_request": 3,
+          "words": 31,
+          "error": null
+        },
+        {
+          "budget": 43,
+          "sentence_request": 3,
+          "words": 41,
+          "error": null
+        },
+        {
+          "budget": 53,
+          "sentence_request": 3,
+          "words": 41,
+          "error": null
+        },
+        {
+          "budget": 59,
+          "sentence_request": 3,
+          "words": 41,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-EDITORIAL:brief:general",
+      "category": "editorial",
+      "depth": "brief",
+      "target_legacy_words": 98,
+      "ui_requested_count": 3,
+      "article_effective_count": 3,
+      "article_internal_depth_limit": 4,
+      "native_ceiling_engine_words": 150,
+      "max_searched_ceiling_engine_words": 150,
+      "depth_maximum_engine_words": 150,
+      "native_words": 53,
+      "selected_words": 53,
+      "native_output_count": 3,
+      "selected_output_count": 3,
+      "native_engine_words": 53,
+      "selected_engine_words": 53,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 45,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 149,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 53,
+          "error": null
+        },
+        {
+          "budget": 88,
+          "sentence_request": 3,
+          "words": 53,
+          "error": null
+        },
+        {
+          "budget": 98,
+          "sentence_request": 3,
+          "words": 53,
+          "error": null
+        },
+        {
+          "budget": 108,
+          "sentence_request": 3,
+          "words": 53,
+          "error": null
+        },
+        {
+          "budget": 133,
+          "sentence_request": 3,
+          "words": 53,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-EDITORIAL:short:general",
+      "category": "editorial",
+      "depth": "short",
+      "target_legacy_words": 163,
+      "ui_requested_count": 5,
+      "article_effective_count": 5,
+      "article_internal_depth_limit": 6,
+      "native_ceiling_engine_words": 280,
+      "max_searched_ceiling_engine_words": 280,
+      "depth_maximum_engine_words": 280,
+      "native_words": 110,
+      "selected_words": 110,
+      "native_output_count": 5,
+      "selected_output_count": 5,
+      "native_engine_words": 110,
+      "selected_engine_words": 110,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 53,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 239,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 5,
+          "words": 110,
+          "error": null
+        },
+        {
+          "budget": 153,
+          "sentence_request": 5,
+          "words": 110,
+          "error": null
+        },
+        {
+          "budget": 163,
+          "sentence_request": 5,
+          "words": 110,
+          "error": null
+        },
+        {
+          "budget": 173,
+          "sentence_request": 5,
+          "words": 110,
+          "error": null
+        },
+        {
+          "budget": 221,
+          "sentence_request": 5,
+          "words": 110,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-EDITORIAL:balanced:general",
+      "category": "editorial",
+      "depth": "balanced",
+      "target_legacy_words": 289,
+      "ui_requested_count": 8,
+      "article_effective_count": 8,
+      "article_internal_depth_limit": 10,
+      "native_ceiling_engine_words": 500,
+      "max_searched_ceiling_engine_words": 500,
+      "depth_maximum_engine_words": 500,
+      "native_words": 172,
+      "selected_words": 172,
+      "native_output_count": 8,
+      "selected_output_count": 8,
+      "native_engine_words": 172,
+      "selected_engine_words": 172,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 117,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 356,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 8,
+          "words": 172,
+          "error": null
+        },
+        {
+          "budget": 279,
+          "sentence_request": 8,
+          "words": 172,
+          "error": null
+        },
+        {
+          "budget": 289,
+          "sentence_request": 8,
+          "words": 172,
+          "error": null
+        },
+        {
+          "budget": 299,
+          "sentence_request": 8,
+          "words": 172,
+          "error": null
+        },
+        {
+          "budget": 391,
+          "sentence_request": 8,
+          "words": 172,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-EDITORIAL:detailed:general",
+      "category": "editorial",
+      "depth": "detailed",
+      "target_legacy_words": 562,
+      "ui_requested_count": 11,
+      "article_effective_count": 11,
+      "article_internal_depth_limit": 18,
+      "native_ceiling_engine_words": 850,
+      "max_searched_ceiling_engine_words": 850,
+      "depth_maximum_engine_words": 850,
+      "native_words": 229,
+      "selected_words": 229,
+      "native_output_count": 11,
+      "selected_output_count": 11,
+      "native_engine_words": 229,
+      "selected_engine_words": 229,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 333,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 469,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 11,
+          "words": 229,
+          "error": null
+        },
+        {
+          "budget": 552,
+          "sentence_request": 11,
+          "words": 229,
+          "error": null
+        },
+        {
+          "budget": 562,
+          "sentence_request": 11,
+          "words": 229,
+          "error": null
+        },
+        {
+          "budget": 572,
+          "sentence_request": 11,
+          "words": 229,
+          "error": null
+        },
+        {
+          "budget": 759,
+          "sentence_request": 11,
+          "words": 229,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-EDITORIAL:comprehensive:general",
+      "category": "editorial",
+      "depth": "comprehensive",
+      "target_legacy_words": 902,
+      "ui_requested_count": 15,
+      "article_effective_count": 15,
+      "article_internal_depth_limit": 32,
+      "native_ceiling_engine_words": 1176,
+      "max_searched_ceiling_engine_words": 1218,
+      "depth_maximum_engine_words": 1600,
+      "native_words": 319,
+      "selected_words": 319,
+      "native_output_count": 15,
+      "selected_output_count": 15,
+      "native_engine_words": 319,
+      "selected_engine_words": 319,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 583,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 608,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 15,
+          "words": 319,
+          "error": null
+        },
+        {
+          "budget": 892,
+          "sentence_request": 15,
+          "words": 319,
+          "error": null
+        },
+        {
+          "budget": 902,
+          "sentence_request": 15,
+          "words": 319,
+          "error": null
+        },
+        {
+          "budget": 912,
+          "sentence_request": 15,
+          "words": 319,
+          "error": null
+        },
+        {
+          "budget": 1218,
+          "sentence_request": 15,
+          "words": 319,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-EDUCATION:very_brief:general",
+      "category": "educational",
+      "depth": "very_brief",
+      "target_legacy_words": 56,
+      "ui_requested_count": 3,
+      "article_effective_count": 2,
+      "article_internal_depth_limit": 2,
+      "native_ceiling_engine_words": 80,
+      "max_searched_ceiling_engine_words": 80,
+      "depth_maximum_engine_words": 80,
+      "native_words": 51,
+      "selected_words": 51,
+      "native_output_count": 2,
+      "selected_output_count": 2,
+      "native_engine_words": 51,
+      "selected_engine_words": 51,
+      "sentence_cap_saturated": true,
+      "matched": true,
+      "absolute_difference": 5,
+      "distinct_trial_outputs": 2,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 80,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 51,
+          "error": null
+        },
+        {
+          "budget": 46,
+          "sentence_request": 3,
+          "words": 46,
+          "error": null
+        },
+        {
+          "budget": 56,
+          "sentence_request": 3,
+          "words": 51,
+          "error": null
+        },
+        {
+          "budget": 66,
+          "sentence_request": 3,
+          "words": 51,
+          "error": null
+        },
+        {
+          "budget": 76,
+          "sentence_request": 3,
+          "words": 51,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-EDUCATION:brief:general",
+      "category": "educational",
+      "depth": "brief",
+      "target_legacy_words": 113,
+      "ui_requested_count": 3,
+      "article_effective_count": 3,
+      "article_internal_depth_limit": 4,
+      "native_ceiling_engine_words": 150,
+      "max_searched_ceiling_engine_words": 150,
+      "depth_maximum_engine_words": 150,
+      "native_words": 61,
+      "selected_words": 61,
+      "native_output_count": 3,
+      "selected_output_count": 3,
+      "native_engine_words": 61,
+      "selected_engine_words": 61,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 52,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 133,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 61,
+          "error": null
+        },
+        {
+          "budget": 103,
+          "sentence_request": 3,
+          "words": 61,
+          "error": null
+        },
+        {
+          "budget": 113,
+          "sentence_request": 3,
+          "words": 61,
+          "error": null
+        },
+        {
+          "budget": 123,
+          "sentence_request": 3,
+          "words": 61,
+          "error": null
+        },
+        {
+          "budget": 150,
+          "sentence_request": 3,
+          "words": 61,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-EDUCATION:short:general",
+      "category": "educational",
+      "depth": "short",
+      "target_legacy_words": 180,
+      "ui_requested_count": 5,
+      "article_effective_count": 5,
+      "article_internal_depth_limit": 6,
+      "native_ceiling_engine_words": 280,
+      "max_searched_ceiling_engine_words": 280,
+      "depth_maximum_engine_words": 280,
+      "native_words": 79,
+      "selected_words": 79,
+      "native_output_count": 5,
+      "selected_output_count": 5,
+      "native_engine_words": 79,
+      "selected_engine_words": 79,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 101,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 210,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 5,
+          "words": 79,
+          "error": null
+        },
+        {
+          "budget": 170,
+          "sentence_request": 5,
+          "words": 79,
+          "error": null
+        },
+        {
+          "budget": 180,
+          "sentence_request": 5,
+          "words": 79,
+          "error": null
+        },
+        {
+          "budget": 190,
+          "sentence_request": 5,
+          "words": 79,
+          "error": null
+        },
+        {
+          "budget": 244,
+          "sentence_request": 5,
+          "words": 79,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-EDUCATION:balanced:general",
+      "category": "educational",
+      "depth": "balanced",
+      "target_legacy_words": 300,
+      "ui_requested_count": 8,
+      "article_effective_count": 8,
+      "article_internal_depth_limit": 10,
+      "native_ceiling_engine_words": 500,
+      "max_searched_ceiling_engine_words": 500,
+      "depth_maximum_engine_words": 500,
+      "native_words": 118,
+      "selected_words": 118,
+      "native_output_count": 8,
+      "selected_output_count": 8,
+      "native_engine_words": 118,
+      "selected_engine_words": 118,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 182,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 318,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 8,
+          "words": 118,
+          "error": null
+        },
+        {
+          "budget": 290,
+          "sentence_request": 8,
+          "words": 118,
+          "error": null
+        },
+        {
+          "budget": 300,
+          "sentence_request": 8,
+          "words": 118,
+          "error": null
+        },
+        {
+          "budget": 310,
+          "sentence_request": 8,
+          "words": 118,
+          "error": null
+        },
+        {
+          "budget": 405,
+          "sentence_request": 8,
+          "words": 118,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-EDUCATION:detailed:general",
+      "category": "educational",
+      "depth": "detailed",
+      "target_legacy_words": 520,
+      "ui_requested_count": 11,
+      "article_effective_count": 11,
+      "article_internal_depth_limit": 18,
+      "native_ceiling_engine_words": 850,
+      "max_searched_ceiling_engine_words": 850,
+      "depth_maximum_engine_words": 850,
+      "native_words": 167,
+      "selected_words": 167,
+      "native_output_count": 11,
+      "selected_output_count": 11,
+      "native_engine_words": 167,
+      "selected_engine_words": 167,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 353,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 418,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 11,
+          "words": 167,
+          "error": null
+        },
+        {
+          "budget": 510,
+          "sentence_request": 11,
+          "words": 167,
+          "error": null
+        },
+        {
+          "budget": 520,
+          "sentence_request": 11,
+          "words": 167,
+          "error": null
+        },
+        {
+          "budget": 530,
+          "sentence_request": 11,
+          "words": 167,
+          "error": null
+        },
+        {
+          "budget": 702,
+          "sentence_request": 11,
+          "words": 167,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-EDUCATION:comprehensive:general",
+      "category": "educational",
+      "depth": "comprehensive",
+      "target_legacy_words": 836,
+      "ui_requested_count": 15,
+      "article_effective_count": 15,
+      "article_internal_depth_limit": 32,
+      "native_ceiling_engine_words": 1600,
+      "max_searched_ceiling_engine_words": 1600,
+      "depth_maximum_engine_words": 1600,
+      "native_words": 231,
+      "selected_words": 231,
+      "native_output_count": 15,
+      "selected_output_count": 15,
+      "native_engine_words": 231,
+      "selected_engine_words": 231,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 605,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 545,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 15,
+          "words": 231,
+          "error": null
+        },
+        {
+          "budget": 826,
+          "sentence_request": 15,
+          "words": 231,
+          "error": null
+        },
+        {
+          "budget": 836,
+          "sentence_request": 15,
+          "words": 231,
+          "error": null
+        },
+        {
+          "budget": 846,
+          "sentence_request": 15,
+          "words": 231,
+          "error": null
+        },
+        {
+          "budget": 1129,
+          "sentence_request": 15,
+          "words": 231,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-FEATURE:very_brief:general",
+      "category": "feature",
+      "depth": "very_brief",
+      "target_legacy_words": 46,
+      "ui_requested_count": 3,
+      "article_effective_count": 2,
+      "article_internal_depth_limit": 2,
+      "native_ceiling_engine_words": 80,
+      "max_searched_ceiling_engine_words": 80,
+      "depth_maximum_engine_words": 80,
+      "native_words": 34,
+      "selected_words": 34,
+      "native_output_count": 2,
+      "selected_output_count": 2,
+      "native_engine_words": 34,
+      "selected_engine_words": 34,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 12,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 63,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 34,
+          "error": null
+        },
+        {
+          "budget": 36,
+          "sentence_request": 3,
+          "words": 34,
+          "error": null
+        },
+        {
+          "budget": 46,
+          "sentence_request": 3,
+          "words": 34,
+          "error": null
+        },
+        {
+          "budget": 56,
+          "sentence_request": 3,
+          "words": 34,
+          "error": null
+        },
+        {
+          "budget": 63,
+          "sentence_request": 3,
+          "words": 34,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-FEATURE:brief:general",
+      "category": "feature",
+      "depth": "brief",
+      "target_legacy_words": 92,
+      "ui_requested_count": 3,
+      "article_effective_count": 3,
+      "article_internal_depth_limit": 4,
+      "native_ceiling_engine_words": 150,
+      "max_searched_ceiling_engine_words": 150,
+      "depth_maximum_engine_words": 150,
+      "native_words": 61,
+      "selected_words": 61,
+      "native_output_count": 3,
+      "selected_output_count": 3,
+      "native_engine_words": 62,
+      "selected_engine_words": 62,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 31,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 94,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 61,
+          "error": null
+        },
+        {
+          "budget": 82,
+          "sentence_request": 3,
+          "words": 61,
+          "error": null
+        },
+        {
+          "budget": 92,
+          "sentence_request": 3,
+          "words": 61,
+          "error": null
+        },
+        {
+          "budget": 102,
+          "sentence_request": 3,
+          "words": 61,
+          "error": null
+        },
+        {
+          "budget": 125,
+          "sentence_request": 3,
+          "words": 61,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-FEATURE:short:general",
+      "category": "feature",
+      "depth": "short",
+      "target_legacy_words": 151,
+      "ui_requested_count": 5,
+      "article_effective_count": 5,
+      "article_internal_depth_limit": 6,
+      "native_ceiling_engine_words": 218,
+      "max_searched_ceiling_engine_words": 218,
+      "depth_maximum_engine_words": 280,
+      "native_words": 106,
+      "selected_words": 106,
+      "native_output_count": 5,
+      "selected_output_count": 5,
+      "native_engine_words": 108,
+      "selected_engine_words": 108,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 45,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 153,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 5,
+          "words": 106,
+          "error": null
+        },
+        {
+          "budget": 141,
+          "sentence_request": 5,
+          "words": 106,
+          "error": null
+        },
+        {
+          "budget": 151,
+          "sentence_request": 5,
+          "words": 106,
+          "error": null
+        },
+        {
+          "budget": 161,
+          "sentence_request": 5,
+          "words": 106,
+          "error": null
+        },
+        {
+          "budget": 204,
+          "sentence_request": 5,
+          "words": 106,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-FEATURE:balanced:general",
+      "category": "feature",
+      "depth": "balanced",
+      "target_legacy_words": 272,
+      "ui_requested_count": 8,
+      "article_effective_count": 8,
+      "article_internal_depth_limit": 10,
+      "native_ceiling_engine_words": 318,
+      "max_searched_ceiling_engine_words": 368,
+      "depth_maximum_engine_words": 500,
+      "native_words": 153,
+      "selected_words": 153,
+      "native_output_count": 8,
+      "selected_output_count": 8,
+      "native_engine_words": 155,
+      "selected_engine_words": 155,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 119,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 238,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 8,
+          "words": 153,
+          "error": null
+        },
+        {
+          "budget": 262,
+          "sentence_request": 8,
+          "words": 153,
+          "error": null
+        },
+        {
+          "budget": 272,
+          "sentence_request": 8,
+          "words": 153,
+          "error": null
+        },
+        {
+          "budget": 282,
+          "sentence_request": 8,
+          "words": 153,
+          "error": null
+        },
+        {
+          "budget": 368,
+          "sentence_request": 8,
+          "words": 153,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-FEATURE:detailed:general",
+      "category": "feature",
+      "depth": "detailed",
+      "target_legacy_words": 450,
+      "ui_requested_count": 11,
+      "article_effective_count": 11,
+      "article_internal_depth_limit": 18,
+      "native_ceiling_engine_words": 460,
+      "max_searched_ceiling_engine_words": 608,
+      "depth_maximum_engine_words": 850,
+      "native_words": 220,
+      "selected_words": 220,
+      "native_output_count": 11,
+      "selected_output_count": 11,
+      "native_engine_words": 225,
+      "selected_engine_words": 225,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 230,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 319,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 11,
+          "words": 220,
+          "error": null
+        },
+        {
+          "budget": 440,
+          "sentence_request": 11,
+          "words": 220,
+          "error": null
+        },
+        {
+          "budget": 450,
+          "sentence_request": 11,
+          "words": 220,
+          "error": null
+        },
+        {
+          "budget": 460,
+          "sentence_request": 11,
+          "words": 220,
+          "error": null
+        },
+        {
+          "budget": 608,
+          "sentence_request": 11,
+          "words": 220,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-FEATURE:comprehensive:general",
+      "category": "feature",
+      "depth": "comprehensive",
+      "target_legacy_words": 706,
+      "ui_requested_count": 15,
+      "article_effective_count": 15,
+      "article_internal_depth_limit": 32,
+      "native_ceiling_engine_words": 628,
+      "max_searched_ceiling_engine_words": 954,
+      "depth_maximum_engine_words": 1600,
+      "native_words": 279,
+      "selected_words": 279,
+      "native_output_count": 15,
+      "selected_output_count": 15,
+      "native_engine_words": 285,
+      "selected_engine_words": 285,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 427,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 412,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 15,
+          "words": 279,
+          "error": null
+        },
+        {
+          "budget": 696,
+          "sentence_request": 15,
+          "words": 279,
+          "error": null
+        },
+        {
+          "budget": 706,
+          "sentence_request": 15,
+          "words": 279,
+          "error": null
+        },
+        {
+          "budget": 716,
+          "sentence_request": 15,
+          "words": 279,
+          "error": null
+        },
+        {
+          "budget": 954,
+          "sentence_request": 15,
+          "words": 279,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-NEWS:very_brief:general",
+      "category": "news",
+      "depth": "very_brief",
+      "target_legacy_words": 43,
+      "ui_requested_count": 3,
+      "article_effective_count": 2,
+      "article_internal_depth_limit": 2,
+      "native_ceiling_engine_words": 57,
+      "max_searched_ceiling_engine_words": 59,
+      "depth_maximum_engine_words": 80,
+      "native_words": 51,
+      "selected_words": 43,
+      "native_output_count": 2,
+      "selected_output_count": 1,
+      "native_engine_words": 51,
+      "selected_engine_words": 43,
+      "sentence_cap_saturated": true,
+      "matched": true,
+      "absolute_difference": 0,
+      "distinct_trial_outputs": 4,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 78,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 51,
+          "error": null
+        },
+        {
+          "budget": 33,
+          "sentence_request": 3,
+          "words": 29,
+          "error": null
+        },
+        {
+          "budget": 43,
+          "sentence_request": 3,
+          "words": 43,
+          "error": null
+        },
+        {
+          "budget": 53,
+          "sentence_request": 3,
+          "words": 51,
+          "error": null
+        },
+        {
+          "budget": 59,
+          "sentence_request": 3,
+          "words": 58,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-NEWS:brief:general",
+      "category": "news",
+      "depth": "brief",
+      "target_legacy_words": 79,
+      "ui_requested_count": 3,
+      "article_effective_count": 3,
+      "article_internal_depth_limit": 4,
+      "native_ceiling_engine_words": 103,
+      "max_searched_ceiling_engine_words": 107,
+      "depth_maximum_engine_words": 150,
+      "native_words": 79,
+      "selected_words": 79,
+      "native_output_count": 3,
+      "selected_output_count": 3,
+      "native_engine_words": 80,
+      "selected_engine_words": 80,
+      "sentence_cap_saturated": true,
+      "matched": true,
+      "absolute_difference": 0,
+      "distinct_trial_outputs": 3,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 132,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 79,
+          "error": null
+        },
+        {
+          "budget": 69,
+          "sentence_request": 3,
+          "words": 64,
+          "error": null
+        },
+        {
+          "budget": 79,
+          "sentence_request": 3,
+          "words": 72,
+          "error": null
+        },
+        {
+          "budget": 89,
+          "sentence_request": 3,
+          "words": 79,
+          "error": null
+        },
+        {
+          "budget": 107,
+          "sentence_request": 3,
+          "words": 79,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-NEWS:short:general",
+      "category": "news",
+      "depth": "short",
+      "target_legacy_words": 136,
+      "ui_requested_count": 5,
+      "article_effective_count": 5,
+      "article_internal_depth_limit": 6,
+      "native_ceiling_engine_words": 148,
+      "max_searched_ceiling_engine_words": 184,
+      "depth_maximum_engine_words": 280,
+      "native_words": 103,
+      "selected_words": 103,
+      "native_output_count": 5,
+      "selected_output_count": 5,
+      "native_engine_words": 104,
+      "selected_engine_words": 104,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 33,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 196,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 5,
+          "words": 103,
+          "error": null
+        },
+        {
+          "budget": 126,
+          "sentence_request": 5,
+          "words": 103,
+          "error": null
+        },
+        {
+          "budget": 136,
+          "sentence_request": 5,
+          "words": 103,
+          "error": null
+        },
+        {
+          "budget": 146,
+          "sentence_request": 5,
+          "words": 103,
+          "error": null
+        },
+        {
+          "budget": 184,
+          "sentence_request": 5,
+          "words": 103,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-NEWS:balanced:general",
+      "category": "news",
+      "depth": "balanced",
+      "target_legacy_words": 268,
+      "ui_requested_count": 8,
+      "article_effective_count": 8,
+      "article_internal_depth_limit": 10,
+      "native_ceiling_engine_words": 217,
+      "max_searched_ceiling_engine_words": 362,
+      "depth_maximum_engine_words": 500,
+      "native_words": 172,
+      "selected_words": 172,
+      "native_output_count": 8,
+      "selected_output_count": 8,
+      "native_engine_words": 173,
+      "selected_engine_words": 173,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 96,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 279,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 8,
+          "words": 172,
+          "error": null
+        },
+        {
+          "budget": 258,
+          "sentence_request": 8,
+          "words": 172,
+          "error": null
+        },
+        {
+          "budget": 268,
+          "sentence_request": 8,
+          "words": 172,
+          "error": null
+        },
+        {
+          "budget": 278,
+          "sentence_request": 8,
+          "words": 172,
+          "error": null
+        },
+        {
+          "budget": 362,
+          "sentence_request": 8,
+          "words": 172,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-NEWS:detailed:general",
+      "category": "news",
+      "depth": "detailed",
+      "target_legacy_words": 424,
+      "ui_requested_count": 11,
+      "article_effective_count": 11,
+      "article_internal_depth_limit": 18,
+      "native_ceiling_engine_words": 314,
+      "max_searched_ceiling_engine_words": 573,
+      "depth_maximum_engine_words": 850,
+      "native_words": 245,
+      "selected_words": 245,
+      "native_output_count": 11,
+      "selected_output_count": 11,
+      "native_engine_words": 246,
+      "selected_engine_words": 246,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 179,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 352,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 11,
+          "words": 245,
+          "error": null
+        },
+        {
+          "budget": 414,
+          "sentence_request": 11,
+          "words": 245,
+          "error": null
+        },
+        {
+          "budget": 424,
+          "sentence_request": 11,
+          "words": 245,
+          "error": null
+        },
+        {
+          "budget": 434,
+          "sentence_request": 11,
+          "words": 245,
+          "error": null
+        },
+        {
+          "budget": 573,
+          "sentence_request": 11,
+          "words": 245,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-NEWS:comprehensive:general",
+      "category": "news",
+      "depth": "comprehensive",
+      "target_legacy_words": 477,
+      "ui_requested_count": 15,
+      "article_effective_count": 15,
+      "article_internal_depth_limit": 32,
+      "native_ceiling_engine_words": 428,
+      "max_searched_ceiling_engine_words": 644,
+      "depth_maximum_engine_words": 1600,
+      "native_words": 361,
+      "selected_words": 361,
+      "native_output_count": 15,
+      "selected_output_count": 15,
+      "native_engine_words": 364,
+      "selected_engine_words": 364,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 116,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 440,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 15,
+          "words": 361,
+          "error": null
+        },
+        {
+          "budget": 467,
+          "sentence_request": 15,
+          "words": 361,
+          "error": null
+        },
+        {
+          "budget": 477,
+          "sentence_request": 15,
+          "words": 361,
+          "error": null
+        },
+        {
+          "budget": 487,
+          "sentence_request": 15,
+          "words": 361,
+          "error": null
+        },
+        {
+          "budget": 644,
+          "sentence_request": 15,
+          "words": 361,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-RESEARCH:very_brief:general",
+      "category": "research",
+      "depth": "very_brief",
+      "target_legacy_words": 42,
+      "ui_requested_count": 3,
+      "article_effective_count": 2,
+      "article_internal_depth_limit": 2,
+      "native_ceiling_engine_words": 80,
+      "max_searched_ceiling_engine_words": 80,
+      "depth_maximum_engine_words": 80,
+      "native_words": 36,
+      "selected_words": 36,
+      "native_output_count": 2,
+      "selected_output_count": 2,
+      "native_engine_words": 36,
+      "selected_engine_words": 36,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 6,
+      "distinct_trial_outputs": 2,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 80,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 36,
+          "error": null
+        },
+        {
+          "budget": 32,
+          "sentence_request": 3,
+          "words": 23,
+          "error": null
+        },
+        {
+          "budget": 42,
+          "sentence_request": 3,
+          "words": 36,
+          "error": null
+        },
+        {
+          "budget": 52,
+          "sentence_request": 3,
+          "words": 36,
+          "error": null
+        },
+        {
+          "budget": 57,
+          "sentence_request": 3,
+          "words": 36,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-RESEARCH:brief:general",
+      "category": "research",
+      "depth": "brief",
+      "target_legacy_words": 150,
+      "ui_requested_count": 3,
+      "article_effective_count": 3,
+      "article_internal_depth_limit": 4,
+      "native_ceiling_engine_words": 150,
+      "max_searched_ceiling_engine_words": 150,
+      "depth_maximum_engine_words": 150,
+      "native_words": 38,
+      "selected_words": 38,
+      "native_output_count": 3,
+      "selected_output_count": 3,
+      "native_engine_words": 38,
+      "selected_engine_words": 38,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 112,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 150,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 38,
+          "error": null
+        },
+        {
+          "budget": 140,
+          "sentence_request": 3,
+          "words": 38,
+          "error": null
+        },
+        {
+          "budget": 150,
+          "sentence_request": 3,
+          "words": 38,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-RESEARCH:short:general",
+      "category": "research",
+      "depth": "short",
+      "target_legacy_words": 201,
+      "ui_requested_count": 5,
+      "article_effective_count": 5,
+      "article_internal_depth_limit": 6,
+      "native_ceiling_engine_words": 280,
+      "max_searched_ceiling_engine_words": 280,
+      "depth_maximum_engine_words": 280,
+      "native_words": 42,
+      "selected_words": 42,
+      "native_output_count": 5,
+      "selected_output_count": 5,
+      "native_engine_words": 42,
+      "selected_engine_words": 42,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 159,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 280,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 5,
+          "words": 42,
+          "error": null
+        },
+        {
+          "budget": 191,
+          "sentence_request": 5,
+          "words": 42,
+          "error": null
+        },
+        {
+          "budget": 201,
+          "sentence_request": 5,
+          "words": 42,
+          "error": null
+        },
+        {
+          "budget": 211,
+          "sentence_request": 5,
+          "words": 42,
+          "error": null
+        },
+        {
+          "budget": 272,
+          "sentence_request": 5,
+          "words": 42,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-RESEARCH:balanced:general",
+      "category": "research",
+      "depth": "balanced",
+      "target_legacy_words": 317,
+      "ui_requested_count": 8,
+      "article_effective_count": 8,
+      "article_internal_depth_limit": 10,
+      "native_ceiling_engine_words": 500,
+      "max_searched_ceiling_engine_words": 500,
+      "depth_maximum_engine_words": 500,
+      "native_words": 64,
+      "selected_words": 64,
+      "native_output_count": 8,
+      "selected_output_count": 8,
+      "native_engine_words": 64,
+      "selected_engine_words": 64,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 253,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 465,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 8,
+          "words": 64,
+          "error": null
+        },
+        {
+          "budget": 307,
+          "sentence_request": 8,
+          "words": 64,
+          "error": null
+        },
+        {
+          "budget": 317,
+          "sentence_request": 8,
+          "words": 64,
+          "error": null
+        },
+        {
+          "budget": 327,
+          "sentence_request": 8,
+          "words": 64,
+          "error": null
+        },
+        {
+          "budget": 428,
+          "sentence_request": 8,
+          "words": 64,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-RESEARCH:detailed:general",
+      "category": "research",
+      "depth": "detailed",
+      "target_legacy_words": 561,
+      "ui_requested_count": 11,
+      "article_effective_count": 11,
+      "article_internal_depth_limit": 18,
+      "native_ceiling_engine_words": 850,
+      "max_searched_ceiling_engine_words": 850,
+      "depth_maximum_engine_words": 850,
+      "native_words": 110,
+      "selected_words": 110,
+      "native_output_count": 11,
+      "selected_output_count": 11,
+      "native_engine_words": 110,
+      "selected_engine_words": 110,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 451,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 601,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 11,
+          "words": 110,
+          "error": null
+        },
+        {
+          "budget": 551,
+          "sentence_request": 11,
+          "words": 110,
+          "error": null
+        },
+        {
+          "budget": 561,
+          "sentence_request": 11,
+          "words": 110,
+          "error": null
+        },
+        {
+          "budget": 571,
+          "sentence_request": 11,
+          "words": 110,
+          "error": null
+        },
+        {
+          "budget": 758,
+          "sentence_request": 11,
+          "words": 110,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-RESEARCH:comprehensive:general",
+      "category": "research",
+      "depth": "comprehensive",
+      "target_legacy_words": 979,
+      "ui_requested_count": 15,
+      "article_effective_count": 15,
+      "article_internal_depth_limit": 32,
+      "native_ceiling_engine_words": 1600,
+      "max_searched_ceiling_engine_words": 1600,
+      "depth_maximum_engine_words": 1600,
+      "native_words": 193,
+      "selected_words": 193,
+      "native_output_count": 15,
+      "selected_output_count": 15,
+      "native_engine_words": 193,
+      "selected_engine_words": 193,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 786,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 766,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 15,
+          "words": 193,
+          "error": null
+        },
+        {
+          "budget": 969,
+          "sentence_request": 15,
+          "words": 193,
+          "error": null
+        },
+        {
+          "budget": 979,
+          "sentence_request": 15,
+          "words": 193,
+          "error": null
+        },
+        {
+          "budget": 989,
+          "sentence_request": 15,
+          "words": 193,
+          "error": null
+        },
+        {
+          "budget": 1322,
+          "sentence_request": 15,
+          "words": 193,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-SCIENCE:very_brief:general",
+      "category": "scientific",
+      "depth": "very_brief",
+      "target_legacy_words": 49,
+      "ui_requested_count": 3,
+      "article_effective_count": 2,
+      "article_internal_depth_limit": 2,
+      "native_ceiling_engine_words": 45,
+      "max_searched_ceiling_engine_words": 67,
+      "depth_maximum_engine_words": 80,
+      "native_words": 32,
+      "selected_words": 46,
+      "native_output_count": 1,
+      "selected_output_count": 2,
+      "native_engine_words": 32,
+      "selected_engine_words": 46,
+      "sentence_cap_saturated": false,
+      "matched": true,
+      "absolute_difference": 3,
+      "distinct_trial_outputs": 2,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 76,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 32,
+          "error": null
+        },
+        {
+          "budget": 39,
+          "sentence_request": 3,
+          "words": 32,
+          "error": null
+        },
+        {
+          "budget": 49,
+          "sentence_request": 3,
+          "words": 46,
+          "error": null
+        },
+        {
+          "budget": 59,
+          "sentence_request": 3,
+          "words": 46,
+          "error": null
+        },
+        {
+          "budget": 67,
+          "sentence_request": 3,
+          "words": 46,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-SCIENCE:brief:general",
+      "category": "scientific",
+      "depth": "brief",
+      "target_legacy_words": 81,
+      "ui_requested_count": 3,
+      "article_effective_count": 3,
+      "article_internal_depth_limit": 4,
+      "native_ceiling_engine_words": 62,
+      "max_searched_ceiling_engine_words": 110,
+      "depth_maximum_engine_words": 150,
+      "native_words": 61,
+      "selected_words": 64,
+      "native_output_count": 3,
+      "selected_output_count": 3,
+      "native_engine_words": 61,
+      "selected_engine_words": 64,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 17,
+      "distinct_trial_outputs": 2,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 132,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 61,
+          "error": null
+        },
+        {
+          "budget": 71,
+          "sentence_request": 3,
+          "words": 64,
+          "error": null
+        },
+        {
+          "budget": 81,
+          "sentence_request": 3,
+          "words": 64,
+          "error": null
+        },
+        {
+          "budget": 91,
+          "sentence_request": 3,
+          "words": 64,
+          "error": null
+        },
+        {
+          "budget": 110,
+          "sentence_request": 3,
+          "words": 64,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-SCIENCE:short:general",
+      "category": "scientific",
+      "depth": "short",
+      "target_legacy_words": 121,
+      "ui_requested_count": 5,
+      "article_effective_count": 5,
+      "article_internal_depth_limit": 6,
+      "native_ceiling_engine_words": 90,
+      "max_searched_ceiling_engine_words": 164,
+      "depth_maximum_engine_words": 280,
+      "native_words": 90,
+      "selected_words": 90,
+      "native_output_count": 5,
+      "selected_output_count": 5,
+      "native_engine_words": 90,
+      "selected_engine_words": 90,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 31,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 190,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 5,
+          "words": 90,
+          "error": null
+        },
+        {
+          "budget": 111,
+          "sentence_request": 5,
+          "words": 90,
+          "error": null
+        },
+        {
+          "budget": 121,
+          "sentence_request": 5,
+          "words": 90,
+          "error": null
+        },
+        {
+          "budget": 131,
+          "sentence_request": 5,
+          "words": 90,
+          "error": null
+        },
+        {
+          "budget": 164,
+          "sentence_request": 5,
+          "words": 90,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-SCIENCE:balanced:general",
+      "category": "scientific",
+      "depth": "balanced",
+      "target_legacy_words": 177,
+      "ui_requested_count": 8,
+      "article_effective_count": 8,
+      "article_internal_depth_limit": 10,
+      "native_ceiling_engine_words": 131,
+      "max_searched_ceiling_engine_words": 239,
+      "depth_maximum_engine_words": 500,
+      "native_words": 131,
+      "selected_words": 180,
+      "native_output_count": 7,
+      "selected_output_count": 8,
+      "native_engine_words": 131,
+      "selected_engine_words": 180,
+      "sentence_cap_saturated": false,
+      "matched": true,
+      "absolute_difference": 3,
+      "distinct_trial_outputs": 4,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 256,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 8,
+          "words": 131,
+          "error": null
+        },
+        {
+          "budget": 167,
+          "sentence_request": 8,
+          "words": 154,
+          "error": null
+        },
+        {
+          "budget": 177,
+          "sentence_request": 8,
+          "words": 172,
+          "error": null
+        },
+        {
+          "budget": 187,
+          "sentence_request": 8,
+          "words": 180,
+          "error": null
+        },
+        {
+          "budget": 239,
+          "sentence_request": 8,
+          "words": 180,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-SCIENCE:detailed:general",
+      "category": "scientific",
+      "depth": "detailed",
+      "target_legacy_words": 239,
+      "ui_requested_count": 11,
+      "article_effective_count": 11,
+      "article_internal_depth_limit": 18,
+      "native_ceiling_engine_words": 190,
+      "max_searched_ceiling_engine_words": 323,
+      "depth_maximum_engine_words": 850,
+      "native_words": 180,
+      "selected_words": 246,
+      "native_output_count": 8,
+      "selected_output_count": 11,
+      "native_engine_words": 180,
+      "selected_engine_words": 247,
+      "sentence_cap_saturated": false,
+      "matched": true,
+      "absolute_difference": 7,
+      "distinct_trial_outputs": 4,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 304,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 11,
+          "words": 180,
+          "error": null
+        },
+        {
+          "budget": 229,
+          "sentence_request": 11,
+          "words": 223,
+          "error": null
+        },
+        {
+          "budget": 239,
+          "sentence_request": 11,
+          "words": 223,
+          "error": null
+        },
+        {
+          "budget": 249,
+          "sentence_request": 11,
+          "words": 246,
+          "error": null
+        },
+        {
+          "budget": 323,
+          "sentence_request": 11,
+          "words": 262,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-SCIENCE:comprehensive:general",
+      "category": "scientific",
+      "depth": "comprehensive",
+      "target_legacy_words": 296,
+      "ui_requested_count": 15,
+      "article_effective_count": 13,
+      "article_internal_depth_limit": 32,
+      "native_ceiling_engine_words": 259,
+      "max_searched_ceiling_engine_words": 400,
+      "depth_maximum_engine_words": 1600,
+      "native_words": 246,
+      "selected_words": 285,
+      "native_output_count": 11,
+      "selected_output_count": 12,
+      "native_engine_words": 247,
+      "selected_engine_words": 286,
+      "sentence_cap_saturated": false,
+      "matched": true,
+      "absolute_difference": 11,
+      "distinct_trial_outputs": 3,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 329,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 15,
+          "words": 246,
+          "error": null
+        },
+        {
+          "budget": 286,
+          "sentence_request": 15,
+          "words": 285,
+          "error": null
+        },
+        {
+          "budget": 296,
+          "sentence_request": 15,
+          "words": 285,
+          "error": null
+        },
+        {
+          "budget": 306,
+          "sentence_request": 15,
+          "words": 285,
+          "error": null
+        },
+        {
+          "budget": 400,
+          "sentence_request": 15,
+          "words": 329,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-TECHNICAL:very_brief:general",
+      "category": "technical",
+      "depth": "very_brief",
+      "target_legacy_words": 47,
+      "ui_requested_count": 3,
+      "article_effective_count": 2,
+      "article_internal_depth_limit": 2,
+      "native_ceiling_engine_words": 80,
+      "max_searched_ceiling_engine_words": 80,
+      "depth_maximum_engine_words": 80,
+      "native_words": 20,
+      "selected_words": 20,
+      "native_output_count": 2,
+      "selected_output_count": 2,
+      "native_engine_words": 20,
+      "selected_engine_words": 20,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 27,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 78,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 20,
+          "error": null
+        },
+        {
+          "budget": 37,
+          "sentence_request": 3,
+          "words": 20,
+          "error": null
+        },
+        {
+          "budget": 47,
+          "sentence_request": 3,
+          "words": 20,
+          "error": null
+        },
+        {
+          "budget": 57,
+          "sentence_request": 3,
+          "words": 20,
+          "error": null
+        },
+        {
+          "budget": 64,
+          "sentence_request": 3,
+          "words": 20,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-TECHNICAL:brief:general",
+      "category": "technical",
+      "depth": "brief",
+      "target_legacy_words": 87,
+      "ui_requested_count": 3,
+      "article_effective_count": 3,
+      "article_internal_depth_limit": 4,
+      "native_ceiling_engine_words": 150,
+      "max_searched_ceiling_engine_words": 150,
+      "depth_maximum_engine_words": 150,
+      "native_words": 24,
+      "selected_words": 24,
+      "native_output_count": 3,
+      "selected_output_count": 3,
+      "native_engine_words": 24,
+      "selected_engine_words": 24,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 63,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 110,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 24,
+          "error": null
+        },
+        {
+          "budget": 77,
+          "sentence_request": 3,
+          "words": 24,
+          "error": null
+        },
+        {
+          "budget": 87,
+          "sentence_request": 3,
+          "words": 24,
+          "error": null
+        },
+        {
+          "budget": 97,
+          "sentence_request": 3,
+          "words": 24,
+          "error": null
+        },
+        {
+          "budget": 118,
+          "sentence_request": 3,
+          "words": 24,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-TECHNICAL:short:general",
+      "category": "technical",
+      "depth": "short",
+      "target_legacy_words": 156,
+      "ui_requested_count": 5,
+      "article_effective_count": 5,
+      "article_internal_depth_limit": 6,
+      "native_ceiling_engine_words": 280,
+      "max_searched_ceiling_engine_words": 280,
+      "depth_maximum_engine_words": 280,
+      "native_words": 46,
+      "selected_words": 46,
+      "native_output_count": 5,
+      "selected_output_count": 5,
+      "native_engine_words": 46,
+      "selected_engine_words": 46,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 110,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 173,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 5,
+          "words": 46,
+          "error": null
+        },
+        {
+          "budget": 146,
+          "sentence_request": 5,
+          "words": 46,
+          "error": null
+        },
+        {
+          "budget": 156,
+          "sentence_request": 5,
+          "words": 46,
+          "error": null
+        },
+        {
+          "budget": 166,
+          "sentence_request": 5,
+          "words": 46,
+          "error": null
+        },
+        {
+          "budget": 211,
+          "sentence_request": 5,
+          "words": 46,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-TECHNICAL:balanced:general",
+      "category": "technical",
+      "depth": "balanced",
+      "target_legacy_words": 313,
+      "ui_requested_count": 8,
+      "article_effective_count": 8,
+      "article_internal_depth_limit": 10,
+      "native_ceiling_engine_words": 500,
+      "max_searched_ceiling_engine_words": 500,
+      "depth_maximum_engine_words": 500,
+      "native_words": 73,
+      "selected_words": 73,
+      "native_output_count": 8,
+      "selected_output_count": 8,
+      "native_engine_words": 74,
+      "selected_engine_words": 74,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 240,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 261,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 8,
+          "words": 73,
+          "error": null
+        },
+        {
+          "budget": 303,
+          "sentence_request": 8,
+          "words": 73,
+          "error": null
+        },
+        {
+          "budget": 313,
+          "sentence_request": 8,
+          "words": 73,
+          "error": null
+        },
+        {
+          "budget": 323,
+          "sentence_request": 8,
+          "words": 73,
+          "error": null
+        },
+        {
+          "budget": 423,
+          "sentence_request": 8,
+          "words": 73,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-TECHNICAL:detailed:general",
+      "category": "technical",
+      "depth": "detailed",
+      "target_legacy_words": 473,
+      "ui_requested_count": 11,
+      "article_effective_count": 11,
+      "article_internal_depth_limit": 18,
+      "native_ceiling_engine_words": 850,
+      "max_searched_ceiling_engine_words": 850,
+      "depth_maximum_engine_words": 850,
+      "native_words": 112,
+      "selected_words": 112,
+      "native_output_count": 11,
+      "selected_output_count": 11,
+      "native_engine_words": 113,
+      "selected_engine_words": 113,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 361,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 342,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 11,
+          "words": 112,
+          "error": null
+        },
+        {
+          "budget": 463,
+          "sentence_request": 11,
+          "words": 112,
+          "error": null
+        },
+        {
+          "budget": 473,
+          "sentence_request": 11,
+          "words": 112,
+          "error": null
+        },
+        {
+          "budget": 483,
+          "sentence_request": 11,
+          "words": 112,
+          "error": null
+        },
+        {
+          "budget": 639,
+          "sentence_request": 11,
+          "words": 112,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_light",
+      "case_id": "IV-TECHNICAL:comprehensive:general",
+      "category": "technical",
+      "depth": "comprehensive",
+      "target_legacy_words": 838,
+      "ui_requested_count": 15,
+      "article_effective_count": 15,
+      "article_internal_depth_limit": 32,
+      "native_ceiling_engine_words": 1600,
+      "max_searched_ceiling_engine_words": 1600,
+      "depth_maximum_engine_words": 1600,
+      "native_words": 169,
+      "selected_words": 169,
+      "native_output_count": 15,
+      "selected_output_count": 15,
+      "native_engine_words": 170,
+      "selected_engine_words": 170,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 669,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 447,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 15,
+          "words": 169,
+          "error": null
+        },
+        {
+          "budget": 828,
+          "sentence_request": 15,
+          "words": 169,
+          "error": null
+        },
+        {
+          "budget": 838,
+          "sentence_request": 15,
+          "words": 169,
+          "error": null
+        },
+        {
+          "budget": 848,
+          "sentence_request": 15,
+          "words": 169,
+          "error": null
+        },
+        {
+          "budget": 1132,
+          "sentence_request": 15,
+          "words": 169,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-BUSINESS:very_brief:general",
+      "category": "business",
+      "depth": "very_brief",
+      "target_legacy_words": 55,
+      "ui_requested_count": 3,
+      "article_effective_count": 2,
+      "article_internal_depth_limit": 2,
+      "native_ceiling_engine_words": 47,
+      "max_searched_ceiling_engine_words": 75,
+      "depth_maximum_engine_words": 80,
+      "native_words": 40,
+      "selected_words": 40,
+      "native_output_count": 2,
+      "selected_output_count": 2,
+      "native_engine_words": 40,
+      "selected_engine_words": 40,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 15,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 77,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 40,
+          "error": null
+        },
+        {
+          "budget": 45,
+          "sentence_request": 3,
+          "words": 40,
+          "error": null
+        },
+        {
+          "budget": 55,
+          "sentence_request": 3,
+          "words": 40,
+          "error": null
+        },
+        {
+          "budget": 65,
+          "sentence_request": 3,
+          "words": 40,
+          "error": null
+        },
+        {
+          "budget": 75,
+          "sentence_request": 3,
+          "words": 40,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-BUSINESS:brief:general",
+      "category": "business",
+      "depth": "brief",
+      "target_legacy_words": 108,
+      "ui_requested_count": 3,
+      "article_effective_count": 3,
+      "article_internal_depth_limit": 4,
+      "native_ceiling_engine_words": 85,
+      "max_searched_ceiling_engine_words": 146,
+      "depth_maximum_engine_words": 150,
+      "native_words": 58,
+      "selected_words": 58,
+      "native_output_count": 3,
+      "selected_output_count": 3,
+      "native_engine_words": 58,
+      "selected_engine_words": 58,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 50,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 112,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 58,
+          "error": null
+        },
+        {
+          "budget": 98,
+          "sentence_request": 3,
+          "words": 58,
+          "error": null
+        },
+        {
+          "budget": 108,
+          "sentence_request": 3,
+          "words": 58,
+          "error": null
+        },
+        {
+          "budget": 118,
+          "sentence_request": 3,
+          "words": 58,
+          "error": null
+        },
+        {
+          "budget": 146,
+          "sentence_request": 3,
+          "words": 58,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-BUSINESS:short:general",
+      "category": "business",
+      "depth": "short",
+      "target_legacy_words": 152,
+      "ui_requested_count": 5,
+      "article_effective_count": 5,
+      "article_internal_depth_limit": 6,
+      "native_ceiling_engine_words": 123,
+      "max_searched_ceiling_engine_words": 206,
+      "depth_maximum_engine_words": 280,
+      "native_words": 87,
+      "selected_words": 87,
+      "native_output_count": 5,
+      "selected_output_count": 5,
+      "native_engine_words": 87,
+      "selected_engine_words": 87,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 65,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 167,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 5,
+          "words": 87,
+          "error": null
+        },
+        {
+          "budget": 142,
+          "sentence_request": 5,
+          "words": 87,
+          "error": null
+        },
+        {
+          "budget": 152,
+          "sentence_request": 5,
+          "words": 87,
+          "error": null
+        },
+        {
+          "budget": 162,
+          "sentence_request": 5,
+          "words": 87,
+          "error": null
+        },
+        {
+          "budget": 206,
+          "sentence_request": 5,
+          "words": 87,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-BUSINESS:balanced:general",
+      "category": "business",
+      "depth": "balanced",
+      "target_legacy_words": 253,
+      "ui_requested_count": 8,
+      "article_effective_count": 8,
+      "article_internal_depth_limit": 10,
+      "native_ceiling_engine_words": 179,
+      "max_searched_ceiling_engine_words": 342,
+      "depth_maximum_engine_words": 500,
+      "native_words": 179,
+      "selected_words": 179,
+      "native_output_count": 8,
+      "selected_output_count": 8,
+      "native_engine_words": 179,
+      "selected_engine_words": 179,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 74,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 244,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 8,
+          "words": 179,
+          "error": null
+        },
+        {
+          "budget": 243,
+          "sentence_request": 8,
+          "words": 179,
+          "error": null
+        },
+        {
+          "budget": 253,
+          "sentence_request": 8,
+          "words": 179,
+          "error": null
+        },
+        {
+          "budget": 263,
+          "sentence_request": 8,
+          "words": 179,
+          "error": null
+        },
+        {
+          "budget": 342,
+          "sentence_request": 8,
+          "words": 179,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-BUSINESS:detailed:general",
+      "category": "business",
+      "depth": "detailed",
+      "target_legacy_words": 334,
+      "ui_requested_count": 11,
+      "article_effective_count": 11,
+      "article_internal_depth_limit": 18,
+      "native_ceiling_engine_words": 260,
+      "max_searched_ceiling_engine_words": 451,
+      "depth_maximum_engine_words": 850,
+      "native_words": 257,
+      "selected_words": 257,
+      "native_output_count": 11,
+      "selected_output_count": 11,
+      "native_engine_words": 257,
+      "selected_engine_words": 257,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 77,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 310,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 11,
+          "words": 257,
+          "error": null
+        },
+        {
+          "budget": 324,
+          "sentence_request": 11,
+          "words": 257,
+          "error": null
+        },
+        {
+          "budget": 334,
+          "sentence_request": 11,
+          "words": 257,
+          "error": null
+        },
+        {
+          "budget": 344,
+          "sentence_request": 11,
+          "words": 257,
+          "error": null
+        },
+        {
+          "budget": 451,
+          "sentence_request": 11,
+          "words": 257,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-BUSINESS:comprehensive:general",
+      "category": "business",
+      "depth": "comprehensive",
+      "target_legacy_words": 363,
+      "ui_requested_count": 15,
+      "article_effective_count": 15,
+      "article_internal_depth_limit": 32,
+      "native_ceiling_engine_words": 354,
+      "max_searched_ceiling_engine_words": 491,
+      "depth_maximum_engine_words": 1600,
+      "native_words": 328,
+      "selected_words": 328,
+      "native_output_count": 15,
+      "selected_output_count": 15,
+      "native_engine_words": 328,
+      "selected_engine_words": 328,
+      "sentence_cap_saturated": true,
+      "matched": true,
+      "absolute_difference": 35,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 381,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 15,
+          "words": 328,
+          "error": null
+        },
+        {
+          "budget": 353,
+          "sentence_request": 15,
+          "words": 328,
+          "error": null
+        },
+        {
+          "budget": 363,
+          "sentence_request": 15,
+          "words": 328,
+          "error": null
+        },
+        {
+          "budget": 373,
+          "sentence_request": 15,
+          "words": 328,
+          "error": null
+        },
+        {
+          "budget": 491,
+          "sentence_request": 15,
+          "words": 328,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDITORIAL:very_brief:general",
+      "category": "editorial",
+      "depth": "very_brief",
+      "target_legacy_words": 43,
+      "ui_requested_count": 3,
+      "article_effective_count": 2,
+      "article_internal_depth_limit": 2,
+      "native_ceiling_engine_words": 80,
+      "max_searched_ceiling_engine_words": 80,
+      "depth_maximum_engine_words": 80,
+      "native_words": 41,
+      "selected_words": 41,
+      "native_output_count": 2,
+      "selected_output_count": 2,
+      "native_engine_words": 41,
+      "selected_engine_words": 41,
+      "sentence_cap_saturated": true,
+      "matched": true,
+      "absolute_difference": 2,
+      "distinct_trial_outputs": 2,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 80,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 41,
+          "error": null
+        },
+        {
+          "budget": 33,
+          "sentence_request": 3,
+          "words": 31,
+          "error": null
+        },
+        {
+          "budget": 43,
+          "sentence_request": 3,
+          "words": 41,
+          "error": null
+        },
+        {
+          "budget": 53,
+          "sentence_request": 3,
+          "words": 41,
+          "error": null
+        },
+        {
+          "budget": 59,
+          "sentence_request": 3,
+          "words": 41,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDITORIAL:brief:general",
+      "category": "editorial",
+      "depth": "brief",
+      "target_legacy_words": 98,
+      "ui_requested_count": 3,
+      "article_effective_count": 3,
+      "article_internal_depth_limit": 4,
+      "native_ceiling_engine_words": 150,
+      "max_searched_ceiling_engine_words": 150,
+      "depth_maximum_engine_words": 150,
+      "native_words": 53,
+      "selected_words": 53,
+      "native_output_count": 3,
+      "selected_output_count": 3,
+      "native_engine_words": 53,
+      "selected_engine_words": 53,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 45,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 149,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 53,
+          "error": null
+        },
+        {
+          "budget": 88,
+          "sentence_request": 3,
+          "words": 53,
+          "error": null
+        },
+        {
+          "budget": 98,
+          "sentence_request": 3,
+          "words": 53,
+          "error": null
+        },
+        {
+          "budget": 108,
+          "sentence_request": 3,
+          "words": 53,
+          "error": null
+        },
+        {
+          "budget": 133,
+          "sentence_request": 3,
+          "words": 53,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDITORIAL:short:general",
+      "category": "editorial",
+      "depth": "short",
+      "target_legacy_words": 163,
+      "ui_requested_count": 5,
+      "article_effective_count": 5,
+      "article_internal_depth_limit": 6,
+      "native_ceiling_engine_words": 280,
+      "max_searched_ceiling_engine_words": 280,
+      "depth_maximum_engine_words": 280,
+      "native_words": 110,
+      "selected_words": 110,
+      "native_output_count": 5,
+      "selected_output_count": 5,
+      "native_engine_words": 110,
+      "selected_engine_words": 110,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 53,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 239,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 5,
+          "words": 110,
+          "error": null
+        },
+        {
+          "budget": 153,
+          "sentence_request": 5,
+          "words": 110,
+          "error": null
+        },
+        {
+          "budget": 163,
+          "sentence_request": 5,
+          "words": 110,
+          "error": null
+        },
+        {
+          "budget": 173,
+          "sentence_request": 5,
+          "words": 110,
+          "error": null
+        },
+        {
+          "budget": 221,
+          "sentence_request": 5,
+          "words": 110,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDITORIAL:balanced:general",
+      "category": "editorial",
+      "depth": "balanced",
+      "target_legacy_words": 289,
+      "ui_requested_count": 8,
+      "article_effective_count": 8,
+      "article_internal_depth_limit": 10,
+      "native_ceiling_engine_words": 500,
+      "max_searched_ceiling_engine_words": 500,
+      "depth_maximum_engine_words": 500,
+      "native_words": 173,
+      "selected_words": 173,
+      "native_output_count": 8,
+      "selected_output_count": 8,
+      "native_engine_words": 173,
+      "selected_engine_words": 173,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 116,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 356,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 8,
+          "words": 173,
+          "error": null
+        },
+        {
+          "budget": 279,
+          "sentence_request": 8,
+          "words": 173,
+          "error": null
+        },
+        {
+          "budget": 289,
+          "sentence_request": 8,
+          "words": 173,
+          "error": null
+        },
+        {
+          "budget": 299,
+          "sentence_request": 8,
+          "words": 173,
+          "error": null
+        },
+        {
+          "budget": 391,
+          "sentence_request": 8,
+          "words": 173,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDITORIAL:detailed:general",
+      "category": "editorial",
+      "depth": "detailed",
+      "target_legacy_words": 562,
+      "ui_requested_count": 11,
+      "article_effective_count": 11,
+      "article_internal_depth_limit": 18,
+      "native_ceiling_engine_words": 850,
+      "max_searched_ceiling_engine_words": 850,
+      "depth_maximum_engine_words": 850,
+      "native_words": 232,
+      "selected_words": 232,
+      "native_output_count": 11,
+      "selected_output_count": 11,
+      "native_engine_words": 232,
+      "selected_engine_words": 232,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 330,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 469,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 11,
+          "words": 232,
+          "error": null
+        },
+        {
+          "budget": 552,
+          "sentence_request": 11,
+          "words": 232,
+          "error": null
+        },
+        {
+          "budget": 562,
+          "sentence_request": 11,
+          "words": 232,
+          "error": null
+        },
+        {
+          "budget": 572,
+          "sentence_request": 11,
+          "words": 232,
+          "error": null
+        },
+        {
+          "budget": 759,
+          "sentence_request": 11,
+          "words": 232,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDITORIAL:comprehensive:general",
+      "category": "editorial",
+      "depth": "comprehensive",
+      "target_legacy_words": 902,
+      "ui_requested_count": 15,
+      "article_effective_count": 15,
+      "article_internal_depth_limit": 32,
+      "native_ceiling_engine_words": 1176,
+      "max_searched_ceiling_engine_words": 1218,
+      "depth_maximum_engine_words": 1600,
+      "native_words": 335,
+      "selected_words": 335,
+      "native_output_count": 15,
+      "selected_output_count": 15,
+      "native_engine_words": 335,
+      "selected_engine_words": 335,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 567,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 608,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 15,
+          "words": 335,
+          "error": null
+        },
+        {
+          "budget": 892,
+          "sentence_request": 15,
+          "words": 335,
+          "error": null
+        },
+        {
+          "budget": 902,
+          "sentence_request": 15,
+          "words": 335,
+          "error": null
+        },
+        {
+          "budget": 912,
+          "sentence_request": 15,
+          "words": 335,
+          "error": null
+        },
+        {
+          "budget": 1218,
+          "sentence_request": 15,
+          "words": 335,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDUCATION:very_brief:general",
+      "category": "educational",
+      "depth": "very_brief",
+      "target_legacy_words": 56,
+      "ui_requested_count": 3,
+      "article_effective_count": 2,
+      "article_internal_depth_limit": 2,
+      "native_ceiling_engine_words": 80,
+      "max_searched_ceiling_engine_words": 80,
+      "depth_maximum_engine_words": 80,
+      "native_words": 50,
+      "selected_words": 50,
+      "native_output_count": 2,
+      "selected_output_count": 2,
+      "native_engine_words": 50,
+      "selected_engine_words": 50,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 6,
+      "distinct_trial_outputs": 2,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 80,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 50,
+          "error": null
+        },
+        {
+          "budget": 46,
+          "sentence_request": 3,
+          "words": 46,
+          "error": null
+        },
+        {
+          "budget": 56,
+          "sentence_request": 3,
+          "words": 50,
+          "error": null
+        },
+        {
+          "budget": 66,
+          "sentence_request": 3,
+          "words": 50,
+          "error": null
+        },
+        {
+          "budget": 76,
+          "sentence_request": 3,
+          "words": 50,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDUCATION:brief:general",
+      "category": "educational",
+      "depth": "brief",
+      "target_legacy_words": 113,
+      "ui_requested_count": 3,
+      "article_effective_count": 3,
+      "article_internal_depth_limit": 4,
+      "native_ceiling_engine_words": 150,
+      "max_searched_ceiling_engine_words": 150,
+      "depth_maximum_engine_words": 150,
+      "native_words": 59,
+      "selected_words": 59,
+      "native_output_count": 3,
+      "selected_output_count": 3,
+      "native_engine_words": 59,
+      "selected_engine_words": 59,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 54,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 133,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 59,
+          "error": null
+        },
+        {
+          "budget": 103,
+          "sentence_request": 3,
+          "words": 59,
+          "error": null
+        },
+        {
+          "budget": 113,
+          "sentence_request": 3,
+          "words": 59,
+          "error": null
+        },
+        {
+          "budget": 123,
+          "sentence_request": 3,
+          "words": 59,
+          "error": null
+        },
+        {
+          "budget": 150,
+          "sentence_request": 3,
+          "words": 59,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDUCATION:short:general",
+      "category": "educational",
+      "depth": "short",
+      "target_legacy_words": 180,
+      "ui_requested_count": 5,
+      "article_effective_count": 5,
+      "article_internal_depth_limit": 6,
+      "native_ceiling_engine_words": 280,
+      "max_searched_ceiling_engine_words": 280,
+      "depth_maximum_engine_words": 280,
+      "native_words": 78,
+      "selected_words": 78,
+      "native_output_count": 5,
+      "selected_output_count": 5,
+      "native_engine_words": 78,
+      "selected_engine_words": 78,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 102,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 210,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 5,
+          "words": 78,
+          "error": null
+        },
+        {
+          "budget": 170,
+          "sentence_request": 5,
+          "words": 78,
+          "error": null
+        },
+        {
+          "budget": 180,
+          "sentence_request": 5,
+          "words": 78,
+          "error": null
+        },
+        {
+          "budget": 190,
+          "sentence_request": 5,
+          "words": 78,
+          "error": null
+        },
+        {
+          "budget": 244,
+          "sentence_request": 5,
+          "words": 78,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDUCATION:balanced:general",
+      "category": "educational",
+      "depth": "balanced",
+      "target_legacy_words": 300,
+      "ui_requested_count": 8,
+      "article_effective_count": 8,
+      "article_internal_depth_limit": 10,
+      "native_ceiling_engine_words": 500,
+      "max_searched_ceiling_engine_words": 500,
+      "depth_maximum_engine_words": 500,
+      "native_words": 107,
+      "selected_words": 107,
+      "native_output_count": 8,
+      "selected_output_count": 8,
+      "native_engine_words": 107,
+      "selected_engine_words": 107,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 193,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 318,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 8,
+          "words": 107,
+          "error": null
+        },
+        {
+          "budget": 290,
+          "sentence_request": 8,
+          "words": 107,
+          "error": null
+        },
+        {
+          "budget": 300,
+          "sentence_request": 8,
+          "words": 107,
+          "error": null
+        },
+        {
+          "budget": 310,
+          "sentence_request": 8,
+          "words": 107,
+          "error": null
+        },
+        {
+          "budget": 405,
+          "sentence_request": 8,
+          "words": 107,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDUCATION:detailed:general",
+      "category": "educational",
+      "depth": "detailed",
+      "target_legacy_words": 520,
+      "ui_requested_count": 11,
+      "article_effective_count": 11,
+      "article_internal_depth_limit": 18,
+      "native_ceiling_engine_words": 850,
+      "max_searched_ceiling_engine_words": 850,
+      "depth_maximum_engine_words": 850,
+      "native_words": 151,
+      "selected_words": 151,
+      "native_output_count": 11,
+      "selected_output_count": 11,
+      "native_engine_words": 151,
+      "selected_engine_words": 151,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 369,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 418,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 11,
+          "words": 151,
+          "error": null
+        },
+        {
+          "budget": 510,
+          "sentence_request": 11,
+          "words": 151,
+          "error": null
+        },
+        {
+          "budget": 520,
+          "sentence_request": 11,
+          "words": 151,
+          "error": null
+        },
+        {
+          "budget": 530,
+          "sentence_request": 11,
+          "words": 151,
+          "error": null
+        },
+        {
+          "budget": 702,
+          "sentence_request": 11,
+          "words": 151,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-EDUCATION:comprehensive:general",
+      "category": "educational",
+      "depth": "comprehensive",
+      "target_legacy_words": 836,
+      "ui_requested_count": 15,
+      "article_effective_count": 15,
+      "article_internal_depth_limit": 32,
+      "native_ceiling_engine_words": 1600,
+      "max_searched_ceiling_engine_words": 1600,
+      "depth_maximum_engine_words": 1600,
+      "native_words": 219,
+      "selected_words": 219,
+      "native_output_count": 15,
+      "selected_output_count": 15,
+      "native_engine_words": 219,
+      "selected_engine_words": 219,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 617,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 545,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 15,
+          "words": 219,
+          "error": null
+        },
+        {
+          "budget": 826,
+          "sentence_request": 15,
+          "words": 219,
+          "error": null
+        },
+        {
+          "budget": 836,
+          "sentence_request": 15,
+          "words": 219,
+          "error": null
+        },
+        {
+          "budget": 846,
+          "sentence_request": 15,
+          "words": 219,
+          "error": null
+        },
+        {
+          "budget": 1129,
+          "sentence_request": 15,
+          "words": 219,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-FEATURE:very_brief:general",
+      "category": "feature",
+      "depth": "very_brief",
+      "target_legacy_words": 46,
+      "ui_requested_count": 3,
+      "article_effective_count": 2,
+      "article_internal_depth_limit": 2,
+      "native_ceiling_engine_words": 80,
+      "max_searched_ceiling_engine_words": 80,
+      "depth_maximum_engine_words": 80,
+      "native_words": 45,
+      "selected_words": 45,
+      "native_output_count": 2,
+      "selected_output_count": 2,
+      "native_engine_words": 46,
+      "selected_engine_words": 46,
+      "sentence_cap_saturated": true,
+      "matched": true,
+      "absolute_difference": 1,
+      "distinct_trial_outputs": 2,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 63,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 45,
+          "error": null
+        },
+        {
+          "budget": 36,
+          "sentence_request": 3,
+          "words": 31,
+          "error": null
+        },
+        {
+          "budget": 46,
+          "sentence_request": 3,
+          "words": 45,
+          "error": null
+        },
+        {
+          "budget": 56,
+          "sentence_request": 3,
+          "words": 45,
+          "error": null
+        },
+        {
+          "budget": 63,
+          "sentence_request": 3,
+          "words": 45,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-FEATURE:brief:general",
+      "category": "feature",
+      "depth": "brief",
+      "target_legacy_words": 92,
+      "ui_requested_count": 3,
+      "article_effective_count": 3,
+      "article_internal_depth_limit": 4,
+      "native_ceiling_engine_words": 150,
+      "max_searched_ceiling_engine_words": 150,
+      "depth_maximum_engine_words": 150,
+      "native_words": 54,
+      "selected_words": 54,
+      "native_output_count": 3,
+      "selected_output_count": 3,
+      "native_engine_words": 56,
+      "selected_engine_words": 56,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 38,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 94,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 54,
+          "error": null
+        },
+        {
+          "budget": 82,
+          "sentence_request": 3,
+          "words": 54,
+          "error": null
+        },
+        {
+          "budget": 92,
+          "sentence_request": 3,
+          "words": 54,
+          "error": null
+        },
+        {
+          "budget": 102,
+          "sentence_request": 3,
+          "words": 54,
+          "error": null
+        },
+        {
+          "budget": 125,
+          "sentence_request": 3,
+          "words": 54,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-FEATURE:short:general",
+      "category": "feature",
+      "depth": "short",
+      "target_legacy_words": 151,
+      "ui_requested_count": 5,
+      "article_effective_count": 5,
+      "article_internal_depth_limit": 6,
+      "native_ceiling_engine_words": 218,
+      "max_searched_ceiling_engine_words": 218,
+      "depth_maximum_engine_words": 280,
+      "native_words": 89,
+      "selected_words": 89,
+      "native_output_count": 5,
+      "selected_output_count": 5,
+      "native_engine_words": 91,
+      "selected_engine_words": 91,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 62,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 153,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 5,
+          "words": 89,
+          "error": null
+        },
+        {
+          "budget": 141,
+          "sentence_request": 5,
+          "words": 89,
+          "error": null
+        },
+        {
+          "budget": 151,
+          "sentence_request": 5,
+          "words": 89,
+          "error": null
+        },
+        {
+          "budget": 161,
+          "sentence_request": 5,
+          "words": 89,
+          "error": null
+        },
+        {
+          "budget": 204,
+          "sentence_request": 5,
+          "words": 89,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-FEATURE:balanced:general",
+      "category": "feature",
+      "depth": "balanced",
+      "target_legacy_words": 272,
+      "ui_requested_count": 8,
+      "article_effective_count": 8,
+      "article_internal_depth_limit": 10,
+      "native_ceiling_engine_words": 318,
+      "max_searched_ceiling_engine_words": 368,
+      "depth_maximum_engine_words": 500,
+      "native_words": 165,
+      "selected_words": 165,
+      "native_output_count": 8,
+      "selected_output_count": 8,
+      "native_engine_words": 169,
+      "selected_engine_words": 169,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 107,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 238,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 8,
+          "words": 165,
+          "error": null
+        },
+        {
+          "budget": 262,
+          "sentence_request": 8,
+          "words": 165,
+          "error": null
+        },
+        {
+          "budget": 272,
+          "sentence_request": 8,
+          "words": 165,
+          "error": null
+        },
+        {
+          "budget": 282,
+          "sentence_request": 8,
+          "words": 165,
+          "error": null
+        },
+        {
+          "budget": 368,
+          "sentence_request": 8,
+          "words": 165,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-FEATURE:detailed:general",
+      "category": "feature",
+      "depth": "detailed",
+      "target_legacy_words": 450,
+      "ui_requested_count": 11,
+      "article_effective_count": 11,
+      "article_internal_depth_limit": 18,
+      "native_ceiling_engine_words": 460,
+      "max_searched_ceiling_engine_words": 608,
+      "depth_maximum_engine_words": 850,
+      "native_words": 213,
+      "selected_words": 213,
+      "native_output_count": 11,
+      "selected_output_count": 11,
+      "native_engine_words": 218,
+      "selected_engine_words": 218,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 237,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 319,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 11,
+          "words": 213,
+          "error": null
+        },
+        {
+          "budget": 440,
+          "sentence_request": 11,
+          "words": 213,
+          "error": null
+        },
+        {
+          "budget": 450,
+          "sentence_request": 11,
+          "words": 213,
+          "error": null
+        },
+        {
+          "budget": 460,
+          "sentence_request": 11,
+          "words": 213,
+          "error": null
+        },
+        {
+          "budget": 608,
+          "sentence_request": 11,
+          "words": 213,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-FEATURE:comprehensive:general",
+      "category": "feature",
+      "depth": "comprehensive",
+      "target_legacy_words": 706,
+      "ui_requested_count": 15,
+      "article_effective_count": 15,
+      "article_internal_depth_limit": 32,
+      "native_ceiling_engine_words": 628,
+      "max_searched_ceiling_engine_words": 954,
+      "depth_maximum_engine_words": 1600,
+      "native_words": 292,
+      "selected_words": 292,
+      "native_output_count": 15,
+      "selected_output_count": 15,
+      "native_engine_words": 297,
+      "selected_engine_words": 297,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 414,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 412,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 15,
+          "words": 292,
+          "error": null
+        },
+        {
+          "budget": 696,
+          "sentence_request": 15,
+          "words": 292,
+          "error": null
+        },
+        {
+          "budget": 706,
+          "sentence_request": 15,
+          "words": 292,
+          "error": null
+        },
+        {
+          "budget": 716,
+          "sentence_request": 15,
+          "words": 292,
+          "error": null
+        },
+        {
+          "budget": 954,
+          "sentence_request": 15,
+          "words": 292,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-NEWS:very_brief:general",
+      "category": "news",
+      "depth": "very_brief",
+      "target_legacy_words": 43,
+      "ui_requested_count": 3,
+      "article_effective_count": 2,
+      "article_internal_depth_limit": 2,
+      "native_ceiling_engine_words": 57,
+      "max_searched_ceiling_engine_words": 59,
+      "depth_maximum_engine_words": 80,
+      "native_words": 51,
+      "selected_words": 43,
+      "native_output_count": 2,
+      "selected_output_count": 1,
+      "native_engine_words": 51,
+      "selected_engine_words": 43,
+      "sentence_cap_saturated": true,
+      "matched": true,
+      "absolute_difference": 0,
+      "distinct_trial_outputs": 4,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 78,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 51,
+          "error": null
+        },
+        {
+          "budget": 33,
+          "sentence_request": 3,
+          "words": 29,
+          "error": null
+        },
+        {
+          "budget": 43,
+          "sentence_request": 3,
+          "words": 43,
+          "error": null
+        },
+        {
+          "budget": 53,
+          "sentence_request": 3,
+          "words": 51,
+          "error": null
+        },
+        {
+          "budget": 59,
+          "sentence_request": 3,
+          "words": 58,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-NEWS:brief:general",
+      "category": "news",
+      "depth": "brief",
+      "target_legacy_words": 79,
+      "ui_requested_count": 3,
+      "article_effective_count": 3,
+      "article_internal_depth_limit": 4,
+      "native_ceiling_engine_words": 103,
+      "max_searched_ceiling_engine_words": 107,
+      "depth_maximum_engine_words": 150,
+      "native_words": 79,
+      "selected_words": 79,
+      "native_output_count": 3,
+      "selected_output_count": 3,
+      "native_engine_words": 80,
+      "selected_engine_words": 80,
+      "sentence_cap_saturated": true,
+      "matched": true,
+      "absolute_difference": 0,
+      "distinct_trial_outputs": 3,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 132,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 79,
+          "error": null
+        },
+        {
+          "budget": 69,
+          "sentence_request": 3,
+          "words": 66,
+          "error": null
+        },
+        {
+          "budget": 79,
+          "sentence_request": 3,
+          "words": 74,
+          "error": null
+        },
+        {
+          "budget": 89,
+          "sentence_request": 3,
+          "words": 79,
+          "error": null
+        },
+        {
+          "budget": 107,
+          "sentence_request": 3,
+          "words": 79,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-NEWS:short:general",
+      "category": "news",
+      "depth": "short",
+      "target_legacy_words": 136,
+      "ui_requested_count": 5,
+      "article_effective_count": 5,
+      "article_internal_depth_limit": 6,
+      "native_ceiling_engine_words": 148,
+      "max_searched_ceiling_engine_words": 184,
+      "depth_maximum_engine_words": 280,
+      "native_words": 117,
+      "selected_words": 117,
+      "native_output_count": 5,
+      "selected_output_count": 5,
+      "native_engine_words": 118,
+      "selected_engine_words": 118,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 19,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 196,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 5,
+          "words": 117,
+          "error": null
+        },
+        {
+          "budget": 126,
+          "sentence_request": 5,
+          "words": 117,
+          "error": null
+        },
+        {
+          "budget": 136,
+          "sentence_request": 5,
+          "words": 117,
+          "error": null
+        },
+        {
+          "budget": 146,
+          "sentence_request": 5,
+          "words": 117,
+          "error": null
+        },
+        {
+          "budget": 184,
+          "sentence_request": 5,
+          "words": 117,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-NEWS:balanced:general",
+      "category": "news",
+      "depth": "balanced",
+      "target_legacy_words": 268,
+      "ui_requested_count": 8,
+      "article_effective_count": 8,
+      "article_internal_depth_limit": 10,
+      "native_ceiling_engine_words": 217,
+      "max_searched_ceiling_engine_words": 362,
+      "depth_maximum_engine_words": 500,
+      "native_words": 169,
+      "selected_words": 169,
+      "native_output_count": 8,
+      "selected_output_count": 8,
+      "native_engine_words": 170,
+      "selected_engine_words": 170,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 99,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 279,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 8,
+          "words": 169,
+          "error": null
+        },
+        {
+          "budget": 258,
+          "sentence_request": 8,
+          "words": 169,
+          "error": null
+        },
+        {
+          "budget": 268,
+          "sentence_request": 8,
+          "words": 169,
+          "error": null
+        },
+        {
+          "budget": 278,
+          "sentence_request": 8,
+          "words": 169,
+          "error": null
+        },
+        {
+          "budget": 362,
+          "sentence_request": 8,
+          "words": 169,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-NEWS:detailed:general",
+      "category": "news",
+      "depth": "detailed",
+      "target_legacy_words": 424,
+      "ui_requested_count": 11,
+      "article_effective_count": 11,
+      "article_internal_depth_limit": 18,
+      "native_ceiling_engine_words": 314,
+      "max_searched_ceiling_engine_words": 573,
+      "depth_maximum_engine_words": 850,
+      "native_words": 238,
+      "selected_words": 238,
+      "native_output_count": 11,
+      "selected_output_count": 11,
+      "native_engine_words": 239,
+      "selected_engine_words": 239,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 186,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 352,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 11,
+          "words": 238,
+          "error": null
+        },
+        {
+          "budget": 414,
+          "sentence_request": 11,
+          "words": 238,
+          "error": null
+        },
+        {
+          "budget": 424,
+          "sentence_request": 11,
+          "words": 238,
+          "error": null
+        },
+        {
+          "budget": 434,
+          "sentence_request": 11,
+          "words": 238,
+          "error": null
+        },
+        {
+          "budget": 573,
+          "sentence_request": 11,
+          "words": 238,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-NEWS:comprehensive:general",
+      "category": "news",
+      "depth": "comprehensive",
+      "target_legacy_words": 477,
+      "ui_requested_count": 15,
+      "article_effective_count": 15,
+      "article_internal_depth_limit": 32,
+      "native_ceiling_engine_words": 428,
+      "max_searched_ceiling_engine_words": 644,
+      "depth_maximum_engine_words": 1600,
+      "native_words": 362,
+      "selected_words": 362,
+      "native_output_count": 15,
+      "selected_output_count": 15,
+      "native_engine_words": 364,
+      "selected_engine_words": 364,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 115,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 440,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 15,
+          "words": 362,
+          "error": null
+        },
+        {
+          "budget": 467,
+          "sentence_request": 15,
+          "words": 362,
+          "error": null
+        },
+        {
+          "budget": 477,
+          "sentence_request": 15,
+          "words": 362,
+          "error": null
+        },
+        {
+          "budget": 487,
+          "sentence_request": 15,
+          "words": 362,
+          "error": null
+        },
+        {
+          "budget": 644,
+          "sentence_request": 15,
+          "words": 362,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-RESEARCH:very_brief:general",
+      "category": "research",
+      "depth": "very_brief",
+      "target_legacy_words": 42,
+      "ui_requested_count": 3,
+      "article_effective_count": 2,
+      "article_internal_depth_limit": 2,
+      "native_ceiling_engine_words": 80,
+      "max_searched_ceiling_engine_words": 80,
+      "depth_maximum_engine_words": 80,
+      "native_words": 36,
+      "selected_words": 36,
+      "native_output_count": 2,
+      "selected_output_count": 2,
+      "native_engine_words": 36,
+      "selected_engine_words": 36,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 6,
+      "distinct_trial_outputs": 2,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 80,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 36,
+          "error": null
+        },
+        {
+          "budget": 32,
+          "sentence_request": 3,
+          "words": 23,
+          "error": null
+        },
+        {
+          "budget": 42,
+          "sentence_request": 3,
+          "words": 36,
+          "error": null
+        },
+        {
+          "budget": 52,
+          "sentence_request": 3,
+          "words": 36,
+          "error": null
+        },
+        {
+          "budget": 57,
+          "sentence_request": 3,
+          "words": 36,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-RESEARCH:brief:general",
+      "category": "research",
+      "depth": "brief",
+      "target_legacy_words": 150,
+      "ui_requested_count": 3,
+      "article_effective_count": 3,
+      "article_internal_depth_limit": 4,
+      "native_ceiling_engine_words": 150,
+      "max_searched_ceiling_engine_words": 150,
+      "depth_maximum_engine_words": 150,
+      "native_words": 38,
+      "selected_words": 38,
+      "native_output_count": 3,
+      "selected_output_count": 3,
+      "native_engine_words": 38,
+      "selected_engine_words": 38,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 112,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 150,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 38,
+          "error": null
+        },
+        {
+          "budget": 140,
+          "sentence_request": 3,
+          "words": 38,
+          "error": null
+        },
+        {
+          "budget": 150,
+          "sentence_request": 3,
+          "words": 38,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-RESEARCH:short:general",
+      "category": "research",
+      "depth": "short",
+      "target_legacy_words": 201,
+      "ui_requested_count": 5,
+      "article_effective_count": 5,
+      "article_internal_depth_limit": 6,
+      "native_ceiling_engine_words": 280,
+      "max_searched_ceiling_engine_words": 280,
+      "depth_maximum_engine_words": 280,
+      "native_words": 50,
+      "selected_words": 50,
+      "native_output_count": 5,
+      "selected_output_count": 5,
+      "native_engine_words": 50,
+      "selected_engine_words": 50,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 151,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 280,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 5,
+          "words": 50,
+          "error": null
+        },
+        {
+          "budget": 191,
+          "sentence_request": 5,
+          "words": 50,
+          "error": null
+        },
+        {
+          "budget": 201,
+          "sentence_request": 5,
+          "words": 50,
+          "error": null
+        },
+        {
+          "budget": 211,
+          "sentence_request": 5,
+          "words": 50,
+          "error": null
+        },
+        {
+          "budget": 272,
+          "sentence_request": 5,
+          "words": 50,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-RESEARCH:balanced:general",
+      "category": "research",
+      "depth": "balanced",
+      "target_legacy_words": 317,
+      "ui_requested_count": 8,
+      "article_effective_count": 8,
+      "article_internal_depth_limit": 10,
+      "native_ceiling_engine_words": 500,
+      "max_searched_ceiling_engine_words": 500,
+      "depth_maximum_engine_words": 500,
+      "native_words": 78,
+      "selected_words": 78,
+      "native_output_count": 8,
+      "selected_output_count": 8,
+      "native_engine_words": 78,
+      "selected_engine_words": 78,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 239,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 465,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 8,
+          "words": 78,
+          "error": null
+        },
+        {
+          "budget": 307,
+          "sentence_request": 8,
+          "words": 78,
+          "error": null
+        },
+        {
+          "budget": 317,
+          "sentence_request": 8,
+          "words": 78,
+          "error": null
+        },
+        {
+          "budget": 327,
+          "sentence_request": 8,
+          "words": 78,
+          "error": null
+        },
+        {
+          "budget": 428,
+          "sentence_request": 8,
+          "words": 78,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-RESEARCH:detailed:general",
+      "category": "research",
+      "depth": "detailed",
+      "target_legacy_words": 561,
+      "ui_requested_count": 11,
+      "article_effective_count": 11,
+      "article_internal_depth_limit": 18,
+      "native_ceiling_engine_words": 850,
+      "max_searched_ceiling_engine_words": 850,
+      "depth_maximum_engine_words": 850,
+      "native_words": 130,
+      "selected_words": 130,
+      "native_output_count": 11,
+      "selected_output_count": 11,
+      "native_engine_words": 130,
+      "selected_engine_words": 130,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 431,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 601,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 11,
+          "words": 130,
+          "error": null
+        },
+        {
+          "budget": 551,
+          "sentence_request": 11,
+          "words": 130,
+          "error": null
+        },
+        {
+          "budget": 561,
+          "sentence_request": 11,
+          "words": 130,
+          "error": null
+        },
+        {
+          "budget": 571,
+          "sentence_request": 11,
+          "words": 130,
+          "error": null
+        },
+        {
+          "budget": 758,
+          "sentence_request": 11,
+          "words": 130,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-RESEARCH:comprehensive:general",
+      "category": "research",
+      "depth": "comprehensive",
+      "target_legacy_words": 979,
+      "ui_requested_count": 15,
+      "article_effective_count": 15,
+      "article_internal_depth_limit": 32,
+      "native_ceiling_engine_words": 1600,
+      "max_searched_ceiling_engine_words": 1600,
+      "depth_maximum_engine_words": 1600,
+      "native_words": 223,
+      "selected_words": 223,
+      "native_output_count": 15,
+      "selected_output_count": 15,
+      "native_engine_words": 223,
+      "selected_engine_words": 223,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 756,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 766,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 15,
+          "words": 223,
+          "error": null
+        },
+        {
+          "budget": 969,
+          "sentence_request": 15,
+          "words": 223,
+          "error": null
+        },
+        {
+          "budget": 979,
+          "sentence_request": 15,
+          "words": 223,
+          "error": null
+        },
+        {
+          "budget": 989,
+          "sentence_request": 15,
+          "words": 223,
+          "error": null
+        },
+        {
+          "budget": 1322,
+          "sentence_request": 15,
+          "words": 223,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-SCIENCE:very_brief:general",
+      "category": "scientific",
+      "depth": "very_brief",
+      "target_legacy_words": 49,
+      "ui_requested_count": 3,
+      "article_effective_count": 2,
+      "article_internal_depth_limit": 2,
+      "native_ceiling_engine_words": 45,
+      "max_searched_ceiling_engine_words": 67,
+      "depth_maximum_engine_words": 80,
+      "native_words": 32,
+      "selected_words": 50,
+      "native_output_count": 1,
+      "selected_output_count": 2,
+      "native_engine_words": 32,
+      "selected_engine_words": 50,
+      "sentence_cap_saturated": false,
+      "matched": true,
+      "absolute_difference": 1,
+      "distinct_trial_outputs": 3,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 76,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 32,
+          "error": null
+        },
+        {
+          "budget": 39,
+          "sentence_request": 3,
+          "words": 32,
+          "error": null
+        },
+        {
+          "budget": 49,
+          "sentence_request": 3,
+          "words": 46,
+          "error": null
+        },
+        {
+          "budget": 59,
+          "sentence_request": 3,
+          "words": 50,
+          "error": null
+        },
+        {
+          "budget": 67,
+          "sentence_request": 3,
+          "words": 50,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-SCIENCE:brief:general",
+      "category": "scientific",
+      "depth": "brief",
+      "target_legacy_words": 81,
+      "ui_requested_count": 3,
+      "article_effective_count": 3,
+      "article_internal_depth_limit": 4,
+      "native_ceiling_engine_words": 62,
+      "max_searched_ceiling_engine_words": 110,
+      "depth_maximum_engine_words": 150,
+      "native_words": 50,
+      "selected_words": 65,
+      "native_output_count": 2,
+      "selected_output_count": 3,
+      "native_engine_words": 50,
+      "selected_engine_words": 65,
+      "sentence_cap_saturated": false,
+      "matched": false,
+      "absolute_difference": 16,
+      "distinct_trial_outputs": 2,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 132,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 50,
+          "error": null
+        },
+        {
+          "budget": 71,
+          "sentence_request": 3,
+          "words": 65,
+          "error": null
+        },
+        {
+          "budget": 81,
+          "sentence_request": 3,
+          "words": 65,
+          "error": null
+        },
+        {
+          "budget": 91,
+          "sentence_request": 3,
+          "words": 65,
+          "error": null
+        },
+        {
+          "budget": 110,
+          "sentence_request": 3,
+          "words": 65,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-SCIENCE:short:general",
+      "category": "scientific",
+      "depth": "short",
+      "target_legacy_words": 121,
+      "ui_requested_count": 5,
+      "article_effective_count": 5,
+      "article_internal_depth_limit": 6,
+      "native_ceiling_engine_words": 90,
+      "max_searched_ceiling_engine_words": 164,
+      "depth_maximum_engine_words": 280,
+      "native_words": 90,
+      "selected_words": 90,
+      "native_output_count": 5,
+      "selected_output_count": 5,
+      "native_engine_words": 90,
+      "selected_engine_words": 90,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 31,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 190,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 5,
+          "words": 90,
+          "error": null
+        },
+        {
+          "budget": 111,
+          "sentence_request": 5,
+          "words": 90,
+          "error": null
+        },
+        {
+          "budget": 121,
+          "sentence_request": 5,
+          "words": 90,
+          "error": null
+        },
+        {
+          "budget": 131,
+          "sentence_request": 5,
+          "words": 90,
+          "error": null
+        },
+        {
+          "budget": 164,
+          "sentence_request": 5,
+          "words": 90,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-SCIENCE:balanced:general",
+      "category": "scientific",
+      "depth": "balanced",
+      "target_legacy_words": 177,
+      "ui_requested_count": 8,
+      "article_effective_count": 8,
+      "article_internal_depth_limit": 10,
+      "native_ceiling_engine_words": 131,
+      "max_searched_ceiling_engine_words": 239,
+      "depth_maximum_engine_words": 500,
+      "native_words": 131,
+      "selected_words": 180,
+      "native_output_count": 7,
+      "selected_output_count": 8,
+      "native_engine_words": 131,
+      "selected_engine_words": 180,
+      "sentence_cap_saturated": false,
+      "matched": true,
+      "absolute_difference": 3,
+      "distinct_trial_outputs": 4,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 256,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 8,
+          "words": 131,
+          "error": null
+        },
+        {
+          "budget": 167,
+          "sentence_request": 8,
+          "words": 154,
+          "error": null
+        },
+        {
+          "budget": 177,
+          "sentence_request": 8,
+          "words": 172,
+          "error": null
+        },
+        {
+          "budget": 187,
+          "sentence_request": 8,
+          "words": 180,
+          "error": null
+        },
+        {
+          "budget": 239,
+          "sentence_request": 8,
+          "words": 180,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-SCIENCE:detailed:general",
+      "category": "scientific",
+      "depth": "detailed",
+      "target_legacy_words": 239,
+      "ui_requested_count": 11,
+      "article_effective_count": 11,
+      "article_internal_depth_limit": 18,
+      "native_ceiling_engine_words": 190,
+      "max_searched_ceiling_engine_words": 323,
+      "depth_maximum_engine_words": 850,
+      "native_words": 180,
+      "selected_words": 246,
+      "native_output_count": 8,
+      "selected_output_count": 11,
+      "native_engine_words": 180,
+      "selected_engine_words": 247,
+      "sentence_cap_saturated": false,
+      "matched": true,
+      "absolute_difference": 7,
+      "distinct_trial_outputs": 4,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 304,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 11,
+          "words": 180,
+          "error": null
+        },
+        {
+          "budget": 229,
+          "sentence_request": 11,
+          "words": 223,
+          "error": null
+        },
+        {
+          "budget": 239,
+          "sentence_request": 11,
+          "words": 223,
+          "error": null
+        },
+        {
+          "budget": 249,
+          "sentence_request": 11,
+          "words": 246,
+          "error": null
+        },
+        {
+          "budget": 323,
+          "sentence_request": 11,
+          "words": 262,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-SCIENCE:comprehensive:general",
+      "category": "scientific",
+      "depth": "comprehensive",
+      "target_legacy_words": 296,
+      "ui_requested_count": 15,
+      "article_effective_count": 13,
+      "article_internal_depth_limit": 32,
+      "native_ceiling_engine_words": 259,
+      "max_searched_ceiling_engine_words": 400,
+      "depth_maximum_engine_words": 1600,
+      "native_words": 246,
+      "selected_words": 285,
+      "native_output_count": 11,
+      "selected_output_count": 12,
+      "native_engine_words": 247,
+      "selected_engine_words": 286,
+      "sentence_cap_saturated": false,
+      "matched": true,
+      "absolute_difference": 11,
+      "distinct_trial_outputs": 3,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 329,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 15,
+          "words": 246,
+          "error": null
+        },
+        {
+          "budget": 286,
+          "sentence_request": 15,
+          "words": 285,
+          "error": null
+        },
+        {
+          "budget": 296,
+          "sentence_request": 15,
+          "words": 285,
+          "error": null
+        },
+        {
+          "budget": 306,
+          "sentence_request": 15,
+          "words": 285,
+          "error": null
+        },
+        {
+          "budget": 400,
+          "sentence_request": 15,
+          "words": 329,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-TECHNICAL:very_brief:general",
+      "category": "technical",
+      "depth": "very_brief",
+      "target_legacy_words": 47,
+      "ui_requested_count": 3,
+      "article_effective_count": 2,
+      "article_internal_depth_limit": 2,
+      "native_ceiling_engine_words": 80,
+      "max_searched_ceiling_engine_words": 80,
+      "depth_maximum_engine_words": 80,
+      "native_words": 20,
+      "selected_words": 20,
+      "native_output_count": 2,
+      "selected_output_count": 2,
+      "native_engine_words": 20,
+      "selected_engine_words": 20,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 27,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 78,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 20,
+          "error": null
+        },
+        {
+          "budget": 37,
+          "sentence_request": 3,
+          "words": 20,
+          "error": null
+        },
+        {
+          "budget": 47,
+          "sentence_request": 3,
+          "words": 20,
+          "error": null
+        },
+        {
+          "budget": 57,
+          "sentence_request": 3,
+          "words": 20,
+          "error": null
+        },
+        {
+          "budget": 64,
+          "sentence_request": 3,
+          "words": 20,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-TECHNICAL:brief:general",
+      "category": "technical",
+      "depth": "brief",
+      "target_legacy_words": 87,
+      "ui_requested_count": 3,
+      "article_effective_count": 3,
+      "article_internal_depth_limit": 4,
+      "native_ceiling_engine_words": 150,
+      "max_searched_ceiling_engine_words": 150,
+      "depth_maximum_engine_words": 150,
+      "native_words": 27,
+      "selected_words": 27,
+      "native_output_count": 3,
+      "selected_output_count": 3,
+      "native_engine_words": 27,
+      "selected_engine_words": 27,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 60,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 110,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 3,
+          "words": 27,
+          "error": null
+        },
+        {
+          "budget": 77,
+          "sentence_request": 3,
+          "words": 27,
+          "error": null
+        },
+        {
+          "budget": 87,
+          "sentence_request": 3,
+          "words": 27,
+          "error": null
+        },
+        {
+          "budget": 97,
+          "sentence_request": 3,
+          "words": 27,
+          "error": null
+        },
+        {
+          "budget": 118,
+          "sentence_request": 3,
+          "words": 27,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-TECHNICAL:short:general",
+      "category": "technical",
+      "depth": "short",
+      "target_legacy_words": 156,
+      "ui_requested_count": 5,
+      "article_effective_count": 5,
+      "article_internal_depth_limit": 6,
+      "native_ceiling_engine_words": 280,
+      "max_searched_ceiling_engine_words": 280,
+      "depth_maximum_engine_words": 280,
+      "native_words": 55,
+      "selected_words": 55,
+      "native_output_count": 5,
+      "selected_output_count": 5,
+      "native_engine_words": 56,
+      "selected_engine_words": 56,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 101,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": true,
+      "relaxed_searched_target_feasible": true,
+      "relaxed_full_depth_target_feasible": true,
+      "relaxed_maximum_evaluator_words": 173,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 5,
+          "words": 55,
+          "error": null
+        },
+        {
+          "budget": 146,
+          "sentence_request": 5,
+          "words": 55,
+          "error": null
+        },
+        {
+          "budget": 156,
+          "sentence_request": 5,
+          "words": 55,
+          "error": null
+        },
+        {
+          "budget": 166,
+          "sentence_request": 5,
+          "words": 55,
+          "error": null
+        },
+        {
+          "budget": 211,
+          "sentence_request": 5,
+          "words": 55,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-TECHNICAL:balanced:general",
+      "category": "technical",
+      "depth": "balanced",
+      "target_legacy_words": 313,
+      "ui_requested_count": 8,
+      "article_effective_count": 8,
+      "article_internal_depth_limit": 10,
+      "native_ceiling_engine_words": 500,
+      "max_searched_ceiling_engine_words": 500,
+      "depth_maximum_engine_words": 500,
+      "native_words": 74,
+      "selected_words": 74,
+      "native_output_count": 8,
+      "selected_output_count": 8,
+      "native_engine_words": 75,
+      "selected_engine_words": 75,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 239,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 261,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 8,
+          "words": 74,
+          "error": null
+        },
+        {
+          "budget": 303,
+          "sentence_request": 8,
+          "words": 74,
+          "error": null
+        },
+        {
+          "budget": 313,
+          "sentence_request": 8,
+          "words": 74,
+          "error": null
+        },
+        {
+          "budget": 323,
+          "sentence_request": 8,
+          "words": 74,
+          "error": null
+        },
+        {
+          "budget": 423,
+          "sentence_request": 8,
+          "words": 74,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-TECHNICAL:detailed:general",
+      "category": "technical",
+      "depth": "detailed",
+      "target_legacy_words": 473,
+      "ui_requested_count": 11,
+      "article_effective_count": 11,
+      "article_internal_depth_limit": 18,
+      "native_ceiling_engine_words": 850,
+      "max_searched_ceiling_engine_words": 850,
+      "depth_maximum_engine_words": 850,
+      "native_words": 106,
+      "selected_words": 106,
+      "native_output_count": 11,
+      "selected_output_count": 11,
+      "native_engine_words": 107,
+      "selected_engine_words": 107,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 367,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 342,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 11,
+          "words": 106,
+          "error": null
+        },
+        {
+          "budget": 463,
+          "sentence_request": 11,
+          "words": 106,
+          "error": null
+        },
+        {
+          "budget": 473,
+          "sentence_request": 11,
+          "words": 106,
+          "error": null
+        },
+        {
+          "budget": 483,
+          "sentence_request": 11,
+          "words": 106,
+          "error": null
+        },
+        {
+          "budget": 639,
+          "sentence_request": 11,
+          "words": 106,
+          "error": null
+        }
+      ]
+    },
+    {
+      "system": "article21_enhanced",
+      "case_id": "IV-TECHNICAL:comprehensive:general",
+      "category": "technical",
+      "depth": "comprehensive",
+      "target_legacy_words": 838,
+      "ui_requested_count": 15,
+      "article_effective_count": 15,
+      "article_internal_depth_limit": 32,
+      "native_ceiling_engine_words": 1600,
+      "max_searched_ceiling_engine_words": 1600,
+      "depth_maximum_engine_words": 1600,
+      "native_words": 171,
+      "selected_words": 171,
+      "native_output_count": 15,
+      "selected_output_count": 15,
+      "native_engine_words": 172,
+      "selected_engine_words": 172,
+      "sentence_cap_saturated": true,
+      "matched": false,
+      "absolute_difference": 667,
+      "distinct_trial_outputs": 1,
+      "relaxed_native_target_feasible": false,
+      "relaxed_searched_target_feasible": false,
+      "relaxed_full_depth_target_feasible": false,
+      "relaxed_maximum_evaluator_words": 447,
+      "trial_requests": [
+        {
+          "budget": null,
+          "sentence_request": 15,
+          "words": 171,
+          "error": null
+        },
+        {
+          "budget": 828,
+          "sentence_request": 15,
+          "words": 171,
+          "error": null
+        },
+        {
+          "budget": 838,
+          "sentence_request": 15,
+          "words": 171,
+          "error": null
+        },
+        {
+          "budget": 848,
+          "sentence_request": 15,
+          "words": 171,
+          "error": null
+        },
+        {
+          "budget": 1132,
+          "sentence_request": 15,
+          "words": 171,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "interpretation": "Relaxed feasibility does not ensure valid context, central meaning, nonredundancy or a selector-reachable output.",
+  "two_word_metrics_explicit": true,
+  "pilot_reproduced_without_reselection": true
+}

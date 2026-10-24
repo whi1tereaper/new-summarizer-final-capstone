@@ -1,0 +1,31 @@
+   As  shown  in  Figure  1,  the  researchers
+identified key challenges in the current record-
+keeping practices at NEUST Peñaranda Off-Campus
+during the input phase. These challenges include
+misplaced files, delayed retrieval, limited
+security  measures,  and  inefficiencies  in
+managing   accreditation-related   documents.
+Additionally,  user  needs  such  as          advanced
+searching   & filtering    and retrieval, document
+version control, role-based access, and audit
+trails were considered essential in guiding
+system development.
+
+   For  the  process  phase,  the  researchers
+applied the Software Development Life Cycle
+(SDLC)  as  the  guiding  methodology.  This
+framework consists of six stages: Requirements
+Analysis,   Design,   Development,   Testing,
+Deployment, and Maintenance. Each step was
+followed to ensure that the system would meet
+both  technical  and  user-centered  quality
+standards.
+
+   The output of the process is a fully developed
+Record Management and Archiving System designed
+to digitize and streamline the institution’s
+document  storage,  retrieval,  and  security
+
+
+
+                                                      12

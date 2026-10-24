@@ -1,0 +1,45 @@
+Overall, recent evidence from 2021 to 2026
+supports adding digital records and archiving
+literature to your paper because these systems
+consistently  improve  retrieval,  security,
+transparency,  and  compliance,  while  their
+success still depends on policy, training, and
+organizational readiness.
+
+Conceptual Framework
+
+              INPUT                                     PROCESS
+ • Identified Challenges                       •  Software Development
+    o Current manual and digital                  Life Cycle (SDLC)
+      systems used.                                o  Planning
+    o Misplaced/lost files                         o  Analysis
+    o Slow retrieval and difficulty                o  Design
+      securing files                               o  Implementation
+    o Inefficiency during                          o  Testing &
+      accreditation                                   Integration
+    o Duplication in files                         o  Maintenance
+ • Desired Features &
+  Functionalities
+    o Advanced Search and retrieval
+    o Secure file storage
+    o Document version control
+    o Role-based access
+    o Audit trails                                      OUTPUT
+    o Folder Checklist                         •   Record Management
+    o Download & Print
+    o General Reports                              and Archiving
+                                                   System
+
+
+
+
+
+
+                                                     FEEDBACK
+
+
+              Figure 1. Research Paradigm
+
+
+
+                                                                   11

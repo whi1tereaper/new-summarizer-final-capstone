@@ -1,0 +1,13 @@
+{
+  "kind": "real_headless_authenticated_browser_on_xampp",
+  "checks": [
+    "real login with isolated local test account",
+    "terms accepted through normal authenticated form",
+    "browser submit, background execution and saved result retrieval",
+    "authenticated history persistence",
+    "foreign-session result isolation",
+    "explicit bearer-link sharing preserved"
+  ],
+  "fixture_cleaned": true,
+  "passed": true
+}

@@ -1,0 +1,22 @@
+{
+  "required_audit_files": 10,
+  "required_manuscript_files": 13,
+  "missing": [],
+  "svg_diagrams": 37,
+  "png_diagrams": 37,
+  "screenshot_pngs": 46,
+  "feature_count": 69,
+  "feature_breakdown": {
+    "Verified working": 5,
+    "Partially working": 18,
+    "Not working": 0,
+    "Implemented but not verified": 46,
+    "UI only": 0,
+    "Not implemented": 0,
+    "Not applicable": 0
+  },
+  "csv_rows": 69,
+  "missing_feature_paths": [],
+  "application_files_compared": 336,
+  "changed_application_files": []
+}

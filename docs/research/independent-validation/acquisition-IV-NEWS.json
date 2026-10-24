@@ -1,0 +1,28 @@
+{
+  "id": "IV-NEWS",
+  "category": "news",
+  "publisher": "USGS",
+  "url": "https://www.usgs.gov/news/state-news-release/usgs-deploys-aftershock-kits-study-whitehouse-station-earthquakes",
+  "license": "US federal government-authored prose; public domain in the US",
+  "license_url": "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits",
+  "authors": [],
+  "publication_dates": [],
+  "visible_times": [
+    "August 23, 2022",
+    "April 24, 2018",
+    "August 23, 2022",
+    "April 24, 2018"
+  ],
+  "license_statement": null,
+  "title": "USGS deploys “aftershock kits” to study Whitehouse Station earthquakes | U.S. Geological Survey",
+  "source_text": "USGS deploys “aftershock kits” to study Whitehouse Station earthquakes | U.S. Geological Survey\n\nWHITEHOUSE STATION, N.J. – A U.S. Geological Survey team has begun a seismic sensor deployment in an effort to capture aftershock data following the 4.8 magnitude earthquake that rattled New Jersey April 5, 2024, and was felt for hundreds of miles.\n\nThe team is deploying five “aftershock kits” this week, which will gather information such as where aftershocks originate in the area, how long they last, and their magnitude, said Greg Tanner, a USGS electronics technician assigned to the USGS’s Albuquerque Seismological Laboratory, who is on the team installing kits.\n\nThis effort is being performed in cooperation with partners at the Lamont Doherty Earth Observatory at Columbia University, the Texas Seismological Network at the University of Texas at Austin, Rutgers University, and Yale University, that are also deploying seismic sensors.\n\nAftershocks are smaller earthquakes that occur in the same general area during the days to years following a larger event or \"mainshock.\"\n\nSo far, the USGS has recorded 50 aftershocks ranging from magnitude 1.3 to 3.8 following the April 5 earthquake. In the coming week, the USGS forecasts that there is a 12 percent chance of a magnitude 3 or greater aftershock, and a one percent chance of a magnitude 4 or greater.\n\nWhile earthquakes in this region are not frequent, they are not unexpected, explained USGS Research Geologist Jessica Thompson Jobe in a press conference held following the mainshock event Friday. She explained that while there are no active faults in that area, there are dozens of older, inactive faults that formed millions of years ago.\n\n“Under the current stresses of tectonic plates moving, those faults can be intermittently reactivated,” Jobe said.\n\nEarthquakes are felt more intensely and farther from their epicenter in the Eastern U.S. than in the West, which explains why there were wide reports of shaking along the East Coast. More than 183,000 people self-reported feeling shaking using the USGS’s “Did you feel it?” tool online ( https://earthquake.usgs.gov/data/dyfi/ ).\n\nEastern North America tends to have older rocks, some of which formed hundreds of millions of years before those in the West.\n\nThese generally older formations have been exposed to extreme pressures and temperatures, making them often harder and denser, said USGS Research Geophysicist Oliver Boyd.\n\nFaults in these older rocks have also had more time to heal, which allows seismic waves to cross them more effectively when an earthquake occurs.\n\n“It’s like ringing a bell that’s in good condition verses ringing one with many cracks in it,” Boyd explained. “The sound from the good bell will have a louder, stronger, and more lasting tone.”\n\nThe aftershock kits deployed this week will include sensors that record strong motion and high frequency, a device that sends digital information through the cellular network, and solar panels. The sensors will send data in real time back to the USGS’s National Earthquake Information Center in Golden, Colorado for analysis. Some of the “kits” will stand alone and others will be co-located with already-existing stream gages monitored by USGS’s New Jersey Water Science Center.\n\n“No one can predict the exact time, location, or place of any earthquake,” said Sara McBride with the USGS Earthquake Hazards Program.\n\nHowever, studying aftershocks may provide researchers with vital information about the nature of earthquakes in order to best prepare for future events.\n\nFor more detailed information on Friday’s earthquake, please visit https://earthquake.usgs.gov/earthquakes/eventpage/us7000ma74/executive .\n\nWhy was an earthquake in Virginia felt at more than twice the distance than a similar-sized earthquake in California? The answer is one that many...\n\nWhy was an earthquake in Virginia felt at more than twice the distance than a similar-sized earthquake in California? The answer is one that many...",
+  "prose_words": 635,
+  "retrieved_utc": "2026-10-22T14:17:03.659965+00:00",
+  "http_final_url": "https://www.usgs.gov/news/state-news-release/usgs-deploys-aftershock-kits-study-whitehouse-station-earthquakes",
+  "http_sha256": "b43101f2ac5d84118ecd5280b0500a8a644fe6155ac233f96fd5f6e5e9bf73c6",
+  "source_sha256": "c1a8b5482a1706c231e93f98f3228c95d3c39da89cf49de67d1e650c05c3bff4",
+  "extraction_selector": "main",
+  "partition": "prospective_external_non_tuning_pilot",
+  "independent_annotation_status": "pending",
+  "profile": "general"
+}

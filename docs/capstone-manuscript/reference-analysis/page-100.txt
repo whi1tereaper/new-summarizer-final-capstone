@@ -1,0 +1,41 @@
+                    of the
+                    file
+last_viewed_by_     Last         int(11)
+id                  viewed by
+                    ID
+
+
+
+4.3 Development Stage
+   The researchers chose Visual Studio Code as
+the text editor for writing the source code of
+the developed system, because it simplifies the
+process of code editing and debugging. The
+sample is shown in Figure 18 below.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            Figure 18. Visual Studio Code
+
+
+
+
+                                                        81

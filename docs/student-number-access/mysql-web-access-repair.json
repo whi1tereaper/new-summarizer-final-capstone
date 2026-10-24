@@ -1,0 +1,338 @@
+{
+  "recorded_utc": "2026-10-23T03:40:25.319Z",
+  "authorization": "User explicitly approved: Yes—back up and repair the existing MySQL site (Recommended).",
+  "issue_status": "FIXED: reported setup error removed from actual localhost Apache summarizer.",
+  "database_backend": {
+    "web": "MariaDB 10.4.32 / mysql PDO",
+    "cli": "mysql",
+    "local_DB_DRIVER": "mysql",
+    "local_env_gitignored": true,
+    "neon_urls_preserved": true,
+    "apache_restarted": false,
+    "automatic_backend_switch_prevented": true
+  },
+  "migration": {
+    "driver": "mysql",
+    "apply": true,
+    "migration": "017_student_number_access.sql",
+    "sha256": "4ddbbd3e6454467c625c9c9277bd50260d2ec660fff43dbf00456ff9a48b8935",
+    "note": "Additive access tables only. Existing accounts are not verified."
+  },
+  "backup": {
+    "private_directory": "%LOCALAPPDATA%/LightSummarizer/Backups/student-access-mysql-20261023T032202Z",
+    "receipt": {
+      "recorded_utc": "2026-10-23T03:28:40+00:00",
+      "configured_mysql_schema_modified": false,
+      "source_server": "10.4.32-MariaDB",
+      "restore_server": "10.4.32-MariaDB-1:10.4.32+maria~ubu2004",
+      "database_read_lock_seconds": 1.775,
+      "backup_sha256": "5bb57449db8edf0f61450d935e85de5d5c3d497fbdf098ec873a0fda41a3af05",
+      "backup_bytes": 30076834,
+      "restored_tables_verified": 31,
+      "snapshot_row_counts": {
+        "admin_audit_logs": 160,
+        "admin_security_challenges": 1,
+        "documents": 25,
+        "document_summaries": 125,
+        "evaluation_assignments": 0,
+        "evaluation_audit_log": 87,
+        "evaluation_challenge_cases": 24,
+        "evaluation_content_units": 0,
+        "evaluation_content_unit_reviews": 0,
+        "evaluation_datasets": 4,
+        "evaluation_documents": 36,
+        "evaluation_errors": 5,
+        "evaluation_metrics": 3652,
+        "evaluation_outputs": 428,
+        "evaluation_ratings": 0,
+        "evaluation_references": 0,
+        "evaluation_runs": 6,
+        "feedback": 103,
+        "feedback_comments": 110,
+        "guest_sessions": 88,
+        "landing_page_events": 8202,
+        "landing_page_sessions": 179,
+        "nutshell_generations": 24,
+        "password_resets": 21,
+        "rate_limits": 8,
+        "schema_migrations": 16,
+        "summaries": 254,
+        "summary_artifacts": 245,
+        "summary_jobs": 227,
+        "users": 35,
+        "user_tokens": 2
+      },
+      "migration_sha256": "4ddbbd3e6454467c625c9c9277bd50260d2ec660fff43dbf00456ff9a48b8935",
+      "migration_replay_passed": true,
+      "original_fields_preserved_in_stage": true,
+      "staged_quota_checks": {
+        "new_guest_has_three": true,
+        "failed_request_costs_zero": true,
+        "three_successes_exhaust_quota": true,
+        "fourth_request_blocked": true,
+        "existing_admin_access_preserved": true,
+        "existing_student_not_auto_verified": true,
+        "probe_records_rolled_back": true
+      },
+      "restore_container": "light-access-mysql-restore-20261023t032202z",
+      "restore_container_id": "221207c74d572199c3f7717d3ea374514734eddc51c69b8434d1e239eb941c19"
+    },
+    "protection": {
+      "encryption": "Windows DPAPI CurrentUser",
+      "encrypted": [
+        {
+          "file": "database.sql.dpapi",
+          "sha256": "976e59c63a1d232a1b0a8d61826ce89669a9d60c8884c2275156bf0671cab297",
+          "round_trip_verified": true
+        },
+        {
+          "file": "baseline-private.json.dpapi",
+          "sha256": "f66304c7cd8ad2c562ab56a7ce92f3a1a1df5f02ad43d0a1f56d1d6002cff9f6",
+          "round_trip_verified": true
+        }
+      ],
+      "plaintext_archives_removed": true,
+      "temporary_credentials_removed": true,
+      "private_acl_protected": true
+    }
+  },
+  "live_preservation": {
+    "original_records_preserved": true,
+    "protected_tables": {
+      "admin_audit_logs": true,
+      "admin_security_challenges": true,
+      "documents": true,
+      "document_summaries": true,
+      "evaluation_assignments": true,
+      "evaluation_audit_log": true,
+      "evaluation_challenge_cases": true,
+      "evaluation_content_units": true,
+      "evaluation_content_unit_reviews": true,
+      "evaluation_datasets": true,
+      "evaluation_documents": true,
+      "evaluation_errors": true,
+      "evaluation_metrics": true,
+      "evaluation_outputs": true,
+      "evaluation_ratings": true,
+      "evaluation_references": true,
+      "evaluation_runs": true,
+      "feedback": true,
+      "feedback_comments": true,
+      "nutshell_generations": true,
+      "password_resets": true,
+      "schema_migrations": true,
+      "summaries": true,
+      "summary_artifacts": true,
+      "summary_jobs": true,
+      "users": true,
+      "user_tokens": true
+    },
+    "mutable_telemetry_excluded": true,
+    "live_quota_checks": {
+      "new_guest_has_three": true,
+      "failed_request_costs_zero": true,
+      "three_successes_exhaust_quota": true,
+      "fourth_request_blocked": true,
+      "existing_admin_access_preserved": true,
+      "existing_student_not_auto_verified": true,
+      "probe_records_rolled_back": true
+    },
+    "probe_data_rolled_back": true
+  },
+  "live_new_schema_matches_stage": {
+    "student_applications": true,
+    "student_review_events": true,
+    "summary_access_subjects": true,
+    "student_trial_links": true,
+    "summary_access_reservations": true
+  },
+  "apache_http": {
+    "access_status": 200,
+    "summarizer": 200,
+    "guest_remaining": 3,
+    "setup_error_absent": true,
+    "form_present": true,
+    "refresh_no_debit": true,
+    "trial_cookie_HttpOnly": true
+  },
+  "browser": {
+    "recorded_utc": "2026-10-23T03:39:38.314Z",
+    "live_localhost": true,
+    "nlp_executed": false,
+    "account_writes": false,
+    "checks": [
+      {
+        "name": "dark theme initialized consistently",
+        "passed": true
+      },
+      {
+        "name": "setup failure absent",
+        "passed": true
+      },
+      {
+        "name": "three-success guest counter visible",
+        "passed": true
+      },
+      {
+        "name": "summarization form restored",
+        "passed": true
+      },
+      {
+        "name": "all six summary depths preserved",
+        "passed": true
+      },
+      {
+        "name": "actual Apache status endpoint succeeds",
+        "passed": true
+      },
+      {
+        "name": "refresh does not debit allowance",
+        "passed": true
+      },
+      {
+        "name": "quota identifier remains HttpOnly",
+        "passed": true
+      },
+      {
+        "name": "mobile form visible",
+        "passed": true
+      },
+      {
+        "name": "mobile layout has no horizontal overflow",
+        "passed": true
+      },
+      {
+        "name": "form visible without JavaScript",
+        "passed": true
+      }
+    ],
+    "passed": 11,
+    "failed": 0
+  },
+  "cli_retention_preview": {
+    "apply": false,
+    "applications_due_batch": 0,
+    "review_details_due": 0,
+    "records_erased": 0
+  },
+  "explicit_postgresql_postflight": {
+    "apply": false,
+    "files": [
+      {
+        "migration": "018_summary_contract_compat.sql",
+        "sha256": "f5f79c2130d9a8a1cbf51d0a07a67d504f2761e8685e59ad7a1b97bccd149903"
+      },
+      {
+        "migration": "019_auth_audit_contract_compat.sql",
+        "sha256": "1e58c0702fb7e1d2df4d7667c87c8c96581ca18d8b3eef8e768b4015728f5411"
+      },
+      {
+        "migration": "017_student_number_access.sql",
+        "sha256": "73d54fd8e05933ee191d47f25edd1e399309631e4f148060d67a30e269695a7b"
+      }
+    ],
+    "versions": [
+      {
+        "migration": "018_summary_contract_compat.sql",
+        "status": "applied_checksum_matches"
+      },
+      {
+        "migration": "019_auth_audit_contract_compat.sql",
+        "status": "applied_checksum_matches"
+      },
+      {
+        "migration": "017_student_number_access.sql",
+        "status": "applied_checksum_matches"
+      }
+    ],
+    "contract": {
+      "compatible": true,
+      "issues": [],
+      "data_counts": {
+        "ambiguous_inline_summaries": 0,
+        "completed_summaries_without_readable_inline": 0,
+        "conflicting_legacy_inline_summaries": 0
+      },
+      "checked_tables": 21
+    },
+    "configured_database_modified": false
+  },
+  "integrity": {
+    "recorded_utc": "2026-10-23T03:38:38+00:00",
+    "nlp_files_checked": 38,
+    "historical_research_files_checked": 46,
+    "mismatches": [],
+    "automatic_article_routing": false,
+    "note": "Protected historical production PHP snapshots are not rewritten to include this unrelated access-control integration."
+  },
+  "syntax": {
+    "php_files_checked": 4,
+    "php_passed": true,
+    "javascript_passed": true,
+    "powershell_backup_protection_executed": true
+  },
+  "final_safety_checks": {
+    "repeat_backup_refused": true,
+    "archive_unchanged": true,
+    "git_whitespace_passed": true,
+    "plaintext_remaining": [],
+    "remaining_restore_containers": [],
+    "recorded_utc": "2026-10-23T03:38:37.9983863Z"
+  },
+  "limitations": [
+    "No NLP generation or live PDF/DOCX/URL processing in this repair.",
+    "No new student accounts, real enrollment review, SMTP delivery or penetration/load audit.",
+    "Student registration privacy contact/HMAC configuration and monitored erasure scheduling remain pending.",
+    "Local encrypted backup depends on this Windows user/profile; no off-site recovery certification."
+  ],
+  "sha256_inventory": [
+    {
+      "file": "app/config/config.php",
+      "sha256": "7e4eb8f1357eefe115415d95a7d18bd5fc976b909fb37eff200848aff0470773"
+    },
+    {
+      "file": "app/src/Database.php",
+      "sha256": "42eed16cc65201680cf8eaf028ff76b9ba9454d60ad74f1f9f108df14c34db6e"
+    },
+    {
+      "file": ".env.example",
+      "sha256": "c89a298d69dec8ddc0e8241243d2fdf786c943e83e898198aa3cf269f29e55d0"
+    },
+    {
+      "file": "database/migrations/017_student_number_access.sql",
+      "sha256": "4ddbbd3e6454467c625c9c9277bd50260d2ec660fff43dbf00456ff9a48b8935"
+    },
+    {
+      "file": "tools/migrate_student_access.php",
+      "sha256": "1c47fa6bb2c5d02f27ef1e8485c7a9bce968a56303143fff0a094971afa7dc3d"
+    },
+    {
+      "file": "tools/backup_mysql_student_access.php",
+      "sha256": "354b235b26881b4808c90d7098a5c11389d8bae799cad516221db3945620c81f"
+    },
+    {
+      "file": "tools/protect_student_backup.ps1",
+      "sha256": "5e2d2f7869bf8fc38236d44bcaf562b124d6c087c063741bc6b663c27dcc020c"
+    },
+    {
+      "file": "scripts/student-access/test_live_access_repair.cjs",
+      "sha256": "f9779157f3adaa56341def63b9e451613f279e06c961ed8ad5af1c7ed56304d1"
+    },
+    {
+      "file": "docs/student-number-access/implementation-report.md",
+      "sha256": "fb9920d191c05cefe43eb2ab6760bf05212a2ca3569c271119036645271cb92a"
+    },
+    {
+      "file": "docs/student-number-access/mysql-web-access-repair.md",
+      "sha256": "27c94f46482c3280f1fd0979508ad7ec9edfff01e0d109172033522e83f16479"
+    },
+    {
+      "file": "docs/student-number-access/tests-live-access-repair.json",
+      "sha256": "de0385b8a3e5aee491ba04c58362ebf0c5878e0b516e80f8419d9709888d4783"
+    },
+    {
+      "file": "docs/student-number-access/access-restored-dark.png",
+      "sha256": "d08421ffea737686e44155ab9190e9ace115737cf6fb62683b1bf21ab4fbb178"
+    }
+  ]
+}

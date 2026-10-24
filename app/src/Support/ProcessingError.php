@@ -1,5 +1,6 @@
 <?php
 namespace App\Src\Support;
+require_once __DIR__ . '/ProcessingDiagnostics.php';
 
 /** Public failure contract. Raw diagnostics never become response text. */
 class ProcessingError extends \RuntimeException
@@ -63,6 +64,7 @@ class ProcessingError extends \RuntimeException
 
     public function log(): void
     {
+        ProcessingDiagnostics::failure($this);
         // No source text, URLs, paths, or exception messages in operational logs.
         error_log('[LIGHT failure] reference=' . $this->reference . ' code=' . $this->errorCode
             . ' exception=' . ($this->getPrevious() ? get_class($this->getPrevious()) : static::class));

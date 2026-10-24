@@ -1,0 +1,3775 @@
+{
+  "status": "exact-bundle feasibility only, not semantic attainability",
+  "note": "Meaning can survive without a whole annotated sentence, especially in legacy compression. These strict-copy diagnostics favor exact extractors and cannot establish semantic recall/accuracy.",
+  "infeasible_exact_bundle_cases": 15,
+  "rows": [
+    {
+      "id": "IV-BUSINESS",
+      "depth": "very_brief",
+      "unit": "main",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 47,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 38
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "very_brief",
+      "unit": "trade",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 47,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 35
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "very_brief",
+      "unit": "demand",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 47,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 23
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "very_brief",
+      "unit": "production",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 47,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 27
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "very_brief",
+      "unit": "late_trade_context",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 47,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 54
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": false
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "brief",
+      "unit": "main",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 85,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 38
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "brief",
+      "unit": "trade",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 85,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 35
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "brief",
+      "unit": "demand",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 85,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 23
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "brief",
+      "unit": "production",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 85,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 27
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "brief",
+      "unit": "late_trade_context",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 85,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 54
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "short",
+      "unit": "main",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 123,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 38
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "short",
+      "unit": "trade",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 123,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 35
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "short",
+      "unit": "demand",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 123,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 23
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "short",
+      "unit": "production",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 123,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 27
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "short",
+      "unit": "late_trade_context",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 123,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 54
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "balanced",
+      "unit": "main",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 179,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 38
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "balanced",
+      "unit": "trade",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 179,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 35
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "balanced",
+      "unit": "demand",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 179,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 23
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "balanced",
+      "unit": "production",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 179,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 27
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "balanced",
+      "unit": "late_trade_context",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 179,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 54
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "detailed",
+      "unit": "main",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 260,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 38
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "detailed",
+      "unit": "trade",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 260,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 35
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "detailed",
+      "unit": "demand",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 260,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 23
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "detailed",
+      "unit": "production",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 260,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 27
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "detailed",
+      "unit": "late_trade_context",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 260,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 54
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "comprehensive",
+      "unit": "main",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 354,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 38
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "comprehensive",
+      "unit": "trade",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 354,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 35
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "comprehensive",
+      "unit": "demand",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 354,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 23
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "comprehensive",
+      "unit": "production",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 354,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 27
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-BUSINESS",
+      "depth": "comprehensive",
+      "unit": "late_trade_context",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 354,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 54
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "very_brief",
+      "unit": "main",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 95
+        },
+        {
+          "sentences": 2,
+          "words": 64
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "very_brief",
+      "unit": "resilience",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 84
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": false
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "very_brief",
+      "unit": "uncertainty_gap",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 62
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": false
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "very_brief",
+      "unit": "policy_interface",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 71
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "very_brief",
+      "unit": "late_prescription",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 4,
+          "words": 85
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": false
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "brief",
+      "unit": "main",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 95
+        },
+        {
+          "sentences": 2,
+          "words": 64
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "brief",
+      "unit": "resilience",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 84
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "brief",
+      "unit": "uncertainty_gap",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 62
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "brief",
+      "unit": "policy_interface",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 71
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "brief",
+      "unit": "late_prescription",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 4,
+          "words": 85
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": false
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "short",
+      "unit": "main",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 280,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 95
+        },
+        {
+          "sentences": 2,
+          "words": 64
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "short",
+      "unit": "resilience",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 280,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 84
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "short",
+      "unit": "uncertainty_gap",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 280,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 62
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "short",
+      "unit": "policy_interface",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 280,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 71
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "short",
+      "unit": "late_prescription",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 280,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 4,
+          "words": 85
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "balanced",
+      "unit": "main",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 500,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 95
+        },
+        {
+          "sentences": 2,
+          "words": 64
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "balanced",
+      "unit": "resilience",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 500,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 84
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "balanced",
+      "unit": "uncertainty_gap",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 500,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 62
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "balanced",
+      "unit": "policy_interface",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 500,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 71
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "balanced",
+      "unit": "late_prescription",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 500,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 4,
+          "words": 85
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "detailed",
+      "unit": "main",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 850,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 95
+        },
+        {
+          "sentences": 2,
+          "words": 64
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "detailed",
+      "unit": "resilience",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 850,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 84
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "detailed",
+      "unit": "uncertainty_gap",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 850,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 62
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "detailed",
+      "unit": "policy_interface",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 850,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 71
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "detailed",
+      "unit": "late_prescription",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 850,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 4,
+          "words": 85
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "comprehensive",
+      "unit": "main",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 1176,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 95
+        },
+        {
+          "sentences": 2,
+          "words": 64
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "comprehensive",
+      "unit": "resilience",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 1176,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 84
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "comprehensive",
+      "unit": "uncertainty_gap",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 1176,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 62
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "comprehensive",
+      "unit": "policy_interface",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 1176,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 71
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "depth": "comprehensive",
+      "unit": "late_prescription",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 1176,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 4,
+          "words": 85
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "very_brief",
+      "unit": "main",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 22
+        },
+        {
+          "sentences": 1,
+          "words": 36
+        },
+        {
+          "sentences": 1,
+          "words": 26
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "very_brief",
+      "unit": "comparison",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 51
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "very_brief",
+      "unit": "no_zero_risk",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 30
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "very_brief",
+      "unit": "data_limit",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 29
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "very_brief",
+      "unit": "late_gap",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 55
+        },
+        {
+          "sentences": 3,
+          "words": 64
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": false
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "brief",
+      "unit": "main",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 22
+        },
+        {
+          "sentences": 1,
+          "words": 36
+        },
+        {
+          "sentences": 1,
+          "words": 26
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "brief",
+      "unit": "comparison",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 51
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "brief",
+      "unit": "no_zero_risk",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 30
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "brief",
+      "unit": "data_limit",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 29
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "brief",
+      "unit": "late_gap",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 55
+        },
+        {
+          "sentences": 3,
+          "words": 64
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "short",
+      "unit": "main",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 280,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 22
+        },
+        {
+          "sentences": 1,
+          "words": 36
+        },
+        {
+          "sentences": 1,
+          "words": 26
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "short",
+      "unit": "comparison",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 280,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 51
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "short",
+      "unit": "no_zero_risk",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 280,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 30
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "short",
+      "unit": "data_limit",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 280,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 29
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "short",
+      "unit": "late_gap",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 280,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 55
+        },
+        {
+          "sentences": 3,
+          "words": 64
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "balanced",
+      "unit": "main",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 500,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 22
+        },
+        {
+          "sentences": 1,
+          "words": 36
+        },
+        {
+          "sentences": 1,
+          "words": 26
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "balanced",
+      "unit": "comparison",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 500,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 51
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "balanced",
+      "unit": "no_zero_risk",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 500,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 30
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "balanced",
+      "unit": "data_limit",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 500,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 29
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "balanced",
+      "unit": "late_gap",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 500,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 55
+        },
+        {
+          "sentences": 3,
+          "words": 64
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "detailed",
+      "unit": "main",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 850,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 22
+        },
+        {
+          "sentences": 1,
+          "words": 36
+        },
+        {
+          "sentences": 1,
+          "words": 26
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "detailed",
+      "unit": "comparison",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 850,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 51
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "detailed",
+      "unit": "no_zero_risk",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 850,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 30
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "detailed",
+      "unit": "data_limit",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 850,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 29
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "detailed",
+      "unit": "late_gap",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 850,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 55
+        },
+        {
+          "sentences": 3,
+          "words": 64
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "comprehensive",
+      "unit": "main",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 1600,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 22
+        },
+        {
+          "sentences": 1,
+          "words": 36
+        },
+        {
+          "sentences": 1,
+          "words": 26
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "comprehensive",
+      "unit": "comparison",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 1600,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 51
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "comprehensive",
+      "unit": "no_zero_risk",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 1600,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 30
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "comprehensive",
+      "unit": "data_limit",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 1600,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 29
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-EDUCATION",
+      "depth": "comprehensive",
+      "unit": "late_gap",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 1600,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 55
+        },
+        {
+          "sentences": 3,
+          "words": 64
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "very_brief",
+      "unit": "main",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 42
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "very_brief",
+      "unit": "extreme_retreat",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 28
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "very_brief",
+      "unit": "mechanism",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 4,
+          "words": 78
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": false
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "very_brief",
+      "unit": "sea_level",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 28
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "very_brief",
+      "unit": "late_qualification",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 52
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": false
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "brief",
+      "unit": "main",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 42
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "brief",
+      "unit": "extreme_retreat",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 28
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "brief",
+      "unit": "mechanism",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 4,
+          "words": 78
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": false
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "brief",
+      "unit": "sea_level",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 28
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "brief",
+      "unit": "late_qualification",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 52
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "short",
+      "unit": "main",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 218,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 42
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "short",
+      "unit": "extreme_retreat",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 218,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 28
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "short",
+      "unit": "mechanism",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 218,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 4,
+          "words": 78
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "short",
+      "unit": "sea_level",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 218,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 28
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "short",
+      "unit": "late_qualification",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 218,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 52
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "balanced",
+      "unit": "main",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 318,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 42
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "balanced",
+      "unit": "extreme_retreat",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 318,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 28
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "balanced",
+      "unit": "mechanism",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 318,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 4,
+          "words": 78
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "balanced",
+      "unit": "sea_level",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 318,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 28
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "balanced",
+      "unit": "late_qualification",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 318,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 52
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "detailed",
+      "unit": "main",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 460,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 42
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "detailed",
+      "unit": "extreme_retreat",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 460,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 28
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "detailed",
+      "unit": "mechanism",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 460,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 4,
+          "words": 78
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "detailed",
+      "unit": "sea_level",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 460,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 28
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "detailed",
+      "unit": "late_qualification",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 460,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 52
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "comprehensive",
+      "unit": "main",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 628,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 42
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "comprehensive",
+      "unit": "extreme_retreat",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 628,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 28
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "comprehensive",
+      "unit": "mechanism",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 628,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 4,
+          "words": 78
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "comprehensive",
+      "unit": "sea_level",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 628,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 28
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-FEATURE",
+      "depth": "comprehensive",
+      "unit": "late_qualification",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 628,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 52
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "very_brief",
+      "unit": "main",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 57,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 43
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "very_brief",
+      "unit": "deployment",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 57,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 49
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "very_brief",
+      "unit": "forecast",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 57,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 53
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "very_brief",
+      "unit": "instruments",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 57,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 50
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "very_brief",
+      "unit": "uncertainty",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 57,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 22
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "brief",
+      "unit": "main",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 103,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 43
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "brief",
+      "unit": "deployment",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 103,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 49
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "brief",
+      "unit": "forecast",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 103,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 53
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "brief",
+      "unit": "instruments",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 103,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 50
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "brief",
+      "unit": "uncertainty",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 103,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 22
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "short",
+      "unit": "main",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 148,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 43
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "short",
+      "unit": "deployment",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 148,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 49
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "short",
+      "unit": "forecast",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 148,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 53
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "short",
+      "unit": "instruments",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 148,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 50
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "short",
+      "unit": "uncertainty",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 148,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 22
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "balanced",
+      "unit": "main",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 217,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 43
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "balanced",
+      "unit": "deployment",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 217,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 49
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "balanced",
+      "unit": "forecast",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 217,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 53
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "balanced",
+      "unit": "instruments",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 217,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 50
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "balanced",
+      "unit": "uncertainty",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 217,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 22
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "detailed",
+      "unit": "main",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 314,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 43
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "detailed",
+      "unit": "deployment",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 314,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 49
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "detailed",
+      "unit": "forecast",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 314,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 53
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "detailed",
+      "unit": "instruments",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 314,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 50
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "detailed",
+      "unit": "uncertainty",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 314,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 22
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "comprehensive",
+      "unit": "main",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 428,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 43
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "comprehensive",
+      "unit": "deployment",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 428,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 49
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "comprehensive",
+      "unit": "forecast",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 428,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 53
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "comprehensive",
+      "unit": "instruments",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 428,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 50
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-NEWS",
+      "depth": "comprehensive",
+      "unit": "uncertainty",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 428,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 22
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "very_brief",
+      "unit": "main",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 24
+        },
+        {
+          "sentences": 2,
+          "words": 75
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "very_brief",
+      "unit": "design",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 4,
+          "words": 71
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": false
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "very_brief",
+      "unit": "result",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 33
+        },
+        {
+          "sentences": 2,
+          "words": 60
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "very_brief",
+      "unit": "imputation",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 30
+        },
+        {
+          "sentences": 1,
+          "words": 28
+        },
+        {
+          "sentences": 1,
+          "words": 21
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "very_brief",
+      "unit": "attrition",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 11
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "very_brief",
+      "unit": "late_limit",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 22
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "brief",
+      "unit": "main",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 24
+        },
+        {
+          "sentences": 2,
+          "words": 75
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "brief",
+      "unit": "design",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 4,
+          "words": 71
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": false
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "brief",
+      "unit": "result",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 33
+        },
+        {
+          "sentences": 2,
+          "words": 60
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "brief",
+      "unit": "imputation",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 30
+        },
+        {
+          "sentences": 1,
+          "words": 28
+        },
+        {
+          "sentences": 1,
+          "words": 21
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "brief",
+      "unit": "attrition",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 11
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "brief",
+      "unit": "late_limit",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 22
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "short",
+      "unit": "main",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 280,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 24
+        },
+        {
+          "sentences": 2,
+          "words": 75
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "short",
+      "unit": "design",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 280,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 4,
+          "words": 71
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "short",
+      "unit": "result",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 280,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 33
+        },
+        {
+          "sentences": 2,
+          "words": 60
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "short",
+      "unit": "imputation",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 280,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 30
+        },
+        {
+          "sentences": 1,
+          "words": 28
+        },
+        {
+          "sentences": 1,
+          "words": 21
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "short",
+      "unit": "attrition",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 280,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 11
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "short",
+      "unit": "late_limit",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 280,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 22
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "balanced",
+      "unit": "main",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 500,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 24
+        },
+        {
+          "sentences": 2,
+          "words": 75
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "balanced",
+      "unit": "design",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 500,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 4,
+          "words": 71
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "balanced",
+      "unit": "result",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 500,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 33
+        },
+        {
+          "sentences": 2,
+          "words": 60
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "balanced",
+      "unit": "imputation",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 500,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 30
+        },
+        {
+          "sentences": 1,
+          "words": 28
+        },
+        {
+          "sentences": 1,
+          "words": 21
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "balanced",
+      "unit": "attrition",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 500,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 11
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "balanced",
+      "unit": "late_limit",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 500,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 22
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "detailed",
+      "unit": "main",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 850,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 24
+        },
+        {
+          "sentences": 2,
+          "words": 75
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "detailed",
+      "unit": "design",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 850,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 4,
+          "words": 71
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "detailed",
+      "unit": "result",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 850,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 33
+        },
+        {
+          "sentences": 2,
+          "words": 60
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "detailed",
+      "unit": "imputation",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 850,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 30
+        },
+        {
+          "sentences": 1,
+          "words": 28
+        },
+        {
+          "sentences": 1,
+          "words": 21
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "detailed",
+      "unit": "attrition",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 850,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 11
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "detailed",
+      "unit": "late_limit",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 850,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 22
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "comprehensive",
+      "unit": "main",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 1600,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 24
+        },
+        {
+          "sentences": 2,
+          "words": 75
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "comprehensive",
+      "unit": "design",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 1600,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 4,
+          "words": 71
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "comprehensive",
+      "unit": "result",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 1600,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 33
+        },
+        {
+          "sentences": 2,
+          "words": 60
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "comprehensive",
+      "unit": "imputation",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 1600,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 30
+        },
+        {
+          "sentences": 1,
+          "words": 28
+        },
+        {
+          "sentences": 1,
+          "words": 21
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "comprehensive",
+      "unit": "attrition",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 1600,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 11
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-RESEARCH",
+      "depth": "comprehensive",
+      "unit": "late_limit",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 1600,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 22
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "very_brief",
+      "unit": "main",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 45,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 32
+        },
+        {
+          "sentences": 1,
+          "words": 26
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "very_brief",
+      "unit": "population",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 45,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 67
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": false
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "very_brief",
+      "unit": "uncertainty",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 45,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 11
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "very_brief",
+      "unit": "specific_causes",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 45,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 14
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "very_brief",
+      "unit": "late_scope",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 45,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 44
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "brief",
+      "unit": "main",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 62,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 32
+        },
+        {
+          "sentences": 1,
+          "words": 26
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "brief",
+      "unit": "population",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 62,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 67
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": false
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "brief",
+      "unit": "uncertainty",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 62,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 11
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "brief",
+      "unit": "specific_causes",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 62,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 14
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "brief",
+      "unit": "late_scope",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 62,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 44
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "short",
+      "unit": "main",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 90,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 32
+        },
+        {
+          "sentences": 1,
+          "words": 26
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "short",
+      "unit": "population",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 90,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 67
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "short",
+      "unit": "uncertainty",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 90,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 11
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "short",
+      "unit": "specific_causes",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 90,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 14
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "short",
+      "unit": "late_scope",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 90,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 44
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "balanced",
+      "unit": "main",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 131,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 32
+        },
+        {
+          "sentences": 1,
+          "words": 26
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "balanced",
+      "unit": "population",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 131,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 67
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "balanced",
+      "unit": "uncertainty",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 131,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 11
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "balanced",
+      "unit": "specific_causes",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 131,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 14
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "balanced",
+      "unit": "late_scope",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 131,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 44
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "detailed",
+      "unit": "main",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 190,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 32
+        },
+        {
+          "sentences": 1,
+          "words": 26
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "detailed",
+      "unit": "population",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 190,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 67
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "detailed",
+      "unit": "uncertainty",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 190,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 11
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "detailed",
+      "unit": "specific_causes",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 190,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 14
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "detailed",
+      "unit": "late_scope",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 190,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 44
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "comprehensive",
+      "unit": "main",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 259,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 32
+        },
+        {
+          "sentences": 1,
+          "words": 26
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "comprehensive",
+      "unit": "population",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 259,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 67
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "comprehensive",
+      "unit": "uncertainty",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 259,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 11
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "comprehensive",
+      "unit": "specific_causes",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 259,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 14
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-SCIENCE",
+      "depth": "comprehensive",
+      "unit": "late_scope",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 259,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 44
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "very_brief",
+      "unit": "main",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 29
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "very_brief",
+      "unit": "state",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 31
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "very_brief",
+      "unit": "compatibility",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 42
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": false
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "very_brief",
+      "unit": "thread_safety",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 30
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "very_brief",
+      "unit": "legacy_api",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 18
+        },
+        {
+          "sentences": 1,
+          "words": 18
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "very_brief",
+      "unit": "maintainer_burden",
+      "article_sentence_limit": 2,
+      "native_word_ceiling": 80,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 70
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": false
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "brief",
+      "unit": "main",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 29
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "brief",
+      "unit": "state",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 31
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "brief",
+      "unit": "compatibility",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 42
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "brief",
+      "unit": "thread_safety",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 30
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "brief",
+      "unit": "legacy_api",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 18
+        },
+        {
+          "sentences": 1,
+          "words": 18
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "brief",
+      "unit": "maintainer_burden",
+      "article_sentence_limit": 3,
+      "native_word_ceiling": 150,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 70
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "short",
+      "unit": "main",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 280,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 29
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "short",
+      "unit": "state",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 280,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 31
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "short",
+      "unit": "compatibility",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 280,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 42
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "short",
+      "unit": "thread_safety",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 280,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 30
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "short",
+      "unit": "legacy_api",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 280,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 18
+        },
+        {
+          "sentences": 1,
+          "words": 18
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "short",
+      "unit": "maintainer_burden",
+      "article_sentence_limit": 5,
+      "native_word_ceiling": 280,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 70
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "balanced",
+      "unit": "main",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 500,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 29
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "balanced",
+      "unit": "state",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 500,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 31
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "balanced",
+      "unit": "compatibility",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 500,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 42
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "balanced",
+      "unit": "thread_safety",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 500,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 30
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "balanced",
+      "unit": "legacy_api",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 500,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 18
+        },
+        {
+          "sentences": 1,
+          "words": 18
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "balanced",
+      "unit": "maintainer_burden",
+      "article_sentence_limit": 8,
+      "native_word_ceiling": 500,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 70
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "detailed",
+      "unit": "main",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 850,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 29
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "detailed",
+      "unit": "state",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 850,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 31
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "detailed",
+      "unit": "compatibility",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 850,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 42
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "detailed",
+      "unit": "thread_safety",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 850,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 30
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "detailed",
+      "unit": "legacy_api",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 850,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 18
+        },
+        {
+          "sentences": 1,
+          "words": 18
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "detailed",
+      "unit": "maintainer_burden",
+      "article_sentence_limit": 11,
+      "native_word_ceiling": 850,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 70
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "comprehensive",
+      "unit": "main",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 1600,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 29
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "comprehensive",
+      "unit": "state",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 1600,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 31
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "comprehensive",
+      "unit": "compatibility",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 1600,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 42
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "comprehensive",
+      "unit": "thread_safety",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 1600,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 2,
+          "words": 30
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "comprehensive",
+      "unit": "legacy_api",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 1600,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 1,
+          "words": 18
+        },
+        {
+          "sentences": 1,
+          "words": 18
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "depth": "comprehensive",
+      "unit": "maintainer_burden",
+      "article_sentence_limit": 15,
+      "native_word_ceiling": 1600,
+      "exact_evidence_alternatives": [
+        {
+          "sentences": 3,
+          "words": 70
+        }
+      ],
+      "some_exact_bundle_fits_without_added_context": true
+    }
+  ]
+}

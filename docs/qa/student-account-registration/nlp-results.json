@@ -1,0 +1,28 @@
+[
+  {
+    "name": "approved initial student authenticates for real NLP",
+    "passed": true
+  },
+  {
+    "name": "real backend accepts an authorized summarization job",
+    "passed": true
+  },
+  {
+    "name": "existing Python engine completes real summarization",
+    "passed": true,
+    "seconds": 14.36,
+    "status": "completed"
+  },
+  {
+    "name": "persisted summary result renders through the existing UI",
+    "passed": true
+  },
+  {
+    "name": "MySQL summary belongs to the same approved student",
+    "passed": true
+  },
+  {
+    "name": "existing summary history retrieves the new result",
+    "passed": true
+  }
+]

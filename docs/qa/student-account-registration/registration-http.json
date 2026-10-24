@@ -1,0 +1,110 @@
+[
+  {
+    "name": "administrator imports authorize five new IDs without creating any accounts",
+    "passed": true
+  },
+  {
+    "name": "missing email is rejected server-side and audited once",
+    "passed": true
+  },
+  {
+    "name": "invalid email is rejected server-side and audited once",
+    "passed": true
+  },
+  {
+    "name": "mismatched passwords show a specific confirmation error",
+    "passed": true
+  },
+  {
+    "name": "server validation retains ID and email but never either password",
+    "passed": true
+  },
+  {
+    "name": "retained invalid input is HTML-escaped without script injection",
+    "passed": true
+  },
+  {
+    "name": "weak passwords are rejected by the PHP policy",
+    "passed": true
+  },
+  {
+    "name": "existing terms acceptance remains required",
+    "passed": true
+  },
+  {
+    "name": "eligible registration returns to Sign In with an active verified registry-match account",
+    "passed": true
+  },
+  {
+    "name": "the exact requested success message is shown",
+    "passed": true
+  },
+  {
+    "name": "registration stores normalized chosen email and a verifiable password hash",
+    "passed": true
+  },
+  {
+    "name": "registration does not create a logged-in session or send any verification mail",
+    "passed": true
+  },
+  {
+    "name": "successful registration has its own safe transactional audit event",
+    "passed": true
+  },
+  {
+    "name": "newly chosen email and password sign in without another approval step",
+    "passed": true
+  },
+  {
+    "name": "new account can open student workspace summarizer and history",
+    "passed": true
+  },
+  {
+    "name": "duplicate email cannot create an account or claim a different eligible ID",
+    "passed": true
+  },
+  {
+    "name": "duplicate details receive privacy-preserving feedback without account information",
+    "passed": true
+  },
+  {
+    "name": "already claimed ID still rejects a second account",
+    "passed": true
+  },
+  {
+    "name": "unlisted registration stays ineligible without creating an account",
+    "passed": true
+  },
+  {
+    "name": "unlisted registration stays ineligible without creating an account",
+    "passed": true
+  },
+  {
+    "name": "revoked newly imported ID cannot register",
+    "passed": true
+  },
+  {
+    "name": "real unavailable database returns safe HTTP 503 without bypass",
+    "passed": true
+  },
+  {
+    "name": "an outage retains only safe non-password form values for retry",
+    "passed": true
+  },
+  {
+    "name": "failure after user insert rolls back both account creation and ID claim",
+    "passed": true
+  },
+  {
+    "name": "a failed transaction can be retried with the same active unclaimed ID",
+    "passed": true
+  },
+  {
+    "name": "claimed unclaimed and actual account counters remain separate and consistent",
+    "passed": true
+  },
+  {
+    "name": "ordinary student still cannot modify the trusted registry",
+    "passed": true
+  }
+]

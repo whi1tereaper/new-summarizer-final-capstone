@@ -1,0 +1,3692 @@
+{
+    "recorded_utc": "2026-10-23T02:02:46+00:00",
+    "read_only": true,
+    "provider": "Neon",
+    "configured_pooled": true,
+    "direct_url_present": true,
+    "direct_url_is_pooled": false,
+    "server_version_num": 180006,
+    "session_ssl": false,
+    "schema": "public",
+    "tables": [
+        {
+            "table_name": "admin_audit_logs",
+            "row_security": false
+        },
+        {
+            "table_name": "admin_security_challenges",
+            "row_security": false
+        },
+        {
+            "table_name": "document_summaries",
+            "row_security": false
+        },
+        {
+            "table_name": "documents",
+            "row_security": false
+        },
+        {
+            "table_name": "feedback",
+            "row_security": false
+        },
+        {
+            "table_name": "feedback_comments",
+            "row_security": false
+        },
+        {
+            "table_name": "guest_sessions",
+            "row_security": false
+        },
+        {
+            "table_name": "landing_page_events",
+            "row_security": false
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "row_security": false
+        },
+        {
+            "table_name": "nutshell_generations",
+            "row_security": false
+        },
+        {
+            "table_name": "password_resets",
+            "row_security": false
+        },
+        {
+            "table_name": "rate_limits",
+            "row_security": false
+        },
+        {
+            "table_name": "schema_migrations",
+            "row_security": false
+        },
+        {
+            "table_name": "summaries",
+            "row_security": false
+        },
+        {
+            "table_name": "summary_artifacts",
+            "row_security": false
+        },
+        {
+            "table_name": "summary_jobs",
+            "row_security": false
+        },
+        {
+            "table_name": "user_tokens",
+            "row_security": false
+        },
+        {
+            "table_name": "users",
+            "row_security": false
+        }
+    ],
+    "columns": [
+        {
+            "table_name": "admin_audit_logs",
+            "column_name": "id",
+            "ordinal_position": 1,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": "nextval('admin_audit_logs_id_seq'::regclass)",
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "admin_audit_logs",
+            "column_name": "user_id",
+            "ordinal_position": 2,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "admin_audit_logs",
+            "column_name": "action",
+            "ordinal_position": 3,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 100,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "admin_audit_logs",
+            "column_name": "details",
+            "ordinal_position": 4,
+            "data_type": "text",
+            "udt_name": "text",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "admin_audit_logs",
+            "column_name": "ip_address",
+            "ordinal_position": 5,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": 45,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "admin_audit_logs",
+            "column_name": "created_at",
+            "ordinal_position": 6,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": "CURRENT_TIMESTAMP",
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "admin_security_challenges",
+            "column_name": "id",
+            "ordinal_position": 1,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": "nextval('admin_security_challenges_id_seq'::regclass)",
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "admin_security_challenges",
+            "column_name": "user_id",
+            "ordinal_position": 2,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "admin_security_challenges",
+            "column_name": "challenge_type",
+            "ordinal_position": 3,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 50,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "admin_security_challenges",
+            "column_name": "secret_hash",
+            "ordinal_position": 4,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 255,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "admin_security_challenges",
+            "column_name": "is_active",
+            "ordinal_position": 5,
+            "data_type": "smallint",
+            "udt_name": "int2",
+            "is_nullable": "NO",
+            "column_default": "1",
+            "character_maximum_length": null,
+            "numeric_precision": 16,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "admin_security_challenges",
+            "column_name": "created_at",
+            "ordinal_position": 6,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": "CURRENT_TIMESTAMP",
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "admin_security_challenges",
+            "column_name": "updated_at",
+            "ordinal_position": 7,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": "CURRENT_TIMESTAMP",
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "document_summaries",
+            "column_name": "id",
+            "ordinal_position": 1,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": "nextval('document_summaries_id_seq'::regclass)",
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "document_summaries",
+            "column_name": "document_id",
+            "ordinal_position": 2,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "document_summaries",
+            "column_name": "profile",
+            "ordinal_position": 3,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 32,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "document_summaries",
+            "column_name": "length",
+            "ordinal_position": 4,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 32,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "document_summaries",
+            "column_name": "summary",
+            "ordinal_position": 5,
+            "data_type": "text",
+            "udt_name": "text",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "document_summaries",
+            "column_name": "word_count",
+            "ordinal_position": 6,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "document_summaries",
+            "column_name": "source_word_count",
+            "ordinal_position": 7,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "document_summaries",
+            "column_name": "compression_ratio",
+            "ordinal_position": 8,
+            "data_type": "numeric",
+            "udt_name": "numeric",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 5,
+            "numeric_scale": 2,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "document_summaries",
+            "column_name": "estimated_reading_time_seconds",
+            "ordinal_position": 9,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "document_summaries",
+            "column_name": "created_at",
+            "ordinal_position": 10,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": "CURRENT_TIMESTAMP",
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "documents",
+            "column_name": "id",
+            "ordinal_position": 1,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": "nextval('documents_id_seq'::regclass)",
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "documents",
+            "column_name": "content",
+            "ordinal_position": 2,
+            "data_type": "text",
+            "udt_name": "text",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "documents",
+            "column_name": "user_id",
+            "ordinal_position": 3,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "documents",
+            "column_name": "guest_token",
+            "ordinal_position": 4,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": 64,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "documents",
+            "column_name": "created_at",
+            "ordinal_position": 5,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": "CURRENT_TIMESTAMP",
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "feedback",
+            "column_name": "id",
+            "ordinal_position": 1,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": "nextval('feedback_id_seq'::regclass)",
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "feedback",
+            "column_name": "summary_id",
+            "ordinal_position": 2,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "feedback",
+            "column_name": "user_id",
+            "ordinal_position": 3,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "feedback",
+            "column_name": "guest_token",
+            "ordinal_position": 4,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": 64,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "feedback",
+            "column_name": "rating",
+            "ordinal_position": 5,
+            "data_type": "smallint",
+            "udt_name": "int2",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 16,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "feedback",
+            "column_name": "name",
+            "ordinal_position": 6,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": 100,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "feedback",
+            "column_name": "email",
+            "ordinal_position": 7,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": 150,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "feedback",
+            "column_name": "impression",
+            "ordinal_position": 8,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": 50,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "feedback",
+            "column_name": "reasons",
+            "ordinal_position": 9,
+            "data_type": "text",
+            "udt_name": "text",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "feedback",
+            "column_name": "comment",
+            "ordinal_position": 10,
+            "data_type": "text",
+            "udt_name": "text",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "feedback",
+            "column_name": "created_at",
+            "ordinal_position": 11,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": "CURRENT_TIMESTAMP",
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "feedback",
+            "column_name": "updated_at",
+            "ordinal_position": 12,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": "CURRENT_TIMESTAMP",
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "feedback_comments",
+            "column_name": "id",
+            "ordinal_position": 1,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": "nextval('feedback_comments_id_seq'::regclass)",
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "feedback_comments",
+            "column_name": "summary_id",
+            "ordinal_position": 2,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "feedback_comments",
+            "column_name": "rating",
+            "ordinal_position": 3,
+            "data_type": "smallint",
+            "udt_name": "int2",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 16,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "feedback_comments",
+            "column_name": "reasons",
+            "ordinal_position": 4,
+            "data_type": "text",
+            "udt_name": "text",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "feedback_comments",
+            "column_name": "comment",
+            "ordinal_position": 5,
+            "data_type": "text",
+            "udt_name": "text",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "feedback_comments",
+            "column_name": "created_at",
+            "ordinal_position": 6,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": "CURRENT_TIMESTAMP",
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "guest_sessions",
+            "column_name": "guest_token",
+            "ordinal_position": 1,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 64,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "guest_sessions",
+            "column_name": "created_at",
+            "ordinal_position": 2,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": "CURRENT_TIMESTAMP",
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "guest_sessions",
+            "column_name": "last_activity",
+            "ordinal_position": 3,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": "CURRENT_TIMESTAMP",
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "guest_sessions",
+            "column_name": "expires_at",
+            "ordinal_position": 4,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "landing_page_events",
+            "column_name": "id",
+            "ordinal_position": 1,
+            "data_type": "bigint",
+            "udt_name": "int8",
+            "is_nullable": "NO",
+            "column_default": "nextval('landing_page_events_id_seq'::regclass)",
+            "character_maximum_length": null,
+            "numeric_precision": 64,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "landing_page_events",
+            "column_name": "session_id",
+            "ordinal_position": 2,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 64,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "landing_page_events",
+            "column_name": "event_type",
+            "ordinal_position": 3,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 50,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "landing_page_events",
+            "column_name": "event_label",
+            "ordinal_position": 4,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": 100,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "landing_page_events",
+            "column_name": "event_value",
+            "ordinal_position": 5,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "landing_page_events",
+            "column_name": "created_at",
+            "ordinal_position": 6,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": "CURRENT_TIMESTAMP",
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "column_name": "session_id",
+            "ordinal_position": 1,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 64,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "column_name": "user_id",
+            "ordinal_position": 2,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "column_name": "guest_token",
+            "ordinal_position": 3,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": 64,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "column_name": "ip_hash",
+            "ordinal_position": 4,
+            "data_type": "character",
+            "udt_name": "bpchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 64,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "column_name": "user_agent",
+            "ordinal_position": 5,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": 255,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "column_name": "device_category",
+            "ordinal_position": 6,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": "'desktop'::character varying",
+            "character_maximum_length": 20,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "column_name": "referrer",
+            "ordinal_position": 7,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": 512,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "column_name": "lcp_ms",
+            "ordinal_position": 8,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "column_name": "fid_ms",
+            "ordinal_position": 9,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "column_name": "cls_score",
+            "ordinal_position": 10,
+            "data_type": "numeric",
+            "udt_name": "numeric",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 6,
+            "numeric_scale": 4,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "column_name": "inp_ms",
+            "ordinal_position": 11,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "column_name": "max_scroll_percent",
+            "ordinal_position": 12,
+            "data_type": "smallint",
+            "udt_name": "int2",
+            "is_nullable": "NO",
+            "column_default": "0",
+            "character_maximum_length": null,
+            "numeric_precision": 16,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "column_name": "dwell_time_seconds",
+            "ordinal_position": 13,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": "0",
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "column_name": "converted",
+            "ordinal_position": 14,
+            "data_type": "smallint",
+            "udt_name": "int2",
+            "is_nullable": "NO",
+            "column_default": "0",
+            "character_maximum_length": null,
+            "numeric_precision": 16,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "column_name": "created_at",
+            "ordinal_position": 15,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": "CURRENT_TIMESTAMP",
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "column_name": "updated_at",
+            "ordinal_position": 16,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": "CURRENT_TIMESTAMP",
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "nutshell_generations",
+            "column_name": "id",
+            "ordinal_position": 1,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": "nextval('nutshell_generations_id_seq'::regclass)",
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "nutshell_generations",
+            "column_name": "summary_id",
+            "ordinal_position": 2,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "nutshell_generations",
+            "column_name": "user_id",
+            "ordinal_position": 3,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "nutshell_generations",
+            "column_name": "guest_token",
+            "ordinal_position": 4,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": 64,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "nutshell_generations",
+            "column_name": "source_word_count",
+            "ordinal_position": 5,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": "0",
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "nutshell_generations",
+            "column_name": "nutshell_text",
+            "ordinal_position": 6,
+            "data_type": "text",
+            "udt_name": "text",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "nutshell_generations",
+            "column_name": "status",
+            "ordinal_position": 7,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": "'completed'::character varying",
+            "character_maximum_length": 20,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "nutshell_generations",
+            "column_name": "failure_reason",
+            "ordinal_position": 8,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": 80,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "nutshell_generations",
+            "column_name": "analysis_mode",
+            "ordinal_position": 9,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": "'general'::character varying",
+            "character_maximum_length": 24,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "nutshell_generations",
+            "column_name": "output_format",
+            "ordinal_position": 10,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": "'paragraph'::character varying",
+            "character_maximum_length": 24,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "nutshell_generations",
+            "column_name": "primary_summary_word_count",
+            "ordinal_position": 11,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": "0",
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "nutshell_generations",
+            "column_name": "compression_ratio",
+            "ordinal_position": 12,
+            "data_type": "numeric",
+            "udt_name": "numeric",
+            "is_nullable": "NO",
+            "column_default": "0",
+            "character_maximum_length": null,
+            "numeric_precision": 8,
+            "numeric_scale": 4,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "nutshell_generations",
+            "column_name": "processing_time_ms",
+            "ordinal_position": 13,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": "0",
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "nutshell_generations",
+            "column_name": "algorithm_version",
+            "ordinal_position": 14,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": "'nutshell-extractive-v2'::character varying",
+            "character_maximum_length": 32,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "nutshell_generations",
+            "column_name": "idempotency_key",
+            "ordinal_position": 15,
+            "data_type": "character",
+            "udt_name": "bpchar",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": 64,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "nutshell_generations",
+            "column_name": "created_at",
+            "ordinal_position": 16,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": "CURRENT_TIMESTAMP",
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "password_resets",
+            "column_name": "id",
+            "ordinal_position": 1,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": "nextval('password_resets_id_seq'::regclass)",
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "password_resets",
+            "column_name": "user_id",
+            "ordinal_position": 2,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "password_resets",
+            "column_name": "token_hash",
+            "ordinal_position": 3,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 64,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "password_resets",
+            "column_name": "expires_at",
+            "ordinal_position": 4,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "password_resets",
+            "column_name": "used",
+            "ordinal_position": 5,
+            "data_type": "smallint",
+            "udt_name": "int2",
+            "is_nullable": "NO",
+            "column_default": "0",
+            "character_maximum_length": null,
+            "numeric_precision": 16,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "password_resets",
+            "column_name": "created_at",
+            "ordinal_position": 6,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": "CURRENT_TIMESTAMP",
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "rate_limits",
+            "column_name": "id",
+            "ordinal_position": 1,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": "nextval('rate_limits_id_seq'::regclass)",
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "rate_limits",
+            "column_name": "action_type",
+            "ordinal_position": 2,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 30,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "rate_limits",
+            "column_name": "identifier",
+            "ordinal_position": 3,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 255,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "rate_limits",
+            "column_name": "attempts",
+            "ordinal_position": 4,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "YES",
+            "column_default": "0",
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "rate_limits",
+            "column_name": "window_start",
+            "ordinal_position": 5,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": "CURRENT_TIMESTAMP",
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "schema_migrations",
+            "column_name": "id",
+            "ordinal_position": 1,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": "nextval('schema_migrations_id_seq'::regclass)",
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "schema_migrations",
+            "column_name": "migration",
+            "ordinal_position": 2,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 255,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "schema_migrations",
+            "column_name": "applied_at",
+            "ordinal_position": 3,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": "CURRENT_TIMESTAMP",
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summaries",
+            "column_name": "id",
+            "ordinal_position": 1,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": "nextval('summaries_id_seq'::regclass)",
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summaries",
+            "column_name": "user_id",
+            "ordinal_position": 2,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summaries",
+            "column_name": "guest_token",
+            "ordinal_position": 3,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": 64,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summaries",
+            "column_name": "share_token",
+            "ordinal_position": 4,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 64,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summaries",
+            "column_name": "article_title",
+            "ordinal_position": 5,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 255,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summaries",
+            "column_name": "author_name",
+            "ordinal_position": 6,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": 255,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summaries",
+            "column_name": "input_type",
+            "ordinal_position": 7,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 20,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summaries",
+            "column_name": "original_text",
+            "ordinal_position": 8,
+            "data_type": "text",
+            "udt_name": "text",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summaries",
+            "column_name": "generated_summary",
+            "ordinal_position": 9,
+            "data_type": "text",
+            "udt_name": "text",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summaries",
+            "column_name": "summary_style",
+            "ordinal_position": 10,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "YES",
+            "column_default": "'standard_paragraph'::character varying",
+            "character_maximum_length": 50,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summaries",
+            "column_name": "status",
+            "ordinal_position": 11,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": "'completed'::character varying",
+            "character_maximum_length": 20,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summaries",
+            "column_name": "error_message",
+            "ordinal_position": 12,
+            "data_type": "text",
+            "udt_name": "text",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summaries",
+            "column_name": "summary_length",
+            "ordinal_position": 13,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": 32,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summaries",
+            "column_name": "nutshell_text",
+            "ordinal_position": 14,
+            "data_type": "text",
+            "udt_name": "text",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summaries",
+            "column_name": "created_at",
+            "ordinal_position": 15,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": "CURRENT_TIMESTAMP",
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summary_artifacts",
+            "column_name": "id",
+            "ordinal_position": 1,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": "nextval('summary_artifacts_id_seq'::regclass)",
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summary_artifacts",
+            "column_name": "summary_id",
+            "ordinal_position": 2,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summary_artifacts",
+            "column_name": "artifact_type",
+            "ordinal_position": 3,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 50,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summary_artifacts",
+            "column_name": "storage_path",
+            "ordinal_position": 4,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 255,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summary_artifacts",
+            "column_name": "created_at",
+            "ordinal_position": 5,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": "CURRENT_TIMESTAMP",
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summary_jobs",
+            "column_name": "id",
+            "ordinal_position": 1,
+            "data_type": "bigint",
+            "udt_name": "int8",
+            "is_nullable": "NO",
+            "column_default": "nextval('summary_jobs_id_seq'::regclass)",
+            "character_maximum_length": null,
+            "numeric_precision": 64,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summary_jobs",
+            "column_name": "job_id",
+            "ordinal_position": 2,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 64,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summary_jobs",
+            "column_name": "user_id",
+            "ordinal_position": 3,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summary_jobs",
+            "column_name": "guest_token",
+            "ordinal_position": 4,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": 64,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summary_jobs",
+            "column_name": "state",
+            "ordinal_position": 5,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": "'queued'::character varying",
+            "character_maximum_length": 20,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summary_jobs",
+            "column_name": "payload",
+            "ordinal_position": 6,
+            "data_type": "text",
+            "udt_name": "text",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summary_jobs",
+            "column_name": "idempotency_key",
+            "ordinal_position": 7,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 128,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summary_jobs",
+            "column_name": "result_id",
+            "ordinal_position": 8,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summary_jobs",
+            "column_name": "error_message",
+            "ordinal_position": 9,
+            "data_type": "text",
+            "udt_name": "text",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summary_jobs",
+            "column_name": "error_details",
+            "ordinal_position": 10,
+            "data_type": "text",
+            "udt_name": "text",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summary_jobs",
+            "column_name": "retry_count",
+            "ordinal_position": 11,
+            "data_type": "smallint",
+            "udt_name": "int2",
+            "is_nullable": "NO",
+            "column_default": "0",
+            "character_maximum_length": null,
+            "numeric_precision": 16,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summary_jobs",
+            "column_name": "worker_pid",
+            "ordinal_position": 12,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summary_jobs",
+            "column_name": "started_at",
+            "ordinal_position": 13,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summary_jobs",
+            "column_name": "completed_at",
+            "ordinal_position": 14,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summary_jobs",
+            "column_name": "created_at",
+            "ordinal_position": 15,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": "CURRENT_TIMESTAMP",
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "summary_jobs",
+            "column_name": "updated_at",
+            "ordinal_position": 16,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": "CURRENT_TIMESTAMP",
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "user_tokens",
+            "column_name": "id",
+            "ordinal_position": 1,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": "nextval('user_tokens_id_seq'::regclass)",
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "user_tokens",
+            "column_name": "user_id",
+            "ordinal_position": 2,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "user_tokens",
+            "column_name": "token_hash",
+            "ordinal_position": 3,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 64,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "user_tokens",
+            "column_name": "token_type",
+            "ordinal_position": 4,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 32,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "user_tokens",
+            "column_name": "expires_at",
+            "ordinal_position": 5,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "user_tokens",
+            "column_name": "created_at",
+            "ordinal_position": 6,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": "CURRENT_TIMESTAMP",
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "users",
+            "column_name": "id",
+            "ordinal_position": 1,
+            "data_type": "integer",
+            "udt_name": "int4",
+            "is_nullable": "NO",
+            "column_default": "nextval('users_id_seq'::regclass)",
+            "character_maximum_length": null,
+            "numeric_precision": 32,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "users",
+            "column_name": "username",
+            "ordinal_position": 2,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 50,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "users",
+            "column_name": "email",
+            "ordinal_position": 3,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 100,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "users",
+            "column_name": "password_hash",
+            "ordinal_position": 4,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": null,
+            "character_maximum_length": 255,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "users",
+            "column_name": "role",
+            "ordinal_position": 5,
+            "data_type": "character varying",
+            "udt_name": "varchar",
+            "is_nullable": "NO",
+            "column_default": "'user'::character varying",
+            "character_maximum_length": 20,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "users",
+            "column_name": "active",
+            "ordinal_position": 6,
+            "data_type": "smallint",
+            "udt_name": "int2",
+            "is_nullable": "NO",
+            "column_default": "1",
+            "character_maximum_length": null,
+            "numeric_precision": 16,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "users",
+            "column_name": "terms_accepted",
+            "ordinal_position": 7,
+            "data_type": "smallint",
+            "udt_name": "int2",
+            "is_nullable": "NO",
+            "column_default": "0",
+            "character_maximum_length": null,
+            "numeric_precision": 16,
+            "numeric_scale": 0,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "users",
+            "column_name": "terms_accepted_at",
+            "ordinal_position": 8,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "YES",
+            "column_default": null,
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        },
+        {
+            "table_name": "users",
+            "column_name": "created_at",
+            "ordinal_position": 9,
+            "data_type": "timestamp with time zone",
+            "udt_name": "timestamptz",
+            "is_nullable": "NO",
+            "column_default": "CURRENT_TIMESTAMP",
+            "character_maximum_length": null,
+            "numeric_precision": null,
+            "numeric_scale": null,
+            "is_identity": "NO",
+            "identity_generation": null
+        }
+    ],
+    "constraints": [
+        {
+            "table_name": "admin_audit_logs",
+            "conname": "admin_audit_logs_action_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL action"
+        },
+        {
+            "table_name": "admin_audit_logs",
+            "conname": "admin_audit_logs_created_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL created_at"
+        },
+        {
+            "table_name": "admin_audit_logs",
+            "conname": "admin_audit_logs_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL id"
+        },
+        {
+            "table_name": "admin_audit_logs",
+            "conname": "admin_audit_logs_pkey",
+            "contype": "p",
+            "convalidated": true,
+            "definition": "PRIMARY KEY (id)"
+        },
+        {
+            "table_name": "admin_audit_logs",
+            "conname": "admin_audit_logs_user_id_fkey",
+            "contype": "f",
+            "convalidated": true,
+            "definition": "FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL"
+        },
+        {
+            "table_name": "admin_security_challenges",
+            "conname": "admin_security_challenges_challenge_type_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL challenge_type"
+        },
+        {
+            "table_name": "admin_security_challenges",
+            "conname": "admin_security_challenges_created_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL created_at"
+        },
+        {
+            "table_name": "admin_security_challenges",
+            "conname": "admin_security_challenges_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL id"
+        },
+        {
+            "table_name": "admin_security_challenges",
+            "conname": "admin_security_challenges_is_active_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL is_active"
+        },
+        {
+            "table_name": "admin_security_challenges",
+            "conname": "admin_security_challenges_pkey",
+            "contype": "p",
+            "convalidated": true,
+            "definition": "PRIMARY KEY (id)"
+        },
+        {
+            "table_name": "admin_security_challenges",
+            "conname": "admin_security_challenges_secret_hash_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL secret_hash"
+        },
+        {
+            "table_name": "admin_security_challenges",
+            "conname": "admin_security_challenges_updated_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL updated_at"
+        },
+        {
+            "table_name": "admin_security_challenges",
+            "conname": "admin_security_challenges_user_id_fkey",
+            "contype": "f",
+            "convalidated": true,
+            "definition": "FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE"
+        },
+        {
+            "table_name": "admin_security_challenges",
+            "conname": "admin_security_challenges_user_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL user_id"
+        },
+        {
+            "table_name": "document_summaries",
+            "conname": "document_summaries_compression_ratio_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL compression_ratio"
+        },
+        {
+            "table_name": "document_summaries",
+            "conname": "document_summaries_created_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL created_at"
+        },
+        {
+            "table_name": "document_summaries",
+            "conname": "document_summaries_document_id_fkey",
+            "contype": "f",
+            "convalidated": true,
+            "definition": "FOREIGN KEY (document_id) REFERENCES documents(id) ON DELETE CASCADE"
+        },
+        {
+            "table_name": "document_summaries",
+            "conname": "document_summaries_document_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL document_id"
+        },
+        {
+            "table_name": "document_summaries",
+            "conname": "document_summaries_estimated_reading_time_seconds_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL estimated_reading_time_seconds"
+        },
+        {
+            "table_name": "document_summaries",
+            "conname": "document_summaries_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL id"
+        },
+        {
+            "table_name": "document_summaries",
+            "conname": "document_summaries_length_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL length"
+        },
+        {
+            "table_name": "document_summaries",
+            "conname": "document_summaries_pkey",
+            "contype": "p",
+            "convalidated": true,
+            "definition": "PRIMARY KEY (id)"
+        },
+        {
+            "table_name": "document_summaries",
+            "conname": "document_summaries_profile_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL profile"
+        },
+        {
+            "table_name": "document_summaries",
+            "conname": "document_summaries_source_word_count_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL source_word_count"
+        },
+        {
+            "table_name": "document_summaries",
+            "conname": "document_summaries_summary_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL summary"
+        },
+        {
+            "table_name": "document_summaries",
+            "conname": "document_summaries_word_count_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL word_count"
+        },
+        {
+            "table_name": "document_summaries",
+            "conname": "uq_doc_profile_length",
+            "contype": "u",
+            "convalidated": true,
+            "definition": "UNIQUE (document_id, profile, length)"
+        },
+        {
+            "table_name": "documents",
+            "conname": "documents_content_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL content"
+        },
+        {
+            "table_name": "documents",
+            "conname": "documents_created_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL created_at"
+        },
+        {
+            "table_name": "documents",
+            "conname": "documents_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL id"
+        },
+        {
+            "table_name": "documents",
+            "conname": "documents_pkey",
+            "contype": "p",
+            "convalidated": true,
+            "definition": "PRIMARY KEY (id)"
+        },
+        {
+            "table_name": "feedback",
+            "conname": "feedback_created_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL created_at"
+        },
+        {
+            "table_name": "feedback",
+            "conname": "feedback_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL id"
+        },
+        {
+            "table_name": "feedback",
+            "conname": "feedback_pkey",
+            "contype": "p",
+            "convalidated": true,
+            "definition": "PRIMARY KEY (id)"
+        },
+        {
+            "table_name": "feedback",
+            "conname": "feedback_rating_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL rating"
+        },
+        {
+            "table_name": "feedback",
+            "conname": "feedback_summary_id_fkey",
+            "contype": "f",
+            "convalidated": true,
+            "definition": "FOREIGN KEY (summary_id) REFERENCES summaries(id) ON DELETE CASCADE"
+        },
+        {
+            "table_name": "feedback",
+            "conname": "feedback_summary_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL summary_id"
+        },
+        {
+            "table_name": "feedback",
+            "conname": "feedback_updated_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL updated_at"
+        },
+        {
+            "table_name": "feedback",
+            "conname": "feedback_user_id_fkey",
+            "contype": "f",
+            "convalidated": true,
+            "definition": "FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE"
+        },
+        {
+            "table_name": "feedback",
+            "conname": "uq_guest_summary",
+            "contype": "u",
+            "convalidated": true,
+            "definition": "UNIQUE (summary_id, guest_token)"
+        },
+        {
+            "table_name": "feedback",
+            "conname": "uq_user_summary",
+            "contype": "u",
+            "convalidated": true,
+            "definition": "UNIQUE (summary_id, user_id)"
+        },
+        {
+            "table_name": "feedback_comments",
+            "conname": "feedback_comments_comment_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL comment"
+        },
+        {
+            "table_name": "feedback_comments",
+            "conname": "feedback_comments_created_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL created_at"
+        },
+        {
+            "table_name": "feedback_comments",
+            "conname": "feedback_comments_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL id"
+        },
+        {
+            "table_name": "feedback_comments",
+            "conname": "feedback_comments_pkey",
+            "contype": "p",
+            "convalidated": true,
+            "definition": "PRIMARY KEY (id)"
+        },
+        {
+            "table_name": "feedback_comments",
+            "conname": "feedback_comments_summary_id_fkey",
+            "contype": "f",
+            "convalidated": true,
+            "definition": "FOREIGN KEY (summary_id) REFERENCES summaries(id) ON DELETE CASCADE"
+        },
+        {
+            "table_name": "feedback_comments",
+            "conname": "feedback_comments_summary_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL summary_id"
+        },
+        {
+            "table_name": "guest_sessions",
+            "conname": "guest_sessions_created_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL created_at"
+        },
+        {
+            "table_name": "guest_sessions",
+            "conname": "guest_sessions_expires_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL expires_at"
+        },
+        {
+            "table_name": "guest_sessions",
+            "conname": "guest_sessions_guest_token_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL guest_token"
+        },
+        {
+            "table_name": "guest_sessions",
+            "conname": "guest_sessions_last_activity_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL last_activity"
+        },
+        {
+            "table_name": "guest_sessions",
+            "conname": "guest_sessions_pkey",
+            "contype": "p",
+            "convalidated": true,
+            "definition": "PRIMARY KEY (guest_token)"
+        },
+        {
+            "table_name": "landing_page_events",
+            "conname": "landing_page_events_created_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL created_at"
+        },
+        {
+            "table_name": "landing_page_events",
+            "conname": "landing_page_events_event_type_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL event_type"
+        },
+        {
+            "table_name": "landing_page_events",
+            "conname": "landing_page_events_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL id"
+        },
+        {
+            "table_name": "landing_page_events",
+            "conname": "landing_page_events_pkey",
+            "contype": "p",
+            "convalidated": true,
+            "definition": "PRIMARY KEY (id)"
+        },
+        {
+            "table_name": "landing_page_events",
+            "conname": "landing_page_events_session_id_fkey",
+            "contype": "f",
+            "convalidated": true,
+            "definition": "FOREIGN KEY (session_id) REFERENCES landing_page_sessions(session_id) ON DELETE CASCADE"
+        },
+        {
+            "table_name": "landing_page_events",
+            "conname": "landing_page_events_session_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL session_id"
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "conname": "landing_page_sessions_converted_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL converted"
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "conname": "landing_page_sessions_created_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL created_at"
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "conname": "landing_page_sessions_device_category_check",
+            "contype": "c",
+            "convalidated": true,
+            "definition": "CHECK (((device_category)::text = ANY ((ARRAY['mobile'::character varying, 'tablet'::character varying, 'desktop'::character varying])::text[])))"
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "conname": "landing_page_sessions_device_category_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL device_category"
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "conname": "landing_page_sessions_dwell_time_seconds_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL dwell_time_seconds"
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "conname": "landing_page_sessions_ip_hash_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL ip_hash"
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "conname": "landing_page_sessions_max_scroll_percent_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL max_scroll_percent"
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "conname": "landing_page_sessions_pkey",
+            "contype": "p",
+            "convalidated": true,
+            "definition": "PRIMARY KEY (session_id)"
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "conname": "landing_page_sessions_session_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL session_id"
+        },
+        {
+            "table_name": "landing_page_sessions",
+            "conname": "landing_page_sessions_updated_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL updated_at"
+        },
+        {
+            "table_name": "nutshell_generations",
+            "conname": "nutshell_generations_algorithm_version_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL algorithm_version"
+        },
+        {
+            "table_name": "nutshell_generations",
+            "conname": "nutshell_generations_analysis_mode_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL analysis_mode"
+        },
+        {
+            "table_name": "nutshell_generations",
+            "conname": "nutshell_generations_compression_ratio_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL compression_ratio"
+        },
+        {
+            "table_name": "nutshell_generations",
+            "conname": "nutshell_generations_created_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL created_at"
+        },
+        {
+            "table_name": "nutshell_generations",
+            "conname": "nutshell_generations_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL id"
+        },
+        {
+            "table_name": "nutshell_generations",
+            "conname": "nutshell_generations_idempotency_key_key",
+            "contype": "u",
+            "convalidated": true,
+            "definition": "UNIQUE (idempotency_key)"
+        },
+        {
+            "table_name": "nutshell_generations",
+            "conname": "nutshell_generations_output_format_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL output_format"
+        },
+        {
+            "table_name": "nutshell_generations",
+            "conname": "nutshell_generations_pkey",
+            "contype": "p",
+            "convalidated": true,
+            "definition": "PRIMARY KEY (id)"
+        },
+        {
+            "table_name": "nutshell_generations",
+            "conname": "nutshell_generations_primary_summary_word_count_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL primary_summary_word_count"
+        },
+        {
+            "table_name": "nutshell_generations",
+            "conname": "nutshell_generations_processing_time_ms_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL processing_time_ms"
+        },
+        {
+            "table_name": "nutshell_generations",
+            "conname": "nutshell_generations_source_word_count_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL source_word_count"
+        },
+        {
+            "table_name": "nutshell_generations",
+            "conname": "nutshell_generations_status_check",
+            "contype": "c",
+            "convalidated": true,
+            "definition": "CHECK (((status)::text = ANY ((ARRAY['completed'::character varying, 'failed'::character varying])::text[])))"
+        },
+        {
+            "table_name": "nutshell_generations",
+            "conname": "nutshell_generations_status_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL status"
+        },
+        {
+            "table_name": "nutshell_generations",
+            "conname": "nutshell_generations_summary_id_fkey",
+            "contype": "f",
+            "convalidated": true,
+            "definition": "FOREIGN KEY (summary_id) REFERENCES summaries(id) ON DELETE SET NULL"
+        },
+        {
+            "table_name": "nutshell_generations",
+            "conname": "nutshell_generations_user_id_fkey",
+            "contype": "f",
+            "convalidated": true,
+            "definition": "FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL"
+        },
+        {
+            "table_name": "password_resets",
+            "conname": "password_resets_created_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL created_at"
+        },
+        {
+            "table_name": "password_resets",
+            "conname": "password_resets_expires_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL expires_at"
+        },
+        {
+            "table_name": "password_resets",
+            "conname": "password_resets_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL id"
+        },
+        {
+            "table_name": "password_resets",
+            "conname": "password_resets_pkey",
+            "contype": "p",
+            "convalidated": true,
+            "definition": "PRIMARY KEY (id)"
+        },
+        {
+            "table_name": "password_resets",
+            "conname": "password_resets_token_hash_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL token_hash"
+        },
+        {
+            "table_name": "password_resets",
+            "conname": "password_resets_used_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL used"
+        },
+        {
+            "table_name": "password_resets",
+            "conname": "password_resets_user_id_fkey",
+            "contype": "f",
+            "convalidated": true,
+            "definition": "FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE"
+        },
+        {
+            "table_name": "password_resets",
+            "conname": "password_resets_user_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL user_id"
+        },
+        {
+            "table_name": "rate_limits",
+            "conname": "rate_limits_action_type_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL action_type"
+        },
+        {
+            "table_name": "rate_limits",
+            "conname": "rate_limits_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL id"
+        },
+        {
+            "table_name": "rate_limits",
+            "conname": "rate_limits_identifier_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL identifier"
+        },
+        {
+            "table_name": "rate_limits",
+            "conname": "rate_limits_pkey",
+            "contype": "p",
+            "convalidated": true,
+            "definition": "PRIMARY KEY (id)"
+        },
+        {
+            "table_name": "rate_limits",
+            "conname": "rate_limits_window_start_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL window_start"
+        },
+        {
+            "table_name": "rate_limits",
+            "conname": "uq_action_id",
+            "contype": "u",
+            "convalidated": true,
+            "definition": "UNIQUE (action_type, identifier)"
+        },
+        {
+            "table_name": "schema_migrations",
+            "conname": "schema_migrations_applied_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL applied_at"
+        },
+        {
+            "table_name": "schema_migrations",
+            "conname": "schema_migrations_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL id"
+        },
+        {
+            "table_name": "schema_migrations",
+            "conname": "schema_migrations_migration_key",
+            "contype": "u",
+            "convalidated": true,
+            "definition": "UNIQUE (migration)"
+        },
+        {
+            "table_name": "schema_migrations",
+            "conname": "schema_migrations_migration_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL migration"
+        },
+        {
+            "table_name": "schema_migrations",
+            "conname": "schema_migrations_pkey",
+            "contype": "p",
+            "convalidated": true,
+            "definition": "PRIMARY KEY (id)"
+        },
+        {
+            "table_name": "summaries",
+            "conname": "summaries_article_title_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL article_title"
+        },
+        {
+            "table_name": "summaries",
+            "conname": "summaries_created_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL created_at"
+        },
+        {
+            "table_name": "summaries",
+            "conname": "summaries_generated_summary_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL generated_summary"
+        },
+        {
+            "table_name": "summaries",
+            "conname": "summaries_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL id"
+        },
+        {
+            "table_name": "summaries",
+            "conname": "summaries_input_type_check",
+            "contype": "c",
+            "convalidated": true,
+            "definition": "CHECK (((input_type)::text = ANY ((ARRAY['text'::character varying, 'pdf'::character varying, 'docx'::character varying, 'url'::character varying])::text[])))"
+        },
+        {
+            "table_name": "summaries",
+            "conname": "summaries_input_type_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL input_type"
+        },
+        {
+            "table_name": "summaries",
+            "conname": "summaries_original_text_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL original_text"
+        },
+        {
+            "table_name": "summaries",
+            "conname": "summaries_pkey",
+            "contype": "p",
+            "convalidated": true,
+            "definition": "PRIMARY KEY (id)"
+        },
+        {
+            "table_name": "summaries",
+            "conname": "summaries_share_token_key",
+            "contype": "u",
+            "convalidated": true,
+            "definition": "UNIQUE (share_token)"
+        },
+        {
+            "table_name": "summaries",
+            "conname": "summaries_share_token_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL share_token"
+        },
+        {
+            "table_name": "summaries",
+            "conname": "summaries_status_check",
+            "contype": "c",
+            "convalidated": true,
+            "definition": "CHECK (((status)::text = ANY ((ARRAY['pending'::character varying, 'processing'::character varying, 'completed'::character varying, 'failed'::character varying])::text[])))"
+        },
+        {
+            "table_name": "summaries",
+            "conname": "summaries_status_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL status"
+        },
+        {
+            "table_name": "summaries",
+            "conname": "summaries_user_id_fkey",
+            "contype": "f",
+            "convalidated": true,
+            "definition": "FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE"
+        },
+        {
+            "table_name": "summary_artifacts",
+            "conname": "summary_artifacts_artifact_type_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL artifact_type"
+        },
+        {
+            "table_name": "summary_artifacts",
+            "conname": "summary_artifacts_created_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL created_at"
+        },
+        {
+            "table_name": "summary_artifacts",
+            "conname": "summary_artifacts_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL id"
+        },
+        {
+            "table_name": "summary_artifacts",
+            "conname": "summary_artifacts_pkey",
+            "contype": "p",
+            "convalidated": true,
+            "definition": "PRIMARY KEY (id)"
+        },
+        {
+            "table_name": "summary_artifacts",
+            "conname": "summary_artifacts_storage_path_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL storage_path"
+        },
+        {
+            "table_name": "summary_artifacts",
+            "conname": "summary_artifacts_summary_id_fkey",
+            "contype": "f",
+            "convalidated": true,
+            "definition": "FOREIGN KEY (summary_id) REFERENCES summaries(id) ON DELETE CASCADE"
+        },
+        {
+            "table_name": "summary_artifacts",
+            "conname": "summary_artifacts_summary_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL summary_id"
+        },
+        {
+            "table_name": "summary_jobs",
+            "conname": "summary_jobs_created_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL created_at"
+        },
+        {
+            "table_name": "summary_jobs",
+            "conname": "summary_jobs_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL id"
+        },
+        {
+            "table_name": "summary_jobs",
+            "conname": "summary_jobs_idempotency_key_key",
+            "contype": "u",
+            "convalidated": true,
+            "definition": "UNIQUE (idempotency_key)"
+        },
+        {
+            "table_name": "summary_jobs",
+            "conname": "summary_jobs_idempotency_key_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL idempotency_key"
+        },
+        {
+            "table_name": "summary_jobs",
+            "conname": "summary_jobs_job_id_key",
+            "contype": "u",
+            "convalidated": true,
+            "definition": "UNIQUE (job_id)"
+        },
+        {
+            "table_name": "summary_jobs",
+            "conname": "summary_jobs_job_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL job_id"
+        },
+        {
+            "table_name": "summary_jobs",
+            "conname": "summary_jobs_payload_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL payload"
+        },
+        {
+            "table_name": "summary_jobs",
+            "conname": "summary_jobs_pkey",
+            "contype": "p",
+            "convalidated": true,
+            "definition": "PRIMARY KEY (id)"
+        },
+        {
+            "table_name": "summary_jobs",
+            "conname": "summary_jobs_result_id_fkey",
+            "contype": "f",
+            "convalidated": true,
+            "definition": "FOREIGN KEY (result_id) REFERENCES summaries(id) ON DELETE SET NULL"
+        },
+        {
+            "table_name": "summary_jobs",
+            "conname": "summary_jobs_retry_count_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL retry_count"
+        },
+        {
+            "table_name": "summary_jobs",
+            "conname": "summary_jobs_state_check",
+            "contype": "c",
+            "convalidated": true,
+            "definition": "CHECK (((state)::text = ANY ((ARRAY['queued'::character varying, 'processing'::character varying, 'completed'::character varying, 'failed'::character varying, 'cancelled'::character varying, 'timed_out'::character varying])::text[])))"
+        },
+        {
+            "table_name": "summary_jobs",
+            "conname": "summary_jobs_state_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL state"
+        },
+        {
+            "table_name": "summary_jobs",
+            "conname": "summary_jobs_updated_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL updated_at"
+        },
+        {
+            "table_name": "summary_jobs",
+            "conname": "summary_jobs_user_id_fkey",
+            "contype": "f",
+            "convalidated": true,
+            "definition": "FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL"
+        },
+        {
+            "table_name": "user_tokens",
+            "conname": "user_tokens_created_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL created_at"
+        },
+        {
+            "table_name": "user_tokens",
+            "conname": "user_tokens_expires_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL expires_at"
+        },
+        {
+            "table_name": "user_tokens",
+            "conname": "user_tokens_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL id"
+        },
+        {
+            "table_name": "user_tokens",
+            "conname": "user_tokens_pkey",
+            "contype": "p",
+            "convalidated": true,
+            "definition": "PRIMARY KEY (id)"
+        },
+        {
+            "table_name": "user_tokens",
+            "conname": "user_tokens_token_hash_key",
+            "contype": "u",
+            "convalidated": true,
+            "definition": "UNIQUE (token_hash)"
+        },
+        {
+            "table_name": "user_tokens",
+            "conname": "user_tokens_token_hash_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL token_hash"
+        },
+        {
+            "table_name": "user_tokens",
+            "conname": "user_tokens_token_type_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL token_type"
+        },
+        {
+            "table_name": "user_tokens",
+            "conname": "user_tokens_user_id_fkey",
+            "contype": "f",
+            "convalidated": true,
+            "definition": "FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE"
+        },
+        {
+            "table_name": "user_tokens",
+            "conname": "user_tokens_user_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL user_id"
+        },
+        {
+            "table_name": "users",
+            "conname": "users_active_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL active"
+        },
+        {
+            "table_name": "users",
+            "conname": "users_created_at_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL created_at"
+        },
+        {
+            "table_name": "users",
+            "conname": "users_email_key",
+            "contype": "u",
+            "convalidated": true,
+            "definition": "UNIQUE (email)"
+        },
+        {
+            "table_name": "users",
+            "conname": "users_email_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL email"
+        },
+        {
+            "table_name": "users",
+            "conname": "users_id_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL id"
+        },
+        {
+            "table_name": "users",
+            "conname": "users_password_hash_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL password_hash"
+        },
+        {
+            "table_name": "users",
+            "conname": "users_pkey",
+            "contype": "p",
+            "convalidated": true,
+            "definition": "PRIMARY KEY (id)"
+        },
+        {
+            "table_name": "users",
+            "conname": "users_role_check",
+            "contype": "c",
+            "convalidated": true,
+            "definition": "CHECK (((role)::text = ANY ((ARRAY['user'::character varying, 'admin'::character varying])::text[])))"
+        },
+        {
+            "table_name": "users",
+            "conname": "users_role_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL role"
+        },
+        {
+            "table_name": "users",
+            "conname": "users_terms_accepted_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL terms_accepted"
+        },
+        {
+            "table_name": "users",
+            "conname": "users_username_key",
+            "contype": "u",
+            "convalidated": true,
+            "definition": "UNIQUE (username)"
+        },
+        {
+            "table_name": "users",
+            "conname": "users_username_not_null",
+            "contype": "n",
+            "convalidated": true,
+            "definition": "NOT NULL username"
+        }
+    ],
+    "indexes": [
+        {
+            "tablename": "admin_audit_logs",
+            "indexname": "admin_audit_logs_pkey",
+            "indexdef": "CREATE UNIQUE INDEX admin_audit_logs_pkey ON public.admin_audit_logs USING btree (id)"
+        },
+        {
+            "tablename": "admin_audit_logs",
+            "indexname": "idx_aal_created",
+            "indexdef": "CREATE INDEX idx_aal_created ON public.admin_audit_logs USING btree (created_at)"
+        },
+        {
+            "tablename": "admin_audit_logs",
+            "indexname": "idx_aal_user",
+            "indexdef": "CREATE INDEX idx_aal_user ON public.admin_audit_logs USING btree (user_id)"
+        },
+        {
+            "tablename": "admin_security_challenges",
+            "indexname": "admin_security_challenges_pkey",
+            "indexdef": "CREATE UNIQUE INDEX admin_security_challenges_pkey ON public.admin_security_challenges USING btree (id)"
+        },
+        {
+            "tablename": "admin_security_challenges",
+            "indexname": "idx_asc_user",
+            "indexdef": "CREATE INDEX idx_asc_user ON public.admin_security_challenges USING btree (user_id)"
+        },
+        {
+            "tablename": "document_summaries",
+            "indexname": "document_summaries_pkey",
+            "indexdef": "CREATE UNIQUE INDEX document_summaries_pkey ON public.document_summaries USING btree (id)"
+        },
+        {
+            "tablename": "document_summaries",
+            "indexname": "idx_doc_summaries_created_at",
+            "indexdef": "CREATE INDEX idx_doc_summaries_created_at ON public.document_summaries USING btree (created_at)"
+        },
+        {
+            "tablename": "document_summaries",
+            "indexname": "idx_document_id",
+            "indexdef": "CREATE INDEX idx_document_id ON public.document_summaries USING btree (document_id)"
+        },
+        {
+            "tablename": "document_summaries",
+            "indexname": "uq_doc_profile_length",
+            "indexdef": "CREATE UNIQUE INDEX uq_doc_profile_length ON public.document_summaries USING btree (document_id, profile, length)"
+        },
+        {
+            "tablename": "documents",
+            "indexname": "documents_pkey",
+            "indexdef": "CREATE UNIQUE INDEX documents_pkey ON public.documents USING btree (id)"
+        },
+        {
+            "tablename": "documents",
+            "indexname": "idx_documents_created_at",
+            "indexdef": "CREATE INDEX idx_documents_created_at ON public.documents USING btree (created_at)"
+        },
+        {
+            "tablename": "documents",
+            "indexname": "idx_documents_guest",
+            "indexdef": "CREATE INDEX idx_documents_guest ON public.documents USING btree (guest_token)"
+        },
+        {
+            "tablename": "documents",
+            "indexname": "idx_documents_user",
+            "indexdef": "CREATE INDEX idx_documents_user ON public.documents USING btree (user_id)"
+        },
+        {
+            "tablename": "feedback",
+            "indexname": "feedback_pkey",
+            "indexdef": "CREATE UNIQUE INDEX feedback_pkey ON public.feedback USING btree (id)"
+        },
+        {
+            "tablename": "feedback",
+            "indexname": "idx_feedback_guest_owner",
+            "indexdef": "CREATE INDEX idx_feedback_guest_owner ON public.feedback USING btree (guest_token, user_id)"
+        },
+        {
+            "tablename": "feedback",
+            "indexname": "idx_feedback_summary",
+            "indexdef": "CREATE INDEX idx_feedback_summary ON public.feedback USING btree (summary_id)"
+        },
+        {
+            "tablename": "feedback",
+            "indexname": "idx_feedback_user",
+            "indexdef": "CREATE INDEX idx_feedback_user ON public.feedback USING btree (user_id)"
+        },
+        {
+            "tablename": "feedback",
+            "indexname": "uq_guest_summary",
+            "indexdef": "CREATE UNIQUE INDEX uq_guest_summary ON public.feedback USING btree (summary_id, guest_token)"
+        },
+        {
+            "tablename": "feedback",
+            "indexname": "uq_user_summary",
+            "indexdef": "CREATE UNIQUE INDEX uq_user_summary ON public.feedback USING btree (summary_id, user_id)"
+        },
+        {
+            "tablename": "feedback_comments",
+            "indexname": "feedback_comments_pkey",
+            "indexdef": "CREATE UNIQUE INDEX feedback_comments_pkey ON public.feedback_comments USING btree (id)"
+        },
+        {
+            "tablename": "feedback_comments",
+            "indexname": "idx_fc_created",
+            "indexdef": "CREATE INDEX idx_fc_created ON public.feedback_comments USING btree (created_at)"
+        },
+        {
+            "tablename": "feedback_comments",
+            "indexname": "idx_fc_summary",
+            "indexdef": "CREATE INDEX idx_fc_summary ON public.feedback_comments USING btree (summary_id)"
+        },
+        {
+            "tablename": "guest_sessions",
+            "indexname": "guest_sessions_pkey",
+            "indexdef": "CREATE UNIQUE INDEX guest_sessions_pkey ON public.guest_sessions USING btree (guest_token)"
+        },
+        {
+            "tablename": "guest_sessions",
+            "indexname": "idx_guest_sessions_activity",
+            "indexdef": "CREATE INDEX idx_guest_sessions_activity ON public.guest_sessions USING btree (last_activity)"
+        },
+        {
+            "tablename": "guest_sessions",
+            "indexname": "idx_guest_sessions_expires",
+            "indexdef": "CREATE INDEX idx_guest_sessions_expires ON public.guest_sessions USING btree (expires_at)"
+        },
+        {
+            "tablename": "landing_page_events",
+            "indexname": "idx_lpe_created",
+            "indexdef": "CREATE INDEX idx_lpe_created ON public.landing_page_events USING btree (created_at)"
+        },
+        {
+            "tablename": "landing_page_events",
+            "indexname": "idx_lpe_session",
+            "indexdef": "CREATE INDEX idx_lpe_session ON public.landing_page_events USING btree (session_id, event_type)"
+        },
+        {
+            "tablename": "landing_page_events",
+            "indexname": "landing_page_events_pkey",
+            "indexdef": "CREATE UNIQUE INDEX landing_page_events_pkey ON public.landing_page_events USING btree (id)"
+        },
+        {
+            "tablename": "landing_page_sessions",
+            "indexname": "idx_lps_converted",
+            "indexdef": "CREATE INDEX idx_lps_converted ON public.landing_page_sessions USING btree (converted)"
+        },
+        {
+            "tablename": "landing_page_sessions",
+            "indexname": "idx_lps_created",
+            "indexdef": "CREATE INDEX idx_lps_created ON public.landing_page_sessions USING btree (created_at)"
+        },
+        {
+            "tablename": "landing_page_sessions",
+            "indexname": "idx_lps_device",
+            "indexdef": "CREATE INDEX idx_lps_device ON public.landing_page_sessions USING btree (device_category)"
+        },
+        {
+            "tablename": "landing_page_sessions",
+            "indexname": "landing_page_sessions_pkey",
+            "indexdef": "CREATE UNIQUE INDEX landing_page_sessions_pkey ON public.landing_page_sessions USING btree (session_id)"
+        },
+        {
+            "tablename": "nutshell_generations",
+            "indexname": "idx_ng_status_created",
+            "indexdef": "CREATE INDEX idx_ng_status_created ON public.nutshell_generations USING btree (status, created_at)"
+        },
+        {
+            "tablename": "nutshell_generations",
+            "indexname": "idx_ng_user",
+            "indexdef": "CREATE INDEX idx_ng_user ON public.nutshell_generations USING btree (user_id)"
+        },
+        {
+            "tablename": "nutshell_generations",
+            "indexname": "nutshell_generations_idempotency_key_key",
+            "indexdef": "CREATE UNIQUE INDEX nutshell_generations_idempotency_key_key ON public.nutshell_generations USING btree (idempotency_key)"
+        },
+        {
+            "tablename": "nutshell_generations",
+            "indexname": "nutshell_generations_pkey",
+            "indexdef": "CREATE UNIQUE INDEX nutshell_generations_pkey ON public.nutshell_generations USING btree (id)"
+        },
+        {
+            "tablename": "password_resets",
+            "indexname": "idx_password_resets_token",
+            "indexdef": "CREATE INDEX idx_password_resets_token ON public.password_resets USING btree (token_hash)"
+        },
+        {
+            "tablename": "password_resets",
+            "indexname": "idx_password_resets_user",
+            "indexdef": "CREATE INDEX idx_password_resets_user ON public.password_resets USING btree (user_id)"
+        },
+        {
+            "tablename": "password_resets",
+            "indexname": "password_resets_pkey",
+            "indexdef": "CREATE UNIQUE INDEX password_resets_pkey ON public.password_resets USING btree (id)"
+        },
+        {
+            "tablename": "rate_limits",
+            "indexname": "idx_rate_limits_window",
+            "indexdef": "CREATE INDEX idx_rate_limits_window ON public.rate_limits USING btree (window_start)"
+        },
+        {
+            "tablename": "rate_limits",
+            "indexname": "rate_limits_pkey",
+            "indexdef": "CREATE UNIQUE INDEX rate_limits_pkey ON public.rate_limits USING btree (id)"
+        },
+        {
+            "tablename": "rate_limits",
+            "indexname": "uq_action_id",
+            "indexdef": "CREATE UNIQUE INDEX uq_action_id ON public.rate_limits USING btree (action_type, identifier)"
+        },
+        {
+            "tablename": "schema_migrations",
+            "indexname": "schema_migrations_migration_key",
+            "indexdef": "CREATE UNIQUE INDEX schema_migrations_migration_key ON public.schema_migrations USING btree (migration)"
+        },
+        {
+            "tablename": "schema_migrations",
+            "indexname": "schema_migrations_pkey",
+            "indexdef": "CREATE UNIQUE INDEX schema_migrations_pkey ON public.schema_migrations USING btree (id)"
+        },
+        {
+            "tablename": "summaries",
+            "indexname": "idx_summaries_created_owner",
+            "indexdef": "CREATE INDEX idx_summaries_created_owner ON public.summaries USING btree (created_at, user_id)"
+        },
+        {
+            "tablename": "summaries",
+            "indexname": "idx_summaries_guest",
+            "indexdef": "CREATE INDEX idx_summaries_guest ON public.summaries USING btree (guest_token)"
+        },
+        {
+            "tablename": "summaries",
+            "indexname": "idx_summaries_guest_owner",
+            "indexdef": "CREATE INDEX idx_summaries_guest_owner ON public.summaries USING btree (guest_token, user_id)"
+        },
+        {
+            "tablename": "summaries",
+            "indexname": "idx_summaries_status",
+            "indexdef": "CREATE INDEX idx_summaries_status ON public.summaries USING btree (status)"
+        },
+        {
+            "tablename": "summaries",
+            "indexname": "idx_summaries_user",
+            "indexdef": "CREATE INDEX idx_summaries_user ON public.summaries USING btree (user_id)"
+        },
+        {
+            "tablename": "summaries",
+            "indexname": "summaries_pkey",
+            "indexdef": "CREATE UNIQUE INDEX summaries_pkey ON public.summaries USING btree (id)"
+        },
+        {
+            "tablename": "summaries",
+            "indexname": "summaries_share_token_key",
+            "indexdef": "CREATE UNIQUE INDEX summaries_share_token_key ON public.summaries USING btree (share_token)"
+        },
+        {
+            "tablename": "summary_artifacts",
+            "indexname": "idx_sa_summary",
+            "indexdef": "CREATE INDEX idx_sa_summary ON public.summary_artifacts USING btree (summary_id)"
+        },
+        {
+            "tablename": "summary_artifacts",
+            "indexname": "summary_artifacts_pkey",
+            "indexdef": "CREATE UNIQUE INDEX summary_artifacts_pkey ON public.summary_artifacts USING btree (id)"
+        },
+        {
+            "tablename": "summary_jobs",
+            "indexname": "idx_summary_jobs_created",
+            "indexdef": "CREATE INDEX idx_summary_jobs_created ON public.summary_jobs USING btree (created_at)"
+        },
+        {
+            "tablename": "summary_jobs",
+            "indexname": "idx_summary_jobs_guest",
+            "indexdef": "CREATE INDEX idx_summary_jobs_guest ON public.summary_jobs USING btree (guest_token)"
+        },
+        {
+            "tablename": "summary_jobs",
+            "indexname": "idx_summary_jobs_result",
+            "indexdef": "CREATE INDEX idx_summary_jobs_result ON public.summary_jobs USING btree (result_id)"
+        },
+        {
+            "tablename": "summary_jobs",
+            "indexname": "idx_summary_jobs_state",
+            "indexdef": "CREATE INDEX idx_summary_jobs_state ON public.summary_jobs USING btree (state)"
+        },
+        {
+            "tablename": "summary_jobs",
+            "indexname": "idx_summary_jobs_user",
+            "indexdef": "CREATE INDEX idx_summary_jobs_user ON public.summary_jobs USING btree (user_id)"
+        },
+        {
+            "tablename": "summary_jobs",
+            "indexname": "summary_jobs_idempotency_key_key",
+            "indexdef": "CREATE UNIQUE INDEX summary_jobs_idempotency_key_key ON public.summary_jobs USING btree (idempotency_key)"
+        },
+        {
+            "tablename": "summary_jobs",
+            "indexname": "summary_jobs_job_id_key",
+            "indexdef": "CREATE UNIQUE INDEX summary_jobs_job_id_key ON public.summary_jobs USING btree (job_id)"
+        },
+        {
+            "tablename": "summary_jobs",
+            "indexname": "summary_jobs_pkey",
+            "indexdef": "CREATE UNIQUE INDEX summary_jobs_pkey ON public.summary_jobs USING btree (id)"
+        },
+        {
+            "tablename": "user_tokens",
+            "indexname": "idx_user_tokens_lookup",
+            "indexdef": "CREATE INDEX idx_user_tokens_lookup ON public.user_tokens USING btree (user_id, token_type)"
+        },
+        {
+            "tablename": "user_tokens",
+            "indexname": "user_tokens_pkey",
+            "indexdef": "CREATE UNIQUE INDEX user_tokens_pkey ON public.user_tokens USING btree (id)"
+        },
+        {
+            "tablename": "user_tokens",
+            "indexname": "user_tokens_token_hash_key",
+            "indexdef": "CREATE UNIQUE INDEX user_tokens_token_hash_key ON public.user_tokens USING btree (token_hash)"
+        },
+        {
+            "tablename": "users",
+            "indexname": "idx_users_role",
+            "indexdef": "CREATE INDEX idx_users_role ON public.users USING btree (role)"
+        },
+        {
+            "tablename": "users",
+            "indexname": "users_email_key",
+            "indexdef": "CREATE UNIQUE INDEX users_email_key ON public.users USING btree (email)"
+        },
+        {
+            "tablename": "users",
+            "indexname": "users_pkey",
+            "indexdef": "CREATE UNIQUE INDEX users_pkey ON public.users USING btree (id)"
+        },
+        {
+            "tablename": "users",
+            "indexname": "users_username_key",
+            "indexdef": "CREATE UNIQUE INDEX users_username_key ON public.users USING btree (username)"
+        }
+    ],
+    "aggregate_row_counts": {
+        "admin_audit_logs": 0,
+        "admin_security_challenges": 0,
+        "document_summaries": 0,
+        "documents": 0,
+        "feedback": 0,
+        "feedback_comments": 0,
+        "guest_sessions": 14,
+        "landing_page_events": 0,
+        "landing_page_sessions": 0,
+        "nutshell_generations": 0,
+        "password_resets": 0,
+        "rate_limits": 2,
+        "schema_migrations": 0,
+        "summaries": 0,
+        "summary_artifacts": 0,
+        "summary_jobs": 0,
+        "user_tokens": 0,
+        "users": 0
+    }
+}

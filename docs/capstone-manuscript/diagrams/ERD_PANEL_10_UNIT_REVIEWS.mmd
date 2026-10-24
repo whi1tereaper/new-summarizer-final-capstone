@@ -1,0 +1,20 @@
+erDiagram
+    direction TB
+    evaluation_outputs {
+        bigint id PK
+        bigint run_id FK
+        bigint document_id FK
+    }
+    evaluation_content_units {
+        bigint id PK
+        bigint document_id FK
+        int created_by FK
+    }
+    evaluation_content_unit_reviews {
+        bigint id PK
+        bigint output_id FK
+        bigint unit_id FK
+        int reviewer_id FK
+    }
+    evaluation_outputs ||--o{ evaluation_content_unit_reviews : "output_id"
+    evaluation_content_units ||--o{ evaluation_content_unit_reviews : "unit_id"

@@ -1,0 +1,32 @@
+   3.2 Security Features Identified as Essential
+
+   Beyond the core features, several security-
+   specific functionalities are essential. The
+   system must implement secure authentication
+   using email and password-based login with
+   password reset functionality. Account status
+   control enables administrators to enable or
+   disable user accounts as needed. Assigned
+   folder restrictions limit user access to only
+   the folders assigned to them, preventing
+   unauthorized viewing of sensitive records.
+   Audit logging records all user activities for
+   accountability, and a bin and recovery system
+   with a 90-day retention period ensures that
+   accidentally deleted items can be restored
+   before permanent removal.
+
+   3.3 User Experience Features Identified as
+   Essential
+
+   To ensure the system is actually adopted and
+   used effectively, certain user experience
+   features are necessary. The interface should
+   provide intuitive navigation with a clear
+   folder hierarchy and easy-to-locate action
+   buttons. Progress indicators such as upload
+   progress bars give users visual feedback
+
+
+
+                                                      44

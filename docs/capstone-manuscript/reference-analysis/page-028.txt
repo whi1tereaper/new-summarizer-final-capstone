@@ -1,0 +1,32 @@
+Yulianti et al., 2025; Pratiwi et al., 2025).
+Cloud-based document systems are used because
+they allow unified upload, download, sharing,
+auditing, retrieval, and role setting while
+improving scalability and reducing operational
+costs (Han et al., 2021; Sipahutar et al., 2025).
+A secured cloud-based EDMS for a university
+records  unit  used AES  encryption and  was
+reported to be effective in storing, retrieving,
+and sharing documents securely (Justina et al.,
+2022). More recent intelligent document systems
+extend these features with OCR, semantic search,
+automated metadata extraction, audit logging,
+and  policy-based  retention  to  strengthen
+compliance readiness and reduce manual handling
+time (Chode, 2025).
+   In educational institutions, the evidence
+especially supports ERMS adoption for academic
+records, archives, and accountability (Oktarina
+et al., 2025; Jannah et al., 2023; Suripto et
+al., 2025). Digital systems in schools and
+universities improve document          accessibility,
+retrieval speed, and monitoring, while also
+producing  clearer  audit  trails  and  more
+transparent administration (Oktarina et al.,
+2025;  Suripto  et  al.,  2025).  One  higher-
+education accountability study found that most
+archivists using ERMS could retrieve documents
+
+
+
+                                                       9

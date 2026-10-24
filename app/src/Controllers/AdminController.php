@@ -238,7 +238,7 @@ class AdminController {
                 return;
             }
 
-            $stmt = $this->db->prepare("DELETE FROM users WHERE id = :id LIMIT 1");
+            $stmt = $this->db->prepare("DELETE FROM users WHERE id = :id");
             $stmt->execute(['id' => $userId]);
 
             if ($stmt->rowCount() === 0) {
@@ -301,7 +301,7 @@ class AdminController {
                 }
             }
 
-            $stmt = $this->db->prepare("UPDATE users SET active = 0 WHERE id = :id LIMIT 1");
+            $stmt = $this->db->prepare("UPDATE users SET active = 0 WHERE id = :id");
             $stmt->execute(['id' => $userId]);
 
             $this->audit('admin_deleted_user', "Deactivated user: {$user['username']}", 'user', $userId);

@@ -1,0 +1,56 @@
+B. Login
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   •   Enter the email and password sent by the system
+       through email.
+   •   Make sure to type the correct login credentials,
+       as any incorrect email or password will not be
+       accepted.
+   •   Click the “Sign In” button to login to the
+       system.
+   •   Click “Forgot password?” if you forgot your
+       account password and it will be sent through
+       email.
+
+
+C. Forgot Password
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   •   Enter your email address
+
+                                                                    127

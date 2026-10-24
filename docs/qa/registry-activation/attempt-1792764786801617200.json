@@ -1,0 +1,51 @@
+[
+  {
+    "name": "isolated setup (existing verified rollback retained)",
+    "exit": 0,
+    "seconds": 11.3,
+    "output": "{\"database\":\"qa_light_3f14a9b2\",\"migrations\":19,\"production_counts\":{\"admin_audit_logs\":165,\"admin_security_challenges\":1,\"document_summaries\":125,\"documents\":25,\"evaluation_assignments\":0,\"evaluation_audit_log\":87,\"evaluation_challenge_cases\":24,\"evaluation_content_unit_reviews\":0,\"evaluation_content_units\":0,\"evaluation_datasets\":4,\"evaluation_documents\":36,\"evaluation_errors\":5,\"evaluation_metrics\":3652,\"evaluation_outputs\":428,\"evaluation_ratings\":0,\"evaluation_references\":0,\"evaluation_runs\":6,\"feedback\":107,\"feedback_comments\":113,\"guest_sessions\":61,\"landing_page_events\":8287,\"landing_page_sessions\":190,\"nutshell_generations\":24,\"password_resets\":25,\"rate_limits\":13,\"schema_migrations\":19,\"student_applications\":0,\"student_enrollment_registry\":0,\"student_registry_batches\":0,\"student_registry_events\":0,\"student_registry_gate\":1,\"student_review_events\":0,\"student_trial_links\":0,\"summaries\":224,\"summary_access_reservations\":29,\"summary_access_subjects\":46,\"summary_artifacts\":215,\"summary_jobs\":246,\"user_tokens\":2,\"users\":35}}",
+    "stderr": ""
+  },
+  {
+    "name": "restricted credentials deny production",
+    "exit": 0,
+    "seconds": 1.31,
+    "output": "",
+    "stderr": ""
+  },
+  {
+    "name": "privacy contact key and processing authorization gates",
+    "exit": 1,
+    "seconds": 9.44,
+    "output": "PASS all three prerequisites permit synthetic test registration\nPASS explicit processing hold blocks registration\nFAIL invalid authorization value fails closed\nPASS blank key cannot be bypassed by authorization\nPASS short key cannot be bypassed by authorization\nPASS invalid privacy email blocks registration\nPASS blank privacy override uses configured project email\nPASS blank project and override email blocks registration\n",
+    "stderr": ""
+  },
+  {
+    "name": "isolated Apache configuration",
+    "exit": 0,
+    "seconds": 2.09,
+    "output": "",
+    "stderr": "Syntax OK\n"
+  },
+  {
+    "name": "registry activation real HTTP workflows",
+    "exit": 0,
+    "seconds": 8.11,
+    "output": "PASS registration form enabled with configured privacy contact and secure key\nPASS anonymous registry access still denied\nPASS ordinary user registry access still denied\nPASS admin password alone does not bypass the existing login challenge\nPASS authorized administrator completes second-factor login\nPASS both authorization-closed messages absent from registry page\nPASS unlisted registration remains pending\nPASS administrator import succeeds without the launch-hold error\nPASS pending account approved by the imported registry match\nPASS new matching registration automatically verified\nPASS matching account receives continued summarizer access\nPASS verified status is shown without another manual approval\nPASS duplicate student-number claim remains blocked\nPASS client role/status cannot grant unlisted students continued access\nPASS CSRF-protected imports remain enforced\n",
+    "stderr": ""
+  },
+  {
+    "name": "original core data preservation during live activity",
+    "exit": 0,
+    "seconds": 1.72,
+    "output": "{\"original_core_rows_preserved\":true,\"live_activity_observed\":false,\"benchmark_uses_restricted_isolated_database\":true}",
+    "stderr": ""
+  },
+  {
+    "name": "isolated fixture cleanup",
+    "exit": 0,
+    "seconds": 0.81,
+    "output": "QA databases and restricted user removed.",
+    "stderr": ""
+  }
+]

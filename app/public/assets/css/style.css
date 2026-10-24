@@ -1051,6 +1051,13 @@ body.modal-open { overflow: hidden; overscroll-behavior: contain; }
 .pw-toggle.pw-visible .pw-icon--show { display: none; }
 .pw-toggle.pw-visible .pw-icon--hide { display: block; }
 
+.password-guide {
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+  line-height: 1.45;
+  margin: 8px 0 0;
+}
+
 .pw-strength { margin-top: 8px; display: none; align-items: center; gap: 12px; }
 .pw-strength.is-active { display: flex; }
 .pw-strength__bar { flex: 1; height: 3px; background: var(--color-border); border-radius: 2px; overflow: hidden; }

@@ -1,0 +1,53 @@
+       •   Clicking “Replace” will replace the file, but
+           leave the older version of the file which can
+           be downloaded.
+       •   Clicking “Keep Both” will display both files,
+           with the newer file having a suffix (1) in the
+           name.
+
+
+      3) Checklist
+
+
+
+
+
+
+
+
+
+
+
+
+
+               •  You can see the checklist of the Folder.
+               •  Any required documents needed to be
+                  uploaded are shown here.
+               •  You can add an item to the checklist by
+                  typing a name into “Checklist name” and
+                  entering the required number of that item
+                  (eg. 10 COEs) into the “Require” field,
+                  then click the “Add” button.
+               •  Checklist items can be manually ticked by
+                  clicking the box beside the name.
+               •  Checklist items can be automatically
+                  ticked by uploading a file with the same
+                  name.
+               •  Checklist items are also complied with by
+                  marking the files.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                   132

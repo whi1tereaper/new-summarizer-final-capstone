@@ -13,6 +13,7 @@ declare(strict_types=1);
  * 6. Services function against existing schema without DDL execution
  */
 
+require_once __DIR__ . '/qa/isolation.php';
 require_once __DIR__ . '/../app/src/Support/config.php';
 require_once __DIR__ . '/../app/src/Database.php';
 
@@ -90,6 +91,10 @@ $expectedMigrations = [
     '014_feedback_hardening_and_reasons.sql',
     '015_summary_jobs.sql',
     '016_summary_error_contract.sql',
+    '017_student_number_access.sql',
+    '018_password_reset_contract.sql',
+    '019_student_enrollment_registry.sql',
+    '020_registry_only_allowlist.sql',
 ];
 
 $actualBasenames = array_map('basename', $migrationFiles);
@@ -138,6 +143,11 @@ $requiredTables = [
     'summary_jobs',
     'user_tokens',
     'users',
+    'student_applications',
+    'student_review_events',
+    'student_trial_links',
+    'summary_access_subjects',
+    'summary_access_reservations',
 ];
 
 $missingTables = [];
@@ -148,7 +158,7 @@ foreach ($requiredTables as $rt) {
 }
 
 assertPhase4(
-    "Live database contains all 14 required tables",
+    "Isolated database contains all required tables",
     empty($missingTables),
     empty($missingTables) ? "All present" : "Missing: " . implode(', ', $missingTables)
 );
@@ -183,7 +193,8 @@ assertPhase4(
 // ---------------------------------------------------------
 echo "\n--- TEST GROUP 4: Fresh Installation in Temporary Database ---\n";
 
-$tempDbName = 'test_tmp_fresh_' . bin2hex(random_bytes(3));
+$tempDbName = getenv('LIGHT_QA_FRESH_DB');
+if (!is_string($tempDbName) || !preg_match('/\Aqa_light_fresh_[a-f0-9]{8}\z/', $tempDbName)) throw new RuntimeException('An isolated fresh-install database is required.');
 $host = config('database.host', '127.0.0.1');
 $port = config('database.port', '3306');
 $user = config('database.username', 'root');
@@ -235,7 +246,7 @@ try {
     assertPhase4(
         "Fresh install: All base schemas and sequential migrations apply with 0 errors",
         empty($migrationFailures),
-        empty($migrationFailures) ? "10/10 migrations passed" : implode('; ', $migrationFailures)
+        empty($migrationFailures) ? count($migrationFiles)."/".count($migrationFiles)." migrations passed" : implode('; ', $migrationFailures)
     );
 
     // Verify temp database final table count
@@ -244,7 +255,7 @@ try {
     $missingInTemp = array_filter($requiredTables, fn($t) => !isset($tempTablesMap[$t]));
 
     assertPhase4(
-        "Fresh install: Temporary database reaches identical 14 required tables",
+        "Fresh install: Temporary database contains all required tables",
         empty($missingInTemp),
         empty($missingInTemp) ? "Exact match" : "Missing: " . implode(', ', $missingInTemp)
     );
@@ -285,7 +296,8 @@ require_once dirname(__DIR__) . '/app/src/Services/RememberMeService.php';
 assertPhase4("RememberMeService::ensureSchema() executes as safe no-op without error", true);
 
 // Test RememberMe cookie creation & DB persistence with controlled fixture
-$fixtureUserId = 12; // Existing user ID in DB
+$db->prepare('INSERT INTO users(username,email,password_hash)VALUES(?,?,?)')->execute(['remember_'.bin2hex(random_bytes(4)),bin2hex(random_bytes(4)).'@example.invalid','fixture-only']);
+$fixtureUserId = (int)$db->lastInsertId();
 $_SERVER['HTTPS'] = 'on';
 @\App\Src\Services\RememberMeService::createCookieForUser($fixtureUserId);
 $chkToken = $db->prepare("SELECT id, selector, expires FROM user_tokens WHERE user_id = ? ORDER BY id DESC LIMIT 1");
@@ -299,6 +311,7 @@ assertPhase4(
 if ($tokenRow) {
     $db->prepare("DELETE FROM user_tokens WHERE id = ?")->execute([$tokenRow['id']]);
 }
+$db->prepare('DELETE FROM users WHERE id=?')->execute([$fixtureUserId]);
 
 // 5.3 RateLimiter
 require_once dirname(__DIR__) . '/app/src/Services/RateLimiter.php';

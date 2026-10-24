@@ -1,0 +1,55 @@
+F. My Uploads Page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   •   Here you can see all of the folders and files you
+       have uploaded.
+   •   You can sort & filter
+   •   You can use the “Select Items” to select all,
+       move, archive or bin your uploads.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                    134

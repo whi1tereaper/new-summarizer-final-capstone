@@ -1,0 +1,31 @@
+%% DFD Level 2: source intake and summary processing
+%% Expands process 2.0; requester, source website and D2 retain their Level 1 identities.
+flowchart TB
+    U["Visitor / registered user<br/>eligible requests only"]
+    W["Public source website"]
+    D2@{ shape: datastore, label: "D2 Main summary stores<br/>summaries; summary_artifacts;<br/>summary_jobs; temporary files" }
+    P21("2.1 Validate request<br/>CSRF, source type,<br/>settings and upload")
+    P22("2.2 Resolve source and<br/>persist / reuse job")
+    P23("2.3 Run local NLP<br/>Extract, rank, select<br/>and validate output")
+    P24("2.4 Save result or failure<br/>Release temporary source")
+    P25("2.5 Return owned job status<br/>Result ID or recovery action")
+    U -->|"source / settings"| P21
+    P21 -->|"validation error"| U
+    P21 -->|"validated request"| P22
+    P22 -->|"URL request, when used"| W
+    W -->|"source bytes / text"| P22
+    P22 -->|"queued payload"| D2
+    D2 -->|"existing job"| P22
+    P22 -->|"resolved source"| P23
+    P23 -->|"summary / safe failure"| P24
+    P24 -->|"summary, artifacts, job<br/>state"| D2
+    P24 -->|"result state"| P25
+    U -->|"status request"| P25
+    D2 -->|"owned job / result"| P25
+    P25 -->|"status / result ID"| U
+    classDef process fill:#edf1f5,stroke:#222,color:#111;
+    classDef store fill:#f6f6f6,stroke:#222,color:#111;
+    classDef entity fill:#fff,stroke:#222,color:#111;
+    class P21,P22,P23,P24,P25 process;
+    class D2 store;
+    class U,W entity;

@@ -1,0 +1,30 @@
+{
+  "status": "source-grounded_agent_drafts_followup_on_inspected_corpus_not_independent_gold",
+  "independent_reviewers": [],
+  "probes": [
+    {"article":"IV-NEWS","kind":"paraphrased","query":"What are the odds of another strong tremor?","expected":"supported","units":["forecast"],"rationale":"Source s0004-s0005 gives observed aftershocks and probabilities of magnitude 3/4 events."},
+    {"article":"IV-NEWS","kind":"ambiguous","query":"risk","expected":null,"units":[],"interpretations":["aftershock probability","predictability","regional shaking"],"rationale":"No magnitude, timeframe or consequence specified; do not force a binary correctness label."},
+    {"article":"IV-NEWS","kind":"far_unsupported","query":"penguin migration routes","expected":"unsupported","units":[],"rationale":"No migration or penguin evidence in the earthquake release."},
+    {"article":"IV-SCIENCE","kind":"paraphrased","query":"Did the daily supplements help people live longer?","expected":"supported","units":["main","specific_causes"],"rationale":"Source s0000/s0009 reports mortality association, not a causal longevity experiment."},
+    {"article":"IV-SCIENCE","kind":"ambiguous","query":"benefits","expected":null,"units":[],"interpretations":["mortality association","untested other health outcomes"],"rationale":"The measured endpoint and untested other benefits must be distinguished."},
+    {"article":"IV-SCIENCE","kind":"far_unsupported","query":"telescope mirror alignment","expected":"unsupported","units":[],"rationale":"No telescope engineering evidence."},
+    {"article":"IV-BUSINESS","kind":"paraphrased","query":"How did shipments of energy abroad change?","expected":"supported","units":["main","trade"],"rationale":"Energy exports and changes are explicit; this is not a corporate profit question."},
+    {"article":"IV-BUSINESS","kind":"ambiguous","query":"performance","expected":null,"units":[],"interpretations":["production","consumption","trade balance","corporate earnings not measured"],"rationale":"Sector dimensions are not interchangeable with company performance."},
+    {"article":"IV-BUSINESS","kind":"far_unsupported","query":"coral spawning dates","expected":"unsupported","units":[],"rationale":"No coral reproductive data."},
+    {"article":"IV-EDUCATION","kind":"paraphrased","query":"Which power sources do least harm to health?","expected":"supported","units":["main","no_zero_risk"],"rationale":"Comparative health harms and limitations are explained; safest does not mean harmless."},
+    {"article":"IV-EDUCATION","kind":"ambiguous","query":"safety","expected":null,"units":[],"interpretations":["accident deaths","air pollution","supply-chain toxicity","climate effects"],"rationale":"Several safety dimensions and denominators appear."},
+    {"article":"IV-EDUCATION","kind":"far_unsupported","query":"chocolate cake baking temperatures","expected":"unsupported","units":[],"rationale":"No cooking-temperature instructions."},
+    {"article":"IV-TECHNICAL","kind":"paraphrased","query":"How are incompatible native modules handled?","expected":"supported","units":["compatibility","legacy_api","thread_safety"],"rationale":"Import restrictions depend on interpreter/API flags and module safety; preserve qualifications."},
+    {"article":"IV-TECHNICAL","kind":"ambiguous","query":"compatibility","expected":null,"units":[],"interpretations":["old interpreter API","extension import flags","thread-unsafe linked libraries"],"rationale":"Compatibility has multiple distinct conditions in the PEP."},
+    {"article":"IV-TECHNICAL","kind":"far_unsupported","query":"orchid watering frequency","expected":"unsupported","units":[],"rationale":"No horticultural evidence."},
+    {"article":"IV-EDITORIAL","kind":"paraphrased","query":"Why must climate policy planning cope with unpredictable futures?","expected":"supported","units":["main","late_prescription"],"rationale":"Authors argue orthodox tools fail to reflect uncertainty and need institutional/co-development changes."},
+    {"article":"IV-EDITORIAL","kind":"ambiguous","query":"impacts","expected":null,"units":[],"interpretations":["policy-design effects","financial volatility","participatory workshop effects"],"rationale":"Several attributed domains; no single gold answer implied."},
+    {"article":"IV-EDITORIAL","kind":"far_unsupported","query":"medieval manuscript ink recipes","expected":"unsupported","units":[],"rationale":"No manuscript-production evidence."},
+    {"article":"IV-FEATURE","kind":"paraphrased","query":"What made the Antarctic ice retreat so quickly?","expected":"supported","units":["main","mechanism"],"rationale":"Geometry, loss of support and proposed buoyancy-driven calving, not a proved universal mechanism."},
+    {"article":"IV-FEATURE","kind":"ambiguous","query":"change","expected":null,"units":[],"interpretations":["retreat size","causal mechanism","future slowing","monitoring capability"],"rationale":"Unspecified dimension and timescale."},
+    {"article":"IV-FEATURE","kind":"far_unsupported","query":"guitar tuning intervals","expected":"unsupported","units":[],"rationale":"No musical tuning evidence."},
+    {"article":"IV-RESEARCH","kind":"paraphrased","query":"Did faster-paced exercise reduce physical frailty?","expected":"supported","units":["main","result","imputation"],"rationale":"Positive complete-case classification result must be distinguished from nonsignificant sensitivity and continuous-score results."},
+    {"article":"IV-RESEARCH","kind":"ambiguous","query":"outcomes","expected":null,"units":[],"interpretations":["frailty category","continuous frailty score","mobility/activity","long-term outcomes not captured"],"rationale":"Different endpoints have different results; no forced binary gold label."},
+    {"article":"IV-RESEARCH","kind":"far_unsupported","query":"ocean salinity forecasts","expected":"unsupported","units":[],"rationale":"No oceanographic forecasts."}
+  ]
+}

@@ -1,0 +1,32 @@
+the necessity for secure, organized, and easily
+available data is especially important during
+accreditation processes (Mitchell & Carter,
+2020).   Implementing   a   reliable   record
+management system ensures that accreditation
+documents are well-organized, secure from data
+loss,  and  easily  accessible  for  review.
+According to studies, organizations that use
+cloud-based archiving benefit from increased
+collaboration, faster information retrieval,
+and lower infrastructure expenses (Harris, 2021;
+Thomassen, 2021).     However, challenges remain,
+particularly in smaller academic institutions
+like Nueva Ecija University of Science and
+Technology   (NEUST)   Peñaranda   Off-Campus.
+Current manual or semi-digital record-keeping
+processes have resulted in inefficiencies such
+as missing data, retrieval delays, and security
+issues. These issues not only affect           everyday
+administrative operations, but also compromise
+the     institution's     preparedness     for
+accreditation and review processes.
+
+  This study aims to create a Record Management
+and Archiving System for NEUST Peñaranda Off-
+Campus. The system will replace manual or semi-
+digital processes, improve document retrieval,
+storage, and organization, and strengthen the
+
+
+
+                                                       2

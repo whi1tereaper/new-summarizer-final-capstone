@@ -1,0 +1,18 @@
+%% DFD 1.2-1.3: identity and session changes
+%% Focused account-flow view; repeated process 1.2 links the two panels. All verification/session state remains D1.
+flowchart TB
+    U["Visitor / registered user<br/>eligible requests only"]
+    D1@{ shape: datastore, label: "D1 Account / session stores<br/>users; password_resets;<br/>user_tokens; guest_sessions;<br/>rate_limits; PHP session state" }
+    P12("1.2 Check required identity<br/>Password, applicable code<br/>or existing session state")
+    P13("1.3 Update permitted account<br/>Establish / revoke session<br/>or remembered login")
+    D1 -->|"hash / code / account<br/>state"| P12
+    P12 -->|"consumed verification<br/>code"| D1
+    P12 -->|"verified identity"| P13
+    P13 -->|"account / session<br/>changes"| D1
+    P13 -->|"access / recovery result"| U
+    classDef process fill:#edf1f5,stroke:#222,color:#111;
+    classDef store fill:#f6f6f6,stroke:#222,color:#111;
+    classDef entity fill:#fff,stroke:#222,color:#111;
+    class P12,P13 process;
+    class D1 store;
+    class U entity;

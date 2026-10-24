@@ -1,0 +1,19 @@
+       Figure 10. Level 2 – Login Management
+
+   The Log In Management process, illustrated in
+Figure 10, manages user authentication, session
+creation, and password recovery for both the
+Administrator and Compliance Manager             through
+the Users (D1) data store.
+   The process begins with         2.1 Verify Access
+Credentials, where users enter their username
+and password to access the system. The submitted
+credentials are compared with the records stored
+in the Users (D1) database. If the credentials
+are valid, the system grants access to the
+appropriate user dashboard based on the assigned
+role. If the credentials are invalid, the system
+denies access and prompts the user to try again.
+
+
+                                                        59

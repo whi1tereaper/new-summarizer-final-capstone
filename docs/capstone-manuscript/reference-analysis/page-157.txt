@@ -1,0 +1,55 @@
+K. Users Page (Admin Only)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   •   Here, admins can manage all users.
+   •   Admins can view all the users, their usernames,
+       emails, roles, and status.
+   •   Admins can change status of a user to “Enabled”
+       or “Disabled”.
+   •   Enabled status means that the user can login to
+       the system.
+   •   Disabled status means that the user cannot login
+       to the system.
+   •   Admins can click the three dots in the actions to
+       either change a user’s status, edit their
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                    138

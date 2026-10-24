@@ -1,0 +1,9 @@
+[
+  {
+    "name": "isolated setup and verified rollback",
+    "exit": 255,
+    "seconds": 23.58,
+    "output": "\nFatal error: Uncaught RuntimeException: Restored backup mismatch. in C:\\xampp\\htdocs\\ai-summarizer-123 - quality upg\\scripts\\qa\\control.php:38\nStack trace:\n#0 {main}\n  thrown in C:\\xampp\\htdocs\\ai-summarizer-123 - quality upg\\scripts\\qa\\control.php on line 38\n",
+    "stderr": "PHP Fatal error:  Uncaught RuntimeException: Restored backup mismatch. in C:\\xampp\\htdocs\\ai-summarizer-123 - quality upg\\scripts\\qa\\control.php:38\nStack trace:\n#0 {main}\n  thrown in C:\\xampp\\htdocs\\ai-summarizer-123 - quality upg\\scripts\\qa\\control.php on line 38\n"
+  }
+]

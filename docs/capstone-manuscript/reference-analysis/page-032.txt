@@ -1,0 +1,32 @@
+processes.  By  automating  file  management,
+implementing  robust  access  control,  and
+ensuring auditability, the system addresses the
+current  inefficiencies  and  supports  the
+university’s  accreditation  processes.  This
+leads to improved organizational efficiency,
+data integrity, and ease of access to vital
+records.
+
+
+   Statement of the Problem
+
+   NEUST Peñaranda Off-Campus faces challenges
+in managing and archiving important documents.
+The current manual or semi-digital record-
+keeping process leads to inefficiencies in file
+organization, retrieval delays, security risks,
+and tracking document history. These challenges
+reduce the overall efficiency of administrative
+tasks and accreditation processes, resulting in
+misplaced files, inconsistent record updates,
+and time-consuming searches.
+To address these issues, the goal of this study
+is to develop a Record Management and Archiving
+System that will improve document organization,
+accessibility, and security during storage and
+retrieval.   The   system   will   streamline
+administrative    processes    by             providing
+
+
+
+                                                       13

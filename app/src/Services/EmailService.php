@@ -19,16 +19,23 @@ class EmailService
         // fail early instead of silently using fake mail settings
         $smtpUser = config('smtp.user');
         $smtpPass = config('smtp.pass');
-        if (!$smtpUser || !$smtpPass) {
+        $auth=(bool)config('smtp.auth',true);
+        $host=(string)config('smtp.host','smtp.gmail.com');
+        $encryption=(string)config('smtp.encryption','tls');
+        if ((!$auth || $encryption==='none') && !in_array($host,['127.0.0.1','::1','localhost'],true)) {
+            throw new \RuntimeException('Unencrypted mail capture is restricted to loopback.');
+        }
+        if ($auth && (!$smtpUser || !$smtpPass)) {
             throw new \RuntimeException('SMTP credentials not configured. Set SMTP_USER and SMTP_PASS in .env or your process environment.');
         }
 
         $this->mailer->isSMTP();
-        $this->mailer->Host = config('smtp.host', 'smtp.gmail.com');
-        $this->mailer->SMTPAuth = true;
+        $this->mailer->Host = $host;
+        $this->mailer->SMTPAuth = $auth;
         $this->mailer->Username = $smtpUser;
         $this->mailer->Password = $smtpPass;
-        $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $this->mailer->SMTPSecure = $encryption==='none'?'':PHPMailer::ENCRYPTION_STARTTLS;
+        $this->mailer->SMTPAutoTLS = $encryption!=='none';
         $this->mailer->Port = (int)config('smtp.port', 587);
         
         $fromEmail = config('smtp.from', $smtpUser);

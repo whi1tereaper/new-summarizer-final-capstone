@@ -1,5 +1,6 @@
 <?php
 // Shared editorial footer matching NexStudio aesthetic specification
+$footerPrivacyContact=(string)config('student_access.privacy_contact','');
 ?>
 <link rel="stylesheet" href="assets/css/site-footer.css?v=<?= filemtime(__DIR__ . '/../assets/css/site-footer.css') ?>">
 
@@ -12,12 +13,13 @@
             <!-- Col 1: EMAIL & MISSION -->
             <div class="nex-footer__col nex-footer__col--main">
                 <div class="nex-footer__col-head">
-                    <span class="nex-footer__col-title">EMAIL</span>
+                    <span class="nex-footer__col-title">SUPPORT &amp; PRIVACY</span>
                 </div>
                 <div class="nex-footer__col-body">
-                    <a href="mailto:whitesummarizerteam@gmail.com" class="nex-footer__email">
-                        whitesummarizerteam@gmail.com
-                    </a>
+                    <?php if(filter_var($footerPrivacyContact,FILTER_VALIDATE_EMAIL)): ?>
+                    <a href="mailto:<?= htmlspecialchars($footerPrivacyContact,ENT_QUOTES,'UTF-8') ?>" class="nex-footer__email"><?= htmlspecialchars($footerPrivacyContact,ENT_QUOTES,'UTF-8') ?></a>
+                    <?php else: ?><a href="terms.php#student-privacy" class="nex-footer__email">Privacy contact not configured</a><?php endif; ?>
+                    <p class="nex-footer__tagline"></p>
                     <p class="nex-footer__tagline">
                         Giving documents, summaries, and <strong>articles</strong> the room to speak for themselves.
                     </p>

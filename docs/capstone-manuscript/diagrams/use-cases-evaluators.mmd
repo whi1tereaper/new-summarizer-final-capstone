@@ -1,0 +1,11 @@
+%% Evaluator is an assignment to an existing account, not a third stored role. It does not grant administration.
+flowchart TB
+    ACTOR["Assigned evaluator"]
+    subgraph SYSTEM["LIGHT summarizer"]
+    C0(["Open an eligible review<br/>with its assignment token"])
+    C1(["Inspect source material<br/>and the assigned output"])
+    C2(["Submit the permitted<br/>assessment and ratings"])
+    end
+    ACTOR --- C0
+    ACTOR --- C1
+    ACTOR --- C2

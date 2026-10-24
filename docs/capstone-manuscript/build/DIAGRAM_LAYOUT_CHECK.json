@@ -1,0 +1,261 @@
+[
+  {
+    "file": "ERD_ACTUAL_SCHEMA.svg",
+    "width": 4851.765625,
+    "height": 1598,
+    "text_elements": 35,
+    "outside": []
+  },
+  {
+    "file": "ERD_CORE.svg",
+    "width": 2727.484375,
+    "height": 677,
+    "text_elements": 13,
+    "outside": []
+  },
+  {
+    "file": "ERD_EVALUATION.svg",
+    "width": 2522.328125,
+    "height": 1598,
+    "text_elements": 22,
+    "outside": []
+  },
+  {
+    "file": "ERD_PANEL_01_ACCOUNTS.svg",
+    "width": 573.21875,
+    "height": 529,
+    "text_elements": 3,
+    "outside": []
+  },
+  {
+    "file": "ERD_PANEL_02_SUMMARY_OUTPUTS.svg",
+    "width": 772.984375,
+    "height": 677,
+    "text_elements": 5,
+    "outside": []
+  },
+  {
+    "file": "ERD_PANEL_03_FEEDBACK.svg",
+    "width": 499.90625,
+    "height": 677,
+    "text_elements": 4,
+    "outside": []
+  },
+  {
+    "file": "ERD_PANEL_04_DOCUMENT_CACHE.svg",
+    "width": 243.078125,
+    "height": 370,
+    "text_elements": 1,
+    "outside": []
+  },
+  {
+    "file": "ERD_PANEL_05_LANDING_TELEMETRY.svg",
+    "width": 260.109375,
+    "height": 370,
+    "text_elements": 1,
+    "outside": []
+  },
+  {
+    "file": "ERD_PANEL_06_INDEPENDENT_STORES.svg",
+    "width": 273.125,
+    "height": 527,
+    "text_elements": 0,
+    "outside": []
+  },
+  {
+    "file": "ERD_PANEL_07_EVALUATION_PIPELINE.svg",
+    "width": 522.234375,
+    "height": 771,
+    "text_elements": 4,
+    "outside": []
+  },
+  {
+    "file": "ERD_PANEL_08_EVALUATION_CONTENT.svg",
+    "width": 876.453125,
+    "height": 464,
+    "text_elements": 3,
+    "outside": []
+  },
+  {
+    "file": "ERD_PANEL_09_EVALUATION_SCORING.svg",
+    "width": 841.375,
+    "height": 1125,
+    "text_elements": 6,
+    "outside": []
+  },
+  {
+    "file": "ERD_PANEL_10_UNIT_REVIEWS.svg",
+    "width": 555.28125,
+    "height": 558,
+    "text_elements": 2,
+    "outside": []
+  },
+  {
+    "file": "ERD_PANEL_11_EVALUATOR_ACCOUNTS.svg",
+    "width": 701.34375,
+    "height": 950,
+    "text_elements": 4,
+    "outside": []
+  },
+  {
+    "file": "ERD_PANEL_12_RESEARCH_AUTHORSHIP.svg",
+    "width": 999.4375,
+    "height": 682.5,
+    "text_elements": 5,
+    "outside": []
+  },
+  {
+    "file": "dfd-context.svg",
+    "width": 600,
+    "height": 820,
+    "text_elements": 36,
+    "outside": []
+  },
+  {
+    "file": "dfd-level1-accounts.svg",
+    "width": 734.765625,
+    "height": 862.390625,
+    "text_elements": 6,
+    "outside": []
+  },
+  {
+    "file": "dfd-level1-administration.svg",
+    "width": 980.046875,
+    "height": 1049.59375,
+    "text_elements": 9,
+    "outside": []
+  },
+  {
+    "file": "dfd-level1-feedback.svg",
+    "width": 661.734375,
+    "height": 852.796875,
+    "text_elements": 5,
+    "outside": []
+  },
+  {
+    "file": "dfd-level1-results.svg",
+    "width": 727.875,
+    "height": 879.1875,
+    "text_elements": 7,
+    "outside": []
+  },
+  {
+    "file": "dfd-level1-summary.svg",
+    "width": 689.3125,
+    "height": 879.1875,
+    "text_elements": 6,
+    "outside": []
+  },
+  {
+    "file": "dfd-level1.svg",
+    "width": 2431.265625,
+    "height": 2281.59375,
+    "text_elements": 33,
+    "outside": []
+  },
+  {
+    "file": "dfd-level2-auth-session.svg",
+    "width": 496.953125,
+    "height": 1361.1875,
+    "text_elements": 5,
+    "outside": []
+  },
+  {
+    "file": "dfd-level2-auth-verification.svg",
+    "width": 850.40625,
+    "height": 1361.1875,
+    "text_elements": 9,
+    "outside": []
+  },
+  {
+    "file": "dfd-level2-auth.svg",
+    "width": 1111.421875,
+    "height": 1699.1875,
+    "text_elements": 12,
+    "outside": []
+  },
+  {
+    "file": "dfd-level2-summary-intake.svg",
+    "width": 971.890625,
+    "height": 1128.390625,
+    "text_elements": 8,
+    "outside": []
+  },
+  {
+    "file": "dfd-level2-summary-output.svg",
+    "width": 788.015625,
+    "height": 1181.1875,
+    "text_elements": 6,
+    "outside": []
+  },
+  {
+    "file": "dfd-level2-summary.svg",
+    "width": 1248.65625,
+    "height": 2041.59375,
+    "text_elements": 14,
+    "outside": []
+  },
+  {
+    "file": "gantt-supplied-1.svg",
+    "width": 800,
+    "height": 670,
+    "text_elements": 48,
+    "outside": []
+  },
+  {
+    "file": "gantt-supplied-2.svg",
+    "width": 800,
+    "height": 670,
+    "text_elements": 48,
+    "outside": []
+  },
+  {
+    "file": "gantt-supplied-3.svg",
+    "width": 800,
+    "height": 670,
+    "text_elements": 51,
+    "outside": []
+  },
+  {
+    "file": "research-paradigm.svg",
+    "width": 600,
+    "height": 830,
+    "text_elements": 18,
+    "outside": []
+  },
+  {
+    "file": "use-cases-administrators.svg",
+    "width": 600,
+    "height": 765,
+    "text_elements": 13,
+    "outside": []
+  },
+  {
+    "file": "use-cases-evaluators.svg",
+    "width": 600,
+    "height": 645,
+    "text_elements": 12,
+    "outside": []
+  },
+  {
+    "file": "use-cases-guests.svg",
+    "width": 600,
+    "height": 885,
+    "text_elements": 16,
+    "outside": []
+  },
+  {
+    "file": "use-cases-registered.svg",
+    "width": 600,
+    "height": 885,
+    "text_elements": 16,
+    "outside": []
+  },
+  {
+    "file": "use-cases.svg",
+    "width": 579,
+    "height": 3636,
+    "text_elements": 17,
+    "outside": []
+  }
+]

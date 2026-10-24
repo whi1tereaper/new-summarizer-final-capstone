@@ -1,0 +1,305 @@
+{
+    "migration_exit": 0,
+    "applied": [
+        "017_student_number_access.sql",
+        "018_password_reset_contract.sql",
+        "019_student_enrollment_registry.sql"
+    ],
+    "verified_backup_path": "C:\\Users\\Robert Martin\\AppData\\Local\\light-qa-c_eiaohk\\rollback.sql",
+    "verified_backup_sha256": "b88cbbeb032406a903bf06e2debf19da2320a907d8a4d520683787cf0cbc5f98",
+    "original_data_preserved": true,
+    "existing_migration_ledger_preserved": true,
+    "before": {
+        "admin_audit_logs": {
+            "rows": 165,
+            "sha256": "6cd81d42f0c1169618e61bcdf8faf50b400d2096323791a20332cec61eb91f64"
+        },
+        "admin_security_challenges": {
+            "rows": 1,
+            "sha256": "b3ae3722fe0167b40e63043e34fba05d2478f53df69de49059b6da9c402915b7"
+        },
+        "document_summaries": {
+            "rows": 125,
+            "sha256": "42f9c9f65b6d2c48aacedf3562dd502bc89be271fc83f6466e6e0ac54d429266"
+        },
+        "documents": {
+            "rows": 25,
+            "sha256": "112cdb41b6d4f86a5096ea3842132d4ece5a1a6ef156c8a9c6a946f781a24528"
+        },
+        "evaluation_assignments": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "evaluation_audit_log": {
+            "rows": 87,
+            "sha256": "45bc05302938a7960af8d3bffa402e70e10f0602d3e8b799761f82fca3715db3"
+        },
+        "evaluation_challenge_cases": {
+            "rows": 24,
+            "sha256": "59f4ed2a3064f48006df60fcd01752fb7e08baf24214981329fc22db4387be90"
+        },
+        "evaluation_content_unit_reviews": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "evaluation_content_units": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "evaluation_datasets": {
+            "rows": 4,
+            "sha256": "1c603df174d8f4d512b0c0c8700d8b1dbc1717e30571331459b7cfd581d1b3a1"
+        },
+        "evaluation_documents": {
+            "rows": 36,
+            "sha256": "117f50e99b581eb369be700ac48c732485a81dc4edeb464127722eb18971fe67"
+        },
+        "evaluation_errors": {
+            "rows": 5,
+            "sha256": "fd60e0514f0f6358691aa008406252cd2cdeda53536e86a9782b072d79f345c1"
+        },
+        "evaluation_metrics": {
+            "rows": 3652,
+            "sha256": "86012d3815a120ab1c1aa99fde1197c4db77bd6ada90a17aa375ff16f0322d9f"
+        },
+        "evaluation_outputs": {
+            "rows": 428,
+            "sha256": "672ecb296d8eb0ba3035d7b52567a5bbfad0c8a315263763d15eedc298861d1f"
+        },
+        "evaluation_ratings": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "evaluation_references": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "evaluation_runs": {
+            "rows": 6,
+            "sha256": "1f09c7443e4bad3760ff9923222c825c61f50e7dd49f9ef5c658b51c220f55f5"
+        },
+        "feedback": {
+            "rows": 103,
+            "sha256": "12a1ee07553d3c8d735ea25f97802c31feba15eaf1097ceed08aeb9dcfd2d326"
+        },
+        "feedback_comments": {
+            "rows": 110,
+            "sha256": "c7fe411179f85d3105d095a05c8e854c884328cfa3742a8f003851e24fded1cb"
+        },
+        "guest_sessions": {
+            "rows": 100,
+            "sha256": "8f7e8f35c41a5fa3e1b33c699cca3492a284bebfa19a6e492af68eb1f889734a"
+        },
+        "landing_page_events": {
+            "rows": 8206,
+            "sha256": "4e7a09a5095d2c786e74f45f9884766eae16ffb36f2a9d6c849f4319437430f9"
+        },
+        "landing_page_sessions": {
+            "rows": 180,
+            "sha256": "da2e2a725dce53a2e0138ac75c7ae59f97b01366fa0efa8495500560771aa873"
+        },
+        "nutshell_generations": {
+            "rows": 24,
+            "sha256": "f6ffbe9092aac9880b2efa160c8a573c79d3bf409ac97dc588a7f5d5e16203f4"
+        },
+        "password_resets": {
+            "rows": 25,
+            "sha256": "1de9cd01d8cdfa680d3dbfc198e0570aad80eae126112b72037eaf420d13ee2c"
+        },
+        "rate_limits": {
+            "rows": 9,
+            "sha256": "77df8313528812370e1a8265ed2420a1a00819ad3355dc87f64bcf0cc8533675"
+        },
+        "schema_migrations": {
+            "rows": 16,
+            "sha256": "22b13a6219defcf1425f395dece13d60562005bf3906dc336c85c107f52715bd"
+        },
+        "student_applications": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "student_review_events": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "student_trial_links": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "summaries": {
+            "rows": 255,
+            "sha256": "0480dbb433e69b68004f31d65b0da40c9b9cdc9c498e19e1987252c91e3ee7f9"
+        },
+        "summary_access_reservations": {
+            "rows": 13,
+            "sha256": "5d8dcd0cb77ade469445c1007540763a4d327d0f37a5dc2e220b92b1c1f73795"
+        },
+        "summary_access_subjects": {
+            "rows": 26,
+            "sha256": "5ab9c7ebba4bdcef9bc245afe3cf6dc6fc88722b89d57d47f1cd82141a763528"
+        },
+        "summary_artifacts": {
+            "rows": 246,
+            "sha256": "a1eba6a25bfb7e0508cc5108083d9f600916ad5bd6d8f8d5c5916e1bda6f3077"
+        },
+        "summary_jobs": {
+            "rows": 230,
+            "sha256": "9d2ac09db8d97570ee0bd6aa3b257dd00b6b5c896600d14c7cab4c1564b9bce8"
+        },
+        "user_tokens": {
+            "rows": 2,
+            "sha256": "faf15e445f267a726abd95ddc2172ef57814e79ef25b0894ca5196d904785cef"
+        },
+        "users": {
+            "rows": 35,
+            "sha256": "e33da58505113d6baea8ce649e6da5398c1a74b1f4fda4e9d69f0ed470f05f68"
+        }
+    },
+    "after_original_columns": {
+        "admin_audit_logs": {
+            "rows": 165,
+            "sha256": "6cd81d42f0c1169618e61bcdf8faf50b400d2096323791a20332cec61eb91f64"
+        },
+        "admin_security_challenges": {
+            "rows": 1,
+            "sha256": "b3ae3722fe0167b40e63043e34fba05d2478f53df69de49059b6da9c402915b7"
+        },
+        "document_summaries": {
+            "rows": 125,
+            "sha256": "42f9c9f65b6d2c48aacedf3562dd502bc89be271fc83f6466e6e0ac54d429266"
+        },
+        "documents": {
+            "rows": 25,
+            "sha256": "112cdb41b6d4f86a5096ea3842132d4ece5a1a6ef156c8a9c6a946f781a24528"
+        },
+        "evaluation_assignments": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "evaluation_audit_log": {
+            "rows": 87,
+            "sha256": "45bc05302938a7960af8d3bffa402e70e10f0602d3e8b799761f82fca3715db3"
+        },
+        "evaluation_challenge_cases": {
+            "rows": 24,
+            "sha256": "59f4ed2a3064f48006df60fcd01752fb7e08baf24214981329fc22db4387be90"
+        },
+        "evaluation_content_unit_reviews": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "evaluation_content_units": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "evaluation_datasets": {
+            "rows": 4,
+            "sha256": "1c603df174d8f4d512b0c0c8700d8b1dbc1717e30571331459b7cfd581d1b3a1"
+        },
+        "evaluation_documents": {
+            "rows": 36,
+            "sha256": "117f50e99b581eb369be700ac48c732485a81dc4edeb464127722eb18971fe67"
+        },
+        "evaluation_errors": {
+            "rows": 5,
+            "sha256": "fd60e0514f0f6358691aa008406252cd2cdeda53536e86a9782b072d79f345c1"
+        },
+        "evaluation_metrics": {
+            "rows": 3652,
+            "sha256": "86012d3815a120ab1c1aa99fde1197c4db77bd6ada90a17aa375ff16f0322d9f"
+        },
+        "evaluation_outputs": {
+            "rows": 428,
+            "sha256": "672ecb296d8eb0ba3035d7b52567a5bbfad0c8a315263763d15eedc298861d1f"
+        },
+        "evaluation_ratings": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "evaluation_references": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "evaluation_runs": {
+            "rows": 6,
+            "sha256": "1f09c7443e4bad3760ff9923222c825c61f50e7dd49f9ef5c658b51c220f55f5"
+        },
+        "feedback": {
+            "rows": 103,
+            "sha256": "12a1ee07553d3c8d735ea25f97802c31feba15eaf1097ceed08aeb9dcfd2d326"
+        },
+        "feedback_comments": {
+            "rows": 110,
+            "sha256": "c7fe411179f85d3105d095a05c8e854c884328cfa3742a8f003851e24fded1cb"
+        },
+        "guest_sessions": {
+            "rows": 100,
+            "sha256": "8f7e8f35c41a5fa3e1b33c699cca3492a284bebfa19a6e492af68eb1f889734a"
+        },
+        "landing_page_events": {
+            "rows": 8206,
+            "sha256": "4e7a09a5095d2c786e74f45f9884766eae16ffb36f2a9d6c849f4319437430f9"
+        },
+        "landing_page_sessions": {
+            "rows": 180,
+            "sha256": "da2e2a725dce53a2e0138ac75c7ae59f97b01366fa0efa8495500560771aa873"
+        },
+        "nutshell_generations": {
+            "rows": 24,
+            "sha256": "f6ffbe9092aac9880b2efa160c8a573c79d3bf409ac97dc588a7f5d5e16203f4"
+        },
+        "password_resets": {
+            "rows": 25,
+            "sha256": "1de9cd01d8cdfa680d3dbfc198e0570aad80eae126112b72037eaf420d13ee2c"
+        },
+        "rate_limits": {
+            "rows": 9,
+            "sha256": "77df8313528812370e1a8265ed2420a1a00819ad3355dc87f64bcf0cc8533675"
+        },
+        "schema_migrations": {
+            "rows": 19,
+            "sha256": "f10a0300d3bdfd03864430d5da5637a3863cb1351ce2ceba27b8a88a47c17ed1"
+        },
+        "student_applications": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "student_review_events": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "student_trial_links": {
+            "rows": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "summaries": {
+            "rows": 255,
+            "sha256": "0480dbb433e69b68004f31d65b0da40c9b9cdc9c498e19e1987252c91e3ee7f9"
+        },
+        "summary_access_reservations": {
+            "rows": 13,
+            "sha256": "5d8dcd0cb77ade469445c1007540763a4d327d0f37a5dc2e220b92b1c1f73795"
+        },
+        "summary_access_subjects": {
+            "rows": 26,
+            "sha256": "5ab9c7ebba4bdcef9bc245afe3cf6dc6fc88722b89d57d47f1cd82141a763528"
+        },
+        "summary_artifacts": {
+            "rows": 246,
+            "sha256": "a1eba6a25bfb7e0508cc5108083d9f600916ad5bd6d8f8d5c5916e1bda6f3077"
+        },
+        "summary_jobs": {
+            "rows": 230,
+            "sha256": "9d2ac09db8d97570ee0bd6aa3b257dd00b6b5c896600d14c7cab4c1564b9bce8"
+        },
+        "user_tokens": {
+            "rows": 2,
+            "sha256": "faf15e445f267a726abd95ddc2172ef57814e79ef25b0894ca5196d904785cef"
+        },
+        "users": {
+            "rows": 35,
+            "sha256": "e33da58505113d6baea8ce649e6da5398c1a74b1f4fda4e9d69f0ed470f05f68"
+        }
+    },
+    "registration_held": true
+}

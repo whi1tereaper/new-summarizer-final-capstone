@@ -1,0 +1,34 @@
+                      Chapter II
+               METHODS AND PROCEDURES
+
+
+Research Design
+   The research design serves as a structured
+framework  that  guides  the  selection  and
+application   of   appropriate   methods   and
+strategies in the development of the study. This
+study adopts a developmental research design,
+which emphasizes the iterative creation              and
+refinement of a functional prototype of              the
+AccredX: Record Management and Archiving System.
+The approach centers on continuous feedback from
+end-users  and  stakeholders  to  inform  each
+development cycle, ensuring that the system
+evolves  in  response  to  actual  needs  and
+practical challenges.
+
+   To structure the development process, the
+study applies the Software Development Life
+Cycle (SDLC), particularly utilizing the Agile
+Methodology. Agile is well-suited for dynamic
+and  user-centered  systems,  as  it  promotes
+adaptability,   close   collaboration,               and
+incremental delivery of functional components.
+
+
+
+
+
+
+
+                                                       21

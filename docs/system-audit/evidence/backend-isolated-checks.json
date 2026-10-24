@@ -1,0 +1,28 @@
+[
+    {
+        "id": "BACKEND-FIXTURE-01",
+        "procedure": "Dispatch GET for synthetic document belonging to user101 while session user202 is active; in-memory SQLite only.",
+        "expected": "Ownership denial/404; no source content.",
+        "actual_http": 200,
+        "other_owner_content_returned": true,
+        "status": "FAIL",
+        "limitation": "Tests actual controller/service with synthetic DB. Does not prove deployed rewrite availability."
+    },
+    {
+        "id": "BACKEND-FIXTURE-02",
+        "procedure": "Same document lookup with no authenticated identity; synthetic in-memory DB.",
+        "expected": "Access denied; no source content.",
+        "actual_http": 200,
+        "other_owner_content_returned": true,
+        "status": "FAIL"
+    },
+    {
+        "id": "BACKEND-FIXTURE-03",
+        "procedure": "Request final100bytes of a synthetic1000byte audio cache file.",
+        "expected_http": 206,
+        "expected_length": 100,
+        "actual_http": 200,
+        "actual_length": 1000,
+        "status": "FAIL"
+    }
+]

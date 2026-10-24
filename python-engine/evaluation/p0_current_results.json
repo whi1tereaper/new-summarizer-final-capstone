@@ -1,0 +1,1492 @@
+{
+ "engine": "current",
+ "engine_path": "C:\\xampp\\htdocs\\ai-summarizer-123 - quality upg\\python-engine\\summarizer_core",
+ "corpus": "C:\\xampp\\htdocs\\ai-summarizer-123 - quality upg\\python-engine\\evaluation\\corpus\\heldout_documents.json",
+ "peak_memory_mb": 541.5,
+ "rows": [
+  {
+   "id": "HO-RESEARCH-COMMUTE",
+   "depth": "brief",
+   "seconds": 10.591,
+   "sentences": [
+    "After adjustment, active commuting remained associated with a 4.1-point higher wellbeing score (95% CI 2.3 to 5.9).",
+    "Respondents who cycled reported slightly higher scores than those who walked, but the difference was not statistically significant.",
+    "The association persisted after controlling for leisure-time exercise, which suggests that the benefit may not be explained by overall fitness alone.",
+    "Because the design is cross-sectional, the results cannot establish that active commuting causes higher wellbeing."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.721,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.721,
+      "high_information_density": 0.721,
+      "broad_topic_coverage": 0.721,
+      "coherence_prioritized": 0.721,
+      "graph_centrality": 0.721
+     },
+     "quality_metrics": {
+      "indices": [
+       9,
+       11,
+       12,
+       14
+      ],
+      "composite_score": 0.721,
+      "topic_coverage": 0.2353,
+      "info_density": 1.2592,
+      "novelty_score": 0.8929,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-RESEARCH-COMMUTE",
+   "depth": "balanced",
+   "seconds": 1.17,
+   "sentences": [
+    "A cross-sectional survey was distributed to employees of 14 firms in two mid-sized cities between March and June 2025.",
+    "This study examined whether commuting by bicycle or on foot is associated with higher self-reported wellbeing among office workers.",
+    "Active commuters reported a mean WHO-5 score of 64.2, compared with 57.9 for car commuters and 58.6 for public transport users.",
+    "After adjustment, active commuting remained associated with a 4.1-point higher wellbeing score (95% CI 2.3 to 5.9).",
+    "Respondents who cycled reported slightly higher scores than those who walked, but the difference was not statistically significant.",
+    "The association persisted after controlling for leisure-time exercise, which suggests that the benefit may not be explained by overall fitness alone.",
+    "Because the design is cross-sectional, the results cannot establish that active commuting causes higher wellbeing.",
+    "Participants completed the WHO-5 Wellbeing Index and reported their usual commuting mode, commute duration, income band, and weekly exercise outside of commuting.",
+    "Respondents with commutes longer than 90 minutes were excluded because the sample in that group was too small.",
+    "The sample was drawn from office workers in two cities, so the findings may not generalize to shift workers or rural populations."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.7492,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.7492,
+      "high_information_density": 0.7492,
+      "broad_topic_coverage": 0.7492,
+      "coherence_prioritized": 0.7492,
+      "graph_centrality": 0.7492
+     },
+     "quality_metrics": {
+      "indices": [
+       0,
+       1,
+       5,
+       7,
+       8,
+       9,
+       11,
+       12,
+       14,
+       15
+      ],
+      "composite_score": 0.7492,
+      "topic_coverage": 0.5882,
+      "info_density": 1.1264,
+      "novelty_score": 0.8387,
+      "coherence_score": 0.7,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 1,
+     "diagnostics": [
+      {
+       "sentence_index": 7,
+       "issues": [
+        {
+         "rule_id": "RULE",
+         "message": "This phrase is redundant. Consider using “outside”.",
+         "category": "REDUNDANCY",
+         "offset": 141,
+         "error_length": 0
+        }
+       ]
+      }
+     ]
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-RESEARCH-COMMUTE",
+   "depth": "detailed",
+   "seconds": 1.499,
+   "sentences": [
+    "Longitudinal studies are needed to determine whether switching to active travel improves wellbeing over time.",
+    "This study examined whether commuting by bicycle or on foot is associated with higher self-reported wellbeing among office workers.",
+    "A cross-sectional survey was distributed to employees of 14 firms in two mid-sized cities between March and June 2025.",
+    "Earlier work has linked physical activity with mood, but few studies have compared commuting modes within the same workforce.",
+    "Active commuters reported a mean WHO-5 score of 64.2, compared with 57.9 for car commuters and 58.6 for public transport users.",
+    "After adjustment, active commuting remained associated with a 4.1-point higher wellbeing score (95% CI 2.3 to 5.9).",
+    "Commute duration was not significantly associated with wellbeing among active commuters.",
+    "Respondents who cycled reported slightly higher scores than those who walked, but the difference was not statistically significant.",
+    "The association persisted after controlling for leisure-time exercise, which suggests that the benefit may not be explained by overall fitness alone.",
+    "However, people who already feel well may be more likely to choose active travel.",
+    "Because the design is cross-sectional, the results cannot establish that active commuting causes higher wellbeing.",
+    "Participants completed the WHO-5 Wellbeing Index and reported their usual commuting mode, commute duration, income band, and weekly exercise outside of commuting.",
+    "Linear regression models adjusted for age, sex, income, and leisure-time exercise.",
+    "Respondents with commutes longer than 90 minutes were excluded because the sample in that group was too small.",
+    "The sample was drawn from office workers in two cities, so the findings may not generalize to shift workers or rural populations."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.7911,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.7911,
+      "high_information_density": 0.7911,
+      "broad_topic_coverage": 0.7911,
+      "coherence_prioritized": 0.7911,
+      "graph_centrality": 0.7911
+     },
+     "quality_metrics": {
+      "indices": [
+       0,
+       1,
+       4,
+       5,
+       6,
+       7,
+       8,
+       9,
+       10,
+       11,
+       12,
+       13,
+       14,
+       15,
+       17
+      ],
+      "composite_score": 0.7911,
+      "topic_coverage": 0.8824,
+      "info_density": 0.9615,
+      "novelty_score": 0.8333,
+      "coherence_score": 0.7,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 1,
+     "diagnostics": [
+      {
+       "sentence_index": 11,
+       "issues": [
+        {
+         "rule_id": "RULE",
+         "message": "This phrase is redundant. Consider using “outside”.",
+         "category": "REDUNDANCY",
+         "offset": 141,
+         "error_length": 0
+        }
+       ]
+      }
+     ]
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-NEWS-BRIDGE",
+   "depth": "brief",
+   "seconds": 0.409,
+   "sentences": [
+    "The Harbor Street Bridge in Port Alden was closed to all vehicle traffic on Monday after state inspectors found corrosion in two of its 48 suspension cables, the Department of Transportation said.",
+    "Officials said the affected cables had last been inspected in 2023 and showed no significant damage at that time."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.7639,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.7639,
+      "high_information_density": 0.7639,
+      "broad_topic_coverage": 0.7639,
+      "coherence_prioritized": 0.7639,
+      "graph_centrality": 0.7639
+     },
+     "quality_metrics": {
+      "indices": [
+       0,
+       6
+      ],
+      "composite_score": 0.7639,
+      "topic_coverage": 0.1818,
+      "info_density": 1.4583,
+      "novelty_score": 0.9565,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-NEWS-BRIDGE",
+   "depth": "balanced",
+   "seconds": 0.453,
+   "sentences": [
+    "The Harbor Street Bridge in Port Alden was closed to all vehicle traffic on Monday after state inspectors found corrosion in two of its 48 suspension cables, the Department of Transportation said.",
+    "Officials said the affected cables had last been inspected in 2023 and showed no significant damage at that time.",
+    "\"We have no evidence that the structure is in immediate danger, but we are not willing to take chances with public safety,\" Whitfield said at a news conference.",
+    "Local business owners on the east shore said they were worried about losing customers if the closure lasts more than a month."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.694,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.694,
+      "high_information_density": 0.694,
+      "broad_topic_coverage": 0.694,
+      "coherence_prioritized": 0.694,
+      "graph_centrality": 0.6885
+     },
+     "quality_metrics": {
+      "indices": [
+       0,
+       4,
+       6,
+       9
+      ],
+      "composite_score": 0.694,
+      "topic_coverage": 0.3636,
+      "info_density": 1.0234,
+      "novelty_score": 0.8537,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-NEWS-BRIDGE",
+   "depth": "detailed",
+   "seconds": 0.572,
+   "sentences": [
+    "The Harbor Street Bridge in Port Alden was closed to all vehicle traffic on Monday after state inspectors found corrosion in two of its 48 suspension cables, the Department of Transportation said.",
+    "Officials said the affected cables had last been inspected in 2023 and showed no significant damage at that time.",
+    "\"We have no evidence that the structure is in immediate danger, but we are not willing to take chances with public safety,\" Whitfield said at a news conference.",
+    "Local business owners on the east shore said they were worried about losing customers if the closure lasts more than a month.",
+    "The Harbor Street Bridge opened in 1968 and was last rehabilitated in 2009 at a cost of $22 million."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.69,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.69,
+      "high_information_density": 0.69,
+      "broad_topic_coverage": 0.69,
+      "coherence_prioritized": 0.69,
+      "graph_centrality": 0.69
+     },
+     "quality_metrics": {
+      "indices": [
+       0,
+       4,
+       6,
+       9,
+       10
+      ],
+      "composite_score": 0.69,
+      "topic_coverage": 0.4545,
+      "info_density": 0.9196,
+      "novelty_score": 0.825,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-TECH-QUEUE",
+   "depth": "brief",
+   "seconds": 0.377,
+   "sentences": [
+    "The order service currently polls the orders table every five seconds to find new records.",
+    "Workers must therefore record each processed idempotency key in a dedicated table with a unique constraint."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.6995,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.6995,
+      "high_information_density": 0.6995,
+      "broad_topic_coverage": 0.6995,
+      "coherence_prioritized": 0.6995,
+      "graph_centrality": 0.6995
+     },
+     "quality_metrics": {
+      "indices": [
+       0,
+       6
+      ],
+      "composite_score": 0.6995,
+      "topic_coverage": 0.1667,
+      "info_density": 1.2021,
+      "novelty_score": 0.9643,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-TECH-QUEUE",
+   "depth": "balanced",
+   "seconds": 0.421,
+   "sentences": [
+    "The order service currently polls the orders table every five seconds to find new records.",
+    "This design produces constant database load even when no orders arrive, and it delays order confirmation by up to five seconds.",
+    "Workers must therefore record each processed idempotency key in a dedicated table with a unique constraint.",
+    "The migration will run in shadow mode for two weeks, with both polling and queue consumers active but only the polling path sending emails."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.6637,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.6637,
+      "high_information_density": 0.6637,
+      "broad_topic_coverage": 0.6637,
+      "coherence_prioritized": 0.6637,
+      "graph_centrality": 0.6637
+     },
+     "quality_metrics": {
+      "indices": [
+       0,
+       1,
+       6,
+       7
+      ],
+      "composite_score": 0.6637,
+      "topic_coverage": 0.3333,
+      "info_density": 0.9209,
+      "novelty_score": 0.871,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-TECH-QUEUE",
+   "depth": "detailed",
+   "seconds": 0.47,
+   "sentences": [
+    "The order service currently polls the orders table every five seconds to find new records.",
+    "This design produces constant database load even when no orders arrive, and it delays order confirmation by up to five seconds.",
+    "Two worker instances occasionally processed the same order because the row-locking strategy relied on a status column that was updated after processing began.",
+    "Workers must therefore record each processed idempotency key in a dedicated table with a unique constraint.",
+    "The migration will run in shadow mode for two weeks, with both polling and queue consumers active but only the polling path sending emails."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.6767,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.6767,
+      "high_information_density": 0.6767,
+      "broad_topic_coverage": 0.6767,
+      "coherence_prioritized": 0.6767,
+      "graph_centrality": 0.6699
+     },
+     "quality_metrics": {
+      "indices": [
+       0,
+       1,
+       3,
+       6,
+       7
+      ],
+      "composite_score": 0.6767,
+      "topic_coverage": 0.4167,
+      "info_density": 0.8778,
+      "novelty_score": 0.871,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-BUSINESS-COOP",
+   "depth": "brief",
+   "seconds": 0.313,
+   "sentences": [
+    "Wages rose 11 percent after the board approved a minimum starting rate of $19 per hour in February.",
+    "The board approved opening a third store in the Riverside district in 2027, subject to securing a lease below $32 per square foot."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.7562,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.7562,
+      "high_information_density": 0.7562,
+      "broad_topic_coverage": 0.7562,
+      "coherence_prioritized": 0.7562,
+      "graph_centrality": 0.7562
+     },
+     "quality_metrics": {
+      "indices": [
+       3,
+       5
+      ],
+      "composite_score": 0.7562,
+      "topic_coverage": 0.2222,
+      "info_density": 1.4748,
+      "novelty_score": 0.8125,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-BUSINESS-COOP",
+   "depth": "balanced",
+   "seconds": 0.406,
+   "sentences": [
+    "Wages rose 11 percent after the board approved a minimum starting rate of $19 per hour in February.",
+    "Energy costs increased by $310,000, mainly due to refrigeration upgrades at the Elm Street store, which were completed in August.",
+    "The board approved opening a third store in the Riverside district in 2027, subject to securing a lease below $32 per square foot.",
+    "Greenfield Grocers Cooperative Annual Operating Review 2025 Greenfield Grocers Cooperative recorded total sales of $48.6 million in fiscal 2025, up 6.2 percent from $45.8 million in fiscal 2024."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.7561,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.7561,
+      "high_information_density": 0.7561,
+      "broad_topic_coverage": 0.7561,
+      "coherence_prioritized": 0.7561,
+      "graph_centrality": 0.7561
+     },
+     "quality_metrics": {
+      "indices": [
+       0,
+       3,
+       4,
+       5
+      ],
+      "composite_score": 0.7561,
+      "topic_coverage": 0.4444,
+      "info_density": 1.2152,
+      "novelty_score": 0.8125,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-BUSINESS-COOP",
+   "depth": "detailed",
+   "seconds": 0.464,
+   "sentences": [
+    "Wages rose 11 percent after the board approved a minimum starting rate of $19 per hour in February.",
+    "Energy costs increased by $310,000, mainly due to refrigeration upgrades at the Elm Street store, which were completed in August.",
+    "The board approved opening a third store in the Riverside district in 2027, subject to securing a lease below $32 per square foot.",
+    "The cooperative has not yet completed its analysis of how much the new competitor might affect revenue.",
+    "Greenfield Grocers Cooperative Annual Operating Review 2025 Greenfield Grocers Cooperative recorded total sales of $48.6 million in fiscal 2025, up 6.2 percent from $45.8 million in fiscal 2024."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.7891,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.7891,
+      "high_information_density": 0.7891,
+      "broad_topic_coverage": 0.7891,
+      "coherence_prioritized": 0.7891,
+      "graph_centrality": 0.7891
+     },
+     "quality_metrics": {
+      "indices": [
+       0,
+       3,
+       4,
+       5,
+       8
+      ],
+      "composite_score": 0.7891,
+      "topic_coverage": 0.5556,
+      "info_density": 1.223,
+      "novelty_score": 0.8125,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-ESSAY-HOMEWORK",
+   "depth": "brief",
+   "seconds": 0.351,
+   "sentences": [
+    "This essay argues that homework policy should be set by age group and grounded in research, rather than by tradition or by the loudest voices in a school community.",
+    "Therefore, schools should adopt age-specific limits, review them regularly against student outcomes, and explain the reasoning to parents."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.5935,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.5935,
+      "high_information_density": 0.5935,
+      "broad_topic_coverage": 0.5935,
+      "coherence_prioritized": 0.5935,
+      "graph_centrality": 0.5935
+     },
+     "quality_metrics": {
+      "indices": [
+       2,
+       8
+      ],
+      "composite_score": 0.5935,
+      "topic_coverage": 0.2,
+      "info_density": 0.8093,
+      "novelty_score": 0.9268,
+      "coherence_score": 0.85,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-ESSAY-HOMEWORK",
+   "depth": "balanced",
+   "seconds": 0.402,
+   "sentences": [
+    "This essay argues that homework policy should be set by age group and grounded in research, rather than by tradition or by the loudest voices in a school community.",
+    "For primary school students, the relationship between homework and achievement is weak, and some reviews have found no clear benefit at all.",
+    "For secondary school students, moderate amounts of homework are generally associated with higher achievement, although the benefit appears to level off after roughly two hours per night.",
+    "Schools should adopt age-specific limits, review them regularly against student outcomes, and explain the reasoning to parents."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.619,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.619,
+      "high_information_density": 0.618,
+      "broad_topic_coverage": 0.619,
+      "coherence_prioritized": 0.619,
+      "graph_centrality": 0.619
+     },
+     "quality_metrics": {
+      "indices": [
+       2,
+       4,
+       5,
+       8
+      ],
+      "composite_score": 0.619,
+      "topic_coverage": 0.4,
+      "info_density": 0.7287,
+      "novelty_score": 0.8571,
+      "coherence_score": 0.85,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-ESSAY-HOMEWORK",
+   "depth": "detailed",
+   "seconds": 0.542,
+   "sentences": [
+    "This essay argues that homework policy should be set by age group and grounded in research, rather than by tradition or by the loudest voices in a school community.",
+    "For primary school students, the relationship between homework and achievement is weak, and some reviews have found no clear benefit at all.",
+    "Schools that apply one standard to every grade are ignoring what the evidence actually shows.",
+    "For secondary school students, moderate amounts of homework are generally associated with higher achievement, although the benefit appears to level off after roughly two hours per night.",
+    "Schools should adopt age-specific limits, review them regularly against student outcomes, and explain the reasoning to parents."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.6364,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.6364,
+      "high_information_density": 0.6364,
+      "broad_topic_coverage": 0.6364,
+      "coherence_prioritized": 0.6364,
+      "graph_centrality": 0.6359
+     },
+     "quality_metrics": {
+      "indices": [
+       2,
+       4,
+       5,
+       7,
+       8
+      ],
+      "composite_score": 0.6364,
+      "topic_coverage": 0.5,
+      "info_density": 0.6844,
+      "novelty_score": 0.8571,
+      "coherence_score": 0.85,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-AMBIGUOUS-TRIAL",
+   "depth": "brief",
+   "seconds": 0.429,
+   "sentences": [
+    "The first trial, conducted in Norway with 212 participants, reported that the supplement reduced the time needed to fall asleep by an average of 11 minutes compared with placebo.",
+    "The second trial, conducted in Canada with 340 participants, found no significant difference between the supplement and placebo in time to fall asleep or total sleep duration."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.7069,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.7069,
+      "high_information_density": 0.7069,
+      "broad_topic_coverage": 0.7069,
+      "coherence_prioritized": 0.7069,
+      "graph_centrality": 0.7069
+     },
+     "quality_metrics": {
+      "indices": [
+       1,
+       3
+      ],
+      "composite_score": 0.7069,
+      "topic_coverage": 0.1,
+      "info_density": 1.4705,
+      "novelty_score": 0.725,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-AMBIGUOUS-TRIAL",
+   "depth": "balanced",
+   "seconds": 0.492,
+   "sentences": [
+    "Two randomized trials have tested whether a valerian-based supplement improves sleep in adults with mild insomnia, and their results disagree.",
+    "The first trial, conducted in Norway with 212 participants, reported that the supplement reduced the time needed to fall asleep by an average of 11 minutes compared with placebo.",
+    "The second trial, conducted in Canada with 340 participants, found no significant difference between the supplement and placebo in time to fall asleep or total sleep duration.",
+    "The Canadian team used a lower dose and measured sleep with wrist-worn devices rather than sleep diaries."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.6944,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.6944,
+      "high_information_density": 0.6894,
+      "broad_topic_coverage": 0.6944,
+      "coherence_prioritized": 0.6944,
+      "graph_centrality": 0.6944
+     },
+     "quality_metrics": {
+      "indices": [
+       0,
+       1,
+       3,
+       4
+      ],
+      "composite_score": 0.6944,
+      "topic_coverage": 0.3,
+      "info_density": 1.1848,
+      "novelty_score": 0.725,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-AMBIGUOUS-TRIAL",
+   "depth": "detailed",
+   "seconds": 0.473,
+   "sentences": [
+    "Two randomized trials have tested whether a valerian-based supplement improves sleep in adults with mild insomnia, and their results disagree.",
+    "The first trial, conducted in Norway with 212 participants, reported that the supplement reduced the time needed to fall asleep by an average of 11 minutes compared with placebo.",
+    "The second trial, conducted in Canada with 340 participants, found no significant difference between the supplement and placebo in time to fall asleep or total sleep duration.",
+    "The Canadian team used a lower dose and measured sleep with wrist-worn devices rather than sleep diaries.",
+    "Neither trial reported serious side effects, although about 7 percent of participants in both trials reported mild stomach discomfort."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.7088,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.7088,
+      "high_information_density": 0.7088,
+      "broad_topic_coverage": 0.7088,
+      "coherence_prioritized": 0.7088,
+      "graph_centrality": 0.7088
+     },
+     "quality_metrics": {
+      "indices": [
+       0,
+       1,
+       3,
+       4,
+       7
+      ],
+      "composite_score": 0.7088,
+      "topic_coverage": 0.4,
+      "info_density": 1.1285,
+      "novelty_score": 0.725,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-POLICY-DATA",
+   "depth": "brief",
+   "seconds": 0.32,
+   "sentences": [
+    "Footage that is not associated with a recorded traffic violation, a reported collision, or an active investigation shall be deleted no later than 30 days after the date of recording.",
+    "Footage associated with a recorded violation shall be retained for 18 months or until any appeal is finally resolved, whichever occurs later."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.7731,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.7731,
+      "high_information_density": 0.7731,
+      "broad_topic_coverage": 0.7731,
+      "coherence_prioritized": 0.7731,
+      "graph_centrality": 0.7731
+     },
+     "quality_metrics": {
+      "indices": [
+       1,
+       2
+      ],
+      "composite_score": 0.7731,
+      "topic_coverage": 0.2222,
+      "info_density": 1.5633,
+      "novelty_score": 0.7857,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-POLICY-DATA",
+   "depth": "balanced",
+   "seconds": 0.385,
+   "sentences": [
+    "Footage that is not associated with a recorded traffic violation, a reported collision, or an active investigation shall be deleted no later than 30 days after the date of recording.",
+    "Footage associated with a recorded violation shall be retained for 18 months or until any appeal is finally resolved, whichever occurs later.",
+    "Access to retained footage is limited to authorized personnel of the Traffic Enforcement Division, except where a court order requires disclosure or where the City Attorney determines in writing that disclosure is necessary to defend the City in litigation.",
+    "No employee may access footage for personal reasons, and every access shall be recorded in an audit log that is reviewed quarterly."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.7982,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.7982,
+      "high_information_density": 0.7982,
+      "broad_topic_coverage": 0.7982,
+      "coherence_prioritized": 0.7982,
+      "graph_centrality": 0.7982
+     },
+     "quality_metrics": {
+      "indices": [
+       1,
+       2,
+       3,
+       4
+      ],
+      "composite_score": 0.7982,
+      "topic_coverage": 0.4444,
+      "info_density": 1.4086,
+      "novelty_score": 0.7857,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-POLICY-DATA",
+   "depth": "detailed",
+   "seconds": 0.533,
+   "sentences": [
+    "Footage that is not associated with a recorded traffic violation, a reported collision, or an active investigation shall be deleted no later than 30 days after the date of recording.",
+    "Footage associated with a recorded violation shall be retained for 18 months or until any appeal is finally resolved, whichever occurs later.",
+    "Access to retained footage is limited to authorized personnel of the Traffic Enforcement Division, except where a court order requires disclosure or where the City Attorney determines in writing that disclosure is necessary to defend the City in litigation.",
+    "No employee may access footage for personal reasons, and every access shall be recorded in an audit log that is reviewed quarterly.",
+    "Footage shall not be sold, licensed, or otherwise provided to commercial entities under any circumstances.",
+    "Requests from law enforcement agencies outside the City must be accompanied by a warrant, unless the request concerns an imminent threat to life, in which case the Chief of Police may approve disclosure and must report the disclosure to the City Council within 10 business days."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.8199,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.8199,
+      "high_information_density": 0.8199,
+      "broad_topic_coverage": 0.8199,
+      "coherence_prioritized": 0.8199,
+      "graph_centrality": 0.8199
+     },
+     "quality_metrics": {
+      "indices": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6
+      ],
+      "composite_score": 0.8199,
+      "topic_coverage": 0.6667,
+      "info_density": 1.2398,
+      "novelty_score": 0.7857,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-SHORT-LIBRARY",
+   "depth": "brief",
+   "seconds": 0.241,
+   "sentences": [
+    "The Westbrook Public Library will open from 9 a.m. to 6 p.m. on Sundays starting November 2, adding four hours to its weekend schedule.",
+    "Library director Ana Pereira said the schedule would be reviewed next autumn, and that Sunday hours could return to the current schedule if the grant is not renewed."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.7017,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized"
+     ],
+     "strategy_scores": {
+      "balanced": 0.7017,
+      "high_information_density": 0.7017,
+      "broad_topic_coverage": 0.7017,
+      "coherence_prioritized": 0.7017
+     },
+     "quality_metrics": {
+      "indices": [
+       0,
+       3
+      ],
+      "composite_score": 0.7017,
+      "topic_coverage": 0.5,
+      "info_density": 0.8596,
+      "novelty_score": 0.9091,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-SHORT-LIBRARY",
+   "depth": "balanced",
+   "seconds": 0.274,
+   "sentences": [
+    "The Westbrook Public Library will open from 9 a.m. to 6 p.m. on Sundays starting November 2, adding four hours to its weekend schedule.",
+    "The change follows a survey in which 62 percent of 900 respondents asked for longer Sunday hours.",
+    "The extra hours will be funded by a one-year state grant of $85,000.",
+    "Library director Ana Pereira said the schedule would be reviewed next autumn, and that Sunday hours could return to the current schedule if the grant is not renewed."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "all_candidates",
+     "composite_score": 1.0,
+     "strategies_evaluated": [
+      "all_candidates"
+     ],
+     "strategy_scores": {
+      "all_candidates": 1.0
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-SHORT-LIBRARY",
+   "depth": "detailed",
+   "seconds": 0.268,
+   "sentences": [
+    "The Westbrook Public Library will open from 9 a.m. to 6 p.m. on Sundays starting November 2, adding four hours to its weekend schedule.",
+    "The change follows a survey in which 62 percent of 900 respondents asked for longer Sunday hours.",
+    "The extra hours will be funded by a one-year state grant of $85,000.",
+    "Library director Ana Pereira said the schedule would be reviewed next autumn, and that Sunday hours could return to the current schedule if the grant is not renewed."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "all_candidates",
+     "composite_score": 1.0,
+     "strategies_evaluated": [
+      "all_candidates"
+     ],
+     "strategy_scores": {
+      "all_candidates": 1.0
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-LONG-WATER",
+   "depth": "brief",
+   "seconds": 0.857,
+   "sentences": [
+    "The region draws about 58 percent of its water from the Calder Reservoir, 30 percent from groundwater wells, and 12 percent from purchased supply through an interconnection with the neighboring Fenwick district.",
+    "Expanding the Fenwick interconnection would add up to 20 million liters per day at relatively low cost, but Fenwick faces the same drought conditions and may not be able to supply water when it is most needed.",
+    "The estimates of leak recovery are based on a sample audit of 8 percent of the distribution network and may not hold across the whole system.",
+    "The region's water supply is adequate under normal conditions but vulnerable during multi-year droughts."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.5736,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.5736,
+      "high_information_density": 0.5684,
+      "broad_topic_coverage": 0.5736,
+      "coherence_prioritized": 0.5736,
+      "graph_centrality": 0.5705
+     },
+     "quality_metrics": {
+      "indices": [
+       3,
+       20,
+       29,
+       32
+      ],
+      "composite_score": 0.5736,
+      "topic_coverage": 0.1176,
+      "info_density": 0.8063,
+      "novelty_score": 0.8571,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-LONG-WATER",
+   "depth": "balanced",
+   "seconds": 1.16,
+   "sentences": [
+    "The Calder Valley Water Authority supplies drinking water to approximately 640,000 residents across nine municipalities.",
+    "This assessment reviews the condition of the region's water sources, forecasts demand through 2040, and evaluates options for improving resilience to drought.",
+    "The region draws about 58 percent of its water from the Calder Reservoir, 30 percent from groundwater wells, and 12 percent from purchased supply through an interconnection with the neighboring Fenwick district.",
+    "Climate projections for the valley indicate that multi-year dry periods are likely to become more frequent, although the projections differ considerably on how much annual rainfall will change.",
+    "Expanding the Fenwick interconnection would add up to 20 million liters per day at relatively low cost, but Fenwick faces the same drought conditions and may not be able to supply water when it is most needed.",
+    "A water recycling plant for non-potable irrigation use would provide about 15 million liters per day and would reduce summer peaks, at an estimated capital cost of $140 million.",
+    "Hydrologists attribute most of the decline to increased agricultural pumping outside the Authority's control, although reduced recharge during dry years also contributes.",
+    "The estimates of leak recovery are based on a sample audit of 8 percent of the distribution network and may not hold across the whole system.",
+    "The assessment also notes that agricultural pumping regulations, which are set by the state, could either ease or worsen groundwater decline.",
+    "The region's water supply is adequate under normal conditions but vulnerable during multi-year droughts."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.5823,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.5823,
+      "high_information_density": 0.5823,
+      "broad_topic_coverage": 0.5823,
+      "coherence_prioritized": 0.5823,
+      "graph_centrality": 0.58
+     },
+     "quality_metrics": {
+      "indices": [
+       0,
+       1,
+       3,
+       7,
+       16,
+       20,
+       21,
+       29,
+       31,
+       32
+      ],
+      "composite_score": 0.5823,
+      "topic_coverage": 0.2941,
+      "info_density": 0.64,
+      "novelty_score": 0.8519,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "HO-LONG-WATER",
+   "depth": "detailed",
+   "seconds": 1.585,
+   "sentences": [
+    "The Calder Valley Water Authority supplies drinking water to approximately 640,000 residents across nine municipalities.",
+    "This assessment reviews the condition of the region's water sources, forecasts demand through 2040, and evaluates options for improving resilience to drought.",
+    "The region draws about 58 percent of its water from the Calder Reservoir, 30 percent from groundwater wells, and 12 percent from purchased supply through an interconnection with the neighboring Fenwick district.",
+    "During the 2024 drought, storage fell to 41 percent of capacity in late September, the lowest level since the reservoir was completed in 1979.",
+    "The forecast assumes that per-person use will continue to decline slowly, as it has for the past decade, due to more efficient appliances and the conservation pricing introduced in 2019.",
+    "Residential customers in the newer southern suburbs, where lot sizes are larger, use about 35 percent more water per household in summer than customers in older neighborhoods.",
+    "Climate projections for the valley indicate that multi-year dry periods are likely to become more frequent, although the projections differ considerably on how much annual rainfall will change.",
+    "In that scenario, reservoir storage would fall below 25 percent, the level at which mandatory restrictions are triggered, in four out of ten simulated years.",
+    "Expanding the Fenwick interconnection would add up to 20 million liters per day at relatively low cost, but Fenwick faces the same drought conditions and may not be able to supply water when it is most needed.",
+    "A water recycling plant for non-potable irrigation use would provide about 15 million liters per day and would reduce summer peaks, at an estimated capital cost of $140 million.",
+    "Hydrologists attribute most of the decline to increased agricultural pumping outside the Authority's control, although reduced recharge during dry years also contributes.",
+    "In the near term, the Authority should expand leak detection, extend conservation pricing to the highest summer usage tiers, and rehabilitate the northern wellfield.",
+    "Over the longer term, it should begin design work on the recycling plant so that construction can start by 2030 if demand follows the baseline scenario.",
+    "The assessment does not recommend relying on the Fenwick interconnection as a primary drought supply.",
+    "The estimates of leak recovery are based on a sample audit of 8 percent of the distribution network and may not hold across the whole system.",
+    "The assessment also notes that agricultural pumping regulations, which are set by the state, could either ease or worsen groundwater decline.",
+    "The region's water supply is adequate under normal conditions but vulnerable during multi-year droughts.",
+    "A combination of demand reduction, loss reduction, and new local supply offers the most reliable path to drought resilience."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.6351,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.6351,
+      "high_information_density": 0.6351,
+      "broad_topic_coverage": 0.6351,
+      "coherence_prioritized": 0.6351,
+      "graph_centrality": 0.6256
+     },
+     "quality_metrics": {
+      "indices": [
+       0,
+       1,
+       3,
+       5,
+       7,
+       11,
+       15,
+       16,
+       18,
+       20,
+       21,
+       26,
+       27,
+       28,
+       29,
+       31,
+       32,
+       34
+      ],
+      "composite_score": 0.6351,
+      "topic_coverage": 0.5294,
+      "info_density": 0.5894,
+      "novelty_score": 0.8462,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 1,
+     "diagnostics": [
+      {
+       "sentence_index": 11,
+       "issues": [
+        {
+         "rule_id": "RULE",
+         "message": "Possible spelling mistake found.",
+         "category": "TYPOS",
+         "offset": 155,
+         "error_length": 0
+        }
+       ]
+      }
+     ]
+    },
+    "semantic_model_status": null
+   }
+  }
+ ]
+}

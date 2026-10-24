@@ -1,0 +1,23 @@
+erDiagram
+    direction TB
+    evaluation_documents {
+        bigint id PK
+        bigint dataset_id FK
+    }
+    evaluation_content_units {
+        bigint id PK
+        bigint document_id FK
+        int created_by FK
+    }
+    evaluation_references {
+        bigint id PK
+        bigint document_id FK
+        int created_by FK
+    }
+    evaluation_challenge_cases {
+        bigint id PK
+        bigint document_id FK
+    }
+    evaluation_documents ||--o{ evaluation_challenge_cases : "document_id"
+    evaluation_documents ||--o{ evaluation_content_units : "document_id"
+    evaluation_documents ||--o{ evaluation_references : "document_id"

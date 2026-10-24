@@ -1,0 +1,35 @@
+ name                 Name of        varchar(2
+                      the file       55)
+ path                 Filepath       varchar(2
+                      where the      55)
+                      file is
+ pdf_path             Filepath       varchar(2
+                      for the        55)
+                      PDF
+                      preview
+                      of the
+                      file
+ relative_path        Relative       varchar(5     Foreign
+                      path of        00)           Key
+                      the file
+ folder_id            Folder ID      int(11)
+
+ created_by           User that      varchar(2
+                      created        55)
+                      the file
+ last_viewed_by       User that      varchar(2
+                      last           55)
+                      viewed
+                      the file
+ last_viewed_at       Date and       varchar(2
+                      time the       55)
+                      folder
+                      was last
+                      viewed
+ archived             File is        tinyint(1
+                      archived       )
+                      or not
+
+
+
+                                                             79

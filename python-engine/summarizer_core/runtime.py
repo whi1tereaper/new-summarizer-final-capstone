@@ -10,6 +10,11 @@ from contextlib import contextmanager
 from contextvars import ContextVar
 from dataclasses import dataclass, field
 from functools import wraps
+import json
+import os
+from pathlib import Path
+import re
+import sys
 import time
 from typing import Any
 
@@ -45,6 +50,7 @@ class BoundedCache:
 @dataclass
 class RequestRuntime:
     profile: bool = False
+    correlation: str = ""
     caches: dict[str, BoundedCache] = field(default_factory=dict)
     stages: dict[str, dict[str, float | int]] = field(default_factory=dict)
     stack: list[list[float]] = field(default_factory=list)
@@ -76,12 +82,12 @@ _CURRENT: ContextVar[RequestRuntime | None] = ContextVar("light_request_runtime"
 
 
 @contextmanager
-def request_scope(*, profile: bool = False):
+def request_scope(*, profile: bool = False, correlation: str = ""):
     existing = _CURRENT.get()
     if existing is not None:
         yield existing
         return
-    runtime = RequestRuntime(profile=profile)
+    runtime = RequestRuntime(profile=profile, correlation=correlation if re.fullmatch(r"[a-f0-9]{32}", correlation) else "")
     token = _CURRENT.set(runtime)
     try:
         yield runtime
@@ -109,6 +115,43 @@ def request_scoped(function):
 
 @contextmanager
 def stage(name: str):
+    # Constant stage names only; no document text, paths, queries or credentials.
+    # The bridge keeps this channel private and reduces it to the last active
+    # stage if the process times out before a response can be serialized.
+    trace = os.environ.get("LIGHT_STAGE_TRACE") == "1" and name in {
+        "summary_request", "nlp_library_imports", "source_extraction", "pdf_extraction",
+        "text_normalization", "candidate_generation", "topic_clustering", "embedding_generation",
+        "sentence_transformers_initialization", "sentence_ranking", "candidate_selection",
+        "grammar_initialization", "paragraph_rendering", "coherence_validation", "factual_validation",
+        "result_serialization",
+    }
+    if trace:
+        _trace_event("START", name)
+    try:
+        with _measured_stage(name):
+            yield
+    finally:
+        if trace:
+            _trace_event("END", name)
+
+
+def _trace_event(event: str, name: str):
+    print("LIGHT_STAGE_" + event + " " + name, file=sys.stderr, flush=True)
+    runtime = _CURRENT.get()
+    directory = os.environ.get("SUMMARIZER_DIAGNOSTICS_DIR", "")
+    if runtime is not None and runtime.correlation and directory:
+        try:
+            # Server-owned directory plus a validated opaque job identifier.
+            path = Path(directory) / ("job-" + runtime.correlation + ".jsonl")
+            with path.open("a", encoding="utf-8") as stream:
+                stream.write(json.dumps({"event": event, "stage": name, "pid": os.getpid(),
+                                         "elapsed_seconds": round(time.perf_counter()-runtime.started, 4)}) + "\n")
+        except OSError:
+            pass
+
+
+@contextmanager
+def _measured_stage(name: str):
     runtime = _CURRENT.get()
     if runtime is None or not runtime.profile:
         yield

@@ -1,0 +1,101 @@
+{
+  "detector_version": "article-rules-2",
+  "threshold": 0.7,
+  "method": "maximize_recall_zero_development_false_positives_highest_tie",
+  "corpus_sha256": "e50ccff0c353b7803b7461484025327d97240cb69808d281ac59f8d4cc535071",
+  "provenance": "engineering_authored_synthetic",
+  "development_count": 15,
+  "human_verified": false,
+  "rows": [
+    {
+      "id": "dev-news",
+      "expected": true,
+      "score": 0.849855,
+      "eligible": true
+    },
+    {
+      "id": "dev-research",
+      "expected": true,
+      "score": 0.949231,
+      "eligible": true
+    },
+    {
+      "id": "dev-technical",
+      "expected": true,
+      "score": 0.853056,
+      "eligible": true
+    },
+    {
+      "id": "dev-opinion",
+      "expected": true,
+      "score": 0.850604,
+      "eligible": true
+    },
+    {
+      "id": "dev-invoice",
+      "expected": false,
+      "score": 0.0,
+      "eligible": false
+    },
+    {
+      "id": "dev-resume",
+      "expected": false,
+      "score": 0.0,
+      "eligible": false
+    },
+    {
+      "id": "dev-code",
+      "expected": false,
+      "score": 0.0,
+      "eligible": false
+    },
+    {
+      "id": "dev-list",
+      "expected": false,
+      "score": 0.0,
+      "eligible": false
+    },
+    {
+      "id": "dev-form",
+      "expected": false,
+      "score": 0.0,
+      "eligible": false
+    },
+    {
+      "id": "dev-ambiguous",
+      "expected": false,
+      "score": 0.405,
+      "eligible": false
+    },
+    {
+      "id": "dev-report",
+      "expected": false,
+      "score": 0.068165,
+      "eligible": false
+    },
+    {
+      "id": "dev-news-flattened",
+      "expected": true,
+      "score": 0.7,
+      "eligible": true
+    },
+    {
+      "id": "dev-research-flattened",
+      "expected": true,
+      "score": 0.7,
+      "eligible": true
+    },
+    {
+      "id": "dev-technical-flattened",
+      "expected": true,
+      "score": 0.7,
+      "eligible": true
+    },
+    {
+      "id": "dev-opinion-flattened",
+      "expected": true,
+      "score": 0.7,
+      "eligible": true
+    }
+  ]
+}

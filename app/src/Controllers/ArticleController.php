@@ -11,6 +11,7 @@ use App\Src\Services\ArticleService;
 use App\Src\Services\SummaryJobService;
 use App\Src\Services\FileUploadService;
 use App\Src\Support\ProcessingError;
+use App\Src\Support\ProcessingDiagnostics;
 
 class ArticleController
 {
@@ -29,6 +30,8 @@ class ArticleController
             return;
         }
         $pending = null;
+        ProcessingDiagnostics::begin();
+        ProcessingDiagnostics::stage('request_validation', self::class, 'process');
         try {
             $maxPost = FileUploadService::iniBytes((string)ini_get('post_max_size'));
             if ($maxPost > 0 && (int)($_SERVER['CONTENT_LENGTH'] ?? 0) > $maxPost) throw new ProcessingError('INPUT_TOO_LARGE');
@@ -36,6 +39,7 @@ class ArticleController
             [$userId, $guestToken] = $this->resolveViewerContext();
             $pending = $this->articleService->buildPendingSummary($_POST, $_FILES, $userId, $guestToken);
             unset($pending['csrf_token']);
+            ProcessingDiagnostics::stage('job_queue', SummaryJobService::class, 'ensureJobForPending');
             $this->jobService->purgeExpiredPayloads();
             $job = $this->jobService->ensureJobForPending($pending, $userId, $guestToken);
             if ($job['job_id'] !== $pending['job_id']) {
@@ -103,6 +107,8 @@ class ArticleController
 
     public function handleBackgroundJob(string $jobId): void
     {
+        ProcessingDiagnostics::begin($jobId);
+        ProcessingDiagnostics::stage('job_lookup', SummaryJobService::class, 'getJob');
         $job = $this->jobService->getJob($jobId);
         if ($job === null || !$this->jobService->markProcessing($jobId)) return;
         $pending = json_decode((string)($job['payload'] ?? ''), true);
@@ -110,6 +116,8 @@ class ArticleController
         $resolvedSource = null;
         try {
             if (!is_array($pending) || $pending === []) throw new ProcessingError('REQUEST_INVALID');
+            $this->articleService->reserveSummaryAccess($jobId);
+            ProcessingDiagnostics::stage('source_resolution', ArticleService::class, 'resolvePendingSummarySource');
             $source = $this->articleService->resolvePendingSummarySource((string)($pending['original_text'] ?? ''), $filePath);
             $summaryInputText = (string)($source['text'] ?? '');
             $filePath = (string)($source['file_path'] ?? $filePath);
@@ -117,12 +125,16 @@ class ArticleController
             if ($filePath === '' && trim($summaryInputText) === '') throw new ProcessingError('INPUT_EMPTY');
             $summaryLength = (string)($pending['summary_depth'] ?? $pending['summary_length'] ?? 'balanced');
             $summaryStyle = (string)($pending['summary_style'] ?? 'standard_paragraph');
+            ProcessingDiagnostics::stage('python_bridge', ArticleService::class, 'requestSummary');
             $result = $this->articleService->requestSummary(
                 $summaryInputText, $filePath, (int)($pending['sentence_count'] ?? 8), $summaryStyle, $summaryLength,
                 (string)($pending['document_title'] ?? ''), (string)($pending['selection_mode'] ?? ''),
                 (string)($pending['analysis_mode'] ?? ''), (string)($pending['output_format'] ?? ''),
                 !empty($pending['use_llm_synthesis']), 0, (string)($pending['focus_query'] ?? ''), $jobId
             );
+            ProcessingDiagnostics::engine($result['source_metadata']['engine_routing']['selected_engine']
+                ?? config('summarizer.engine_version', 'legacy'));
+            ProcessingDiagnostics::stage('response_validation', ArticleService::class, 'storeSummary');
             $this->articleService->storeSummary(
                 isset($job['user_id']) ? (int)$job['user_id'] : null, $job['guest_token'] ?? null,
                 $result, (string)($source['input_type'] ?? 'text'), $summaryStyle, $summaryInputText, $summaryLength, null, $jobId
@@ -130,6 +142,7 @@ class ArticleController
         } catch (\Throwable $error) {
             $this->jobService->failJob($jobId, $error, 'failed', getmypid());
         } finally {
+            $this->articleService->releaseSummaryAccess();
             $this->articleService->cleanupTemporaryArtifacts($filePath, $resolvedSource);
         }
     }

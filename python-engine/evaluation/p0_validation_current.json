@@ -1,0 +1,1330 @@
+{
+ "engine": "current",
+ "engine_path": "C:\\xampp\\htdocs\\ai-summarizer-123 - quality upg\\python-engine\\summarizer_core",
+ "corpus": "tests\\fixtures\\evaluation_validation_documents.json",
+ "peak_memory_mb": 619.3,
+ "rows": [
+  {
+   "id": "USGS-SIR-2023-5136",
+   "depth": "brief",
+   "seconds": 11.538,
+   "sentences": [
+    "In cooperation with the U.S. Army Corps of Engineers, the U.S. Geological Survey initiated a water-quality monitoring study to describe the water-quality characteristics of the Red River of the North and its tributaries in the Fargo-Moorhead metropolitan area during the preconstruction period of the Flood Risk Management Project from October 1, 2019, to October 1, 2022.",
+    "The monitoring study included the collection of discrete and continuous water-quality data and streamflow monitoring at selected sites that integrated and enhanced existing monitoring programs within the study area.",
+    "The median filtered ammonia concentration at most sites was less than the laboratory reporting level of 0.03 milligram per liter as nitrogen except for the Sheyenne River at Harwood, North Dakota (U.S. Geological Survey [USGS] station 05060400), and Red River of the North near Georgetown, Minnesota (USGS station 05062130).",
+    "The increase in nitrate plus nitrite concentrations could reflect the effect of the wastewater-treatment plant discharge that enters the Red River of the North upstream from the site located downstream from the Fargo-Moorhead metropolitan area and from urban runoff."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "broad_topic_coverage",
+     "composite_score": 0.5979,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.5833,
+      "high_information_density": 0.5833,
+      "broad_topic_coverage": 0.5979,
+      "coherence_prioritized": 0.5833,
+      "graph_centrality": 0.5833
+     },
+     "quality_metrics": {
+      "indices": [
+       1,
+       2,
+       11,
+       13
+      ],
+      "composite_score": 0.5979,
+      "topic_coverage": 0.2,
+      "info_density": 0.8407,
+      "novelty_score": 0.8136,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 1,
+     "diagnostics": [
+      {
+       "sentence_index": 1,
+       "issues": [
+        {
+         "rule_id": "RULE",
+         "message": "Possible spelling mistake found.",
+         "category": "TYPOS",
+         "offset": 95,
+         "error_length": 0
+        }
+       ]
+      }
+     ]
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "USGS-SIR-2023-5136",
+   "depth": "balanced",
+   "seconds": 1.786,
+   "sentences": [
+    "In general, bicarbonate, calcium, magnesium, and sulfate represented most of the dissolved ions measured in samples collected at the 10 sites.",
+    "Calcium, chloride, fluoride, potassium, silica, and sodium were also measured in samples, but they represented a smaller portion of the total dissolved ions.",
+    "In cooperation with the U.S. Army Corps of Engineers, the U.S. Geological Survey initiated a water-quality monitoring study to describe the water-quality characteristics of the Red River of the North and its tributaries in the Fargo-Moorhead metropolitan area during the preconstruction period of the Flood Risk Management Project from October 1, 2019, to October 1, 2022.",
+    "The monitoring study included the collection of discrete and continuous water-quality data and streamflow monitoring at selected sites that integrated and enhanced existing monitoring programs within the study area.",
+    "Discrete samples collected at 10 sites in the Fargo-Moorhead metropolitan area were analyzed for major ions, trace elements, nutrients, suspended sediment, pesticides, and fecal indicator bacteria.",
+    "In general, major ion concentrations were higher at sites on the tributaries (Wild Rice, Sheyenne, and Maple Rivers) compared to sites on the Red River of the North.",
+    "The median filtered ammonia concentration at most sites was less than the laboratory reporting level of 0.03 milligram per liter as nitrogen except for the Sheyenne River at Harwood, North Dakota (U.S. Geological Survey [USGS] station 05060400), and Red River of the North near Georgetown, Minnesota (USGS station 05062130).",
+    "The increase in nitrate plus nitrite concentrations could reflect the effect of the wastewater-treatment plant discharge that enters the Red River of the North upstream from the site located downstream from the Fargo-Moorhead metropolitan area and from urban runoff.",
+    "For all sites other than the Sheyenne River near Kindred, N. Dak., 95 percent or more of the suspended sediment had particle diameter sizes less than 0.0625 millimeter in 50 percent of the samples (median).",
+    "Likewise, the least loads for most constituents were at the Maple River and were least in 2021 compared to the other years because of low-streamflow conditions."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "broad_topic_coverage",
+     "composite_score": 0.6143,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.5666,
+      "high_information_density": 0.5673,
+      "broad_topic_coverage": 0.6143,
+      "coherence_prioritized": 0.5666,
+      "graph_centrality": 0.5774
+     },
+     "quality_metrics": {
+      "indices": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6,
+       11,
+       13,
+       18,
+       25
+      ],
+      "composite_score": 0.6143,
+      "topic_coverage": 0.5,
+      "info_density": 0.6199,
+      "novelty_score": 0.7222,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 4,
+     "diagnostics": [
+      {
+       "sentence_index": 3,
+       "issues": [
+        {
+         "rule_id": "RULE",
+         "message": "Possible spelling mistake found.",
+         "category": "TYPOS",
+         "offset": 95,
+         "error_length": 0
+        }
+       ]
+      },
+      {
+       "sentence_index": 5,
+       "issues": [
+        {
+         "rule_id": "RULE",
+         "message": "Possible spelling mistake found.",
+         "category": "TYPOS",
+         "offset": 89,
+         "error_length": 0
+        }
+       ]
+      },
+      {
+       "sentence_index": 8,
+       "issues": [
+        {
+         "rule_id": "RULE",
+         "message": "Possible spelling mistake found.",
+         "category": "TYPOS",
+         "offset": 61,
+         "error_length": 0
+        }
+       ]
+      },
+      {
+       "sentence_index": 9,
+       "issues": [
+        {
+         "rule_id": "RULE",
+         "message": "Possible spelling mistake found.",
+         "category": "TYPOS",
+         "offset": 134,
+         "error_length": 0
+        }
+       ]
+      }
+     ]
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "USGS-SIR-2023-5136",
+   "depth": "detailed",
+   "seconds": 1.985,
+   "sentences": [
+    "In general, bicarbonate, calcium, magnesium, and sulfate represented most of the dissolved ions measured in samples collected at the 10 sites.",
+    "Calcium, chloride, fluoride, potassium, silica, and sodium were also measured in samples, but they represented a smaller portion of the total dissolved ions.",
+    "In cooperation with the U.S. Army Corps of Engineers, the U.S. Geological Survey initiated a water-quality monitoring study to describe the water-quality characteristics of the Red River of the North and its tributaries in the Fargo-Moorhead metropolitan area during the preconstruction period of the Flood Risk Management Project from October 1, 2019, to October 1, 2022.",
+    "The monitoring study included the collection of discrete and continuous water-quality data and streamflow monitoring at selected sites that integrated and enhanced existing monitoring programs within the study area.",
+    "Discrete samples collected at 10 sites in the Fargo-Moorhead metropolitan area were analyzed for major ions, trace elements, nutrients, suspended sediment, pesticides, and fecal indicator bacteria.",
+    "In general, major ion concentrations were higher at sites on the tributaries (Wild Rice, Sheyenne, and Maple Rivers) compared to sites on the Red River of the North.",
+    "Nutrients analyzed in discrete samples included filtered and unfiltered concentrations of ammonia, nitrate plus nitrite, phosphorus, and organic carbon.",
+    "The median filtered ammonia concentration at most sites was less than the laboratory reporting level of 0.03 milligram per liter as nitrogen except for the Sheyenne River at Harwood, North Dakota (U.S. Geological Survey [USGS] station 05060400), and Red River of the North near Georgetown, Minnesota (USGS station 05062130).",
+    "The increase in nitrate plus nitrite concentrations could reflect the effect of the wastewater-treatment plant discharge that enters the Red River of the North upstream from the site located downstream from the Fargo-Moorhead metropolitan area and from urban runoff.",
+    "Suspended-sediment concentrations were generally highest at sites in the Sheyenne River and lowest in the upstream Red River of the North sites.",
+    "Suspended-sediment concentration was highly variable in samples collected at the 10 sites, mostly influenced by the occurrence of snowmelt and rainfall-runoff events.",
+    "The Sheyenne River near Kindred, N. Dak. (USGS station 05059000) had the largest range in sediment concentrations in samples collected at the 10 sites.",
+    "For all sites other than the Sheyenne River near Kindred, N. Dak., 95 percent or more of the suspended sediment had particle diameter sizes less than 0.0625 millimeter in 50 percent of the samples (median).",
+    "Of the 102 pesticides and pesticide degradates analyzed, 45 constituents had no detectable concentrations in any of the 17 samples collected at five sites.",
+    "Patterns in annual loads generally followed the same pattern as streamflow at the 10 sites for water years 2020–22.",
+    "A water year is the 12-month period from October 1 to September 30 and is designated by the calendar year in which it ends.",
+    "The greatest loads for all constituents were delivered at the two downstream sites on the Red River of the North; sites that also had the highest annual streamflows among the sites and the greatest loads were delivered in water year 2020 when the highest streamflows occurred at the sites.",
+    "Likewise, the least loads for most constituents were at the Maple River and were least in 2021 compared to the other years because of low-streamflow conditions."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "broad_topic_coverage",
+     "composite_score": 0.6994,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.6473,
+      "high_information_density": 0.6473,
+      "broad_topic_coverage": 0.6994,
+      "coherence_prioritized": 0.6473,
+      "graph_centrality": 0.6323
+     },
+     "quality_metrics": {
+      "indices": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6,
+       10,
+       11,
+       13,
+       15,
+       16,
+       17,
+       18,
+       19,
+       22,
+       23,
+       24,
+       25
+      ],
+      "composite_score": 0.6994,
+      "topic_coverage": 0.9,
+      "info_density": 0.531,
+      "novelty_score": 0.6875,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 9,
+     "diagnostics": [
+      {
+       "sentence_index": 3,
+       "issues": [
+        {
+         "rule_id": "RULE",
+         "message": "Possible spelling mistake found.",
+         "category": "TYPOS",
+         "offset": 95,
+         "error_length": 0
+        }
+       ]
+      },
+      {
+       "sentence_index": 5,
+       "issues": [
+        {
+         "rule_id": "RULE",
+         "message": "Possible spelling mistake found.",
+         "category": "TYPOS",
+         "offset": 89,
+         "error_length": 0
+        }
+       ]
+      },
+      {
+       "sentence_index": 11,
+       "issues": [
+        {
+         "rule_id": "RULE",
+         "message": "Possible spelling mistake found.",
+         "category": "TYPOS",
+         "offset": 36,
+         "error_length": 0
+        }
+       ]
+      },
+      {
+       "sentence_index": 12,
+       "issues": [
+        {
+         "rule_id": "RULE",
+         "message": "Possible spelling mistake found.",
+         "category": "TYPOS",
+         "offset": 61,
+         "error_length": 0
+        }
+       ]
+      },
+      {
+       "sentence_index": 13,
+       "issues": [
+        {
+         "rule_id": "RULE",
+         "message": "Possible spelling mistake found.",
+         "category": "TYPOS",
+         "offset": 36,
+         "error_length": 0
+        }
+       ]
+      },
+      {
+       "sentence_index": 14,
+       "issues": [
+        {
+         "rule_id": "RULE",
+         "message": "Possible spelling mistake found.",
+         "category": "TYPOS",
+         "offset": 64,
+         "error_length": 0
+        }
+       ]
+      },
+      {
+       "sentence_index": 16,
+       "issues": [
+        {
+         "rule_id": "RULE",
+         "message": "Possible spelling mistake found.",
+         "category": "TYPOS",
+         "offset": 153,
+         "error_length": 0
+        },
+        {
+         "rule_id": "RULE",
+         "message": "Possible spelling mistake found.",
+         "category": "TYPOS",
+         "offset": 255,
+         "error_length": 0
+        }
+       ]
+      },
+      {
+       "sentence_index": 17,
+       "issues": [
+        {
+         "rule_id": "RULE",
+         "message": "Possible spelling mistake found.",
+         "category": "TYPOS",
+         "offset": 134,
+         "error_length": 0
+        }
+       ]
+      }
+     ]
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "NASA-RELEASE-25-002",
+   "depth": "brief",
+   "seconds": 0.948,
+   "sentences": [
+    "The concentration of carbon dioxide in the atmosphere has increased from pre-industrial levels in the 18th century of approximately 278 parts per million to about 420 parts per million today.",
+    "NASA scientists further estimate Earth in 2024 was about 2.65 degrees Fahrenheit (1.47 degrees Celsius) warmer than the mid-19th century average (1850-1900).",
+    "Independent analyses by NOAA, Berkeley Earth, the Hadley Centre (part of the United Kingdom’s weather forecasting Met Office) and Copernicus Climate Services in Europe have also concluded that the global surface temperatures for 2024 were the highest since modern record-keeping began."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "graph_centrality",
+     "composite_score": 0.5908,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.5902,
+      "high_information_density": 0.5802,
+      "broad_topic_coverage": 0.5902,
+      "coherence_prioritized": 0.5902,
+      "graph_centrality": 0.5908
+     },
+     "quality_metrics": {
+      "indices": [
+       4,
+       11,
+       20,
+       24
+      ],
+      "composite_score": 0.5908,
+      "topic_coverage": 0.1429,
+      "info_density": 0.8212,
+      "novelty_score": 0.898,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "NASA-RELEASE-25-002",
+   "depth": "balanced",
+   "seconds": 1.256,
+   "sentences": [
+    "The new record comes after 15 consecutive months (June 2023 through August 2024) of monthly temperature records — an unprecedented heat streak.",
+    "Scientists have concluded the warming trend of recent decades is driven by heat-trapping carbon dioxide, methane, and other greenhouse gases.",
+    "The concentration of carbon dioxide in the atmosphere has increased from pre-industrial levels in the 18th century of approximately 278 parts per million to about 420 parts per million today.",
+    "A new assessment published earlier this year by scientists at the Colorado School of Mines, National Science Foundation, the National Atmospheric and Oceanic Administration (NOAA), and NASA further increases confidence in the agency’s global and regional temperature data.",
+    "Global temperatures in 2024 were 2.30 degrees Fahrenheit (1.28 degrees Celsius) above the agency’s 20th-century baseline (1951-1980), which tops the record set in 2023.",
+    "“Once again, the temperature record has been shattered — 2024 was the hottest year since record keeping began in 1880,” said NASA Administrator Bill Nelson.",
+    "NASA scientists further estimate Earth in 2024 was about 2.65 degrees Fahrenheit (1.47 degrees Celsius) warmer than the mid-19th century average (1850-1900).",
+    "For more than half of 2024, average temperatures were more than 1.5 degrees Celsius above the baseline, and the annual average, with mathematical uncertainties, may have exceeded the level for the first time.",
+    "Independent analyses by NOAA, Berkeley Earth, the Hadley Centre (part of the United Kingdom’s weather forecasting Met Office) and Copernicus Climate Services in Europe have also concluded that the global surface temperatures for 2024 were the highest since modern record-keeping began.",
+    "NASA’s full dataset of global surface temperatures, as well as details of how NASA scientists conducted the analysis, are publicly available from GISS, a NASA laboratory managed by the agency’s Goddard Space Flight Center in Greenbelt, Maryland."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "broad_topic_coverage",
+     "composite_score": 0.6031,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.6029,
+      "high_information_density": 0.6,
+      "broad_topic_coverage": 0.6031,
+      "coherence_prioritized": 0.6029,
+      "graph_centrality": 0.6031
+     },
+     "quality_metrics": {
+      "indices": [
+       0,
+       1,
+       2,
+       4,
+       5,
+       9,
+       11,
+       20,
+       24,
+       27
+      ],
+      "composite_score": 0.6031,
+      "topic_coverage": 0.3571,
+      "info_density": 0.6657,
+      "novelty_score": 0.8333,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "NASA-RELEASE-25-002",
+   "depth": "detailed",
+   "seconds": 1.659,
+   "sentences": [
+    "The new record comes after 15 consecutive months (June 2023 through August 2024) of monthly temperature records — an unprecedented heat streak.",
+    "Scientists have concluded the warming trend of recent decades is driven by heat-trapping carbon dioxide, methane, and other greenhouse gases.",
+    "The concentration of carbon dioxide in the atmosphere has increased from pre-industrial levels in the 18th century of approximately 278 parts per million to about 420 parts per million today.",
+    "The strong El Niño that began in fall 2023 helped nudge global temperatures above previous records.",
+    "“Not every year is going to break records, but the long-term trend is clear,” Schmidt said.",
+    "A new assessment published earlier this year by scientists at the Colorado School of Mines, National Science Foundation, the National Atmospheric and Oceanic Administration (NOAA), and NASA further increases confidence in the agency’s global and regional temperature data.",
+    "Global temperatures in 2024 were 2.30 degrees Fahrenheit (1.28 degrees Celsius) above the agency’s 20th-century baseline (1951-1980), which tops the record set in 2023.",
+    "“Once again, the temperature record has been shattered — 2024 was the hottest year since record keeping began in 1880,” said NASA Administrator Bill Nelson.",
+    "“Between record breaking temperatures and wildfires currently threatening our centers and workforce in California, it has never been more important to understand our changing planet.”",
+    "NASA scientists further estimate Earth in 2024 was about 2.65 degrees Fahrenheit (1.47 degrees Celsius) warmer than the mid-19th century average (1850-1900).",
+    "For more than half of 2024, average temperatures were more than 1.5 degrees Celsius above the baseline, and the annual average, with mathematical uncertainties, may have exceeded the level for the first time.",
+    "To put that in perspective, temperatures during the warm periods on Earth three million years ago — when sea levels were dozens of feet higher than today — were only around 3 degrees Celsius warmer than pre-industrial levels,” said Gavin Schmidt.",
+    "The temperatures of individual years can be influenced by natural climate fluctuations such as El Niño and La Niña, which alternately warm and cool the tropical Pacific Ocean.",
+    "Researchers are working to identify contributing factors, including possible climate impacts of the January 2022 Tonga volcanic eruption and reductions in pollution, which may change cloud cover and how solar energy is reflected back into space.",
+    "“We’re already seeing the impact in extreme rainfall, heat waves, and increased flood risk, which are going to keep getting worse as long as emissions continue.”",
+    "NASA assembles its temperature record using surface air temperature data collected from tens of thousands of meteorological stations, as well as sea surface temperature data acquired by ship- and buoy-based instruments.",
+    "Independent analyses by NOAA, Berkeley Earth, the Hadley Centre (part of the United Kingdom’s weather forecasting Met Office) and Copernicus Climate Services in Europe have also concluded that the global surface temperatures for 2024 were the highest since modern record-keeping began.",
+    "NASA’s full dataset of global surface temperatures, as well as details of how NASA scientists conducted the analysis, are publicly available from GISS, a NASA laboratory managed by the agency’s Goddard Space Flight Center in Greenbelt, Maryland."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "broad_topic_coverage",
+     "composite_score": 0.6601,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.6599,
+      "high_information_density": 0.6589,
+      "broad_topic_coverage": 0.6601,
+      "coherence_prioritized": 0.6599,
+      "graph_centrality": 0.6456
+     },
+     "quality_metrics": {
+      "indices": [
+       0,
+       1,
+       2,
+       3,
+       4,
+       5,
+       7,
+       9,
+       11,
+       12,
+       13,
+       15,
+       16,
+       17,
+       18,
+       20,
+       24,
+       27
+      ],
+      "composite_score": 0.6601,
+      "topic_coverage": 0.6429,
+      "info_density": 0.5698,
+      "novelty_score": 0.8333,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 3,
+     "diagnostics": [
+      {
+       "sentence_index": 8,
+       "issues": [
+        {
+         "rule_id": "RULE",
+         "message": "This word is normally spelled with a hyphen.",
+         "category": "MISC",
+         "offset": 9,
+         "error_length": 0
+        }
+       ]
+      },
+      {
+       "sentence_index": 11,
+       "issues": [
+        {
+         "rule_id": "RULE",
+         "message": "Unpaired symbol: ‘“’ seems to be missing",
+         "category": "PUNCTUATION",
+         "offset": 225,
+         "error_length": 0
+        }
+       ]
+      },
+      {
+       "sentence_index": 13,
+       "issues": [
+        {
+         "rule_id": "RULE",
+         "message": "Consider using just “reflected”.",
+         "category": "REDUNDANCY",
+         "offset": 219,
+         "error_length": 0
+        }
+       ]
+      }
+     ]
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "NIST-OUTLIERS-INTRO",
+   "depth": "brief",
+   "seconds": 0.372,
+   "sentences": [
+    "For example, the data may have been coded incorrectly or an experiment may not have been run correctly.",
+    "In some cases, it may not be possible to determine if an outlying point is bad data."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.6599,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.6599,
+      "high_information_density": 0.6599,
+      "broad_topic_coverage": 0.6599,
+      "coherence_prioritized": 0.6599,
+      "graph_centrality": 0.6599
+     },
+     "quality_metrics": {
+      "indices": [
+       3,
+       5
+      ],
+      "composite_score": 0.6599,
+      "topic_coverage": 0.25,
+      "info_density": 0.9854,
+      "novelty_score": 0.8966,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 1,
+     "diagnostics": [
+      {
+       "sentence_index": 0,
+       "issues": [
+        {
+         "rule_id": "RULE",
+         "message": "Use a comma before “or” if it connects two independent clauses (unless they are closely connected and short).",
+         "category": "PUNCTUATION",
+         "offset": 53,
+         "error_length": 0
+        }
+       ]
+      }
+     ]
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "NIST-OUTLIERS-INTRO",
+   "depth": "balanced",
+   "seconds": 0.423,
+   "sentences": [
+    "An outlier is an observation that appears to deviate markedly from other observations in the sample.",
+    "For example, the data may have been coded incorrectly or an experiment may not have been run correctly.",
+    "If it can be determined that an outlying point is in fact erroneous, then the outlying value should be deleted from the analysis (or corrected if possible).",
+    "In some cases, it may not be possible to determine if an outlying point is bad data."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.6434,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.6434,
+      "high_information_density": 0.6434,
+      "broad_topic_coverage": 0.6434,
+      "coherence_prioritized": 0.6434,
+      "graph_centrality": 0.6434
+     },
+     "quality_metrics": {
+      "indices": [
+       0,
+       3,
+       4,
+       5
+      ],
+      "composite_score": 0.6434,
+      "topic_coverage": 0.375,
+      "info_density": 0.8685,
+      "novelty_score": 0.75,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 1,
+     "diagnostics": [
+      {
+       "sentence_index": 1,
+       "issues": [
+        {
+         "rule_id": "RULE",
+         "message": "Use a comma before “or” if it connects two independent clauses (unless they are closely connected and short).",
+         "category": "PUNCTUATION",
+         "offset": 53,
+         "error_length": 0
+        }
+       ]
+      }
+     ]
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "NIST-OUTLIERS-INTRO",
+   "depth": "detailed",
+   "seconds": 0.415,
+   "sentences": [
+    "An outlier is an observation that appears to deviate markedly from other observations in the sample.",
+    "For example, the data may have been coded incorrectly or an experiment may not have been run correctly.",
+    "If it can be determined that an outlying point is in fact erroneous, then the outlying value should be deleted from the analysis (or corrected if possible).",
+    "In some cases, it may not be possible to determine if an outlying point is bad data.",
+    "In any event, we typically do not want to simply delete the outlying observation."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.6641,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.6641,
+      "high_information_density": 0.6641,
+      "broad_topic_coverage": 0.6641,
+      "coherence_prioritized": 0.6641,
+      "graph_centrality": 0.6641
+     },
+     "quality_metrics": {
+      "indices": [
+       0,
+       3,
+       4,
+       5,
+       7
+      ],
+      "composite_score": 0.6641,
+      "topic_coverage": 0.5,
+      "info_density": 0.8087,
+      "novelty_score": 0.75,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 1,
+     "diagnostics": [
+      {
+       "sentence_index": 1,
+       "issues": [
+        {
+         "rule_id": "RULE",
+         "message": "Use a comma before “or” if it connects two independent clauses (unless they are closely connected and short).",
+         "category": "PUNCTUATION",
+         "offset": 53,
+         "error_length": 0
+        }
+       ]
+      }
+     ]
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "CENSUS-CB24-149",
+   "depth": "brief",
+   "seconds": 2.171,
+   "sentences": [
+    "SEPT. 10, 2024 — The U.S. Census Bureau today announced that real median household income increased by 4.0% between 2022 and 2023.",
+    "This is the first statistically significant annual increase in real median household income since 2019.",
+    "Between 2022 and 2023, the official poverty rate decreased for White and non-Hispanic White individuals; women; 18- to 64-year-olds; unrelated individuals; all workers; less than full-time, year-round workers.",
+    "For more details on how sample difference and the associated nonresponse bias impact income and official poverty estimates, refer to the Research Matters blog."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.6121,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.6121,
+      "high_information_density": 0.6121,
+      "broad_topic_coverage": 0.6121,
+      "coherence_prioritized": 0.6121,
+      "graph_centrality": 0.6082
+     },
+     "quality_metrics": {
+      "indices": [
+       3,
+       4,
+       23,
+       36
+      ],
+      "composite_score": 0.6121,
+      "topic_coverage": 0.0952,
+      "info_density": 1.0016,
+      "novelty_score": 0.8438,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "CENSUS-CB24-149",
+   "depth": "balanced",
+   "seconds": 1.975,
+   "sentences": [
+    "SEPT. 10, 2024 — The U.S. Census Bureau today announced that real median household income increased by 4.0% between 2022 and 2023.",
+    "This is the first statistically significant annual increase in real median household income since 2019.",
+    "Real median earnings for men who worked full-time, year-round increased by 3.0%, and real median earnings increased 1.5% for women who worked full-time, year-round.",
+    "This is the first statistically significant annual decrease in the female-to-male earnings ratio since 2003.",
+    "Between 2022 and 2023, the official poverty rate decreased for White and non-Hispanic White individuals; women; 18- to 64-year-olds; unrelated individuals; all workers; less than full-time, year-round workers; and those with some college.",
+    "The only group to experience a statistically significant increase in their official poverty rate was the Two or More Races population.",
+    "Between 2022 and 2023, the rate of Medicare coverage increased by 0.2 percentage points to cover 18.9% of people.",
+    "The uninsured rate for children under age 19 increased by 0.5 percentage points to 5.8% between 2022 and 2023.",
+    "All comparisons made here and in each respective report have been tested and found to be statistically significant at the 90% confidence level, unless otherwise noted.",
+    "For more details on how sample difference and the associated nonresponse bias impact income and official poverty estimates, refer to the Research Matters blog, “Using Administrative Data to Evaluate Nonresponse Bias in the 2024 Current Population Survey Annual Social and Economic Supplement.”"
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.5393,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.5393,
+      "high_information_density": 0.5393,
+      "broad_topic_coverage": 0.5393,
+      "coherence_prioritized": 0.5393,
+      "graph_centrality": 0.5393
+     },
+     "quality_metrics": {
+      "indices": [
+       3,
+       4,
+       23,
+       30,
+       33,
+       36,
+       37,
+       50,
+       52,
+       56
+      ],
+      "composite_score": 0.5393,
+      "topic_coverage": 0.1905,
+      "info_density": 0.8456,
+      "novelty_score": 0.55,
+      "coherence_score": 0.85,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "CENSUS-CB24-149",
+   "depth": "detailed",
+   "seconds": 2.269,
+   "sentences": [
+    "SEPT. 10, 2024 — The U.S. Census Bureau today announced that real median household income increased by 4.0% between 2022 and 2023.",
+    "This is the first statistically significant annual increase in real median household income since 2019.",
+    "The SPM provides an alternative way of measuring poverty in the United States and serves as an additional indicator of economic well-being.",
+    "Household income rose throughout the income distribution, increasing 6.7% at the 10th percentile and 4.6% at the 90th percentile.",
+    "Income inequality as measured by the Gini index and income percentile ratios was not significantly different between 2022 and 2023.",
+    "Real median earnings for men who worked full-time, year-round increased by 3.0%, and real median earnings increased 1.5% for women who worked full-time, year-round.",
+    "This is the first statistically significant annual decrease in the female-to-male earnings ratio since 2003.",
+    "Post-tax income is defined as money income net of federal and state taxes and credits, payroll taxes (FICA) and temporary cash payments administered by tax agencies like rebates or stimulus payments.",
+    "Between 2022 and 2023, the official poverty rate decreased for White and non-Hispanic White individuals; women; 18- to 64-year-olds; unrelated individuals; all workers; less than full-time, year-round workers; and those with some college.",
+    "The only group to experience a statistically significant increase in their official poverty rate was the Two or More Races population.",
+    "Between 2022 and 2023, the rate of Medicare coverage increased by 0.2 percentage points to cover 18.9% of people.",
+    "The uninsured rate for children under age 19 increased by 0.5 percentage points to 5.8% between 2022 and 2023.",
+    "All comparisons made here and in each respective report have been tested and found to be statistically significant at the 90% confidence level, unless otherwise noted.",
+    "On July 17, 2026, the Bureau of Labor Statistics re-released SPM thresholds for 2019-2024 following the discovery of coding errors.",
+    "The U.S. Census Bureau will publish revised SPM poverty rates using these updated thresholds before the release of the annual poverty report in September.",
+    "Meanwhile, 92.0% of the U.S. population had health insurance coverage for all or part of 2023, not statistically different from 2022.",
+    "Since the response rates remain below pre-pandemic levels, which were regularly above 80%, it is important to examine how respondents differ from nonrespondents, as this difference could affect the accuracy of the estimates.",
+    "For more details on how sample difference and the associated nonresponse bias impact income and official poverty estimates, refer to the Research Matters blog, “Using Administrative Data to Evaluate Nonresponse Bias in the 2024 Current Population Survey Annual Social and Economic Supplement.”"
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.5762,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.5762,
+      "high_information_density": 0.5744,
+      "broad_topic_coverage": 0.5762,
+      "coherence_prioritized": 0.5762,
+      "graph_centrality": 0.5677
+     },
+     "quality_metrics": {
+      "indices": [
+       0,
+       1,
+       3,
+       4,
+       7,
+       11,
+       22,
+       23,
+       28,
+       29,
+       30,
+       33,
+       34,
+       36,
+       37,
+       50,
+       52,
+       56
+      ],
+      "composite_score": 0.5762,
+      "topic_coverage": 0.381,
+      "info_density": 0.777,
+      "novelty_score": 0.55,
+      "coherence_score": 0.85,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 1,
+     "diagnostics": [
+      {
+       "sentence_index": 16,
+       "issues": [
+        {
+         "rule_id": "RULE",
+         "message": "Possible spelling mistake found.",
+         "category": "TYPOS",
+         "offset": 146,
+         "error_length": 0
+        }
+       ]
+      }
+     ]
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "SYNTHETIC-REPEATED-PARAGRAPHS",
+   "depth": "brief",
+   "seconds": 0.177,
+   "sentences": [
+    "Retention increased by 12.7%, not 27%.",
+    "The demonstration study enrolled approximately 1,240 participants on 12 March 2024."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.6573,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.6573,
+      "high_information_density": 0.6573,
+      "broad_topic_coverage": 0.6573,
+      "coherence_prioritized": 0.6573,
+      "graph_centrality": 0.6573
+     },
+     "quality_metrics": {
+      "indices": [
+       0,
+       2
+      ],
+      "composite_score": 0.6573,
+      "topic_coverage": 0.2857,
+      "info_density": 0.8636,
+      "novelty_score": 1.0,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "SYNTHETIC-REPEATED-PARAGRAPHS",
+   "depth": "balanced",
+   "seconds": 0.251,
+   "sentences": [
+    "Retention increased by 12.7%, not 27%.",
+    "The demonstration study enrolled approximately 1,240 participants on 12 March 2024.",
+    "The change may reflect selection bias and does not establish causation.",
+    "The concluding statement repeats no additional experiment; this is an intentionally constructed software stress fixture."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.6969,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.6969,
+      "high_information_density": 0.6961,
+      "broad_topic_coverage": 0.6969,
+      "coherence_prioritized": 0.6969,
+      "graph_centrality": 0.6774
+     },
+     "quality_metrics": {
+      "indices": [
+       0,
+       2,
+       3,
+       6
+      ],
+      "composite_score": 0.6969,
+      "topic_coverage": 0.5714,
+      "info_density": 0.7369,
+      "novelty_score": 0.9375,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "SYNTHETIC-REPEATED-PARAGRAPHS",
+   "depth": "detailed",
+   "seconds": 0.334,
+   "sentences": [
+    "Retention increased by 12.7%, not 27%.",
+    "Researchers measured a mean concentration of 0.03 milligram per liter.",
+    "The demonstration study enrolled approximately 1,240 participants on 12 March 2024.",
+    "The change may reflect selection bias and does not establish causation.",
+    "The concluding statement repeats no additional experiment; this is an intentionally constructed software stress fixture."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.7235,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.7235,
+      "high_information_density": 0.7235,
+      "broad_topic_coverage": 0.7235,
+      "coherence_prioritized": 0.7235,
+      "graph_centrality": 0.7096
+     },
+     "quality_metrics": {
+      "indices": [
+       0,
+       2,
+       3,
+       4,
+       6
+      ],
+      "composite_score": 0.7235,
+      "topic_coverage": 0.7143,
+      "info_density": 0.6813,
+      "novelty_score": 0.9375,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "SYNTHETIC-OCR-NOISE",
+   "depth": "brief",
+   "seconds": 0.202,
+   "sentences": [
+    "The demonstration study enrolled approximately 1,240 participants on 12 March 2024.",
+    "Retention increased by 12.7%, not 27%."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.6571,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.6571,
+      "high_information_density": 0.6571,
+      "broad_topic_coverage": 0.6571,
+      "coherence_prioritized": 0.6571,
+      "graph_centrality": 0.6571
+     },
+     "quality_metrics": {
+      "indices": [
+       3,
+       5
+      ],
+      "composite_score": 0.6571,
+      "topic_coverage": 0.25,
+      "info_density": 0.9047,
+      "novelty_score": 1.0,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "SYNTHETIC-OCR-NOISE",
+   "depth": "balanced",
+   "seconds": 0.3,
+   "sentences": [
+    "The demonstration study enrolled approximately 1,240 participants on 12 March 2024.",
+    "Retention increased by 12.7%, not 27%.",
+    "The change may reflect selection bias and does not establish causation.",
+    "Researchers measured a mean concentration of 0.03 milligram per liter."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.6891,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.6891,
+      "high_information_density": 0.6891,
+      "broad_topic_coverage": 0.6891,
+      "coherence_prioritized": 0.6891,
+      "graph_centrality": 0.6758
+     },
+     "quality_metrics": {
+      "indices": [
+       3,
+       5,
+       6,
+       7
+      ],
+      "composite_score": 0.6891,
+      "topic_coverage": 0.5,
+      "info_density": 0.788,
+      "novelty_score": 0.9375,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "SYNTHETIC-OCR-NOISE",
+   "depth": "detailed",
+   "seconds": 0.308,
+   "sentences": [
+    "The demonstration study enrolled approximately 1,240 participants on 12 March 2024.",
+    "Retention increased by 12.7%, not 27%.",
+    "The change may reflect selection bias and does not establish causation.",
+    "Researchers measured a mean concentration of 0.03 milligram per liter.",
+    "The committee recommended further study before implementation."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": {
+     "selected_strategy": "balanced",
+     "composite_score": 0.7093,
+     "strategies_evaluated": [
+      "balanced",
+      "high_information_density",
+      "broad_topic_coverage",
+      "coherence_prioritized",
+      "graph_centrality"
+     ],
+     "strategy_scores": {
+      "balanced": 0.7093,
+      "high_information_density": 0.7093,
+      "broad_topic_coverage": 0.7093,
+      "coherence_prioritized": 0.7093,
+      "graph_centrality": 0.7093
+     },
+     "quality_metrics": {
+      "indices": [
+       3,
+       5,
+       6,
+       7,
+       8
+      ],
+      "composite_score": 0.7093,
+      "topic_coverage": 0.625,
+      "info_density": 0.7677,
+      "novelty_score": 0.875,
+      "coherence_score": 1.0,
+      "semantic_relevance": 0.5
+     }
+    },
+    "grammar_diagnostics": {
+     "available": true,
+     "issues_count": 0,
+     "diagnostics": []
+    },
+    "semantic_model_status": null
+   }
+  }
+ ]
+}

@@ -1,0 +1,12 @@
+{
+  "quality_inputs_or_engine_changed": false,
+  "incidents": [
+    {
+      "stage": "overlapping Windows quality worker and Docker resource matrix",
+      "observations": ["Windows CreateProcess failed with WinError 1455 (paging capacity).", "A separate source-detector inspection raised MemoryError during scipy import.", "Legacy evaluation worker subsequently exited 3221225477 (0xC0000005); 47 completed cases had been retained.", "No completed legacy case had an engine exception recorded before the process interruption."],
+      "interpretation": "Host resource interference/process failure, not proof of a 512 MiB engine cgroup OOM or a diagnosed legacy algorithm defect.",
+      "action": "Stopped and removed only the owned active resource container; retained completed quality cases; resume missing cases serially without changing inputs, algorithms, annotations or length-selection rules.",
+      "remaining_uncertainty": "The access violation's precise native cause is not established. Quality timings from this Windows session are not deployment latency evidence."
+    }
+  ]
+}

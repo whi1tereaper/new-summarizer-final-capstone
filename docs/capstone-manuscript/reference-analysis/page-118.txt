@@ -1,0 +1,32 @@
+selected  criteria:  functional  suitability,
+performance efficiency and usability.
+   The  respondents  were  grouped  into  three
+categories:   administrator,   teachers,   and
+assistants. This grouping reflects their roles
+as  the  primary  users  of  the  system.  The
+developed system was evaluated by 3 admins, 5
+teachers and 15 assistants, with a total of 23
+respondents. The respondents did the evaluation
+of  the  system  by  answering  the  prepared
+questionnaires given by the researchers.             The
+following sections include tables that provide
+a clear view of the data collected. These tables
+highlight the findings from the          system users’
+responses.
+
+
+   6.1 Functional Suitability
+   Table 18 shows the functional suitability of
+the developed AccredX: Record Management and
+Archiving System assessed by the end users that
+consist  of      three    (3)  sub-characteristics,
+namely:    functional  completeness,  functional
+correctness and functional appropriateness.
+
+
+
+
+
+
+
+                                                       99

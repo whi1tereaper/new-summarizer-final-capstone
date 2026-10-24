@@ -1,0 +1,125 @@
+{
+  "recorded_utc": "2026-10-23T01:49:56.054044+00:00",
+  "isolated_fixture": true,
+  "real_nlp": "PHP LocalPythonBridge synchronous document API, regenerated output persisted",
+  "passed": 29,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "registration form renders student-number fields without photo requirements",
+      "passed": true
+    },
+    {
+      "name": "actual registration controller establishes pending session",
+      "passed": true
+    },
+    {
+      "name": "owner status page shows pending",
+      "passed": true
+    },
+    {
+      "name": "trial cookie is HttpOnly and independent of login session",
+      "passed": true
+    },
+    {
+      "name": "HTTP counter reports exhausted shared allowance",
+      "passed": true
+    },
+    {
+      "name": "polished exhaustion panel preserves result links",
+      "passed": true
+    },
+    {
+      "name": "Nutshell cannot bypass exhausted pending quota",
+      "passed": true
+    },
+    {
+      "name": "direct document API cannot bypass quota",
+      "passed": true
+    },
+    {
+      "name": "anonymous administrator access rejected",
+      "passed": true
+    },
+    {
+      "name": "existing dashboard module renders protected queue",
+      "passed": true
+    },
+    {
+      "name": "admin detail exposes complete student number only in protected view",
+      "passed": true
+    },
+    {
+      "name": "ordinary student cannot inspect another administrative detail",
+      "passed": true
+    },
+    {
+      "name": "administrative CSRF bypass denied",
+      "passed": true
+    },
+    {
+      "name": "actual admin approval action succeeds",
+      "passed": true
+    },
+    {
+      "name": "approval changes access without relogin",
+      "passed": true
+    },
+    {
+      "name": "approved owner receives in-app notification",
+      "passed": true
+    },
+    {
+      "name": "real PHP-to-Python document summarization persists successfully",
+      "passed": true
+    },
+    {
+      "name": "real Nutshell success persists under shared authorization",
+      "passed": true
+    },
+    {
+      "name": "Nutshell successful retry returns cached result",
+      "passed": true
+    },
+    {
+      "name": "HTTP document ownership prevents enumeration",
+      "passed": true
+    },
+    {
+      "name": "own generated history remains readable",
+      "passed": true
+    },
+    {
+      "name": "existing page smoke: forgot_password.php",
+      "passed": true
+    },
+    {
+      "name": "existing page smoke: terms.php",
+      "passed": true
+    },
+    {
+      "name": "existing page smoke: profile.php",
+      "passed": true
+    },
+    {
+      "name": "existing page smoke: history.php",
+      "passed": true
+    },
+    {
+      "name": "existing logout alias remains available",
+      "passed": true
+    },
+    {
+      "name": "existing logout completes",
+      "passed": true
+    },
+    {
+      "name": "existing password login remains functional",
+      "passed": true
+    },
+    {
+      "name": "approval and original account survive logout/login",
+      "passed": true
+    }
+  ]
+}

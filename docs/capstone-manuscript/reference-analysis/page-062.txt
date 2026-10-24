@@ -1,0 +1,32 @@
+   old records and recover deleted items with a
+   retention  period  (e.g.,  90  days  before
+   permanent deletion). This supports long-term
+   preservation and prevents accidental data
+   loss. Compliance reporting is another vital
+   function,  generating  reports  that  show
+   document status, completion percentages, and
+   accreditation readiness, directly supporting
+   decision-making      and      accreditation
+   preparation.
+
+   A dashboard with analytics provides at-a-
+   glance   visibility   into   system   and
+   accreditation   status,   displaying   total
+   folders,  total  files,  archived  items,
+   compliance status, and pending documents.
+   File upload with conflict resolution (options
+   to cancel, replace, or keep both files when
+   uploading  duplicates)  prevents  accidental
+   overwriting and preserves file integrity.
+   Finally, user profile management allows users
+   to update profile pictures, email addresses,
+   and passwords, supporting personalization and
+   account security.
+
+
+
+
+
+
+
+                                                       43

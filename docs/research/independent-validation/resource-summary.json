@@ -1,0 +1,612 @@
+{
+  "benchmarks": [
+    {
+      "artifact": "resource-enhanced-1024.json",
+      "mode": "enhanced",
+      "persistent_supervisor": false,
+      "limit_mib": 1024,
+      "completed": false,
+      "harness_error": "RuntimeError: no public port '10000/tcp' published for light-iv21-002bb320da\n",
+      "cgroup_peak_mib": null,
+      "cgroup_peak_headroom_mib": null,
+      "oom_events": 0,
+      "oom_kills": 0,
+      "startup_seconds": null,
+      "request_count": 0,
+      "http_successes": 0,
+      "article21_successes": 0,
+      "legacy_fallback_successes": 0,
+      "runs": []
+    },
+    {
+      "artifact": "resource-enhanced-512.json",
+      "mode": "enhanced",
+      "persistent_supervisor": false,
+      "limit_mib": 512,
+      "completed": true,
+      "harness_error": null,
+      "cgroup_peak_mib": 491.4296875,
+      "cgroup_peak_headroom_mib": 20.5703125,
+      "oom_events": 0,
+      "oom_kills": 0,
+      "startup_seconds": 5.636093699999037,
+      "request_count": 7,
+      "http_successes": 7,
+      "article21_successes": 4,
+      "legacy_fallback_successes": 3,
+      "runs": [
+        {
+          "label": "cold_text",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 15.787109099997906,
+          "engine_version": "2",
+          "daemon_used": false,
+          "outer_timeout": false
+        },
+        {
+          "label": "repeat_text",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 16.945047699999122,
+          "engine_version": "2",
+          "daemon_used": false,
+          "outer_timeout": false
+        },
+        {
+          "label": "first_focus",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 13.538709200001904,
+          "engine_version": "2",
+          "daemon_used": false,
+          "outer_timeout": false
+        },
+        {
+          "label": "large_text",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 8.492082500000834,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": false,
+          "outer_timeout": false
+        },
+        {
+          "label": "large_pdf",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 7.95223999999871,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": false,
+          "outer_timeout": false
+        },
+        {
+          "label": "concurrent_1",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 17.369513900004677,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": false,
+          "outer_timeout": false
+        },
+        {
+          "label": "concurrent_2",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 17.368334899998445,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": false,
+          "outer_timeout": false
+        }
+      ]
+    },
+    {
+      "artifact": "resource-large-guide-enhanced-512.json",
+      "mode": "enhanced",
+      "persistent_supervisor": true,
+      "limit_mib": 512,
+      "completed": true,
+      "harness_error": null,
+      "cgroup_peak_mib": 387.33203125,
+      "cgroup_peak_headroom_mib": 124.66796875,
+      "oom_events": 0,
+      "oom_kills": 0,
+      "startup_seconds": 0.73738179999782,
+      "request_count": 1,
+      "http_successes": 1,
+      "article21_successes": 0,
+      "legacy_fallback_successes": 1,
+      "runs": [
+        {
+          "label": "large_academic_pdf",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 37.83040550000442,
+          "engine_version": "2",
+          "daemon_used": true,
+          "outer_timeout": false
+        }
+      ]
+    },
+    {
+      "artifact": "resource-large-guide-light-512.json",
+      "mode": "light",
+      "persistent_supervisor": true,
+      "limit_mib": 512,
+      "completed": true,
+      "harness_error": null,
+      "cgroup_peak_mib": 300.125,
+      "cgroup_peak_headroom_mib": 211.875,
+      "oom_events": 0,
+      "oom_kills": 0,
+      "startup_seconds": 1.1947765000004438,
+      "request_count": 1,
+      "http_successes": 1,
+      "article21_successes": 0,
+      "legacy_fallback_successes": 1,
+      "runs": [
+        {
+          "label": "large_academic_pdf",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 21.25062269999762,
+          "engine_version": "2",
+          "daemon_used": true,
+          "outer_timeout": false
+        }
+      ]
+    },
+    {
+      "artifact": "resource-light-1024.json",
+      "mode": "light",
+      "persistent_supervisor": false,
+      "limit_mib": 1024,
+      "completed": false,
+      "harness_error": null,
+      "cgroup_peak_mib": 235.4375,
+      "cgroup_peak_headroom_mib": 788.5625,
+      "oom_events": 0,
+      "oom_kills": 0,
+      "startup_seconds": 8.052038800000446,
+      "request_count": 2,
+      "http_successes": 2,
+      "article21_successes": 0,
+      "legacy_fallback_successes": 2,
+      "runs": [
+        {
+          "label": "cold_text",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 11.17051999999967,
+          "engine_version": "2",
+          "daemon_used": false,
+          "outer_timeout": false
+        },
+        {
+          "label": "repeat_text",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 7.347084399996675,
+          "engine_version": "2",
+          "daemon_used": false,
+          "outer_timeout": false
+        }
+      ]
+    },
+    {
+      "artifact": "resource-light-512.json",
+      "mode": "light",
+      "persistent_supervisor": false,
+      "limit_mib": 512,
+      "completed": true,
+      "harness_error": null,
+      "cgroup_peak_mib": 396.05859375,
+      "cgroup_peak_headroom_mib": 115.94140625,
+      "oom_events": 0,
+      "oom_kills": 0,
+      "startup_seconds": 2.527460700002848,
+      "request_count": 7,
+      "http_successes": 7,
+      "article21_successes": 4,
+      "legacy_fallback_successes": 3,
+      "runs": [
+        {
+          "label": "cold_text",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 12.105824600002961,
+          "engine_version": "2",
+          "daemon_used": false,
+          "outer_timeout": false
+        },
+        {
+          "label": "repeat_text",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 12.633779700001469,
+          "engine_version": "2",
+          "daemon_used": false,
+          "outer_timeout": false
+        },
+        {
+          "label": "first_focus",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 10.995012800005497,
+          "engine_version": "2",
+          "daemon_used": false,
+          "outer_timeout": false
+        },
+        {
+          "label": "large_text",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 7.8389466000007815,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": false,
+          "outer_timeout": false
+        },
+        {
+          "label": "large_pdf",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 3.3338690000018687,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": false,
+          "outer_timeout": false
+        },
+        {
+          "label": "concurrent_1",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 7.441986300000281,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": false,
+          "outer_timeout": false
+        },
+        {
+          "label": "concurrent_2",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 7.451563800001168,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": false,
+          "outer_timeout": false
+        }
+      ]
+    },
+    {
+      "artifact": "resource-warm-enhanced-1024.json",
+      "mode": "enhanced",
+      "persistent_supervisor": true,
+      "limit_mib": 1024,
+      "completed": true,
+      "harness_error": null,
+      "cgroup_peak_mib": 373.1328125,
+      "cgroup_peak_headroom_mib": 650.8671875,
+      "oom_events": 0,
+      "oom_kills": 0,
+      "startup_seconds": 0.5650383999964106,
+      "request_count": 7,
+      "http_successes": 6,
+      "article21_successes": 6,
+      "legacy_fallback_successes": 0,
+      "runs": [
+        {
+          "label": "cold_article",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 3.0921201999954064,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        },
+        {
+          "label": "warm_article",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 0.8252617999969516,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        },
+        {
+          "label": "first_article_focus",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 1.9682478000031551,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        },
+        {
+          "label": "warm_article_focus",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 1.5083538999970187,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        },
+        {
+          "label": "large_pdf",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 0.9869665000005625,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        },
+        {
+          "label": "concurrent_1",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 0.7875159999966854,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        },
+        {
+          "label": "concurrent_2",
+          "http": 500,
+          "failure_code": "WORKER_UNAVAILABLE",
+          "seconds": 0.07725509999727365,
+          "engine_version": null,
+          "daemon_used": false,
+          "outer_timeout": false
+        }
+      ]
+    },
+    {
+      "artifact": "resource-warm-enhanced-512.json",
+      "mode": "enhanced",
+      "persistent_supervisor": true,
+      "limit_mib": 512,
+      "completed": true,
+      "harness_error": null,
+      "cgroup_peak_mib": 431.5625,
+      "cgroup_peak_headroom_mib": 80.4375,
+      "oom_events": 0,
+      "oom_kills": 0,
+      "startup_seconds": 0.7250892000010936,
+      "request_count": 7,
+      "http_successes": 6,
+      "article21_successes": 6,
+      "legacy_fallback_successes": 0,
+      "runs": [
+        {
+          "label": "cold_article",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 3.5549150000006193,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        },
+        {
+          "label": "warm_article",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 0.8628422999972827,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        },
+        {
+          "label": "first_article_focus",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 1.9091019000043161,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        },
+        {
+          "label": "warm_article_focus",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 1.0965039000002434,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        },
+        {
+          "label": "large_pdf",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 0.828620399995998,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        },
+        {
+          "label": "concurrent_1",
+          "http": 500,
+          "failure_code": "WORKER_UNAVAILABLE",
+          "seconds": 0.04473359999974491,
+          "engine_version": null,
+          "daemon_used": false,
+          "outer_timeout": false
+        },
+        {
+          "label": "concurrent_2",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 0.8189368999956059,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        }
+      ]
+    },
+    {
+      "artifact": "resource-warm-light-1024.json",
+      "mode": "light",
+      "persistent_supervisor": true,
+      "limit_mib": 1024,
+      "completed": true,
+      "harness_error": null,
+      "cgroup_peak_mib": 275.49609375,
+      "cgroup_peak_headroom_mib": 748.50390625,
+      "oom_events": 0,
+      "oom_kills": 0,
+      "startup_seconds": 0.8402242000011029,
+      "request_count": 7,
+      "http_successes": 6,
+      "article21_successes": 6,
+      "legacy_fallback_successes": 0,
+      "runs": [
+        {
+          "label": "cold_article",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 2.0261132000014186,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        },
+        {
+          "label": "warm_article",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 0.1526138000044739,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        },
+        {
+          "label": "first_article_focus",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 1.6524930999948992,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        },
+        {
+          "label": "warm_article_focus",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 0.5113390000042273,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        },
+        {
+          "label": "large_pdf",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 0.23559849999583093,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        },
+        {
+          "label": "concurrent_1",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 0.18001189999631606,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        },
+        {
+          "label": "concurrent_2",
+          "http": 500,
+          "failure_code": "WORKER_UNAVAILABLE",
+          "seconds": 0.07830490000196733,
+          "engine_version": null,
+          "daemon_used": false,
+          "outer_timeout": false
+        }
+      ]
+    },
+    {
+      "artifact": "resource-warm-light-512.json",
+      "mode": "light",
+      "persistent_supervisor": true,
+      "limit_mib": 512,
+      "completed": true,
+      "harness_error": null,
+      "cgroup_peak_mib": 444.484375,
+      "cgroup_peak_headroom_mib": 67.515625,
+      "oom_events": 0,
+      "oom_kills": 0,
+      "startup_seconds": 1.279415799996059,
+      "request_count": 7,
+      "http_successes": 6,
+      "article21_successes": 6,
+      "legacy_fallback_successes": 0,
+      "runs": [
+        {
+          "label": "cold_article",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 2.1442966000031447,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        },
+        {
+          "label": "warm_article",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 0.14432469999883324,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        },
+        {
+          "label": "first_article_focus",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 1.325291000001016,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        },
+        {
+          "label": "warm_article_focus",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 0.4846694000007119,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        },
+        {
+          "label": "large_pdf",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 0.23375189999933355,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        },
+        {
+          "label": "concurrent_1",
+          "http": 500,
+          "failure_code": "WORKER_UNAVAILABLE",
+          "seconds": 0.045550599999842234,
+          "engine_version": null,
+          "daemon_used": false,
+          "outer_timeout": false
+        },
+        {
+          "label": "concurrent_2",
+          "http": 200,
+          "failure_code": null,
+          "seconds": 0.13644159999967087,
+          "engine_version": "recipe-article-2.1",
+          "daemon_used": true,
+          "outer_timeout": false
+        }
+      ]
+    }
+  ],
+  "actual_deployment_certified": false,
+  "timing_caution": "Initial CLI measurements overlapped a host model comparison; host paging disrupted the 1 GiB matrix. Later warm measurements run serially.",
+  "plan_caution": "512 MiB/1 CPU/180 s is an enforced declared envelope, not a verified live Render plan.",
+  "scope_caution": "Apache/PHP/service/bridge/extraction/NLP plus supervisor when declared. DB/controller/job persistence not exercised.",
+  "observer_caution": "cgroup peak includes server, child processes, mapped/file-cache pages and small in-cgroup measurement commands; not just Python RSS."
+}

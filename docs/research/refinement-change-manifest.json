@@ -1,0 +1,305 @@
+{
+  "scope": "Current runtime repair/refinement task only; unrelated pre-existing dirty work preserved.",
+  "local_configuration": {
+    "path": ".env",
+    "edited_keys": [
+      "LOCAL_PYTHON_TIMEOUT",
+      "NLTK_DATA"
+    ],
+    "credentials_exported": false
+  },
+  "modified": [
+    {
+      "sha256": "32ab9f7d4628a831f1ac92b96d0b02b43648dcb390b6783e1e51ba5881baff4c",
+      "path": "app/public/result.php"
+    },
+    {
+      "sha256": "d92dfdc897f2be240d9070ec7ee49a61b57058b0f2acdb7d48e216cd4c180ee7",
+      "path": "app/public/summary_worker.php"
+    },
+    {
+      "sha256": "88d179b7fdedc0412c4e863e5690869db2924e0f121c8fd18303cc99197a80a4",
+      "path": "app/src/Controllers/ArticleController.php"
+    },
+    {
+      "sha256": "3ef0b80407ec10781427de6847c956209e6432ae4db0dc114d28affb2bcdceec",
+      "path": "app/src/Database.php"
+    },
+    {
+      "sha256": "224be6521573d1a932354c88629762255ad2a48a1bb75bb6f08168f77a383b47",
+      "path": "app/src/Services/ArticleService.php"
+    },
+    {
+      "sha256": "8d75d1c526cd5524528536df39cc68862aea4dc2ca1f1744f73b5b976ea2807e",
+      "path": "app/src/Services/LocalPythonBridge.php"
+    },
+    {
+      "sha256": "ece10819e0be1fb7a8c5ed079a20ca6cc22809388676f8125821cb95f1074e97",
+      "path": "app/src/Services/SummaryJobService.php"
+    },
+    {
+      "sha256": "23846ae5f46a21237ebd139cd04b5fd025600a68570574becf27e666d07dfb7e",
+      "path": "app/src/Support/ProcessingError.php"
+    },
+    {
+      "sha256": "882d76887618865f6be62e7fa1e2360771be83685d37544cf1a86ae99fa8e2e9",
+      "path": "python-engine/local_cli.py"
+    },
+    {
+      "sha256": "163eac7d692e6fd9cef47fb046c1aee08dbce0e5edde0a1f52425494fc599ddd",
+      "path": "python-engine/summarizer_core/runtime.py"
+    },
+    {
+      "sha256": "ddd4efaa2f07fef7f30571b74c7bede7aa6b9411767b69737f22e0a596ad00aa",
+      "path": "python-engine/article_engine/__init__.py"
+    },
+    {
+      "sha256": "893d348a8fe5d41d859b9a0a4a49a9fbaf618a375cfcc6462e0fc19fdd73b982",
+      "path": "python-engine/article_engine/selection.py"
+    },
+    {
+      "sha256": "a282a416d85d6367a69e86302d5776f1909104b1ecc61812655f921453167012",
+      "path": "python-engine/article_engine/summarizer.py"
+    },
+    {
+      "sha256": "003a0e3b75f76dcb5fa859ae74ecb196a1c60940ff8ccd6f4788a8278e28f531",
+      "path": "python-engine/article_engine/validation.py"
+    },
+    {
+      "sha256": "ee3c8665c6ee2b8f2c4f093b2e0a674c0aeed1680ab61dca4ad5450cf2240dbc",
+      "path": "docs/research/experimental-results.md"
+    },
+    {
+      "sha256": "cf5738042d0d14e47c5dd00869aa14f576578013f3b8c0a6f949436e4bfd872a",
+      "path": "docs/research/article-engine-quality-report.md"
+    },
+    {
+      "sha256": "0415dc82d283f92e172320376e76451fb4ad1e9fc19943928266951fcfeee56e",
+      "path": "docs/research/algorithm-improvement-methodology.md"
+    },
+    {
+      "sha256": "415bfa5b7732f34e78e32e9285a465b477ff2362861cf875e0b2159fe918bef6",
+      "path": "docs/research/mathematical-formulation.md"
+    },
+    {
+      "sha256": "1ef875f863a52bc1bd71faa671db7b03c725ba277a6ca6bb5ca41d50414f962a",
+      "path": "docs/research/coverage-aware-extractive-summarization.md"
+    },
+    {
+      "sha256": "235317b44667f52bec1a33eb3a3d7c5116dcc393acf8f0153141500277b6bf1f",
+      "path": "docs/research/ablation-study.md"
+    },
+    {
+      "sha256": "b45febd284f5a8463444fb3eb52e380084c7b36a1fc79fe8ee0c9a016d7a4b7b",
+      "path": "docs/research/engine-routing-architecture.md"
+    }
+  ],
+  "created": [
+    {
+      "sha256": "93fc17c9c63a01c3cb8896f6e2ae5b769b1952f1661ad1a45bc0feebe8d0fc24",
+      "path": "app/src/Support/ProcessingDiagnostics.php"
+    },
+    {
+      "sha256": "fda4c8390eb35627dd4fbe07fbccd2faf199c14d1a54449dc7cdbd3ac4542db6",
+      "path": "python-engine/article_engine/core.py"
+    },
+    {
+      "sha256": "6f81fd9218e18bc9804448311a2832446c8702e1bee15691bdadf9494b04d667",
+      "path": "python-engine/article_engine/focus.py"
+    },
+    {
+      "sha256": "9acfb2d2ce845f2290631c0bf530e01ed8fc47c2d418b4c62d8f5e0d7d12e195",
+      "path": "python-engine/article_engine/refinement_parameters.json"
+    },
+    {
+      "sha256": "8be6df3c071c3e271ba7fd1aab152348d2ec6f17a52afdf692b96cdfeb151168",
+      "path": "python-engine/evaluation/article_v2_snapshot/__init__.py"
+    },
+    {
+      "sha256": "f046b1971dd741a6340149178ad03cc60853b24309cad1a876467c629019ad76",
+      "path": "python-engine/evaluation/article_v2_snapshot/baseline.py"
+    },
+    {
+      "sha256": "807a498ec33a53afe70e9ee8adafe6809b1a89cb3eef2a0918ef5e85896d4a71",
+      "path": "python-engine/evaluation/article_v2_snapshot/preprocessing.py"
+    },
+    {
+      "sha256": "98503b913a6caaf909a0716778cffada466da1cd48d4ac51f1cdfeee9a518162",
+      "path": "python-engine/evaluation/article_v2_snapshot/ranking.py"
+    },
+    {
+      "sha256": "0c466e1fec54e9b4f61297f7187779c4e24ca00ab9c8b1496a8175771efc174e",
+      "path": "python-engine/evaluation/article_v2_snapshot/summarizer.py"
+    },
+    {
+      "sha256": "902f8d40ea5a4736edeb868826cb2c1415f851c561d33c000358ee28f23f7a2d",
+      "path": "python-engine/evaluation/article_v2_snapshot/coverage.py"
+    },
+    {
+      "sha256": "35f8f157d173d1fdaf3d598876a7299bccaa48919a597f0839636ee6fa92d317",
+      "path": "python-engine/evaluation/article_v2_snapshot/selection.py"
+    },
+    {
+      "sha256": "521b45060d766b336ec56d907f70fba7013947df8b2fe59f042512b8d1619a43",
+      "path": "python-engine/evaluation/article_v2_snapshot/validation.py"
+    },
+    {
+      "sha256": "922f6543b36396a392798bf7b0cbb7e16c14d362108e9ce42e705dc22833c266",
+      "path": "python-engine/evaluation/article_v2_snapshot/coverage_parameters.json"
+    },
+    {
+      "sha256": "bc2678af60ac6d33d98244a6c86fbd3a35fba9670448b003aea29261753c725e",
+      "path": "python-engine/evaluation/runtime_profile.py"
+    },
+    {
+      "sha256": "7189bbb44f102e0e5c7584ca3504c61f019d59c3e2d019113407a4224cda4d5d",
+      "path": "python-engine/evaluation/runtime_memory.py"
+    },
+    {
+      "sha256": "1f37a93c76582c37b1f152ac5002ebaeba253565200e677d1d62b0ba1abdda8a",
+      "path": "python-engine/evaluation/refinement_calibration.py"
+    },
+    {
+      "sha256": "54ec20d235e33e066aa73396297bb4623bf6a4420e3771a632cf8043631e1566",
+      "path": "python-engine/evaluation/refinement_experiment.py"
+    },
+    {
+      "sha256": "b8f7f8ee102806330773a9099217a17c66dc02680819d76db32037bf3b57bba9",
+      "path": "python-engine/evaluation/refinement_performance.py"
+    },
+    {
+      "sha256": "5976ca4c352ccddae9d7f3ad342ae52ebfbb0dfbdee30fdfb00a3aaf2a61f5fe",
+      "path": "python-engine/tests/test_article_refinement.py"
+    },
+    {
+      "sha256": "0959c87efb8fa51b46bc9ab68e0e260ecb09e2277a95bcfe625316e29fbe4870",
+      "path": "python-engine/tests/test_runtime_diagnostics.py"
+    },
+    {
+      "sha256": "26e6f24d6dc498363b89e006a6a2a8952a940bfcf9c4d9f5ba81b2b234dd7585",
+      "path": "scripts/inspect_summary_runtime.php"
+    },
+    {
+      "sha256": "b978a29331539a89dcf95bf89635b1384b0bdb2fbc639df242bd5127935e4097",
+      "path": "scripts/test_runtime_repair.py"
+    },
+    {
+      "sha256": "9264805632ddad776eeb1f3e8293eb4b1a58e15db4f0d48d7eaf042647476400",
+      "path": "scripts/test_runtime_diagnostics.php"
+    },
+    {
+      "sha256": "5d3e52e5a665f021b68168ff757a06e751b6284ff41ff5b4eb8c8d5b4cfded5d",
+      "path": "scripts/runtime_browser_account.php"
+    },
+    {
+      "sha256": "0bf2bcb46915285c8c76cfc1507bbb79b48c15dc3d93f729d607018f4adf1c89",
+      "path": "scripts/test_runtime_authenticated_browser.cjs"
+    },
+    {
+      "sha256": "b7f4da743e158546e30e9662f6a939f55d7564fd9a72df84bba31db26631cf5f",
+      "path": "scripts/test_runtime_matrix.py"
+    },
+    {
+      "sha256": "c000ca63160270bba8f8d94271430e658f16b1080740574378e4ead68c293418",
+      "path": "scripts/test_article_optin_http.py"
+    },
+    {
+      "sha256": "19cc62d7d827c385b50855290a38b5e4d9dfce124d2f9aee797c8b45238faa90",
+      "path": "scripts/run_refinement_regressions.py"
+    },
+    {
+      "sha256": "df0d980bd354f50ad1526ba97357dbc27134fe5a10e23e8dba9345d7c8444124",
+      "path": "docs/research/article-engine-release-readiness.md"
+    },
+    {
+      "sha256": "de71f28e09f8496f8e298e0dd228bf1d6e09b67fd2130a892834c2dd0b1ba14a",
+      "path": "docs/research/external-evaluation-protocol.md"
+    },
+    {
+      "sha256": "9721510d867fa1fe753bc200f57941029c538611d0eb30ac6cd749e9d3ad75fb",
+      "path": "docs/research/external-source-candidates.json"
+    },
+    {
+      "sha256": "e0655285a027c19ba8666123c7b3404618b0b06acdda4712c977c0c82b100042",
+      "path": "docs/research/external-review-workbook.csv"
+    },
+    {
+      "sha256": "9a9eb528ae83fc3456515ddb18cdb5f8e4d8cc56bd1404edaa003871f5a2f557",
+      "path": "docs/research/refinement-results.json"
+    },
+    {
+      "sha256": "7ea1b014050338c45c7bc271cdfb22872c2cfb0e66669f78c0345939ec849b40",
+      "path": "docs/research/refinement-performance.json"
+    },
+    {
+      "sha256": "726299205c734049a0af935aa4251ef0f75225162cf49de4808c721627a8b28d",
+      "path": "docs/research/refinement-regression-results.json"
+    },
+    {
+      "sha256": "790ebb57e4eea76225699be5af6a8179726ec6eb15c485dc4f5da2de2243b425",
+      "path": "docs/research/runtime-failure-reproduction.json"
+    },
+    {
+      "sha256": "d1479d811394bd5897371bb79a72c2149be7d2ee2ab7d6a1b4f90b7e036a3e9b",
+      "path": "docs/research/runtime-http-attempts.jsonl"
+    },
+    {
+      "sha256": "49d4110abd396e97eb66b8d0f460d8a0971fc3a7ff52fc932bac3f617e5c6c6e",
+      "path": "docs/research/runtime-browser-attempts.jsonl"
+    },
+    {
+      "sha256": "607030873bac54a24de9c76aae2296ad4496632fd507d136479d490aa4374b26",
+      "path": "docs/research/runtime-authenticated-browser.json"
+    },
+    {
+      "sha256": "df63d4735f62ce7a67a3312a82acc9069cbc05ca568d09c9ba1c7fe15037d0c6",
+      "path": "docs/research/runtime-optin-http.json"
+    },
+    {
+      "sha256": "2080d1ccd5ec5d9147a6cc36f98567d076c4a124769f07ddb25d0b6485b0fd0a",
+      "path": "docs/research/runtime-http-matrix.json"
+    },
+    {
+      "sha256": "e5e8174e001b9c18bd4ac94f7b57f1238f64c0970bdef23b5910ff5a914319c8",
+      "path": "docs/research/runtime-repair-http.json"
+    },
+    {
+      "sha256": "c6a823475a44e069341e6a81600b6d3b468b965f3d1932ad6861d617f065b970",
+      "path": "docs/research/runtime-repair-http-text.json"
+    },
+    {
+      "sha256": "bde6c84386189d34499fe60b686c30b94f853b1cb64acfc68d6a8281acdc1daf",
+      "path": "docs/research/runtime-repair-http-pdf.json"
+    },
+    {
+      "sha256": "616f0ba42a5368338e8656d61a8bed3d9dbe6b15872aebd2a259f0af566ff343",
+      "path": "docs/research/runtime-repair-http-docx.json"
+    },
+    {
+      "sha256": "8e9ad1e96956829003cf74d7f9c279530ff534b9a08320fef5fbb1d7a29d26ab",
+      "path": "docs/research/runtime-repair-http-url.json"
+    },
+    {
+      "sha256": "5f52fdd4320a1cb5d49119dfc11b6f100c09bac2d865cc122e43ccbba30c20ac",
+      "path": "docs/research/runtime-memory-c002f04023a7c1b3d5a8b1d9cd948e75.json"
+    },
+    {
+      "sha256": "f550f3930377f7b051b19658acb17674662bdb6be550a94dee3284b87a62c858",
+      "path": "docs/research/runtime-python-profile.json"
+    },
+    {
+      "sha256": "a32333d1c2384cef1f9d2c6e25321848d55bcd283cee0c90027dcabec93f21d6",
+      "path": "python-engine/evaluation/refinement_trial_verification.py"
+    },
+    {
+      "sha256": "b20fc024adf77dabe660b17258f054ade0931167c7aaea0661902dbd38196c17",
+      "path": "docs/research/refinement-trial-verification.json"
+    }
+  ],
+  "excluded_generated_runtime": "Private storage/logs/request-diagnostics.jsonl and job-*.jsonl; ordinary test uploads/session artifacts.",
+  "notes": [
+    "Manifest does not hash itself.",
+    "Generated browser/HTTP attempt records retain harness failures as well as final successful retests.",
+    "No deployment routing flag was enabled."
+  ]
+}

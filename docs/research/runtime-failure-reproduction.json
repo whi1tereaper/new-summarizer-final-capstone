@@ -1,0 +1,71 @@
+{
+  "test_kind": "real_apache_http_guest_session",
+  "input": "pdf",
+  "depth": "brief",
+  "job_id": "128a12953698ebc15b2561c5354fc60e",
+  "accept_http": 200,
+  "observations": [
+    {
+      "success": true,
+      "job_id": "128a12953698ebc15b2561c5354fc60e",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "128a12953698ebc15b2561c5354fc60e",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "128a12953698ebc15b2561c5354fc60e",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "128a12953698ebc15b2561c5354fc60e",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "128a12953698ebc15b2561c5354fc60e",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "128a12953698ebc15b2561c5354fc60e",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "128a12953698ebc15b2561c5354fc60e",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "128a12953698ebc15b2561c5354fc60e",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "128a12953698ebc15b2561c5354fc60e",
+      "status": "processing",
+      "can_retry": false
+    }
+  ],
+  "seconds": 8.674409799998102,
+  "expected_original_file_match_not_assumed": true,
+  "worker_exit": 255,
+  "worker_sqlstate": [
+    "42601"
+  ],
+  "worker_failed_in_job_lookup": true,
+  "completed": false
+}

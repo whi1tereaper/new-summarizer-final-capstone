@@ -1,0 +1,98 @@
+{
+    "passed": 23,
+    "failed": 0,
+    "checks": [
+        {
+            "name": "legacy separator mismatch reproduces correct-ID account lookup failure",
+            "passed": true
+        },
+        {
+            "name": "dry run verifies eligibility without altering the application",
+            "passed": true
+        },
+        {
+            "name": "explicit operator approval is required",
+            "passed": true
+        },
+        {
+            "name": "maintenance reason is required",
+            "passed": true
+        },
+        {
+            "name": "arbitrary ID replacements are rejected",
+            "passed": true
+        },
+        {
+            "name": "stale version cannot overwrite an application",
+            "passed": true
+        },
+        {
+            "name": "apply requires a private pre-change backup",
+            "passed": true
+        },
+        {
+            "name": "backup directory inside the web tree is rejected",
+            "passed": true
+        },
+        {
+            "name": "inactive account cannot be repaired",
+            "passed": true
+        },
+        {
+            "name": "administrator account cannot be repaired as a student",
+            "passed": true
+        },
+        {
+            "name": "inactive imported ID cannot activate an account",
+            "passed": true
+        },
+        {
+            "name": "expired imported ID cannot activate an account",
+            "passed": true
+        },
+        {
+            "name": "another students claimed ID cannot be transferred",
+            "passed": true
+        },
+        {
+            "name": "late audit failure rolls back link approval notifications and audit rows",
+            "passed": true
+        },
+        {
+            "name": "operator repair uses the real registry approval path",
+            "passed": true
+        },
+        {
+            "name": "corrected student ID resolves the same existing account",
+            "passed": true
+        },
+        {
+            "name": "existing password still verifies after repair",
+            "passed": true
+        },
+        {
+            "name": "username email password role and all account fields are unchanged",
+            "passed": true
+        },
+        {
+            "name": "no user summary or feedback is created deleted or replaced",
+            "passed": true
+        },
+        {
+            "name": "private pre-change application backup is exact and hash verified",
+            "passed": true
+        },
+        {
+            "name": "audit records local operator provenance without impersonating an admin",
+            "passed": true
+        },
+        {
+            "name": "correction and verification notifications are retained on the same account",
+            "passed": true
+        },
+        {
+            "name": "repeated repair is idempotent and does not duplicate audit events",
+            "passed": true
+        }
+    ]
+}

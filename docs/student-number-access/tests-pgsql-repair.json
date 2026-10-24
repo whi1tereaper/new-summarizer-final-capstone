@@ -1,0 +1,20 @@
+{
+    "recorded_utc": "2026-10-23T02:39:46+00:00",
+    "isolated_fixture": true,
+    "existing_schema": true,
+    "nlp": "fixture bridge for accounting tests; real NLP is separate HTTP evidence",
+    "driver": "pgsql",
+    "passed": 59,
+    "failed": 0,
+    "failures": [],
+    "race_outcomes": [
+        "completed",
+        "ACCESS_BUSY",
+        "completed",
+        "ACCESS_BUSY",
+        "completed",
+        "ACCESS_BUSY",
+        "ACCESS_BUSY",
+        "ACCESS_BUSY"
+    ]
+}

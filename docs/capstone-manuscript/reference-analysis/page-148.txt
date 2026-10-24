@@ -1,0 +1,52 @@
+       -   Total Files – the total number of files in the
+           records
+       -   Archived Items – the number of items archived
+       -   Compliance Status – the percentage of
+           compliance completion and the number of
+           checklists completed
+       -   Pending Documents – the number of documents
+           needed to be complied with
+       -   Accreditation Readiness – shows the overall
+           progress of each Area
+   •   You can also generate a compliance report in this
+       page.
+
+
+E. Folders Page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    •   Here, you can see all the folders of all the
+        Areas you are assigned to.
+    •   You can only access the Folders of the Areas you
+        are assigned to by the Admin.
+    •   Click one of the Folders to open it.
+    •   You can only manage/manipulate all folders in the
+        system if you are an Admin. If you are a
+        compliance manager (teacher or assistant), you
+        can only manage folders you create or upload.
+    •   You can only manage/manipulate files that you
+        have uploaded. Admins can manage all files.
+
+
+
+
+                                                                   129

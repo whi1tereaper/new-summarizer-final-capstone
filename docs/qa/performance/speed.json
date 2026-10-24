@@ -1,0 +1,92 @@
+{
+  "measured_at": "2026-10-23T13:41:54.624640+00:00",
+  "settings": {
+    "analysis_mode": "general",
+    "output_format": "paragraph",
+    "summary_depth": "balanced"
+  },
+  "method": "Sequential HTTP submit through persisted result; fresh dedicated NLP worker for first text run. Polling interval 0.2 seconds. Fixture creation and login excluded.",
+  "running": null,
+  "results": [
+    {
+      "kind": "text",
+      "run": 1,
+      "worker_state": "fresh worker / first request",
+      "passed": true,
+      "submission_seconds": 1.578,
+      "completed_seconds": 293.718,
+      "end_to_end_seconds": 294.0,
+      "source_words": 148,
+      "summary_words": 66,
+      "recorded_processing_seconds": null,
+      "recorded_job_seconds": 291
+    },
+    {
+      "kind": "text",
+      "run": 2,
+      "worker_state": "reused worker",
+      "passed": true,
+      "submission_seconds": 0.297,
+      "completed_seconds": 18.64,
+      "end_to_end_seconds": 19.765,
+      "source_words": 148,
+      "summary_words": 66,
+      "recorded_processing_seconds": null,
+      "recorded_job_seconds": 17
+    },
+    {
+      "kind": "text",
+      "run": 3,
+      "worker_state": "reused worker",
+      "passed": true,
+      "submission_seconds": 0.485,
+      "completed_seconds": 20.938,
+      "end_to_end_seconds": 21.172,
+      "source_words": 148,
+      "summary_words": 66,
+      "recorded_processing_seconds": null,
+      "recorded_job_seconds": 20
+    },
+    {
+      "kind": "pdf",
+      "run": 1,
+      "worker_state": "reused worker",
+      "passed": true,
+      "upload_bytes": 1652,
+      "submission_seconds": 1.797,
+      "completed_seconds": 10.532,
+      "end_to_end_seconds": 10.641,
+      "source_words": 148,
+      "summary_words": 66,
+      "recorded_processing_seconds": null,
+      "recorded_job_seconds": 8
+    },
+    {
+      "kind": "docx",
+      "run": 1,
+      "worker_state": "reused worker",
+      "passed": true,
+      "upload_bytes": 37092,
+      "submission_seconds": 0.156,
+      "completed_seconds": 4.938,
+      "end_to_end_seconds": 5.047,
+      "source_words": 148,
+      "summary_words": 66,
+      "recorded_processing_seconds": null,
+      "recorded_job_seconds": 5
+    },
+    {
+      "kind": "url",
+      "run": 1,
+      "worker_state": "reused worker",
+      "passed": true,
+      "submission_seconds": 0.25,
+      "completed_seconds": 27.015,
+      "end_to_end_seconds": 27.297,
+      "source_words": 1161,
+      "summary_words": 320,
+      "recorded_processing_seconds": null,
+      "recorded_job_seconds": 26
+    }
+  ]
+}

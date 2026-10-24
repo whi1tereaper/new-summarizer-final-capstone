@@ -1,0 +1,52 @@
+[
+  {
+    "name": "HTTP protection .env",
+    "passed": true,
+    "detail": 403
+  },
+  {
+    "name": "HTTP protection .git/config",
+    "passed": true,
+    "detail": 403
+  },
+  {
+    "name": "HTTP protection storage/backups/ai_summarizer_xampp_20261023_190448.sql",
+    "passed": true,
+    "detail": 403
+  },
+  {
+    "name": "HTTP protection scripts/qa/control.php",
+    "passed": true,
+    "detail": 403
+  },
+  {
+    "name": "HTTP protection .venv-nlp/pyvenv.cfg",
+    "passed": true,
+    "detail": 403
+  },
+  {
+    "name": "Git ignores .env",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "Git ignores storage/backups/qa.sql",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "no tracked active credentials or SQL backups",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "application PHP has no removed database/container runtime branches",
+    "passed": true,
+    "detail": []
+  },
+  {
+    "name": "unavailable local MySQL fails safely without fallback",
+    "passed": true,
+    "detail": null
+  }
+]

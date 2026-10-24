@@ -1,0 +1,1942 @@
+{
+  "source_files": [
+    "PRELIMINARY_PAGES.md",
+    "CHAPTER_1.md",
+    "CHAPTER_2.md",
+    "CHAPTER_3.md",
+    "tables\\FEATURE_DISCUSSION.md",
+    "tables\\DATA_DICTIONARY.md",
+    "CHAPTER_4.md",
+    "REFERENCES.md",
+    "APPENDICES_A_E.md",
+    "APPENDIX_F_USER_MANUAL.md",
+    "APPENDIX_G_MAINTENANCE_MANUAL.md",
+    "EVALUATION_INSTRUMENTS.md",
+    "ADDITIONAL_APPENDICES.md"
+  ],
+  "source_sha256": {
+    "PRELIMINARY_PAGES.md": "0b2afa8c97eee27c23cc91cee2b2c87d1941d89c1134506f1f4648bfefb8555d",
+    "CHAPTER_1.md": "33fe561a191e4ff995ea0a7104421e7512e2730c1f07b610f546dc85fc887954",
+    "CHAPTER_2.md": "4d7fbebd9e2ba9e84c6fe153d475d91dce0783efffcb0e9d238534172b9e59a1",
+    "CHAPTER_3.md": "33cc84d50c7713b5845acf4cc3552412ecaccfe929e01f928396fb5cf96c8262",
+    "tables\\FEATURE_DISCUSSION.md": "350ff1f85211fdb7fc56eea685eb2dafaa925ca4953424de923bef93f4c1f039",
+    "tables\\DATA_DICTIONARY.md": "3492c1cebc975002ff4dfc4efa522dc5190784c440e9d0673c57cee9a5898b97",
+    "CHAPTER_4.md": "bad7449db706a038ce12d604c442b246c5b9c693e73583083bf2c21e1f03771a",
+    "REFERENCES.md": "af1f3551504a0a7c64907cce98368f1aeb44a3622b294e0e33688430466719a4",
+    "APPENDICES_A_E.md": "22558faec2e2491943422445b49df3b73245eb3f544320e194e18ec99e0b71ed",
+    "APPENDIX_F_USER_MANUAL.md": "6b66ea2b588c12e2dcbd9499267ed6b405a615ab0556f977319256b26fd193ec",
+    "APPENDIX_G_MAINTENANCE_MANUAL.md": "2083098540a009ff718d97d9bd9dc0db6d39c3461d8ad5aff88a407b56f8c3fc",
+    "EVALUATION_INSTRUMENTS.md": "b417482bdd06786262ea5168eab8224afe9cb83496d63411717ef77b5daf63f6",
+    "ADDITIONAL_APPENDICES.md": "2ecb5646f0a5e74cbb455ddc1d96236771bff11df32d1a20c7bf9a1d91e9657c"
+  },
+  "warnings": [],
+  "figures": [
+    {
+      "number": 1,
+      "title": "Proposed research paradigm for LIGHT summarizer.",
+      "generated_caption": false
+    },
+    {
+      "number": 2,
+      "title": "Researcher-supplied provisional schedule, activities 1 to 7.",
+      "generated_caption": false
+    },
+    {
+      "number": 3,
+      "title": "Researcher-supplied provisional schedule, activities 8 to 14.",
+      "generated_caption": false
+    },
+    {
+      "number": 4,
+      "title": "Researcher-supplied provisional schedule, activities 15 to 21.",
+      "generated_caption": false
+    },
+    {
+      "number": 5,
+      "title": "Implemented actors and major use cases.",
+      "generated_caption": false
+    },
+    {
+      "number": 6,
+      "title": "Guest visitor use cases.",
+      "generated_caption": false
+    },
+    {
+      "number": 7,
+      "title": "Registered account use cases.",
+      "generated_caption": false
+    },
+    {
+      "number": 8,
+      "title": "Administrator use cases.",
+      "generated_caption": false
+    },
+    {
+      "number": 9,
+      "title": "Assigned evaluator use cases.",
+      "generated_caption": false
+    },
+    {
+      "number": 10,
+      "title": "Context diagram of LIGHT summarizer.",
+      "generated_caption": false
+    },
+    {
+      "number": 11,
+      "title": "Level 1 data flows and logical stores.",
+      "generated_caption": false
+    },
+    {
+      "number": 12,
+      "title": "Level 2 summary-generation data flow.",
+      "generated_caption": false
+    },
+    {
+      "number": 13,
+      "title": "Level 2 account and authentication data flow.",
+      "generated_caption": false
+    },
+    {
+      "number": 14,
+      "title": "Level 1 account and session detail.",
+      "generated_caption": false
+    },
+    {
+      "number": 15,
+      "title": "Level 1 source and summary detail.",
+      "generated_caption": false
+    },
+    {
+      "number": 16,
+      "title": "Level 1 result and reading-helper detail.",
+      "generated_caption": false
+    },
+    {
+      "number": 17,
+      "title": "Level 1 feedback and usage detail.",
+      "generated_caption": false
+    },
+    {
+      "number": 18,
+      "title": "Level 1 administration and evaluation detail.",
+      "generated_caption": false
+    },
+    {
+      "number": 19,
+      "title": "Level 2 summary intake detail.",
+      "generated_caption": false
+    },
+    {
+      "number": 20,
+      "title": "Level 2 summary output detail.",
+      "generated_caption": false
+    },
+    {
+      "number": 21,
+      "title": "Level 2 account verification detail.",
+      "generated_caption": false
+    },
+    {
+      "number": 22,
+      "title": "Level 2 session and identity-change detail.",
+      "generated_caption": false
+    },
+    {
+      "number": 23,
+      "title": "Accounts and authentication ERD panel.",
+      "generated_caption": false
+    },
+    {
+      "number": 24,
+      "title": "Summary ownership, jobs and artifacts ERD panel.",
+      "generated_caption": false
+    },
+    {
+      "number": 25,
+      "title": "Ratings and comments ERD panel.",
+      "generated_caption": false
+    },
+    {
+      "number": 26,
+      "title": "Document extraction and cached combinations ERD panel.",
+      "generated_caption": false
+    },
+    {
+      "number": 27,
+      "title": "Landing sessions and events ERD panel.",
+      "generated_caption": false
+    },
+    {
+      "number": 28,
+      "title": "Stores without declared foreign keys ERD panel.",
+      "generated_caption": false
+    },
+    {
+      "number": 29,
+      "title": "Evaluation datasets, documents, runs and outputs ERD panel.",
+      "generated_caption": false
+    },
+    {
+      "number": 30,
+      "title": "References, content units and challenge cases ERD panel.",
+      "generated_caption": false
+    },
+    {
+      "number": 31,
+      "title": "Assignments, ratings, errors and metrics ERD panel.",
+      "generated_caption": false
+    },
+    {
+      "number": 32,
+      "title": "Content-unit reviews ERD panel.",
+      "generated_caption": false
+    },
+    {
+      "number": 33,
+      "title": "Evaluator and reviewer account relationships ERD panel.",
+      "generated_caption": false
+    },
+    {
+      "number": 34,
+      "title": "Dataset, run and reference authorship ERD panel.",
+      "generated_caption": false
+    },
+    {
+      "number": 35,
+      "title": "Landing information and navigation — isolated template capture.",
+      "generated_caption": false
+    },
+    {
+      "number": 36,
+      "title": "Source intake and summary settings — isolated template capture.",
+      "generated_caption": false
+    },
+    {
+      "number": 37,
+      "title": "Sign-in form — isolated template capture.",
+      "generated_caption": false
+    },
+    {
+      "number": 38,
+      "title": "Registration form — isolated template capture.",
+      "generated_caption": false
+    },
+    {
+      "number": 39,
+      "title": "Recovery request form — isolated template capture.",
+      "generated_caption": false
+    },
+    {
+      "number": 40,
+      "title": "Password reset form — isolated template capture.",
+      "generated_caption": false
+    },
+    {
+      "number": 41,
+      "title": "Administrator code verification state — isolated template capture.",
+      "generated_caption": false
+    },
+    {
+      "number": 42,
+      "title": "Terms acceptance state — isolated template capture.",
+      "generated_caption": false
+    },
+    {
+      "number": 43,
+      "title": "Personal dashboard empty state — isolated template capture.",
+      "generated_caption": false
+    },
+    {
+      "number": 44,
+      "title": "History empty state — isolated template capture.",
+      "generated_caption": false
+    },
+    {
+      "number": 45,
+      "title": "Analytics empty state — isolated template capture.",
+      "generated_caption": false
+    },
+    {
+      "number": 46,
+      "title": "Account profile display — isolated template capture.",
+      "generated_caption": false
+    },
+    {
+      "number": 47,
+      "title": "Background processing state — isolated template capture.",
+      "generated_caption": false
+    },
+    {
+      "number": 48,
+      "title": "Structured result and output controls — isolated template capture.",
+      "generated_caption": false
+    },
+    {
+      "number": 49,
+      "title": "Unavailable-result recovery state — isolated template capture.",
+      "generated_caption": false
+    },
+    {
+      "number": 50,
+      "title": "Administrator overview — isolated template capture.",
+      "generated_caption": false
+    },
+    {
+      "number": 51,
+      "title": "Administrator audit-log filters — isolated template capture.",
+      "generated_caption": false
+    },
+    {
+      "number": 52,
+      "title": "Assigned evaluation empty state — isolated template capture.",
+      "generated_caption": false
+    },
+    {
+      "number": 53,
+      "title": "LIGHT landing page rendered from source with an anonymous fixture.",
+      "generated_caption": false
+    },
+    {
+      "number": 54,
+      "title": "Sign-in form rendered with an anonymous fixture.",
+      "generated_caption": false
+    },
+    {
+      "number": 55,
+      "title": "Conditional administrator email-code screen using a synthetic pending-login fixture.",
+      "generated_caption": false
+    },
+    {
+      "number": 56,
+      "title": "Registration form rendered without submitting account data.",
+      "generated_caption": false
+    },
+    {
+      "number": 57,
+      "title": "Password-recovery form rendered without sending an email.",
+      "generated_caption": false
+    },
+    {
+      "number": 58,
+      "title": "Password-reset form rendered with no recovery request in progress.",
+      "generated_caption": false
+    },
+    {
+      "number": 59,
+      "title": "Public terms page rendered with an anonymous fixture.",
+      "generated_caption": false
+    },
+    {
+      "number": 60,
+      "title": "Pending-acceptance page using a synthetic registered-account fixture.",
+      "generated_caption": false
+    },
+    {
+      "number": 61,
+      "title": "Summary workspace showing source selection and generation settings.",
+      "generated_caption": false
+    },
+    {
+      "number": 62,
+      "title": "Processing layout using a synthetic pending request; execution was blocked.",
+      "generated_caption": false
+    },
+    {
+      "number": 63,
+      "title": "Result interface with explicitly synthetic summary text, not model output.",
+      "generated_caption": false
+    },
+    {
+      "number": 64,
+      "title": "Unavailable-result state produced with a missing synthetic record.",
+      "generated_caption": false
+    },
+    {
+      "number": 65,
+      "title": "Personal dashboard with an empty synthetic registered-account fixture.",
+      "generated_caption": false
+    },
+    {
+      "number": 66,
+      "title": "History page with no synthetic saved summaries.",
+      "generated_caption": false
+    },
+    {
+      "number": 67,
+      "title": "Analytics page displaying the synthetic empty-data state.",
+      "generated_caption": false
+    },
+    {
+      "number": 68,
+      "title": "Profile page displaying a reserved synthetic account identity.",
+      "generated_caption": false
+    },
+    {
+      "number": 69,
+      "title": "Logout confirmation opened from a synthetic signed-in profile.",
+      "generated_caption": false
+    },
+    {
+      "number": 70,
+      "title": "Administrative console rendered with synthetic administrator access and empty records.",
+      "generated_caption": false
+    },
+    {
+      "number": 71,
+      "title": "Audit-log viewer with a synthetic existing table and no log rows.",
+      "generated_caption": false
+    },
+    {
+      "number": 72,
+      "title": "Assigned-review page with an active synthetic account and no assignments.",
+      "generated_caption": false
+    }
+  ],
+  "tables": [
+    {
+      "number": 1,
+      "title": "Research questions, evidence sources and limits of inference.",
+      "generated_caption": false
+    },
+    {
+      "number": 2,
+      "title": "Researcher-supplied provisional Gantt schedule, April–October 2026.",
+      "generated_caption": false
+    },
+    {
+      "number": 3,
+      "title": "Proposed respondent groups and outstanding sampling information.",
+      "generated_caption": false
+    },
+    {
+      "number": 4,
+      "title": "Proposed questionnaire response coding.",
+      "generated_caption": false
+    },
+    {
+      "number": 5,
+      "title": "Proposed descriptive interpretation intervals for questionnaire means.",
+      "generated_caption": false
+    },
+    {
+      "number": 6,
+      "title": "Relationship between supplied project needs and implemented capabilities.",
+      "generated_caption": false
+    },
+    {
+      "number": 7,
+      "title": "Data dictionary for admin_audit_logs.",
+      "generated_caption": false
+    },
+    {
+      "number": 8,
+      "title": "Data dictionary for admin_security_challenges.",
+      "generated_caption": false
+    },
+    {
+      "number": 9,
+      "title": "Data dictionary for documents.",
+      "generated_caption": false
+    },
+    {
+      "number": 10,
+      "title": "Data dictionary for document_summaries.",
+      "generated_caption": false
+    },
+    {
+      "number": 11,
+      "title": "Data dictionary for evaluation_assignments.",
+      "generated_caption": false
+    },
+    {
+      "number": 12,
+      "title": "Data dictionary for evaluation_audit_log.",
+      "generated_caption": false
+    },
+    {
+      "number": 13,
+      "title": "Data dictionary for evaluation_challenge_cases.",
+      "generated_caption": false
+    },
+    {
+      "number": 14,
+      "title": "Data dictionary for evaluation_content_units.",
+      "generated_caption": false
+    },
+    {
+      "number": 15,
+      "title": "Data dictionary for evaluation_content_unit_reviews.",
+      "generated_caption": false
+    },
+    {
+      "number": 16,
+      "title": "Data dictionary for evaluation_datasets.",
+      "generated_caption": false
+    },
+    {
+      "number": 17,
+      "title": "Data dictionary for evaluation_documents.",
+      "generated_caption": false
+    },
+    {
+      "number": 18,
+      "title": "Data dictionary for evaluation_errors.",
+      "generated_caption": false
+    },
+    {
+      "number": 19,
+      "title": "Data dictionary for evaluation_metrics.",
+      "generated_caption": false
+    },
+    {
+      "number": 20,
+      "title": "Data dictionary for evaluation_outputs.",
+      "generated_caption": false
+    },
+    {
+      "number": 21,
+      "title": "Data dictionary for evaluation_ratings.",
+      "generated_caption": false
+    },
+    {
+      "number": 22,
+      "title": "Data dictionary for evaluation_references.",
+      "generated_caption": false
+    },
+    {
+      "number": 23,
+      "title": "Data dictionary for evaluation_runs.",
+      "generated_caption": false
+    },
+    {
+      "number": 24,
+      "title": "Data dictionary for feedback.",
+      "generated_caption": false
+    },
+    {
+      "number": 25,
+      "title": "Data dictionary for feedback_comments.",
+      "generated_caption": false
+    },
+    {
+      "number": 26,
+      "title": "Data dictionary for guest_sessions.",
+      "generated_caption": false
+    },
+    {
+      "number": 27,
+      "title": "Data dictionary for landing_page_events.",
+      "generated_caption": false
+    },
+    {
+      "number": 28,
+      "title": "Data dictionary for landing_page_sessions.",
+      "generated_caption": false
+    },
+    {
+      "number": 29,
+      "title": "Data dictionary for nutshell_generations.",
+      "generated_caption": false
+    },
+    {
+      "number": 30,
+      "title": "Data dictionary for password_resets.",
+      "generated_caption": false
+    },
+    {
+      "number": 31,
+      "title": "Data dictionary for rate_limits.",
+      "generated_caption": false
+    },
+    {
+      "number": 32,
+      "title": "Data dictionary for schema_migrations.",
+      "generated_caption": false
+    },
+    {
+      "number": 33,
+      "title": "Data dictionary for summaries.",
+      "generated_caption": false
+    },
+    {
+      "number": 34,
+      "title": "Data dictionary for summary_artifacts.",
+      "generated_caption": false
+    },
+    {
+      "number": 35,
+      "title": "Data dictionary for summary_jobs.",
+      "generated_caption": false
+    },
+    {
+      "number": 36,
+      "title": "Data dictionary for users.",
+      "generated_caption": false
+    },
+    {
+      "number": 37,
+      "title": "Data dictionary for user_tokens.",
+      "generated_caption": false
+    },
+    {
+      "number": 38,
+      "title": "Technologies and observed development environment.",
+      "generated_caption": false
+    },
+    {
+      "number": 39,
+      "title": "Audit verification procedures and outcomes.",
+      "generated_caption": false
+    },
+    {
+      "number": 40,
+      "title": "Functional Suitability — pending human evaluation.",
+      "generated_caption": false
+    },
+    {
+      "number": 41,
+      "title": "Performance Efficiency — pending human evaluation.",
+      "generated_caption": false
+    },
+    {
+      "number": 42,
+      "title": "Compatibility — pending human evaluation.",
+      "generated_caption": false
+    },
+    {
+      "number": 43,
+      "title": "Usability — pending human evaluation.",
+      "generated_caption": false
+    },
+    {
+      "number": 44,
+      "title": "Reliability — pending human evaluation.",
+      "generated_caption": false
+    },
+    {
+      "number": 45,
+      "title": "Security — pending human evaluation.",
+      "generated_caption": false
+    },
+    {
+      "number": 46,
+      "title": "Portability — pending human evaluation.",
+      "generated_caption": false
+    },
+    {
+      "number": 47,
+      "title": "Overall IT consultants’ summary — pending human evaluation.",
+      "generated_caption": false
+    },
+    {
+      "number": 48,
+      "title": "Functional Suitability for end users — pending human evaluation.",
+      "generated_caption": false
+    },
+    {
+      "number": 49,
+      "title": "Performance Efficiency for end users — pending human evaluation.",
+      "generated_caption": false
+    },
+    {
+      "number": 50,
+      "title": "Usability for end users — pending human evaluation.",
+      "generated_caption": false
+    },
+    {
+      "number": 51,
+      "title": "Overall end-users’ summary — pending human evaluation.",
+      "generated_caption": false
+    },
+    {
+      "number": 52,
+      "title": "Blank consultation and monitoring record.",
+      "generated_caption": false
+    },
+    {
+      "number": 53,
+      "title": "Available access contexts and interface boundaries.",
+      "generated_caption": false
+    },
+    {
+      "number": 54,
+      "title": "Source methods and user actions.",
+      "generated_caption": false
+    },
+    {
+      "number": 55,
+      "title": "Summary settings in the main interface.",
+      "generated_caption": false
+    },
+    {
+      "number": 56,
+      "title": "Result toolbar actions and verification limits.",
+      "generated_caption": false
+    },
+    {
+      "number": 57,
+      "title": "Common recovery situations and user guidance.",
+      "generated_caption": false
+    },
+    {
+      "number": 58,
+      "title": "Maintainer's path and component reference.",
+      "generated_caption": false
+    },
+    {
+      "number": 59,
+      "title": "Evidence-based troubleshooting guide.",
+      "generated_caption": false
+    },
+    {
+      "number": 60,
+      "title": "Proposed maintenance schedule; adoption and execution are not verified.",
+      "generated_caption": false
+    },
+    {
+      "number": 61,
+      "title": "Response scale for the proposed technical and end-user questionnaires.",
+      "generated_caption": false
+    },
+    {
+      "number": 62,
+      "title": "Proposed technical functional-suitability items.",
+      "generated_caption": false
+    },
+    {
+      "number": 63,
+      "title": "Proposed technical performance-efficiency items.",
+      "generated_caption": false
+    },
+    {
+      "number": 64,
+      "title": "Proposed technical compatibility items.",
+      "generated_caption": false
+    },
+    {
+      "number": 65,
+      "title": "Proposed technical usability items.",
+      "generated_caption": false
+    },
+    {
+      "number": 66,
+      "title": "Proposed technical reliability items.",
+      "generated_caption": false
+    },
+    {
+      "number": 67,
+      "title": "Proposed technical security items.",
+      "generated_caption": false
+    },
+    {
+      "number": 68,
+      "title": "Proposed technical portability items.",
+      "generated_caption": false
+    },
+    {
+      "number": 69,
+      "title": "Proposed end-user functional-suitability items.",
+      "generated_caption": false
+    },
+    {
+      "number": 70,
+      "title": "Proposed end-user performance items.",
+      "generated_caption": false
+    },
+    {
+      "number": 71,
+      "title": "Proposed end-user usability items.",
+      "generated_caption": false
+    },
+    {
+      "number": 72,
+      "title": "Supporting-document register and current evidence status.",
+      "generated_caption": false
+    },
+    {
+      "number": 73,
+      "title": "Technical evidence supplied with the manuscript.",
+      "generated_caption": false
+    }
+  ],
+  "images": [
+    {
+      "source": "capstone-manuscript\\diagrams\\research-paradigm.png",
+      "alt": "Proposed input-process-output framework for documenting and evaluating LIGHT summarizer, including a feedback path"
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\gantt-supplied-1.png",
+      "alt": "Supplied schedule activities 1 to 7"
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\gantt-supplied-2.png",
+      "alt": "Supplied schedule activities 8 to 14"
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\gantt-supplied-3.png",
+      "alt": "Supplied schedule activities 15 to 21"
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\use-cases.png",
+      "alt": "Implemented actors and major use cases."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\use-cases-guests.png",
+      "alt": "Guest visitor use cases."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\use-cases-registered.png",
+      "alt": "Registered account use cases."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\use-cases-administrators.png",
+      "alt": "Administrator use cases."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\use-cases-evaluators.png",
+      "alt": "Assigned evaluator use cases."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\dfd-context.png",
+      "alt": "Context diagram of LIGHT summarizer."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\dfd-level1.png",
+      "alt": "Level 1 data flows and logical stores."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\dfd-level2-summary.png",
+      "alt": "Level 2 summary-generation data flow."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\dfd-level2-auth.png",
+      "alt": "Level 2 account and authentication data flow."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\dfd-level1-accounts.png",
+      "alt": "Level 1 account and session detail."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\dfd-level1-summary.png",
+      "alt": "Level 1 source and summary detail."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\dfd-level1-results.png",
+      "alt": "Level 1 result and reading-helper detail."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\dfd-level1-feedback.png",
+      "alt": "Level 1 feedback and usage detail."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\dfd-level1-administration.png",
+      "alt": "Level 1 administration and evaluation detail."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\dfd-level2-summary-intake.png",
+      "alt": "Level 2 summary intake detail."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\dfd-level2-summary-output.png",
+      "alt": "Level 2 summary output detail."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\dfd-level2-auth-verification.png",
+      "alt": "Level 2 account verification detail."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\dfd-level2-auth-session.png",
+      "alt": "Level 2 session and identity-change detail."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\ERD_PANEL_01_ACCOUNTS.png",
+      "alt": "Accounts and authentication ERD panel."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\ERD_PANEL_02_SUMMARY_OUTPUTS.png",
+      "alt": "Summary ownership, jobs and artifacts ERD panel."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\ERD_PANEL_03_FEEDBACK.png",
+      "alt": "Ratings and comments ERD panel."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\ERD_PANEL_04_DOCUMENT_CACHE.png",
+      "alt": "Document extraction and cached combinations ERD panel."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\ERD_PANEL_05_LANDING_TELEMETRY.png",
+      "alt": "Landing sessions and events ERD panel."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\ERD_PANEL_06_INDEPENDENT_STORES.png",
+      "alt": "Stores without declared foreign keys ERD panel."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\ERD_PANEL_07_EVALUATION_PIPELINE.png",
+      "alt": "Evaluation datasets, documents, runs and outputs ERD panel."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\ERD_PANEL_08_EVALUATION_CONTENT.png",
+      "alt": "References, content units and challenge cases ERD panel."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\ERD_PANEL_09_EVALUATION_SCORING.png",
+      "alt": "Assignments, ratings, errors and metrics ERD panel."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\ERD_PANEL_10_UNIT_REVIEWS.png",
+      "alt": "Content-unit reviews ERD panel."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\ERD_PANEL_11_EVALUATOR_ACCOUNTS.png",
+      "alt": "Evaluator and reviewer account relationships ERD panel."
+    },
+    {
+      "source": "capstone-manuscript\\diagrams\\ERD_PANEL_12_RESEARCH_AUTHORSHIP.png",
+      "alt": "Dataset, run and reference authorship ERD panel."
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-landing-desktop.png",
+      "alt": "Landing information and navigation — isolated template capture."
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-summarizer-desktop.png",
+      "alt": "Source intake and summary settings — isolated template capture."
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-sign-in-desktop.png",
+      "alt": "Sign-in form — isolated template capture."
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-register-desktop.png",
+      "alt": "Registration form — isolated template capture."
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-password-recovery-desktop.png",
+      "alt": "Recovery request form — isolated template capture."
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-password-reset-desktop.png",
+      "alt": "Password reset form — isolated template capture."
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-admin-code-synthetic-desktop.png",
+      "alt": "Administrator code verification state — isolated template capture."
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-terms-pending-synthetic-desktop.png",
+      "alt": "Terms acceptance state — isolated template capture."
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-dashboard-empty-desktop.png",
+      "alt": "Personal dashboard empty state — isolated template capture."
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-history-empty-desktop.png",
+      "alt": "History empty state — isolated template capture."
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-analytics-empty-desktop.png",
+      "alt": "Analytics empty state — isolated template capture."
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-profile-synthetic-desktop.png",
+      "alt": "Account profile display — isolated template capture."
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-processing-synthetic-desktop.png",
+      "alt": "Background processing state — isolated template capture."
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-result-synthetic-desktop.png",
+      "alt": "Structured result and output controls — isolated template capture."
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-result-unavailable-desktop.png",
+      "alt": "Unavailable-result recovery state — isolated template capture."
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-admin-dashboard-empty-desktop.png",
+      "alt": "Administrator overview — isolated template capture."
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-admin-log-filters-empty-desktop.png",
+      "alt": "Administrator audit-log filters — isolated template capture."
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-evaluation-empty-desktop.png",
+      "alt": "Assigned evaluation empty state — isolated template capture."
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-landing-desktop.png",
+      "alt": "LIGHT landing page in isolated desktop render"
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-sign-in-desktop.png",
+      "alt": "Sign-in form"
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-admin-code-synthetic-desktop.png",
+      "alt": "Administrator verification form with synthetic pending session"
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-register-desktop.png",
+      "alt": "Create Account form"
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-password-recovery-desktop.png",
+      "alt": "Recovery form"
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-password-reset-desktop.png",
+      "alt": "Password reset form"
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-terms-desktop.png",
+      "alt": "Terms page"
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-terms-pending-synthetic-desktop.png",
+      "alt": "Pending account terms confirmation"
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-summarizer-desktop.png",
+      "alt": "Summarizer workspace"
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-processing-synthetic-desktop.png",
+      "alt": "Synthetic processing page"
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-result-synthetic-desktop.png",
+      "alt": "Synthetic result page"
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-result-unavailable-desktop.png",
+      "alt": "Unavailable result recovery"
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-dashboard-empty-desktop.png",
+      "alt": "Empty personal dashboard"
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-history-empty-desktop.png",
+      "alt": "Empty history"
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-analytics-empty-desktop.png",
+      "alt": "Empty analytics"
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-profile-synthetic-desktop.png",
+      "alt": "Synthetic account profile"
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-logout-modal-synthetic-desktop.png",
+      "alt": "Logout confirmation modal"
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-admin-dashboard-empty-desktop.png",
+      "alt": "Synthetic empty administrative console"
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-admin-log-filters-empty-desktop.png",
+      "alt": "Synthetic audit-log filters"
+    },
+    {
+      "source": "capstone-manuscript\\screenshots\\ui-evaluation-empty-desktop.png",
+      "alt": "No assigned reviews"
+    }
+  ],
+  "headings": [
+    {
+      "level": 1,
+      "title": "LIGHT SUMMARIZER"
+    },
+    {
+      "level": 2,
+      "title": "Title Page"
+    },
+    {
+      "level": 2,
+      "title": "Approval Sheet"
+    },
+    {
+      "level": 2,
+      "title": "Joint Undertaking"
+    },
+    {
+      "level": 2,
+      "title": "English Critic Certification"
+    },
+    {
+      "level": 2,
+      "title": "Acknowledgement"
+    },
+    {
+      "level": 2,
+      "title": "Dedication"
+    },
+    {
+      "level": 2,
+      "title": "Table of Contents"
+    },
+    {
+      "level": 2,
+      "title": "List of Tables"
+    },
+    {
+      "level": 2,
+      "title": "List of Figures"
+    },
+    {
+      "level": 2,
+      "title": "Abstract"
+    },
+    {
+      "level": 1,
+      "title": "CHAPTER I — THE PROBLEM AND ITS BACKGROUND"
+    },
+    {
+      "level": 2,
+      "title": "Introduction"
+    },
+    {
+      "level": 2,
+      "title": "Review of Related Literature and Studies"
+    },
+    {
+      "level": 3,
+      "title": "Extractive ranking and information selection"
+    },
+    {
+      "level": 3,
+      "title": "Automatic comparison with reference summaries"
+    },
+    {
+      "level": 3,
+      "title": "Faithfulness and factuality"
+    },
+    {
+      "level": 3,
+      "title": "Evaluation through complementary evidence"
+    },
+    {
+      "level": 3,
+      "title": "Product-quality framework and edition control"
+    },
+    {
+      "level": 3,
+      "title": "Synthesis and project contribution"
+    },
+    {
+      "level": 2,
+      "title": "Conceptual Framework"
+    },
+    {
+      "level": 2,
+      "title": "Statement of the Problem"
+    },
+    {
+      "level": 2,
+      "title": "Objectives of the Study"
+    },
+    {
+      "level": 2,
+      "title": "Scope and Delimitation"
+    },
+    {
+      "level": 2,
+      "title": "Significance of the Study"
+    },
+    {
+      "level": 2,
+      "title": "Definition of Terms"
+    },
+    {
+      "level": 1,
+      "title": "CHAPTER II — METHODS AND PROCEDURES"
+    },
+    {
+      "level": 2,
+      "title": "Research Design"
+    },
+    {
+      "level": 2,
+      "title": "Development Approach Described in the Researcher Draft"
+    },
+    {
+      "level": 3,
+      "title": "Planning and analysis"
+    },
+    {
+      "level": 3,
+      "title": "Design"
+    },
+    {
+      "level": 3,
+      "title": "Implementation"
+    },
+    {
+      "level": 3,
+      "title": "Testing, integration and maintenance"
+    },
+    {
+      "level": 3,
+      "title": "Supplied development schedule"
+    },
+    {
+      "level": 2,
+      "title": "Technical Examination Procedure"
+    },
+    {
+      "level": 2,
+      "title": "Research Locale"
+    },
+    {
+      "level": 2,
+      "title": "Research Respondents"
+    },
+    {
+      "level": 2,
+      "title": "Sampling Procedure"
+    },
+    {
+      "level": 2,
+      "title": "Research Instruments"
+    },
+    {
+      "level": 2,
+      "title": "Proposed Data-Gathering Procedure"
+    },
+    {
+      "level": 2,
+      "title": "Data Analysis Technique"
+    },
+    {
+      "level": 3,
+      "title": "Technical findings"
+    },
+    {
+      "level": 3,
+      "title": "Questionnaire responses"
+    },
+    {
+      "level": 3,
+      "title": "Summary quality and comments"
+    },
+    {
+      "level": 2,
+      "title": "Ethical and Methodological Boundaries"
+    },
+    {
+      "level": 1,
+      "title": "CHAPTER III — RESULTS AND DISCUSSION"
+    },
+    {
+      "level": 2,
+      "title": "1. Problems Encountered in the Existing System"
+    },
+    {
+      "level": 2,
+      "title": "2. How the Developed System Addresses the Identified Problems"
+    },
+    {
+      "level": 2,
+      "title": "3. Essential Features and Functionalities"
+    },
+    {
+      "level": 3,
+      "title": "Entry"
+    },
+    {
+      "level": 3,
+      "title": "Navigation"
+    },
+    {
+      "level": 3,
+      "title": "Appearance"
+    },
+    {
+      "level": 3,
+      "title": "Accounts"
+    },
+    {
+      "level": 3,
+      "title": "Terms"
+    },
+    {
+      "level": 3,
+      "title": "Summary input"
+    },
+    {
+      "level": 3,
+      "title": "Summary controls"
+    },
+    {
+      "level": 3,
+      "title": "Summarization"
+    },
+    {
+      "level": 3,
+      "title": "Recovery"
+    },
+    {
+      "level": 3,
+      "title": "Processing"
+    },
+    {
+      "level": 3,
+      "title": "Nutshell"
+    },
+    {
+      "level": 3,
+      "title": "Results"
+    },
+    {
+      "level": 3,
+      "title": "Feedback"
+    },
+    {
+      "level": 3,
+      "title": "Results"
+    },
+    {
+      "level": 3,
+      "title": "Dashboard"
+    },
+    {
+      "level": 3,
+      "title": "History"
+    },
+    {
+      "level": 3,
+      "title": "Analytics"
+    },
+    {
+      "level": 3,
+      "title": "Profile"
+    },
+    {
+      "level": 3,
+      "title": "Accounts"
+    },
+    {
+      "level": 3,
+      "title": "Administration"
+    },
+    {
+      "level": 3,
+      "title": "Evaluation"
+    },
+    {
+      "level": 3,
+      "title": "API-only"
+    },
+    {
+      "level": 3,
+      "title": "Health"
+    },
+    {
+      "level": 3,
+      "title": "Backend services"
+    },
+    {
+      "level": 3,
+      "title": "Evaluation"
+    },
+    {
+      "level": 3,
+      "title": "Operations"
+    },
+    {
+      "level": 3,
+      "title": "Results"
+    },
+    {
+      "level": 3,
+      "title": "Processing"
+    },
+    {
+      "level": 3,
+      "title": "Security Features"
+    },
+    {
+      "level": 3,
+      "title": "User Experience Features"
+    },
+    {
+      "level": 2,
+      "title": "4. Design and Development of the System"
+    },
+    {
+      "level": 3,
+      "title": "4.1 Planning Stage"
+    },
+    {
+      "level": 3,
+      "title": "4.2 Design Stage"
+    },
+    {
+      "level": 4,
+      "title": "A. Use Case Diagram"
+    },
+    {
+      "level": 4,
+      "title": "B. Data Flow Diagram"
+    },
+    {
+      "level": 4,
+      "title": "C. Database Normalization"
+    },
+    {
+      "level": 4,
+      "title": "D. Entity Relationship Diagram"
+    },
+    {
+      "level": 4,
+      "title": "E. Data Dictionary"
+    },
+    {
+      "level": 5,
+      "title": "DD-01. admin_audit_logs"
+    },
+    {
+      "level": 5,
+      "title": "DD-02. admin_security_challenges"
+    },
+    {
+      "level": 5,
+      "title": "DD-03. documents"
+    },
+    {
+      "level": 5,
+      "title": "DD-04. document_summaries"
+    },
+    {
+      "level": 5,
+      "title": "DD-05. evaluation_assignments"
+    },
+    {
+      "level": 5,
+      "title": "DD-06. evaluation_audit_log"
+    },
+    {
+      "level": 5,
+      "title": "DD-07. evaluation_challenge_cases"
+    },
+    {
+      "level": 5,
+      "title": "DD-08. evaluation_content_units"
+    },
+    {
+      "level": 5,
+      "title": "DD-09. evaluation_content_unit_reviews"
+    },
+    {
+      "level": 5,
+      "title": "DD-10. evaluation_datasets"
+    },
+    {
+      "level": 5,
+      "title": "DD-11. evaluation_documents"
+    },
+    {
+      "level": 5,
+      "title": "DD-12. evaluation_errors"
+    },
+    {
+      "level": 5,
+      "title": "DD-13. evaluation_metrics"
+    },
+    {
+      "level": 5,
+      "title": "DD-14. evaluation_outputs"
+    },
+    {
+      "level": 5,
+      "title": "DD-15. evaluation_ratings"
+    },
+    {
+      "level": 5,
+      "title": "DD-16. evaluation_references"
+    },
+    {
+      "level": 5,
+      "title": "DD-17. evaluation_runs"
+    },
+    {
+      "level": 5,
+      "title": "DD-18. feedback"
+    },
+    {
+      "level": 5,
+      "title": "DD-19. feedback_comments"
+    },
+    {
+      "level": 5,
+      "title": "DD-20. guest_sessions"
+    },
+    {
+      "level": 5,
+      "title": "DD-21. landing_page_events"
+    },
+    {
+      "level": 5,
+      "title": "DD-22. landing_page_sessions"
+    },
+    {
+      "level": 5,
+      "title": "DD-23. nutshell_generations"
+    },
+    {
+      "level": 5,
+      "title": "DD-24. password_resets"
+    },
+    {
+      "level": 5,
+      "title": "DD-25. rate_limits"
+    },
+    {
+      "level": 5,
+      "title": "DD-26. schema_migrations"
+    },
+    {
+      "level": 5,
+      "title": "DD-27. summaries"
+    },
+    {
+      "level": 5,
+      "title": "DD-28. summary_artifacts"
+    },
+    {
+      "level": 5,
+      "title": "DD-29. summary_jobs"
+    },
+    {
+      "level": 5,
+      "title": "DD-30. users"
+    },
+    {
+      "level": 5,
+      "title": "DD-31. user_tokens"
+    },
+    {
+      "level": 3,
+      "title": "4.3 Development Stage"
+    },
+    {
+      "level": 3,
+      "title": "4.4 Testing Stage"
+    },
+    {
+      "level": 3,
+      "title": "4.5 Deployment Stage"
+    },
+    {
+      "level": 3,
+      "title": "4.6 Operational Stage"
+    },
+    {
+      "level": 2,
+      "title": "5. IT Consultants’ System Evaluation"
+    },
+    {
+      "level": 3,
+      "title": "Functional Suitability"
+    },
+    {
+      "level": 3,
+      "title": "Performance Efficiency"
+    },
+    {
+      "level": 3,
+      "title": "Compatibility"
+    },
+    {
+      "level": 3,
+      "title": "Usability"
+    },
+    {
+      "level": 3,
+      "title": "Reliability"
+    },
+    {
+      "level": 3,
+      "title": "Security"
+    },
+    {
+      "level": 3,
+      "title": "Portability"
+    },
+    {
+      "level": 3,
+      "title": "Overall IT Consultants’ Evaluation Summary"
+    },
+    {
+      "level": 2,
+      "title": "6. End-Users’ System Evaluation"
+    },
+    {
+      "level": 3,
+      "title": "Functional Suitability"
+    },
+    {
+      "level": 3,
+      "title": "Performance Efficiency"
+    },
+    {
+      "level": 3,
+      "title": "Usability"
+    },
+    {
+      "level": 3,
+      "title": "Overall End-Users’ Evaluation Summary"
+    },
+    {
+      "level": 1,
+      "title": "CHAPTER IV — SUMMARY, CONCLUSIONS AND RECOMMENDATIONS"
+    },
+    {
+      "level": 2,
+      "title": "1. Summary"
+    },
+    {
+      "level": 2,
+      "title": "2. Conclusions"
+    },
+    {
+      "level": 2,
+      "title": "3. Recommendations"
+    },
+    {
+      "level": 1,
+      "title": "REFERENCES"
+    },
+    {
+      "level": 2,
+      "title": "Project and Documentary Sources"
+    },
+    {
+      "level": 1,
+      "title": "APPENDIX A. RESEARCH ADVISER REQUEST LETTER TEMPLATE"
+    },
+    {
+      "level": 1,
+      "title": "APPENDIX B. DATA-GATHERING PERMISSION REQUEST TEMPLATE"
+    },
+    {
+      "level": 1,
+      "title": "APPENDIX C. ENGLISH CRITIC REVIEW REQUEST TEMPLATE"
+    },
+    {
+      "level": 1,
+      "title": "APPENDIX D. CONSULTATION REQUEST AND MONITORING FORM"
+    },
+    {
+      "level": 1,
+      "title": "APPENDIX E. RESEARCH ADVISER DECISION LETTER TEMPLATE"
+    },
+    {
+      "level": 1,
+      "title": "APPENDIX F — USER MANUAL"
+    },
+    {
+      "level": 2,
+      "title": "A. Landing Page and Shared Navigation"
+    },
+    {
+      "level": 2,
+      "title": "B. Sign In and Administrator Verification"
+    },
+    {
+      "level": 2,
+      "title": "C. Create Account"
+    },
+    {
+      "level": 2,
+      "title": "D. Recover Password"
+    },
+    {
+      "level": 2,
+      "title": "E. Set a New Password"
+    },
+    {
+      "level": 2,
+      "title": "F. Terms and Conditions"
+    },
+    {
+      "level": 2,
+      "title": "G. Summarizer Workspace"
+    },
+    {
+      "level": 3,
+      "title": "G.1. Select the source"
+    },
+    {
+      "level": 3,
+      "title": "G.2. Choose settings and submit"
+    },
+    {
+      "level": 3,
+      "title": "G.3. Errors, drafts, and Nutshell"
+    },
+    {
+      "level": 2,
+      "title": "H. Processing and Recovery"
+    },
+    {
+      "level": 2,
+      "title": "I. Summary Result, Source Review, and Export"
+    },
+    {
+      "level": 2,
+      "title": "J. Summary Feedback"
+    },
+    {
+      "level": 2,
+      "title": "K. Unavailable Result"
+    },
+    {
+      "level": 2,
+      "title": "L. Personal Dashboard"
+    },
+    {
+      "level": 2,
+      "title": "M. Summary History"
+    },
+    {
+      "level": 2,
+      "title": "N. Analytics"
+    },
+    {
+      "level": 2,
+      "title": "O. Profile and Account Deactivation"
+    },
+    {
+      "level": 2,
+      "title": "P. Logout Confirmation"
+    },
+    {
+      "level": 2,
+      "title": "Q. Administrative Console"
+    },
+    {
+      "level": 3,
+      "title": "Q.1. Review system information"
+    },
+    {
+      "level": 3,
+      "title": "Q.2. Manage users"
+    },
+    {
+      "level": 3,
+      "title": "Q.3. Review feedback and landing telemetry"
+    },
+    {
+      "level": 2,
+      "title": "R. Administrator Audit Logs"
+    },
+    {
+      "level": 2,
+      "title": "S. Assigned Independent Reviews"
+    },
+    {
+      "level": 2,
+      "title": "T. Evaluation Reports, Compatibility Routes, and Diagnostics"
+    },
+    {
+      "level": 2,
+      "title": "U. Common Recovery Guidance and Evidence Trace"
+    },
+    {
+      "level": 1,
+      "title": "APPENDIX G. LIGHT SUMMARIZER MAINTENANCE MANUAL"
+    },
+    {
+      "level": 2,
+      "title": "1. Introduction"
+    },
+    {
+      "level": 2,
+      "title": "2. System Overview"
+    },
+    {
+      "level": 2,
+      "title": "3. Major Features"
+    },
+    {
+      "level": 2,
+      "title": "4. System Requirements"
+    },
+    {
+      "level": 2,
+      "title": "5. Preventive Maintenance Procedures"
+    },
+    {
+      "level": 3,
+      "title": "Database and schema"
+    },
+    {
+      "level": 3,
+      "title": "File storage and retention"
+    },
+    {
+      "level": 3,
+      "title": "Security and dependency maintenance"
+    },
+    {
+      "level": 3,
+      "title": "Worker and performance monitoring"
+    },
+    {
+      "level": 3,
+      "title": "Proposed backup and recovery procedure"
+    },
+    {
+      "level": 2,
+      "title": "6. Troubleshooting Guide"
+    },
+    {
+      "level": 2,
+      "title": "7. Roles and Responsibilities"
+    },
+    {
+      "level": 2,
+      "title": "8. Data Security and Privacy"
+    },
+    {
+      "level": 2,
+      "title": "9. Maintenance Schedule"
+    },
+    {
+      "level": 2,
+      "title": "10. Conclusion"
+    },
+    {
+      "level": 1,
+      "title": "APPENDIX H. PROPOSED TECHNICAL EVALUATION INSTRUMENT"
+    },
+    {
+      "level": 2,
+      "title": "Instrument Status and Purpose"
+    },
+    {
+      "level": 2,
+      "title": "Directions and Response Scale"
+    },
+    {
+      "level": 2,
+      "title": "Functional Suitability"
+    },
+    {
+      "level": 2,
+      "title": "Performance Efficiency"
+    },
+    {
+      "level": 2,
+      "title": "Compatibility"
+    },
+    {
+      "level": 2,
+      "title": "Usability"
+    },
+    {
+      "level": 2,
+      "title": "Reliability"
+    },
+    {
+      "level": 2,
+      "title": "Security"
+    },
+    {
+      "level": 2,
+      "title": "Portability"
+    },
+    {
+      "level": 2,
+      "title": "Reviewer Comments and Researcher Coding"
+    },
+    {
+      "level": 1,
+      "title": "APPENDIX I. PROPOSED END-USER EVALUATION INSTRUMENT"
+    },
+    {
+      "level": 2,
+      "title": "Instrument Status and Directions"
+    },
+    {
+      "level": 2,
+      "title": "Functional Suitability"
+    },
+    {
+      "level": 2,
+      "title": "Perceived Performance Efficiency"
+    },
+    {
+      "level": 2,
+      "title": "Usability"
+    },
+    {
+      "level": 1,
+      "title": "APPENDIX J. DATA-GATHERING AND SUPPORTING DOCUMENTS"
+    },
+    {
+      "level": 2,
+      "title": "Status of Research-Event Evidence"
+    },
+    {
+      "level": 2,
+      "title": "Photograph and Activity-Record Template"
+    },
+    {
+      "level": 1,
+      "title": "APPENDIX K. RESEARCHER CURRICULUM VITAE"
+    },
+    {
+      "level": 2,
+      "title": "Robert Martin Baltisoto"
+    },
+    {
+      "level": 2,
+      "title": "Shielo Mariell Leodones"
+    },
+    {
+      "level": 2,
+      "title": "Gieselle Sabbaluca"
+    },
+    {
+      "level": 2,
+      "title": "Sofiah Heaven Galman"
+    },
+    {
+      "level": 1,
+      "title": "APPENDIX L. TECHNICAL EVIDENCE AND REPRODUCTION GUIDE"
+    },
+    {
+      "level": 2,
+      "title": "Purpose and Boundaries"
+    },
+    {
+      "level": 2,
+      "title": "Controlled Reproduction Principles"
+    }
+  ],
+  "output_docx": "capstone-manuscript\\EDITABLE_MANUSCRIPT.docx",
+  "layout": {
+    "page_width_pt": 515.88,
+    "page_height_pt": 728.52,
+    "body_font": "Courier New",
+    "body_font_pt": 12,
+    "line_spacing_pt": 20.4,
+    "margins_pt": {
+      "left": 108,
+      "right": 72,
+      "top": 72,
+      "bottom": 72
+    }
+  },
+  "omitted_missing_files": [],
+  "output_pdf": "capstone-manuscript\\EDITABLE_MANUSCRIPT.pdf"
+}

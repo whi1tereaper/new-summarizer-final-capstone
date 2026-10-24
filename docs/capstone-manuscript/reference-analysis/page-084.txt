@@ -1,0 +1,35 @@
+   This is the Level 2 DFD for Archive Management.
+This process enables the Administrator to manage
+inactive records by identifying documents that
+are no longer actively used and maintaining
+their availability for future retrieval. The
+process interacts with the         Folders (D2)      and
+Files (D3) data stores.
+   The process begins with        5.1 Flag Inactive
+Records,    where the Administrator identifies
+folders and files that are no longer part of
+active accreditation activities. The system
+marks these records as inactive and updates
+their status within the Folders (D2) and Files
+(D3) data stores. This process helps organize
+records by separating inactive documents from
+those currently in use while preserving them for
+future reference.
+   The  5.2 Extract Archived Records            process
+allows the Administrator to retrieve archived
+folders and files whenever access to historical
+records is required. The system accesses the
+archived information stored in the Folders (D2)
+and  Files (D3)     data stores and provides the
+requested records for viewing, verification, or
+accreditation-related purposes.
+
+
+
+
+
+
+
+
+
+                                                       65

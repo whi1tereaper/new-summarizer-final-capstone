@@ -71,6 +71,8 @@ function nutshellWordCount(string $text): int
 
 function nutshellGenerate(): array
 {
+    require_once __DIR__.'/../src/Services/CampusAccessService.php';
+    $access=null;$ticket=null;
     $savedFile = '';
     $resolvedSource = null;
     $db = null;
@@ -127,7 +129,7 @@ function nutshellGenerate(): array
         $inputType = 'text';
         if ($summaryId !== null) {
             $db->beginTransaction(); $transaction = true;
-            $query = $db->prepare('SELECT s.*, a.original_text, a.generated_summary FROM summaries s LEFT JOIN summary_artifacts a ON a.summary_id = s.id WHERE s.id = :id AND s.user_id = :user_id FOR UPDATE');
+            $query = $db->prepare('SELECT s.*, a.original_text, a.generated_summary FROM summaries s LEFT JOIN summary_artifacts a ON a.summary_id = s.id AND a.original_text IS NOT NULL AND a.generated_summary IS NOT NULL WHERE s.id = :id AND s.user_id = :user_id FOR UPDATE');
             $query->execute(['id' => $summaryId, 'user_id' => $userId]);
             $summary = $query->fetch(PDO::FETCH_ASSOC);
             if (!$summary) { $db->rollBack(); $transaction = false; return nutshellError(404, 'summary_not_found', 'Summary not found or access denied.'); }
@@ -164,6 +166,8 @@ function nutshellGenerate(): array
             $failure['retry_after'] = $limiter->getRetryAfter('nutshell', (string)$userId);
             return [$status, $failure];
         }
+        $access=new \App\Src\Services\CampusAccessService($db);
+        $ticket=$access->reserve($userId,$access->visitorToken(),'nutshell:'.bin2hex(random_bytes(16)));
         if ($hasFile) {
             $savedFile = (new FileUploadService())->saveUploadedFile($_FILES['pdf_file']);
             $inputType = strtolower(pathinfo((string)($_FILES['pdf_file']['name'] ?? ''), PATHINFO_EXTENSION));
@@ -178,12 +182,19 @@ function nutshellGenerate(): array
 
         $started = microtime(true);
         try {
+            $workerTimeout=45;
+            $phpLimit=(int)ini_get('max_execution_time');
+            if($phpLimit>0){
+                $remaining=(int)floor((float)($_SERVER['REQUEST_TIME_FLOAT']??$started)+$phpLimit-microtime(true))-15;
+                if($remaining<10)throw new ProcessingError('PROCESSING_TIMEOUT');
+                $workerTimeout=min($workerTimeout,$remaining);
+            }
             $result = (new LocalPythonBridge())->nutshell([
                 'text' => $text,
                 'file_path' => $savedFile,
                 'analysis_mode' => $mode,
                 'primary_summary_word_count' => $primaryWords,
-            ], 45);
+            ], $workerTimeout);
         } catch (Throwable $exception) {
             $failure = ProcessingError::fromThrowable($exception);
             $failure->log();
@@ -213,6 +224,7 @@ function nutshellGenerate(): array
             error_log('[Nutshell] generation rejected summary_id=' . ($summaryId ?? 'none') . ' category=output_validation duration_ms=' . $duration);
             return nutshellError(422, 'generation_failed', '', new ProcessingError('SUMMARY_QUALITY_FAILED'));
         }
+        if(!$transaction){$db->beginTransaction();$transaction=true;}
         $ratio = round($wordCount / max(1, $sourceWords), 4);
         $insert = $db->prepare('INSERT INTO nutshell_generations (summary_id,user_id,input_type,nutshell_text,status,analysis_mode,output_format,word_count,source_word_count,primary_summary_word_count,compression_ratio,processing_time_ms,algorithm_version,idempotency_key) VALUES (:summary_id,:user_id,:input_type,:text,\'completed\',:mode,\'paragraph\',:words,:source_words,:primary_words,:ratio,:duration,:version,:key)');
         $insert->execute(['summary_id'=>$summaryId,'user_id'=>$userId,'input_type'=>$inputType,'text'=>$content,'mode'=>$mode,'words'=>$wordCount,'source_words'=>$sourceWords,'primary_words'=>$primaryWords,'ratio'=>$ratio,'duration'=>$duration,'version'=>(string)($result['algorithm_version'] ?? 'nutshell-extractive-v2'),'key'=>$idempotencyKey]);
@@ -222,7 +234,9 @@ function nutshellGenerate(): array
             $update->execute(['text'=>$content,'words'=>$wordCount,'id'=>$summaryId,'user_id'=>$userId]);
             if ($update->rowCount() < 1) throw new RuntimeException('Summary snapshot update failed.');
         }
+        $access->complete($ticket);
         if ($transaction) { $db->commit(); $transaction = false; }
+        $ticket=null;
         $limiter->recordAttempt('nutshell', (string)$userId);
         error_log('[Nutshell] generation_id=' . $generationId . ' summary_id=' . ($summaryId ?? 'none') . ' duration_ms=' . $duration . ' status=completed');
         return [200, nutshellSuccess($content, ['id'=>$generationId,'word_count'=>$wordCount,'source_word_count'=>$sourceWords,'primary_summary_word_count'=>$primaryWords,'compression_ratio'=>$ratio,'processing_time_ms'=>$duration,'algorithm_version'=>$result['algorithm_version'] ?? 'nutshell-extractive-v2'], $mode, $summaryId, false)];
@@ -243,6 +257,7 @@ function nutshellGenerate(): array
         $failure->log();
         return nutshellError($failure->httpStatus, 'internal_error', '', $failure);
     } finally {
+        if($ticket!==null && $access!==null)$access->release($ticket);
         if ($savedFile !== '' && is_file($savedFile)) @unlink($savedFile);
         if ($resolvedSource !== null) $resolvedSource->cleanup();
     }

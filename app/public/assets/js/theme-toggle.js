@@ -11,12 +11,7 @@
             // The current page can still switch themes when storage is unavailable.
         }
 
-        const pageTheme = document.documentElement.dataset.theme;
-        if (pageTheme === 'light' || pageTheme === 'dark') {
-            return pageTheme;
-        }
-
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
 
     function applyTheme(theme) {
@@ -31,6 +26,9 @@
             button.setAttribute('aria-pressed', String(isDark));
             button.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
         });
+
+        // Dispatch a custom event so charts and reactive components can re-render immediately
+        window.dispatchEvent(new CustomEvent('themechange', { detail: { theme: normalizedTheme } }));
     }
 
     function bindThemeButton(button) {
@@ -50,9 +48,13 @@
         });
     }
 
+    // Apply preferred theme IMMEDIATELY (synchronously) so DOM has the correct data-theme attribute
+    // before any downstream scripts or Chart renderers initialize
+    const initialTheme = getPreferredTheme();
+    applyTheme(initialTheme);
+
     function initializeThemeControls() {
-        const initialTheme = getPreferredTheme();
-        applyTheme(initialTheme);
+        applyTheme(getPreferredTheme());
 
         document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
             bindThemeButton(button);

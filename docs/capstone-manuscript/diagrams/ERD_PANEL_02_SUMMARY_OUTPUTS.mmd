@@ -1,0 +1,27 @@
+erDiagram
+    direction TB
+    users {
+        int id PK
+    }
+    summaries {
+        int id PK
+        int user_id FK
+    }
+    summary_artifacts {
+        int id PK
+        int summary_id FK
+    }
+    summary_jobs {
+        bigint id PK
+        int user_id FK
+        int result_id FK
+    }
+    nutshell_generations {
+        bigint id PK
+        int summary_id FK
+    }
+    summaries |o--o{ nutshell_generations : "summary_id"
+    users |o--o{ summaries : "user_id"
+    summaries ||--o{ summary_artifacts : "summary_id"
+    summaries |o--o{ summary_jobs : "result_id"
+    users |o--o{ summary_jobs : "user_id"

@@ -1,0 +1,22 @@
+erDiagram
+    direction TB
+    users {
+        int id PK
+    }
+    summaries {
+        int id PK
+        int user_id FK
+    }
+    feedback {
+        int id PK
+        int summary_id FK
+        int user_id FK
+    }
+    feedback_comments {
+        int id PK
+        int summary_id FK
+    }
+    summaries ||--o{ feedback : "summary_id"
+    users |o--o{ feedback : "user_id"
+    summaries ||--o{ feedback_comments : "summary_id"
+    users |o--o{ summaries : "user_id"

@@ -1,0 +1,41 @@
+•   Stable Internet Connection
+
+Software
+•   Windows 10/11
+•   Apache/XAMPP
+•   PHP
+•   MySQL
+•   Modern browser
+
+
+5. Preventive Maintenance Procedures
+
+Database Maintenance
+•   Perform daily backups.
+•   Optimize tables monthly.
+•   Verify integrity after recovery.
+•   Remove obsolete temporary records.
+
+File Storage
+•   Monitor disk usage.
+•   Check upload folders.
+•   Verify permissions.
+•   Scan uploaded files.
+
+Security
+•   Change admin passwords periodically.
+•   Review user permissions.
+•   Enable HTTPS in production.
+•   Update dependencies.
+
+Performance
+•   Review logs.
+•   Monitor response times.
+•   Clear cache.
+•   Test large uploads.
+
+Backup and Recovery
+•   Maintain daily and weekly backups.
+
+
+                                                                                   143

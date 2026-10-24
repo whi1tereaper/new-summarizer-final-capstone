@@ -50,9 +50,9 @@ try {
     }
 
     foreach ($requiredTables as $table => $columns) {
-        $stmt = $db->prepare('SHOW TABLES LIKE ?');
+        $stmt = $db->prepare('SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name=?');
         $stmt->execute([$table]);
-        $tableExists = $stmt->rowCount() > 0;
+        $tableExists = (int)$stmt->fetchColumn() > 0;
         
         if (!$tableExists) {
             $status['tables'][$table] = ['exists' => false];

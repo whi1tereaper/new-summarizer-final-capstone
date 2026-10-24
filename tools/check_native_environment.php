@@ -64,8 +64,7 @@ foreach ($storageDirectories as $label => $path) {
 }
 
 $configuredDbHost = config('database.host', '127.0.0.1');
-$dockerOnlyDbHosts = ['db', 'mysql', 'ai_summarizer_db'];
-$dbHostLooksNative = !in_array(strtolower($configuredDbHost), $dockerOnlyDbHosts, true);
+$dbHostLooksNative = in_array(strtolower($configuredDbHost), ['127.0.0.1', 'localhost', '::1'], true);
 checkCondition('DB_HOST', $dbHostLooksNative, $configuredDbHost, $failures);
 
 try {

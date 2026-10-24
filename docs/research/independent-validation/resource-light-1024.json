@@ -1,0 +1,128 @@
+{
+  "mode": "light",
+  "memory_limit_mib": 1024,
+  "memory_swap_limit_mib": 1024,
+  "cpu_limit": 1,
+  "configured_python_timeout_seconds": 180,
+  "outer_http_read_deadline_seconds": 185,
+  "image_id": "sha256:911ae89cb2304103890bd0b5061990ccff39b05abb42fa0ee4bd5ae96248a007",
+  "scope": "isolated actual Apache + PHP ArticleService + bridge + Python extraction/routing/models; excludes database, auth/controller/job persistence and host Docker daemon",
+  "warm_definition": "repeat HTTP requests; CLI Python is cold per call, no persistent supervisor",
+  "runs": [
+    {
+      "label": "cold_text",
+      "payload": {
+        "id": "IV-BUSINESS"
+      },
+      "http_status": 200,
+      "response": {
+        "ok": true,
+        "seconds": 11.167888879776001,
+        "sentences": 15,
+        "words": 364,
+        "engine": "summarizer_core",
+        "engine_version": "2",
+        "routing": {
+          "enabled": true,
+          "selected_engine": "legacy",
+          "reason": "uncertain",
+          "fallback_used": false,
+          "failure_type": "",
+          "detection": {
+            "is_article": false,
+            "article_type": "unknown",
+            "confidence": 0.745339,
+            "detected_features": {
+              "complete_sentences": 21,
+              "words": 472,
+              "prose_ratio": 0.9767,
+              "paragraphs": 7,
+              "headings": 0,
+              "title": true,
+              "category_cues": 1,
+              "negative_document_marker": false,
+              "code_ratio": 0,
+              "list_ratio": 0,
+              "eligible": false,
+              "threshold": 0.7,
+              "tokenizer": "nltk_punkt",
+              "detector_version": "article-rules-2"
+            },
+            "classification_reason": "uncertain"
+          }
+        },
+        "annotation_status": null,
+        "focus_status": null
+      },
+      "wall_seconds": 11.17051999999967,
+      "transport_error": null,
+      "after": {
+        "cgroup_v2": "memory.current\n22790144\nmemory.peak\n244887552\nmemory.max\n1073741824\nmemory.swap.max\n0\nmemory.events\nlow 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\ncpu.max\n100000 100000",
+        "container_running": true,
+        "container_exit_code": 0,
+        "container_oom_killed": false
+      }
+    },
+    {
+      "label": "repeat_text",
+      "payload": {
+        "id": "IV-BUSINESS"
+      },
+      "http_status": 200,
+      "response": {
+        "ok": true,
+        "seconds": 7.236722946166992,
+        "sentences": 15,
+        "words": 364,
+        "engine": "summarizer_core",
+        "engine_version": "2",
+        "routing": {
+          "enabled": true,
+          "selected_engine": "legacy",
+          "reason": "uncertain",
+          "fallback_used": false,
+          "failure_type": "",
+          "detection": {
+            "is_article": false,
+            "article_type": "unknown",
+            "confidence": 0.745339,
+            "detected_features": {
+              "complete_sentences": 21,
+              "words": 472,
+              "prose_ratio": 0.9767,
+              "paragraphs": 7,
+              "headings": 0,
+              "title": true,
+              "category_cues": 1,
+              "negative_document_marker": false,
+              "code_ratio": 0,
+              "list_ratio": 0,
+              "eligible": false,
+              "threshold": 0.7,
+              "tokenizer": "nltk_punkt",
+              "detector_version": "article-rules-2"
+            },
+            "classification_reason": "uncertain"
+          }
+        },
+        "annotation_status": null,
+        "focus_status": null
+      },
+      "wall_seconds": 7.347084399996675,
+      "transport_error": null,
+      "after": {
+        "cgroup_v2": "memory.current\n25133056\nmemory.peak\n246874112\nmemory.max\n1073741824\nmemory.swap.max\n0\nmemory.events\nlow 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\ncpu.max\n100000 100000",
+        "container_running": true,
+        "container_exit_code": 0,
+        "container_oom_killed": false
+      }
+    }
+  ],
+  "startup_seconds": 8.052038800000446,
+  "initial": {
+    "cgroup_v2": "memory.current\n14565376\nmemory.peak\n18620416\nmemory.max\n1073741824\nmemory.swap.max\n0\nmemory.events\nlow 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\ncpu.max\n100000 100000",
+    "container_running": true,
+    "container_exit_code": 0,
+    "container_oom_killed": false
+  }
+}

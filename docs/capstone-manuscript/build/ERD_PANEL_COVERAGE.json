@@ -1,0 +1,142 @@
+{
+  "authoritative_source": "diagrams/ERD_ACTUAL_SCHEMA.mmd",
+  "unique_entities": 31,
+  "unique_foreign_key_relationships": 35,
+  "all_entities_covered": true,
+  "all_foreign_keys_covered": true,
+  "note": "Entities and relationships can repeat in focused panels. No relationship is inferred from a column name.",
+  "panels": [
+    {
+      "source": "diagrams/ERD_PANEL_01_ACCOUNTS.mmd",
+      "title": "Accounts and authentication",
+      "entities": [
+        "users",
+        "admin_security_challenges",
+        "password_resets",
+        "user_tokens"
+      ],
+      "foreign_keys": 3
+    },
+    {
+      "source": "diagrams/ERD_PANEL_02_SUMMARY_OUTPUTS.mmd",
+      "title": "Summary ownership, jobs and generated artifacts",
+      "entities": [
+        "users",
+        "summaries",
+        "summary_artifacts",
+        "summary_jobs",
+        "nutshell_generations"
+      ],
+      "foreign_keys": 5
+    },
+    {
+      "source": "diagrams/ERD_PANEL_03_FEEDBACK.mmd",
+      "title": "Summary ratings and comments",
+      "entities": [
+        "users",
+        "summaries",
+        "feedback",
+        "feedback_comments"
+      ],
+      "foreign_keys": 4
+    },
+    {
+      "source": "diagrams/ERD_PANEL_04_DOCUMENT_CACHE.mmd",
+      "title": "Document extraction and cached summaries",
+      "entities": [
+        "documents",
+        "document_summaries"
+      ],
+      "foreign_keys": 1
+    },
+    {
+      "source": "diagrams/ERD_PANEL_05_LANDING_TELEMETRY.mmd",
+      "title": "Landing-page sessions and events",
+      "entities": [
+        "landing_page_sessions",
+        "landing_page_events"
+      ],
+      "foreign_keys": 1
+    },
+    {
+      "source": "diagrams/ERD_PANEL_06_INDEPENDENT_STORES.mmd",
+      "title": "Tables without declared foreign-key relationships",
+      "entities": [
+        "admin_audit_logs",
+        "guest_sessions",
+        "rate_limits",
+        "schema_migrations"
+      ],
+      "foreign_keys": 0
+    },
+    {
+      "source": "diagrams/ERD_PANEL_07_EVALUATION_PIPELINE.mmd",
+      "title": "Evaluation datasets, documents, runs and outputs",
+      "entities": [
+        "evaluation_datasets",
+        "evaluation_documents",
+        "evaluation_runs",
+        "evaluation_outputs"
+      ],
+      "foreign_keys": 4
+    },
+    {
+      "source": "diagrams/ERD_PANEL_08_EVALUATION_CONTENT.mmd",
+      "title": "Evaluation content units, references and challenge cases",
+      "entities": [
+        "evaluation_documents",
+        "evaluation_content_units",
+        "evaluation_references",
+        "evaluation_challenge_cases"
+      ],
+      "foreign_keys": 3
+    },
+    {
+      "source": "diagrams/ERD_PANEL_09_EVALUATION_SCORING.mmd",
+      "title": "Evaluation assignments, ratings, errors and metrics",
+      "entities": [
+        "evaluation_outputs",
+        "evaluation_runs",
+        "evaluation_assignments",
+        "evaluation_ratings",
+        "evaluation_errors",
+        "evaluation_metrics"
+      ],
+      "foreign_keys": 6
+    },
+    {
+      "source": "diagrams/ERD_PANEL_10_UNIT_REVIEWS.mmd",
+      "title": "Content-unit reviews against generated outputs",
+      "entities": [
+        "evaluation_outputs",
+        "evaluation_content_units",
+        "evaluation_content_unit_reviews"
+      ],
+      "foreign_keys": 2
+    },
+    {
+      "source": "diagrams/ERD_PANEL_11_EVALUATOR_ACCOUNTS.mmd",
+      "title": "Evaluator, reviewer and audit actor account links",
+      "entities": [
+        "users",
+        "evaluation_assignments",
+        "evaluation_content_unit_reviews",
+        "evaluation_errors",
+        "evaluation_audit_log"
+      ],
+      "foreign_keys": 4
+    },
+    {
+      "source": "diagrams/ERD_PANEL_12_RESEARCH_AUTHORSHIP.mmd",
+      "title": "Research dataset, run and reference authorship",
+      "entities": [
+        "users",
+        "evaluation_datasets",
+        "evaluation_runs",
+        "evaluation_references",
+        "evaluation_content_units"
+      ],
+      "foreign_keys": 5
+    }
+  ]
+}

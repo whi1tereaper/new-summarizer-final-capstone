@@ -1,0 +1,32 @@
+   required documents are complete, organized,
+   well-tracked through checklists, and easily
+   retrievable. This structured approach reduces
+   preparation   time   and   enhances   the
+   institution's       credibility       during
+   accreditation reviews.
+
+
+
+Recommendations
+   The conclusions and findings of the study
+have led to the formulation of the following
+recommendations:
+
+   1. Implement Additional Security Enhancements
+      Although the system already meets high
+      security standards, integrating advanced
+      features such as two-factor authentication
+      (2FA), IP logging, and automated security
+      alerts can further strengthen protection
+      against  unauthorized  access  and  data
+      breaches.
+
+   2. Develop a Mobile-Friendly or Mobile App
+      Version
+      Creating a responsive mobile layout or a
+      dedicated mobile application would allow
+      users—especially  teachers  and  staff—to
+
+
+
+                                                      108

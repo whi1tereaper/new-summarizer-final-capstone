@@ -1,0 +1,18 @@
+%% DFD Level 1: feedback and usage analytics
+%% SOURCE-SUPPORTED design; operation is separately verified.
+flowchart TB
+    U["Visitor / registered user<br/>eligible requests only"]
+    P4("4.0 Feedback and<br/>usage analytics")
+    D2@{ shape: datastore, label: "D2 Main summary stores<br/>summaries; summary_artifacts;<br/>summary_jobs; temporary files" }
+    D4@{ shape: datastore, label: "D4 Feedback / telemetry<br/>feedback; feedback_comments;<br/>landing_page_sessions;<br/>landing_page_events" }
+    U -->|"feedback / visit event"| P4
+    P4 -->|"confirmation /<br/>statistics"| U
+    P4 -->|"feedback / event records"| D4
+    D4 -->|"feedback / usage data"| P4
+    D2 -->|"summary statistics"| P4
+    classDef process fill:#edf1f5,stroke:#222,color:#111;
+    classDef store fill:#f6f6f6,stroke:#222,color:#111;
+    classDef entity fill:#fff,stroke:#222,color:#111;
+    class P4 process;
+    class D2,D4 store;
+    class U entity;

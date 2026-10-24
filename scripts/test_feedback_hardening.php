@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+require_once __DIR__.'/qa/isolation.php';
 
 require_once __DIR__ . '/../app/src/whitereaper.php';
 require_once __DIR__ . '/../app/src/Services/FeedbackService.php';

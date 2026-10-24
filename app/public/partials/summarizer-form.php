@@ -67,8 +67,9 @@ $capabilities = [
 $initialFailure = is_array($_SESSION['flash_failure'] ?? null) ? $_SESSION['flash_failure'] : null;
 unset($_SESSION['flash_error']);
 require __DIR__ . '/error-support.php';
+require __DIR__ . '/student-trial.php';
 ?>
-<form id="summarize-form" action="summarize.php" method="POST" enctype="multipart/form-data" novalidate class="summary-workspace workspace-page__form" data-initial-failure="<?= htmlspecialchars(json_encode($initialFailure, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8') ?>" data-capabilities="<?= htmlspecialchars(json_encode($capabilities, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8') ?>">
+<form id="summarize-form" <?= $trialExhausted||$trialError?'hidden':'' ?> action="summarize.php" method="POST" enctype="multipart/form-data" novalidate class="summary-workspace workspace-page__form" data-initial-failure="<?= htmlspecialchars(json_encode($initialFailure, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8') ?>" data-capabilities="<?= htmlspecialchars(json_encode($capabilities, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8') ?>">
     <?php if (!empty($embeddedSummarizer)): ?>
     <h2 class="workspace-title visually-hidden" id="workspace-title">Summarizer</h2>
     <?php else: ?>

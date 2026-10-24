@@ -84,17 +84,8 @@ final class FeedbackService
             $db = Database::getInstance()->getConnection();
             $db->beginTransaction();
 
-            $isPg = Database::getInstance()->isPostgres();
             if ($userId !== null) {
-                $sql = $isPg
-                    ? "INSERT INTO feedback (summary_id, user_id, rating, reasons, comment)
-                       VALUES (:sid, :uid, :rating, :reasons, :comment)
-                       ON CONFLICT (summary_id, user_id) DO UPDATE SET 
-                          rating = EXCLUDED.rating, 
-                          reasons = EXCLUDED.reasons, 
-                          comment = EXCLUDED.comment, 
-                          updated_at = CURRENT_TIMESTAMP"
-                    : "INSERT INTO feedback (summary_id, user_id, rating, reasons, comment)
+                $sql = "INSERT INTO feedback (summary_id, user_id, rating, reasons, comment)
                        VALUES (:sid, :uid, :rating, :reasons, :comment)
                        ON DUPLICATE KEY UPDATE 
                           rating = VALUES(rating), 
@@ -110,15 +101,7 @@ final class FeedbackService
                     'comment' => $comment,
                 ]);
             } else {
-                $sql = $isPg
-                    ? "INSERT INTO feedback (summary_id, guest_token, rating, reasons, comment)
-                       VALUES (:sid, :token, :rating, :reasons, :comment)
-                       ON CONFLICT (summary_id, guest_token) DO UPDATE SET 
-                          rating = EXCLUDED.rating, 
-                          reasons = EXCLUDED.reasons, 
-                          comment = EXCLUDED.comment, 
-                          updated_at = CURRENT_TIMESTAMP"
-                    : "INSERT INTO feedback (summary_id, guest_token, rating, reasons, comment)
+                $sql = "INSERT INTO feedback (summary_id, guest_token, rating, reasons, comment)
                        VALUES (:sid, :token, :rating, :reasons, :comment)
                        ON DUPLICATE KEY UPDATE 
                           rating = VALUES(rating), 
@@ -202,19 +185,8 @@ final class FeedbackService
         try {
             $db = Database::getInstance()->getConnection();
 
-            $isPg = Database::getInstance()->isPostgres();
             if ($userId !== null) {
-                $sql = $isPg
-                    ? "INSERT INTO feedback (summary_id, user_id, name, email, impression, rating, comment)
-                       VALUES (:sid, :uid, :name, :email, :impression, :rating, :comment)
-                       ON CONFLICT (summary_id, user_id) DO UPDATE SET
-                          name = EXCLUDED.name,
-                          email = EXCLUDED.email,
-                          impression = EXCLUDED.impression,
-                          rating = EXCLUDED.rating,
-                          comment = EXCLUDED.comment,
-                          updated_at = CURRENT_TIMESTAMP"
-                    : "INSERT INTO feedback (summary_id, user_id, name, email, impression, rating, comment)
+                $sql = "INSERT INTO feedback (summary_id, user_id, name, email, impression, rating, comment)
                        VALUES (:sid, :uid, :name, :email, :impression, :rating, :comment)
                        ON DUPLICATE KEY UPDATE
                           name = VALUES(name),
@@ -234,17 +206,7 @@ final class FeedbackService
                     'comment' => $comment,
                 ]);
             } else {
-                $sql = $isPg
-                    ? "INSERT INTO feedback (summary_id, guest_token, name, email, impression, rating, comment)
-                       VALUES (:sid, :token, :name, :email, :impression, :rating, :comment)
-                       ON CONFLICT (summary_id, guest_token) DO UPDATE SET
-                          name = EXCLUDED.name,
-                          email = EXCLUDED.email,
-                          impression = EXCLUDED.impression,
-                          rating = EXCLUDED.rating,
-                          comment = EXCLUDED.comment,
-                          updated_at = CURRENT_TIMESTAMP"
-                    : "INSERT INTO feedback (summary_id, guest_token, name, email, impression, rating, comment)
+                $sql = "INSERT INTO feedback (summary_id, guest_token, name, email, impression, rating, comment)
                        VALUES (:sid, :token, :name, :email, :impression, :rating, :comment)
                        ON DUPLICATE KEY UPDATE
                           name = VALUES(name),

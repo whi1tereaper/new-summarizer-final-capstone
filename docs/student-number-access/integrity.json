@@ -1,0 +1,8 @@
+{
+    "recorded_utc": "2026-10-23T02:49:54+00:00",
+    "nlp_files_checked": 38,
+    "historical_research_files_checked": 46,
+    "mismatches": [],
+    "automatic_article_routing": false,
+    "note": "Protected historical production PHP snapshots are not rewritten to include this unrelated access-control integration."
+}

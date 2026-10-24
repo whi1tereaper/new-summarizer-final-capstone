@@ -1,0 +1,113 @@
+{
+  "recorded_utc": "2026-10-23T02:39:50.953704+00:00",
+  "configured_database_modified": false,
+  "nlp_executed": false,
+  "passed": 26,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "existing registration form renders",
+      "passed": true
+    },
+    {
+      "name": "real registration controller uses migrated schema",
+      "passed": true
+    },
+    {
+      "name": "new applicant status remains pending",
+      "passed": true
+    },
+    {
+      "name": "pending applicant retains only three trial successes",
+      "passed": true
+    },
+    {
+      "name": "public access status contains no student email or number",
+      "passed": true
+    },
+    {
+      "name": "anonymous health metadata is protected",
+      "passed": true
+    },
+    {
+      "name": "protected admin detail reads full application",
+      "passed": true
+    },
+    {
+      "name": "ordinary student cannot view admin detail",
+      "passed": true
+    },
+    {
+      "name": "review mutation requires CSRF",
+      "passed": true
+    },
+    {
+      "name": "real decline transition succeeds",
+      "passed": true
+    },
+    {
+      "name": "declined applicant receives own reason",
+      "passed": true
+    },
+    {
+      "name": "declined applicant resubmits without duplicate account",
+      "passed": true
+    },
+    {
+      "name": "real evidence-recorded admin approval succeeds",
+      "passed": true
+    },
+    {
+      "name": "approval changes continued access immediately",
+      "passed": true
+    },
+    {
+      "name": "existing administrative page: admin_dashboard.php",
+      "passed": true
+    },
+    {
+      "name": "existing administrative page: admin_audit_logs.php",
+      "passed": true
+    },
+    {
+      "name": "existing administrative page: analytics.php",
+      "passed": true
+    },
+    {
+      "name": "existing PostgreSQL database-health endpoint succeeds",
+      "passed": true
+    },
+    {
+      "name": "existing PostgreSQL analytics JSON endpoint succeeds",
+      "passed": true
+    },
+    {
+      "name": "existing owner page: history.php",
+      "passed": true
+    },
+    {
+      "name": "existing owner page: profile.php",
+      "passed": true
+    },
+    {
+      "name": "existing owner page: terms.php",
+      "passed": true
+    },
+    {
+      "name": "existing owner page: forgot_password.php",
+      "passed": true
+    },
+    {
+      "name": "another account historical content is not disclosed",
+      "passed": true
+    },
+    {
+      "name": "existing logout works",
+      "passed": true
+    },
+    {
+      "name": "existing password login preserves approval",
+      "passed": true
+    }
+  ]
+}

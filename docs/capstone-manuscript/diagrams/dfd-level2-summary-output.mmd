@@ -1,0 +1,20 @@
+%% DFD 2.3-2.5: output persistence and status
+%% Focused view; repeated subprocesses connect adjacent panels of the full process-2.0 decomposition.
+flowchart TB
+    U["Visitor / registered user<br/>eligible requests only"]
+    D2@{ shape: datastore, label: "D2 Main summary stores<br/>summaries; summary_artifacts;<br/>summary_jobs; temporary files" }
+    P23("2.3 Run local NLP<br/>Extract, rank, select<br/>and validate output")
+    P24("2.4 Save result or failure<br/>Release temporary source")
+    P25("2.5 Return owned job status<br/>Result ID or recovery action")
+    P23 -->|"summary / safe failure"| P24
+    P24 -->|"summary, artifacts, job<br/>state"| D2
+    P24 -->|"result state"| P25
+    U -->|"status request"| P25
+    D2 -->|"owned job / result"| P25
+    P25 -->|"status / result ID"| U
+    classDef process fill:#edf1f5,stroke:#222,color:#111;
+    classDef store fill:#f6f6f6,stroke:#222,color:#111;
+    classDef entity fill:#fff,stroke:#222,color:#111;
+    class P23,P24,P25 process;
+    class D2 store;
+    class U entity;

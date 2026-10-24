@@ -1,0 +1,69 @@
+Republic of the Philippines
+_______________________SS.
+Province of Nueva Ecija
+JOINT UNDERTAKING
+
+We, Julius Cesar P. Reyes, John Paulo P. Samson, Christopher A. Ramoso Jr., Gregory Grant C. Alarilla of all
+members, all of legal age, Filipino, and students of Nueva Ecija University of Science and Technology (NEUST), after
+having been duly sworn in accordance with law, do hereby state and depose:
+       1.      That the undersigned are the authors/researchers of an academic project entitled ACCREDX: RECORD
+               MANAGEMENT  AND  ARCHIVING  SYSTEM  FOR  NEUST  PENARANDA  OFF-CAMPUS,  in  partial
+               fulfillment of the requirements for the degree of Bachelor of Science in Information Technology at Nueva
+               Ecija University of Science and Technology (NEUST). This project was completed with the guidance and
+               contribution of our adviser and course teacher, Mr. Jodell R. Bulaclac, MSIT, who are hereby recognized
+               as co-authors of this work in acknowledgment of their valuable intellectual and professional support
+               throughout the development of the project.
+       2.      That the manuscript, attachments, models, system software/enterprise resource plan, source code, algorithms,
+               or any part of the above-mentioned project have not been copyrighted, published, or are under consideration
+               for publication prior to or upon submission thereof.
+       3.      That the manuscript, attachments, models, system software/enterprise resource plan, source code, algorithms,
+               or any part of the above-mentioned project have not been plagiarized, copyrighted, submitted, or published
+               elsewhere by the authors.
+       4.      That the College of Information and Communications Technology and the Nueva Ecija University shall not
+               be held liable for any consequences, damages, loss of life and/or property or financial gain resulting from
+               the authors’ misrepresentation, plagiarism or inclusion of plagiarized work. Furthermore, this manuscript
+               should be thoroughly reviewed and edited by a competent editor, ensuring clarity, coherence, and adherence
+               to academic writing standards.
+       5.      The authors hereby retain full ownership of the above-mentioned project, including all moral and economic
+               rights  under  Philippine  law.  However,  the  authors  grant the  Nueva  Ecija  University  of  Science  and
+               Technology an exclusive, irrevocable right to utilize, modify, reverse engineer, and disseminate the project
+               for academic, institutional, community extension, and production purposes, subject to the condition that the
+               authors’ moral rights, including the right to be credited as the creators and the right to object to any
+               derogatory treatment of the work, shall be upheld. This exclusive right does not transfer ownership of the
+               copyright to the university but allows it to utilize the work for its institutional needs.
+       6.      The project thus submitted, and upon acceptance by the College of Information and Communications
+               Technology, shall grant the Nueva Ecija University of Science and Technology exclusive rights to use,
+               reproduce, and distribute the work for academic, institutional and extension purposes, to the exclusion of all
+               others.
+       7.      The authors shall not commercially use or distribute the project without the written consent of the President
+               of Nueva Ecija University of Science and Technology, but they retain the right to use the project for personal,
+               academic, or non-commercial purposes, provided that the university’s exclusive rights are respected.
+       8.      Additionally, the authors grant permission to their adviser and course teacher, Mr. Jodell R. Bulaclac,
+               MSIT, as co-authors, to present the project in various research conferences, seminars, and fora. However,
+               it is recognized that the student-researchers are the senior authors of this project, and their contribution shall
+               be duly acknowledged in any presentation or publication related to this work.
+
+IN WITNESS WHEREOF, we have hereunto set on our hands this ____ day of _______, 20___ in the City of General
+Tinio, Nueva Ecija, Philippines.
+Name                                                 ID No.                                                Address
+Julius Cesar P. Reyes                                PEN2021-00062                                         Sinasajan, Peñaranda, Nueva Ecija
+John Paulo P. Samson                                 PEN2021-00763                                         San Josef, Peñaranda, Nueva Ecija
+Christopher A. Ramoso Jr.                            PEN2021-00085                                         Las Piñas, Peñaranda, Nueva Ecija
+Gregory Grant C. Alarilla                            PEN2021-00780                                         Poblacion I, Peñaranda, Nueva Ecija
+
+SUBSCRIBED AND SWORN to before us this_______ day of ___________, 20_____ in the City of General Tinio,
+Nueva Ecija, Philippines.
+
+Doc No. _____
+Page No. ____
+Book No. ____
+Series of. ____
+
+
+
+
+
+
+
+
+                                                                                                                                              iv

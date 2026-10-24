@@ -1,0 +1,54 @@
+       •   Enter a name for the Folder you want to create
+       •   Click the “Create” button to create the
+           Folder.
+      2) Upload File
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       •   You have the option to upload Files or
+           Folders.
+       •   Select a file or folder to upload, or drag it
+           and drop it into the system.
+       •   Click “Upload Files” or “Upload Folders” to
+           upload them.
+       •   Wait for the Files or Folders to be uploaded.
+           A progress bar and percentage will be shown as
+           your folder or file uploads.
+       •   The uploaded folder or file will then be
+           displayed.
+       •   When uploading a file or folder with the same
+           name, a modal will be displayed with the
+           options to Cancel, Replace, or Keep Both.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                    131

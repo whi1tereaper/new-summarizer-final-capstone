@@ -1,0 +1,33 @@
+   Audit Trail    –  a feature of the system that
+records every activity or modification made to
+documents, helping to track changes and ensure
+accountability.
+
+   Document Management – a structured method for
+handling documents, including creation, storage,
+retrieval, and disposal.
+
+   Electronic Records Management System (ERMS)
+– a software-based system designed to manage
+records in digital format, automate document
+workflows,   and   enhance   security   and
+accessibility.
+
+   File Retrieval – The process of locating and
+accessing   stored   documents   quickly   and
+efficiently.
+   ISO/IEC  25010:2011        –    an  international
+standard used to evaluate software quality based
+on  criteria  like  usability,  reliability,
+maintainability, and performance.
+
+   Record Management – the systematic control of
+records from creation through maintenance to
+disposal. It ensures records are accurate,
+secure, and accessible when needed.
+
+
+
+
+
+                                                       19

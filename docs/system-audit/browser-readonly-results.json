@@ -1,0 +1,2725 @@
+{
+    "evidenceClass": "ISOLATED_UI_RENDER",
+    "dateManila": "2026-10-17",
+    "sourceRoot": "C:\\xampp\\htdocs\\ai-summarizer-123 - quality upg",
+    "origin": "http://127.0.0.1:8765",
+    "limitations": [
+        "Original PHP templates are rendered with APP_BOOTSTRAPPED set and a synthetic PDO fixture.",
+        "No live database, production authentication, model, audio, translation or email flow is tested.",
+        "Browser is restricted to loopback GET requests. External fonts, telemetry and backend calls are blocked.",
+        "Audit provenance banner is injected into screenshots only. Empty values are fixture data, not collected research results."
+    ],
+    "pages": [
+        {
+            "name": "landing",
+            "viewport": "desktop",
+            "width": 1440,
+            "height": 1000,
+            "requestUrl": "http://127.0.0.1:8765/index.php",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-landing-desktop.png",
+            "title": "LIGHT â€” AI Article Summarizer",
+            "url": "http://127.0.0.1:8765/index.php",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "Smart Summary Experience"
+                },
+                {
+                    "level": "H2",
+                    "text": "LIGHT turns complex articles into clear, useful knowledge."
+                },
+                {
+                    "level": "H2",
+                    "text": "READY TO TURN\nLONG DOCUMENTS\n\nINTO CLARITY."
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 1440,
+            "viewportWidth": 1440,
+            "horizontalOverflow": false,
+            "overflowingElements": [
+                {
+                    "tag": "SPAN",
+                    "id": "",
+                    "class": "nex-cta__bg-num"
+                }
+            ],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [],
+            "bodyTextStart": "LIGHT\nSUMMARIZE\nLOGIN\nREGISTER\nSmart Summary Experience\nLIGHT\nSCROLL TO EXPLORE\n01\nABOUT LIGHT\nLIGHT turns complex documents into clear, useful knowledge.\n\nUnderstand more without reading everything.\n\n02\n02\nSTART SUMMARIZING\n\nREAD",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@600;700;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Failed to load resource: the server responded with a status of 404 (Not Found)",
+                "Connecting to \u0027http://127.0.0.1:8765/api/track_landing.php\u0027 violates the following Content Security Policy directive: \"connect-src \u0027none\u0027\". The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [
+                {
+                    "url": "http://127.0.0.1:8765/assets/images/poc-neust-logo.png",
+                    "status": 404
+                }
+            ],
+            "blocked": []
+        },
+        {
+            "name": "summarizer",
+            "viewport": "desktop",
+            "width": 1440,
+            "height": 1000,
+            "requestUrl": "http://127.0.0.1:8765/summarizer.php",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-summarizer-desktop.png",
+            "title": "Summarizer â€” LIGHT",
+            "url": "http://127.0.0.1:8765/summarizer.php",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "DROP YOUR\nDOCUMENT."
+                },
+                {
+                    "level": "H1",
+                    "text": "Summarizer"
+                },
+                {
+                    "level": "H2",
+                    "text": "SUMMARY SETTINGS"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 1440,
+            "viewportWidth": 1440,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [
+                {
+                    "method": "post",
+                    "action": "summarize.php"
+                }
+            ],
+            "bodyTextStart": "LIGHT\nSUMMARIZE\nLOGIN\nREGISTER\nâ˜€\nTheme\n01\nSUMMARIZE\nDROP YOUR\nDOCUMENT.\nDOCUMENT TITLE (Optional)\nFOCUS / TOPIC / QUESTION (Optional)\n\nDirects the summary algorithm to prioritize evidence matching your query or question.\n\nSOURCE\nU",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900\u0026family=Outfit:wght@600;700;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "sign-in",
+            "viewport": "desktop",
+            "width": 1440,
+            "height": 1000,
+            "requestUrl": "http://127.0.0.1:8765/login.php",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-sign-in-desktop.png",
+            "title": "Sign In â€” LIGHT",
+            "url": "http://127.0.0.1:8765/login.php",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "Sign in to LIGHT"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 1440,
+            "viewportWidth": 1440,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [
+                {
+                    "id": "toggle-password",
+                    "label": "Toggle password visibility"
+                }
+            ],
+            "formActions": [
+                {
+                    "method": "post",
+                    "action": "auth.php?action=login"
+                }
+            ],
+            "bodyTextStart": "LIGHT\nSUMMARIZE\nLOGIN\nREGISTER\nâ˜€\nTheme\nSIGN IN\nCREATE ACCOUNT\nSign in to LIGHT\n\nEnter your credentials to access your document workspace.\n\nUSERNAME OR EMAIL\nPASSWORD\nForgot password?\nKeep me signed in for 30 days\nSIGN IN\nDon\u0027t hav",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "register",
+            "viewport": "desktop",
+            "width": 1440,
+            "height": 1000,
+            "requestUrl": "http://127.0.0.1:8765/register.php",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-register-desktop.png",
+            "title": "Create Account â€” LIGHT",
+            "url": "http://127.0.0.1:8765/register.php",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "Create Account"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 1440,
+            "viewportWidth": 1440,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [
+                {
+                    "id": "toggle-password",
+                    "label": "Toggle password visibility"
+                },
+                {
+                    "id": "toggle-confirm",
+                    "label": "Toggle password visibility"
+                }
+            ],
+            "formActions": [
+                {
+                    "method": "post",
+                    "action": "auth.php?action=register"
+                }
+            ],
+            "bodyTextStart": "LIGHT\nSUMMARIZE\nLOGIN\nREGISTER\nâ˜€\nTheme\nSIGN IN\nCREATE ACCOUNT\nCreate Account\n\nSign up to unlock custom summarization profiles, history, and document export.\n\nPREFERRED USERNAME\nEMAIL\nPASSWORD\nCONFIRM PASSWORD\nI have read and agree",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "password-recovery",
+            "viewport": "desktop",
+            "width": 1440,
+            "height": 1000,
+            "requestUrl": "http://127.0.0.1:8765/forgot_password.php",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-password-recovery-desktop.png",
+            "title": "Recover Password â€” LIGHT",
+            "url": "http://127.0.0.1:8765/forgot_password.php",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H2",
+                    "text": "Recover Password"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 1440,
+            "viewportWidth": 1440,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [
+                {
+                    "method": "post",
+                    "action": "auth.php?action=forgotPassword"
+                }
+            ],
+            "bodyTextStart": "LIGHT\nSUMMARIZE\nLOGIN\nREGISTER\nâ˜€\nTheme\nRECOVER ACCESS\nRecover Password\n\nEnter your email address and we will send you a verification code to reset your password.\n\nEMAIL ADDRESS\nSEND OTP\nReturn to Login\nCreate Account\nEMAIL\nwhitesu",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "password-reset",
+            "viewport": "desktop",
+            "width": 1440,
+            "height": 1000,
+            "requestUrl": "http://127.0.0.1:8765/reset_password.php",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-password-reset-desktop.png",
+            "title": "Reset Password â€” LIGHT",
+            "url": "http://127.0.0.1:8765/reset_password.php",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H2",
+                    "text": "Set New Password"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 1440,
+            "viewportWidth": 1440,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [
+                {
+                    "id": "toggle-password",
+                    "label": "Show password"
+                },
+                {
+                    "id": "toggle-confirm",
+                    "label": "Show password"
+                }
+            ],
+            "formActions": [
+                {
+                    "method": "post",
+                    "action": "auth.php?action=resetPassword"
+                }
+            ],
+            "bodyTextStart": "LIGHT\nSUMMARIZE\nLOGIN\nREGISTER\nâ˜€\nTheme\nNEW CREDENTIALS\nSet New Password\n\nChoose a secure password for your condensed intelligence history.\n\nEMAIL ADDRESS:\nSECURITY CODE (OTP):\nNEW PASSWORD:\nCONFIRM PASSWORD:\nUPDATE PASSWORD\nReturn",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "terms",
+            "viewport": "desktop",
+            "width": 1440,
+            "height": 1000,
+            "requestUrl": "http://127.0.0.1:8765/terms.php",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-terms-desktop.png",
+            "title": "Terms and Conditions â€” LIGHT",
+            "url": "http://127.0.0.1:8765/terms.php",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "Terms and Conditions"
+                },
+                {
+                    "level": "H2",
+                    "text": "1. Agreement"
+                },
+                {
+                    "level": "H2",
+                    "text": "2. Purpose of the Software"
+                },
+                {
+                    "level": "H2",
+                    "text": "3. Data We Collect"
+                },
+                {
+                    "level": "H2",
+                    "text": "4. Why We Collect Data"
+                },
+                {
+                    "level": "H2",
+                    "text": "5. User Responsibility"
+                },
+                {
+                    "level": "H2",
+                    "text": "6. Accuracy of Summaries"
+                },
+                {
+                    "level": "H2",
+                    "text": "7. Data Privacy"
+                },
+                {
+                    "level": "H2",
+                    "text": "8. Prohibited Use"
+                },
+                {
+                    "level": "H2",
+                    "text": "9. Changes to the Terms"
+                },
+                {
+                    "level": "H2",
+                    "text": "10. Acceptance"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 1440,
+            "viewportWidth": 1440,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [
+                {
+                    "method": "post",
+                    "action": "terms.php?return=index.php"
+                }
+            ],
+            "bodyTextStart": "LIGHT\nSUMMARIZE\nLOGIN\nREGISTER\nâ˜€\nTheme\nBACK TO SUMMARIZER\nTerms and Conditions\n\nPlease read these terms carefully before using the Article Summarization Software. The language below is intentionally simple so it is easy to underst",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "accept-terms",
+            "viewport": "desktop",
+            "width": 1440,
+            "height": 1000,
+            "requestUrl": "http://127.0.0.1:8765/accept_terms.php",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-accept-terms-desktop.png",
+            "title": "Accept Terms and Conditions â€” LIGHT",
+            "url": "http://127.0.0.1:8765/accept_terms.php",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "Terms and Conditions"
+                },
+                {
+                    "level": "H2",
+                    "text": "1. Agreement"
+                },
+                {
+                    "level": "H2",
+                    "text": "2. Purpose of the Software"
+                },
+                {
+                    "level": "H2",
+                    "text": "3. Data We Collect"
+                },
+                {
+                    "level": "H2",
+                    "text": "4. Why We Collect Data"
+                },
+                {
+                    "level": "H2",
+                    "text": "5. User Responsibility"
+                },
+                {
+                    "level": "H2",
+                    "text": "6. Accuracy of Summaries"
+                },
+                {
+                    "level": "H2",
+                    "text": "7. Data Privacy"
+                },
+                {
+                    "level": "H2",
+                    "text": "8. Prohibited Use"
+                },
+                {
+                    "level": "H2",
+                    "text": "9. Changes to the Terms"
+                },
+                {
+                    "level": "H2",
+                    "text": "10. Acceptance"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 1440,
+            "viewportWidth": 1440,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [],
+            "bodyTextStart": "LIGHT\nSUMMARIZE\nLOGIN\nREGISTER\nâ˜€\nTheme\nTerms and Conditions\n\nReview the terms below to learn about using the software.\n\n1. Agreement\n\nBy using this Article Summarization Software, you agree to follow these Terms and Conditions. If",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "dashboard-empty",
+            "viewport": "desktop",
+            "width": 1440,
+            "height": 1000,
+            "requestUrl": "http://127.0.0.1:8765/dashboard.php?fixture_role=user",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-dashboard-empty-desktop.png",
+            "title": "Your Dashboard â€” LIGHT",
+            "url": "http://127.0.0.1:8765/dashboard.php?fixture_role=user",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "Welcome back, SYNTHETIC AUDIT USER."
+                },
+                {
+                    "level": "H2",
+                    "text": "No preference yet"
+                },
+                {
+                    "level": "H2",
+                    "text": "No summaries yet"
+                },
+                {
+                    "level": "H2",
+                    "text": "Analytics \u0026 Graphs"
+                },
+                {
+                    "level": "H3",
+                    "text": "Summaries Over Time"
+                },
+                {
+                    "level": "H3",
+                    "text": "Original vs Summary Length"
+                },
+                {
+                    "level": "H3",
+                    "text": "Articles by Category"
+                },
+                {
+                    "level": "H3",
+                    "text": "Method Usage"
+                },
+                {
+                    "level": "H2",
+                    "text": "Log out?"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 1440,
+            "viewportWidth": 1440,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [],
+            "bodyTextStart": "LIGHT\nSUMMARIZE\nDASHBOARD\nPROFILE\nHISTORY\nLOGOUT\nâ˜€\nTheme\n\nYour workspace\n\nWelcome back, SYNTHETIC AUDIT USER.\n\nMost used settings\n\nNo preference yet\n\nComplete a summary and your preferred settings will appear here.\n\nCreate a summa",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900\u0026family=Outfit:wght@600;700;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "profile-synthetic",
+            "viewport": "desktop",
+            "width": 1440,
+            "height": 1000,
+            "requestUrl": "http://127.0.0.1:8765/profile.php?fixture_role=user",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-profile-synthetic-desktop.png",
+            "title": "Profile â€” LIGHT",
+            "url": "http://127.0.0.1:8765/profile.php?fixture_role=user",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "Profile"
+                },
+                {
+                    "level": "H2",
+                    "text": "SYNTHETIC AUDIT USER"
+                },
+                {
+                    "level": "H2",
+                    "text": "Deactivate account"
+                },
+                {
+                    "level": "H2",
+                    "text": "Log out?"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 1440,
+            "viewportWidth": 1440,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [
+                {
+                    "method": "post",
+                    "action": "auth.php?action=deactivateAccount"
+                }
+            ],
+            "bodyTextStart": "LIGHT\nSUMMARIZE\nDASHBOARD\nPROFILE\nHISTORY\nLOGOUT\nâ˜€\nTheme\n\nYour account\n\nProfile\n\nACCOUNT\n\nDashboard\nHistory\nProfile\nS\n\nACCOUNT PROFILE\n\nSYNTHETIC AUDIT USER\nEmail\naudit-fixture@example.invalid\nUsername\nSYNTHETIC AUDIT USER\nAccount",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "history-empty",
+            "viewport": "desktop",
+            "width": 1440,
+            "height": 1000,
+            "requestUrl": "http://127.0.0.1:8765/history.php?fixture_role=user",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-history-empty-desktop.png",
+            "title": "History â€” LIGHT",
+            "url": "http://127.0.0.1:8765/history.php?fixture_role=user",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "History"
+                },
+                {
+                    "level": "H2",
+                    "text": "Log out?"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 1440,
+            "viewportWidth": 1440,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [],
+            "bodyTextStart": "LIGHT\nSUMMARIZE\nDASHBOARD\nPROFILE\nHISTORY\nLOGOUT\nâ˜€\nTheme\nHistory\n\nHistory remains vacant. Initiate a new document analysis to begin.\n\nEMAIL\nwhitesummarizerteam@gmail.com\n\nGiving documents, summaries, and articles the room to speak",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=JetBrains+Mono:wght@400;500\u0026family=Outfit:wght@600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "analytics-empty",
+            "viewport": "desktop",
+            "width": 1440,
+            "height": 1000,
+            "requestUrl": "http://127.0.0.1:8765/analytics.php?fixture_role=user",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-analytics-empty-desktop.png",
+            "title": "Analytics â€” LIGHT",
+            "url": "http://127.0.0.1:8765/analytics.php?fixture_role=user",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "Analytics"
+                },
+                {
+                    "level": "H2",
+                    "text": "No summarization data available yet."
+                },
+                {
+                    "level": "H2",
+                    "text": "Log out?"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 1440,
+            "viewportWidth": 1440,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [
+                {
+                    "method": "get",
+                    "action": null
+                }
+            ],
+            "bodyTextStart": "LIGHT\nSUMMARIZE\nDASHBOARD\nPROFILE\nHISTORY\nLOGOUT\nâ˜€\nTheme\n\nACTIVITY REPORT Â· PERSONAL\n\nAnalytics\n\nOverview of article summarization activity\n\nLast 7 days\nLast 30 days\nLast 3 months\nThis year\nFrom\nTo\nApply filter\nSUMMARIES COMPLETED",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "processing-synthetic",
+            "viewport": "desktop",
+            "width": 1440,
+            "height": 1000,
+            "requestUrl": "http://127.0.0.1:8765/processing.php?fixture_pending=1",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-processing-synthetic-desktop.png",
+            "title": "Preparing your summary â€” LIGHT",
+            "url": "http://127.0.0.1:8765/processing.php?fixture_pending=1",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H2",
+                    "text": "Summary settings"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 1440,
+            "viewportWidth": 1440,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [],
+            "bodyTextStart": "â˜€\nTheme\nLIGHT\nDocument summarizer\nloading\nThe connection was interrupted. Checking the existing request again.\n\nPasted text\n\nSYNTHETIC UI EXAMPLE â€” no job submitted\n\nSummary settings\nOutput format\nParagraph\nAnalysis mode\nGeneral\nS",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Connecting to \u0027http://127.0.0.1:8765/summarize.php?action=execute\u0026job_id=\u0027 violates the following Content Security Policy directive: \"connect-src \u0027none\u0027\". The action has been blocked.",
+                "Fetch API cannot load http://127.0.0.1:8765/summarize.php?action=execute\u0026job_id=. Refused to connect because it violates the document\u0027s Content Security Policy."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "result-synthetic",
+            "viewport": "desktop",
+            "width": 1440,
+            "height": 1000,
+            "requestUrl": "http://127.0.0.1:8765/result.php?id=900001",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-result-synthetic-desktop.png",
+            "title": "SYNTHETIC UI EXAMPLE â€” no model output - Summary",
+            "url": "http://127.0.0.1:8765/result.php?id=900001",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "SYNTHETIC UI EXAMPLE â€” no model output"
+                },
+                {
+                    "level": "H2",
+                    "text": "Overall Summary"
+                },
+                {
+                    "level": "H3",
+                    "text": "Filipino translation"
+                },
+                {
+                    "level": "H2",
+                    "text": "Source \u0026 supporting passages"
+                },
+                {
+                    "level": "H3",
+                    "text": "Original Source Text"
+                },
+                {
+                    "level": "H2",
+                    "text": "Summary details"
+                },
+                {
+                    "level": "H2",
+                    "text": "Was this summary useful?"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 1440,
+            "viewportWidth": 1440,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [],
+            "bodyTextStart": "NEW SUMMARY\nSUMMARY\nâ˜€\nTheme\n\nYOUR SUMMARY\n\nSYNTHETIC UI EXAMPLE â€” no model output\nBalanced\nParagraph Summary\nDetails\nOverall Summary\nCheck source\nCopy Summary\nSave PDF\nExport TXT\nListen\nTranslate to Filipino\n\nThis synthetic summar",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Outfit:wght@600;700;900\u0026family=JetBrains+Mono:wght@400;500;600\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "result-unavailable",
+            "viewport": "desktop",
+            "width": 1440,
+            "height": 1000,
+            "requestUrl": "http://127.0.0.1:8765/result.php?id=900002",
+            "status": 404,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-result-unavailable-desktop.png",
+            "title": "Error - Summary",
+            "url": "http://127.0.0.1:8765/result.php?id=900002",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "This result is not available."
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 1440,
+            "viewportWidth": 1440,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [],
+            "bodyTextStart": "NEW SUMMARY\nSUMMARY\nâ˜€\nTheme\n\nUNABLE TO LOAD\n\nThis result is not available.\n\nThe result could not be found or is not accessible in your current session.\n\nReturn to your summary history or submit a source in this session.\n\nReference",
+            "consoleErrors": [
+                "Failed to load resource: the server responded with a status of 404 (Not Found)",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Outfit:wght@600;700;900\u0026family=JetBrains+Mono:wght@400;500;600\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [
+                {
+                    "url": "http://127.0.0.1:8765/result.php?id=900002",
+                    "status": 404
+                }
+            ],
+            "blocked": []
+        },
+        {
+            "name": "admin-dashboard-empty",
+            "viewport": "desktop",
+            "width": 1440,
+            "height": 1000,
+            "requestUrl": "http://127.0.0.1:8765/admin_dashboard.php?fixture_role=admin",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-admin-dashboard-empty-desktop.png",
+            "title": "Admin Dashboard",
+            "url": "http://127.0.0.1:8765/admin_dashboard.php?fixture_role=admin",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "Administrative Console"
+                },
+                {
+                    "level": "H2",
+                    "text": "SYSTEM OVERVIEW"
+                },
+                {
+                    "level": "H2",
+                    "text": "Analytics \u0026 Graphs"
+                },
+                {
+                    "level": "H3",
+                    "text": "Summaries Over Time"
+                },
+                {
+                    "level": "H3",
+                    "text": "Original vs Summary Length"
+                },
+                {
+                    "level": "H3",
+                    "text": "Articles by Category"
+                },
+                {
+                    "level": "H3",
+                    "text": "Method Usage"
+                },
+                {
+                    "level": "H2",
+                    "text": "STORAGE \u0026 MAINTENANCE"
+                },
+                {
+                    "level": "H2",
+                    "text": "USER MANAGEMENT"
+                },
+                {
+                    "level": "H2",
+                    "text": "SUMMARIZER QUALITY TELEMETRY"
+                },
+                {
+                    "level": "H2",
+                    "text": "USER FEEDBACK (ANONYMOUS REPOSITORY)"
+                },
+                {
+                    "level": "H2",
+                    "text": "FEEDBACK COMMENTS REPOSITORY (ANONYMOUS)"
+                },
+                {
+                    "level": "H2",
+                    "text": "LANDING PAGE ANALYTICS"
+                },
+                {
+                    "level": "H3",
+                    "text": "DEVICE BREAKDOWN"
+                },
+                {
+                    "level": "H3",
+                    "text": "SCROLL DEPTH FUNNEL"
+                },
+                {
+                    "level": "H3",
+                    "text": "DAILY SESSIONS (LAST 14 DAYS)"
+                },
+                {
+                    "level": "H3",
+                    "text": "TOP REFERRERS"
+                },
+                {
+                    "level": "H2",
+                    "text": "Log out?"
+                }
+            ],
+            "mainCount": 0,
+            "bodyWidth": 1440,
+            "viewportWidth": 1440,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [
+                {
+                    "method": "get",
+                    "action": "admin_dashboard.php"
+                },
+                {
+                    "method": "get",
+                    "action": "admin_dashboard.php"
+                }
+            ],
+            "bodyTextStart": "LIGHT\nSUMMARIZE\nADMIN\nANALYTICS\nPROFILE\nHISTORY\nLOGOUT\nâ˜€\nTheme\nâ† DASHBOARD\nAUDIT LOGS\nLOGOUT\nAdministrative Console\nSYSTEM OVERVIEW\nSTATISTICS PERIOD\nLast 7 days\nLast 30 days\nLast 90 days\nAll time\nApply period\n\nOverview totals and",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=Inter:wght@400;600\u0026family=VT323\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "admin-audit-logs-empty",
+            "viewport": "desktop",
+            "width": 1440,
+            "height": 1000,
+            "requestUrl": "http://127.0.0.1:8765/admin_audit_logs.php?fixture_role=admin",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-admin-audit-logs-empty-desktop.png",
+            "title": "Admin Audit Logs",
+            "url": "http://127.0.0.1:8765/admin_audit_logs.php?fixture_role=admin",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H2",
+                    "text": "Admin Audit Logs"
+                }
+            ],
+            "mainCount": 0,
+            "bodyWidth": 1440,
+            "viewportWidth": 1440,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [],
+            "bodyTextStart": "â˜€\nTheme\nAdmin Audit Logs\nâ† Back to Dashboard\nAudit log table is currently missing. Waiting for the first log to be generated.\nEMAIL\nwhitesummarizerteam@gmail.com\n\nGiving documents, summaries, and articles the room to speak for the",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=Inter:wght@400;600\u0026family=VT323\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "evaluation-denied",
+            "viewport": "desktop",
+            "width": 1440,
+            "height": 1000,
+            "requestUrl": "http://127.0.0.1:8765/evaluate.php",
+            "status": 403,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-evaluation-denied-desktop.png",
+            "title": "Sign in to review â€” LIGHT",
+            "url": "http://127.0.0.1:8765/evaluate.php",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "Sign in to review"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 1440,
+            "viewportWidth": 1440,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [],
+            "bodyTextStart": "LIGHT\nSUMMARIZE\nLOGIN\nREGISTER\nâ˜€\nTheme\n\nINDEPENDENT REVIEW\n\nSign in to review\n\nRead the source and assess each assigned summary using the same rubric.\n\nAn active account is required to access assigned reviews.\n\nSign in\n\nEMAIL\nwhit",
+            "consoleErrors": [
+                "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [
+                {
+                    "url": "http://127.0.0.1:8765/evaluate.php",
+                    "status": 403
+                }
+            ],
+            "blocked": []
+        },
+        {
+            "name": "evaluation-empty",
+            "viewport": "desktop",
+            "width": 1440,
+            "height": 1000,
+            "requestUrl": "http://127.0.0.1:8765/evaluate.php?fixture_role=user",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-evaluation-empty-desktop.png",
+            "title": "Summary review â€” LIGHT",
+            "url": "http://127.0.0.1:8765/evaluate.php?fixture_role=user",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "Summary review"
+                },
+                {
+                    "level": "H2",
+                    "text": "No assigned reviews"
+                },
+                {
+                    "level": "H2",
+                    "text": "Log out?"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 1440,
+            "viewportWidth": 1440,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [],
+            "bodyTextStart": "LIGHT\nSUMMARIZE\nDASHBOARD\nPROFILE\nHISTORY\nLOGOUT\nâ˜€\nTheme\n\nINDEPENDENT REVIEW\n\nSummary review\n\nRead the source and assess each assigned summary using the same rubric.\n\nNo assigned reviews\n\nYour research administrator will assign do",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "landing",
+            "viewport": "mobile",
+            "width": 390,
+            "height": 844,
+            "requestUrl": "http://127.0.0.1:8765/index.php",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-landing-mobile.png",
+            "title": "LIGHT â€” AI Article Summarizer",
+            "url": "http://127.0.0.1:8765/index.php",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "Smart Summary Experience"
+                },
+                {
+                    "level": "H2",
+                    "text": "LIGHT turns complex articles into clear, useful knowledge."
+                },
+                {
+                    "level": "H2",
+                    "text": "READY TO TURN\nLONG ARTICLES\n\nINTO CLARITY."
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 390,
+            "viewportWidth": 390,
+            "horizontalOverflow": false,
+            "overflowingElements": [
+                {
+                    "tag": "SPAN",
+                    "id": "",
+                    "class": "nex-cta__bg-num"
+                }
+            ],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [],
+            "bodyTextStart": "LIGHT\nSmart Summary Experience\nLIGHT\nSCROLL TO EXPLORE\n01\nABOUT LIGHT\nLIGHT turns complex documents into clear, useful knowledge.\n\nUnderstand more without reading everything.\n\n02\n02\nSTART SUMMARIZING\n\nREADY TO READ LESS, UNDERSTAN",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@600;700;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Connecting to \u0027http://127.0.0.1:8765/api/track_landing.php\u0027 violates the following Content Security Policy directive: \"connect-src \u0027none\u0027\". The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "summarizer",
+            "viewport": "mobile",
+            "width": 390,
+            "height": 844,
+            "requestUrl": "http://127.0.0.1:8765/summarizer.php",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-summarizer-mobile.png",
+            "title": "Summarizer â€” LIGHT",
+            "url": "http://127.0.0.1:8765/summarizer.php",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "DROP YOUR\nDOCUMENT."
+                },
+                {
+                    "level": "H1",
+                    "text": "Summarizer"
+                },
+                {
+                    "level": "H2",
+                    "text": "SUMMARY SETTINGS"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 390,
+            "viewportWidth": 390,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [
+                {
+                    "method": "post",
+                    "action": "summarize.php"
+                }
+            ],
+            "bodyTextStart": "LIGHT\n01\nSUMMARIZE\nDROP YOUR\nDOCUMENT.\nDOCUMENT TITLE (Optional)\nFOCUS / TOPIC / QUESTION (Optional)\n\nDirects the summary algorithm to prioritize evidence matching your query or question.\n\nSOURCE\nUpload File\nPaste Text\nURL\nUPLOAD ",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900\u0026family=Outfit:wght@600;700;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "sign-in",
+            "viewport": "mobile",
+            "width": 390,
+            "height": 844,
+            "requestUrl": "http://127.0.0.1:8765/login.php",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-sign-in-mobile.png",
+            "title": "Sign In â€” LIGHT",
+            "url": "http://127.0.0.1:8765/login.php",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "Sign in to LIGHT"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 390,
+            "viewportWidth": 390,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [
+                {
+                    "id": "toggle-password",
+                    "label": "Toggle password visibility"
+                }
+            ],
+            "formActions": [
+                {
+                    "method": "post",
+                    "action": "auth.php?action=login"
+                }
+            ],
+            "bodyTextStart": "LIGHT\nSIGN IN\nCREATE ACCOUNT\nSign in to LIGHT\n\nEnter your credentials to access your document workspace.\n\nUSERNAME OR EMAIL\nPASSWORD\nForgot password?\nKeep me signed in for 30 days\nSIGN IN\nDon\u0027t have an account? Create Account\nRese",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "register",
+            "viewport": "mobile",
+            "width": 390,
+            "height": 844,
+            "requestUrl": "http://127.0.0.1:8765/register.php",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-register-mobile.png",
+            "title": "Create Account â€” LIGHT",
+            "url": "http://127.0.0.1:8765/register.php",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "Create Account"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 390,
+            "viewportWidth": 390,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [
+                {
+                    "id": "toggle-password",
+                    "label": "Toggle password visibility"
+                },
+                {
+                    "id": "toggle-confirm",
+                    "label": "Toggle password visibility"
+                }
+            ],
+            "formActions": [
+                {
+                    "method": "post",
+                    "action": "auth.php?action=register"
+                }
+            ],
+            "bodyTextStart": "LIGHT\nSIGN IN\nCREATE ACCOUNT\nCreate Account\n\nSign up to unlock custom summarization profiles, history, and document export.\n\nPREFERRED USERNAME\nEMAIL\nPASSWORD\nCONFIRM PASSWORD\nI have read and agree to the Terms and Conditions.\nCRE",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "password-recovery",
+            "viewport": "mobile",
+            "width": 390,
+            "height": 844,
+            "requestUrl": "http://127.0.0.1:8765/forgot_password.php",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-password-recovery-mobile.png",
+            "title": "Recover Password â€” LIGHT",
+            "url": "http://127.0.0.1:8765/forgot_password.php",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H2",
+                    "text": "Recover Password"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 390,
+            "viewportWidth": 390,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [
+                {
+                    "method": "post",
+                    "action": "auth.php?action=forgotPassword"
+                }
+            ],
+            "bodyTextStart": "LIGHT\nRECOVER ACCESS\nRecover Password\n\nEnter your email address and we will send you a verification code to reset your password.\n\nEMAIL ADDRESS\nSEND OTP\nReturn to Login\nCreate Account\nEMAIL\nwhitesummarizerteam@gmail.com\n\nGiving do",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "password-reset",
+            "viewport": "mobile",
+            "width": 390,
+            "height": 844,
+            "requestUrl": "http://127.0.0.1:8765/reset_password.php",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-password-reset-mobile.png",
+            "title": "Reset Password â€” LIGHT",
+            "url": "http://127.0.0.1:8765/reset_password.php",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H2",
+                    "text": "Set New Password"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 390,
+            "viewportWidth": 390,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [
+                {
+                    "id": "toggle-password",
+                    "label": "Show password"
+                },
+                {
+                    "id": "toggle-confirm",
+                    "label": "Show password"
+                }
+            ],
+            "formActions": [
+                {
+                    "method": "post",
+                    "action": "auth.php?action=resetPassword"
+                }
+            ],
+            "bodyTextStart": "LIGHT\nNEW CREDENTIALS\nSet New Password\n\nChoose a secure password for your condensed intelligence history.\n\nEMAIL ADDRESS:\nSECURITY CODE (OTP):\nNEW PASSWORD:\nCONFIRM PASSWORD:\nUPDATE PASSWORD\nReturn to Login\nEMAIL\nwhitesummarizerte",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "terms",
+            "viewport": "mobile",
+            "width": 390,
+            "height": 844,
+            "requestUrl": "http://127.0.0.1:8765/terms.php",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-terms-mobile.png",
+            "title": "Terms and Conditions â€” LIGHT",
+            "url": "http://127.0.0.1:8765/terms.php",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "Terms and Conditions"
+                },
+                {
+                    "level": "H2",
+                    "text": "1. Agreement"
+                },
+                {
+                    "level": "H2",
+                    "text": "2. Purpose of the Software"
+                },
+                {
+                    "level": "H2",
+                    "text": "3. Data We Collect"
+                },
+                {
+                    "level": "H2",
+                    "text": "4. Why We Collect Data"
+                },
+                {
+                    "level": "H2",
+                    "text": "5. User Responsibility"
+                },
+                {
+                    "level": "H2",
+                    "text": "6. Accuracy of Summaries"
+                },
+                {
+                    "level": "H2",
+                    "text": "7. Data Privacy"
+                },
+                {
+                    "level": "H2",
+                    "text": "8. Prohibited Use"
+                },
+                {
+                    "level": "H2",
+                    "text": "9. Changes to the Terms"
+                },
+                {
+                    "level": "H2",
+                    "text": "10. Acceptance"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 390,
+            "viewportWidth": 390,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [
+                {
+                    "method": "post",
+                    "action": "terms.php?return=index.php"
+                }
+            ],
+            "bodyTextStart": "LIGHT\nBACK TO SUMMARIZER\nTerms and Conditions\n\nPlease read these terms carefully before using the Article Summarization Software. The language below is intentionally simple so it is easy to understand.\n\nReview every section below.",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "accept-terms",
+            "viewport": "mobile",
+            "width": 390,
+            "height": 844,
+            "requestUrl": "http://127.0.0.1:8765/accept_terms.php",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-accept-terms-mobile.png",
+            "title": "Accept Terms and Conditions â€” LIGHT",
+            "url": "http://127.0.0.1:8765/accept_terms.php",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "Terms and Conditions"
+                },
+                {
+                    "level": "H2",
+                    "text": "1. Agreement"
+                },
+                {
+                    "level": "H2",
+                    "text": "2. Purpose of the Software"
+                },
+                {
+                    "level": "H2",
+                    "text": "3. Data We Collect"
+                },
+                {
+                    "level": "H2",
+                    "text": "4. Why We Collect Data"
+                },
+                {
+                    "level": "H2",
+                    "text": "5. User Responsibility"
+                },
+                {
+                    "level": "H2",
+                    "text": "6. Accuracy of Summaries"
+                },
+                {
+                    "level": "H2",
+                    "text": "7. Data Privacy"
+                },
+                {
+                    "level": "H2",
+                    "text": "8. Prohibited Use"
+                },
+                {
+                    "level": "H2",
+                    "text": "9. Changes to the Terms"
+                },
+                {
+                    "level": "H2",
+                    "text": "10. Acceptance"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 390,
+            "viewportWidth": 390,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [],
+            "bodyTextStart": "LIGHT\nTerms and Conditions\n\nReview the terms below to learn about using the software.\n\n1. Agreement\n\nBy using this Article Summarization Software, you agree to follow these Terms and Conditions. If you do not agree, please do not ",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "dashboard-empty",
+            "viewport": "mobile",
+            "width": 390,
+            "height": 844,
+            "requestUrl": "http://127.0.0.1:8765/dashboard.php?fixture_role=user",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-dashboard-empty-mobile.png",
+            "title": "Your Dashboard â€” LIGHT",
+            "url": "http://127.0.0.1:8765/dashboard.php?fixture_role=user",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "Welcome back, SYNTHETIC AUDIT USER."
+                },
+                {
+                    "level": "H2",
+                    "text": "No preference yet"
+                },
+                {
+                    "level": "H2",
+                    "text": "No summaries yet"
+                },
+                {
+                    "level": "H2",
+                    "text": "Analytics \u0026 Graphs"
+                },
+                {
+                    "level": "H3",
+                    "text": "Summaries Over Time"
+                },
+                {
+                    "level": "H3",
+                    "text": "Original vs Summary Length"
+                },
+                {
+                    "level": "H3",
+                    "text": "Articles by Category"
+                },
+                {
+                    "level": "H3",
+                    "text": "Method Usage"
+                },
+                {
+                    "level": "H2",
+                    "text": "Log out?"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 390,
+            "viewportWidth": 390,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [],
+            "bodyTextStart": "LIGHT\n\nYour workspace\n\nWelcome back, SYNTHETIC AUDIT USER.\n\nMost used settings\n\nNo preference yet\n\nComplete a summary and your preferred settings will appear here.\n\nCreate a summary â†’\n\nRecent summaries\n\nNo summaries yet\n\nYour comp",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900\u0026family=Outfit:wght@600;700;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "profile-synthetic",
+            "viewport": "mobile",
+            "width": 390,
+            "height": 844,
+            "requestUrl": "http://127.0.0.1:8765/profile.php?fixture_role=user",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-profile-synthetic-mobile.png",
+            "title": "Profile â€” LIGHT",
+            "url": "http://127.0.0.1:8765/profile.php?fixture_role=user",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "Profile"
+                },
+                {
+                    "level": "H2",
+                    "text": "SYNTHETIC AUDIT USER"
+                },
+                {
+                    "level": "H2",
+                    "text": "Deactivate account"
+                },
+                {
+                    "level": "H2",
+                    "text": "Log out?"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 390,
+            "viewportWidth": 390,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [
+                {
+                    "method": "post",
+                    "action": "auth.php?action=deactivateAccount"
+                }
+            ],
+            "bodyTextStart": "LIGHT\n\nYour account\n\nProfile\n\nACCOUNT\n\nDashboard\nHistory\nProfile\nS\n\nACCOUNT PROFILE\n\nSYNTHETIC AUDIT USER\nEmail\naudit-fixture@example.invalid\nUsername\nSYNTHETIC AUDIT USER\nAccount created\nOctober 17, 2026\nDeactivate account\n\nYour ",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "history-empty",
+            "viewport": "mobile",
+            "width": 390,
+            "height": 844,
+            "requestUrl": "http://127.0.0.1:8765/history.php?fixture_role=user",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-history-empty-mobile.png",
+            "title": "History â€” LIGHT",
+            "url": "http://127.0.0.1:8765/history.php?fixture_role=user",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "History"
+                },
+                {
+                    "level": "H2",
+                    "text": "Log out?"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 390,
+            "viewportWidth": 390,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [],
+            "bodyTextStart": "LIGHT\nHistory\n\nHistory remains vacant. Initiate a new document analysis to begin.\n\nEMAIL\nwhitesummarizerteam@gmail.com\n\nGiving documents, summaries, and articles the room to speak for themselves.\n\nSOCIALS\nFacebook\nInstagram\nTikTok",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=JetBrains+Mono:wght@400;500\u0026family=Outfit:wght@600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "analytics-empty",
+            "viewport": "mobile",
+            "width": 390,
+            "height": 844,
+            "requestUrl": "http://127.0.0.1:8765/analytics.php?fixture_role=user",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-analytics-empty-mobile.png",
+            "title": "Analytics â€” LIGHT",
+            "url": "http://127.0.0.1:8765/analytics.php?fixture_role=user",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "Analytics"
+                },
+                {
+                    "level": "H2",
+                    "text": "No summarization data available yet."
+                },
+                {
+                    "level": "H2",
+                    "text": "Log out?"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 390,
+            "viewportWidth": 390,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [
+                {
+                    "method": "get",
+                    "action": null
+                }
+            ],
+            "bodyTextStart": "LIGHT\n\nACTIVITY REPORT Â· PERSONAL\n\nAnalytics\n\nOverview of article summarization activity\n\nLast 7 days\nLast 30 days\nLast 3 months\nThis year\nFrom\nTo\nApply filter\nSUMMARIES COMPLETED\n0\nSuccessful summaries\nDOCUMENTS PROCESSED\n0\nCompl",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "processing-synthetic",
+            "viewport": "mobile",
+            "width": 390,
+            "height": 844,
+            "requestUrl": "http://127.0.0.1:8765/processing.php?fixture_pending=1",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-processing-synthetic-mobile.png",
+            "title": "Preparing your summary â€” LIGHT",
+            "url": "http://127.0.0.1:8765/processing.php?fixture_pending=1",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H2",
+                    "text": "Summary settings"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 390,
+            "viewportWidth": 390,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [],
+            "bodyTextStart": "â˜€\nTheme\nLIGHT\nDocument summarizer\nloading\nThe connection was interrupted. Checking the existing request again.\n\nPasted text\n\nSYNTHETIC UI EXAMPLE â€” no job submitted\n\nSummary settings\nOutput format\nParagraph\nAnalysis mode\nGeneral\nS",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Connecting to \u0027http://127.0.0.1:8765/summarize.php?action=execute\u0026job_id=\u0027 violates the following Content Security Policy directive: \"connect-src \u0027none\u0027\". The action has been blocked.",
+                "Fetch API cannot load http://127.0.0.1:8765/summarize.php?action=execute\u0026job_id=. Refused to connect because it violates the document\u0027s Content Security Policy."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "result-synthetic",
+            "viewport": "mobile",
+            "width": 390,
+            "height": 844,
+            "requestUrl": "http://127.0.0.1:8765/result.php?id=900001",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-result-synthetic-mobile.png",
+            "title": "SYNTHETIC UI EXAMPLE â€” no model output - Summary",
+            "url": "http://127.0.0.1:8765/result.php?id=900001",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "SYNTHETIC UI EXAMPLE â€” no model output"
+                },
+                {
+                    "level": "H2",
+                    "text": "Overall Summary"
+                },
+                {
+                    "level": "H3",
+                    "text": "Filipino translation"
+                },
+                {
+                    "level": "H2",
+                    "text": "Source \u0026 supporting passages"
+                },
+                {
+                    "level": "H3",
+                    "text": "Original Source Text"
+                },
+                {
+                    "level": "H2",
+                    "text": "Summary details"
+                },
+                {
+                    "level": "H2",
+                    "text": "Was this summary useful?"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 390,
+            "viewportWidth": 390,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [],
+            "bodyTextStart": "NEW SUMMARY\nâ˜€\nTheme\n\nYOUR SUMMARY\n\nSYNTHETIC UI EXAMPLE â€” no model output\nBalanced\nParagraph Summary\nDetails\nOverall Summary\nCheck source\nCopy Summary\nSave PDF\nExport TXT\nListen\nTranslate to Filipino\n\nThis synthetic summary demons",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Outfit:wght@600;700;900\u0026family=JetBrains+Mono:wght@400;500;600\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "result-unavailable",
+            "viewport": "mobile",
+            "width": 390,
+            "height": 844,
+            "requestUrl": "http://127.0.0.1:8765/result.php?id=900002",
+            "status": 404,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-result-unavailable-mobile.png",
+            "title": "Error - Summary",
+            "url": "http://127.0.0.1:8765/result.php?id=900002",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "This result is not available."
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 390,
+            "viewportWidth": 390,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [],
+            "bodyTextStart": "NEW SUMMARY\nâ˜€\nTheme\n\nUNABLE TO LOAD\n\nThis result is not available.\n\nThe result could not be found or is not accessible in your current session.\n\nReturn to your summary history or submit a source in this session.\n\nReference: 861ff4",
+            "consoleErrors": [
+                "Failed to load resource: the server responded with a status of 404 (Not Found)",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Outfit:wght@600;700;900\u0026family=JetBrains+Mono:wght@400;500;600\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [
+                {
+                    "url": "http://127.0.0.1:8765/result.php?id=900002",
+                    "status": 404
+                }
+            ],
+            "blocked": []
+        },
+        {
+            "name": "admin-dashboard-empty",
+            "viewport": "mobile",
+            "width": 390,
+            "height": 844,
+            "requestUrl": "http://127.0.0.1:8765/admin_dashboard.php?fixture_role=admin",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-admin-dashboard-empty-mobile.png",
+            "title": "Admin Dashboard",
+            "url": "http://127.0.0.1:8765/admin_dashboard.php?fixture_role=admin",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "Administrative Console"
+                },
+                {
+                    "level": "H2",
+                    "text": "SYSTEM OVERVIEW"
+                },
+                {
+                    "level": "H2",
+                    "text": "Analytics \u0026 Graphs"
+                },
+                {
+                    "level": "H3",
+                    "text": "Summaries Over Time"
+                },
+                {
+                    "level": "H3",
+                    "text": "Original vs Summary Length"
+                },
+                {
+                    "level": "H3",
+                    "text": "Articles by Category"
+                },
+                {
+                    "level": "H3",
+                    "text": "Method Usage"
+                },
+                {
+                    "level": "H2",
+                    "text": "STORAGE \u0026 MAINTENANCE"
+                },
+                {
+                    "level": "H2",
+                    "text": "USER MANAGEMENT"
+                },
+                {
+                    "level": "H2",
+                    "text": "SUMMARIZER QUALITY TELEMETRY"
+                },
+                {
+                    "level": "H2",
+                    "text": "USER FEEDBACK (ANONYMOUS REPOSITORY)"
+                },
+                {
+                    "level": "H2",
+                    "text": "FEEDBACK COMMENTS REPOSITORY (ANONYMOUS)"
+                },
+                {
+                    "level": "H2",
+                    "text": "LANDING PAGE ANALYTICS"
+                },
+                {
+                    "level": "H3",
+                    "text": "DEVICE BREAKDOWN"
+                },
+                {
+                    "level": "H3",
+                    "text": "SCROLL DEPTH FUNNEL"
+                },
+                {
+                    "level": "H3",
+                    "text": "DAILY SESSIONS (LAST 14 DAYS)"
+                },
+                {
+                    "level": "H3",
+                    "text": "TOP REFERRERS"
+                },
+                {
+                    "level": "H2",
+                    "text": "Log out?"
+                }
+            ],
+            "mainCount": 0,
+            "bodyWidth": 390,
+            "viewportWidth": 390,
+            "horizontalOverflow": false,
+            "overflowingElements": [
+                {
+                    "tag": "TABLE",
+                    "id": "admin-user-table",
+                    "class": ""
+                },
+                {
+                    "tag": "THEAD",
+                    "id": "",
+                    "class": ""
+                },
+                {
+                    "tag": "TR",
+                    "id": "",
+                    "class": ""
+                },
+                {
+                    "tag": "TH",
+                    "id": "",
+                    "class": ""
+                },
+                {
+                    "tag": "TH",
+                    "id": "",
+                    "class": ""
+                },
+                {
+                    "tag": "TH",
+                    "id": "",
+                    "class": ""
+                },
+                {
+                    "tag": "TBODY",
+                    "id": "admin-user-table-body",
+                    "class": ""
+                },
+                {
+                    "tag": "TR",
+                    "id": "admin-user-no-results",
+                    "class": ""
+                },
+                {
+                    "tag": "TD",
+                    "id": "",
+                    "class": ""
+                },
+                {
+                    "tag": "TABLE",
+                    "id": "",
+                    "class": ""
+                },
+                {
+                    "tag": "THEAD",
+                    "id": "",
+                    "class": ""
+                },
+                {
+                    "tag": "TR",
+                    "id": "",
+                    "class": ""
+                },
+                {
+                    "tag": "TH",
+                    "id": "",
+                    "class": ""
+                },
+                {
+                    "tag": "TH",
+                    "id": "",
+                    "class": ""
+                },
+                {
+                    "tag": "TH",
+                    "id": "",
+                    "class": ""
+                }
+            ],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [
+                {
+                    "method": "get",
+                    "action": "admin_dashboard.php"
+                },
+                {
+                    "method": "get",
+                    "action": "admin_dashboard.php"
+                }
+            ],
+            "bodyTextStart": "LIGHT\nâ† DASHBOARD\nAUDIT LOGS\nLOGOUT\nAdministrative Console\nSYSTEM OVERVIEW\nSTATISTICS PERIOD\nLast 7 days\nLast 30 days\nLast 90 days\nAll time\nApply period\n\nOverview totals and analytics use All time.\n\n0\nREGISTERED USERS\n0\nTOTAL SUMM",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=Inter:wght@400;600\u0026family=VT323\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "admin-audit-logs-empty",
+            "viewport": "mobile",
+            "width": 390,
+            "height": 844,
+            "requestUrl": "http://127.0.0.1:8765/admin_audit_logs.php?fixture_role=admin",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-admin-audit-logs-empty-mobile.png",
+            "title": "Admin Audit Logs",
+            "url": "http://127.0.0.1:8765/admin_audit_logs.php?fixture_role=admin",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H2",
+                    "text": "Admin Audit Logs"
+                }
+            ],
+            "mainCount": 0,
+            "bodyWidth": 390,
+            "viewportWidth": 390,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [],
+            "bodyTextStart": "â˜€\nTheme\nAdmin Audit Logs\nâ† Back to Dashboard\nAudit log table is currently missing. Waiting for the first log to be generated.\nEMAIL\nwhitesummarizerteam@gmail.com\n\nGiving documents, summaries, and articles the room to speak for the",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=Inter:wght@400;600\u0026family=VT323\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        },
+        {
+            "name": "evaluation-denied",
+            "viewport": "mobile",
+            "width": 390,
+            "height": 844,
+            "requestUrl": "http://127.0.0.1:8765/evaluate.php",
+            "status": 403,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-evaluation-denied-mobile.png",
+            "title": "Sign in to review â€” LIGHT",
+            "url": "http://127.0.0.1:8765/evaluate.php",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "Sign in to review"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 390,
+            "viewportWidth": 390,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [],
+            "bodyTextStart": "LIGHT\n\nINDEPENDENT REVIEW\n\nSign in to review\n\nRead the source and assess each assigned summary using the same rubric.\n\nAn active account is required to access assigned reviews.\n\nSign in\n\nEMAIL\nwhitesummarizerteam@gmail.com\n\nGiving",
+            "consoleErrors": [
+                "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [
+                {
+                    "url": "http://127.0.0.1:8765/evaluate.php",
+                    "status": 403
+                }
+            ],
+            "blocked": []
+        },
+        {
+            "name": "evaluation-empty",
+            "viewport": "mobile",
+            "width": 390,
+            "height": 844,
+            "requestUrl": "http://127.0.0.1:8765/evaluate.php?fixture_role=user",
+            "status": 200,
+            "error": null,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-evaluation-empty-mobile.png",
+            "title": "Summary review â€” LIGHT",
+            "url": "http://127.0.0.1:8765/evaluate.php?fixture_role=user",
+            "lang": "en",
+            "headings": [
+                {
+                    "level": "H1",
+                    "text": "Summary review"
+                },
+                {
+                    "level": "H2",
+                    "text": "No assigned reviews"
+                },
+                {
+                    "level": "H2",
+                    "text": "Log out?"
+                }
+            ],
+            "mainCount": 1,
+            "bodyWidth": 390,
+            "viewportWidth": 390,
+            "horizontalOverflow": false,
+            "overflowingElements": [],
+            "missingLabels": [],
+            "imagesMissingAlt": [],
+            "imagesFailed": [],
+            "negativeTabButtons": [],
+            "formActions": [],
+            "bodyTextStart": "LIGHT\n\nINDEPENDENT REVIEW\n\nSummary review\n\nRead the source and assess each assigned summary using the same rubric.\n\nNo assigned reviews\n\nYour research administrator will assign documents and summaries here.\n\nEMAIL\nwhitesummarizert",
+            "consoleErrors": [
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400\u0026family=Merriweather:ital,wght@0,400;0,700;1,400\u0026family=JetBrains+Mono:wght@400;500;600\u0026family=Outfit:wght@500;600;700\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked.",
+                "Loading the stylesheet \u0027https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700\u0026family=Outfit:wght@500;600;700;800;900\u0026display=swap\u0027 violates the following Content Security Policy directive: \"style-src \u0027self\u0027 \u0027unsafe-inline\u0027\". Note that \u0027style-src-elem\u0027 was not explicitly set, so \u0027style-src\u0027 is used as a fallback. The action has been blocked."
+            ],
+            "pageErrors": [],
+            "badResponses": [],
+            "blocked": []
+        }
+    ],
+    "denials": [
+        {
+            "route": "dashboard.php",
+            "status": 302,
+            "location": "login.php?redirect=dashboard.php",
+            "body": "",
+            "scope": "isolated direct guard execution with anonymous synthetic session; bootstrap/authentication untested",
+            "expectedStatus": 302,
+            "passed": true,
+            "expectedBasis": "Direct handler/guard source inspected before isolated execution; bootstrap deliberately bypassed"
+        },
+        {
+            "route": "profile.php",
+            "status": 302,
+            "location": "login.php?redirect=profile.php",
+            "body": "",
+            "scope": "isolated direct guard execution with anonymous synthetic session; bootstrap/authentication untested",
+            "expectedStatus": 302,
+            "passed": true,
+            "expectedBasis": "Direct handler/guard source inspected before isolated execution; bootstrap deliberately bypassed"
+        },
+        {
+            "route": "history.php",
+            "status": 302,
+            "location": "register.php",
+            "body": "",
+            "scope": "isolated direct guard execution with anonymous synthetic session; bootstrap/authentication untested",
+            "expectedStatus": 302,
+            "passed": true,
+            "expectedBasis": "Direct handler/guard source inspected before isolated execution; bootstrap deliberately bypassed"
+        },
+        {
+            "route": "analytics.php",
+            "status": 302,
+            "location": "register.php",
+            "body": "",
+            "scope": "isolated direct guard execution with anonymous synthetic session; bootstrap/authentication untested",
+            "expectedStatus": 302,
+            "passed": true,
+            "expectedBasis": "Direct handler/guard source inspected before isolated execution; bootstrap deliberately bypassed"
+        },
+        {
+            "route": "analytics.php?action=data",
+            "status": 403,
+            "location": null,
+            "body": "{\"error\":\"REGISTRATION_REQUIRED\",\"message\":\"Create an account to access analytics.\",\"redirect\":\"register.php\"}",
+            "scope": "isolated direct guard execution with anonymous synthetic session; bootstrap/authentication untested",
+            "expectedStatus": 403,
+            "passed": true,
+            "expectedBasis": "Direct handler/guard source inspected before isolated execution; bootstrap deliberately bypassed"
+        },
+        {
+            "route": "admin_dashboard.php",
+            "status": 302,
+            "location": "login.php?context=admin",
+            "body": "",
+            "scope": "isolated direct guard execution with anonymous synthetic session; bootstrap/authentication untested",
+            "expectedStatus": 302,
+            "passed": true,
+            "expectedBasis": "Direct handler/guard source inspected before isolated execution; bootstrap deliberately bypassed"
+        },
+        {
+            "route": "admin_audit_logs.php",
+            "status": 302,
+            "location": "login.php?context=admin",
+            "body": "",
+            "scope": "isolated direct guard execution with anonymous synthetic session; bootstrap/authentication untested",
+            "expectedStatus": 302,
+            "passed": true,
+            "expectedBasis": "Direct handler/guard source inspected before isolated execution; bootstrap deliberately bypassed"
+        },
+        {
+            "route": "admin_db_health.php",
+            "status": 403,
+            "location": null,
+            "body": "{\"error\":\"Forbidden\"}",
+            "scope": "isolated direct guard execution with anonymous synthetic session; bootstrap/authentication untested",
+            "expectedStatus": 403,
+            "passed": true,
+            "expectedBasis": "Direct handler/guard source inspected before isolated execution; bootstrap deliberately bypassed"
+        },
+        {
+            "route": "admin_feedback_feed.php",
+            "status": 403,
+            "location": null,
+            "body": "{\"error\":\"Forbidden\"}",
+            "scope": "isolated direct guard execution with anonymous synthetic session; bootstrap/authentication untested",
+            "expectedStatus": 403,
+            "passed": true,
+            "expectedBasis": "Direct handler/guard source inspected before isolated execution; bootstrap deliberately bypassed"
+        },
+        {
+            "route": "evaluation.php",
+            "status": 302,
+            "location": "login.php?context=admin",
+            "body": "",
+            "scope": "isolated direct guard execution with anonymous synthetic session; bootstrap/authentication untested",
+            "expectedStatus": 302,
+            "passed": true,
+            "expectedBasis": "Direct handler/guard source inspected before isolated execution; bootstrap deliberately bypassed"
+        },
+        {
+            "route": "evaluation_export.php?run=1",
+            "status": 403,
+            "location": null,
+            "body": "Evaluation export requires administrator access.",
+            "scope": "isolated direct guard execution with anonymous synthetic session; bootstrap/authentication untested",
+            "expectedStatus": 403,
+            "passed": true,
+            "expectedBasis": "Direct handler/guard source inspected before isolated execution; bootstrap deliberately bypassed"
+        },
+        {
+            "route": "admin_verify.php",
+            "status": 303,
+            "location": "login.php?context=admin",
+            "body": "",
+            "scope": "isolated direct guard execution with anonymous synthetic session; bootstrap/authentication untested",
+            "expectedStatus": 303,
+            "passed": true,
+            "expectedBasis": "Direct handler/guard source inspected before isolated execution; bootstrap deliberately bypassed"
+        },
+        {
+            "route": "admin_challenge_change.php",
+            "status": 303,
+            "location": "login.php?context=admin",
+            "body": "",
+            "scope": "isolated direct guard execution with anonymous synthetic session; bootstrap/authentication untested",
+            "expectedStatus": 303,
+            "passed": true,
+            "expectedBasis": "Direct handler/guard source inspected before isolated execution; bootstrap deliberately bypassed"
+        },
+        {
+            "route": "admin_challenge_setup.php",
+            "status": 303,
+            "location": "login.php?context=admin",
+            "body": "",
+            "scope": "isolated direct guard execution with anonymous synthetic session; bootstrap/authentication untested",
+            "expectedStatus": 303,
+            "passed": true,
+            "expectedBasis": "Direct handler/guard source inspected before isolated execution; bootstrap deliberately bypassed"
+        },
+        {
+            "route": "processing.php",
+            "status": 302,
+            "location": "summarizer.php",
+            "body": "",
+            "scope": "isolated direct guard execution with anonymous synthetic session; bootstrap/authentication untested",
+            "expectedStatus": 302,
+            "passed": true,
+            "expectedBasis": "Direct handler/guard source inspected before isolated execution; bootstrap deliberately bypassed"
+        },
+        {
+            "route": "result.php",
+            "status": 302,
+            "location": "index.php",
+            "body": "",
+            "scope": "isolated direct guard execution with anonymous synthetic session; bootstrap/authentication untested",
+            "expectedStatus": 302,
+            "passed": true,
+            "expectedBasis": "Direct handler/guard source inspected before isolated execution; bootstrap deliberately bypassed"
+        },
+        {
+            "route": "tts_generate.php",
+            "status": 405,
+            "location": null,
+            "body": "{\"success\":false,\"message\":\"POST request required.\"}",
+            "scope": "isolated direct guard execution with anonymous synthetic session; bootstrap/authentication untested",
+            "expectedStatus": 405,
+            "passed": true,
+            "expectedBasis": "Direct handler/guard source inspected before isolated execution; bootstrap deliberately bypassed"
+        },
+        {
+            "route": "tts_audio.php",
+            "status": 404,
+            "location": null,
+            "body": "Audio not found.",
+            "scope": "isolated direct guard execution with anonymous synthetic session; bootstrap/authentication untested",
+            "expectedStatus": 404,
+            "passed": true,
+            "expectedBasis": "Direct handler/guard source inspected before isolated execution; bootstrap deliberately bypassed"
+        },
+        {
+            "route": "api/qa.php",
+            "status": 405,
+            "location": null,
+            "body": "{\"error\":\"Method Not Allowed. POST is required.\"}",
+            "scope": "isolated direct guard execution with anonymous synthetic session; bootstrap/authentication untested",
+            "expectedStatus": 405,
+            "passed": true,
+            "expectedBasis": "Direct handler/guard source inspected before isolated execution; bootstrap deliberately bypassed"
+        }
+    ],
+    "interactions": [
+        {
+            "test": "Mobile menu opens",
+            "actual": "true",
+            "expected": "true"
+        },
+        {
+            "test": "Escape closes mobile menu",
+            "actual": "false",
+            "expected": "false"
+        },
+        {
+            "test": "Text source selection",
+            "actual": "text",
+            "expected": "text"
+        },
+        {
+            "test": "URL source selection",
+            "actual": "url",
+            "expected": "url"
+        },
+        {
+            "test": "Depth selection",
+            "actual": "comprehensive",
+            "expected": "comprehensive"
+        },
+        {
+            "test": "Output format selection",
+            "actual": "structured",
+            "expected": "structured"
+        },
+        {
+            "test": "Analysis mode selection",
+            "actual": "academic",
+            "expected": "academic"
+        },
+        {
+            "test": "Empty URL source rejected before request",
+            "actual": true,
+            "expected": true,
+            "message": "Check the article URL.\n\nThe link is not a valid HTTP or HTTPS address.\n\nCopy the complete article address, including https://."
+        },
+        {
+            "test": "Password visibility click",
+            "actual": "text",
+            "expected": "text"
+        },
+        {
+            "test": "Guest nutshell registration redirect",
+            "actual": "/register.php",
+            "expected": "/register.php"
+        }
+    ],
+    "supplementalPages": [
+        {
+            "name": "admin-code-synthetic",
+            "viewport": "desktop",
+            "url": "http://127.0.0.1:8765/login.php?fixture_admin_code=1",
+            "status": 200,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-admin-code-synthetic-desktop.png",
+            "title": "Sign In â€” LIGHT",
+            "mainCount": 1,
+            "horizontalOverflow": false,
+            "unlabeled": []
+        },
+        {
+            "name": "terms-pending-synthetic",
+            "viewport": "desktop",
+            "url": "http://127.0.0.1:8765/accept_terms.php?fixture_role=user\u0026fixture_terms_pending=1",
+            "status": 200,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-terms-pending-synthetic-desktop.png",
+            "title": "Accept Terms and Conditions â€” LIGHT",
+            "mainCount": 1,
+            "horizontalOverflow": false,
+            "unlabeled": []
+        },
+        {
+            "name": "admin-log-filters-empty",
+            "viewport": "desktop",
+            "url": "http://127.0.0.1:8765/admin_audit_logs.php?fixture_role=admin\u0026fixture_logs=1",
+            "status": 200,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-admin-log-filters-empty-desktop.png",
+            "title": "Admin Audit Logs",
+            "mainCount": 0,
+            "horizontalOverflow": false,
+            "unlabeled": [
+                {
+                    "name": "action",
+                    "type": "select-one"
+                },
+                {
+                    "name": "admin_id",
+                    "type": "number"
+                },
+                {
+                    "name": "date_from",
+                    "type": "date"
+                },
+                {
+                    "name": "date_to",
+                    "type": "date"
+                }
+            ]
+        },
+        {
+            "name": "logout-modal-synthetic",
+            "viewport": "desktop",
+            "url": "http://127.0.0.1:8765/profile.php?fixture_role=user",
+            "status": 200,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-logout-modal-synthetic-desktop.png",
+            "title": "Profile â€” LIGHT",
+            "mainCount": 1,
+            "horizontalOverflow": false,
+            "unlabeled": []
+        },
+        {
+            "name": "admin-code-synthetic",
+            "viewport": "mobile",
+            "url": "http://127.0.0.1:8765/login.php?fixture_admin_code=1",
+            "status": 200,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-admin-code-synthetic-mobile.png",
+            "title": "Sign In â€” LIGHT",
+            "mainCount": 1,
+            "horizontalOverflow": false,
+            "unlabeled": []
+        },
+        {
+            "name": "terms-pending-synthetic",
+            "viewport": "mobile",
+            "url": "http://127.0.0.1:8765/accept_terms.php?fixture_role=user\u0026fixture_terms_pending=1",
+            "status": 200,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-terms-pending-synthetic-mobile.png",
+            "title": "Accept Terms and Conditions â€” LIGHT",
+            "mainCount": 1,
+            "horizontalOverflow": false,
+            "unlabeled": []
+        },
+        {
+            "name": "admin-log-filters-empty",
+            "viewport": "mobile",
+            "url": "http://127.0.0.1:8765/admin_audit_logs.php?fixture_role=admin\u0026fixture_logs=1",
+            "status": 200,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-admin-log-filters-empty-mobile.png",
+            "title": "Admin Audit Logs",
+            "mainCount": 0,
+            "horizontalOverflow": false,
+            "unlabeled": [
+                {
+                    "name": "action",
+                    "type": "select-one"
+                },
+                {
+                    "name": "admin_id",
+                    "type": "number"
+                },
+                {
+                    "name": "date_from",
+                    "type": "date"
+                },
+                {
+                    "name": "date_to",
+                    "type": "date"
+                }
+            ]
+        },
+        {
+            "name": "logout-modal-synthetic",
+            "viewport": "mobile",
+            "url": "http://127.0.0.1:8765/profile.php?fixture_role=user",
+            "status": 200,
+            "screenshot": "docs/capstone-manuscript/screenshots/ui-logout-modal-synthetic-mobile.png",
+            "title": "Profile â€” LIGHT",
+            "mainCount": 1,
+            "horizontalOverflow": false,
+            "unlabeled": []
+        }
+    ],
+    "supplementalInteractions": [
+        {
+            "test": "Terms checkbox enables acceptance desktop",
+            "actual": true,
+            "expected": true
+        },
+        {
+            "test": "Logout modal Escape close desktop",
+            "actual": true,
+            "expected": true
+        },
+        {
+            "test": "Terms checkbox enables acceptance mobile",
+            "actual": true,
+            "expected": true
+        },
+        {
+            "test": "Logout modal Escape close mobile",
+            "actual": true,
+            "expected": true
+        },
+        {
+            "test": "Result dark theme toggle",
+            "actual": "dark",
+            "expected": "dark"
+        },
+        {
+            "test": "Copy synthetic summary",
+            "actual": "This synthetic summary demonstrates the result interface. It is not a model output or an evaluation result.",
+            "expected": "This synthetic summary demonstrates the result interface. It is not a model output or an evaluation result."
+        },
+        {
+            "test": "Export synthetic summary as TXT",
+            "actual": "This synthetic summary demonstrates the result interface. It is not a model output or an evaluation result.",
+            "expected": "This synthetic summary demonstrates the result interface. It is not a model output or an evaluation result."
+        },
+        {
+            "test": "Selecting low feedback rating reveals optional reasons without submission",
+            "actual": true,
+            "expected": true
+        }
+    ]
+}

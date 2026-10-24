@@ -1,0 +1,7 @@
+source_id,reviewer_id,source_sha256,partition,main_idea_unit,important_units,required_context,attribution_and_qualification_checks,supported_custom_focus,predefined_focus,partially_supported_focus,absent_focus,adjudication,status
+EXT-CAND-NIST-CLOCK,,,,,,,,,,,,,pending
+EXT-CAND-USGS-WATER,,,,,,,,,,,,,pending
+EXT-CAND-NASA-NISAR,,,,,,,,,,,,,pending
+EXT-CAND-EIA-GENERATION,,,,,,,,,,,,,pending
+EXT-CAND-USGS-SEDIMENT,,,,,,,,,,,,,pending
+EXT-CAND-NIST-CHIPS,,,,,,,,,,,,,pending

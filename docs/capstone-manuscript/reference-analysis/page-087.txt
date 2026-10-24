@@ -1,0 +1,46 @@
+accreditation activities. This process enhances
+the ability of NEUST Peñaranda Off-Campus to
+monitor document readiness, track accreditation
+requirements, and maintain organized records
+within the AccredX platform.
+
+
+               Database Normalization
+   Database normalization is a principle used to
+organize data clearly and consistently within a
+database.  Its  objectives  are  simplifying
+complexity, removing duplicate information, and
+ensuring consistent data organization (K.Chris,
+2023). The unnormalized form (UNF) of the
+developed system is depicted in Figure below.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                       68

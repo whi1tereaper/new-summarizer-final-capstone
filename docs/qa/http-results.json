@@ -1,0 +1,321 @@
+[
+  {
+    "name": "Apache registration renders ID only",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "existing controlled account authenticates",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "ordinary account denied admin",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "actual registration without name email images",
+    "passed": true,
+    "detail": 302
+  },
+  {
+    "name": "pending student restricted",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "pending owner status",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "duplicate registration rejected safely",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "anonymous review denied",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "admin password requires second factor",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "admin captured-mail second factor login",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "complete admin dashboard renders",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "student cannot inspect admin detail",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "admin CSRF enforced",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "admin approval with required evidence",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "approved account gains access without relogin",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "stale review cannot reverse approval",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "admin decline and student notification",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "declined account has no continued privilege",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "admin page admin_audit_logs.php",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "admin page admin_db_health.php",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "admin database health payload",
+    "passed": true,
+    "detail": "OK"
+  },
+  {
+    "name": "admin page analytics.php",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "admin page admin_feedback_feed.php",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "admin page dashboard.php",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "text result HTTP and saved title",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "text real NLP completes",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "history persists own summary",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "foreign result ownership blocked",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "real Filipino translation",
+    "passed": true,
+    "detail": {
+      "http": 200,
+      "code": null
+    }
+  },
+  {
+    "name": "real local audio generation",
+    "passed": true,
+    "detail": {
+      "http": 200,
+      "message": "Audio generated successfully."
+    }
+  },
+  {
+    "name": "audio playback response contains WAV",
+    "passed": true,
+    "detail": {
+      "http": 200,
+      "type": "audio/wav",
+      "bytes": 88620
+    }
+  },
+  {
+    "name": "audio supports browser seeking ranges",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "audio URL denies foreign session",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "HTTP feedback submission",
+    "passed": true,
+    "detail": {
+      "http": 200
+    }
+  },
+  {
+    "name": "pdf result HTTP and saved title",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "pdf real NLP completes",
+    "passed": true,
+    "detail": {
+      "first_failure": null,
+      "final_failure": null
+    }
+  },
+  {
+    "name": "docx result HTTP and saved title",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "docx real NLP completes",
+    "passed": true,
+    "detail": {
+      "first_failure": null,
+      "final_failure": null
+    }
+  },
+  {
+    "name": "url result HTTP and saved title",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "url real NLP completes",
+    "passed": true,
+    "detail": {
+      "first_failure": null,
+      "final_failure": null
+    }
+  },
+  {
+    "name": "invalid summary consumes zero guest attempts",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "text result HTTP and saved title",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "guest successful quota 1",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "text result HTTP and saved title",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "guest successful quota 2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "text result HTTP and saved title",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "guest successful quota 3",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "fourth guest request denied before NLP",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "alternate document API enforces exhausted quota",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "anonymous Nutshell retains account requirement",
+    "passed": true,
+    "detail": {
+      "http": 401,
+      "response_code": "registration_required"
+    }
+  },
+  {
+    "name": "registering after trial exhaustion preserves zero quota",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "pending Nutshell cannot bypass exhausted quota",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "password reset through captured OTP",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "reset controlled credentials authenticate",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "used reset OTP cannot be replayed",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "student number password login",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "login rotates session ID",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "logout removes account privilege",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "session cookie security",
+    "passed": true,
+    "detail": null
+  }
+]

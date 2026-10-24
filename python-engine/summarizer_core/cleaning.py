@@ -976,7 +976,18 @@ def looks_like_figure_caption(text: str) -> bool:
 
 def looks_like_navigation_noise(text: str) -> bool:
     compact = normalize_whitespace(text)
-    return COOKIE_NOISE_PATTERN.search(compact) is not None or NAVIGATION_PATTERN.search(compact) is not None
+    if COOKIE_NOISE_PATTERN.search(compact) is not None:
+        return True
+
+    navigation_matches = NAVIGATION_PATTERN.findall(compact)
+    if not navigation_matches:
+        return False
+
+    # A single word such as "register" or "login" can be legitimate article
+    # prose. Treat navigation as noise only when the block is short enough to
+    # look like UI chrome, or when several navigation labels occur together.
+    word_count = len(tokenize_words(compact))
+    return word_count <= 12 or (len(navigation_matches) >= 2 and word_count <= 30)
 
 
 def _legacy_looks_like_metadata_line(text: str) -> bool:

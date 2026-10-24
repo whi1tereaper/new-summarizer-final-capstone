@@ -1,0 +1,66 @@
+[
+  {
+    "name": "mobile registration has a fixed PEN prefix and no secondary verification fields",
+    "passed": true
+  },
+  {
+    "name": "mobile registration fits the viewport",
+    "passed": true
+  },
+  {
+    "name": "pasting a full ID keeps PEN noneditable and preserves the suffix",
+    "passed": true
+  },
+  {
+    "name": "real mobile signup approves automatically with optional username and email blank",
+    "passed": true
+  },
+  {
+    "name": "approved student Profile requires no further identity form",
+    "passed": true
+  },
+  {
+    "name": "approved student signs in with full ID and unchanged password",
+    "passed": true
+  },
+  {
+    "name": "existing history page remains available",
+    "passed": true
+  },
+  {
+    "name": "administrator second factor and existing dashboard open Student ID Management",
+    "passed": true
+  },
+  {
+    "name": "all six management statistics are rendered",
+    "passed": true
+  },
+  {
+    "name": "bulk paste counter detects 1000 IDs",
+    "passed": true
+  },
+  {
+    "name": "browser preview does not approve IDs before confirmation",
+    "passed": true
+  },
+  {
+    "name": "confirmed 1000-ID import is stored in MySQL",
+    "passed": true
+  },
+  {
+    "name": "keyboard-submitted search shows the actual unclaimed account state",
+    "passed": true
+  },
+  {
+    "name": "keyboard-accessible Manage control changes database eligibility",
+    "passed": true
+  },
+  {
+    "name": "mobile management keeps wide tables locally scrollable",
+    "passed": true
+  },
+  {
+    "name": "no browser JavaScript exceptions",
+    "passed": true
+  }
+]

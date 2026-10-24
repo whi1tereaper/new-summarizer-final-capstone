@@ -1,0 +1,44 @@
+Figure 17. Entity Relationship Diagram...... 71
+Figure 18. Visual Studio Code............... 81
+Figure 19. XAMPP Control Panel.............. 82
+Figure 20. phpMyAdmin Page.................. 83
+Figure 21. Homepage of the System........... 83
+Figure 22. Login Page....................... 84
+Figure 23. Dashboard Page................... 84
+Figure 24. Folders Page..................... 85
+Figure 25. My Uploads Page.................. 85
+Figure 26. Archives Page.................... 86
+Figure 27. Bin Page......................... 86
+Figure 28. Users Page (Admin Only).......... 87
+Figure 29. Profile Page..................... 87
+Figure 30. System Successfully Deployed..... 89
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                        xvi

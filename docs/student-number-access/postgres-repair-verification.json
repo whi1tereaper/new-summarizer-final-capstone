@@ -1,0 +1,336 @@
+{
+  "recorded_utc": "2026-10-23T02:52:31.1748225Z",
+  "scope": "PostgreSQL legacy-schema student-number access repair; no NLP or frontend redesign",
+  "configured_database": {
+    "provider": "Neon PostgreSQL",
+    "server_version_num": 180006,
+    "inspection_read_only": true,
+    "core_preflight_issues": 32,
+    "migration_apply_executed": false,
+    "modified_by_this_task": false
+  },
+  "readiness": {
+    "isolated_repair": "PASS",
+    "configured_deployment": "FAIL / NOT READY",
+    "pending": [
+      "Explicitly authorized deployment migration and verified real backup/restore",
+      "Responsible operator privacy contact and stable HMAC key",
+      "Monitored three-day retention schedule and backup retention controls",
+      "Actual staging/Neon write flows, SMTP, extraction/workers and hosting-resource validation"
+    ]
+  },
+  "tests": {
+    "reports": [
+      {
+        "file": "tests-postgres-repair.json",
+        "passed": 58,
+        "failed": 0
+      },
+      {
+        "file": "tests-pgsql-repair.json",
+        "passed": 59,
+        "failed": 0
+      },
+      {
+        "file": "tests-mysql-repair.json",
+        "passed": 59,
+        "failed": 0
+      },
+      {
+        "file": "tests-sql-compat-pgsql.json",
+        "passed": 20,
+        "failed": 0
+      },
+      {
+        "file": "tests-sql-compat-mysql.json",
+        "passed": 20,
+        "failed": 0
+      },
+      {
+        "file": "tests-postgres-repair-http.json",
+        "passed": 26,
+        "failed": 0
+      }
+    ],
+    "passed": 242,
+    "failed": 0,
+    "representative_legacy_schema": true,
+    "real_campus_identities_used": false,
+    "nlp_executed_in_repair_http": false,
+    "full_application_regression_claimed": false
+  },
+  "syntax": {
+    "php": [
+      {
+        "file": "app/src/Support/PostgresSchemaContract.php",
+        "passed": true
+      },
+      {
+        "file": "app/src/Services/PostgresAccessMigrator.php",
+        "passed": true
+      },
+      {
+        "file": "tools/inspect_postgres_contract.php",
+        "passed": true
+      },
+      {
+        "file": "tools/migrate_student_access.php",
+        "passed": true
+      },
+      {
+        "file": "app/src/Repositories/HistoryRepository.php",
+        "passed": true
+      },
+      {
+        "file": "app/src/Controllers/AnalyticsController.php",
+        "passed": true
+      },
+      {
+        "file": "app/src/Repositories/FeedbackRepository.php",
+        "passed": true
+      },
+      {
+        "file": "app/src/Services/FeedbackService.php",
+        "passed": true
+      },
+      {
+        "file": "app/src/Services/PasswordResetService.php",
+        "passed": true
+      },
+      {
+        "file": "app/src/Services/RememberMeService.php",
+        "passed": true
+      },
+      {
+        "file": "app/src/Services/GuestSessionService.php",
+        "passed": true
+      },
+      {
+        "file": "app/src/Controllers/AdminController.php",
+        "passed": true
+      },
+      {
+        "file": "app/public/admin_audit_logs.php",
+        "passed": true
+      },
+      {
+        "file": "app/public/admin_db_health.php",
+        "passed": true
+      },
+      {
+        "file": "app/public/nutshell_generate.php",
+        "passed": true
+      },
+      {
+        "file": "scripts/student-access/test_bootstrap.php",
+        "passed": true
+      },
+      {
+        "file": "scripts/student-access/test_access.php",
+        "passed": true
+      },
+      {
+        "file": "scripts/student-access/test_postgres_repair.php",
+        "passed": true
+      },
+      {
+        "file": "scripts/student-access/test_sql_compat.php",
+        "passed": true
+      },
+      {
+        "file": "scripts/student-access/http_router.php",
+        "passed": true
+      }
+    ],
+    "python_test_compilation": "PASS",
+    "git_diff_whitespace_check": "PASS"
+  },
+  "integrity": {
+    "nlp_source_config_hashes_checked": 38,
+    "historical_research_hashes_checked": 46,
+    "mismatches": [],
+    "automatic_article_routing": false
+  },
+  "backup_recovery": {
+    "synthetic_pg_dump_pg_restore_rehearsal": "PASS",
+    "destination": "Separate new empty test database",
+    "restored_original_fields_in_tables": 12,
+    "real_configured_database_backup_or_restore_executed": false,
+    "destructive_down_migration_supplied": false,
+    "sequence_gaps_on_rollback_are_possible": true
+  },
+  "fixture_images": [
+    {
+      "reference": "postgres:18-alpine",
+      "server_version_num": 180006,
+      "image_id": "sha256:898c60cb390d1085bc97bdd6a1ae968757421df394b071848b52b1c09c89d6a5"
+    },
+    {
+      "reference": "mysql:8.0",
+      "image_id": "sha256:64756cc92f707eb504496d774353990bcb0f6999ddf598b6ad188f2da66bd000"
+    }
+  ],
+  "cleanup": {
+    "fixture_php_stopped": 1,
+    "containers_removed": [
+      "/light-pg-repair-test",
+      "/light-pg-repair-mysql"
+    ],
+    "anonymous_test_volumes_removed": [
+      "66ce2ca71fc00ee57233a7bee0219484ff4e1086c9b08e62f37b8269e91c24d6",
+      "e2d10e0b49c7aedcb5eab89aefdd6898623c9760b4fad735a7c8cc76544bf524"
+    ],
+    "images_removed": false,
+    "configured_database_modified": false,
+    "remaining_owned_services": false,
+    "temporary_dump_and_synthetic_records_discarded": true,
+    "evidence_retained": true,
+    "unrelated_services_removed": false
+  },
+  "sha256_inventory": [
+    {
+      "file": "app/src/Support/PostgresSchemaContract.php",
+      "sha256": "0cbd3568839f40491981f241576492380dd2914086b473cc1ca39fd00b96c694"
+    },
+    {
+      "file": "app/src/Services/PostgresAccessMigrator.php",
+      "sha256": "b3aaafbd6ee1bfebcfbf348888487c8e887fb6c21da44013d0266b912fb017c2"
+    },
+    {
+      "file": "tools/inspect_postgres_contract.php",
+      "sha256": "c55db1360efc30f9c3deed5ec0ceb7e9ad92b3d9f8359a00ca32895a124ae0e4"
+    },
+    {
+      "file": "tools/migrate_student_access.php",
+      "sha256": "058cef63abdd63614a2014efee7da3fb83137b01e07d8b787cfcfe9366504784"
+    },
+    {
+      "file": "app/src/Repositories/HistoryRepository.php",
+      "sha256": "739c864bb77815ff7222060f37f1457bcb7236e49f8a23bf728f8a63613d8813"
+    },
+    {
+      "file": "app/src/Controllers/AnalyticsController.php",
+      "sha256": "b2eb5ff08f4eadfe575aecdc084424268032484bd560a4ef7c6916bf5ef18725"
+    },
+    {
+      "file": "app/src/Repositories/FeedbackRepository.php",
+      "sha256": "9eb4967191641c7916c5e86b67f9e8fbe8efce99aea40952c9876c224e86cd96"
+    },
+    {
+      "file": "app/src/Services/FeedbackService.php",
+      "sha256": "f35c2a7ef7c41aae038522d53611b2b74c6f8398f99369eea65d540ca8b38773"
+    },
+    {
+      "file": "app/src/Services/PasswordResetService.php",
+      "sha256": "f8e21a72b0cf66ee33229ad076fafecb2c4e109ac20441336191940b764888c6"
+    },
+    {
+      "file": "app/src/Services/RememberMeService.php",
+      "sha256": "0e384a8c25cdefcaf4fd9bdcbb53d1f4ff6b6ab4d324c37ddc8458d4a78482c8"
+    },
+    {
+      "file": "app/src/Services/GuestSessionService.php",
+      "sha256": "ab0b8e46fb9c58b5373694862de55c0834757799a9ef7fae7e8c9e2a62429dc7"
+    },
+    {
+      "file": "app/src/Controllers/AdminController.php",
+      "sha256": "c6b799b8659374a687962544e0eb17eabfdca242e534d7dc70ec1eacd74d8376"
+    },
+    {
+      "file": "app/public/admin_audit_logs.php",
+      "sha256": "1d2ebd77b215b7300393a8566209828b2da359e4ed9a6a83e7fc63168fdc0d71"
+    },
+    {
+      "file": "app/public/admin_db_health.php",
+      "sha256": "1ae375446b5d237cdd1cae804a0c8073bfe7642e663805384db24dc68d8440a1"
+    },
+    {
+      "file": "app/public/nutshell_generate.php",
+      "sha256": "02940fcb8196aba5a6e7b2688d1fe5aa71039615633fc1b647463c0f9fbf0b8c"
+    },
+    {
+      "file": "database/migrations/postgres/017_student_number_access.sql",
+      "sha256": "73d54fd8e05933ee191d47f25edd1e399309631e4f148060d67a30e269695a7b"
+    },
+    {
+      "file": "database/migrations/postgres/018_summary_contract_compat.sql",
+      "sha256": "f5f79c2130d9a8a1cbf51d0a07a67d504f2761e8685e59ad7a1b97bccd149903"
+    },
+    {
+      "file": "database/migrations/postgres/019_auth_audit_contract_compat.sql",
+      "sha256": "1e58c0702fb7e1d2df4d7667c87c8c96581ca18d8b3eef8e768b4015728f5411"
+    },
+    {
+      "file": "scripts/student-access/test_bootstrap.php",
+      "sha256": "f05eadd029d12cff8770b13b3c2c813c5ebd4bb4828e3e3ee22f0077ecbc52ec"
+    },
+    {
+      "file": "scripts/student-access/test_access.php",
+      "sha256": "2cb4c2f75ead0ccbfac631dff9a88a3a1508c8f4e6413bf77301dfbaf5cda311"
+    },
+    {
+      "file": "scripts/student-access/test_postgres_repair.php",
+      "sha256": "35abee35f3739d25d7b72bd75b483bff9c9b0c6c2946f80b6388a914f2d485b1"
+    },
+    {
+      "file": "scripts/student-access/test_sql_compat.php",
+      "sha256": "f17929b94365f73fd30e29aaf6ca9753a3400428ba6878dd134ced1b04201420"
+    },
+    {
+      "file": "scripts/student-access/http_router.php",
+      "sha256": "615ac02036bcdea42d7072728d439364b421fa86889be7a8961339078ab7680a"
+    },
+    {
+      "file": "scripts/student-access/test_repair_http.py",
+      "sha256": "8904897bed21e68b404f0443bfe493b7013b2785645a57f97dfb7f7030606ef9"
+    },
+    {
+      "file": "docs/student-number-access/postgres-schema-before.json",
+      "sha256": "89ac2faeb64a0409bba4178001fe4c5341a08c7d5f2bddc248a0b099d4830482"
+    },
+    {
+      "file": "docs/student-number-access/postgres-repair-preflight.json",
+      "sha256": "57918d26524eb2d6cd2397b520a5848cc138ca22548ef40a6ff8a46fcc287f18"
+    },
+    {
+      "file": "docs/student-number-access/tests-postgres-repair.json",
+      "sha256": "203e2ab2725c628eaa072f327bbaaaac1f34f7f3591593e8ccade586897afbf0"
+    },
+    {
+      "file": "docs/student-number-access/tests-pgsql-repair.json",
+      "sha256": "fca82f107491c64a83a40a519d075753e39b7df5b290d4a1e815c19f635cdd42"
+    },
+    {
+      "file": "docs/student-number-access/tests-mysql-repair.json",
+      "sha256": "9e23f179ab4809de876f2b0b4987e44a6b1ac82ba6733c3e18b5fc7f0e186580"
+    },
+    {
+      "file": "docs/student-number-access/tests-sql-compat-pgsql.json",
+      "sha256": "1485f418681798687047c038c51b94077a1dc4d5c57848dab226715a39a12a43"
+    },
+    {
+      "file": "docs/student-number-access/tests-sql-compat-mysql.json",
+      "sha256": "628c2bded40718db06b789b775ab500edfb90fc429975bae0040780e7cf391e6"
+    },
+    {
+      "file": "docs/student-number-access/tests-postgres-repair-http.json",
+      "sha256": "1c12b80d8dbe00c16649a9d637e014e6ef0576ad46aafae24db5502fd6c60b46"
+    },
+    {
+      "file": "docs/student-number-access/implementation-report.md",
+      "sha256": "d647810e695e5a4c149ab8a68e5925a6a7657116cc792311f9d545788fcf7020"
+    },
+    {
+      "file": "docs/student-number-access/postgres-schema-repair.md",
+      "sha256": "1ab48dc7b1730a24298eaf534e8d1d7de932e5319994b867b1d8a3eea1b0348e"
+    },
+    {
+      "file": "docs/student-number-access/postgres-migration-runbook.md",
+      "sha256": "09a4d8fa6722acfb581c8c6a0a536404562eb8547a6efa764af056452bc939e6"
+    },
+    {
+      "file": "docs/student-number-access/integrity.json",
+      "sha256": "de28872822edf4c68531363868d7ec2da2ef7f7b95d2a497c0b1d66fcbe17a9f"
+    }
+  ]
+}

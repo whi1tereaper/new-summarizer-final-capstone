@@ -1,0 +1,32 @@
+Interpretation for End Users’ Evaluation.... 34
+Table  3.  Ranges  of  Weighted  Mean  and
+Interpretation for Consultants’ Evaluation.. 34
+Table 4. users Table........................ 72
+Table 5. folders Table...................... 74
+Table 6. folder_checklists Table............ 76
+Table 7. checklist_file_links Table......... 78
+Table 8. files Table........................ 78
+Table 9. Estimated Project Cost............. 89
+Table 10. Assessment of the IT Consultants on
+the Functional Suitability of the Developed
+System...................................... 91
+Table 11. Assessment of the IT Consultants on
+the Performance Efficiency of the Developed
+System...................................... 92
+Table 12. Assessment of the IT Consultants on
+the Compatibility of the Developed System... 93
+Table 13. Assessment of the IT Consultants on
+the Usability of the Developed System....... 94
+Table 14. Assessment of the IT Consultants on
+the Reliability of the Developed System..... 95
+Table 15. Assessment of the IT Consultants on
+the Security of the Developed System........ 96
+Table 16. Assessment of the IT Consultants on
+the Portability of the Developed System..... 97
+Table 17. IT Consultants’ Evaluation Summary
+Result...................................... 98
+Table 18. Assessment of the End Users on the
+
+
+
+                                                       xiv

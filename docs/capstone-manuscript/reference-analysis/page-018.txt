@@ -1,0 +1,32 @@
+and   accessibility   requirements   of   the
+institution.
+
+    The system was evaluated by two groups of
+respondents:  ten  (10)  IT  consultants  who
+assessed technical quality based on ISO/IEC
+25010:2011 standards, and twenty-three (23)
+end-users composed of administrative staff,
+teachers, and assistants. IT consultants          rated
+the system with an overall weighted mean of 3.38
+(Very Satisfactory), with strong performance
+across  all  criteria  including  functional
+suitability, security, performance efficiency,
+compatibility,  usability,  reliability,  and
+portability.  End-users  similarly  gave  the
+system an overall weighted mean of 3.49 (Very
+Satisfactory), with particularly high marks in
+usability,   functional   correctness,   and
+performance efficiency.
+
+    The   findings   confirm   that   AccredX
+effectively    addresses    the    documented
+shortcomings of the institution's prior record
+management  approach.  The  system  enhances
+document   integrity,   strengthens   security
+through controlled access, and significantly
+improves  the  institution's  readiness  for
+accreditation. This study contributes to a
+
+
+
+                                                     xviii

@@ -1,0 +1,23 @@
+[
+  {
+    "name": "isolated setup and verified rollback",
+    "exit": 0,
+    "seconds": 16.55,
+    "output": "{\"database\":\"qa_light_2a57e534\",\"migrations\":19,\"production_counts\":{\"admin_audit_logs\":165,\"admin_security_challenges\":1,\"document_summaries\":125,\"documents\":25,\"evaluation_assignments\":0,\"evaluation_audit_log\":87,\"evaluation_challenge_cases\":24,\"evaluation_content_unit_reviews\":0,\"evaluation_content_units\":0,\"evaluation_datasets\":4,\"evaluation_documents\":36,\"evaluation_errors\":5,\"evaluation_metrics\":3652,\"evaluation_outputs\":428,\"evaluation_ratings\":0,\"evaluation_references\":0,\"evaluation_runs\":6,\"feedback\":107,\"feedback_comments\":113,\"guest_sessions\":63,\"landing_page_events\":8343,\"landing_page_sessions\":199,\"nutshell_generations\":24,\"password_resets\":25,\"rate_limits\":3,\"schema_migrations\":19,\"student_applications\":1,\"student_enrollment_registry\":38,\"student_registry_batches\":1,\"student_registry_events\":3,\"student_registry_gate\":1,\"student_review_events\":3,\"student_trial_links\":1,\"summaries\":221,\"summary_access_reservations\":29,\"summary_access_subjects\":51,\"summary_artifacts\":212,\"summary_jobs\":246,\"user_tokens\":2,\"users\":36}}",
+    "stderr": ""
+  },
+  {
+    "name": "production all-table integrity",
+    "exit": 0,
+    "seconds": 1.11,
+    "output": "{\"production_unchanged\":true}",
+    "stderr": ""
+  },
+  {
+    "name": "isolated fixture cleanup",
+    "exit": 0,
+    "seconds": 1.52,
+    "output": "QA databases and restricted user removed.",
+    "stderr": ""
+  }
+]

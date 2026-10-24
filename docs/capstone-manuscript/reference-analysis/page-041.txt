@@ -1,0 +1,40 @@
+Figure 2 below shows the study of the Record
+Management and Archiving System developed
+using the SDLC.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  Figure 2. SDLC Model
+
+   The Agile methodology in this study consists
+of the following phases:
+
+   Planning Stage: This phase involves
+collecting requirements through consultations
+and interviews with the business owner and
+staff. It aims to identify existing challenges
+in sales transactions and inventory
+
+
+
+
+                                                        22

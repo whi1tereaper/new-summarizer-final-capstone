@@ -1,0 +1,36 @@
+authorized personnel can be granted access to
+the system.
+   The  1.2 Modify User Configuration           process
+allows the Administrator to update existing user
+information and account settings. Through this
+process,  user  roles,  permissions,  account
+status, and profile details can be modified as
+needed. The updated information is then saved
+to the    Users (D1)      data store to maintain
+accurate and current user records.
+   The 1.3 Fetch Account Records process enables
+the Administrator to retrieve and view stored
+user account information from the          Users (D1)
+database.  This  process  supports  account
+monitoring, verification, and management by
+providing  access  to  existing  user  records
+whenever needed.
+   The  User  Management  process  ensures  the
+proper creation, maintenance, and retrieval of
+user  accounts,  allowing  the  system  to
+effectively   control   access   and   manage
+authorized users within the AccredX platform.
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                      58

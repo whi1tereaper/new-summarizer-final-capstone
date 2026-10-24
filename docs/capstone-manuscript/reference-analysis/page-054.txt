@@ -1,0 +1,32 @@
+                     Chapter III
+              RESULTS AND DISCUSSION
+   This  chapter  explains  the  analysis  and
+interpretation of the data on the development
+and evaluation of AccredX: Record Management and
+Archiving System. It also addresses the issues
+identified in the study’s Statement of the
+Problem:
+
+   1. Problems Encountered in the Existing
+      System.
+      The existing system of record management
+at NEUST Peñaranda Off-Campus still relies
+heavily on manual and semi-digital processes
+that make document organization, retrieval, and
+archiving inefficient.       While Google Drive is
+used to store and share files, it lacks a
+centralized structure, proper categorization
+for academic and administrative records, and a
+checklist  feature  for  tracking  required
+documents or completion status. This results in
+difficulties in locating specific documents and
+monitoring file requirements when needed. File
+duplication, inconsistent naming conventions,
+and the absence of version control further
+complicate the process. Moreover, since Google
+Drive  access  depends  on  individual  user
+management,  data  security  and  control  are
+limited, increasing the risk of          unauthorized
+
+
+                                                      35

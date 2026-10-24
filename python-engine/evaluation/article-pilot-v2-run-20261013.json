@@ -1,0 +1,291 @@
+{
+ "engine": "light_v2",
+ "engine_path": "C:\\xampp\\htdocs\\ai-summarizer-123 - quality upg\\python-engine\\light_engine",
+ "corpus": "python-engine\\evaluation\\corpus\\independent_article_pilot_20261013.json",
+ "peak_memory_mb": 493.8,
+ "rows": [
+  {
+   "id": "NASA-CRS35-HEALTH-RESEARCH",
+   "depth": "brief",
+   "seconds": 18.902,
+   "sentences": [
+    "NASA experiments focused on human and plant health and drug-resistant organisms will travel to the International Space Station aboard SpaceX’s 35th Commercial Resupply Services mission for the agency from Cape Canaveral Space Force Station in Florida, advancing research that benefits life on Earth and future exploration.",
+    "A precision health investigation returns for its fourth and final planned stay aboard the space station to study how antibiotic-resistant bacteria survive and evolve in microgravity.",
+    "As part of the investigation, astronauts repeatedly sample surfaces throughout the space station to monitor for drug-resistant organisms."
+   ],
+   "error": "",
+   "meta": {
+    "quality_selection": {
+     "strategy": "adaptive_tfidf_mmr_v2",
+     "candidates": 23,
+     "selected": 3,
+     "word_budget": 102,
+     "requested_word_budget": 0,
+     "max_sentences": 3,
+     "depth": "brief",
+     "detected_content_type": "general_article",
+     "classification_confidence": 0.43,
+     "selection_profile": "general_article",
+     "selection_profile_source": "detected",
+     "semantic_model_status": "enabled:all-MiniLM-L6-v2"
+    }
+   }
+  },
+  {
+   "id": "NASA-CRS35-HEALTH-RESEARCH",
+   "depth": "balanced",
+   "seconds": 6.4,
+   "sentences": [
+    "NASA experiments focused on human and plant health and drug-resistant organisms will travel to the International Space Station aboard SpaceX’s 35th Commercial Resupply Services mission for the agency from Cape Canaveral Space Force Station in Florida, advancing research that benefits life on Earth and future exploration.",
+    "A new precision health investigation helps address a key question: What happens to the human brain in space?",
+    "The effort could deepen our understanding of how the human brain responds to stress and help lay the groundwork for methods that counter risks to brain health that astronauts may face on future missions to the Moon and beyond.",
+    "Disease-resistant crops for space",
+    "A space crops investigation tests whether crop diseases develop faster and more severely in microgravity.",
+    "A precision health investigation returns for its fourth and final planned stay aboard the space station to study how antibiotic-resistant bacteria survive and evolve in microgravity.",
+    "As part of the investigation, astronauts repeatedly sample surfaces throughout the space station to monitor for drug-resistant organisms.",
+    "The work could help develop ways to protect astronauts against bacterial infections during long-duration missions."
+   ],
+   "error": "",
+   "meta": {
+    "quality_selection": {
+     "strategy": "adaptive_tfidf_mmr_v2",
+     "candidates": 23,
+     "selected": 8,
+     "word_budget": 193,
+     "requested_word_budget": 0,
+     "max_sentences": 8,
+     "depth": "balanced",
+     "detected_content_type": "general_article",
+     "classification_confidence": 0.43,
+     "selection_profile": "general_article",
+     "selection_profile_source": "detected",
+     "semantic_model_status": "enabled:all-MiniLM-L6-v2"
+    }
+   }
+  },
+  {
+   "id": "NASA-CRS35-HEALTH-RESEARCH",
+   "depth": "detailed",
+   "seconds": 8.528,
+   "sentences": [
+    "NASA experiments focused on human and plant health and drug-resistant organisms will travel to the International Space Station aboard SpaceX’s 35th Commercial Resupply Services mission for the agency from Cape Canaveral Space Force Station in Florida, advancing research that benefits life on Earth and future exploration.",
+    "A new precision health investigation helps address a key question: What happens to the human brain in space?",
+    "The experiment sends small, lab-grown models of the human brain to the orbiting laboratory for five weeks.",
+    "The effort could deepen our understanding of how the human brain responds to stress and help lay the groundwork for methods that counter risks to brain health that astronauts may face on future missions to the Moon and beyond.",
+    "Disease-resistant crops for space",
+    "A space crops investigation tests whether crop diseases develop faster and more severely in microgravity.",
+    "The experiment compares molecular and structural changes between Earth-grown and space station-grown plants infected with a disease-causing fungus.",
+    "The findings could guide plant breeding on Earth to produce disease-resistant crops and help minimize yield losses in future space agriculture systems.",
+    "Space crops provide nutrition, increase dietary variety, and offer psychological benefits for astronauts during extended missions.",
+    "A precision health investigation returns for its fourth and final planned stay aboard the space station to study how antibiotic-resistant bacteria survive and evolve in microgravity.",
+    "As part of the investigation, astronauts repeatedly sample surfaces throughout the space station to monitor for drug-resistant organisms.",
+    "The work could help develop ways to protect astronauts against bacterial infections during long-duration missions."
+   ],
+   "error": "",
+   "meta": {
+    "quality_selection": {
+     "strategy": "adaptive_tfidf_mmr_v2",
+     "candidates": 23,
+     "selected": 12,
+     "word_budget": 285,
+     "requested_word_budget": 0,
+     "max_sentences": 12,
+     "depth": "detailed",
+     "detected_content_type": "general_article",
+     "classification_confidence": 0.43,
+     "selection_profile": "general_article",
+     "selection_profile_source": "detected",
+     "semantic_model_status": "enabled:all-MiniLM-L6-v2"
+    }
+   }
+  },
+  {
+   "id": "NASA-EARTH-OBSERVATORY-THAILAND-FLOODS",
+   "depth": "brief",
+   "seconds": 6.41,
+   "sentences": [
+    "But throughout late September and early October 2026, persistent heavy rains punctuated by intense downpours left low-lying areas across the country in Southeast Asia under sustained flooding.",
+    "The right image above shows land along the Bang Pakong River and nearby agricultural areas and aquaculture facilities inundated on October 2, 2026.",
+    "The bright red shapes are floating solar arrays."
+   ],
+   "error": "",
+   "meta": {
+    "quality_selection": {
+     "strategy": "adaptive_tfidf_mmr_v2",
+     "candidates": 14,
+     "selected": 3,
+     "word_budget": 58,
+     "requested_word_budget": 0,
+     "max_sentences": 3,
+     "depth": "brief",
+     "detected_content_type": "general",
+     "classification_confidence": 0.2,
+     "selection_profile": "news",
+     "selection_profile_source": "user",
+     "semantic_model_status": "enabled:all-MiniLM-L6-v2"
+    }
+   }
+  },
+  {
+   "id": "NASA-EARTH-OBSERVATORY-THAILAND-FLOODS",
+   "depth": "balanced",
+   "seconds": 6.321,
+   "sentences": [
+    "But throughout late September and early October 2026, persistent heavy rains punctuated by intense downpours left low-lying areas across the country in Southeast Asia under sustained flooding.",
+    "Prachin Buri province was among the areas where flooding was widespread.",
+    "The right image above shows land along the Bang Pakong River and nearby agricultural areas and aquaculture facilities inundated on October 2, 2026.",
+    "The left image shows the same area at the same time of year in 2025.",
+    "Some of the flooding likely stemmed from a low-pressure system that stalled over the area for several days in late September."
+   ],
+   "error": "",
+   "meta": {
+    "quality_selection": {
+     "strategy": "adaptive_tfidf_mmr_v2",
+     "candidates": 14,
+     "selected": 5,
+     "word_budget": 109,
+     "requested_word_budget": 0,
+     "max_sentences": 5,
+     "depth": "balanced",
+     "detected_content_type": "general",
+     "classification_confidence": 0.2,
+     "selection_profile": "news",
+     "selection_profile_source": "user",
+     "semantic_model_status": "enabled:all-MiniLM-L6-v2"
+    }
+   }
+  },
+  {
+   "id": "NASA-EARTH-OBSERVATORY-THAILAND-FLOODS",
+   "depth": "detailed",
+   "seconds": 6.63,
+   "sentences": [
+    "But throughout late September and early October 2026, persistent heavy rains punctuated by intense downpours left low-lying areas across the country in Southeast Asia under sustained flooding.",
+    "Prachin Buri province was among the areas where flooding was widespread.",
+    "The right image above shows land along the Bang Pakong River and nearby agricultural areas and aquaculture facilities inundated on October 2, 2026.",
+    "The left image shows the same area at the same time of year in 2025.",
+    "Acquired with NASA-USGS Landsat satellites, the images are false-color to better distinguish water from vegetation, developed land, and other surfaces.",
+    "The bright red shapes are floating solar arrays.",
+    "Some of the flooding likely stemmed from a low-pressure system that stalled over the area for several days in late September.",
+    "Since mid-September, flooding has occurred in 50 provinces across the country, affecting over 4 million people and causing dozens of deaths, according to the International Federation of Red Cross and Red Crescent Societies."
+   ],
+   "error": "",
+   "meta": {
+    "quality_selection": {
+     "strategy": "adaptive_tfidf_mmr_v2",
+     "candidates": 14,
+     "selected": 8,
+     "word_budget": 161,
+     "requested_word_budget": 0,
+     "max_sentences": 8,
+     "depth": "detailed",
+     "detected_content_type": "general",
+     "classification_confidence": 0.2,
+     "selection_profile": "news",
+     "selection_profile_source": "user",
+     "semantic_model_status": "enabled:all-MiniLM-L6-v2"
+    }
+   }
+  },
+  {
+   "id": "NASA-RELEASE-25-002",
+   "depth": "brief",
+   "seconds": 6.351,
+   "sentences": [
+    "Earth’s average surface temperature in 2024 was the warmest on record, according to an analysis led by NASA scientists.",
+    "Global temperatures in 2024 were 2.30 degrees Fahrenheit (1.28 degrees Celsius) above the agency’s 20th-century baseline (1951-1980), which tops the record set in 2023.",
+    "NASA scientists further estimate Earth in 2024 was about 2.65 degrees Fahrenheit (1.47 degrees Celsius) warmer than the mid-19th century average (1850-1900)."
+   ],
+   "error": "",
+   "meta": {
+    "quality_selection": {
+     "strategy": "adaptive_tfidf_mmr_v2",
+     "candidates": 31,
+     "selected": 3,
+     "word_budget": 110,
+     "requested_word_budget": 0,
+     "max_sentences": 3,
+     "depth": "brief",
+     "detected_content_type": "general",
+     "classification_confidence": 0.3,
+     "selection_profile": "general",
+     "selection_profile_source": "general_fallback",
+     "semantic_model_status": "enabled:all-MiniLM-L6-v2"
+    }
+   }
+  },
+  {
+   "id": "NASA-RELEASE-25-002",
+   "depth": "balanced",
+   "seconds": 6.292,
+   "sentences": [
+    "Earth’s average surface temperature in 2024 was the warmest on record, according to an analysis led by NASA scientists.",
+    "Global temperatures in 2024 were 2.30 degrees Fahrenheit (1.28 degrees Celsius) above the agency’s 20th-century baseline (1951-1980), which tops the record set in 2023.",
+    "“Once again, the temperature record has been shattered — 2024 was the hottest year since record keeping began in 1880,” said NASA Administrator Bill Nelson.",
+    "NASA scientists further estimate Earth in 2024 was about 2.65 degrees Fahrenheit (1.47 degrees Celsius) warmer than the mid-19th century average (1850-1900).",
+    "For more than half of 2024, average temperatures were more than 1.5 degrees Celsius above the baseline, and the annual average, with mathematical uncertainties, may have exceeded the level for the first time.",
+    "To put that in perspective, temperatures during the warm periods on Earth three million years ago — when sea levels were dozens of feet higher than today — were only around 3 degrees Celsius warmer than pre-industrial levels,” said Gavin Schmidt, director of NASA’s Goddard Institute for Space Studies (GISS) in New York.",
+    "In 2022 and 2023, Earth saw record increases in carbon dioxide emissions from fossil fuels, according to a recent international analysis .",
+    "The strong El Niño that began in fall 2023 helped nudge global temperatures above previous records.",
+    "The heat surge that began in 2023 continued to exceed expectations in 2024, Schmidt said, even though El Niño abated.",
+    "Independent analyses by NOAA, Berkeley Earth, the Hadley Centre (part of the United Kingdom’s weather forecasting Met Office) and Copernicus Climate Services in Europe have also concluded that the global surface temperatures for 2024 were the highest since modern record-keeping began."
+   ],
+   "error": "",
+   "meta": {
+    "quality_selection": {
+     "strategy": "adaptive_tfidf_mmr_v2",
+     "candidates": 31,
+     "selected": 10,
+     "word_budget": 297,
+     "requested_word_budget": 0,
+     "max_sentences": 10,
+     "depth": "balanced",
+     "detected_content_type": "general",
+     "classification_confidence": 0.3,
+     "selection_profile": "general",
+     "selection_profile_source": "general_fallback",
+     "semantic_model_status": "enabled:all-MiniLM-L6-v2"
+    }
+   }
+  },
+  {
+   "id": "NASA-RELEASE-25-002",
+   "depth": "detailed",
+   "seconds": 7.726,
+   "sentences": [
+    "Earth’s average surface temperature in 2024 was the warmest on record, according to an analysis led by NASA scientists.",
+    "Global temperatures in 2024 were 2.30 degrees Fahrenheit (1.28 degrees Celsius) above the agency’s 20th-century baseline (1951-1980), which tops the record set in 2023.",
+    "The new record comes after 15 consecutive months (June 2023 through August 2024) of monthly temperature records — an unprecedented heat streak .",
+    "“Once again, the temperature record has been shattered — 2024 was the hottest year since record keeping began in 1880,” said NASA Administrator Bill Nelson.",
+    "NASA scientists further estimate Earth in 2024 was about 2.65 degrees Fahrenheit (1.47 degrees Celsius) warmer than the mid-19th century average (1850-1900).",
+    "For more than half of 2024, average temperatures were more than 1.5 degrees Celsius above the baseline, and the annual average, with mathematical uncertainties, may have exceeded the level for the first time.",
+    "“The Paris Agreement on climate change sets forth efforts to remain below 1.5 degrees Celsius over the long term.",
+    "To put that in perspective, temperatures during the warm periods on Earth three million years ago — when sea levels were dozens of feet higher than today — were only around 3 degrees Celsius warmer than pre-industrial levels,” said Gavin Schmidt, director of NASA’s Goddard Institute for Space Studies (GISS) in New York.",
+    "Scientists have concluded the warming trend of recent decades is driven by heat-trapping carbon dioxide, methane , and other greenhouse gases.",
+    "In 2022 and 2023, Earth saw record increases in carbon dioxide emissions from fossil fuels, according to a recent international analysis .",
+    "The strong El Niño that began in fall 2023 helped nudge global temperatures above previous records.",
+    "The heat surge that began in 2023 continued to exceed expectations in 2024, Schmidt said, even though El Niño abated.",
+    "“Not every year is going to break records, but the long-term trend is clear,” Schmidt said.",
+    "A new assessment published earlier this year by scientists at the Colorado School of Mines, National Science Foundation, the National Atmospheric and Oceanic Administration (NOAA), and NASA further increases confidence in the agency’s global and regional temperature data.",
+    "Independent analyses by NOAA, Berkeley Earth, the Hadley Centre (part of the United Kingdom’s weather forecasting Met Office) and Copernicus Climate Services in Europe have also concluded that the global surface temperatures for 2024 were the highest since modern record-keeping began."
+   ],
+   "error": "",
+   "meta": {
+    "quality_selection": {
+     "strategy": "adaptive_tfidf_mmr_v2",
+     "candidates": 31,
+     "selected": 15,
+     "word_budget": 438,
+     "requested_word_budget": 0,
+     "max_sentences": 15,
+     "depth": "detailed",
+     "detected_content_type": "general",
+     "classification_confidence": 0.3,
+     "selection_profile": "general",
+     "selection_profile_source": "general_fallback",
+     "semantic_model_status": "enabled:all-MiniLM-L6-v2"
+    }
+   }
+  }
+ ]
+}

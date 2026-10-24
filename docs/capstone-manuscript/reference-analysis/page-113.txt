@@ -1,0 +1,32 @@
+operability,  user  error  protection,  user
+interface aesthetics and accessibility.
+
+
+   Table 13. Assessment of the IT consultants on
+the Usability of the developed system
+     Software                                     Verbal
+      Product           Weighted Mean        Interpretation
+    Categories
+ Appropriateness              3.3              Very Usable
+ recognizability
+   Learnability               3.3              Very Usable
+   Operability                3.1                 Usable
+    User error                3.4              Very Usable
+    protection
+  User interface              3.5              Very Usable
+    aesthetics
+  Accessibility               3.3              Very Usable
+     Usability               3.32              Very Usable
+
+   As  presented    in Table 13, the evaluation
+results for the Compatibility category indicate
+a weighted mean of 3.32, and a verbal rating of
+“Very Usable”.
+
+   5.5 Reliability
+   Table  14     shows  the     reliability     of  the
+developed  AccredX:  Record  Management  and
+
+
+
+                                                        94

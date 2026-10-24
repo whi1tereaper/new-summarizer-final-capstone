@@ -1,0 +1,14 @@
+       Figure 16. First Normal Form (1NF)
+
+Entity Relationship Diagram
+
+   A  visual  depiction  of  the  relationships
+between entries in a database is called an
+entity relationship diagram (ER diagram or ERD).
+ERDs are a specific kind of flowchart that
+illustrates the kinds of relationships that
+exist between various elements in a system.
+
+
+
+                                                       70

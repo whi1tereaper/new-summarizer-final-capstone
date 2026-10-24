@@ -1,0 +1,53 @@
+[
+  {
+    "id": "T-PDF-PAGE",
+    "status": "ERROR",
+    "error": "PDF text did not pass readability checks"
+  },
+  {
+    "id": "T-QA",
+    "status": "PASS",
+    "scope": "direct isolated Python function; no PHP/database/browser integration",
+    "result": {
+      "found": true,
+      "question": "How many books does the reading room contain?",
+      "answer": "The community library opened a new reading room on Monday. The room contains 120 books and has space for 24 visitors.",
+      "passages": [
+        {
+          "index": 0,
+          "text": "The community library opened a new reading room on Monday.",
+          "score": 0.2241
+        },
+        {
+          "index": 1,
+          "text": "The room contains 120 books and has space for 24 visitors.",
+          "score": 0.1805
+        }
+      ],
+      "confidence": "moderate",
+      "message": "Answer grounded directly in source document passages."
+    }
+  },
+  {
+    "id": "T-SUMMARY",
+    "status": "ERROR",
+    "error": "ProcessingFailure: CONTENT_UNREADABLE"
+  },
+  {
+    "id": "T-NUTSHELL",
+    "status": "PASS",
+    "scope": "direct isolated Python function; no PHP/database/browser integration",
+    "result": {
+      "status": "insufficient_content",
+      "reason": "no_readable_content",
+      "nutshell": "",
+      "word_count": 0,
+      "source_word_count": 0,
+      "primary_summary_word_count": 0,
+      "compression_ratio": 0.0,
+      "analysis_mode": "general",
+      "format": "paragraph",
+      "algorithm_version": "nutshell-extractive-v2"
+    }
+  }
+]

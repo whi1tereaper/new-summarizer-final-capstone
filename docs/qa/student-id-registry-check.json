@@ -1,0 +1,112 @@
+{
+  "checked_date": "2026-10-23",
+  "scope": "Backend/database diagnostic; supplied IDs retained only in the isolated DB and process environment, not this report.",
+  "live": {
+    "read_only": true,
+    "sample_count": 9,
+    "all_sample_formats_accepted": true,
+    "registry_total": 0,
+    "sample_registry_matches": 0,
+    "sample_eligible_matches": 0,
+    "matching_fingerprints": 0,
+    "unique_constraints": [
+      {
+        "INDEX_NAME": "normalized_student_number",
+        "columns_used": "normalized_student_number"
+      },
+      {
+        "INDEX_NAME": "PRIMARY",
+        "columns_used": "id"
+      },
+      {
+        "INDEX_NAME": "registry_ref",
+        "columns_used": "registry_ref"
+      },
+      {
+        "INDEX_NAME": "student_number_fingerprint",
+        "columns_used": "student_number_fingerprint"
+      }
+    ],
+    "privacy_contact_configured": true,
+    "student_key_configured": true,
+    "enrollment_processing_authorized": false,
+    "registration_open": false
+  },
+  "isolated": {
+    "sample_count": 9,
+    "passed": 17,
+    "failed": 0,
+    "checks": [
+      {
+        "name": "all supplied ID formats accepted with separators and leading zeros intact",
+        "passed": true
+      },
+      {
+        "name": "unlisted application remains pending and restricted",
+        "passed": true
+      },
+      {
+        "name": "unverified submissions never populate the trusted registry",
+        "passed": true
+      },
+      {
+        "name": "administrator paste inserts every supplied ID",
+        "passed": true
+      },
+      {
+        "name": "matching pending account approved within import transaction",
+        "passed": true
+      },
+      {
+        "name": "existing account password hash preserved",
+        "passed": true
+      },
+      {
+        "name": "every matched registration approved without another manual review",
+        "passed": true
+      },
+      {
+        "name": "all matched accounts receive continued summarizer access",
+        "passed": true
+      },
+      {
+        "name": "student-number login resolves the approved account and password",
+        "passed": true
+      },
+      {
+        "name": "exact normalized IDs and keyed identities persisted uniquely",
+        "passed": true
+      },
+      {
+        "name": "repeat import skips duplicates without rewriting approvals",
+        "passed": true
+      },
+      {
+        "name": "duplicate account claim rejected with complete transaction rollback",
+        "passed": true
+      },
+      {
+        "name": "duplicate claim audited for administrators",
+        "passed": true
+      },
+      {
+        "name": "ordinary student cannot import trusted enrollment IDs",
+        "passed": true
+      },
+      {
+        "name": "unmatched number never receives verified privileges",
+        "passed": true
+      },
+      {
+        "name": "inactive registry number does not auto-approve",
+        "passed": true
+      },
+      {
+        "name": "each automatic approval has a real audit event",
+        "passed": true
+      }
+    ]
+  },
+  "cleanup": "Isolated databases and restricted user removed; no live ID imports or account writes performed.",
+  "application_changes": false
+}

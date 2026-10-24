@@ -1,0 +1,23 @@
+{
+  "measured_at": "2026-10-23T13:33:54.402482+00:00",
+  "settings": {
+    "analysis_mode": "general",
+    "output_format": "paragraph",
+    "summary_depth": "balanced"
+  },
+  "method": "Sequential HTTP submit through persisted result; fresh dedicated NLP worker for first text run. Polling interval 0.2 seconds. Fixture creation and login excluded.",
+  "running": null,
+  "results": [
+    {
+      "kind": "text",
+      "run": 1,
+      "worker_state": "fresh worker / first request",
+      "passed": false,
+      "submission_seconds": 0.094,
+      "completed_seconds": 85.485,
+      "end_to_end_seconds": 85.735,
+      "elapsed_seconds": 85.922,
+      "error": "TypeError: float() argument must be a string or a real number, not 'NoneType'"
+    }
+  ]
+}

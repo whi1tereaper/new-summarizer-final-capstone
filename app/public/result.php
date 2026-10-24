@@ -25,7 +25,10 @@ $resultFailure = null;
 $summaryData = HistoryHandler::getSummaryById($id, $userId, $guestToken, $shareToken);
 
 if (!$summaryData || isset($summaryData['error'])) {
-    $resultFailure = (new ProcessingError('RESULT_UNAVAILABLE'))->toArray();
+    \App\Src\Support\ProcessingDiagnostics::stage('result_retrieval', 'result', 'main');
+    $retrievalFailure = new ProcessingError('RESULT_UNAVAILABLE');
+    $retrievalFailure->log();
+    $resultFailure = $retrievalFailure->toArray();
     $error = $resultFailure['explanation'];
     http_response_code($resultFailure['http_status']);
 }

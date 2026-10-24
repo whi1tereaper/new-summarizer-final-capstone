@@ -1,0 +1,37 @@
+   Table 7. checklist_file_links Table
+
+
+Fields Name     Description      Type/Length     Constraint
+
+id              Unique           int(11)         Primary
+                Identifier                       key
+                for each
+                checklist
+                file link
+folder_id       Folder ID        int(11)
+checklist_id    Checklist ID     int(11)         Foreign
+                                                 Key
+file_id         File ID          int(11)         Foreign
+                                                 Key
+created_at      Time             timestamp
+                checklist
+                file link
+                was created
+
+
+   Table 8. files Table
+
+
+ Fields Name          Descripti     Type/Leng     Constrai
+                      on            th            nt
+
+ id                   Unique        int(11)       Primary
+                      Identifie                   key
+                      r
+                      for each
+                      file
+
+
+
+
+                                                            78

@@ -1,0 +1,40 @@
+•    Store offsite copies.
+•    Test restoration quarterly.
+
+6. Troubleshooting Guide
+ Problem                        Possible Cause                     Solution
+ Cannot login                   Incorrect                          Reset password and
+                                credentials/database issue         verify DB connection.
+ Upload fails                   File size or permissions           Increase limits and
+                                                                   verify folder
+                                                                   permissions.
+ Preview unavailable            Unsupported/corrupt file           Re-upload or verify
+                                                                   preview service.
+ Slow system                    Large database                     Optimize DB and
+                                                                   archive old records.
+ Search incomplete              Index outdated                     Rebuild extracted text
+                                                                   index.
+
+7. Roles and Responsibilities
+System Administrator: manages users, backups, updates, security, monitoring.
+Staff: upload, organize, and maintain document quality.
+Developers: maintain source code, fix bugs, implement enhancements.
+
+8. Data Security and Privacy
+Follow least-privilege access, maintain audit logs, encrypt credentials, perform
+regular backups, and comply with the Philippine Data Privacy Act of 2012.
+
+9. Maintenance Schedule
+•    Daily: backup database, monitor logs.
+•    Weekly: verify backups, review storage.
+•    Monthly: optimize database and audit accounts.
+•    Quarterly: disaster recovery test.
+•    Yearly: full security and performance review.
+
+
+10. Conclusion
+Consistent preventive maintenance ensures that AccredX remains secure, reliable,
+and capable of supporting accreditation activities. Administrators should
+document every maintenance activity and review procedures regularly.
+
+                                                                                            144

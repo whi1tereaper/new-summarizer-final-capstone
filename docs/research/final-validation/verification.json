@@ -1,0 +1,120 @@
+{
+  "recorded_utc": "2026-10-23T00:38:56.542134+00:00",
+  "client_date": "2026-10-23",
+  "client_timezone": "Asia/Manila",
+  "tests": [
+    {
+      "command": [
+        "C:\\Users\\Robert Martin\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "python-engine/tests",
+        "-p",
+        "test_final_validation.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_actual_submission_validation (test_final_validation.FinalValidationIntegrity.test_actual_submission_validation) ... ok\ntest_agreement_fixture_is_not_research_data (test_final_validation.FinalValidationIntegrity.test_agreement_fixture_is_not_research_data) ... ok\ntest_all_focus_sentence_occurrences_have_review_rows (test_final_validation.FinalValidationIntegrity.test_all_focus_sentence_occurrences_have_review_rows) ... ok\ntest_dual_tokenizer_relaxation_equals_brute_force (test_final_validation.FinalValidationIntegrity.test_dual_tokenizer_relaxation_equals_brute_force) ... ok\ntest_enforced_resource_measurements_not_rss_inference (test_final_validation.FinalValidationIntegrity.test_enforced_resource_measurements_not_rss_inference) ... ok\ntest_frozen_engine_pilot_and_protocol (test_final_validation.FinalValidationIntegrity.test_frozen_engine_pilot_and_protocol) ... ok\ntest_input_lock_and_ambiguous_queries (test_final_validation.FinalValidationIntegrity.test_input_lock_and_ambiguous_queries) ... ok\ntest_length_assignment_max_cardinality_then_min_cost (test_final_validation.FinalValidationIntegrity.test_length_assignment_max_cardinality_then_min_cost) ... ok\ntest_matching_accepts_no_quality_argument (test_final_validation.FinalValidationIntegrity.test_matching_accepts_no_quality_argument) ... ok\ntest_new_generations_and_native_repeats (test_final_validation.FinalValidationIntegrity.test_new_generations_and_native_repeats) ... ok\ntest_no_fictional_human_results (test_final_validation.FinalValidationIntegrity.test_no_fictional_human_results) ... ok\ntest_original_selection_and_nine_matches_reproduce (test_final_validation.FinalValidationIntegrity.test_original_selection_and_nine_matches_reproduce) ... ok\ntest_saved_sensitivity_bodies_are_whole_original_outputs (test_final_validation.FinalValidationIntegrity.test_saved_sensitivity_bodies_are_whole_original_outputs) ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 0.293s\n\nOK\n"
+    },
+    {
+      "command": [
+        "C:\\Users\\Robert Martin\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "python-engine/tests",
+        "-p",
+        "test_independent_validation.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_all_eight_categories_and_valid_exact_evidence (test_independent_validation.IndependentValidationTests.test_all_eight_categories_and_valid_exact_evidence) ... ok\ntest_completed_results_have_no_invented_human_scores (test_independent_validation.IndependentValidationTests.test_completed_results_have_no_invented_human_scores) ... ok\ntest_frozen_evaluation_code_and_protocol_unchanged (test_independent_validation.IndependentValidationTests.test_frozen_evaluation_code_and_protocol_unchanged) ... ok\ntest_length_choice_ignores_scores_and_rejects_empty_or_error (test_independent_validation.IndependentValidationTests.test_length_choice_ignores_scores_and_rejects_empty_or_error) ... ok\ntest_six_real_ui_sentence_requests (test_independent_validation.IndependentValidationTests.test_six_real_ui_sentence_requests) ... ok\ntest_tie_prefers_smaller_complete_output (test_independent_validation.IndependentValidationTests.test_tie_prefers_smaller_complete_output) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.067s\n\nOK\n"
+    }
+  ],
+  "php_syntax": {
+    "command": [
+      "C:\\xampp\\php\\php.exe",
+      "-l",
+      "scripts/final_resource_endpoint.php"
+    ],
+    "exit_code": 0,
+    "stdout": "No syntax errors detected in scripts/final_resource_endpoint.php\n",
+    "stderr": ""
+  },
+  "final_configuration": {
+    "automatic_article_routing": false,
+    "summary_engine_version": "legacy"
+  },
+  "owned_containers": {
+    "command": [
+      "docker",
+      "ps",
+      "-a",
+      "--filter",
+      "label=light.final-validation=20261023",
+      "--format",
+      "{{.Names}} {{.Status}}"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "python_files_parsed": [
+    "python-engine/evaluation/final_agreement.py",
+    "python-engine/evaluation/final_analysis.py",
+    "python-engine/evaluation/final_control_experiment.py",
+    "python-engine/evaluation/final_finalize.py",
+    "python-engine/evaluation/final_length_analysis.py",
+    "python-engine/evaluation/final_process_sampler.py",
+    "python-engine/evaluation/final_resource_profile.py",
+    "python-engine/evaluation/final_review_package.py",
+    "python-engine/evaluation/final_validation.py",
+    "python-engine/tests/test_final_validation.py"
+  ],
+  "custom_whitespace_errors": [],
+  "git_diff_check": {
+    "command": [
+      "git",
+      "diff",
+      "--check",
+      "--",
+      "python-engine/evaluation/final_agreement.py",
+      "python-engine/evaluation/final_analysis.py",
+      "python-engine/evaluation/final_control_experiment.py",
+      "python-engine/evaluation/final_finalize.py",
+      "python-engine/evaluation/final_length_analysis.py",
+      "python-engine/evaluation/final_process_sampler.py",
+      "python-engine/evaluation/final_resource_profile.py",
+      "python-engine/evaluation/final_review_package.py",
+      "python-engine/evaluation/final_validation.py",
+      "python-engine/tests/test_final_validation.py",
+      "scripts/final_resource_endpoint.php",
+      "docs/research/article-engine-final-validation.md",
+      "docs/research/final-validation/apache-resource.conf",
+      "docs/research/final-validation/protocol.md",
+      "docs/research/final-validation/README.md",
+      "docs/research/final-validation/reviewer-instructions.md"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "host_endpoint_without_token": {
+    "status": 403
+  },
+  "freeze_verification": {
+    "evaluation_relevant_changes": [],
+    "unrelated_workspace_changes_preserved": [],
+    "pilot_artifacts_changed": [],
+    "protocol_unchanged": true,
+    "code_tree_sha256": "0a19ecc8fdc07e8748ea9cc589b4e21d5d692db3b2bddb934e5f0974748f62b8"
+  },
+  "limits": "No full application regression, database writes or live deployment certification. Human review pending.",
+  "relative_markdown_links_checked": 26,
+  "broken_relative_links": []
+}

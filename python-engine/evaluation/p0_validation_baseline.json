@@ -1,0 +1,389 @@
+{
+ "engine": "baseline",
+ "engine_path": "C:\\xampp\\htdocs\\ai-summarizer-123 - quality upg\\python-engine\\evaluation\\baseline_snapshot\\summarizer_core",
+ "corpus": "tests\\fixtures\\evaluation_validation_documents.json",
+ "peak_memory_mb": 716.4,
+ "rows": [
+  {
+   "id": "USGS-SIR-2023-5136",
+   "depth": "brief",
+   "seconds": 18.109,
+   "sentences": [
+    "In cooperation with the U.S. Army Corps of Engineers, the U.S. Geological Survey initiated a water-quality monitoring study to describe the water-quality characteristics of the Red River of the North and its tributaries in the Fargo-Moorhead metropolitan area during the preconstruction period of the Flood Risk Management Project from October 1, 2019, to October 1, 2022.",
+    "The monitoring study included the collection of discrete and continuous water-quality data and streamflow monitoring at selected sites that integrated and enhanced existing monitoring programs within the study area.",
+    "In general, major ion concentrations were higher at sites on the tributaries (Wild Rice, Sheyenne, and Maple Rivers) compared to sites on the Red River of the North.",
+    "The median filtered ammonia concentration at most sites was less than the laboratory reporting level of 0.03 milligram per liter as nitrogen except for the Sheyenne River at Harwood, North Dakota (U.S."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": null,
+    "grammar_diagnostics": null,
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "USGS-SIR-2023-5136",
+   "depth": "balanced",
+   "seconds": 12.306,
+   "sentences": [
+    "In cooperation with the U.S. Army Corps of Engineers, the U.S. Geological Survey initiated a water-quality monitoring study to describe the water-quality characteristics of the Red River of the North and its tributaries in the Fargo-Moorhead metropolitan area during the preconstruction period of the Flood Risk Management Project from October 1, 2019, to October 1, 2022.",
+    "The monitoring study included the collection of discrete and continuous water-quality data and streamflow monitoring at selected sites that integrated and enhanced existing monitoring programs within the study area.",
+    "Discrete samples collected at 10 sites in the Fargo-Moorhead metropolitan area were analyzed for major ions, trace elements, nutrients, suspended sediment, pesticides, and fecal indicator bacteria.",
+    "In general, major ion concentrations were higher at sites on the tributaries (Wild Rice, Sheyenne, and Maple Rivers) compared to sites on the Red River of the North.",
+    "Sites on the Wild Rice River generally had the highest concentrations of arsenic, barium, boron, manganese, and nickel compared to the other sites.",
+    "The median filtered ammonia concentration at most sites was less than the laboratory reporting level of 0.03 milligram per liter as nitrogen except for the Sheyenne River at Harwood, North Dakota (U.S. Geological Survey [USGS] station 05060400).",
+    "The lowest median unfiltered nitrate plus nitrite concentration was measured at sites on the Red River of the North upstream from the Fargo-Moorhead metropolitan area and the highest median was at sites on the Red River of the North downstream from the Fargo-Moorhead metropolitan area compared to all other sites.",
+    "The increase in nitrate plus nitrite concentrations could reflect the effect of the wastewater-treatment plant discharge that enters the Red River of the North upstream from the site located downstream from the Fargo-Moorhead metropolitan area and from urban runoff.",
+    "For all sites other than the Sheyenne River near Kindred, N. Dak., 95 percent or more of the suspended sediment had particle diameter sizes less than 0.0625 millimeter in 50 percent of the samples (median).",
+    "(USGS station 05051522); Red River of the North at Fargo, N. Dak.; and Red River of the North near Georgetown, Minn. included water temperature, specific conductance, dissolved oxygen, pH, and turbidity."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": null,
+    "grammar_diagnostics": null,
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "USGS-SIR-2023-5136",
+   "depth": "detailed",
+   "seconds": 17.982,
+   "sentences": [
+    "In cooperation with the U.S. Army Corps of Engineers, the U.S. Geological Survey initiated a water-quality monitoring study to describe the water-quality characteristics of the Red River of the North and its tributaries in the Fargo-Moorhead metropolitan area during the preconstruction period of the Flood Risk Management Project from October 1, 2019, to October 1, 2022.",
+    "The monitoring study included the collection of discrete and continuous water-quality data and streamflow monitoring at selected sites that integrated and enhanced existing monitoring programs within the study area.",
+    "Discrete samples collected at 10 sites in the Fargo-Moorhead metropolitan area were analyzed for major ions, trace elements, nutrients, suspended sediment, pesticides, and fecal indicator bacteria.",
+    "In general, major ion concentrations were higher at sites on the tributaries (Wild Rice, Sheyenne, and Maple Rivers) compared to sites on the Red River of the North.",
+    "Several of the trace elements had concentrations below the laboratory reporting level in all of the samples, including antimony, beryllium, cadmium, chromium, silver, and thallium.",
+    "Sites on the Wild Rice River generally had the highest concentrations of arsenic, barium, boron, manganese, and nickel compared to the other sites.",
+    "The median filtered ammonia concentration at most sites was less than the laboratory reporting level of 0.03 milligram per liter as nitrogen except for the Sheyenne River at Harwood, North Dakota (U.S. Geological Survey [USGS] station 05060400), and Red River of the North near Georgetown, Minnesota (USGS station 05062130).",
+    "The lowest median unfiltered nitrate plus nitrite concentration was measured at sites on the Red River of the North upstream from the Fargo-Moorhead metropolitan area and the highest median was at sites on the Red River of the North downstream from the Fargo-Moorhead metropolitan area compared to all other sites.",
+    "The increase in nitrate plus nitrite concentrations could reflect the effect of the wastewater-treatment plant discharge that enters the Red River of the North upstream from the site located downstream from the Fargo-Moorhead metropolitan area and from urban runoff.",
+    "Suspended-sediment concentration was highly variable in samples collected at the 10 sites, mostly influenced by the occurrence of snowmelt and rainfall-runoff events.",
+    "For all sites other than the Sheyenne River near Kindred, N. Dak., 95 percent or more of the suspended sediment had particle diameter sizes less than 0.0625 millimeter in 50 percent of the samples (median).",
+    "Of the 102 pesticides and pesticide degradates analyzed, 45 constituents had no detectable concentrations in any of the 17 samples collected at five sites.",
+    "The sites on the Wild Rice River (near Abercrombie, N. Dak., USGS station 05053000, and near St. Benedict, N. Dak., USGS station 05053500) and Sheyenne River near Kindred, N. Dak., had fewer pesticide detections compared to the Maple River below Mapleton, N.Dak.",
+    "(USGS station 05060100) and the Red River of the North at Fargo, N. Dak (USGS station 05054000) and near Georgetown, Minn. Patterns in annual loads generally followed the same pattern as streamflow at the 10 sites for water years 2020–22.",
+    "A water year is the 12-month period from October 1 to September 30 and is designated by the calendar year in which it ends.",
+    "Likewise, the least loads for most constituents were at the Maple River and were least in 2021 compared to the other years because of low-streamflow conditions.",
+    "(USGS station 05051522); Red River of the North at Fargo, N. Dak.; and Red River of the North near Georgetown, Minn. included water temperature, specific conductance, dissolved oxygen, pH, and turbidity.",
+    "The patterns in turbidity were mostly related to streamflow conditions and were similar among the three sites on the Red River of the North."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": null,
+    "grammar_diagnostics": null,
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "NASA-RELEASE-25-002",
+   "depth": "brief",
+   "seconds": 7.201,
+   "sentences": [
+    "Earth’saverage surface temperature in 2024 was the warmest on record, according to an analysis led by NASA scientists.",
+    "Global temperatures in 2024 were 2.30 degrees Fahrenheit (1.28 degrees Celsius) above the agency’s 20th-century baseline (1951-1980), which tops the record set in 2023.",
+    "Independent analyses by NOAA, Berkeley Earth, the Hadley Centre (part of the United Kingdom’sweather forecasting Met Office) and Copernicus Climate Services in Europe have also concluded that the global surface temperatures for 2024 were the highest since modern record-keeping began.",
+    "NASA’sfull dataset of global surface temperatures, as well as details of how NASA scientists conducted the analysis, are publicly available from GISS."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": null,
+    "grammar_diagnostics": null,
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "NASA-RELEASE-25-002",
+   "depth": "balanced",
+   "seconds": 12.31,
+   "sentences": [
+    "Earth’saverage surface temperature in 2024 was the warmest on record, according to an analysis led by NASA scientists.",
+    "Global temperatures in 2024 were 2.30 degrees Fahrenheit (1.28 degrees Celsius) above the agency’s 20th-century baseline (1951-1980), which tops the record set in 2023.",
+    "Between record breaking temperatures and wildfires currently threatening our centers and workforce in California, it has never been more important to understand our changing planet.”.",
+    "For more than half of 2024, average temperatures were more than 1.5 degrees Celsius above the baseline, and the annual average, with mathematical uncertainties, may have exceeded the level for the first time.",
+    "To put that in perspective, temperatures during the warm periods on Earth three million years ago — when sea levels were dozens of feet higher than today — were only around 3 degrees Celsius warmer than pre-industrial levels,” said Gavin Schmidt.",
+    "The concentration of carbon dioxide in the atmosphere has increased from pre-industrial levels in the 18th century of approximately 278 parts per million to about 420 parts per million today.",
+    "Researchers are working to identify contributing factors, including possible climate impacts of the January 2022 Tonga volcanic eruption and reductions in pollution, which may change cloud cover and how solar energy is reflected back into space.",
+    "A new assessment published earlier this year by scientists at the Colorado School of Mines, National Science Foundation, the National Atmospheric and Oceanic Administration (NOAA), and NASA further increases confidence in the agency’sglobal and regional temperature data.",
+    "Independent analyses by NOAA, Berkeley Earth, the Hadley Centre (part of the United Kingdom’sweather forecasting Met Office) and Copernicus Climate Services in Europe have also concluded that the global surface temperatures for 2024 were the highest since modern record-keeping began.",
+    "NASA’sfull dataset of global surface temperatures, as well as details of how NASA scientists conducted the analysis, are publicly available from GISS, a NASA laboratory managed by the agency’sGoddard Space Flight Center in Greenbelt, Maryland."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": null,
+    "grammar_diagnostics": null,
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "NASA-RELEASE-25-002",
+   "depth": "detailed",
+   "seconds": 18.291,
+   "sentences": [
+    "Earth’saverage surface temperature in 2024 was the warmest on record, according to an analysis led by NASA scientists.",
+    "Global temperatures in 2024 were 2.30 degrees Fahrenheit (1.28 degrees Celsius) above the agency’s 20th-century baseline (1951-1980), which tops the record set in 2023.",
+    "The new record comes after 15 consecutive months (June 2023 through August 2024) of monthly temperature records — an unprecedented heat streak.",
+    "Once again, the temperature record has been shattered — 2024 was the hottest year since record keeping began in 1880,” said NASA Administrator Bill Nelson.",
+    "Between record breaking temperatures and wildfires currently threatening our centers and workforce in California, it has never been more important to understand our changing planet.”.",
+    "NASA scientists further estimate Earth in 2024 was about 2.65 degrees Fahrenheit (1.47 degrees Celsius) warmer than the mid-19th century average (1850-1900).",
+    "For more than half of 2024, average temperatures were more than 1.5 degrees Celsius above the baseline, and the annual average, with mathematical uncertainties, may have exceeded the level for the first time.",
+    "To put that in perspective, temperatures during the warm periods on Earth three million years ago — when sea levels were dozens of feet higher than today — were only around 3 degrees Celsius warmer than pre-industrial levels,” said Gavin Schmidt.",
+    "Scientists have concluded the warming trend of recent decades is driven by heat-trapping carbon dioxide, methane, and other greenhouse gases.",
+    "In 2022 and 2023, Earth saw record increases in carbon dioxide emissions from fossil fuels, according to a recent international analysis.",
+    "The concentration of carbon dioxide in the atmosphere has increased from pre-industrial levels in the 18th century of approximately 278 parts per million to about 420 parts per million today.",
+    "Exceptional heat trends The temperatures of individual years can be influenced by natural climate fluctuations such as El Niño and La Niña, which alternately warm and cool the tropical Pacific Ocean.",
+    "Researchers are working to identify contributing factors, including possible climate impacts of the January 2022 Tonga volcanic eruption and reductions in pollution, which may change cloud cover and how solar energy is reflected back into space.",
+    "We’re already seeing the impact in extreme rainfall, heat waves, and increased flood risk, which are going to keep getting worse as long as emissions continue.”.",
+    "Seeing changes locally NASA assembles its temperature record using surface air temperature data collected from tens of thousands of meteorological stations, as well as sea surface temperature data acquired by ship- and buoy-based instruments.",
+    "A new assessment published earlier this year by scientists at the Colorado School of Mines, National Science Foundation, the National Atmospheric and Oceanic Administration (NOAA), and NASA further increases confidence in the agency’sglobal and regional temperature data.",
+    "Independent analyses by NOAA, Berkeley Earth, the Hadley Centre (part of the United Kingdom’sweather forecasting Met Office) and Copernicus Climate Services in Europe have also concluded that the global surface temperatures for 2024 were the highest since modern record-keeping began.",
+    "NASA’sfull dataset of global surface temperatures, as well as details of how NASA scientists conducted the analysis, are publicly available from GISS, a NASA laboratory managed by the agency’sGoddard Space Flight Center in Greenbelt, Maryland."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": null,
+    "grammar_diagnostics": null,
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "NIST-OUTLIERS-INTRO",
+   "depth": "brief",
+   "seconds": 4.586,
+   "sentences": [
+    "For example, the data may have been coded incorrectly or an experiment may not have been run correctly.",
+    "If it can be determined that an outlying point is in fact erroneous, then the outlying value should be deleted from the analysis (or corrected if possible)."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": null,
+    "grammar_diagnostics": null,
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "NIST-OUTLIERS-INTRO",
+   "depth": "balanced",
+   "seconds": 6.06,
+   "sentences": [
+    "An outlier may indicate bad data.",
+    "For example, the data may have been coded incorrectly or an experiment may not have been run correctly.",
+    "If it can be determined that an outlying point is in fact erroneous, then the outlying value should be deleted from the analysis (or corrected if possible).",
+    "In any event, we typically do not want to simply delete the outlying observation."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": null,
+    "grammar_diagnostics": null,
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "NIST-OUTLIERS-INTRO",
+   "depth": "detailed",
+   "seconds": 7.223,
+   "sentences": [
+    "An outlier may indicate bad data.",
+    "For example, the data may have been coded incorrectly or an experiment may not have been run correctly.",
+    "If it can be determined that an outlying point is in fact erroneous, then the outlying value should be deleted from the analysis (or corrected if possible).",
+    "Outliers may be due to random variation or may indicate something scientifically interesting.",
+    "In any event, we typically do not want to simply delete the outlying observation."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": null,
+    "grammar_diagnostics": null,
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "CENSUS-CB24-149",
+   "depth": "brief",
+   "seconds": 9.027,
+   "sentences": [
+    "On July 17, 2026, the Bureau of Labor Statistics re-released SPM thresholds for 2019-2024 following the discovery of coding errors.",
+    "An estimated 26.4 million or 8.0% of people did not have health insurance at any point during 2023, according to the 2024 Current Population Survey Annual Social and Economic Supplement (CPS ASEC), also not statistically different from the previous year.",
+    "Since the response rates remain below pre-pandemic levels, which were regularly above 80%, it is important to examine how respondents differ from nonrespondents, as this difference could affect the accuracy of the estimates.",
+    "For more details on how sample difference and the associated nonresponse bias impact income and official poverty estimates, refer to the Research Matters blog."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": null,
+    "grammar_diagnostics": null,
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "CENSUS-CB24-149",
+   "depth": "balanced",
+   "seconds": 14.371,
+   "sentences": [
+    "On July 17, 2026, the Bureau of Labor Statistics re-released SPM thresholds for 2019-2024 following the discovery of coding errors.",
+    "10, 2024 — The U.S. Census Bureau today announced that real median household income increased by 4.0% between 2022 and 2023.",
+    "Meanwhile, 92.0% of the U.S. population had health insurance coverage for all or part of 2023, not statistically different from 2022.",
+    "An estimated 26.4 million or 8.0% of people did not have health insurance at any point during 2023, according to the 2024 Current Population Survey Annual Social and Economic Supplement (CPS ASEC), also not statistically different from the previous year.",
+    "While the official poverty measure is based on the concept of money income, which is pretax and does not include tax credits, the SPM is a post-tax and transfer poverty measure.",
+    "The Current Population Survey (CPS), sponsored jointly by the Census Bureau and BLS, is conducted every month and is the primary source of labor force statistics for the U.S. population.",
+    "Since the response rates remain below pre-pandemic levels, which were regularly above 80%, it is important to examine how respondents differ from nonrespondents, as this difference could affect the accuracy of the estimates.",
+    "For more details on how sample difference and the associated nonresponse bias impact income and official poverty estimates, refer to the Research Matters blog, “Using Administrative Data to Evaluate Nonresponse Bias in the 2024 Current Population Survey Annual Social and Economic Supplement.”.",
+    "Between 2022 and 2023, the official poverty rate decreased for White and non-Hispanic White individuals; women; 18- to 64-year-olds; unrelated individuals; all workers; less than full-time, year-round workers; and those with some college.",
+    "All comparisons made here and in each respective report have been tested and found to be statistically significant at the 90% confidence level, unless otherwise noted."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": null,
+    "grammar_diagnostics": null,
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "CENSUS-CB24-149",
+   "depth": "detailed",
+   "seconds": 19.058,
+   "sentences": [
+    "On July 17, 2026, the Bureau of Labor Statistics re-released SPM thresholds for 2019-2024 following the discovery of coding errors.",
+    "The U.S. Census Bureau will publish revised SPM poverty rates using these updated thresholds before the release of the annual poverty report in September.",
+    "10, 2024 — The U.S. Census Bureau today announced that real median household income increased by 4.0% between 2022 and 2023.",
+    "The Supplemental Poverty Measure (SPM) rate in 2023 was 12.9%, an increase of 0.5 percentage points from 2022.",
+    "Meanwhile, 92.0% of the U.S. population had health insurance coverage for all or part of 2023, not statistically different from 2022.",
+    "An estimated 26.4 million or 8.0% of people did not have health insurance at any point during 2023, according to the 2024 Current Population Survey Annual Social and Economic Supplement (CPS ASEC), also not statistically different from the previous year.",
+    "While the official poverty measure is based on the concept of money income, which is pretax and does not include tax credits, the SPM is a post-tax and transfer poverty measure.",
+    "The SPM provides an alternative way of measuring poverty in the United States and serves as an additional indicator of economic well-being.",
+    "The Current Population Survey (CPS), sponsored jointly by the Census Bureau and BLS, is conducted every month and is the primary source of labor force statistics for the U.S. population.",
+    "The response rate for the CPS basic household survey declined from 68.9% in March 2023 to 67.2% in March 2024.",
+    "Since the response rates remain below pre-pandemic levels, which were regularly above 80%, it is important to examine how respondents differ from nonrespondents, as this difference could affect the accuracy of the estimates.",
+    "For more details on how sample difference and the associated nonresponse bias impact income and official poverty estimates, refer to the Research Matters blog, “Using Administrative Data to Evaluate Nonresponse Bias in the 2024 Current Population Survey Annual Social and Economic Supplement.”.",
+    "Between 2022 and 2023, the official poverty rate decreased for White and non-Hispanic White individuals; women; 18- to 64-year-olds; unrelated individuals; all workers; less than full-time, year-round workers; and those with some college.",
+    "The SPM does not replace the official poverty measure; however, it does provide a different metric of economic well-being that includes resources from government programs and tax credits to low-income families.",
+    "In 2023, private health insurance coverage continued to be more prevalent than public coverage, at 65.4% and 36.3%, respectively.",
+    "Of the more common subtypes of health insurance coverage, employment-based insurance was the most prevalent, covering 53.7% of the population for some or all of the calendar year, followed by Medicaid (18.9%), Medicare (18.9%), and direct-purchase coverage (10.2%).",
+    "Between 2022 and 2023, the rate of Medicare coverage increased by 0.2 percentage points to cover 18.9% of people.",
+    "All comparisons made here and in each respective report have been tested and found to be statistically significant at the 90% confidence level, unless otherwise noted."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": null,
+    "grammar_diagnostics": null,
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "SYNTHETIC-REPEATED-PARAGRAPHS",
+   "depth": "brief",
+   "seconds": 4.874,
+   "sentences": [
+    "The demonstration study enrolled approximately 1,240 participants on 12 March 2024.",
+    "The concluding statement repeats no additional experiment; this is an intentionally constructed software stress fixture."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": null,
+    "grammar_diagnostics": null,
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "SYNTHETIC-REPEATED-PARAGRAPHS",
+   "depth": "balanced",
+   "seconds": 6.406,
+   "sentences": [
+    "The demonstration study enrolled approximately 1,240 participants on 12 March 2024.",
+    "The change may reflect selection bias and does not establish causation.",
+    "The committee recommended further study before implementation.",
+    "The concluding statement repeats no additional experiment; this is an intentionally constructed software stress fixture."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": null,
+    "grammar_diagnostics": null,
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "SYNTHETIC-REPEATED-PARAGRAPHS",
+   "depth": "detailed",
+   "seconds": 7.305,
+   "sentences": [
+    "The demonstration study enrolled approximately 1,240 participants on 12 March 2024.",
+    "Retention increased by 12.7%, not 27%.",
+    "The change may reflect selection bias and does not establish causation.",
+    "The committee recommended further study before implementation.",
+    "The concluding statement repeats no additional experiment; this is an intentionally constructed software stress fixture."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": null,
+    "grammar_diagnostics": null,
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "SYNTHETIC-OCR-NOISE",
+   "depth": "brief",
+   "seconds": 3.939,
+   "sentences": [
+    "The demonstration study enrolled approximately 1,240 participants on 12 March 2024.",
+    "The change may reflect selection bias and does not establish causation."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": null,
+    "grammar_diagnostics": null,
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "SYNTHETIC-OCR-NOISE",
+   "depth": "balanced",
+   "seconds": 6.3,
+   "sentences": [
+    "The demonstration study enrolled approximately 1,240 participants on 12 March 2024.",
+    "The change may reflect selection bias and does not establish causation.",
+    "Researchers measured a mean concentration of 0.03 milligram per liter.",
+    "The committee recommended further study before implementation."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": null,
+    "grammar_diagnostics": null,
+    "semantic_model_status": null
+   }
+  },
+  {
+   "id": "SYNTHETIC-OCR-NOISE",
+   "depth": "detailed",
+   "seconds": 7.083,
+   "sentences": [
+    "The demonstration study enrolled approximately 1,240 participants on 12 March 2024.",
+    "The change may reflect selection bias and does not establish causation.",
+    "Researchers measured a mean concentration of 0.03 milligram per liter.",
+    "North Laboratory measured 17.4% while South Laboratory measured 9.2%.",
+    "The committee recommended further study before implementation."
+   ],
+   "error": "",
+   "target_word_budget": 0,
+   "meta": {
+    "quality_selection": null,
+    "grammar_diagnostics": null,
+    "semantic_model_status": null
+   }
+  }
+ ]
+}

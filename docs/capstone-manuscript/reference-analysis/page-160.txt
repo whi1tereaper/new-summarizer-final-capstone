@@ -1,0 +1,54 @@
+   •   Once clicked, a “Register User” modal will be
+       displayed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   •   Enter the Username and Email of the User you want
+       to register.
+   •   Select a role for the user.
+   •   Admins get access to all Folders and Files.
+   •   For Teachers and Assistants (Compliance
+       Managers), select the Area Folders you want to
+       assign to them.
+   •   Click the “Register” button to register the user.
+   •   An email will be sent to the user with the
+       Username and provided password.
+   •   The system will leave the user with disabled
+       status first. This is so the admin can make sure
+       the user got the email.
+
+
+                                                                    141

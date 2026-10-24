@@ -1,0 +1,15 @@
+%% Registered users retain eligible guest workflows. These functions are source-supported, not successful live-test claims.
+flowchart TB
+    ACTOR["Registered account"]
+    subgraph SYSTEM["LIGHT summarizer"]
+    C0(["Use eligible summarization<br/>and reading workflows"])
+    C1(["View personal summary<br/>history and analytics"])
+    C2(["Maintain profile and<br/>saved preferences"])
+    C3(["Generate standalone Nutshell<br/>when account guards permit"])
+    C4(["Read permitted shared results<br/>and give feedback"])
+    end
+    ACTOR --- C0
+    ACTOR --- C1
+    ACTOR --- C2
+    ACTOR --- C3
+    ACTOR --- C4

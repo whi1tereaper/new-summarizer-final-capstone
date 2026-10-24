@@ -21,19 +21,19 @@ $where = [];
 $params = [];
 
 if ($filterAction !== '') {
-    $where[] = "action = :action";
+    $where[] = "a.action = :action";
     $params['action'] = $filterAction;
 }
 if ($filterAdminId !== '') {
-    $where[] = "admin_id = :admin_id";
+    $where[] = "a.admin_id = :admin_id";
     $params['admin_id'] = $filterAdminId;
 }
 if ($filterDateFrom !== '') {
-    $where[] = "created_at >= :date_from";
+    $where[] = "a.created_at >= :date_from";
     $params['date_from'] = $filterDateFrom . ' 00:00:00';
 }
 if ($filterDateTo !== '') {
-    $where[] = "created_at <= :date_to";
+    $where[] = "a.created_at <= :date_to";
     $params['date_to'] = $filterDateTo . ' 23:59:59';
 }
 
@@ -48,10 +48,10 @@ try {
     $pdo = Database::getInstance()->getConnection();
 
     // Check if table exists securely
-    $tableExists = $pdo->query("SHOW TABLES LIKE 'admin_audit_logs'")->rowCount() > 0;
+    $tableExists = $pdo->query("SHOW TABLES LIKE 'admin_audit_logs'")->rowCount()>0;
 
     if ($tableExists) {
-        $countSql = "SELECT COUNT(*) FROM admin_audit_logs $whereClause";
+        $countSql = "SELECT COUNT(*) FROM admin_audit_logs a $whereClause";
         $stmtCount = $pdo->prepare($countSql);
         $stmtCount->execute($params);
         $totalRows = (int)$stmtCount->fetchColumn();

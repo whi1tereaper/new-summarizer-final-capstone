@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Src\Controllers;
 
 require_once __DIR__ . '/../Services/DocumentSummaryService.php';
+require_once __DIR__ . '/../Utils/validation.php';
 
 use App\Src\Services\DocumentSummaryService;
 use InvalidArgumentException;
@@ -39,6 +40,11 @@ class DocumentSummaryController
         $path = rawurldecode($path);
 
         try {
+            if($method==='POST') {
+                $body=$body??$this->readJsonBody();
+                $csrf=$_SERVER['HTTP_X_CSRF_TOKEN']??$body['csrf_token']??null;
+                if(!is_string($csrf)||!verifyCsrfToken($csrf))throw new \App\Src\Support\ProcessingError('ACCESS_DENIED');
+            }
             // Match /api/documents routes
             if (preg_match('#/api/documents(?P<subpath>/.*)?$#i', $path, $matches)) {
                 $subpath = trim((string)($matches['subpath'] ?? ''), '/');
@@ -99,13 +105,15 @@ class DocumentSummaryController
             }
 
             $this->sendJson(404, ['error' => 'Endpoint not found.']);
+        } catch (\App\Src\Support\ProcessingError $e) {
+            $this->sendJson($e->httpStatus,['error'=>$e->getMessage(),'failure'=>$e->toArray()]);
         } catch (InvalidArgumentException $e) {
             $this->sendJson(400, ['error' => $e->getMessage()]);
         } catch (OutOfBoundsException $e) {
             $this->sendJson(404, ['error' => $e->getMessage()]);
         } catch (Throwable $e) {
-            error_log('[DocumentSummaryController] Server error: ' . $e->getMessage());
-            $this->sendJson(500, ['error' => 'Internal server error: ' . $e->getMessage()]);
+            $failure=\App\Src\Support\ProcessingError::fromThrowable($e);$failure->log();
+            $this->sendJson($failure->httpStatus,['error'=>$failure->getMessage(),'failure'=>$failure->toArray()]);
         }
     }
 
@@ -203,6 +211,8 @@ class DocumentSummaryController
      */
     private function streamCreateDocumentResponse(string $text, ?int $userId, ?string $guestToken): void
     {
+        $result=$this->service->createDocumentWithDefaultSummary($text,$userId,$guestToken);
+        $documentId=$result['documentId'];$summaryResult=$result['defaultSummary'];
         // Disable output buffering for live chunk flushing
         while (ob_get_level() > 0) {
             ob_end_clean();
@@ -213,12 +223,10 @@ class DocumentSummaryController
         header('X-Accel-Buffering: no');
         header('Connection: keep-alive');
 
-        $documentId = $this->service->createDocument($text, $userId, $guestToken);
 
         echo "event: document\ndata: " . json_encode(['documentId' => $documentId]) . "\n\n";
         flush();
 
-        $summaryResult = $this->service->getOrGenerateSummary($documentId, 'general', 'balanced');
         $summaryText = $summaryResult['summary'];
 
         // Stream text in small sentence/clause chunks

@@ -1,0 +1,31 @@
+Conclusion
+  Based on the findings of the study, the
+following conclusions were drawn:
+
+     1.  The existing record management system
+  at NEUST Peñaranda Off-Campus was inadequate
+  for  the  institution's  operational  and
+  accreditation needs. The reliance on Google
+  Drive without structured organization, proper
+  categorization, checklist functionality, or
+  centralized  control  created  significant
+  inefficiencies,    security    risks,    and
+  difficulties  in  document  retrieval  and
+  accountability.
+
+     2.      The Agile methodology and SDLC
+  framework proved effective        in developing a
+  comprehensive    and    responsive    record
+  management system. The iterative development
+  approach allowed for continuous refinement
+  based on stakeholder feedback, ensuring the
+  final   product   aligned   closely   with
+  institutional    requirements    and    user
+  expectations.
+     3.     AccredX successfully addresses the
+  identified     problems            through     its
+  implementation   of   essential   features
+
+
+
+                                                     106

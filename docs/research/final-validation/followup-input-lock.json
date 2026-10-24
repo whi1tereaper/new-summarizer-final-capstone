@@ -1,0 +1,9 @@
+{
+  "locked_utc": "2026-10-23T00:16:47.076256+00:00",
+  "pilot_corpus_sha256": "047c1e15655066f91b01ded03a01f975eec73ea03d1ee0aec4dd5bf5f54526e0",
+  "focus_probes_sha256": "7d5cf5a035b54fe043f89ac9911d447dd84188d4e33d589a0becbf666d7538ca",
+  "protocol_sha256": "e12d36fa0984d5da5a3658c0bb7998e3b29a68e903e3741355990c63bb6efdf4",
+  "harness_sha256": "b5fcfb4802e9dc67ba06b9bbc283f4095caf9ab88621fc4275c5aee666ad2b8a",
+  "new_generation_started": false,
+  "independent_human_labels": null
+}

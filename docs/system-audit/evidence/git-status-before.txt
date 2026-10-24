@@ -1,0 +1,206 @@
+ M .env.example
+ M .gitignore
+ M QUICK_START.txt
+ M SETUP_GUIDE.txt
+ M app/config/config.php
+ M app/public/.htaccess
+ M app/public/about.php
+ M app/public/accept_terms.php
+ M app/public/admin_audit_logs.php
+ M app/public/admin_dashboard.php
+ M app/public/analytics.php
+ M app/public/assets/css/about.css
+ M app/public/assets/css/design-tokens.css
+ M app/public/assets/css/nex-landing.css
+ M app/public/assets/css/processing.css
+ M app/public/assets/css/result.css
+ M app/public/assets/css/site-footer.css
+ M app/public/assets/css/site-nav.css
+ M app/public/assets/css/style.css
+ M app/public/assets/js/index.js
+ M app/public/assets/js/processing.js
+ M app/public/assets/js/result.js
+ M app/public/auth.php
+ M app/public/evaluation.php
+ M app/public/forgot_password.php
+ M app/public/history.php
+ M app/public/index.php
+ M app/public/login.php
+ M app/public/nutshell_generate.php
+ M app/public/partials/evaluation-ui.php
+ M app/public/partials/nex-footer.php
+ M app/public/partials/rating-widget.php
+ M app/public/partials/site-nav.php
+ M app/public/partials/summarizer-form.php
+ M app/public/processing.php
+ M app/public/register.php
+ M app/public/reset_password.php
+ M app/public/result.php
+ M app/public/summarize.php
+ M app/public/summarizer.php
+ M app/public/terms.php
+ M app/public/translate_proxy.php
+ M app/src/Controllers/AdminController.php
+ M app/src/Controllers/AnalyticsController.php
+ M app/src/Controllers/ArticleController.php
+ M app/src/Controllers/AuthController.php
+ M app/src/Controllers/FeedbackHandler.php
+ M app/src/Services/ArticleService.php
+ M app/src/Services/EmailService.php
+ M app/src/Services/FeedbackService.php
+ M app/src/Services/FileUploadService.php
+ M app/src/Services/HistoryService.php
+ M app/src/Services/LocalPythonBridge.php
+ M app/src/Services/RateLimiter.php
+ M app/src/Services/RememberMeService.php
+ M app/src/Services/SourceResolver.php
+ M app/src/Services/SummarizerPromptTemplate.php
+ M app/src/whitereaper.php
+ M database/migrations/002_admin_security_challenges.sql
+ M docs/evaluation-implementation-audit.md
+ M docs/evaluation-methodology.md
+ M docs/evaluation-operations.md
+ M docs/summarizer-ux-backend-audit.md
+ M python-engine/__pycache__/local_cli.cpython-311.pyc
+ M python-engine/__pycache__/local_cli.cpython-314.pyc
+ M python-engine/__pycache__/nlp_pipeline.cpython-311.pyc
+ M python-engine/__pycache__/nlp_pipeline.cpython-314.pyc
+ M python-engine/local_cli.py
+ M python-engine/nlp_pipeline.py
+ M python-engine/summarizer_core/__pycache__/constants.cpython-311.pyc
+ M python-engine/summarizer_core/__pycache__/constants.cpython-314.pyc
+ M python-engine/summarizer_core/__pycache__/models.cpython-311.pyc
+ M python-engine/summarizer_core/__pycache__/models.cpython-314.pyc
+ M python-engine/summarizer_core/__pycache__/nutshell.cpython-311.pyc
+ M python-engine/summarizer_core/__pycache__/nutshell.cpython-314.pyc
+ M python-engine/summarizer_core/__pycache__/pipeline.cpython-311.pyc
+ M python-engine/summarizer_core/__pycache__/pipeline.cpython-314.pyc
+ M python-engine/summarizer_core/__pycache__/profiles.cpython-311.pyc
+ M python-engine/summarizer_core/__pycache__/profiles.cpython-314.pyc
+ M python-engine/summarizer_core/cleaning.py
+ M python-engine/summarizer_core/constants.py
+ M python-engine/summarizer_core/document_analysis.py
+ M python-engine/summarizer_core/embeddings.py
+ M python-engine/summarizer_core/extraction.py
+ M python-engine/summarizer_core/fact_ledger.py
+ M python-engine/summarizer_core/models.py
+ M python-engine/summarizer_core/normalization.py
+ M python-engine/summarizer_core/nutshell.py
+ M python-engine/summarizer_core/pipeline.py
+ M python-engine/summarizer_core/profiles.py
+ M python-engine/summarizer_core/scoring.py
+ M python-engine/summarizer_core/selection.py
+ M python-engine/summarizer_core/structure.py
+ M python-engine/summarizer_core/tokenization.py
+ M python-engine/tests/__pycache__/test_summarizer_quality.cpython-311.pyc
+ M python-engine/tests/__pycache__/test_summarizer_quality.cpython-314.pyc
+ M python-engine/tests/test_document_analysis.py
+ M python-engine/tests/test_document_aware_engine.py
+ M python-engine/tests/test_evaluation_core.py
+ M python-engine/tests/test_fact_ledger.py
+ M python-engine/tests/test_pipeline_architecture.py
+ M python-engine/tests/test_retrieval.py
+ M python-engine/tests/test_selection_architecture.py
+ M python-engine/tests/test_summarizer_quality.py
+ M python-engine/tests/test_text_processing_architecture.py
+A  python-engine/tests/test_translation_cooldown_processes.py
+AM python-engine/tests/test_translation_http_acceptance.py
+AM python-engine/tests/test_translation_resilience.py
+ M scripts/test_auth_full_verification.php
+ M scripts/test_part2_and_result_page.php
+ M securityprotocol.md
+?? BA_client/
+?? app/config/error_catalog.json
+?? app/public/api/qa.php
+?? app/public/assets/css/dashboard-charts.css
+?? app/public/assets/css/light-errors.css
+?? app/public/assets/css/profile.css
+?? app/public/assets/css/theme-toggle.css
+?? app/public/assets/js/admin-user-filters.js
+?? app/public/assets/js/dashboard-charts.js
+?? app/public/assets/js/light-errors.js
+?? app/public/assets/js/logout-confirmation.js
+?? app/public/assets/js/theme-toggle.js
+?? app/public/dashboard.php
+?? app/public/partials/analytics-graphs-card.php
+?? app/public/partials/error-support.php
+?? app/public/partials/theme-toggle-button.php
+?? app/public/profile.php
+?? app/public/summary_worker.php
+?? app/src/Repositories/
+?? app/src/Services/SummaryJobService.php
+?? app/src/Support/ProcessingError.php
+?? artifacts/
+?? database/migrations/015_summary_jobs.sql
+?? database/migrations/016_summary_error_contract.sql
+?? docs/backend-compatibility-matrix.md
+?? docs/capstone-manuscript/
+?? docs/error-feedback-implementation-20261014.md
+?? docs/error-feedback-ui-verification.md
+?? docs/independent-article-pilot-20261013.md
+?? docs/light-engine-v2.md
+?? docs/performance-report-20261014.md
+?? docs/quality-acceptance-report.md
+?? docs/system-audit/
+?? docs/website-feature-audit.md
+?? python-engine/evaluation/article-pilot-legacy-run-20261013.json
+?? python-engine/evaluation/article-pilot-report-20261013.json
+?? python-engine/evaluation/article-pilot-v2-budget-matched-run-20261013.json
+?? python-engine/evaluation/article-pilot-v2-run-20261013.json
+?? python-engine/evaluation/baseline_eval.json
+?? python-engine/evaluation/baseline_snapshot/
+?? python-engine/evaluation/benchmark_performance.py
+?? python-engine/evaluation/compare_engines.py
+?? python-engine/evaluation/compare_performance_quality.py
+?? python-engine/evaluation/comparison_report.json
+?? python-engine/evaluation/corpus/
+?? python-engine/evaluation/current_eval.json
+?? python-engine/evaluation/p0_baseline_results.json
+?? python-engine/evaluation/p0_comparison_report.json
+?? python-engine/evaluation/p0_current_results.json
+?? python-engine/evaluation/p0_performance.json
+?? python-engine/evaluation/p0_validation_baseline.json
+?? python-engine/evaluation/p0_validation_comparison.json
+?? python-engine/evaluation/p0_validation_current.json
+?? python-engine/evaluation/profile_breakdown.py
+?? python-engine/evaluation/profile_stages.py
+?? python-engine/failure_contract.py
+?? python-engine/light_engine/
+?? python-engine/light_engine_cli.py
+?? python-engine/scripts/prepare_languagetool.py
+?? python-engine/summarizer_core/grammar_check.py
+?? python-engine/summarizer_core/runtime.py
+?? python-engine/summarizer_core/simplification.py
+?? python-engine/tests/fixtures/selection_performance_baseline.json
+?? python-engine/tests/test_compare_engines.py
+?? python-engine/tests/test_configuration_contracts.py
+?? python-engine/tests/test_failure_feedback.py
+?? python-engine/tests/test_light_engine.py
+?? python-engine/tests/test_natural_language_quality.py
+?? python-engine/tests/test_nlp_normalization_and_fragments.py
+?? python-engine/tests/test_performance_quality_comparison.py
+?? python-engine/tests/test_runtime_performance.py
+?? python-engine/tests/test_selection_performance.py
+?? python-engine/tests/test_worker_supervisor.py
+?? python-engine/worker_daemon.py
+?? request_document_poc_system_gab/
+?? scripts/cleanup_summary_recovery.php
+?? scripts/install_nlp_worker_task.ps1
+?? scripts/monitor_nlp_worker.ps1
+?? scripts/remove_nlp_worker_task.ps1
+?? scripts/start_nlp_worker.ps1
+?? scripts/stop_stale_nlp_workers.ps1
+?? scripts/test_error_http.py
+?? scripts/test_error_http_audit.php
+?? scripts/test_error_http_validation.py
+?? scripts/test_error_lifecycle.php
+?? scripts/test_error_ui.cjs
+?? scripts/test_history_repository_boundary.php
+?? scripts/test_processing_error_ui.cjs
+?? scripts/test_source_error_contract.php
+?? scripts/test_summarizer_intelligence_update.php
+?? scripts/test_worker_daemon.php
+?? storage/translation_provider_cooldown.json
+?? storage/translation_provider_cooldown.lock
+?? storage/translation_provider_cooldown.mymemory.request.lock
+?? storage/worker.token

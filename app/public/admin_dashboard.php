@@ -573,7 +573,7 @@ try {
         </div>
 
         <?php if (isset($_SESSION['flash_success'])): ?>
-            <div style="background:rgba(242, 238, 255, 0.88); color:var(--color-primary-dark); padding:15px; margin-bottom:20px; font-family:'Inter'; font-size:0.85em; border-left:4px solid var(--color-primary-dark);">
+            <div style="background:var(--color-accent-soft); color:var(--color-accent-strong); padding:15px; margin-bottom:20px; font-family:'Inter'; font-size:0.85em; border-left:4px solid var(--color-accent);">
                 <?= htmlspecialchars($_SESSION['flash_success']) ?>
             </div>
             <?php unset($_SESSION['flash_success']); ?>
@@ -587,6 +587,7 @@ try {
         <?php endif; ?>
 
         <div class="admin-section">
+            <?php require __DIR__.'/partials/admin-student-registry.php'; ?>
             <h2>System Overview</h2>
             <form class="admin-stats-range" id="admin-stats-range-form" method="get" action="admin_dashboard.php">
                 <label for="admin-stats-range-select">Statistics period
@@ -819,7 +820,7 @@ try {
                 <!-- Feedback Filters Bar -->
                 <form method="GET" action="admin_dashboard.php" class="feedback-filters">
                     <label style="font-size: 0.8em; color: var(--color-muted);">Rating:
-                        <select name="fb_rating" style="padding: 4px 8px; font-size: 0.85em; border: 1px solid var(--color-border);">
+                        <select name="fb_rating" style="padding: 4px 8px; font-size: 0.85em; background: var(--color-bg); color: var(--color-text); border: 1px solid var(--color-border);">
                             <option value="">All ratings</option>
                             <option value="5" <?= $fbFilterRating === 5 ? 'selected' : '' ?>>5 Stars</option>
                             <option value="4" <?= $fbFilterRating === 4 ? 'selected' : '' ?>>4 Stars</option>
@@ -830,7 +831,7 @@ try {
                     </label>
 
                     <label style="font-size: 0.8em; color: var(--color-muted);">Comments:
-                        <select name="fb_comment" style="padding: 4px 8px; font-size: 0.85em; border: 1px solid var(--color-border);">
+                        <select name="fb_comment" style="padding: 4px 8px; font-size: 0.85em; background: var(--color-bg); color: var(--color-text); border: 1px solid var(--color-border);">
                             <option value="">All</option>
                             <option value="1" <?= $fbFilterComment === true ? 'selected' : '' ?>>With comment</option>
                             <option value="0" <?= $fbFilterComment === false ? 'selected' : '' ?>>No comment</option>
@@ -838,7 +839,7 @@ try {
                     </label>
 
                     <label style="font-size: 0.8em; color: var(--color-muted);">Sort:
-                        <select name="fb_sort" style="padding: 4px 8px; font-size: 0.85em; border: 1px solid var(--color-border);">
+                        <select name="fb_sort" style="padding: 4px 8px; font-size: 0.85em; background: var(--color-bg); color: var(--color-text); border: 1px solid var(--color-border);">
                             <option value="newest" <?= $fbFilterSort === 'newest' ? 'selected' : '' ?>>Newest First</option>
                             <option value="lowest_rated" <?= $fbFilterSort === 'lowest_rated' ? 'selected' : '' ?>>Lowest Rated</option>
                             <option value="highest_rated" <?= $fbFilterSort === 'highest_rated' ? 'selected' : '' ?>>Highest Rated</option>
@@ -953,7 +954,7 @@ try {
                                 <strong style="display: block; font-size: 1em; color: var(--color-text);">Anonymous User</strong>
                                 <span style="font-size: 0.75em; color: var(--color-muted); text-transform: uppercase;"><?= date('M d, Y', strtotime($fb['created_at'])) ?></span>
                             </div>
-                            <span style="font-size: 0.75em; font-weight: 700; color: <?= $ratingVal <= 2 ? 'var(--color-danger)' : ($ratingVal >= 4 ? '#059669' : '#d97706') ?>; background: rgba(0,0,0,0.04); padding: 4px 8px; border-radius: 4px;">
+                            <span style="font-size: 0.75em; font-weight: 700; color: <?= $ratingVal <= 2 ? 'var(--color-danger)' : ($ratingVal >= 4 ? 'var(--color-success)' : 'var(--color-warning, #d97706)') ?>; background: var(--color-bg-tertiary); padding: 4px 8px; border-radius: 4px;">
                                 ★ <?= $ratingVal > 0 ? $ratingVal . ' / 5' : 'No rating' ?>
                             </span>
                         </div>
@@ -968,12 +969,12 @@ try {
                         </div>
                         <?php endif; ?>
 
-                        <p style="font-size: 0.9em; line-height: 1.6; color: <?= $commentText ? '#1f2937' : '#9ca3af' ?>; margin: 0 0 12px 0; font-style: <?= $commentText ? 'normal' : 'italic' ?>;">
+                        <p style="font-size: 0.9em; line-height: 1.6; color: <?= $commentText ? 'var(--color-text)' : 'var(--color-text-muted)' ?>; margin: 0 0 12px 0; font-style: <?= $commentText ? 'normal' : 'italic' ?>;">
                             <?= $commentText ? '"' . htmlspecialchars($commentText) . '"' : '(No detailed comment provided)' ?>
                         </p>
 
                         <!-- Telemetry metadata footer -->
-                        <div style="padding-top: 10px; border-top: 1px solid #f3f4f6; font-size: 0.75em; color: var(--color-muted); display: flex; flex-direction: column; gap: 3px;">
+                        <div style="padding-top: 10px; border-top: 1px solid var(--color-border); font-size: 0.75em; color: var(--color-muted); display: flex; flex-direction: column; gap: 3px;">
                             <div>
                                 <strong>Summary:</strong> 
                                 <?php if (!empty($fb['article_title'])): ?>
@@ -1182,6 +1183,9 @@ try {
             .lcp-good  { color: #1a7f47; }
             .lcp-needs-improvement { color: #b45309; }
             .lcp-poor  { color: var(--color-danger); }
+            html[data-theme="dark"] .lcp-good { color: var(--color-success); }
+            html[data-theme="dark"] .lcp-needs-improvement { color: var(--color-warning); }
+            html[data-theme="dark"] .lcp-poor { color: var(--color-danger); }
 
             .analytics-two-col {
                 display: grid;
@@ -1194,7 +1198,7 @@ try {
             }
 
             .analytics-panel {
-                background: rgba(255,255,255,0.72);
+                background: var(--color-surface);
                 border: 1px solid var(--color-border);
                 padding: 22px 24px;
                 box-shadow: var(--shadow-soft);
@@ -1224,15 +1228,15 @@ try {
                 font-weight: 600;
             }
             .device-row__bar-wrap {
-                background: var(--color-soft-bg);
+                background: var(--color-bg-tertiary);
                 height: 8px;
-                border-radius: 0;
+                border-radius: 4px;
                 overflow: hidden;
             }
             .device-row__bar {
                 height: 100%;
-                background: var(--gradient-button);
-                border-radius: 0;
+                background: var(--color-accent);
+                border-radius: 4px;
                 transition: width 0.4s ease;
             }
             .device-row__pct {
@@ -1259,24 +1263,29 @@ try {
             }
             .funnel-step__bar-wrap {
                 width: 100%;
-                background: var(--color-soft-bg);
+                background: var(--color-bg-tertiary);
                 height: 72px;
                 display: flex;
                 align-items: flex-end;
                 overflow: hidden;
+                border-radius: 4px 4px 0 0;
             }
             .funnel-step__bar {
                 width: 100%;
-                background: var(--gradient-button);
+                background: var(--color-accent);
                 min-height: 2px;
                 transition: height 0.4s ease;
+                border-radius: 4px 4px 0 0;
             }
             .funnel-step__pct {
                 font-family: 'Merriweather', serif;
                 font-size: 0.95em;
                 font-weight: 700;
-                color: var(--color-primary-dark);
+                color: var(--color-accent);
                 margin-top: 6px;
+            }
+            html[data-theme="light"] .funnel-step__pct {
+                color: var(--color-primary-dark);
             }
             .funnel-step__label {
                 font-family: 'Inter', sans-serif;

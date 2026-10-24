@@ -25,6 +25,11 @@ $createdAt = is_array($profile)
 $isAdmin = ($_SESSION['role'] ?? 'user') === 'admin';
 $workspaceHref = $isAdmin ? 'admin_dashboard.php' : 'dashboard.php';
 $workspaceLabel = $isAdmin ? 'Admin dashboard' : 'Dashboard';
+$studentApplication=null;$studentContinued=false;
+if(!$isAdmin&&$profile!==null){
+    require_once __DIR__.'/../src/Services/StudentVerificationService.php';
+    try{$studentApplication=(new \App\Src\Services\StudentVerificationService())->forUser((int)$userId);$studentContinued=(new \App\Src\Services\CampusAccessService())->continuedAccess((int)$userId);}catch(\Throwable $ignored){}
+}
 ?>
 <!doctype html>
 <html lang="en" data-theme="light">
@@ -92,6 +97,8 @@ $workspaceLabel = $isAdmin ? 'Admin dashboard' : 'Dashboard';
                             </div>
                         </dl>
                     </section>
+
+                    <?php if(!$isAdmin): ?><section class="profile-card" aria-labelledby="student-access-title"><h2 id="student-access-title">Student access</h2><p data-student-status="<?= $studentContinued?'verified':'restricted' ?>"><?= $studentContinued?'Approved — your Student ID has an active database match.':'Restricted — there is no active approved Student ID match for this account. Your account and summaries are preserved.' ?></p><?php if($studentApplication): ?><p>Student ID: <?= htmlspecialchars(\App\Src\Services\StudentVerificationService::masked($studentApplication['student_number']),ENT_QUOTES,'UTF-8') ?></p><?php endif; ?><p>Student ID eligibility is managed by the system administrator. No additional verification form, document, student OTP or manual approval is required.</p></section><?php endif; ?>
 
                     <section class="profile-card profile-deactivation" aria-labelledby="profile-deactivation-title">
                         <h2 id="profile-deactivation-title" class="profile-deactivation__title">Deactivate account</h2>

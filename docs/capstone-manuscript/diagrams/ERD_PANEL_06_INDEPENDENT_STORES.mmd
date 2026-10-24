@@ -1,0 +1,15 @@
+erDiagram
+    direction LR
+    admin_audit_logs {
+        bigint id PK
+    }
+    guest_sessions {
+        varchar guest_token PK
+    }
+    rate_limits {
+        int id PK
+    }
+    schema_migrations {
+        int id PK
+    }
+

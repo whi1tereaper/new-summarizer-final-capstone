@@ -1,0 +1,24 @@
+%% LIGHT summarizer: context diagram
+%% System boundary includes local NLP and TTS. External synthesis is disabled in inspected configuration.
+flowchart TB
+    U["Visitor / registered user<br/>eligible requests only"]
+    A["Administrator /<br/>assigned evaluator"]
+    P0("0 LIGHT summarizer<br/>PHP application and<br/>local NLP / TTS workers")
+    W["Public source website"]
+    M["Configured email service"]
+    T["Translation provider"]
+    U -->|"source / settings /<br/>account / feedback"| P0
+    P0 -->|"results / account status"| U
+    A -->|"administration /<br/>evaluation data"| P0
+    P0 -->|"reports / assigned<br/>outputs"| A
+    P0 -->|"URL request"| W
+    W -->|"source content"| P0
+    P0 -->|"verification / reset<br/>mail"| M
+    M -->|"delivery status"| P0
+    P0 -->|"selected text / language"| T
+    T -->|"translation / provider<br/>error"| P0
+    classDef process fill:#edf1f5,stroke:#222,color:#111;
+    classDef store fill:#f6f6f6,stroke:#222,color:#111;
+    classDef entity fill:#fff,stroke:#222,color:#111;
+    class P0 process;
+    class U,A,W,M,T entity;

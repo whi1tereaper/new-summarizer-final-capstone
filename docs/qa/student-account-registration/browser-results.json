@@ -1,0 +1,102 @@
+[
+  {
+    "name": "mobile registration has a fixed PEN prefix and no secondary verification fields",
+    "passed": true
+  },
+  {
+    "name": "mobile registration fits the viewport",
+    "passed": true
+  },
+  {
+    "name": "pasting a full ID keeps PEN noneditable and preserves the suffix",
+    "passed": true
+  },
+  {
+    "name": "email is required for student-created accounts",
+    "passed": true
+  },
+  {
+    "name": "client validation shows accessible email and password-confirmation errors without discarding the ID",
+    "passed": true
+  },
+  {
+    "name": "keyboard-focusable show and hide password controls work",
+    "passed": true
+  },
+  {
+    "name": "registration displays a loading state and prevents duplicate browser submissions",
+    "passed": true
+  },
+  {
+    "name": "browser sends the complete server-validated PEN Student ID",
+    "passed": true
+  },
+  {
+    "name": "mobile signup activates the account then shows the required sign-in success message without automatic login",
+    "passed": true
+  },
+  {
+    "name": "new student signs in immediately using their chosen email and password",
+    "passed": true
+  },
+  {
+    "name": "approved student Profile requires no further identity form",
+    "passed": true
+  },
+  {
+    "name": "approved student signs in with full ID and unchanged password",
+    "passed": true
+  },
+  {
+    "name": "existing history page remains available",
+    "passed": true
+  },
+  {
+    "name": "without JavaScript server validation retains safe values and clears both passwords",
+    "passed": true
+  },
+  {
+    "name": "without JavaScript the backend still prefixes and activates an eligible ID",
+    "passed": true
+  },
+  {
+    "name": "without JavaScript the newly created email and password sign in normally",
+    "passed": true
+  },
+  {
+    "name": "administrator second factor and existing dashboard open Student ID Management",
+    "passed": true
+  },
+  {
+    "name": "claimed IDs and actual accounts have distinct management statistics",
+    "passed": true
+  },
+  {
+    "name": "bulk paste counter detects 1000 IDs",
+    "passed": true
+  },
+  {
+    "name": "browser preview does not approve IDs before confirmation",
+    "passed": true
+  },
+  {
+    "name": "confirmed 1000-ID import is stored in MySQL",
+    "passed": true
+  },
+  {
+    "name": "keyboard-submitted search shows the actual unclaimed account state",
+    "passed": true
+  },
+  {
+    "name": "keyboard-accessible Manage control changes database eligibility",
+    "passed": true
+  },
+  {
+    "name": "mobile management keeps wide tables locally scrollable",
+    "passed": true
+  },
+  {
+    "name": "no browser JavaScript exceptions",
+    "passed": true
+  }
+]

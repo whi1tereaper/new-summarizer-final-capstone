@@ -1,0 +1,31 @@
+{
+    "runtime": "8.3.29",
+    "passed": 6,
+    "failed": 0,
+    "checks": [
+        {
+            "name": "PHP 8.3 runtime",
+            "passed": true
+        },
+        {
+            "name": "PHP 8.3 transactional import",
+            "passed": true
+        },
+        {
+            "name": "PHP 8.3 automatic approval",
+            "passed": true
+        },
+        {
+            "name": "PHP 8.3 password hashing",
+            "passed": true
+        },
+        {
+            "name": "PHP 8.3 duplicate claim blocked",
+            "passed": true
+        },
+        {
+            "name": "PHP 8.3 revocation enforced",
+            "passed": true
+        }
+    ]
+}

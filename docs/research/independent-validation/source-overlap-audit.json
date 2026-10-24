@@ -1,0 +1,78 @@
+{
+  "distinct_prior_texts": 54,
+  "new_sources": [
+    {
+      "id": "IV-BUSINESS",
+      "nearest_prior": {
+        "prior_id": "HO-RESEARCH-COMMUTE",
+        "prior_path": "docs\\research\\refinement-results.json",
+        "jaccard_5gram": 0.0
+      },
+      "exact_source_duplicate": false
+    },
+    {
+      "id": "IV-EDITORIAL",
+      "nearest_prior": {
+        "prior_id": "HO-RESEARCH-COMMUTE",
+        "prior_path": "docs\\research\\refinement-results.json",
+        "jaccard_5gram": 0.0
+      },
+      "exact_source_duplicate": false
+    },
+    {
+      "id": "IV-EDUCATION",
+      "nearest_prior": {
+        "prior_id": "HO-RESEARCH-COMMUTE",
+        "prior_path": "docs\\research\\refinement-results.json",
+        "jaccard_5gram": 0.0
+      },
+      "exact_source_duplicate": false
+    },
+    {
+      "id": "IV-FEATURE",
+      "nearest_prior": {
+        "prior_id": "HO-RESEARCH-COMMUTE",
+        "prior_path": "docs\\research\\refinement-results.json",
+        "jaccard_5gram": 0.0
+      },
+      "exact_source_duplicate": false
+    },
+    {
+      "id": "IV-NEWS",
+      "nearest_prior": {
+        "prior_id": "HO-RESEARCH-COMMUTE",
+        "prior_path": "docs\\research\\refinement-results.json",
+        "jaccard_5gram": 0.0
+      },
+      "exact_source_duplicate": false
+    },
+    {
+      "id": "IV-RESEARCH",
+      "nearest_prior": {
+        "prior_id": "CE-HO-RESEARCH",
+        "prior_path": "docs\\research\\refinement-results.json",
+        "jaccard_5gram": 0.00017905102954341988
+      },
+      "exact_source_duplicate": false
+    },
+    {
+      "id": "IV-SCIENCE",
+      "nearest_prior": {
+        "prior_id": "HO-POLICY-DATA",
+        "prior_path": "python-engine\\evaluation\\corpus\\heldout_documents.json",
+        "jaccard_5gram": 0.001669449081803005
+      },
+      "exact_source_duplicate": false
+    },
+    {
+      "id": "IV-TECHNICAL",
+      "nearest_prior": {
+        "prior_id": "HO-RESEARCH-COMMUTE",
+        "prior_path": "docs\\research\\refinement-results.json",
+        "jaccard_5gram": 0.0
+      },
+      "exact_source_duplicate": false
+    }
+  ],
+  "interpretation": "Lexical overlap screen supplements identity audit; not a semantic/event-independence proof."
+}

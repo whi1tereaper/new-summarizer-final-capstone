@@ -1,0 +1,87 @@
+erDiagram
+    evaluation_assignments {
+        bigint id PK
+        bigint run_id FK
+        bigint output_id FK
+        int evaluator_user_id FK
+    }
+    evaluation_audit_log {
+        bigint id PK
+        int actor_id FK
+    }
+    evaluation_challenge_cases {
+        bigint id PK
+        bigint document_id FK
+    }
+    evaluation_content_units {
+        bigint id PK
+        bigint document_id FK
+        int created_by FK
+    }
+    evaluation_content_unit_reviews {
+        bigint id PK
+        bigint output_id FK
+        bigint unit_id FK
+        int reviewer_id FK
+    }
+    evaluation_datasets {
+        bigint id PK
+        int created_by FK
+    }
+    evaluation_documents {
+        bigint id PK
+        bigint dataset_id FK
+    }
+    evaluation_errors {
+        bigint id PK
+        bigint output_id FK
+        int reviewer_id FK
+    }
+    evaluation_metrics {
+        bigint id PK
+        bigint output_id FK
+    }
+    evaluation_outputs {
+        bigint id PK
+        bigint run_id FK
+        bigint document_id FK
+    }
+    evaluation_ratings {
+        bigint id PK
+        bigint assignment_id FK
+    }
+    evaluation_references {
+        bigint id PK
+        bigint document_id FK
+        int created_by FK
+    }
+    evaluation_runs {
+        bigint id PK
+        bigint dataset_id FK
+        int created_by FK
+    }
+    users {
+        int id PK
+    }
+    evaluation_outputs ||--o{ evaluation_assignments : "output_id"
+    evaluation_runs ||--o{ evaluation_assignments : "run_id"
+    users ||--o{ evaluation_assignments : "evaluator_user_id"
+    users |o--o{ evaluation_audit_log : "actor_id"
+    evaluation_documents ||--o{ evaluation_challenge_cases : "document_id"
+    evaluation_documents ||--o{ evaluation_content_units : "document_id"
+    users |o--o{ evaluation_content_units : "created_by"
+    evaluation_outputs ||--o{ evaluation_content_unit_reviews : "output_id"
+    evaluation_content_units ||--o{ evaluation_content_unit_reviews : "unit_id"
+    users |o--o{ evaluation_content_unit_reviews : "reviewer_id"
+    users |o--o{ evaluation_datasets : "created_by"
+    evaluation_datasets ||--o{ evaluation_documents : "dataset_id"
+    evaluation_outputs ||--o{ evaluation_errors : "output_id"
+    users |o--o{ evaluation_errors : "reviewer_id"
+    evaluation_outputs ||--o{ evaluation_metrics : "output_id"
+    evaluation_documents ||--o{ evaluation_outputs : "document_id"
+    evaluation_runs ||--o{ evaluation_outputs : "run_id"
+    evaluation_assignments ||--o| evaluation_ratings : "assignment_id"
+    evaluation_documents ||--o{ evaluation_references : "document_id"
+    users |o--o{ evaluation_references : "created_by"
+    evaluation_datasets ||--o{ evaluation_runs : "dataset_id"
+    users |o--o{ evaluation_runs : "created_by"

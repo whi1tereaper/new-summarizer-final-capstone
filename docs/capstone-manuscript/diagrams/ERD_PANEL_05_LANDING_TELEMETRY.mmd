@@ -1,0 +1,10 @@
+erDiagram
+    direction TB
+    landing_page_sessions {
+        varchar session_id PK
+    }
+    landing_page_events {
+        bigint id PK
+        varchar session_id FK
+    }
+    landing_page_sessions ||--o{ landing_page_events : "session_id"

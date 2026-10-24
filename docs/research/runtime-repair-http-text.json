@@ -1,0 +1,35 @@
+{
+  "test_kind": "real_apache_http_guest_session",
+  "input": "text",
+  "base": "http://127.0.0.1/app/public/",
+  "fixture_nonarticle": false,
+  "depth": "brief",
+  "job_id": "1aedb62f14bd8441e7fb4babdeb25a9d",
+  "accept_http": 200,
+  "observations": [
+    {
+      "success": true,
+      "job_id": "1aedb62f14bd8441e7fb4babdeb25a9d",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "1aedb62f14bd8441e7fb4babdeb25a9d",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "1aedb62f14bd8441e7fb4babdeb25a9d",
+      "status": "completed",
+      "can_retry": false,
+      "redirect": "result.php?id=716"
+    }
+  ],
+  "seconds": 1.2226692999975057,
+  "expected_original_file_match_not_assumed": true,
+  "result_http": 200,
+  "result_contains_title": true,
+  "completed": true
+}

@@ -1,0 +1,1338 @@
+{
+  "dfd-context": {
+    "title": "LIGHT summarizer: context diagram",
+    "nodes": {
+      "U": {
+        "kind": "entity",
+        "label": "Visitor / registered user|eligible requests only"
+      },
+      "A": {
+        "kind": "entity",
+        "label": "Administrator /|assigned evaluator"
+      },
+      "P0": {
+        "kind": "process",
+        "label": "0 LIGHT summarizer|PHP application and|local NLP / TTS workers"
+      },
+      "W": {
+        "kind": "entity",
+        "label": "Public source website"
+      },
+      "M": {
+        "kind": "entity",
+        "label": "Configured email service"
+      },
+      "T": {
+        "kind": "entity",
+        "label": "Translation provider"
+      }
+    },
+    "edges": [
+      [
+        "U",
+        "P0",
+        "source / settings / account / feedback"
+      ],
+      [
+        "P0",
+        "U",
+        "results / account status"
+      ],
+      [
+        "A",
+        "P0",
+        "administration / evaluation data"
+      ],
+      [
+        "P0",
+        "A",
+        "reports / assigned outputs"
+      ],
+      [
+        "P0",
+        "W",
+        "URL request"
+      ],
+      [
+        "W",
+        "P0",
+        "source content"
+      ],
+      [
+        "P0",
+        "M",
+        "verification / reset mail"
+      ],
+      [
+        "M",
+        "P0",
+        "delivery status"
+      ],
+      [
+        "P0",
+        "T",
+        "selected text / language"
+      ],
+      [
+        "T",
+        "P0",
+        "translation / provider error"
+      ]
+    ],
+    "note": "System boundary includes local NLP and TTS. External synthesis is disabled in inspected configuration.",
+    "direction": "TB",
+    "svg_preserved": true
+  },
+  "dfd-level1": {
+    "title": "LIGHT summarizer: DFD Level 1",
+    "nodes": {
+      "U": {
+        "kind": "entity",
+        "label": "Visitor / registered user|eligible requests only"
+      },
+      "A": {
+        "kind": "entity",
+        "label": "Administrator /|assigned evaluator"
+      },
+      "W": {
+        "kind": "entity",
+        "label": "Public source website"
+      },
+      "M": {
+        "kind": "entity",
+        "label": "Configured email service"
+      },
+      "T": {
+        "kind": "entity",
+        "label": "Translation provider"
+      },
+      "P1": {
+        "kind": "process",
+        "label": "1.0 Account and|session management"
+      },
+      "P2": {
+        "kind": "process",
+        "label": "2.0 Source intake and|summary processing"
+      },
+      "P3": {
+        "kind": "process",
+        "label": "3.0 Results and|reading helpers"
+      },
+      "P4": {
+        "kind": "process",
+        "label": "4.0 Feedback and|usage analytics"
+      },
+      "P5": {
+        "kind": "process",
+        "label": "5.0 Administration and|research evaluation"
+      },
+      "D1": {
+        "kind": "store",
+        "label": "D1 Account / session stores|users; password_resets;|user_tokens; guest_sessions;|rate_limits; PHP session state"
+      },
+      "D2": {
+        "kind": "store",
+        "label": "D2 Main summary stores|summaries; summary_artifacts;|summary_jobs; temporary files"
+      },
+      "D3": {
+        "kind": "store",
+        "label": "D3 Reading-helper stores|documents; document_summaries;|nutshell_generations; audio files"
+      },
+      "D4": {
+        "kind": "store",
+        "label": "D4 Feedback / telemetry|feedback; feedback_comments;|landing_page_sessions;|landing_page_events"
+      },
+      "D5": {
+        "kind": "store",
+        "label": "D5 Administration audit|admin_audit_logs"
+      },
+      "D6": {
+        "kind": "store",
+        "label": "D6 Evaluation stores|13 evaluation_* tables|See complete data dictionary"
+      }
+    },
+    "edges": [
+      [
+        "U",
+        "P1",
+        "account request"
+      ],
+      [
+        "P1",
+        "U",
+        "account status"
+      ],
+      [
+        "P1",
+        "M",
+        "verification / reset mail"
+      ],
+      [
+        "M",
+        "P1",
+        "delivery status"
+      ],
+      [
+        "P1",
+        "D1",
+        "account / session changes"
+      ],
+      [
+        "D1",
+        "P1",
+        "identity / session data"
+      ],
+      [
+        "U",
+        "P2",
+        "source and settings"
+      ],
+      [
+        "P2",
+        "U",
+        "job status / result ID"
+      ],
+      [
+        "P2",
+        "W",
+        "URL request"
+      ],
+      [
+        "W",
+        "P2",
+        "source content"
+      ],
+      [
+        "P2",
+        "D2",
+        "job / summary / artifact records"
+      ],
+      [
+        "D2",
+        "P2",
+        "job state / existing result"
+      ],
+      [
+        "U",
+        "P3",
+        "result / helper request"
+      ],
+      [
+        "P3",
+        "U",
+        "authorized reading output"
+      ],
+      [
+        "D2",
+        "P3",
+        "owned or shared summary"
+      ],
+      [
+        "P3",
+        "D3",
+        "helper cache / audio"
+      ],
+      [
+        "D3",
+        "P3",
+        "cached source / helper data"
+      ],
+      [
+        "P3",
+        "T",
+        "text and target language"
+      ],
+      [
+        "T",
+        "P3",
+        "translation / error"
+      ],
+      [
+        "U",
+        "P4",
+        "feedback / visit event"
+      ],
+      [
+        "P4",
+        "U",
+        "confirmation / statistics"
+      ],
+      [
+        "P4",
+        "D4",
+        "feedback / event records"
+      ],
+      [
+        "D4",
+        "P4",
+        "feedback / usage data"
+      ],
+      [
+        "D2",
+        "P4",
+        "summary statistics"
+      ],
+      [
+        "A",
+        "P5",
+        "management / assessment request"
+      ],
+      [
+        "P5",
+        "A",
+        "reports / assigned outputs"
+      ],
+      [
+        "P5",
+        "D1",
+        "managed account changes"
+      ],
+      [
+        "D1",
+        "P5",
+        "account records"
+      ],
+      [
+        "D4",
+        "P5",
+        "feedback / telemetry"
+      ],
+      [
+        "P5",
+        "D5",
+        "audit entries"
+      ],
+      [
+        "D5",
+        "P5",
+        "audit history"
+      ],
+      [
+        "P5",
+        "D6",
+        "dataset / run / review records"
+      ],
+      [
+        "D6",
+        "P5",
+        "evaluation outputs / ratings"
+      ]
+    ],
+    "note": "Use focused panels for print. Logical stores group actual tables/files; PHP session state is not a SQL table.",
+    "direction": "TB"
+  },
+  "dfd-level1-accounts": {
+    "title": "DFD Level 1: account and session management",
+    "nodes": {
+      "U": {
+        "kind": "entity",
+        "label": "Visitor / registered user|eligible requests only"
+      },
+      "P1": {
+        "kind": "process",
+        "label": "1.0 Account and|session management"
+      },
+      "M": {
+        "kind": "entity",
+        "label": "Configured email service"
+      },
+      "D1": {
+        "kind": "store",
+        "label": "D1 Account / session stores|users; password_resets;|user_tokens; guest_sessions;|rate_limits; PHP session state"
+      }
+    },
+    "edges": [
+      [
+        "U",
+        "P1",
+        "account request"
+      ],
+      [
+        "P1",
+        "U",
+        "account status"
+      ],
+      [
+        "P1",
+        "M",
+        "verification / reset mail"
+      ],
+      [
+        "M",
+        "P1",
+        "delivery status"
+      ],
+      [
+        "P1",
+        "D1",
+        "account / session changes"
+      ],
+      [
+        "D1",
+        "P1",
+        "identity / session data"
+      ]
+    ],
+    "note": "SOURCE-SUPPORTED design; operation is separately verified.",
+    "direction": "TB"
+  },
+  "dfd-level1-summary": {
+    "title": "DFD Level 1: source intake and summarization",
+    "nodes": {
+      "U": {
+        "kind": "entity",
+        "label": "Visitor / registered user|eligible requests only"
+      },
+      "P2": {
+        "kind": "process",
+        "label": "2.0 Source intake and|summary processing"
+      },
+      "W": {
+        "kind": "entity",
+        "label": "Public source website"
+      },
+      "D2": {
+        "kind": "store",
+        "label": "D2 Main summary stores|summaries; summary_artifacts;|summary_jobs; temporary files"
+      }
+    },
+    "edges": [
+      [
+        "U",
+        "P2",
+        "source and settings"
+      ],
+      [
+        "P2",
+        "U",
+        "job status / result ID"
+      ],
+      [
+        "P2",
+        "W",
+        "URL request"
+      ],
+      [
+        "W",
+        "P2",
+        "source content"
+      ],
+      [
+        "P2",
+        "D2",
+        "job / summary / artifact records"
+      ],
+      [
+        "D2",
+        "P2",
+        "job state / existing result"
+      ]
+    ],
+    "note": "SOURCE-SUPPORTED design; operation is separately verified.",
+    "direction": "TB"
+  },
+  "dfd-level1-results": {
+    "title": "DFD Level 1: results and reading helpers",
+    "nodes": {
+      "U": {
+        "kind": "entity",
+        "label": "Visitor / registered user|eligible requests only"
+      },
+      "P3": {
+        "kind": "process",
+        "label": "3.0 Results and|reading helpers"
+      },
+      "T": {
+        "kind": "entity",
+        "label": "Translation provider"
+      },
+      "D2": {
+        "kind": "store",
+        "label": "D2 Main summary stores|summaries; summary_artifacts;|summary_jobs; temporary files"
+      },
+      "D3": {
+        "kind": "store",
+        "label": "D3 Reading-helper stores|documents; document_summaries;|nutshell_generations; audio files"
+      }
+    },
+    "edges": [
+      [
+        "U",
+        "P3",
+        "result / helper request"
+      ],
+      [
+        "P3",
+        "U",
+        "authorized reading output"
+      ],
+      [
+        "D2",
+        "P3",
+        "owned or shared summary"
+      ],
+      [
+        "P3",
+        "D3",
+        "helper cache / audio"
+      ],
+      [
+        "D3",
+        "P3",
+        "cached source / helper data"
+      ],
+      [
+        "P3",
+        "T",
+        "text and target language"
+      ],
+      [
+        "T",
+        "P3",
+        "translation / error"
+      ]
+    ],
+    "note": "SOURCE-SUPPORTED design; operation is separately verified.",
+    "direction": "TB"
+  },
+  "dfd-level1-feedback": {
+    "title": "DFD Level 1: feedback and usage analytics",
+    "nodes": {
+      "U": {
+        "kind": "entity",
+        "label": "Visitor / registered user|eligible requests only"
+      },
+      "P4": {
+        "kind": "process",
+        "label": "4.0 Feedback and|usage analytics"
+      },
+      "D2": {
+        "kind": "store",
+        "label": "D2 Main summary stores|summaries; summary_artifacts;|summary_jobs; temporary files"
+      },
+      "D4": {
+        "kind": "store",
+        "label": "D4 Feedback / telemetry|feedback; feedback_comments;|landing_page_sessions;|landing_page_events"
+      }
+    },
+    "edges": [
+      [
+        "U",
+        "P4",
+        "feedback / visit event"
+      ],
+      [
+        "P4",
+        "U",
+        "confirmation / statistics"
+      ],
+      [
+        "P4",
+        "D4",
+        "feedback / event records"
+      ],
+      [
+        "D4",
+        "P4",
+        "feedback / usage data"
+      ],
+      [
+        "D2",
+        "P4",
+        "summary statistics"
+      ]
+    ],
+    "note": "SOURCE-SUPPORTED design; operation is separately verified.",
+    "direction": "TB"
+  },
+  "dfd-level1-administration": {
+    "title": "DFD Level 1: administration and research evaluation",
+    "nodes": {
+      "A": {
+        "kind": "entity",
+        "label": "Administrator /|assigned evaluator"
+      },
+      "P5": {
+        "kind": "process",
+        "label": "5.0 Administration and|research evaluation"
+      },
+      "D1": {
+        "kind": "store",
+        "label": "D1 Account / session stores|users; password_resets;|user_tokens; guest_sessions;|rate_limits; PHP session state"
+      },
+      "D4": {
+        "kind": "store",
+        "label": "D4 Feedback / telemetry|feedback; feedback_comments;|landing_page_sessions;|landing_page_events"
+      },
+      "D5": {
+        "kind": "store",
+        "label": "D5 Administration audit|admin_audit_logs"
+      },
+      "D6": {
+        "kind": "store",
+        "label": "D6 Evaluation stores|13 evaluation_* tables|See complete data dictionary"
+      }
+    },
+    "edges": [
+      [
+        "A",
+        "P5",
+        "management / assessment request"
+      ],
+      [
+        "P5",
+        "A",
+        "reports / assigned outputs"
+      ],
+      [
+        "P5",
+        "D1",
+        "managed account changes"
+      ],
+      [
+        "D1",
+        "P5",
+        "account records"
+      ],
+      [
+        "D4",
+        "P5",
+        "feedback / telemetry"
+      ],
+      [
+        "P5",
+        "D5",
+        "audit entries"
+      ],
+      [
+        "D5",
+        "P5",
+        "audit history"
+      ],
+      [
+        "P5",
+        "D6",
+        "dataset / run / review records"
+      ],
+      [
+        "D6",
+        "P5",
+        "evaluation outputs / ratings"
+      ]
+    ],
+    "note": "SOURCE-SUPPORTED design; operation is separately verified.",
+    "direction": "TB"
+  },
+  "dfd-level2-summary": {
+    "title": "DFD Level 2: source intake and summary processing",
+    "nodes": {
+      "U": {
+        "kind": "entity",
+        "label": "Visitor / registered user|eligible requests only"
+      },
+      "W": {
+        "kind": "entity",
+        "label": "Public source website"
+      },
+      "D2": {
+        "kind": "store",
+        "label": "D2 Main summary stores|summaries; summary_artifacts;|summary_jobs; temporary files"
+      },
+      "P21": {
+        "kind": "process",
+        "label": "2.1 Validate request|CSRF, source type,|settings and upload"
+      },
+      "P22": {
+        "kind": "process",
+        "label": "2.2 Resolve source and|persist / reuse job"
+      },
+      "P23": {
+        "kind": "process",
+        "label": "2.3 Run local NLP|Extract, rank, select|and validate output"
+      },
+      "P24": {
+        "kind": "process",
+        "label": "2.4 Save result or failure|Release temporary source"
+      },
+      "P25": {
+        "kind": "process",
+        "label": "2.5 Return owned job status|Result ID or recovery action"
+      }
+    },
+    "edges": [
+      [
+        "U",
+        "P21",
+        "source / settings"
+      ],
+      [
+        "P21",
+        "U",
+        "validation error"
+      ],
+      [
+        "P21",
+        "P22",
+        "validated request"
+      ],
+      [
+        "P22",
+        "W",
+        "URL request, when used"
+      ],
+      [
+        "W",
+        "P22",
+        "source bytes / text"
+      ],
+      [
+        "P22",
+        "D2",
+        "queued payload"
+      ],
+      [
+        "D2",
+        "P22",
+        "existing job"
+      ],
+      [
+        "P22",
+        "P23",
+        "resolved source"
+      ],
+      [
+        "P23",
+        "P24",
+        "summary / safe failure"
+      ],
+      [
+        "P24",
+        "D2",
+        "summary, artifacts, job state"
+      ],
+      [
+        "P24",
+        "P25",
+        "result state"
+      ],
+      [
+        "U",
+        "P25",
+        "status request"
+      ],
+      [
+        "D2",
+        "P25",
+        "owned job / result"
+      ],
+      [
+        "P25",
+        "U",
+        "status / result ID"
+      ]
+    ],
+    "note": "Expands process 2.0; requester, source website and D2 retain their Level 1 identities.",
+    "direction": "TB"
+  },
+  "dfd-level2-summary-intake": {
+    "title": "DFD 2.1-2.2: request and source intake",
+    "nodes": {
+      "U": {
+        "kind": "entity",
+        "label": "Visitor / registered user|eligible requests only"
+      },
+      "W": {
+        "kind": "entity",
+        "label": "Public source website"
+      },
+      "D2": {
+        "kind": "store",
+        "label": "D2 Main summary stores|summaries; summary_artifacts;|summary_jobs; temporary files"
+      },
+      "P21": {
+        "kind": "process",
+        "label": "2.1 Validate request|CSRF, source type,|settings and upload"
+      },
+      "P22": {
+        "kind": "process",
+        "label": "2.2 Resolve source and|persist / reuse job"
+      },
+      "P23": {
+        "kind": "process",
+        "label": "2.3 Run local NLP|Extract, rank, select|and validate output"
+      }
+    },
+    "edges": [
+      [
+        "U",
+        "P21",
+        "source / settings"
+      ],
+      [
+        "P21",
+        "U",
+        "validation error"
+      ],
+      [
+        "P21",
+        "P22",
+        "validated request"
+      ],
+      [
+        "P22",
+        "W",
+        "URL request, when used"
+      ],
+      [
+        "W",
+        "P22",
+        "source bytes / text"
+      ],
+      [
+        "P22",
+        "D2",
+        "queued payload"
+      ],
+      [
+        "D2",
+        "P22",
+        "existing job"
+      ],
+      [
+        "P22",
+        "P23",
+        "resolved source"
+      ]
+    ],
+    "note": "Focused view; repeated subprocesses connect adjacent panels of the full process-2.0 decomposition.",
+    "direction": "TB"
+  },
+  "dfd-level2-summary-output": {
+    "title": "DFD 2.3-2.5: output persistence and status",
+    "nodes": {
+      "U": {
+        "kind": "entity",
+        "label": "Visitor / registered user|eligible requests only"
+      },
+      "D2": {
+        "kind": "store",
+        "label": "D2 Main summary stores|summaries; summary_artifacts;|summary_jobs; temporary files"
+      },
+      "P23": {
+        "kind": "process",
+        "label": "2.3 Run local NLP|Extract, rank, select|and validate output"
+      },
+      "P24": {
+        "kind": "process",
+        "label": "2.4 Save result or failure|Release temporary source"
+      },
+      "P25": {
+        "kind": "process",
+        "label": "2.5 Return owned job status|Result ID or recovery action"
+      }
+    },
+    "edges": [
+      [
+        "P23",
+        "P24",
+        "summary / safe failure"
+      ],
+      [
+        "P24",
+        "D2",
+        "summary, artifacts, job state"
+      ],
+      [
+        "P24",
+        "P25",
+        "result state"
+      ],
+      [
+        "U",
+        "P25",
+        "status request"
+      ],
+      [
+        "D2",
+        "P25",
+        "owned job / result"
+      ],
+      [
+        "P25",
+        "U",
+        "status / result ID"
+      ]
+    ],
+    "note": "Focused view; repeated subprocesses connect adjacent panels of the full process-2.0 decomposition.",
+    "direction": "TB"
+  },
+  "dfd-level2-auth": {
+    "title": "DFD Level 2: account and session management",
+    "nodes": {
+      "U": {
+        "kind": "entity",
+        "label": "Visitor / registered user|eligible requests only"
+      },
+      "M": {
+        "kind": "entity",
+        "label": "Configured email service"
+      },
+      "D1": {
+        "kind": "store",
+        "label": "D1 Account / session stores|users; password_resets;|user_tokens; guest_sessions;|rate_limits; PHP session state"
+      },
+      "P11": {
+        "kind": "process",
+        "label": "1.1 Validate account request|Apply rate limits and|choose authentication flow"
+      },
+      "P12": {
+        "kind": "process",
+        "label": "1.2 Check required identity|Password, applicable code|or existing session state"
+      },
+      "P13": {
+        "kind": "process",
+        "label": "1.3 Update permitted account|Establish / revoke session|or remembered login"
+      }
+    },
+    "edges": [
+      [
+        "U",
+        "P11",
+        "account request"
+      ],
+      [
+        "P11",
+        "U",
+        "validation failure"
+      ],
+      [
+        "P11",
+        "M",
+        "verification / reset mail"
+      ],
+      [
+        "M",
+        "P11",
+        "delivery status"
+      ],
+      [
+        "D1",
+        "P11",
+        "rate / account state"
+      ],
+      [
+        "P11",
+        "D1",
+        "rate / verification state"
+      ],
+      [
+        "P11",
+        "P12",
+        "validated request"
+      ],
+      [
+        "D1",
+        "P12",
+        "hash / code / account state"
+      ],
+      [
+        "P12",
+        "D1",
+        "consumed verification code"
+      ],
+      [
+        "P12",
+        "P13",
+        "verified identity"
+      ],
+      [
+        "P13",
+        "D1",
+        "account / session changes"
+      ],
+      [
+        "P13",
+        "U",
+        "access / recovery result"
+      ]
+    ],
+    "note": "OTP and PHP session state remain under D1. D5 is audit storage; legacy security-question tables are not current OTP storage.",
+    "direction": "TB"
+  },
+  "dfd-level2-auth-verification": {
+    "title": "DFD 1.1-1.2: account request and verification",
+    "nodes": {
+      "U": {
+        "kind": "entity",
+        "label": "Visitor / registered user|eligible requests only"
+      },
+      "M": {
+        "kind": "entity",
+        "label": "Configured email service"
+      },
+      "D1": {
+        "kind": "store",
+        "label": "D1 Account / session stores|users; password_resets;|user_tokens; guest_sessions;|rate_limits; PHP session state"
+      },
+      "P11": {
+        "kind": "process",
+        "label": "1.1 Validate account request|Apply rate limits and|choose authentication flow"
+      },
+      "P12": {
+        "kind": "process",
+        "label": "1.2 Check required identity|Password, applicable code|or existing session state"
+      }
+    },
+    "edges": [
+      [
+        "U",
+        "P11",
+        "account request"
+      ],
+      [
+        "P11",
+        "U",
+        "validation failure"
+      ],
+      [
+        "P11",
+        "M",
+        "verification / reset mail"
+      ],
+      [
+        "M",
+        "P11",
+        "delivery status"
+      ],
+      [
+        "D1",
+        "P11",
+        "rate / account state"
+      ],
+      [
+        "P11",
+        "D1",
+        "rate / verification state"
+      ],
+      [
+        "P11",
+        "P12",
+        "validated request"
+      ],
+      [
+        "D1",
+        "P12",
+        "hash / code / account state"
+      ],
+      [
+        "P12",
+        "D1",
+        "consumed verification code"
+      ]
+    ],
+    "note": "Focused account-flow view; repeated process 1.2 links the two panels. All verification/session state remains D1.",
+    "direction": "TB"
+  },
+  "dfd-level2-auth-session": {
+    "title": "DFD 1.2-1.3: identity and session changes",
+    "nodes": {
+      "U": {
+        "kind": "entity",
+        "label": "Visitor / registered user|eligible requests only"
+      },
+      "D1": {
+        "kind": "store",
+        "label": "D1 Account / session stores|users; password_resets;|user_tokens; guest_sessions;|rate_limits; PHP session state"
+      },
+      "P12": {
+        "kind": "process",
+        "label": "1.2 Check required identity|Password, applicable code|or existing session state"
+      },
+      "P13": {
+        "kind": "process",
+        "label": "1.3 Update permitted account|Establish / revoke session|or remembered login"
+      }
+    },
+    "edges": [
+      [
+        "D1",
+        "P12",
+        "hash / code / account state"
+      ],
+      [
+        "P12",
+        "D1",
+        "consumed verification code"
+      ],
+      [
+        "P12",
+        "P13",
+        "verified identity"
+      ],
+      [
+        "P13",
+        "D1",
+        "account / session changes"
+      ],
+      [
+        "P13",
+        "U",
+        "access / recovery result"
+      ]
+    ],
+    "note": "Focused account-flow view; repeated process 1.2 links the two panels. All verification/session state remains D1.",
+    "direction": "TB"
+  },
+  "research-paradigm": {
+    "title": "Proposed Input-Process-Output-Feedback research paradigm",
+    "nodes": {
+      "I": {
+        "kind": "entity",
+        "label": "INPUT|Academic articles and user requirements|Actual system design and constraints|Approved evaluation criteria: pending"
+      },
+      "P": {
+        "kind": "process",
+        "label": "PROCESS|Refine and verify LIGHT summarizer|Apply implemented NLP workflows|Conduct human evaluation: pending"
+      },
+      "O": {
+        "kind": "entity",
+        "label": "OUTPUT|LIGHT article summaries and features|User and maintenance documentation|Human evaluation findings: pending"
+      },
+      "F": {
+        "kind": "entity",
+        "label": "FEEDBACK|Use technical findings and future|participant responses to refine|the system and research account"
+      }
+    },
+    "edges": [
+      [
+        "I",
+        "P",
+        "inputs"
+      ],
+      [
+        "P",
+        "O",
+        "documented results"
+      ],
+      [
+        "O",
+        "F",
+        "review"
+      ],
+      [
+        "F",
+        "I",
+        "revised requirements"
+      ]
+    ],
+    "note": "PROPOSED DRAFT; research organization, not completed human evaluation.",
+    "direction": "TB",
+    "svg_preserved": true
+  },
+  "use-cases-guests": {
+    "title": "Use cases: Guest visitor",
+    "note": "Guest context has no personal history or standalone Nutshell. Reading helpers remain subject to route guards.",
+    "nodes": {},
+    "edges": [],
+    "svg_preserved": true
+  },
+  "use-cases-registered": {
+    "title": "Use cases: Registered account",
+    "note": "Registered users retain eligible guest workflows. These functions are source-supported, not successful live-test claims.",
+    "nodes": {},
+    "edges": [],
+    "svg_preserved": true
+  },
+  "use-cases-administrators": {
+    "title": "Use cases: Administrator",
+    "note": "Stored roles are user/admin. Current email OTP is separate from the retired security-question flow.",
+    "nodes": {},
+    "edges": [],
+    "svg_preserved": true
+  },
+  "use-cases-evaluators": {
+    "title": "Use cases: Assigned evaluator",
+    "note": "Evaluator is an assignment to an existing account, not a third stored role. It does not grant administration.",
+    "nodes": {},
+    "edges": [],
+    "svg_preserved": true
+  },
+  "use-cases": {
+    "title": "LIGHT summarizer: role and use-case overview",
+    "nodes": {
+      "guests": {
+        "kind": "entity",
+        "label": "Guest visitor"
+      },
+      "guests0": {
+        "kind": "process",
+        "label": "Provide text, URL, PDF or DOCX|and choose summary settings"
+      },
+      "guests1": {
+        "kind": "process",
+        "label": "Generate a summary; inspect|progress, retry or cancel"
+      },
+      "guests2": {
+        "kind": "process",
+        "label": "Read an authorized result;|copy / export / reading helpers"
+      },
+      "guests3": {
+        "kind": "process",
+        "label": "Submit permitted rating|and feedback comments"
+      },
+      "guests4": {
+        "kind": "process",
+        "label": "Register, sign in or|request password recovery"
+      },
+      "registered": {
+        "kind": "entity",
+        "label": "Registered account"
+      },
+      "registered0": {
+        "kind": "process",
+        "label": "Use eligible summarization|and reading workflows"
+      },
+      "registered1": {
+        "kind": "process",
+        "label": "View personal summary|history and analytics"
+      },
+      "registered2": {
+        "kind": "process",
+        "label": "Maintain profile and|saved preferences"
+      },
+      "registered3": {
+        "kind": "process",
+        "label": "Generate standalone Nutshell|when account guards permit"
+      },
+      "registered4": {
+        "kind": "process",
+        "label": "Read permitted shared results|and give feedback"
+      },
+      "administrators": {
+        "kind": "entity",
+        "label": "Administrator"
+      },
+      "administrators0": {
+        "kind": "process",
+        "label": "Use eligible ordinary|account workflows"
+      },
+      "administrators1": {
+        "kind": "process",
+        "label": "Manage permitted user|account operations"
+      },
+      "administrators2": {
+        "kind": "process",
+        "label": "Inspect audit history,|system records and analytics"
+      },
+      "administrators3": {
+        "kind": "process",
+        "label": "Manage evaluation datasets,|runs, assignments and reports"
+      },
+      "evaluators": {
+        "kind": "entity",
+        "label": "Assigned evaluator"
+      },
+      "evaluators0": {
+        "kind": "process",
+        "label": "Open an eligible review|with its assignment token"
+      },
+      "evaluators1": {
+        "kind": "process",
+        "label": "Inspect source material|and the assigned output"
+      },
+      "evaluators2": {
+        "kind": "process",
+        "label": "Submit the permitted|assessment and ratings"
+      }
+    },
+    "edges": [
+      [
+        "guests",
+        "guests0",
+        "association"
+      ],
+      [
+        "guests",
+        "guests1",
+        "association"
+      ],
+      [
+        "guests",
+        "guests2",
+        "association"
+      ],
+      [
+        "guests",
+        "guests3",
+        "association"
+      ],
+      [
+        "guests",
+        "guests4",
+        "association"
+      ],
+      [
+        "registered",
+        "registered0",
+        "association"
+      ],
+      [
+        "registered",
+        "registered1",
+        "association"
+      ],
+      [
+        "registered",
+        "registered2",
+        "association"
+      ],
+      [
+        "registered",
+        "registered3",
+        "association"
+      ],
+      [
+        "registered",
+        "registered4",
+        "association"
+      ],
+      [
+        "administrators",
+        "administrators0",
+        "association"
+      ],
+      [
+        "administrators",
+        "administrators1",
+        "association"
+      ],
+      [
+        "administrators",
+        "administrators2",
+        "association"
+      ],
+      [
+        "administrators",
+        "administrators3",
+        "association"
+      ],
+      [
+        "evaluators",
+        "evaluators0",
+        "association"
+      ],
+      [
+        "evaluators",
+        "evaluators1",
+        "association"
+      ],
+      [
+        "evaluators",
+        "evaluators2",
+        "association"
+      ]
+    ],
+    "note": "Use four focused panels for printing. Guest access excludes standalone Nutshell and personal history.",
+    "direction": "LR"
+  }
+}

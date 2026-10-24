@@ -1,0 +1,267 @@
+{
+    "recorded_utc": "2026-10-23T02:33:21+00:00",
+    "fixture_database": "repair_main_64ab1995",
+    "test_server_version": "180006",
+    "configured_database_modified": false,
+    "captured_schema_matches": true,
+    "checks": [
+        {
+            "name": "test server is PostgreSQL 18",
+            "passed": true
+        },
+        {
+            "name": "fresh dedicated database required",
+            "passed": true
+        },
+        {
+            "name": "legacy fixture columns/types/nullability match captured Neon schema",
+            "passed": true
+        },
+        {
+            "name": "actual pg_dump and restore to a new database preserve representative rows",
+            "passed": true
+        },
+        {
+            "name": "old schema preflight fails before any migration",
+            "passed": true
+        },
+        {
+            "name": "production migration runner succeeds on representative legacy schema",
+            "passed": true
+        },
+        {
+            "name": "existing users records preserved byte-for-byte",
+            "passed": true
+        },
+        {
+            "name": "existing summaries records preserved byte-for-byte",
+            "passed": true
+        },
+        {
+            "name": "existing summary_artifacts records preserved byte-for-byte",
+            "passed": true
+        },
+        {
+            "name": "existing password_resets records preserved byte-for-byte",
+            "passed": true
+        },
+        {
+            "name": "existing user_tokens records preserved byte-for-byte",
+            "passed": true
+        },
+        {
+            "name": "existing admin_audit_logs records preserved byte-for-byte",
+            "passed": true
+        },
+        {
+            "name": "existing admin_security_challenges records preserved byte-for-byte",
+            "passed": true
+        },
+        {
+            "name": "existing feedback records preserved byte-for-byte",
+            "passed": true
+        },
+        {
+            "name": "existing nutshell_generations records preserved byte-for-byte",
+            "passed": true
+        },
+        {
+            "name": "existing landing_page_sessions records preserved byte-for-byte",
+            "passed": true
+        },
+        {
+            "name": "existing student_applications records preserved byte-for-byte",
+            "passed": true
+        },
+        {
+            "name": "existing student_review_events records preserved byte-for-byte",
+            "passed": true
+        },
+        {
+            "name": "runner replay is checksum-idempotent",
+            "passed": true
+        },
+        {
+            "name": "historical original and generated text remain readable",
+            "passed": true
+        },
+        {
+            "name": "multiple legacy file references do not duplicate history",
+            "passed": true
+        },
+        {
+            "name": "no historical analytics values fabricated",
+            "passed": true
+        },
+        {
+            "name": "unknown historical Nutshell source type and word count remain unknown",
+            "passed": true
+        },
+        {
+            "name": "used legacy OTP cannot be revived",
+            "passed": true
+        },
+        {
+            "name": "new password reset is redeemable",
+            "passed": true
+        },
+        {
+            "name": "reset expiry is 15 minutes, not an eight-hour timezone extension",
+            "passed": true
+        },
+        {
+            "name": "used new OTP cannot be replayed",
+            "passed": true
+        },
+        {
+            "name": "legacy used timestamp is not invented",
+            "passed": true
+        },
+        {
+            "name": "new remember-me token persists alongside untouched legacy token",
+            "passed": true
+        },
+        {
+            "name": "legacy token not assigned fabricated credentials",
+            "passed": true
+        },
+        {
+            "name": "existing admin audit writer succeeds",
+            "passed": true
+        },
+        {
+            "name": "landing KPI PostgreSQL syntax succeeds",
+            "passed": true
+        },
+        {
+            "name": "scroll funnel PostgreSQL syntax succeeds",
+            "passed": true
+        },
+        {
+            "name": "daily trend retains fourteen buckets",
+            "passed": true
+        },
+        {
+            "name": "top referrer PostgreSQL string functions succeed",
+            "passed": true
+        },
+        {
+            "name": "saved settings PostgreSQL literals and artifact join succeed",
+            "passed": true
+        },
+        {
+            "name": "admin sidebar PostgreSQL syntax succeeds",
+            "passed": true
+        },
+        {
+            "name": "student sidebar remains owner-scoped",
+            "passed": true
+        },
+        {
+            "name": "summary analytics supports decimal casts, ordering and aggregates",
+            "passed": true
+        },
+        {
+            "name": "feedback PostgreSQL string literal queries succeed",
+            "passed": true
+        },
+        {
+            "name": "feedback admin projections do not disclose account email",
+            "passed": true
+        },
+        {
+            "name": "continued student approval survives migration",
+            "passed": true
+        },
+        {
+            "name": "three-day erasure retains eligibility without application details",
+            "passed": true
+        },
+        {
+            "name": "erasure preserves private account email and password hash",
+            "passed": true
+        },
+        {
+            "name": "old review detail erased while minimal action audit remains",
+            "passed": true
+        },
+        {
+            "name": "new application stays pending and unprivileged",
+            "passed": true
+        },
+        {
+            "name": "decline without a reason is refused",
+            "passed": true
+        },
+        {
+            "name": "administrator decline changes real status and not privileges",
+            "passed": true
+        },
+        {
+            "name": "decline reason and actor are auditable",
+            "passed": true
+        },
+        {
+            "name": "declined applicant can correct without duplicate registration",
+            "passed": true
+        },
+        {
+            "name": "pooler URL refused for DDL",
+            "passed": true
+        },
+        {
+            "name": "different direct database refused",
+            "passed": true
+        },
+        {
+            "name": "matching Neon direct/pooler pair accepted",
+            "passed": true
+        },
+        {
+            "name": "checksum mismatch blocks migration and preflight",
+            "passed": true
+        },
+        {
+            "name": "unreadable completed summary fails closed",
+            "passed": true
+        },
+        {
+            "name": "failed data gate rolls back DDL and ledger",
+            "passed": true
+        },
+        {
+            "name": "ambiguous inline duplicates are not silently merged",
+            "passed": true
+        },
+        {
+            "name": "IF NOT EXISTS is not mistaken for shape validation",
+            "passed": true
+        }
+    ],
+    "passed": 58,
+    "failed": 0,
+    "post_migration_contract": {
+        "compatible": true,
+        "issues": [],
+        "data_counts": {
+            "ambiguous_inline_summaries": 0,
+            "completed_summaries_without_readable_inline": 0,
+            "conflicting_legacy_inline_summaries": 0
+        },
+        "checked_tables": 21
+    },
+    "migration_sha256": [
+        {
+            "file": "018_summary_contract_compat.sql",
+            "sha256": "f5f79c2130d9a8a1cbf51d0a07a67d504f2761e8685e59ad7a1b97bccd149903"
+        },
+        {
+            "file": "019_auth_audit_contract_compat.sql",
+            "sha256": "1e58c0702fb7e1d2df4d7667c87c8c96581ca18d8b3eef8e768b4015728f5411"
+        },
+        {
+            "file": "017_student_number_access.sql",
+            "sha256": "73d54fd8e05933ee191d47f25edd1e399309631e4f148060d67a30e269695a7b"
+        }
+    ]
+}

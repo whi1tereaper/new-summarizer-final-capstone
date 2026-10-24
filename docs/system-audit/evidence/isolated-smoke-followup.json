@@ -1,0 +1,651 @@
+[
+  {
+    "id": "original",
+    "cleaned_paragraph_count": 0,
+    "cleaned": []
+  },
+  {
+    "id": "without_register",
+    "cleaned_paragraph_count": 1,
+    "cleaned": [
+      "The community library opened a new reading room on Monday. The room contains 120 books and has space for 24 visitors. Staff will provide reading support each afternoon. The program is a six month pilot and has not been evaluated. Visitors must check in at the front desk before using the room. The library will collect anonymous feedback after the pilot."
+    ]
+  },
+  {
+    "id": "paragraphs",
+    "cleaned_paragraph_count": 1,
+    "cleaned": [
+      "The program is a six month pilot and has not been evaluated."
+    ]
+  },
+  {
+    "id": "T-SUMMARY-NIST",
+    "status": "PASS",
+    "source_fixture": "NIST-OUTLIERS-INTRO",
+    "result": {
+      "title": "Generated Summary",
+      "raw_text": "Introduction  | An outlier is an observation that appears to deviate markedly from other observations in the sample. Identification of potential outliers is important for the following reasons.\n\n  1. An outlier may indicate bad data. For example, the data may have been coded incorrectly or an experiment may not have been run correctly. If it can be determined that an outlying point is in fact erroneous, then the outlying value should be deleted from the analysis (or corrected if possible).\n\n  2. In some cases, it may not be possible to determine if an outlying point is bad data. Outliers may be due to random variation or may indicate something scientifically interesting. In any event, we typically do not want to simply delete the outlying observation. However, if the data contains significant outliers, we may need to consider the use of robust statistical techniques.",
+      "cleaned_text": "An outlier is an observation that appears to deviate markedly from other observations in the sample. Identification of potential outliers is important for the following reasons.\n\nAn outlier may indicate bad data. For example, the data may have been coded incorrectly or an experiment may not have been run correctly. If it can be determined that an outlying point is in fact erroneous, then the outlying value should be deleted from the analysis (or corrected if possible).\n\nIn some cases, it may not be possible to determine if an outlying point is bad data. Outliers may be due to random variation or may indicate something scientifically interesting. In any event, we typically do not want to simply delete the outlying observation. However, if the data contains significant outliers, we may need to consider the use of robust statistical techniques.",
+      "sentences": [
+        "An outlier is an observation that appears to deviate markedly from other observations in the sample.",
+        "For example, the data may have been coded incorrectly or an experiment may not have been run correctly.",
+        "In some cases, it may not be possible to determine if an outlying point is bad data.",
+        "In any event, we typically do not want to simply delete the outlying observation."
+      ],
+      "sentence_count": 4,
+      "overview": [
+        "An outlier is an observation that appears to deviate markedly from other observations in the sample.",
+        "For example, the data may have been coded incorrectly or an experiment may not have been run correctly."
+      ],
+      "plain_summary": "An outlier is an observation that appears to deviate markedly from other observations in the sample. For example, the data may have been coded incorrectly or an experiment may not have been run correctly. In some cases, it may not be possible to determine if an outlying point is bad data. In any event, we typically do not want to simply delete the outlying observation.",
+      "overall_summary_bullets": [],
+      "preprocessing": {
+        "lowercase": false,
+        "remove_punctuation": false,
+        "remove_stopwords": false,
+        "tokenize": false,
+        "lemmatize": false,
+        "remove_visual_artifacts": true,
+        "remove_email_addresses": true,
+        "remove_known_noise": true,
+        "normalize_whitespace": true
+      },
+      "readability": {
+        "original_word_count": 139,
+        "summary_word_count": 65,
+        "compression_ratio": 0.468,
+        "compression_percent": 53.2,
+        "estimated_reading_time_minutes": 1,
+        "estimated_source_reading_time_minutes": 1,
+        "summary_length": "balanced",
+        "summary_depth": "balanced",
+        "detail_level": 3,
+        "topics_detected": 8,
+        "topics_covered": 4,
+        "sections_detected": 1,
+        "sections_represented": 1,
+        "target_word_range": {
+          "minimum": 100,
+          "maximum": 168
+        }
+      },
+      "summary_method": {
+        "name": "Adaptive Extractive Summary",
+        "topic_component": "tfidf + title similarity",
+        "redundancy_reduction": "ordered sentence deduplication",
+        "scoring_strategy": "tfidf_title_position_section_profile:technical",
+        "selection_mode": "technical",
+        "analysis_mode": "technical",
+        "output_format": "paragraph",
+        "summary_depth": "balanced",
+        "profile_label": "Technical Summary",
+        "compression_bias": "generous",
+        "fallback_used": false,
+        "synthesis_status": "not_requested",
+        "synthesis_model": "",
+        "synthesis_verification": "not_applicable",
+        "retrieval": {
+          "status": "bypassed",
+          "backend": "none",
+          "fallback_used": false,
+          "fallback_reason": "short_document",
+          "chunk_count": 3,
+          "retrieved_chunk_count": 0,
+          "retrieval_breadth": 0,
+          "profile": "technical",
+          "summary_depth": "balanced",
+          "semantic_score_adjustment_limit": 0.06,
+          "coverage_ratio": 0.0,
+          "retrieved_sections": [],
+          "evidence_mapping_status": "available"
+        },
+        "pipeline": [
+          "source_resolution",
+          "paragraph_preparation",
+          "document_classification",
+          "structural_segmentation",
+          "claim_extraction_and_status_classification",
+          "summary_planning",
+          "article_type_detection",
+          "profile_resolution",
+          "request_local_retrieval",
+          "selection_aware_scoring",
+          "profile_coverage_selection",
+          "natural_language_simplification",
+          "grammar_and_coherence_validation",
+          "structured_output_formatting",
+          "profile_validation"
+        ],
+        "scoring_weights": {
+          "tfidf": 0.32,
+          "title_similarity": 0.14,
+          "document_position": 0.12,
+          "paragraph_position": 0.08,
+          "section_importance": 0.2,
+          "article_type_relevance": 0.14
+        },
+        "synthesis": {
+          "requested": false,
+          "enabled": false,
+          "status": "not_requested",
+          "provider": "",
+          "model": "",
+          "endpoint_scope": "",
+          "verification": "not_applicable",
+          "verification_limit": "Lexical and literal-fact checks do not establish semantic entailment."
+        },
+        "fact_validation": {
+          "status": "checked_no_lexical_warnings",
+          "method": "literal_span_and_marker_checks_v1"
+        }
+      },
+      "keywords": [
+        "observation",
+        "data",
+        "outlying",
+        "outlier",
+        "appear",
+        "deviate",
+        "markedly",
+        "sample"
+      ],
+      "important_terms": [
+        {
+          "term": "observation",
+          "meaning": "An outlier is an observation that appears to deviate markedly from other observations in the sample."
+        },
+        {
+          "term": "data",
+          "meaning": "For example, the data may have been coded incorrectly or an experiment may not have been run correctly."
+        },
+        {
+          "term": "outlying",
+          "meaning": "it may not be possible to determine if an outlying point is bad data."
+        },
+        {
+          "term": "outlier",
+          "meaning": "An outlier is an observation that appears to deviate markedly from other observations in the sample."
+        },
+        {
+          "term": "appear",
+          "meaning": "An outlier is an observation that appears to deviate markedly from other observations in the sample."
+        },
+        {
+          "term": "deviate",
+          "meaning": "An outlier is an observation that appears to deviate markedly from other observations in the sample."
+        }
+      ],
+      "article_type": "Academic",
+      "key_points": [
+        "In some cases, it may not be possible to determine if an outlying point is bad data.",
+        "In any event, we typically do not want to simply delete the outlying observation."
+      ],
+      "conclusion": "In any event, we typically do not want to simply delete the outlying observation.",
+      "structured_summary": [
+        {
+          "label": "System Overview",
+          "text": "An outlier is an observation that appears to deviate markedly from other observations in the sample."
+        }
+      ],
+      "paragraph_summaries": [
+        {
+          "paragraph_number": 1,
+          "section": "Body",
+          "purpose": "General Explanation",
+          "main_idea": "Identification of potential outliers is important for the following reasons.",
+          "supporting_details": [
+            "An outlier is an observation that appears to deviate markedly from other observations in the sample."
+          ],
+          "keywords": [
+            "identification",
+            "of",
+            "potential",
+            "outlier"
+          ],
+          "summary": "Identification of potential outliers is important for the following reasons."
+        },
+        {
+          "paragraph_number": 2,
+          "section": "Body",
+          "purpose": "General Explanation",
+          "main_idea": "An outlier may indicate bad data. If it can be determined that an outlying point is in fact erroneous, then the outlying value should be deleted from the analysis (or corrected if possible).",
+          "supporting_details": [
+            "For example, the data may have been coded incorrectly or an experiment may not have been run correctly."
+          ],
+          "keywords": [
+            "an",
+            "outlier",
+            "may",
+            "indicate"
+          ],
+          "summary": "An outlier may indicate bad data. If it can be determined that an outlying point is in fact erroneous, then the outlying value should be deleted from the analysis (or corrected if possible)."
+        },
+        {
+          "paragraph_number": 3,
+          "section": "Body",
+          "purpose": "General Explanation",
+          "main_idea": "Outliers may be due to random variation or may indicate something scientifically interesting. However, if the data contains significant outliers, we may need to consider the use of robust statistical techniques.",
+          "supporting_details": [
+            "In some cases, it may not be possible to determine if an outlying point is bad data.",
+            "In any event, we typically do not want to simply delete the outlying observation."
+          ],
+          "keywords": [
+            "may",
+            "outlier",
+            "be",
+            "due"
+          ],
+          "summary": "Outliers may be due to random variation or may indicate something scientifically interesting. However, if the data contains significant outliers, we may need to consider the use of robust statistical techniques."
+        }
+      ],
+      "excluded_sections": [],
+      "source_metadata": {
+        "engine_version": "2",
+        "summary_schema_version": 2,
+        "source_type": "text",
+        "title": "Generated Summary",
+        "user_supplied_title": "",
+        "article_type": "Academic",
+        "article_type_key": "academic",
+        "selection_mode": "technical",
+        "analysis_mode": "technical",
+        "output_format": "paragraph",
+        "profile_label": "Technical Summary",
+        "engine": "summarizer_core",
+        "scoring_strategy": "tfidf_title_position_section_profile:technical",
+        "original_word_count": 139,
+        "cleaned_word_count": 139,
+        "paragraph_count": 3,
+        "candidate_sentence_count": 9,
+        "summary_length": "balanced",
+        "summary_depth": "balanced",
+        "detail_level": 3,
+        "target_ratio": 0.22,
+        "target_word_range": {
+          "minimum": 100,
+          "maximum": 168
+        },
+        "section_coverage_weight": 0.65,
+        "prompt_instruction": "Give a well-rounded summary that preserves the main argument, important supporting details, and major conclusion.",
+        "target_sentence_count": 4,
+        "topic_coverage_target": 6,
+        "topics_detected": 8,
+        "topics_covered": 4,
+        "sections_detected": 1,
+        "sections_represented": 1,
+        "covered_sections": [
+          "body"
+        ],
+        "coverage_ratio": 1.0,
+        "evidence_level": "supporting",
+        "fallback_used": false,
+        "retrieval": {
+          "status": "bypassed",
+          "backend": "none",
+          "fallback_used": false,
+          "fallback_reason": "short_document",
+          "chunk_count": 3,
+          "retrieved_chunk_count": 0,
+          "retrieval_breadth": 0,
+          "profile": "technical",
+          "summary_depth": "balanced",
+          "semantic_score_adjustment_limit": 0.06,
+          "coverage_ratio": 0.0,
+          "retrieved_sections": [],
+          "evidence_mapping_status": "available"
+        },
+        "evidence_count": 7,
+        "synthesis": {
+          "requested": false,
+          "enabled": false,
+          "status": "not_requested",
+          "provider": "",
+          "model": "",
+          "endpoint_scope": "",
+          "verification": "not_applicable",
+          "verification_limit": "Lexical and literal-fact checks do not establish semantic entailment."
+        },
+        "synthesis_status": "not_requested",
+        "synthesis_model": "",
+        "synthesis_verification": "not_applicable",
+        "simplification": {
+          "status": "verified_unchanged",
+          "sentences_simplified_count": 0,
+          "total_sentences_checked": 4
+        },
+        "quality_selection": {
+          "selected_strategy": "graph_centrality",
+          "composite_score": 0.6458,
+          "strategies_evaluated": [
+            "balanced",
+            "high_information_density",
+            "broad_topic_coverage",
+            "coherence_prioritized",
+            "graph_centrality"
+          ],
+          "strategy_scores": {
+            "balanced": 0.642,
+            "high_information_density": 0.642,
+            "broad_topic_coverage": 0.642,
+            "coherence_prioritized": 0.642,
+            "graph_centrality": 0.6458
+          },
+          "quality_metrics": {
+            "indices": [
+              0,
+              3,
+              5,
+              7
+            ],
+            "composite_score": 0.6458,
+            "topic_coverage": 0.5,
+            "info_density": 0.6644,
+            "novelty_score": 0.8519,
+            "coherence_score": 1.0,
+            "semantic_relevance": 0.5
+          }
+        },
+        "grammar_diagnostics": {
+          "available": false,
+          "issues_count": 0,
+          "diagnostics": []
+        },
+        "document_analysis": {
+          "document_type": "general_article",
+          "document_type_confidence": 0.36,
+          "confidence_method": "measured_structural_and_lexical_signal_share_not_calibrated_probability",
+          "classification_signals": [
+            "multi-paragraph prose without a stronger genre signal"
+          ],
+          "detected_structure": [
+            {
+              "section_id": "section-001-body",
+              "heading": "Body",
+              "role": "other",
+              "section_key": "body",
+              "paragraph_indices": [
+                0,
+                1,
+                2
+              ],
+              "source_sentence_ids": [
+                "sentence-000001",
+                "sentence-000002",
+                "sentence-000003",
+                "sentence-000004",
+                "sentence-000005",
+                "sentence-000006",
+                "sentence-000007",
+                "sentence-000008",
+                "sentence-000009"
+              ],
+              "page": null,
+              "paragraph_ids": [
+                "paragraph-000001",
+                "paragraph-000002",
+                "paragraph-000003"
+              ],
+              "confidence": "fallback_body"
+            }
+          ],
+          "research_stage": "unknown",
+          "results_section_available": false,
+          "results_available": false,
+          "conclusion_available": false,
+          "missing_information": [],
+          "claim_count": 9,
+          "main_subject": "Outlier Observation Appears",
+          "purpose": "An outlier is an observation that appears to deviate markedly from other observations in the sample.",
+          "key_findings": [],
+          "supporting_details": [],
+          "conclusion": "",
+          "primary_finding_indices": [],
+          "primary_findings": []
+        },
+        "summary_plan": {
+          "mode": "technical",
+          "depth": "balanced",
+          "planned_sections": [
+            {
+              "label": "System Overview",
+              "claim_types": [
+                "definition"
+              ]
+            }
+          ],
+          "supported_claim_types": [
+            "author_claim",
+            "claim",
+            "definition"
+          ],
+          "results_available": false,
+          "conclusion_available": false,
+          "missing_information": []
+        },
+        "focus_query": "",
+        "multi_document": {
+          "is_multi_document": false,
+          "document_count": 1,
+          "documents": [],
+          "provenance_tracking": "single_source"
+        },
+        "fact_validation": {
+          "status": "checked_no_lexical_warnings",
+          "sentences_checked": 4,
+          "ledger_entries": 9,
+          "issues": [],
+          "method": "literal_span_and_marker_checks_v1",
+          "interpretation": "Heuristic diagnostics only; not semantic entailment or proof of factual consistency."
+        },
+        "source_guard": {
+          "status": "checked",
+          "method": "source_sentence_match_with_literal_fact_and_claim_status_checks",
+          "sentences_checked": 4,
+          "sentences_restored_to_source": 0,
+          "sentences_omitted_without_source_match": 0,
+          "issues": {},
+          "semantic_entailment_measured": false
+        },
+        "quality_metrics": {
+          "coverage_score": 0.0,
+          "redundancy_score": 0.8333,
+          "source_support_rate": 1.0,
+          "attribution_preservation_rate": 1.0,
+          "numeric_preservation_rate": 1.0,
+          "qualifier_preservation_rate": 1.0,
+          "section_coverage": 1.0,
+          "dangling_reference_count": 0,
+          "heading_leak_count": 0,
+          "trend_consistency_rate": 1.0,
+          "unsupported_numeric_count": 0
+        },
+        "document_stage": "general",
+        "document_stage_confidence": 0.7,
+        "stage_evidence": [
+          "General article prose without specialized academic stage structure"
+        ]
+      },
+      "method": "local",
+      "fallback_used": false,
+      "selection_mode": "technical",
+      "profile_label": "Technical Summary",
+      "active_profile_weights": {
+        "tfidf": 0.32,
+        "title": 0.14,
+        "position": 0.12,
+        "paragraph_pos": 0.08,
+        "section": 0.2,
+        "type_relevance": 0.14
+      },
+      "validation_passed": true,
+      "validation_notes": [
+        "Completeness: no methodology sentence in output for academic/technical mode.",
+        "Completeness: no findings/results sentence in output."
+      ],
+      "summary_depth": "balanced",
+      "analysis_mode": "technical",
+      "output_format": "paragraph",
+      "retrieval_metadata": {
+        "status": "bypassed",
+        "backend": "none",
+        "fallback_used": false,
+        "fallback_reason": "short_document",
+        "chunk_count": 3,
+        "retrieved_chunk_count": 0,
+        "retrieval_breadth": 0,
+        "profile": "technical",
+        "summary_depth": "balanced",
+        "semantic_score_adjustment_limit": 0.06,
+        "coverage_ratio": 0.0,
+        "retrieved_sections": [],
+        "evidence_mapping_status": "available"
+      },
+      "evidence": [
+        {
+          "summary_sentence": "An outlier is an observation that appears to deviate markedly from other observations in the sample.",
+          "supports": "An outlier is an observation that appears to deviate markedly from other observations in the sample.",
+          "source_sentence": "An outlier is an observation that appears to deviate markedly from other observations in the sample.",
+          "excerpt": "An outlier is an observation that appears to deviate markedly from other observations in the sample. Identification of potential outliers is important for the following reasons.",
+          "chunk_id": "p0-c0",
+          "paragraph_index": 0,
+          "section": "body",
+          "retrieved": false,
+          "relevance_score": 0.0
+        },
+        {
+          "summary_sentence": "For example, the data may have been coded incorrectly or an experiment may not have been run correctly.",
+          "supports": "For example, the data may have been coded incorrectly or an experiment may not have been run correctly.",
+          "source_sentence": "For example, the data may have been coded incorrectly or an experiment may not have been run correctly.",
+          "excerpt": "An outlier may indicate bad data. For example, the data may have been coded incorrectly or an experiment may not have been run correctly. If it can be determined that an outlying point is in fact erroneous, then the outlying value should be deleted from the analysis (or corrected if possible).",
+          "chunk_id": "p1-c0",
+          "paragraph_index": 1,
+          "section": "body",
+          "retrieved": false,
+          "relevance_score": 0.0
+        },
+        {
+          "summary_sentence": "In some cases, it may not be possible to determine if an outlying point is bad data.",
+          "supports": "In some cases, it may not be possible to determine if an outlying point is bad data. In any event, we typically do not want to simply delete the outlying observation.",
+          "source_sentence": "In some cases, it may not be possible to determine if an outlying point is bad data.",
+          "excerpt": "In some cases, it may not be possible to determine if an outlying point is bad data. Outliers may be due to random variation or may indicate something scientifically interesting. In any event, we typically do not want to simply delete the outlying observation. However, if the data contains significant outliers, we may need to consider the use of robust statistical techniques.",
+          "chunk_id": "p2-c0",
+          "paragraph_index": 2,
+          "section": "body",
+          "retrieved": false,
+          "relevance_score": 0.0
+        },
+        {
+          "chunk_id": "p000001-s000001",
+          "summary_unit": "sentence",
+          "section": "Source",
+          "subsection": "",
+          "excerpt": "An outlier is an observation that appears to deviate markedly from other observations in the sample.",
+          "supports": "An outlier is an observation that appears to deviate markedly from other observations in the sample.",
+          "source_sentence": "An outlier is an observation that appears to deviate markedly from other observations in the sample.",
+          "summary_sentence": "An outlier is an observation that appears to deviate markedly from other observations in the sample.",
+          "summary_sentence_index": 0,
+          "paragraph_index": 0,
+          "source_sentence_indices": [
+            0
+          ],
+          "source_sentence_id": "sentence-000001",
+          "source_paragraph_id": "paragraph-000001",
+          "section_id": "section-001-body",
+          "claim_type": "definition",
+          "claim_status": "DEFINITION",
+          "epistemic_status": "DEFINITION",
+          "source_role": "definition",
+          "attribution": "",
+          "document_stage": "general",
+          "retrieved": false,
+          "relevance_score": 1.0
+        },
+        {
+          "chunk_id": "p000002-s000004",
+          "summary_unit": "sentence",
+          "section": "Source",
+          "subsection": "",
+          "excerpt": "For example, the data may have been coded incorrectly or an experiment may not have been run correctly.",
+          "supports": "For example, the data may have been coded incorrectly or an experiment may not have been run correctly.",
+          "source_sentence": "For example, the data may have been coded incorrectly or an experiment may not have been run correctly.",
+          "summary_sentence": "For example, the data may have been coded incorrectly or an experiment may not have been run correctly.",
+          "summary_sentence_index": 1,
+          "paragraph_index": 1,
+          "source_sentence_indices": [
+            3
+          ],
+          "source_sentence_id": "sentence-000004",
+          "source_paragraph_id": "paragraph-000002",
+          "section_id": "section-001-body",
+          "claim_type": "author_claim",
+          "claim_status": "AUTHOR_CLAIM",
+          "epistemic_status": "AUTHOR_CLAIM",
+          "source_role": "current_study",
+          "attribution": "",
+          "document_stage": "general",
+          "retrieved": false,
+          "relevance_score": 1.0
+        },
+        {
+          "chunk_id": "p000003-s000006",
+          "summary_unit": "sentence",
+          "section": "Source",
+          "subsection": "",
+          "excerpt": "In some cases, it may not be possible to determine if an outlying point is bad data.",
+          "supports": "In some cases, it may not be possible to determine if an outlying point is bad data.",
+          "source_sentence": "In some cases, it may not be possible to determine if an outlying point is bad data.",
+          "summary_sentence": "In some cases, it may not be possible to determine if an outlying point is bad data.",
+          "summary_sentence_index": 2,
+          "paragraph_index": 2,
+          "source_sentence_indices": [
+            5
+          ],
+          "source_sentence_id": "sentence-000006",
+          "source_paragraph_id": "paragraph-000003",
+          "section_id": "section-001-body",
+          "claim_type": "author_claim",
+          "claim_status": "AUTHOR_CLAIM",
+          "epistemic_status": "AUTHOR_CLAIM",
+          "source_role": "current_study",
+          "attribution": "",
+          "document_stage": "general",
+          "retrieved": false,
+          "relevance_score": 1.0
+        },
+        {
+          "chunk_id": "p000003-s000008",
+          "summary_unit": "sentence",
+          "section": "Source",
+          "subsection": "",
+          "excerpt": "In any event, we typically do not want to simply delete the outlying observation.",
+          "supports": "In any event, we typically do not want to simply delete the outlying observation.",
+          "source_sentence": "In any event, we typically do not want to simply delete the outlying observation.",
+          "summary_sentence": "In any event, we typically do not want to simply delete the outlying observation.",
+          "summary_sentence_index": 3,
+          "paragraph_index": 2,
+          "source_sentence_indices": [
+            7
+          ],
+          "source_sentence_id": "sentence-000008",
+          "source_paragraph_id": "paragraph-000003",
+          "section_id": "section-001-body",
+          "claim_type": "claim",
+          "claim_status": "UNKNOWN",
+          "epistemic_status": "UNKNOWN",
+          "source_role": "unknown",
+          "attribution": "",
+          "document_stage": "general",
+          "retrieved": false,
+          "relevance_score": 1.0
+        }
+      ],
+      "focus_query": "",
+      "multi_document_metadata": {
+        "is_multi_document": false,
+        "document_count": 1,
+        "documents": [],
+        "provenance_tracking": "single_source"
+      }
+    }
+  }
+]

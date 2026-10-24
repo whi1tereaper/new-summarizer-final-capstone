@@ -1,0 +1,38 @@
+                                  Appendix G.
+                    AccredX Maintenance Manual
+
+                AccredX Maintenance Manual
+
+1. Introduction
+AccredX is a web-based Record Management and Archiving System developed to
+streamline accreditation document management. This manual provides
+administrators and future developers with guidance for operating, maintaining,
+updating, and troubleshooting the system. It serves as a reference throughout the
+software lifecycle.
+
+2. System Overview
+AccredX centralizes accreditation files into organized folders, parameters, and
+modules. It supports secure uploads, version control, document preview, search,
+reporting, archive, recycle bin, and RET modules. The objective is to reduce
+manual document handling while improving accessibility, integrity, and security.
+
+3. Major Features
+•   User authentication and role-based access.
+•   Dashboard with statistics and recent activity.
+•   Document upload with metadata.
+•   Folder organization.
+•   Document preview and download.
+•   Version control for replacing or keeping previous revisions.
+•   Archive and recycle bin.
+•   Advanced search including extracted text.
+•   RET (Research, Extension, Training) management.
+•   Reports and activity monitoring.
+
+4. System Requirements
+
+Hardware
+•   Computer (Desktop or Laptop)
+•   8 GB RAM recommended
+•   SSD
+
+                                                                                       142

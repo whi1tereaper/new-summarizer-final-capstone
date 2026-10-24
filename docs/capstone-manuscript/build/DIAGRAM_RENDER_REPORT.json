@@ -1,0 +1,110 @@
+[
+  {
+    "input": "capstone-manuscript\\diagrams\\ERD_PANEL_01_ACCOUNTS.mmd",
+    "svg": "capstone-manuscript\\diagrams\\ERD_PANEL_01_ACCOUNTS.svg",
+    "png": "capstone-manuscript\\diagrams\\ERD_PANEL_01_ACCOUNTS.png",
+    "width": 573.21875,
+    "height": 529,
+    "renderer": "locally installed Mermaid + Chromium",
+    "code_native": true
+  },
+  {
+    "input": "capstone-manuscript\\diagrams\\ERD_PANEL_02_SUMMARY_OUTPUTS.mmd",
+    "svg": "capstone-manuscript\\diagrams\\ERD_PANEL_02_SUMMARY_OUTPUTS.svg",
+    "png": "capstone-manuscript\\diagrams\\ERD_PANEL_02_SUMMARY_OUTPUTS.png",
+    "width": 772.984375,
+    "height": 677,
+    "renderer": "locally installed Mermaid + Chromium",
+    "code_native": true
+  },
+  {
+    "input": "capstone-manuscript\\diagrams\\ERD_PANEL_03_FEEDBACK.mmd",
+    "svg": "capstone-manuscript\\diagrams\\ERD_PANEL_03_FEEDBACK.svg",
+    "png": "capstone-manuscript\\diagrams\\ERD_PANEL_03_FEEDBACK.png",
+    "width": 499.90625,
+    "height": 677,
+    "renderer": "locally installed Mermaid + Chromium",
+    "code_native": true
+  },
+  {
+    "input": "capstone-manuscript\\diagrams\\ERD_PANEL_04_DOCUMENT_CACHE.mmd",
+    "svg": "capstone-manuscript\\diagrams\\ERD_PANEL_04_DOCUMENT_CACHE.svg",
+    "png": "capstone-manuscript\\diagrams\\ERD_PANEL_04_DOCUMENT_CACHE.png",
+    "width": 243.078125,
+    "height": 370,
+    "renderer": "locally installed Mermaid + Chromium",
+    "code_native": true
+  },
+  {
+    "input": "capstone-manuscript\\diagrams\\ERD_PANEL_05_LANDING_TELEMETRY.mmd",
+    "svg": "capstone-manuscript\\diagrams\\ERD_PANEL_05_LANDING_TELEMETRY.svg",
+    "png": "capstone-manuscript\\diagrams\\ERD_PANEL_05_LANDING_TELEMETRY.png",
+    "width": 260.109375,
+    "height": 370,
+    "renderer": "locally installed Mermaid + Chromium",
+    "code_native": true
+  },
+  {
+    "input": "capstone-manuscript\\diagrams\\ERD_PANEL_06_INDEPENDENT_STORES.mmd",
+    "svg": "capstone-manuscript\\diagrams\\ERD_PANEL_06_INDEPENDENT_STORES.svg",
+    "png": "capstone-manuscript\\diagrams\\ERD_PANEL_06_INDEPENDENT_STORES.png",
+    "width": 273.125,
+    "height": 527,
+    "renderer": "locally installed Mermaid + Chromium",
+    "code_native": true
+  },
+  {
+    "input": "capstone-manuscript\\diagrams\\ERD_PANEL_07_EVALUATION_PIPELINE.mmd",
+    "svg": "capstone-manuscript\\diagrams\\ERD_PANEL_07_EVALUATION_PIPELINE.svg",
+    "png": "capstone-manuscript\\diagrams\\ERD_PANEL_07_EVALUATION_PIPELINE.png",
+    "width": 522.234375,
+    "height": 771,
+    "renderer": "locally installed Mermaid + Chromium",
+    "code_native": true
+  },
+  {
+    "input": "capstone-manuscript\\diagrams\\ERD_PANEL_08_EVALUATION_CONTENT.mmd",
+    "svg": "capstone-manuscript\\diagrams\\ERD_PANEL_08_EVALUATION_CONTENT.svg",
+    "png": "capstone-manuscript\\diagrams\\ERD_PANEL_08_EVALUATION_CONTENT.png",
+    "width": 876.453125,
+    "height": 464,
+    "renderer": "locally installed Mermaid + Chromium",
+    "code_native": true
+  },
+  {
+    "input": "capstone-manuscript\\diagrams\\ERD_PANEL_09_EVALUATION_SCORING.mmd",
+    "svg": "capstone-manuscript\\diagrams\\ERD_PANEL_09_EVALUATION_SCORING.svg",
+    "png": "capstone-manuscript\\diagrams\\ERD_PANEL_09_EVALUATION_SCORING.png",
+    "width": 841.375,
+    "height": 1125,
+    "renderer": "locally installed Mermaid + Chromium",
+    "code_native": true
+  },
+  {
+    "input": "capstone-manuscript\\diagrams\\ERD_PANEL_10_UNIT_REVIEWS.mmd",
+    "svg": "capstone-manuscript\\diagrams\\ERD_PANEL_10_UNIT_REVIEWS.svg",
+    "png": "capstone-manuscript\\diagrams\\ERD_PANEL_10_UNIT_REVIEWS.png",
+    "width": 555.28125,
+    "height": 558,
+    "renderer": "locally installed Mermaid + Chromium",
+    "code_native": true
+  },
+  {
+    "input": "capstone-manuscript\\diagrams\\ERD_PANEL_11_EVALUATOR_ACCOUNTS.mmd",
+    "svg": "capstone-manuscript\\diagrams\\ERD_PANEL_11_EVALUATOR_ACCOUNTS.svg",
+    "png": "capstone-manuscript\\diagrams\\ERD_PANEL_11_EVALUATOR_ACCOUNTS.png",
+    "width": 701.34375,
+    "height": 950,
+    "renderer": "locally installed Mermaid + Chromium",
+    "code_native": true
+  },
+  {
+    "input": "capstone-manuscript\\diagrams\\ERD_PANEL_12_RESEARCH_AUTHORSHIP.mmd",
+    "svg": "capstone-manuscript\\diagrams\\ERD_PANEL_12_RESEARCH_AUTHORSHIP.svg",
+    "png": "capstone-manuscript\\diagrams\\ERD_PANEL_12_RESEARCH_AUTHORSHIP.png",
+    "width": 999.4375,
+    "height": 682.5,
+    "renderer": "locally installed Mermaid + Chromium",
+    "code_native": true
+  }
+]

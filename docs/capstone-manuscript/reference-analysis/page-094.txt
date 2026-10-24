@@ -1,0 +1,34 @@
+                      the
+                      folder
+ last_viewed_at       Date and       varchar(2
+                      time the       55)
+                      folder
+                      was last
+                      viewed at
+ archived             Whether        tinyint(1
+                      folder is      )
+                      archived
+                      or not
+ archived_by          User that      int(11)
+                      archived
+                      the
+                      folder
+ archived_ at         Date and       datetime
+                      time the
+                      folder
+                      was
+                      archived
+ deleted_by           User that      int(11)
+                      deleted
+                      the
+                      folder
+ deleted_at           Date and       datetime
+                      time
+                      folder
+                      was
+                      deleted
+ scheduled_delet      Scheduled      datetime
+ e_at                 delete
+
+
+                                                             75

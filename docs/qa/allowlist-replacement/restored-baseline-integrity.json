@@ -1,0 +1,137 @@
+{
+    "backup_sha256": "0ca53fbdf43e20503ec078335e5166155aeea6339b9aafa80d84871b6c4f37a6",
+    "restored_only_into_isolation": true,
+    "allows_legitimate_new_live_rows": true,
+    "passed": 18,
+    "failed": 2,
+    "checks": [
+        {
+            "table": "users",
+            "original_rows": 36,
+            "current_rows": 37,
+            "passed": true
+        },
+        {
+            "table": "summaries",
+            "original_rows": 221,
+            "current_rows": 208,
+            "passed": false,
+            "missing_rows": 13,
+            "missing_account_owned": 0,
+            "original_account_owned_rows": 155,
+            "account_owned_rows_preserved": true,
+            "missing_guest_owned": 13,
+            "missing_legacy_guest": 0,
+            "missing_older_than_guest_ttl": 13,
+            "missing_matches_existing_guest_cleanup": 13
+        },
+        {
+            "table": "summary_artifacts",
+            "original_rows": 212,
+            "current_rows": 199,
+            "passed": false
+        },
+        {
+            "table": "feedback",
+            "original_rows": 107,
+            "current_rows": 107,
+            "passed": true
+        },
+        {
+            "table": "feedback_comments",
+            "original_rows": 113,
+            "current_rows": 113,
+            "passed": true
+        },
+        {
+            "table": "documents",
+            "original_rows": 25,
+            "current_rows": 25,
+            "passed": true
+        },
+        {
+            "table": "document_summaries",
+            "original_rows": 125,
+            "current_rows": 125,
+            "passed": true
+        },
+        {
+            "table": "nutshell_generations",
+            "original_rows": 24,
+            "current_rows": 24,
+            "passed": true
+        },
+        {
+            "table": "evaluation_runs",
+            "original_rows": 6,
+            "current_rows": 6,
+            "passed": true
+        },
+        {
+            "table": "evaluation_outputs",
+            "original_rows": 428,
+            "current_rows": 428,
+            "passed": true
+        },
+        {
+            "table": "evaluation_metrics",
+            "original_rows": 3652,
+            "current_rows": 3652,
+            "passed": true
+        },
+        {
+            "table": "evaluation_assignments",
+            "original_rows": 0,
+            "current_rows": 0,
+            "passed": true
+        },
+        {
+            "table": "evaluation_ratings",
+            "original_rows": 0,
+            "current_rows": 0,
+            "passed": true
+        },
+        {
+            "table": "evaluation_references",
+            "original_rows": 0,
+            "current_rows": 0,
+            "passed": true
+        },
+        {
+            "table": "evaluation_documents",
+            "original_rows": 36,
+            "current_rows": 36,
+            "passed": true
+        },
+        {
+            "table": "evaluation_datasets",
+            "original_rows": 4,
+            "current_rows": 4,
+            "passed": true
+        },
+        {
+            "table": "evaluation_errors",
+            "original_rows": 5,
+            "current_rows": 5,
+            "passed": true
+        },
+        {
+            "table": "evaluation_content_units",
+            "original_rows": 0,
+            "current_rows": 0,
+            "passed": true
+        },
+        {
+            "table": "evaluation_content_unit_reviews",
+            "original_rows": 0,
+            "current_rows": 0,
+            "passed": true
+        },
+        {
+            "table": "evaluation_challenge_cases",
+            "original_rows": 24,
+            "current_rows": 24,
+            "passed": true
+        }
+    ]
+}

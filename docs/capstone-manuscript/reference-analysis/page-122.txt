@@ -1,0 +1,42 @@
+   Table  21.     End-users’  Evaluation  Summary
+Result
+
+    Software Product           Weighted            Verbal
+        Categories                Mean        Interpretation
+
+        Functional                3.46               Very
+       suitability                              Satisfactory
+
+       Performance                3.46               Very
+        Efficiency                              Satisfactory
+
+         Usability                3.55               Very
+                                                Satisfactory
+
+Overall                           3.49               Very
+                                                Satisfactory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                        103

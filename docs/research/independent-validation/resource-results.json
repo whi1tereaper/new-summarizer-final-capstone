@@ -1,0 +1,118 @@
+{
+  "pdf_fixture": {
+    "pages": 10,
+    "bytes": 42835,
+    "source": "IV-RESEARCH",
+    "encoding_note": "Helvetica WinAnsi fixture: unsupported glyphs replaced only in this transport test, never in quality inputs."
+  },
+  "benchmarks": [
+    {
+      "mode": "light",
+      "memory_limit_mib": 512,
+      "memory_swap_limit_mib": 512,
+      "cpu_limit": 1,
+      "configured_python_timeout_seconds": 180,
+      "outer_http_read_deadline_seconds": 185,
+      "image_id": "sha256:911ae89cb2304103890bd0b5061990ccff39b05abb42fa0ee4bd5ae96248a007",
+      "scope": "isolated actual Apache + PHP ArticleService + bridge + Python extraction/routing/models; excludes database, auth/controller/job persistence and host Docker daemon",
+      "warm_definition": "repeat HTTP requests; CLI Python is cold per call, no persistent supervisor",
+      "runs": [],
+      "harness_error": "RuntimeError: Apache startup deadline exceeded",
+      "completed": false,
+      "whole_container_wall_seconds": 50.60255839999445,
+      "freeze_verification": {
+        "protected_files": 191,
+        "evaluation_relevant_changes": [],
+        "concurrent_unrelated_ui_changes_preserved": [
+          "app/public/analytics.php",
+          "app/public/assets/js/analytics.js",
+          "app/public/assets/js/theme-toggle.js",
+          "app/public/partials/site-nav.php"
+        ],
+        "protocol_unchanged": true
+      }
+    },
+    {
+      "mode": "enhanced",
+      "memory_limit_mib": 512,
+      "memory_swap_limit_mib": 512,
+      "cpu_limit": 1,
+      "configured_python_timeout_seconds": 180,
+      "outer_http_read_deadline_seconds": 185,
+      "image_id": "sha256:2861f4cf1edfebbfc015c8f9f384fa23b677b7dce9837b7649fd7578417bfcbd",
+      "scope": "isolated actual Apache + PHP ArticleService + bridge + Python extraction/routing/models; excludes database, auth/controller/job persistence and host Docker daemon",
+      "warm_definition": "repeat HTTP requests; CLI Python is cold per call, no persistent supervisor",
+      "runs": [],
+      "harness_error": "RuntimeError: Apache startup deadline exceeded",
+      "completed": false,
+      "whole_container_wall_seconds": 46.81245900000067,
+      "freeze_verification": {
+        "protected_files": 191,
+        "evaluation_relevant_changes": [],
+        "concurrent_unrelated_ui_changes_preserved": [
+          "app/public/analytics.php",
+          "app/public/assets/js/analytics.js",
+          "app/public/assets/js/theme-toggle.js",
+          "app/public/partials/site-nav.php"
+        ],
+        "protocol_unchanged": true
+      }
+    },
+    {
+      "mode": "light",
+      "memory_limit_mib": 1024,
+      "memory_swap_limit_mib": 1024,
+      "cpu_limit": 1,
+      "configured_python_timeout_seconds": 180,
+      "outer_http_read_deadline_seconds": 185,
+      "image_id": "sha256:911ae89cb2304103890bd0b5061990ccff39b05abb42fa0ee4bd5ae96248a007",
+      "scope": "isolated actual Apache + PHP ArticleService + bridge + Python extraction/routing/models; excludes database, auth/controller/job persistence and host Docker daemon",
+      "warm_definition": "repeat HTTP requests; CLI Python is cold per call, no persistent supervisor",
+      "runs": [],
+      "harness_error": "RuntimeError: Apache startup deadline exceeded",
+      "completed": false,
+      "whole_container_wall_seconds": 50.368404500004544,
+      "freeze_verification": {
+        "protected_files": 191,
+        "evaluation_relevant_changes": [],
+        "concurrent_unrelated_ui_changes_preserved": [
+          "app/public/analytics.php",
+          "app/public/assets/js/analytics.js",
+          "app/public/assets/js/theme-toggle.js",
+          "app/public/partials/site-nav.php"
+        ],
+        "protocol_unchanged": true
+      }
+    },
+    {
+      "mode": "enhanced",
+      "memory_limit_mib": 1024,
+      "memory_swap_limit_mib": 1024,
+      "cpu_limit": 1,
+      "configured_python_timeout_seconds": 180,
+      "outer_http_read_deadline_seconds": 185,
+      "image_id": "sha256:2861f4cf1edfebbfc015c8f9f384fa23b677b7dce9837b7649fd7578417bfcbd",
+      "scope": "isolated actual Apache + PHP ArticleService + bridge + Python extraction/routing/models; excludes database, auth/controller/job persistence and host Docker daemon",
+      "warm_definition": "repeat HTTP requests; CLI Python is cold per call, no persistent supervisor",
+      "runs": [],
+      "harness_error": "RuntimeError: no public port '10000/tcp' published for light-iv21-002bb320da\n",
+      "completed": false,
+      "whole_container_wall_seconds": 9.153786599999876,
+      "freeze_verification": {
+        "protected_files": 191,
+        "evaluation_relevant_changes": [],
+        "concurrent_unrelated_ui_changes_preserved": [
+          "app/public/analytics.php",
+          "app/public/assets/js/analytics.js",
+          "app/public/assets/js/theme-toggle.js",
+          "app/public/partials/site-nav.php"
+        ],
+        "protocol_unchanged": true
+      }
+    }
+  ],
+  "production_compatibility": "not certified; test envelope is declared, actual Render plan/CPU/memory is not configured in render.yaml",
+  "enhanced_image": "evaluation-only added spaCy 3.8.11/en_core_web_sm 3.8.0; production image lacks these resources",
+  "swap": "memory-swap equals memory, so cgroup swap allowance is zero",
+  "global_host_routing_changed": false
+}

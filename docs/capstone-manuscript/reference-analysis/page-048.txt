@@ -1,0 +1,33 @@
+assess the system based on technical quality
+standards.
+
+   The second group is composed of twenty-three
+(23) end-users, distributed as follows: three
+(3) administrative staff, five (5) teachers, and
+fifteen (15) assistants. These respondents were
+selected based on their direct involvement in
+the academic and administrative operations of
+NEUST Peñaranda Off-Campus. Their role is to
+evaluate the developed system in terms of
+usability,   functional   suitability,   and
+performance   efficiency,   reflecting   its
+applicability  in  the  actual  institutional
+setting.
+
+   This purposive selection ensured that the
+system was evaluated both from a technical
+perspective (IT     consultants) and a practical
+user perspective (end-users).
+
+Research Instruments
+
+   The primary research instrument used in this
+study   was   a   structured   questionnaire
+distributed in both printed and digital (Google
+Forms) formats. The questionnaire was designed
+to gather quantitative and qualitative feedback
+from respondents regarding the developed system.
+
+
+
+                                                      29

@@ -1,0 +1,26 @@
+{
+    "date":  "2026-10-17",
+    "sourceFilesChecked":  89,
+    "changedSourceFiles":  [
+
+                           ],
+    "manualFigureCount":  20,
+    "manualMissingScreenshots":  [
+
+                                 ],
+    "screenshots":  46,
+    "localInteractionChecks":  18,
+    "isolatedGuards":  19,
+    "features":  51,
+    "featureStatuses":  [
+                            {
+                                "count":  14,
+                                "status":  "VERIFIED_UI_IN_ISOLATION"
+                            },
+                            {
+                                "count":  37,
+                                "status":  "SOURCE-SUPPORTED"
+                            }
+                        ],
+    "isolatedServerStopped":  true
+}

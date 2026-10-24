@@ -1,0 +1,11 @@
+{
+  "decision_source": "explicit operator response during validation",
+  "decision": "Keep the existing 24-hour guest retention policy",
+  "restore_expired_guest_summaries": false,
+  "automatic_guest_cleanup_changed": false,
+  "observed_expired_guest_summaries_missing_from_live": 13,
+  "observed_cascaded_summary_artifacts_missing_from_live": 13,
+  "private_backup_contains_the_original_rows": true,
+  "strict_backup_comparison_must_not_be_reported_as_identical": true,
+  "evidence": "restored-baseline-integrity.json"
+}

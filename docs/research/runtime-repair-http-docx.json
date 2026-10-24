@@ -1,0 +1,41 @@
+{
+  "test_kind": "real_apache_http_guest_session",
+  "input": "docx",
+  "base": "http://127.0.0.1/app/public/",
+  "fixture_nonarticle": false,
+  "depth": "brief",
+  "job_id": "f48b1d2ebb809f444d04ddacf55254d5",
+  "accept_http": 200,
+  "observations": [
+    {
+      "success": true,
+      "job_id": "f48b1d2ebb809f444d04ddacf55254d5",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "f48b1d2ebb809f444d04ddacf55254d5",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "f48b1d2ebb809f444d04ddacf55254d5",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "f48b1d2ebb809f444d04ddacf55254d5",
+      "status": "completed",
+      "can_retry": false,
+      "redirect": "result.php?id=713"
+    }
+  ],
+  "seconds": 2.294217899994692,
+  "expected_original_file_match_not_assumed": true,
+  "result_http": 200,
+  "result_contains_title": true,
+  "completed": true
+}

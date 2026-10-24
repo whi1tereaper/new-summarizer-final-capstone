@@ -19,9 +19,8 @@ require_once __DIR__ . '/../Database.php';
 require_once __DIR__ . '/../Repositories/UserRepository.php';
 require_once __DIR__ . '/../Utils/validation.php';
 require_once __DIR__ . '/../Services/RateLimiter.php';
-require_once __DIR__ . '/../Services/NeonAuthService.php';
-
-use App\Src\Services\NeonAuthService;
+require_once __DIR__ . '/../Services/StudentVerificationService.php';
+require_once __DIR__ . '/../Support/StudentRegistrationForm.php';
 
 class AuthController
 {
@@ -32,7 +31,6 @@ class AuthController
     private ?EmailService $emailService;
     private ?PasswordResetService $resetService;
     private TermsAcceptanceService $termsAcceptanceService;
-    private NeonAuthService $neonAuth;
 
     public function __construct()
     {
@@ -43,7 +41,6 @@ class AuthController
             ? new PasswordResetService($this->db)
             : null;
         $this->termsAcceptanceService = new TermsAcceptanceService();
-        $this->neonAuth = new NeonAuthService();
     }
 
     public function login(): void
@@ -79,26 +76,6 @@ class AuthController
 
         if ($user && \App\Src\Utils\PasswordPolicy::verify($password, $user['password_hash'])) {
             $authenticated = true;
-        } elseif ($this->neonAuth->isEnabled()) {
-            $emailToTry = filter_var($username, FILTER_VALIDATE_EMAIL) ? $username : ($user['email'] ?? '');
-            if ($emailToTry !== '') {
-                $neonResult = $this->neonAuth->signIn($emailToTry, $password);
-                if ($neonResult['success']) {
-                    if (!$user) {
-                        $neonUser = $neonResult['user'];
-                        $defaultUsername = $neonUser['name'] ?? explode('@', $emailToTry)[0];
-                        $user = $this->users->createPendingTermsAccount(
-                            $defaultUsername,
-                            $emailToTry,
-                            \App\Src\Utils\PasswordPolicy::hash($password)
-                        );
-                    }
-                    $authenticated = true;
-                    if (isset($neonResult['token'])) {
-                        $_SESSION['neon_auth_token'] = $neonResult['token'];
-                    }
-                }
-            }
         }
 
         if ($authenticated && $user) {
@@ -284,67 +261,55 @@ class AuthController
         );
         $limiter->recordAttempt('register', $ip);
 
-        $username = trim($_POST['username'] ?? '');
-        $email = $_POST['email'] ?? '';
-        $password = $_POST['password'] ?? '';
-        $confirmPassword = $_POST['confirm_password'] ?? '';
+        $username = is_string($_POST['username'] ?? null) ? trim($_POST['username']) : '';
+        if ($username === '') $username = 'student_' . bin2hex(random_bytes(6));
+        $email = is_string($_POST['email'] ?? null) ? $_POST['email'] : '';
+        $password = is_string($_POST['password'] ?? null) ? $_POST['password'] : '';
+        $confirmPassword = is_string($_POST['confirm_password'] ?? null) ? $_POST['confirm_password'] : '';
         $termsAccepted = isAcceptedCheckboxValue($_POST['terms_accept'] ?? null);
-
-        if (!$termsAccepted) {
-            $this->redirectWithError('You must accept the Terms and Conditions before registering.', 'register.php');
-        }
-
+        $errors=[];
+        if (!$termsAccepted) $errors['terms_accept']='You must accept the Terms and Conditions before registering.';
         $usernameError = validateUsername($username);
-        if ($usernameError) {
-            $this->redirectWithError($usernameError, 'register.php');
-        }
-
-        $normalizedEmail = $this->normalizeEmailOrRedirect(
-            $email,
-            'register.php',
-            null
-        );
-
+        if ($usernameError) $errors['username']=$usernameError;
+        $emailResult=validateEmail($email);
+        if(is_string($emailResult)) $errors['email']=$emailResult;
         $passwordError = \App\Src\Utils\PasswordPolicy::validate($password);
-        if ($passwordError) {
-            $this->redirectWithError($passwordError, 'register.php');
-        }
-
-        if ($password !== $confirmPassword) {
-            $this->redirectWithError('Your passwords do not match. Please try again.', 'register.php');
-        }
-
+        if ($passwordError) $errors['password']=$passwordError;
+        if ($password !== $confirmPassword) $errors['confirm_password']='Your passwords do not match. Please try again.';
+        if($errors)$this->rejectRegistration($errors,true);
+        $normalizedEmail=$emailResult['email'];
         $passwordHash = \App\Src\Utils\PasswordPolicy::hash($password);
 
         try {
-            if ($this->neonAuth->isEnabled()) {
-                $neonResult = $this->neonAuth->signUp($username, $normalizedEmail, $password);
-                if (!$neonResult['success']) {
-                    $errMsg = $neonResult['error'] ?? '';
-                    if (stripos($errMsg, 'already') !== false || stripos($errMsg, 'exists') !== false) {
-                        $this->redirectWithError('Username or email already exists.', 'register.php');
-                    }
-                } elseif (isset($neonResult['token'])) {
-                    $_SESSION['neon_auth_token'] = $neonResult['token'];
-                }
-            }
-
-            $user = $this->users->createPendingTermsAccount($username, $normalizedEmail, $passwordHash);
-            if (!$this->establishAuthenticatedSession($user)) {
-                $this->redirect('login.php');
-            }
-
-            if (TermsAcceptanceService::currentUserNeedsAcceptance()) {
-                $this->redirect('accept_terms.php');
-            }
-
-            $this->redirect('profile.php');
+            $visitor = (new \App\Src\Services\CampusAccessService($this->db))->visitorToken();
+            (new \App\Src\Services\StudentVerificationService($this->db))->register($username, $normalizedEmail, $passwordHash, $_POST, $visitor);
         } catch (PDOException $exception) {
             if (UserRepository::isUniqueConstraintViolation($exception)) {
-                $this->redirectWithError('Username or email already exists.', 'register.php');
+                $this->rejectRegistration(['email'=>\App\Src\Services\StudentVerificationService::UNAVAILABLE_ID]);
             }
             throw $exception;
+        } catch (\InvalidArgumentException $exception) {
+            $this->rejectRegistration(['student_number'=>$exception->getMessage()]);
+        } catch (\App\Src\Support\ProcessingError $exception) {
+            $this->rejectRegistration(['student_number'=>$exception->getMessage()]);
         }
+        unset($_SESSION['registration_feedback'],$_SESSION['error']);
+        \App\Src\Utils\SessionManager::regenerate();
+        rotateCsrfToken();
+        $this->redirectWithSuccess(\App\Src\Support\StudentRegistrationForm::CREATED,'login.php');
+    }
+
+    private function rejectRegistration(array $errors,bool $audit=false): void
+    {
+        \App\Src\Support\StudentRegistrationForm::remember($_POST,$errors);
+        if($audit){
+            try{
+                $number=is_string($_POST['student_number']??null)?$_POST['student_number']:'';
+                try{$number=\App\Src\Services\StudentVerificationService::registrationNumber($number);}catch(\InvalidArgumentException $ignored){$number=null;}
+                (new \App\Src\Services\StudentEnrollmentRegistryService($this->db))->recordRegistrationRejection($number,'validation_failed');
+            }catch(\Throwable $ignored){error_log('[Student registration] Validation audit unavailable.');}
+        }
+        $this->redirect('register.php');
     }
 
     private function establishAuthenticatedSession(array $user): bool
@@ -355,9 +320,14 @@ class AuthController
         \App\Src\Utils\SessionManager::regenerate();
 
         try {
+            // Bind before the existing history migration clears the guest identity.
+            $access = new \App\Src\Services\CampusAccessService($this->db);
+            if (!$access->continuedAccess((int)$user['id'])) {
+                $access->trialSubject((int)$user['id'], $access->visitorToken());
+            }
             $guestSessionService->claimGuestDataForUser((int)$user['id'], $guestToken);
-        } catch (PDOException $exception) {
-            error_log('[AuthController] Guest data migration failed during authentication: ' . $exception->getMessage());
+        } catch (\Throwable $exception) {
+            error_log('[AuthController] Guest data migration failed during authentication: ' . get_class($exception));
             $_SESSION['error'] = "Your account is ready, but we could not link this guest session's saved data. Your summaries are preserved; please sign in again shortly.";
             return false;
         }
@@ -379,11 +349,6 @@ class AuthController
 
     public function logout(): void
     {
-        if (isset($_SESSION['neon_auth_token'])) {
-            $this->neonAuth->signOut((string)$_SESSION['neon_auth_token']);
-            unset($_SESSION['neon_auth_token']);
-        }
-
         RememberMeService::clearCookie();
         
         $guestSessionService = new GuestSessionService();
@@ -589,7 +554,7 @@ class AuthController
         }
 
         $token = $_POST['csrf_token'] ?? '';
-        if (!verifyCsrfToken($token)) {
+        if (!is_string($token) || !verifyCsrfToken($token)) {
             http_response_code(403);
             die('Invalid CSRF token.');
         }
@@ -630,15 +595,14 @@ class AuthController
 
     private function resetPasswordForUser(int $userId, string $otp, string $password): bool
     {
-        $resetRecord = $this->resetService->validateToken($userId, $otp);
-        if (!$resetRecord) {
-            return false;
-        }
-
-        $passwordHash = \App\Src\Utils\PasswordPolicy::hash($password);
-
         $this->db->beginTransaction();
         try {
+            $resetRecord = $this->resetService->validateToken($userId, $otp);
+            if (!$resetRecord) {
+                $this->db->rollBack();
+                return false;
+            }
+            $passwordHash = \App\Src\Utils\PasswordPolicy::hash($password);
             $this->users->updatePasswordHash($userId, $passwordHash);
 
             $this->resetService->markTokenUsed($userId);

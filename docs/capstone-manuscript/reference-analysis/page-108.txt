@@ -1,0 +1,48 @@
+      Domain Costing: Domain costing is needed
+      to   maintain   the   system’s   online
+      availability.
+   The total cost to maintain the AccredX:
+Record  Management  and  Archiving  system  is
+1,100.00 as reflected below.
+   Table 9. Estimated Project Cost
+           COMPONENT                           COST
+
+        Domain Costing                      ₱1,100.00
+
+Total  Estimated  Project                   ₱1,100.00
+Cost
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      Figure 30. System Successfully Deployed
+
+
+
+
+
+
+                                                       89

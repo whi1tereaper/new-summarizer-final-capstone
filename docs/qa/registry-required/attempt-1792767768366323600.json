@@ -1,0 +1,79 @@
+[
+  {
+    "name": "isolated setup (existing verified rollback retained)",
+    "exit": 0,
+    "seconds": 4.14,
+    "output": "{\"database\":\"qa_light_f1315562\",\"migrations\":19,\"production_counts\":{\"admin_audit_logs\":165,\"admin_security_challenges\":1,\"document_summaries\":125,\"documents\":25,\"evaluation_assignments\":0,\"evaluation_audit_log\":87,\"evaluation_challenge_cases\":24,\"evaluation_content_unit_reviews\":0,\"evaluation_content_units\":0,\"evaluation_datasets\":4,\"evaluation_documents\":36,\"evaluation_errors\":5,\"evaluation_metrics\":3652,\"evaluation_outputs\":428,\"evaluation_ratings\":0,\"evaluation_references\":0,\"evaluation_runs\":6,\"feedback\":107,\"feedback_comments\":113,\"guest_sessions\":62,\"landing_page_events\":8324,\"landing_page_sessions\":196,\"nutshell_generations\":24,\"password_resets\":25,\"rate_limits\":13,\"schema_migrations\":19,\"student_applications\":1,\"student_enrollment_registry\":38,\"student_registry_batches\":1,\"student_registry_events\":1,\"student_registry_gate\":1,\"student_review_events\":1,\"student_trial_links\":1,\"summaries\":221,\"summary_access_reservations\":29,\"summary_access_subjects\":50,\"summary_artifacts\":212,\"summary_jobs\":246,\"user_tokens\":2,\"users\":36}}",
+    "stderr": ""
+  },
+  {
+    "name": "restricted credentials deny production",
+    "exit": 0,
+    "seconds": 0.09,
+    "output": "",
+    "stderr": ""
+  },
+  {
+    "name": "privacy contact key and processing authorization gates",
+    "exit": 0,
+    "seconds": 0.78,
+    "output": "PASS all three prerequisites permit synthetic test registration\nPASS explicit processing hold blocks registration\nPASS invalid authorization value fails closed\nPASS blank key cannot be bypassed by authorization\nPASS short key cannot be bypassed by authorization\nPASS invalid privacy email blocks registration\nPASS blank privacy override uses configured project email\nPASS blank project and override email blocks registration\n",
+    "stderr": ""
+  },
+  {
+    "name": "student-number matching diagnostic",
+    "exit": 0,
+    "seconds": 0.91,
+    "output": "PASS all supplied ID formats accepted with separators and leading zeros intact\nPASS historical unlisted account remains preserved and restricted\nPASS unverified submissions never populate the trusted registry\nPASS administrator paste inserts every supplied ID\nPASS matching pending account approved within import transaction\nPASS existing account password hash preserved\nPASS every matched registration approved without another manual review\nPASS all matched accounts receive continued summarizer access\nPASS student-number login resolves the approved account and password\nPASS exact normalized IDs and keyed identities persisted uniquely\nPASS repeat import skips duplicates without rewriting approvals\nPASS duplicate account claim rejected with complete transaction rollback\nPASS duplicate claim audited for administrators\nPASS ordinary student cannot import trusted enrollment IDs\nPASS unmatched number rejected without retaining an account\nPASS inactive registry number rejected without retaining an account\nPASS each automatic approval has a real audit event\n{\n    \"sample_count\": 3,\n    \"passed\": 17,\n    \"failed\": 0,\n    \"checks\": [\n        {\n            \"name\": \"all supplied ID formats accepted with separators and leading zeros intact\",\n            \"passed\": true\n        },\n        {\n            \"name\": \"historical unlisted account remains preserved and restricted\",\n            \"passed\": true\n        },\n        {\n            \"name\": \"unverified submissions never populate the trusted registry\",\n            \"passed\": true\n        },\n        {\n            \"name\": \"administrator paste inserts every supplied ID\",\n            \"passed\": true\n        },\n        {\n            \"name\": \"matching pending account approved within import transaction\",\n            \"passed\": true\n        },\n        {\n            \"name\": \"existing account password hash preserved\",\n            \"passed\": true\n        },\n        {\n            \"name\": \"every matched registration approved without another manual review\",\n            \"passed\": true\n        },\n        {\n            \"name\": \"all matched accounts receive continued summarizer access\",\n            \"passed\": true\n        },\n        {\n            \"name\": \"student-number login resolves the approved account and password\",\n            \"passed\": true\n        },\n        {\n            \"name\": \"exact normalized IDs and keyed identities persisted uniquely\",\n            \"passed\": true\n        },\n        {\n            \"name\": \"repeat import skips duplicates without rewriting approvals\",\n            \"passed\": true\n        },\n        {\n            \"name\": \"duplicate account claim rejected with complete transaction rollback\",\n            \"passed\": true\n        },\n        {\n            \"name\": \"duplicate claim audited for administrators\",\n            \"passed\": true\n        },\n        {\n            \"name\": \"ordinary student cannot import trusted enrollment IDs\",\n            \"passed\": true\n        },\n        {\n            \"name\": \"unmatched number rejected without retaining an account\",\n            \"passed\": true\n        },\n        {\n            \"name\": \"inactive registry number rejected without retaining an account\",\n            \"passed\": true\n        },\n        {\n            \"name\": \"each automatic approval has a real audit event\",\n            \"passed\": true\n        }\n    ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "name": "guest quota and historical account regression",
+    "exit": 0,
+    "seconds": 1.2,
+    "output": "PASS new guest has exactly three\nPASS failure costs zero\nPASS result rollback rolls back debit\nPASS idempotent successful debit exactly one\nPASS fourth generation denied\nPASS student number only accepted without name email or photos\nPASS historical unverified account remains restricted\nPASS registration never resets exhausted trial\nPASS password hash preserved\nPASS duplicate student claim refused\nPASS missing student number refused\nPASS unsafe student number refused\nPASS name XSS rejected\nPASS number syntax is configurable safety only\nPASS unprivileged review refused\nPASS no evidence means no approval\nPASS evidenced human approval grants access\nPASS repeated stale decision refused\nPASS student notification and audit are real\nPASS verified generation does not debit trial\nPASS revocation checked again before persistence\nPASS eligible correction reuses and activates existing account\nPASS overdue details hidden before cleanup\nPASS retention dry run read only\nPASS three day physical detail erasure\nPASS minimal approval retained\nPASS old review detail erased\nPASS cleanup idempotent\nPASS expiry enforced without scheduler\nPASS admin role checked from database\nPASS eight concurrent requests admit exactly three\nPASS concurrency only produces expected denials\nPASS document API consumes shared allowance\nPASS cache does not consume allowance\nPASS generation failure returned\nPASS generation failure costs zero\nPASS batch larger than allowance rolls back\nPASS failed batch has no hidden charge\nPASS direct API missing CSRF denied\nPASS valid CSRF API request succeeds\nPASS API cannot bypass exhausted limit\nPASS existing results readable at zero\nPASS document IDOR blocked\nPASS main pipeline result and debit atomic\nPASS expired reservation cannot persist\nPASS expired lease restores capacity without debit\nPASS stale worker release cannot release new attempt\nPASS old pending account binding survives fresh browser\nPASS existing account never automatically verified\nPASS client role cannot grant continued access\nPASS inactive account is denied\nPASS owner cannot read other review history\nPASS expired pending details require correction, not approval\nPASS erased unapproved claim releases duplicate identifier\nPASS mismatched persistence identity rejected\nPASS persistence failure rolls back result and debit\nPASS exhausted text is gated before extraction/upload\nPASS exhausted url is gated before extraction/upload\nPASS exhausted file is gated before extraction/upload\nPASS request budget exhaustion is controlled and never debits\n{\n    \"driver\": \"mysql\",\n    \"passed\": 60,\n    \"failed\": 0,\n    \"failures\": [],\n    \"race_outcomes\": [\n        \"completed\",\n        \"completed\",\n        \"ACCESS_BUSY\",\n        \"completed\",\n        \"ACCESS_BUSY\",\n        \"ACCESS_BUSY\",\n        \"ACCESS_BUSY\",\n        \"ACCESS_BUSY\"\n    ]\n}\n",
+    "stderr": "[DocumentSummaryService] Worker generation failed: RuntimeException\n"
+  },
+  {
+    "name": "registry eligibility imports races and rollback",
+    "exit": 0,
+    "seconds": 4.41,
+    "output": "PASS preview never populates trusted registry\nPASS single insertion\nPASS confirmation idempotent\nPASS leading zeros preserved\nPASS short IDs are genuinely masked\nPASS distinct numeric IDs never collapse\nPASS paste counts invalid and duplicate accurately\nPASS case and surrounding whitespace share one identity\nPASS meaningful separators remain distinct\nPASS UTF-8 BOM optional CSV header and quoted strings\nPASS TXT parser\nPASS empty input rejected\nPASS broken CSV rejected\nPASS binary contents rejected\nPASS oversize input rejected\nPASS row cap enforced\nPASS SQL/XSS/formula payloads rejected as invalid rows\nPASS unknown number is rejected without retaining an account\nPASS three thousand unique records imported\nPASS pending account reconciled once\nPASS approval provenance and notification\nPASS pending password preserved\nPASS rerun skips approved account without rewrite\nPASS registration automatically approves eligible registry match\nPASS duplicate claim rejected and transaction removes new account\nPASS duplicate claim administrator audit exists\nPASS inactive registry rejects registration\nPASS reimport never reactivates inactive entry\nPASS revocation suspends previously approved account\nPASS in-flight generation rechecks revocation before saving\nPASS stale status version rejected\nPASS reactivation never silently restores suspended access\nPASS unprivileged import denied\nPASS unprivileged registry list and statistics denied\nPASS expired registry rejects registration\nPASS expired entry needs an explicit campus renewal\nPASS explicit renewal updates eligibility without silently approving accounts\nPASS authorized reimport reconciles a pending account after renewal\nPASS expired preview cannot commit\nPASS another admin cannot claim preview\nPASS mid-import failure rolls back prior rows\nPASS same preview safely retries after failure\nPASS eight simultaneous registrations activate exactly one account\nPASS concurrent overlapping imports and registration activate safely or require retry\nPASS application detail erasure preserves registry approval and durable duplicate protection\nPASS expired preview data physically erased\nPASS all pre-existing password hashes unchanged\nPASS existing summaries preserved\nPASS committed preview payload erased\nPASS audit records never contain complete list identifiers\nPASS additive registry migration replays without losing imported records\n{\"passed\":51,\"failed\":0,\"failures\":[]}\n",
+    "stderr": ""
+  },
+  {
+    "name": "PHP 8.3 registry compatibility",
+    "exit": 0,
+    "seconds": 0.34,
+    "output": "PASS PHP 8.3 runtime\nPASS PHP 8.3 transactional import\nPASS PHP 8.3 automatic approval\nPASS PHP 8.3 password hashing\nPASS PHP 8.3 duplicate claim blocked\nPASS PHP 8.3 revocation enforced\n",
+    "stderr": ""
+  },
+  {
+    "name": "isolated Apache configuration",
+    "exit": 0,
+    "seconds": 0.47,
+    "output": "",
+    "stderr": "Syntax OK\n"
+  },
+  {
+    "name": "registry activation real HTTP workflows",
+    "exit": 0,
+    "seconds": 7.11,
+    "output": "PASS registration explains immediate activation without the old pending workflow\nPASS anonymous registry access denied\nPASS ordinary user registry access denied\nPASS admin password alone does not bypass the login challenge\nPASS authorized administrator completes second-factor login\nPASS registry imports remain enabled\nPASS unlisted ID rejected despite forged approval fields\nPASS rejected signup retains no user application review-event or trial-link rows\nPASS rejected signup has no continued access\nPASS administrator imports active IDs successfully\nPASS case-normalized matching signup commits verified not pending\nPASS matching account immediately receives continued access\nPASS verified page has no waiting heading or review-submit button\nPASS duplicate ID rejected without another account\nPASS activated student can sign in again with ID and unchanged password\nPASS inactive ID rejected with no retained signup rows\nPASS revoked ID rejected with no retained signup rows\nPASS expired ID rejected with no retained signup rows\nPASS existing unmatched account preserved without a review waiting screen\nPASS failed existing-account activation preserves original application\nPASS existing-account activation requires valid CSRF\nPASS existing account activates immediately with imported corrected ID\nPASS ordinary existing account without application remains restricted\nPASS registry import still requires valid CSRF\nPASS admin dashboard preserves legacy management without pending badge\nPASS terms acceptance remains required\nPASS registration requires valid CSRF\n",
+    "stderr": ""
+  },
+  {
+    "name": "original core data preservation during live activity",
+    "exit": 0,
+    "seconds": 0.89,
+    "output": "{\"original_core_rows_preserved\":true,\"live_activity_observed\":false,\"benchmark_uses_restricted_isolated_database\":true}",
+    "stderr": ""
+  },
+  {
+    "name": "isolated fixture cleanup",
+    "exit": 0,
+    "seconds": 0.67,
+    "output": "QA databases and restricted user removed.",
+    "stderr": ""
+  }
+]

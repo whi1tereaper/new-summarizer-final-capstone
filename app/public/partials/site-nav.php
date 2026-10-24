@@ -9,8 +9,8 @@ $isLanding = ($navCurrentPage === 'index.php' || $navCurrentPage === '');
 <link rel="stylesheet" href="assets/css/site-nav.css?v=nex-13">
 <script src="assets/js/logout-confirmation.js?v=<?= filemtime(__DIR__ . '/../assets/js/logout-confirmation.js') ?>" defer></script>
 <?php if (!$isLanding): ?>
-<link rel="stylesheet" href="assets/css/theme-toggle.css?v=2">
-<script src="assets/js/theme-toggle.js?v=2"></script>
+<link rel="stylesheet" href="assets/css/theme-toggle.css?v=<?= filemtime(__DIR__ . '/../assets/css/theme-toggle.css') ?>">
+<script src="assets/js/theme-toggle.js?v=<?= filemtime(__DIR__ . '/../assets/js/theme-toggle.js') ?>"></script>
 <?php endif; ?>
 <header class="nex-header site-header" id="nex-site-header" data-active-theme="light" aria-label="LIGHT navigation">
     <a href="index.php" class="nex-brand" aria-label="LIGHT home">LIGHT</a>

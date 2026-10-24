@@ -33,7 +33,6 @@ $prefilledEmail = $_SESSION['reset_email'] ?? '';
                             <h2>Set New Password</h2>
                         </div>
                     </div>
-                    <p style="font-family:'Inter', sans-serif; font-size:0.9rem; color:rgba(8,8,8,0.65); line-height:1.55; margin-bottom:24px;">Choose a secure password for your condensed intelligence history.</p>
                 
                 <?php if (!empty($_SESSION['error'])): ?>
                     <div class="message message-error">

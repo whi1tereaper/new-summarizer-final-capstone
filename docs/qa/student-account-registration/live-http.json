@@ -1,0 +1,22 @@
+[
+  {
+    "name": "live Apache port 80 uses PHP 8.3.29",
+    "passed": true
+  },
+  {
+    "name": "live registration requires email and keeps a fixed PEN prefix",
+    "passed": true
+  },
+  {
+    "name": "live registration JavaScript is available",
+    "passed": true
+  },
+  {
+    "name": "live administrator ID management rejects anonymous visitors",
+    "passed": true
+  },
+  {
+    "name": "live registration rejects invalid CSRF without creating an account",
+    "passed": true
+  }
+]

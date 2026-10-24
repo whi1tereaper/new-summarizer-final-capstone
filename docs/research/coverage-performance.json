@@ -1,0 +1,249 @@
+{
+  "cases": [
+    {
+      "sentence_count": 20,
+      "enhanced": false,
+      "import_seconds": 6.6934671999988495,
+      "source_characters": 2536,
+      "runs": [
+        {
+          "iteration": 0,
+          "seconds": 0.2623212999969837,
+          "sampled_peak_rss_mb": 139.00390625,
+          "timings": {
+            "annotation_seconds": 0.0014093999998294748,
+            "vectorization_seconds": 0.06045649999578018,
+            "lsa_seconds": 0.025856200001726393,
+            "concept_seconds": 0.017623299994738773,
+            "selection_seconds": 0.02344029999949271,
+            "redundancy_seconds": 0.0,
+            "total_seconds": 0.13649030000669882
+          },
+          "summary_words": 400,
+          "selected_sentence_count": 20
+        },
+        {
+          "iteration": 1,
+          "seconds": 0.04445549999945797,
+          "sampled_peak_rss_mb": 139.03125,
+          "timings": {
+            "annotation_seconds": 1.0000003385357559e-05,
+            "vectorization_seconds": 0.006249700003536418,
+            "lsa_seconds": 0.0037966000018059276,
+            "concept_seconds": 0.0075735999998869374,
+            "selection_seconds": 0.018581199998152442,
+            "redundancy_seconds": 0.0,
+            "total_seconds": 0.039641600000322796
+          },
+          "summary_words": 400,
+          "selected_sentence_count": 20
+        }
+      ]
+    },
+    {
+      "sentence_count": 20,
+      "enhanced": true,
+      "import_seconds": 6.25032509999437,
+      "source_characters": 2536,
+      "runs": [
+        {
+          "iteration": 0,
+          "seconds": 13.387909299999592,
+          "sampled_peak_rss_mb": 390.94140625,
+          "timings": {
+            "annotation_seconds": 13.203269700003148,
+            "vectorization_seconds": 0.02597349999996368,
+            "lsa_seconds": 0.003391600002942141,
+            "concept_seconds": 0.007852599999750964,
+            "selection_seconds": 0.01181440000073053,
+            "redundancy_seconds": 0.0,
+            "total_seconds": 13.259096599998884
+          },
+          "summary_words": 400,
+          "selected_sentence_count": 20
+        },
+        {
+          "iteration": 1,
+          "seconds": 0.20372240000142483,
+          "sampled_peak_rss_mb": 391.01171875,
+          "timings": {
+            "annotation_seconds": 0.17709340000146767,
+            "vectorization_seconds": 0.0039700999986962415,
+            "lsa_seconds": 0.0021157000010134652,
+            "concept_seconds": 0.004568600001221057,
+            "selection_seconds": 0.010884099996474106,
+            "redundancy_seconds": 0.0,
+            "total_seconds": 0.20032809999975143
+          },
+          "summary_words": 400,
+          "selected_sentence_count": 20
+        }
+      ]
+    },
+    {
+      "sentence_count": 200,
+      "enhanced": false,
+      "import_seconds": 4.558762500004377,
+      "source_characters": 25210,
+      "runs": [
+        {
+          "iteration": 0,
+          "seconds": 0.40374380000139354,
+          "sampled_peak_rss_mb": 139.859375,
+          "timings": {
+            "annotation_seconds": 0.0009869999994407408,
+            "vectorization_seconds": 0.03263900000456488,
+            "lsa_seconds": 0.03411490000144113,
+            "concept_seconds": 0.08645070000056876,
+            "selection_seconds": 0.12152970000170171,
+            "redundancy_seconds": 0.0,
+            "total_seconds": 0.2874872000029427
+          },
+          "summary_words": 400,
+          "selected_sentence_count": 20
+        },
+        {
+          "iteration": 1,
+          "seconds": 0.2951489999977639,
+          "sampled_peak_rss_mb": 140.13671875,
+          "timings": {
+            "annotation_seconds": 2.8200003725942224e-05,
+            "vectorization_seconds": 0.008276000000478234,
+            "lsa_seconds": 0.004680300000472926,
+            "concept_seconds": 0.03470819999347441,
+            "selection_seconds": 0.19053379999968456,
+            "redundancy_seconds": 0.0,
+            "total_seconds": 0.24995689999923343
+          },
+          "summary_words": 400,
+          "selected_sentence_count": 20
+        }
+      ]
+    },
+    {
+      "sentence_count": 200,
+      "enhanced": true,
+      "import_seconds": 6.071196700002474,
+      "source_characters": 25210,
+      "runs": [
+        {
+          "iteration": 0,
+          "seconds": 15.884358600000269,
+          "sampled_peak_rss_mb": 379.90234375,
+          "timings": {
+            "annotation_seconds": 15.196328600002744,
+            "vectorization_seconds": 0.06751680000161286,
+            "lsa_seconds": 0.013589399997727014,
+            "concept_seconds": 0.10341079999489011,
+            "selection_seconds": 0.3200933000043733,
+            "redundancy_seconds": 0.0,
+            "total_seconds": 15.730829400003131
+          },
+          "summary_words": 400,
+          "selected_sentence_count": 20
+        },
+        {
+          "iteration": 1,
+          "seconds": 3.333561599996756,
+          "sampled_peak_rss_mb": 377.7890625,
+          "timings": {
+            "annotation_seconds": 2.9377161000011256,
+            "vectorization_seconds": 0.019816699998045806,
+            "lsa_seconds": 0.008271600003354251,
+            "concept_seconds": 0.06366649999836227,
+            "selection_seconds": 0.2249281000040355,
+            "redundancy_seconds": 0.0,
+            "total_seconds": 3.2762572999999975
+          },
+          "summary_words": 400,
+          "selected_sentence_count": 20
+        }
+      ]
+    },
+    {
+      "sentence_count": 800,
+      "enhanced": false,
+      "import_seconds": 5.640269699993951,
+      "source_characters": 101297,
+      "runs": [
+        {
+          "iteration": 0,
+          "seconds": 1.9263917000062065,
+          "sampled_peak_rss_mb": 142.58984375,
+          "timings": {
+            "annotation_seconds": 0.0027974999975413084,
+            "vectorization_seconds": 0.09744070000306237,
+            "lsa_seconds": 0.024840399993991014,
+            "concept_seconds": 0.33891749999747844,
+            "selection_seconds": 1.0575419000015245,
+            "redundancy_seconds": 0.0,
+            "total_seconds": 1.6193363999991561
+          },
+          "summary_words": 400,
+          "selected_sentence_count": 20
+        },
+        {
+          "iteration": 1,
+          "seconds": 1.735942100000102,
+          "sampled_peak_rss_mb": 143.03125,
+          "timings": {
+            "annotation_seconds": 0.00019099999917671084,
+            "vectorization_seconds": 0.05716719999327324,
+            "lsa_seconds": 0.022630699997534975,
+            "concept_seconds": 0.28742450000572717,
+            "selection_seconds": 1.1372409999967203,
+            "redundancy_seconds": 0.0,
+            "total_seconds": 1.592587299994193
+          },
+          "summary_words": 400,
+          "selected_sentence_count": 20
+        }
+      ]
+    },
+    {
+      "sentence_count": 800,
+      "enhanced": true,
+      "import_seconds": 5.614061299995228,
+      "source_characters": 101297,
+      "runs": [
+        {
+          "iteration": 0,
+          "seconds": 24.5327357999995,
+          "sampled_peak_rss_mb": 397.1171875,
+          "timings": {
+            "annotation_seconds": 22.88599940000131,
+            "vectorization_seconds": 0.08471310000459198,
+            "lsa_seconds": 0.017105399994761683,
+            "concept_seconds": 0.2383641999986139,
+            "selection_seconds": 0.9673630999968736,
+            "redundancy_seconds": 0.0,
+            "total_seconds": 24.264151700001094
+          },
+          "summary_words": 400,
+          "selected_sentence_count": 20
+        },
+        {
+          "iteration": 1,
+          "seconds": 12.222161199999391,
+          "sampled_peak_rss_mb": 400.31640625,
+          "timings": {
+            "annotation_seconds": 10.64109119999921,
+            "vectorization_seconds": 0.04909149999730289,
+            "lsa_seconds": 0.020325799996498972,
+            "concept_seconds": 0.27637179999874206,
+            "selection_seconds": 0.9985121999998228,
+            "redundancy_seconds": 0.0,
+            "total_seconds": 12.052233499998692
+          },
+          "summary_words": 400,
+          "selected_sentence_count": 20
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Synthetic scaling sources; no real-article quality inference.",
+    "No OS memory cap enforced. Python RSS excludes Apache/PHP, workers, and container overhead.",
+    "10-ms memory sampling may miss short peaks; no 512 MB deployment guarantee is made."
+  ]
+}

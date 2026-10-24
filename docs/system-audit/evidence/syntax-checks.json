@@ -1,0 +1,752 @@
+[
+  {
+    "file": "app/config/config.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\config\\config.php"
+  },
+  {
+    "file": "app/public/about.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\about.php"
+  },
+  {
+    "file": "app/public/accept_terms.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\accept_terms.php"
+  },
+  {
+    "file": "app/public/admin_audit_logs.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\admin_audit_logs.php"
+  },
+  {
+    "file": "app/public/admin_challenge_change.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\admin_challenge_change.php"
+  },
+  {
+    "file": "app/public/admin_challenge_setup.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\admin_challenge_setup.php"
+  },
+  {
+    "file": "app/public/admin_dashboard.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\admin_dashboard.php"
+  },
+  {
+    "file": "app/public/admin_db_health.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\admin_db_health.php"
+  },
+  {
+    "file": "app/public/admin_feedback_feed.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\admin_feedback_feed.php"
+  },
+  {
+    "file": "app/public/admin_verify.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\admin_verify.php"
+  },
+  {
+    "file": "app/public/analytics.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\analytics.php"
+  },
+  {
+    "file": "app/public/auth.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\auth.php"
+  },
+  {
+    "file": "app/public/check_status.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\check_status.php"
+  },
+  {
+    "file": "app/public/dashboard.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\dashboard.php"
+  },
+  {
+    "file": "app/public/evaluate.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\evaluate.php"
+  },
+  {
+    "file": "app/public/evaluation.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\evaluation.php"
+  },
+  {
+    "file": "app/public/evaluation_export.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\evaluation_export.php"
+  },
+  {
+    "file": "app/public/feedback_submit.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\feedback_submit.php"
+  },
+  {
+    "file": "app/public/forgot_password.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\forgot_password.php"
+  },
+  {
+    "file": "app/public/health.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\health.php"
+  },
+  {
+    "file": "app/public/history.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\history.php"
+  },
+  {
+    "file": "app/public/index.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\index.php"
+  },
+  {
+    "file": "app/public/login.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\login.php"
+  },
+  {
+    "file": "app/public/logout.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\logout.php"
+  },
+  {
+    "file": "app/public/nutshell_generate.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\nutshell_generate.php"
+  },
+  {
+    "file": "app/public/processing.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\processing.php"
+  },
+  {
+    "file": "app/public/profile.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\profile.php"
+  },
+  {
+    "file": "app/public/register.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\register.php"
+  },
+  {
+    "file": "app/public/reset_password.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\reset_password.php"
+  },
+  {
+    "file": "app/public/result.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\result.php"
+  },
+  {
+    "file": "app/public/summarize.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\summarize.php"
+  },
+  {
+    "file": "app/public/summarizer.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\summarizer.php"
+  },
+  {
+    "file": "app/public/summary_worker.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\summary_worker.php"
+  },
+  {
+    "file": "app/public/terms.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\terms.php"
+  },
+  {
+    "file": "app/public/translate_proxy.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\translate_proxy.php"
+  },
+  {
+    "file": "app/public/tts_audio.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\tts_audio.php"
+  },
+  {
+    "file": "app/public/tts_generate.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\tts_generate.php"
+  },
+  {
+    "file": "app/src/Database.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Database.php"
+  },
+  {
+    "file": "app/src/whitereaper.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\whitereaper.php"
+  },
+  {
+    "file": "app/vendor/autoload.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\vendor\\autoload.php"
+  },
+  {
+    "file": "app/vendor/composer/autoload_classmap.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\vendor\\composer\\autoload_classmap.php"
+  },
+  {
+    "file": "app/vendor/composer/autoload_namespaces.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\vendor\\composer\\autoload_namespaces.php"
+  },
+  {
+    "file": "app/vendor/composer/autoload_psr4.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\vendor\\composer\\autoload_psr4.php"
+  },
+  {
+    "file": "app/vendor/composer/autoload_real.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\vendor\\composer\\autoload_real.php"
+  },
+  {
+    "file": "app/vendor/composer/autoload_static.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\vendor\\composer\\autoload_static.php"
+  },
+  {
+    "file": "app/vendor/composer/ClassLoader.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\vendor\\composer\\ClassLoader.php"
+  },
+  {
+    "file": "app/vendor/composer/installed.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\vendor\\composer\\installed.php"
+  },
+  {
+    "file": "app/vendor/composer/InstalledVersions.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\vendor\\composer\\InstalledVersions.php"
+  },
+  {
+    "file": "app/src/Controllers/AdminController.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Controllers\\AdminController.php"
+  },
+  {
+    "file": "app/src/Controllers/AnalyticsController.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Controllers\\AnalyticsController.php"
+  },
+  {
+    "file": "app/src/Controllers/ArticleController.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Controllers\\ArticleController.php"
+  },
+  {
+    "file": "app/src/Controllers/AuthController.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Controllers\\AuthController.php"
+  },
+  {
+    "file": "app/src/Controllers/DocumentSummaryController.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Controllers\\DocumentSummaryController.php"
+  },
+  {
+    "file": "app/src/Controllers/FeedbackHandler.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Controllers\\FeedbackHandler.php"
+  },
+  {
+    "file": "app/src/Controllers/HistoryHandler.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Controllers\\HistoryHandler.php"
+  },
+  {
+    "file": "app/src/Repositories/FeedbackRepository.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Repositories\\FeedbackRepository.php"
+  },
+  {
+    "file": "app/src/Repositories/HistoryRepository.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Repositories\\HistoryRepository.php"
+  },
+  {
+    "file": "app/src/Repositories/UserRepository.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Repositories\\UserRepository.php"
+  },
+  {
+    "file": "app/src/Services/AdminSecurityService.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Services\\AdminSecurityService.php"
+  },
+  {
+    "file": "app/src/Services/ArticleService.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Services\\ArticleService.php"
+  },
+  {
+    "file": "app/src/Services/BarkTtsService.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Services\\BarkTtsService.php"
+  },
+  {
+    "file": "app/src/Services/DocumentSummaryService.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Services\\DocumentSummaryService.php"
+  },
+  {
+    "file": "app/src/Services/EmailService.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Services\\EmailService.php"
+  },
+  {
+    "file": "app/src/Services/EvaluationAccess.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Services\\EvaluationAccess.php"
+  },
+  {
+    "file": "app/src/Services/EvaluationPythonBridge.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Services\\EvaluationPythonBridge.php"
+  },
+  {
+    "file": "app/src/Services/EvaluationService.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Services\\EvaluationService.php"
+  },
+  {
+    "file": "app/src/Services/FeedbackService.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Services\\FeedbackService.php"
+  },
+  {
+    "file": "app/src/Services/FileUploadService.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Services\\FileUploadService.php"
+  },
+  {
+    "file": "app/src/Services/GuestSessionService.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Services\\GuestSessionService.php"
+  },
+  {
+    "file": "app/src/Services/HistoryService.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Services\\HistoryService.php"
+  },
+  {
+    "file": "app/src/Services/LocalPythonBridge.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Services\\LocalPythonBridge.php"
+  },
+  {
+    "file": "app/src/Services/PasswordResetService.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Services\\PasswordResetService.php"
+  },
+  {
+    "file": "app/src/Services/RateLimiter.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Services\\RateLimiter.php"
+  },
+  {
+    "file": "app/src/Services/RememberMeService.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Services\\RememberMeService.php"
+  },
+  {
+    "file": "app/src/Services/SourceResolver.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Services\\SourceResolver.php"
+  },
+  {
+    "file": "app/src/Services/SummarizerPromptTemplate.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Services\\SummarizerPromptTemplate.php"
+  },
+  {
+    "file": "app/src/Services/SummaryJobService.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Services\\SummaryJobService.php"
+  },
+  {
+    "file": "app/src/Services/TermsAcceptanceService.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Services\\TermsAcceptanceService.php"
+  },
+  {
+    "file": "app/src/Services/UploadService.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Services\\UploadService.php"
+  },
+  {
+    "file": "app/src/Support/config.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Support\\config.php"
+  },
+  {
+    "file": "app/src/Support/Env.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Support\\Env.php"
+  },
+  {
+    "file": "app/src/Support/ProcessingError.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Support\\ProcessingError.php"
+  },
+  {
+    "file": "app/src/Support/RuntimePaths.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Support\\RuntimePaths.php"
+  },
+  {
+    "file": "app/src/Utils/Formatter.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Utils\\Formatter.php"
+  },
+  {
+    "file": "app/src/Utils/PasswordPolicy.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Utils\\PasswordPolicy.php"
+  },
+  {
+    "file": "app/src/Utils/Privacy.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Utils\\Privacy.php"
+  },
+  {
+    "file": "app/src/Utils/SessionManager.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Utils\\SessionManager.php"
+  },
+  {
+    "file": "app/src/Utils/TermsContent.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Utils\\TermsContent.php"
+  },
+  {
+    "file": "app/src/Utils/validation.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\src\\Utils\\validation.php"
+  },
+  {
+    "file": "app/public/api/documents.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\api\\documents.php"
+  },
+  {
+    "file": "app/public/api/index.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\api\\index.php"
+  },
+  {
+    "file": "app/public/api/qa.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\api\\qa.php"
+  },
+  {
+    "file": "app/public/api/router.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\api\\router.php"
+  },
+  {
+    "file": "app/public/api/track_landing.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\api\\track_landing.php"
+  },
+  {
+    "file": "app/public/partials/analytics-graphs-card.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\partials\\analytics-graphs-card.php"
+  },
+  {
+    "file": "app/public/partials/background-component.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\partials\\background-component.php"
+  },
+  {
+    "file": "app/public/partials/error-support.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\partials\\error-support.php"
+  },
+  {
+    "file": "app/public/partials/evaluation-output.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\partials\\evaluation-output.php"
+  },
+  {
+    "file": "app/public/partials/evaluation-report.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\partials\\evaluation-report.php"
+  },
+  {
+    "file": "app/public/partials/evaluation-ui.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\partials\\evaluation-ui.php"
+  },
+  {
+    "file": "app/public/partials/nex-footer.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\partials\\nex-footer.php"
+  },
+  {
+    "file": "app/public/partials/rating-widget.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\partials\\rating-widget.php"
+  },
+  {
+    "file": "app/public/partials/site-footer.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\partials\\site-footer.php"
+  },
+  {
+    "file": "app/public/partials/site-nav.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\partials\\site-nav.php"
+  },
+  {
+    "file": "app/public/partials/summarizer-form.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\partials\\summarizer-form.php"
+  },
+  {
+    "file": "app/public/partials/summarizer-scripts.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\partials\\summarizer-scripts.php"
+  },
+  {
+    "file": "app/public/partials/theme-toggle-button.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in app\\public\\partials\\theme-toggle-button.php"
+  },
+  {
+    "file": "scripts/cleanup_admin_audit_logs.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\cleanup_admin_audit_logs.php"
+  },
+  {
+    "file": "scripts/cleanup_feedback_events.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\cleanup_feedback_events.php"
+  },
+  {
+    "file": "scripts/cleanup_landing_analytics.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\cleanup_landing_analytics.php"
+  },
+  {
+    "file": "scripts/cleanup_summary_recovery.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\cleanup_summary_recovery.php"
+  },
+  {
+    "file": "scripts/evaluation_import.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\evaluation_import.php"
+  },
+  {
+    "file": "scripts/evaluation_worker.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\evaluation_worker.php"
+  },
+  {
+    "file": "scripts/reset_admin_challenge.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\reset_admin_challenge.php"
+  },
+  {
+    "file": "scripts/seed_summary_feedback.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\seed_summary_feedback.php"
+  },
+  {
+    "file": "scripts/test_auth_full_verification.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\test_auth_full_verification.php"
+  },
+  {
+    "file": "scripts/test_combinable_summarizer.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\test_combinable_summarizer.php"
+  },
+  {
+    "file": "scripts/test_error_http_audit.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\test_error_http_audit.php"
+  },
+  {
+    "file": "scripts/test_error_lifecycle.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\test_error_lifecycle.php"
+  },
+  {
+    "file": "scripts/test_evaluation.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\test_evaluation.php"
+  },
+  {
+    "file": "scripts/test_feedback_hardening.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\test_feedback_hardening.php"
+  },
+  {
+    "file": "scripts/test_history_repository_boundary.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\test_history_repository_boundary.php"
+  },
+  {
+    "file": "scripts/test_part1_rating_comments.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\test_part1_rating_comments.php"
+  },
+  {
+    "file": "scripts/test_part2_and_result_page.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\test_part2_and_result_page.php"
+  },
+  {
+    "file": "scripts/test_phase1_security.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\test_phase1_security.php"
+  },
+  {
+    "file": "scripts/test_phase2_decoupling.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\test_phase2_decoupling.php"
+  },
+  {
+    "file": "scripts/test_phase3_admin_analytics.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\test_phase3_admin_analytics.php"
+  },
+  {
+    "file": "scripts/test_phase4_database_lifecycle.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\test_phase4_database_lifecycle.php"
+  },
+  {
+    "file": "scripts/test_source_error_contract.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\test_source_error_contract.php"
+  },
+  {
+    "file": "scripts/test_summarizer_intelligence_update.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\test_summarizer_intelligence_update.php"
+  },
+  {
+    "file": "scripts/test_worker_daemon.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in scripts\\test_worker_daemon.php"
+  },
+  {
+    "file": "tools/check_native_environment.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in tools\\check_native_environment.php"
+  },
+  {
+    "file": "tools/import_schema.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in tools\\import_schema.php"
+  },
+  {
+    "file": "tools/migrate.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in tools\\migrate.php"
+  },
+  {
+    "file": "index.php",
+    "exit_code": 0,
+    "output": "No syntax errors detected in index.php"
+  },
+  {
+    "file": "app/public/assets/js/admin-user-filters.js",
+    "exit_code": 0,
+    "output": ""
+  },
+  {
+    "file": "app/public/assets/js/analytics.js",
+    "exit_code": 0,
+    "output": ""
+  },
+  {
+    "file": "app/public/assets/js/dashboard-charts.js",
+    "exit_code": 0,
+    "output": ""
+  },
+  {
+    "file": "app/public/assets/js/evaluation.js",
+    "exit_code": 0,
+    "output": ""
+  },
+  {
+    "file": "app/public/assets/js/footer-mesh-text.js",
+    "exit_code": 0,
+    "output": ""
+  },
+  {
+    "file": "app/public/assets/js/index.js",
+    "exit_code": 0,
+    "output": ""
+  },
+  {
+    "file": "app/public/assets/js/landing-analytics.js",
+    "exit_code": 0,
+    "output": ""
+  },
+  {
+    "file": "app/public/assets/js/light-errors.js",
+    "exit_code": 0,
+    "output": ""
+  },
+  {
+    "file": "app/public/assets/js/logout-confirmation.js",
+    "exit_code": 0,
+    "output": ""
+  },
+  {
+    "file": "app/public/assets/js/mesh-text-hover.js",
+    "exit_code": 0,
+    "output": ""
+  },
+  {
+    "file": "app/public/assets/js/mesh-text.js",
+    "exit_code": 0,
+    "output": ""
+  },
+  {
+    "file": "app/public/assets/js/nex-landing.js",
+    "exit_code": 0,
+    "output": ""
+  },
+  {
+    "file": "app/public/assets/js/processing.js",
+    "exit_code": 0,
+    "output": ""
+  },
+  {
+    "file": "app/public/assets/js/result.js",
+    "exit_code": 0,
+    "output": ""
+  },
+  {
+    "file": "app/public/assets/js/theme-toggle.js",
+    "exit_code": 0,
+    "output": ""
+  }
+]

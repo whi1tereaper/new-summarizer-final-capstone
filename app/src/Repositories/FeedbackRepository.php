@@ -69,7 +69,7 @@ final class FeedbackRepository
         $statement = $this->db->prepare(
             'SELECT id, summary_id, rating, reasons, comment, created_at
              FROM feedback_comments
-             WHERE summary_id = :summary_id AND comment IS NOT NULL AND TRIM(comment) != ""
+             WHERE summary_id = :summary_id AND comment IS NOT NULL AND TRIM(comment) != \'\'
              ORDER BY created_at DESC, id DESC
              LIMIT :limit'
         );
@@ -164,7 +164,7 @@ final class FeedbackRepository
                     s.summary_length AS summary_depth,
                     s.original_word_count,
                     s.summary_word_count,
-                    ROUND(s.summary_word_count / NULLIF(s.original_word_count, 0), 2) AS compression_ratio,
+                    ROUND(1.0 * s.summary_word_count / NULLIF(s.original_word_count, 0), 2) AS compression_ratio,
                     s.processing_time,
                     NULL AS account_username,
                     NULL AS account_email
@@ -224,7 +224,7 @@ final class FeedbackRepository
         $bySource = $sourceStatement->fetchAll(PDO::FETCH_ASSOC);
 
         $reasonsStatement = $this->db->query(
-            'SELECT reasons FROM feedback WHERE reasons IS NOT NULL AND reasons != ""'
+            "SELECT reasons FROM feedback WHERE reasons IS NOT NULL AND reasons != ''"
         );
         $reasonCounts = [];
         while ($row = $reasonsStatement->fetch(PDO::FETCH_ASSOC)) {

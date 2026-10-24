@@ -125,12 +125,12 @@ $navUserId = $_SESSION['user_id'] ?? null;
                             <?php endif; ?>
 
                             <div class="form-group">
-                                <label for="username">Username or Email</label>
+                                <label for="username">Student ID, Username or Email</label>
                                 <div class="auth-input-group">
                                     <span class="auth-input-icon" aria-hidden="true">
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                     </span>
-                                    <input type="text" id="username" name="username" required placeholder="Enter username or email" autocomplete="username" autofocus>
+                                    <input type="text" id="username" name="username" required placeholder="Enter your full Student ID, username or email" autocomplete="username" autofocus>
                                 </div>
                             </div>
 

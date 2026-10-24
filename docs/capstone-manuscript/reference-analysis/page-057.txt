@@ -1,0 +1,36 @@
+supporting   the   efficiency   demands   of
+accreditation preparation.
+
+2.2 Improvement in Security
+The system enhances document security through
+multiple layers of control:
+
+   •  Role-Based Access Control (RBAC): Users
+      are  assigned  roles  (Admin,  Teacher,
+      Assistant) that determine which folders
+      and files they can access. Teachers and
+      assistants  (Compliance  Managers)  are
+      limited to the specific Areas assigned to
+      them by the Admin, preventing unauthorized
+      viewing  or  modification  of  sensitive
+      records.
+
+   •  User Authentication: Secure login with
+      email  and  password  ensures  that  only
+      registered users can access the system. The
+      password reset feature adds an additional
+      layer of account recovery security.
+
+   •  Audit Trails: The system tracks who created,
+      viewed, modified, archived, or deleted
+      each file. This accountability ensures
+      that   any   changes   to   accreditation
+      documents are logged and traceable.
+
+   •  Archiving and Bin Recovery: Deleted files
+      are moved to a Bin and retained for 90 days
+      before  permanent  deletion,  preventing
+
+
+
+                                                       38

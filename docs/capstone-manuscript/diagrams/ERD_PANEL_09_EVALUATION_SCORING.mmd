@@ -1,0 +1,37 @@
+erDiagram
+    direction TB
+    evaluation_outputs {
+        bigint id PK
+        bigint run_id FK
+        bigint document_id FK
+    }
+    evaluation_runs {
+        bigint id PK
+        bigint dataset_id FK
+        int created_by FK
+    }
+    evaluation_assignments {
+        bigint id PK
+        bigint run_id FK
+        bigint output_id FK
+        int evaluator_user_id FK
+    }
+    evaluation_ratings {
+        bigint id PK
+        bigint assignment_id FK
+    }
+    evaluation_errors {
+        bigint id PK
+        bigint output_id FK
+        int reviewer_id FK
+    }
+    evaluation_metrics {
+        bigint id PK
+        bigint output_id FK
+    }
+    evaluation_outputs ||--o{ evaluation_assignments : "output_id"
+    evaluation_runs ||--o{ evaluation_assignments : "run_id"
+    evaluation_outputs ||--o{ evaluation_errors : "output_id"
+    evaluation_outputs ||--o{ evaluation_metrics : "output_id"
+    evaluation_runs ||--o{ evaluation_outputs : "run_id"
+    evaluation_assignments ||--o| evaluation_ratings : "assignment_id"

@@ -1,0 +1,32 @@
+4.4 Testing Stage
+
+   During this phase, the researchers conducted
+thorough testing of the system to identify and
+resolve any issues, ensuring it functions as
+intended. Adjustments were made to refine the
+system’s performance and align it with the
+project requirements. This testing phase took
+place after completing the development of both
+the system interface and back-end components.
+It involved verifying that all features work
+seamlessly together and that the system meets
+the  expected  usability  and  functionality
+standards. The researchers collaborated with IT
+consultants and end-users to test the system,
+identify errors, and gather recommendations for
+improvement. Their feedback helped refine the
+system’s functionality and usability.
+
+4.5 Deployment Stage
+   In this stage, AccredX: Record Management and
+Archiving System had been thoroughly tested and
+evaluated by the researchers, so it can now be
+put into deployment. The researchers uploaded
+the system online via web hosting under a domain
+name.
+   An  Estimated  Project  Cost  contains  the
+expenses related to the system maintenance upon
+its deployment.
+
+
+                                                       88

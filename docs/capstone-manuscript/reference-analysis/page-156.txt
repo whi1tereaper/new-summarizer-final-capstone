@@ -1,0 +1,55 @@
+J. Profile Page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   •   In this page, the user can see their Username,
+       Email and Profile Picture.
+   •   You can set a profile picture by clicking the
+       “Choose a new image” and clicking “Update Image”.
+   •   You can change/update your email address by
+       entering a new email in the textbox and clicking
+       “Update Email”
+   •   You can also change your password to a new one by
+       entering your current password, entering a new
+       password, and typing that same new password to
+       confirm the changes, then click on “Update
+       Password”.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                   137

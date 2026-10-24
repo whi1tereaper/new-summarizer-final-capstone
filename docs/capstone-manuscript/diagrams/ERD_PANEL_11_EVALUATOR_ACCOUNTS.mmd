@@ -1,0 +1,30 @@
+erDiagram
+    direction LR
+    users {
+        int id PK
+    }
+    evaluation_assignments {
+        bigint id PK
+        bigint run_id FK
+        bigint output_id FK
+        int evaluator_user_id FK
+    }
+    evaluation_content_unit_reviews {
+        bigint id PK
+        bigint output_id FK
+        bigint unit_id FK
+        int reviewer_id FK
+    }
+    evaluation_errors {
+        bigint id PK
+        bigint output_id FK
+        int reviewer_id FK
+    }
+    evaluation_audit_log {
+        bigint id PK
+        int actor_id FK
+    }
+    users ||--o{ evaluation_assignments : "evaluator_user_id"
+    users |o--o{ evaluation_audit_log : "actor_id"
+    users |o--o{ evaluation_content_unit_reviews : "reviewer_id"
+    users |o--o{ evaluation_errors : "reviewer_id"

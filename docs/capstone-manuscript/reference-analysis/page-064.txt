@@ -1,0 +1,32 @@
+   during file operations. Clear error handling
+   with  user-friendly  messages  helps  users
+   understand  and  resolve  issues  such  as
+   duplicate file uploads. Finally, the system
+   must prioritize accessibility, ensuring that
+   staff  with  varying  levels  of  technical
+   proficiency can use it without difficulty.
+
+   These   essential   features   formed   the
+   foundation of the AccredX system and directly
+   address the challenges identified in the
+   existing record management practices at NEUST
+   Peñaranda Off-Campus.
+
+
+   4. The Design and Development of            AccredX:
+      Record Management and Archiving System
+      through the use of Agile Development Life
+      Cycle.
+      The  researchers  applied  the  different
+phases of the Agile Model for the practical
+completion of the AccredX: Record Management and
+Archiving System. Each stage of the Agile Model
+is defined and explained as follows:
+
+   4.1   Planning Stage
+   The researchers began the planning stage by
+identifying the need to improve the existing
+
+
+
+                                                       45

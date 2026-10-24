@@ -1,0 +1,27 @@
+%% DFD Level 2: account and session management
+%% OTP and PHP session state remain under D1. D5 is audit storage; legacy security-question tables are not current OTP storage.
+flowchart TB
+    U["Visitor / registered user<br/>eligible requests only"]
+    M["Configured email service"]
+    D1@{ shape: datastore, label: "D1 Account / session stores<br/>users; password_resets;<br/>user_tokens; guest_sessions;<br/>rate_limits; PHP session state" }
+    P11("1.1 Validate account request<br/>Apply rate limits and<br/>choose authentication flow")
+    P12("1.2 Check required identity<br/>Password, applicable code<br/>or existing session state")
+    P13("1.3 Update permitted account<br/>Establish / revoke session<br/>or remembered login")
+    U -->|"account request"| P11
+    P11 -->|"validation failure"| U
+    P11 -->|"verification / reset<br/>mail"| M
+    M -->|"delivery status"| P11
+    D1 -->|"rate / account state"| P11
+    P11 -->|"rate / verification<br/>state"| D1
+    P11 -->|"validated request"| P12
+    D1 -->|"hash / code / account<br/>state"| P12
+    P12 -->|"consumed verification<br/>code"| D1
+    P12 -->|"verified identity"| P13
+    P13 -->|"account / session<br/>changes"| D1
+    P13 -->|"access / recovery result"| U
+    classDef process fill:#edf1f5,stroke:#222,color:#111;
+    classDef store fill:#f6f6f6,stroke:#222,color:#111;
+    classDef entity fill:#fff,stroke:#222,color:#111;
+    class P11,P12,P13 process;
+    class D1 store;
+    class U,M entity;

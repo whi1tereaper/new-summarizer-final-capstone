@@ -9,14 +9,42 @@ require_once __DIR__ . '/LocalPythonBridge.php';
 require_once __DIR__ . '/SourceResolver.php';
 require_once __DIR__ . '/FileUploadService.php';
 require_once __DIR__ . '/../Support/ProcessingError.php';
+require_once __DIR__ . '/CampusAccessService.php';
 
 use App\Src\Database;
 use App\Src\Utils\Privacy;
 use PDO;
 use App\Src\Support\ProcessingError;
+use App\Src\Support\ProcessingDiagnostics;
 
 final class ArticleService
 {
+    private ?array $accessTicket = null;
+
+    public function reserveSummaryAccess(string $jobId = ''): void
+    {
+        if ($this->accessTicket !== null) return;
+        $access = new CampusAccessService($this->db);
+        $userId = isset($_SESSION['user_id']) ? (int)$_SESSION['user_id'] : null;
+        $visitor = null;
+        if ($jobId !== '') {
+            $q = $this->db->prepare('SELECT user_id,state,worker_pid,payload FROM summary_jobs WHERE job_id=?');
+            $q->execute([$jobId]); $job = $q->fetch(PDO::FETCH_ASSOC);
+            if (!$job || $job['state'] !== 'processing' || (int)$job['worker_pid'] !== getmypid()) throw new ProcessingError('ACCESS_DENIED');
+            $payload = json_decode((string)$job['payload'], true);
+            $userId = $job['user_id'] !== null ? (int)$job['user_id'] : null;
+            $visitor = is_array($payload) && is_string($payload['access_visitor'] ?? null) ? $payload['access_visitor'] : null;
+        } else $visitor = $access->visitorToken();
+        $ref = $jobId !== '' ? CampusAccessService::jobReference($jobId, getmypid()) : 'article:' . bin2hex(random_bytes(20));
+        $this->accessTicket = $access->reserve($userId, $visitor, $ref);
+    }
+
+    public function releaseSummaryAccess(): void
+    {
+        if ($this->accessTicket === null) return;
+        (new CampusAccessService($this->db))->release($this->accessTicket);
+        $this->accessTicket = null;
+    }
     // Keep style and size limits here so both the form handler and worker handoff use the same rules.
     public const ALLOWED_STYLES = [
         'standard_paragraph',
@@ -56,6 +84,9 @@ final class ArticleService
 
     public function buildPendingSummary(array $request, array $files, ?int $userId, ?string $guestToken): array
     {
+        $access = new CampusAccessService($this->db);
+        $visitor = $access->visitorToken();
+        $access->assertCanStart($userId, $visitor);
         // The declared source method is authoritative; reject conflicting raw requests before saving uploads.
         $sourceType = is_string($request['source_type'] ?? null) ? strtolower(trim($request['source_type'])) : '';
         if (!in_array($sourceType, self::ALLOWED_SOURCE_TYPES, true)) {
@@ -160,6 +191,7 @@ final class ArticleService
 
         return [
             'original_text' => $originalText,
+            'access_visitor' => $visitor,
             'file_path' => $filePath,
             'original_file_name' => $originalFileName,
             'source_hash' => $filePath !== '' ? hash_file('sha256', $filePath) : hash('sha256', $originalText),
@@ -221,6 +253,7 @@ final class ArticleService
         string $jobId = ''
     ): array {
         try {
+            $this->reserveSummaryAccess($jobId);
             // Send only the worker-facing data contract; preprocessing flags stay server-owned.
             $preprocessing = $this->summaryPreprocessingOptions($selectionMode);
             $payload = [
@@ -244,11 +277,13 @@ final class ArticleService
             // A 90-second cap here silently overrode the configured 120-second
             // budget and caused valid, slower PDF jobs to be marked timed out.
             $timeout = max(30, min(300, (int)config('python.timeout', 180)));
-            if (config('summarizer.engine_version', 'legacy') === 'v2') {
+            if (config('summarizer.engine_version', 'legacy') === 'v2'
+                && !config('summarizer.automatic_article_routing', false)) {
                 return $this->pythonBridge->summarizeV2($payload, $timeout);
             }
             return $this->pythonBridge->summarize($payload, $timeout);
         } catch (\Throwable $exception) {
+            $this->releaseSummaryAccess();
             throw ProcessingError::fromThrowable($exception);
         }
     }
@@ -276,13 +311,13 @@ final class ArticleService
         ?float $processingTime = null,
         ?string $jobId = null
     ): string {
+        try {
         if ($jobId !== null && $jobId !== '' && isset($_SESSION['stored_job_' . $jobId])) {
             return (string)$_SESSION['stored_job_' . $jobId];
         }
 
         if ($userId !== null && !$this->userExists((int)$userId)) {
-            error_log("[ArticleService] Non-existent userId {$userId} passed to storeSummary; falling back to guest.");
-            $userId = null;
+            throw new ProcessingError('ACCESS_DENIED');
         }
 
         $summaryResult = $this->normalizeContractSummaryResult($summaryResult);
@@ -291,7 +326,10 @@ final class ArticleService
         }
 
         // Normalize every optional worker field before storing anything in JSON or the database.
-        $summaryBlocks = $this->normalizeSummaryBlocks($summaryResult['sentences'] ?? []);
+        $summaryBlocks = $this->normalizeSummaryBlocks(
+            $summaryResult['sentences'] ?? [],
+            $this->isUnsupportedArticleFocusResult($summaryResult)
+        );
         $overview = $this->normalizeTextList($summaryResult['overview'] ?? []);
         $plainSummary = $this->normalizePlainSummary(
             $summaryResult['plain_summary'] ?? '',
@@ -368,6 +406,7 @@ final class ArticleService
             throw new \RuntimeException('Could not encode generated summary.');
         }
 
+        ProcessingDiagnostics::stage('database_persistence', self::class, 'storeSummary');
         // Prepared statements keep summary content out of raw SQL and preserve the insert contract.
         try {
             $this->db->beginTransaction();
@@ -420,17 +459,21 @@ final class ArticleService
                 $complete = $this->db->prepare("UPDATE summary_jobs SET state = 'completed', result_id = ?, completed_at = NOW(), updated_at = NOW(), error_message = NULL, error_details = NULL, payload = '{}' WHERE job_id = ?");
                 $complete->execute([$summaryId, $jobId]);
             }
+            if ($this->accessTicket === null || $this->accessTicket['user_id'] !== $userId) throw new ProcessingError('ACCESS_DENIED');
+            (new CampusAccessService($this->db))->complete($this->accessTicket);
             $this->db->commit();
+            $this->accessTicket = null;
             if ($jobId !== null && $jobId !== '') {
                 $_SESSION['stored_job_' . $jobId] = (string)$summaryId;
             }
             return (string)$summaryId;
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             if ($this->db->inTransaction()) {
                 $this->db->rollBack();
             }
             throw ProcessingError::fromThrowable($e);
         }
+        } finally { $this->releaseSummaryAccess(); }
     }
 
     private function normalizeContractSummaryResult(array $summaryResult): array
@@ -717,7 +760,22 @@ final class ArticleService
         ];
     }
 
-    private function normalizeSummaryBlocks(mixed $summaryBlocks): array
+    private function isUnsupportedArticleFocusResult(array $result): bool
+    {
+        // This is an explicit informational outcome, not an empty successful
+        // extraction. Keep evidence empty rather than inventing a source quote.
+        return ($result['source_metadata']['engine'] ?? null) === 'recipe_article'
+            && ($result['source_metadata']['article_analysis']['focus_status'] ?? null) === 'unsupported'
+            && ($result['source_metadata']['source_guard']['status'] ?? null) === 'exact_source_and_context_validated'
+            && ($result['source_metadata']['source_guard']['sentences_checked'] ?? null) === 0
+            && ($result['source_metadata']['source_guard']['issues'] ?? null) === []
+            && ($result['validation_passed'] ?? null) === true
+            && is_string($result['focus_query'] ?? null) && trim($result['focus_query']) !== ''
+            && ($result['sentences'] ?? null) === [] && ($result['evidence'] ?? null) === []
+            && ($result['plain_summary'] ?? null) === 'The article does not contain enough information about the selected focus.';
+    }
+
+    private function normalizeSummaryBlocks(mixed $summaryBlocks, bool $allowUnsupportedFocus = false): array
     {
         // A summary without actual content is treated as a worker failure, not as a valid empty result.
         if (!is_array($summaryBlocks)) {
@@ -732,7 +790,7 @@ final class ArticleService
             static fn($block) => $block !== ''
         ));
 
-        if ($normalized === []) {
+        if ($normalized === [] && !$allowUnsupportedFocus) {
             throw new ProcessingError('SUMMARY_QUALITY_FAILED');
         }
 
@@ -908,6 +966,7 @@ final class ArticleService
         if (array_key_exists('fallback_used', $value)) {
             $normalized['fallback_used'] = (bool)$value['fallback_used'];
         }
+
         if (is_array($value['pipeline'] ?? null)) {
             $normalized['pipeline'] = $this->normalizeTextList($value['pipeline']);
         }
@@ -922,6 +981,52 @@ final class ArticleService
             if ($normalizedWeights !== []) {
                 $normalized['scoring_weights'] = $normalizedWeights;
             }
+        }
+
+        return $normalized;
+    }
+
+    private function normalizeArticleRoutingMetadata(array $value): array
+    {
+        $normalized = [];
+        // Internal routing evidence must survive persistence, including fallback.
+        if (is_array($value['engine_routing'] ?? null)) {
+            $routing = [];
+            foreach (['selected_engine', 'reason', 'failure_type'] as $key) {
+                if (is_string($value['engine_routing'][$key] ?? null)) {
+                    $routing[$key] = mb_substr($value['engine_routing'][$key], 0, 100);
+                }
+            }
+            foreach (['enabled', 'fallback_used'] as $key) {
+                $routing[$key] = ($value['engine_routing'][$key] ?? false) === true;
+            }
+            $detection = $value['engine_routing']['detection'] ?? [];
+            if (is_array($detection) && $detection !== []) {
+                $routing['detection'] = [
+                    'is_article' => ($detection['is_article'] ?? false) === true,
+                    'article_type' => mb_substr((string)($detection['article_type'] ?? 'unknown'), 0, 40),
+                    'confidence' => max(0, min(1, (float)($detection['confidence'] ?? 0))),
+                    'classification_reason' => mb_substr((string)($detection['classification_reason'] ?? ''), 0, 100),
+                ];
+                $features = [];
+                foreach ((array)($detection['detected_features'] ?? []) as $key => $feature) {
+                    if (is_string($key) && (is_bool($feature) || is_numeric($feature) || is_string($feature))) {
+                        $features[mb_substr($key, 0, 50)] = is_string($feature) ? mb_substr($feature, 0, 100) : $feature;
+                    }
+                }
+                $routing['detection']['detected_features'] = $features;
+            }
+            $normalized['engine_routing'] = $routing;
+        }
+
+        if (is_array($value['article_analysis'] ?? null)) {
+            $analysis = $value['article_analysis'];
+            $normalized['article_analysis'] = [
+                'annotation_status' => mb_substr((string)($analysis['annotation_status'] ?? ''), 0, 100),
+                'focus_status' => mb_substr((string)($analysis['focus_status'] ?? ''), 0, 100),
+                'tokenizer' => mb_substr((string)($analysis['tokenizer'] ?? ''), 0, 100),
+                'topic_keywords' => $this->normalizeKeywords($analysis['topic_keywords'] ?? []),
+            ];
         }
 
         return $normalized;
@@ -983,6 +1088,8 @@ final class ArticleService
         if (array_key_exists('fallback_used', $value)) {
             $normalized['fallback_used'] = (bool)$value['fallback_used'];
         }
+
+        $normalized = array_merge($normalized, $this->normalizeArticleRoutingMetadata($value));
 
         if (is_array($value['synthesis'] ?? null)) {
             $synthesis = [];

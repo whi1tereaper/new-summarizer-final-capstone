@@ -1,0 +1,43 @@
+   The  5.0 Archive Management        process handles
+inactive, completed, or historical records.
+Documents that are no longer actively used may
+be transferred to the archive while remaining
+accessible for future reference, audits, and
+accreditation purposes.
+   Lastly,   6.0 Report Generation enables users
+to generate reports based on stored records and
+system  activities.  The  generated  reports
+provide  summaries  and  documentation  that
+support   decision-making,   monitoring,   and
+accreditation compliance requirements.
+   Overall, the Level 1 DFD demonstrates how
+AccredX manages user access, maintains records,
+archives documents, and generates reports to
+improve  the  efficiency,  organization,  and
+accessibility     of     accreditation-related
+information within NEUST Peñaranda Off-Campus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                       56

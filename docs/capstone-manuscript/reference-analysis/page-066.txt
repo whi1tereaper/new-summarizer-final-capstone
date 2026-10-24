@@ -1,0 +1,43 @@
+institutional data. Based on these findings,
+they formulated a system design that would not
+only
+support accreditation requirements but also
+enhance the overall efficiency and reliability
+of record handling within the campus.
+
+Gantt Chart
+   As a result of the planning, the Gantt Chart
+was produced. It contains the Agile Model stages
+which are the following:         Planning, Analysis,
+Design, Implementation, Testing and Integration,
+and Maintenance.
+   The schedule of activities performed by the
+researchers  every  stage  and  during  the
+development of the      AccredX: Record Management
+and Archiving System is depicted in Figure 5.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                       47

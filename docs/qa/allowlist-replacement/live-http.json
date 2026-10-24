@@ -1,0 +1,18 @@
+[
+  {
+    "name": "normal port 80 serves PHP 8.3.29",
+    "passed": true
+  },
+  {
+    "name": "live registration renders fixed PEN suffix workflow",
+    "passed": true
+  },
+  {
+    "name": "live administrator management remains protected",
+    "passed": true
+  },
+  {
+    "name": "live anonymous guest status remains restricted to trial",
+    "passed": true
+  }
+]

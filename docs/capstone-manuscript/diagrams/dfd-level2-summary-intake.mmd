@@ -1,0 +1,23 @@
+%% DFD 2.1-2.2: request and source intake
+%% Focused view; repeated subprocesses connect adjacent panels of the full process-2.0 decomposition.
+flowchart TB
+    U["Visitor / registered user<br/>eligible requests only"]
+    W["Public source website"]
+    D2@{ shape: datastore, label: "D2 Main summary stores<br/>summaries; summary_artifacts;<br/>summary_jobs; temporary files" }
+    P21("2.1 Validate request<br/>CSRF, source type,<br/>settings and upload")
+    P22("2.2 Resolve source and<br/>persist / reuse job")
+    P23("2.3 Run local NLP<br/>Extract, rank, select<br/>and validate output")
+    U -->|"source / settings"| P21
+    P21 -->|"validation error"| U
+    P21 -->|"validated request"| P22
+    P22 -->|"URL request, when used"| W
+    W -->|"source bytes / text"| P22
+    P22 -->|"queued payload"| D2
+    D2 -->|"existing job"| P22
+    P22 -->|"resolved source"| P23
+    classDef process fill:#edf1f5,stroke:#222,color:#111;
+    classDef store fill:#f6f6f6,stroke:#222,color:#111;
+    classDef entity fill:#fff,stroke:#222,color:#111;
+    class P21,P22,P23 process;
+    class D2 store;
+    class U,W entity;

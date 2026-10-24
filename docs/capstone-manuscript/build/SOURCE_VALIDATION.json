@@ -1,0 +1,1045 @@
+{
+  "files": [
+    "PRELIMINARY_PAGES.md",
+    "CHAPTER_1.md",
+    "CHAPTER_2.md",
+    "CHAPTER_3.md",
+    "tables\\FEATURE_DISCUSSION.md",
+    "tables\\DATA_DICTIONARY.md",
+    "CHAPTER_4.md",
+    "REFERENCES.md",
+    "APPENDICES_A_E.md",
+    "APPENDIX_F_USER_MANUAL.md",
+    "APPENDIX_G_MAINTENANCE_MANUAL.md",
+    "EVALUATION_INSTRUMENTS.md",
+    "ADDITIONAL_APPENDICES.md"
+  ],
+  "captions": [
+    {
+      "kind": "Figure",
+      "old": "Figure 1",
+      "number": 1,
+      "title": "Proposed research paradigm for LIGHT summarizer.",
+      "source": "CHAPTER_1.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 1",
+      "number": 1,
+      "title": "Research questions, evidence sources and limits of inference.",
+      "source": "CHAPTER_2.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 2",
+      "number": 2,
+      "title": "Researcher-supplied provisional Gantt schedule, April–October 2026.",
+      "source": "CHAPTER_2.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 2",
+      "number": 2,
+      "title": "Researcher-supplied provisional schedule, activities 1 to 7.",
+      "source": "CHAPTER_2.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 3",
+      "number": 3,
+      "title": "Researcher-supplied provisional schedule, activities 8 to 14.",
+      "source": "CHAPTER_2.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 4",
+      "number": 4,
+      "title": "Researcher-supplied provisional schedule, activities 15 to 21.",
+      "source": "CHAPTER_2.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 3",
+      "number": 3,
+      "title": "Proposed respondent groups and outstanding sampling information.",
+      "source": "CHAPTER_2.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 4",
+      "number": 4,
+      "title": "Proposed questionnaire response coding.",
+      "source": "CHAPTER_2.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 5",
+      "number": 5,
+      "title": "Proposed descriptive interpretation intervals for questionnaire means.",
+      "source": "CHAPTER_2.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 6",
+      "number": 6,
+      "title": "Relationship between supplied project needs and implemented capabilities.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 5",
+      "number": 5,
+      "title": "Implemented actors and major use cases.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 6",
+      "number": 6,
+      "title": "Guest visitor use cases.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 7",
+      "number": 7,
+      "title": "Registered account use cases.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 8",
+      "number": 8,
+      "title": "Administrator use cases.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 9",
+      "number": 9,
+      "title": "Assigned evaluator use cases.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 10",
+      "number": 10,
+      "title": "Context diagram of LIGHT summarizer.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 11",
+      "number": 11,
+      "title": "Level 1 data flows and logical stores.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 12",
+      "number": 12,
+      "title": "Level 2 summary-generation data flow.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 13",
+      "number": 13,
+      "title": "Level 2 account and authentication data flow.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 14",
+      "number": 14,
+      "title": "Level 1 account and session detail.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 15",
+      "number": 15,
+      "title": "Level 1 source and summary detail.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 16",
+      "number": 16,
+      "title": "Level 1 result and reading-helper detail.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 17",
+      "number": 17,
+      "title": "Level 1 feedback and usage detail.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 18",
+      "number": 18,
+      "title": "Level 1 administration and evaluation detail.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 19",
+      "number": 19,
+      "title": "Level 2 summary intake detail.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 20",
+      "number": 20,
+      "title": "Level 2 summary output detail.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 21",
+      "number": 21,
+      "title": "Level 2 account verification detail.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 22",
+      "number": 22,
+      "title": "Level 2 session and identity-change detail.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 23",
+      "number": 23,
+      "title": "Accounts and authentication ERD panel.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 24",
+      "number": 24,
+      "title": "Summary ownership, jobs and artifacts ERD panel.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 25",
+      "number": 25,
+      "title": "Ratings and comments ERD panel.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 26",
+      "number": 26,
+      "title": "Document extraction and cached combinations ERD panel.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 27",
+      "number": 27,
+      "title": "Landing sessions and events ERD panel.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 28",
+      "number": 28,
+      "title": "Stores without declared foreign keys ERD panel.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 29",
+      "number": 29,
+      "title": "Evaluation datasets, documents, runs and outputs ERD panel.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 30",
+      "number": 30,
+      "title": "References, content units and challenge cases ERD panel.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 31",
+      "number": 31,
+      "title": "Assignments, ratings, errors and metrics ERD panel.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 32",
+      "number": 32,
+      "title": "Content-unit reviews ERD panel.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 33",
+      "number": 33,
+      "title": "Evaluator and reviewer account relationships ERD panel.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 34",
+      "number": 34,
+      "title": "Dataset, run and reference authorship ERD panel.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 7",
+      "number": 7,
+      "title": "Data dictionary for admin_audit_logs.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 8",
+      "number": 8,
+      "title": "Data dictionary for admin_security_challenges.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 9",
+      "number": 9,
+      "title": "Data dictionary for documents.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 10",
+      "number": 10,
+      "title": "Data dictionary for document_summaries.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 11",
+      "number": 11,
+      "title": "Data dictionary for evaluation_assignments.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 12",
+      "number": 12,
+      "title": "Data dictionary for evaluation_audit_log.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 13",
+      "number": 13,
+      "title": "Data dictionary for evaluation_challenge_cases.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 14",
+      "number": 14,
+      "title": "Data dictionary for evaluation_content_units.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 15",
+      "number": 15,
+      "title": "Data dictionary for evaluation_content_unit_reviews.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 16",
+      "number": 16,
+      "title": "Data dictionary for evaluation_datasets.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 17",
+      "number": 17,
+      "title": "Data dictionary for evaluation_documents.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 18",
+      "number": 18,
+      "title": "Data dictionary for evaluation_errors.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 19",
+      "number": 19,
+      "title": "Data dictionary for evaluation_metrics.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 20",
+      "number": 20,
+      "title": "Data dictionary for evaluation_outputs.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 21",
+      "number": 21,
+      "title": "Data dictionary for evaluation_ratings.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 22",
+      "number": 22,
+      "title": "Data dictionary for evaluation_references.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 23",
+      "number": 23,
+      "title": "Data dictionary for evaluation_runs.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 24",
+      "number": 24,
+      "title": "Data dictionary for feedback.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 25",
+      "number": 25,
+      "title": "Data dictionary for feedback_comments.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 26",
+      "number": 26,
+      "title": "Data dictionary for guest_sessions.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 27",
+      "number": 27,
+      "title": "Data dictionary for landing_page_events.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 28",
+      "number": 28,
+      "title": "Data dictionary for landing_page_sessions.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 29",
+      "number": 29,
+      "title": "Data dictionary for nutshell_generations.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 30",
+      "number": 30,
+      "title": "Data dictionary for password_resets.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 31",
+      "number": 31,
+      "title": "Data dictionary for rate_limits.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 32",
+      "number": 32,
+      "title": "Data dictionary for schema_migrations.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 33",
+      "number": 33,
+      "title": "Data dictionary for summaries.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 34",
+      "number": 34,
+      "title": "Data dictionary for summary_artifacts.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 35",
+      "number": 35,
+      "title": "Data dictionary for summary_jobs.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 36",
+      "number": 36,
+      "title": "Data dictionary for users.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 37",
+      "number": 37,
+      "title": "Data dictionary for user_tokens.",
+      "source": "tables\\DATA_DICTIONARY.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 38",
+      "number": 38,
+      "title": "Technologies and observed development environment.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 35",
+      "number": 35,
+      "title": "Landing information and navigation — isolated template capture.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 36",
+      "number": 36,
+      "title": "Source intake and summary settings — isolated template capture.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 37",
+      "number": 37,
+      "title": "Sign-in form — isolated template capture.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 38",
+      "number": 38,
+      "title": "Registration form — isolated template capture.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 39",
+      "number": 39,
+      "title": "Recovery request form — isolated template capture.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 40",
+      "number": 40,
+      "title": "Password reset form — isolated template capture.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 41",
+      "number": 41,
+      "title": "Administrator code verification state — isolated template capture.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 42",
+      "number": 42,
+      "title": "Terms acceptance state — isolated template capture.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 43",
+      "number": 43,
+      "title": "Personal dashboard empty state — isolated template capture.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 44",
+      "number": 44,
+      "title": "History empty state — isolated template capture.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 45",
+      "number": 45,
+      "title": "Analytics empty state — isolated template capture.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 46",
+      "number": 46,
+      "title": "Account profile display — isolated template capture.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 47",
+      "number": 47,
+      "title": "Background processing state — isolated template capture.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 48",
+      "number": 48,
+      "title": "Structured result and output controls — isolated template capture.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 49",
+      "number": 49,
+      "title": "Unavailable-result recovery state — isolated template capture.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 50",
+      "number": 50,
+      "title": "Administrator overview — isolated template capture.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 51",
+      "number": 51,
+      "title": "Administrator audit-log filters — isolated template capture.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 52",
+      "number": 52,
+      "title": "Assigned evaluation empty state — isolated template capture.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 39",
+      "number": 39,
+      "title": "Audit verification procedures and outcomes.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 40",
+      "number": 40,
+      "title": "Functional Suitability — pending human evaluation.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 41",
+      "number": 41,
+      "title": "Performance Efficiency — pending human evaluation.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 42",
+      "number": 42,
+      "title": "Compatibility — pending human evaluation.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 43",
+      "number": 43,
+      "title": "Usability — pending human evaluation.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 44",
+      "number": 44,
+      "title": "Reliability — pending human evaluation.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 45",
+      "number": 45,
+      "title": "Security — pending human evaluation.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 46",
+      "number": 46,
+      "title": "Portability — pending human evaluation.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 47",
+      "number": 47,
+      "title": "Overall IT consultants’ summary — pending human evaluation.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 48",
+      "number": 48,
+      "title": "Functional Suitability for end users — pending human evaluation.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 49",
+      "number": 49,
+      "title": "Performance Efficiency for end users — pending human evaluation.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 50",
+      "number": 50,
+      "title": "Usability for end users — pending human evaluation.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 51",
+      "number": 51,
+      "title": "Overall end-users’ summary — pending human evaluation.",
+      "source": "CHAPTER_3.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 52",
+      "number": 52,
+      "title": "Blank consultation and monitoring record.",
+      "source": "APPENDICES_A_E.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table UF1",
+      "number": 53,
+      "title": "Available access contexts and interface boundaries.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 53",
+      "number": 53,
+      "title": "LIGHT landing page rendered from source with an anonymous fixture.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 54",
+      "number": 54,
+      "title": "Sign-in form rendered with an anonymous fixture.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 55",
+      "number": 55,
+      "title": "Conditional administrator email-code screen using a synthetic pending-login fixture.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 56",
+      "number": 56,
+      "title": "Registration form rendered without submitting account data.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 57",
+      "number": 57,
+      "title": "Password-recovery form rendered without sending an email.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 58",
+      "number": 58,
+      "title": "Password-reset form rendered with no recovery request in progress.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 59",
+      "number": 59,
+      "title": "Public terms page rendered with an anonymous fixture.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 60",
+      "number": 60,
+      "title": "Pending-acceptance page using a synthetic registered-account fixture.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 61",
+      "number": 61,
+      "title": "Summary workspace showing source selection and generation settings.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table UF2",
+      "number": 54,
+      "title": "Source methods and user actions.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table UF3",
+      "number": 55,
+      "title": "Summary settings in the main interface.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 62",
+      "number": 62,
+      "title": "Processing layout using a synthetic pending request; execution was blocked.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 63",
+      "number": 63,
+      "title": "Result interface with explicitly synthetic summary text, not model output.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table UF4",
+      "number": 56,
+      "title": "Result toolbar actions and verification limits.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 64",
+      "number": 64,
+      "title": "Unavailable-result state produced with a missing synthetic record.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 65",
+      "number": 65,
+      "title": "Personal dashboard with an empty synthetic registered-account fixture.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 66",
+      "number": 66,
+      "title": "History page with no synthetic saved summaries.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 67",
+      "number": 67,
+      "title": "Analytics page displaying the synthetic empty-data state.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 68",
+      "number": 68,
+      "title": "Profile page displaying a reserved synthetic account identity.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 69",
+      "number": 69,
+      "title": "Logout confirmation opened from a synthetic signed-in profile.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 70",
+      "number": 70,
+      "title": "Administrative console rendered with synthetic administrator access and empty records.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 71",
+      "number": 71,
+      "title": "Audit-log viewer with a synthetic existing table and no log rows.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Figure",
+      "old": "Figure 72",
+      "number": 72,
+      "title": "Assigned-review page with an active synthetic account and no assignments.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table UF5",
+      "number": 57,
+      "title": "Common recovery situations and user guidance.",
+      "source": "APPENDIX_F_USER_MANUAL.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 53",
+      "number": 58,
+      "title": "Maintainer's path and component reference.",
+      "source": "APPENDIX_G_MAINTENANCE_MANUAL.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 54",
+      "number": 59,
+      "title": "Evidence-based troubleshooting guide.",
+      "source": "APPENDIX_G_MAINTENANCE_MANUAL.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 55",
+      "number": 60,
+      "title": "Proposed maintenance schedule; adoption and execution are not verified.",
+      "source": "APPENDIX_G_MAINTENANCE_MANUAL.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 56",
+      "number": 61,
+      "title": "Response scale for the proposed technical and end-user questionnaires.",
+      "source": "EVALUATION_INSTRUMENTS.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 57",
+      "number": 62,
+      "title": "Proposed technical functional-suitability items.",
+      "source": "EVALUATION_INSTRUMENTS.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 58",
+      "number": 63,
+      "title": "Proposed technical performance-efficiency items.",
+      "source": "EVALUATION_INSTRUMENTS.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 59",
+      "number": 64,
+      "title": "Proposed technical compatibility items.",
+      "source": "EVALUATION_INSTRUMENTS.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 60",
+      "number": 65,
+      "title": "Proposed technical usability items.",
+      "source": "EVALUATION_INSTRUMENTS.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 61",
+      "number": 66,
+      "title": "Proposed technical reliability items.",
+      "source": "EVALUATION_INSTRUMENTS.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 62",
+      "number": 67,
+      "title": "Proposed technical security items.",
+      "source": "EVALUATION_INSTRUMENTS.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 63",
+      "number": 68,
+      "title": "Proposed technical portability items.",
+      "source": "EVALUATION_INSTRUMENTS.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 64",
+      "number": 69,
+      "title": "Proposed end-user functional-suitability items.",
+      "source": "EVALUATION_INSTRUMENTS.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 65",
+      "number": 70,
+      "title": "Proposed end-user performance items.",
+      "source": "EVALUATION_INSTRUMENTS.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 66",
+      "number": 71,
+      "title": "Proposed end-user usability items.",
+      "source": "EVALUATION_INSTRUMENTS.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 67",
+      "number": 72,
+      "title": "Supporting-document register and current evidence status.",
+      "source": "ADDITIONAL_APPENDICES.md"
+    },
+    {
+      "kind": "Table",
+      "old": "Table 68",
+      "number": 73,
+      "title": "Technical evidence supplied with the manuscript.",
+      "source": "ADDITIONAL_APPENDICES.md"
+    }
+  ],
+  "counts": {
+    "Figure": 72,
+    "Table": 73
+  },
+  "image_occurrences": 72,
+  "unique_images": 54,
+  "markdown_tables": 73,
+  "missing_assets": [],
+  "uncaptioned": [],
+  "invalid_references": [],
+  "research_status": "Human evaluation pending; proposed instruments and institutional placeholders retained."
+}

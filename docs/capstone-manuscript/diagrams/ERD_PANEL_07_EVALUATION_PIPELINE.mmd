@@ -1,0 +1,24 @@
+erDiagram
+    direction TB
+    evaluation_datasets {
+        bigint id PK
+        int created_by FK
+    }
+    evaluation_documents {
+        bigint id PK
+        bigint dataset_id FK
+    }
+    evaluation_runs {
+        bigint id PK
+        bigint dataset_id FK
+        int created_by FK
+    }
+    evaluation_outputs {
+        bigint id PK
+        bigint run_id FK
+        bigint document_id FK
+    }
+    evaluation_datasets ||--o{ evaluation_documents : "dataset_id"
+    evaluation_documents ||--o{ evaluation_outputs : "document_id"
+    evaluation_runs ||--o{ evaluation_outputs : "run_id"
+    evaluation_datasets ||--o{ evaluation_runs : "dataset_id"

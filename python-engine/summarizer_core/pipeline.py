@@ -190,7 +190,7 @@ class SummarizationPipeline:
             else:
                 summary_length_key = "comprehensive"
 
-        source_document = load_source_document(text=request.text, file_path=request.file_path)
+        source_document = request.source_document or load_source_document(text=request.text, file_path=request.file_path)
         if source_document.raw_text.strip() == "":
             raise ProcessingFailure("INPUT_EMPTY")
 

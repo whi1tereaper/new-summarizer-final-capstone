@@ -1,0 +1,32 @@
+                       Abstract
+
+    This study presents the design, development,
+and evaluation of AccredX: A Record Management
+and  Archiving  System  for  the  Nueva  Ecija
+University of Science and Technology (NEUST)
+Peñaranda   Off-Campus.   The   institution's
+existing record-keeping practices, which rely
+heavily on manual processes and unstructured
+Google Drive storage, have led to chronic issues
+including misplaced files, delayed document
+retrieval, inadequate security controls, and
+significant operational inefficiencies during
+accreditation   periods.   These   persistent
+challenges underscore the critical need for a
+structured and dedicated digital solution.
+
+    AccredX  was  developed  following  the
+Software Development Life Cycle (SDLC) using the
+Agile methodology, which allowed for iterative
+refinement  based  on  continuous  stakeholder
+feedback.   The   system   integrates   key
+functionalities including centralized document
+storage, advanced search and filtering, folder
+and file management, version control, role-
+based   access   control,   audit   trails,
+accreditation folder checklists, and compliance
+report generation. These features collectively
+address the document organization, security,
+
+
+                                                      xvii

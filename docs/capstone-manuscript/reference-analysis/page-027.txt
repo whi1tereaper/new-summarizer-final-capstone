@@ -1,0 +1,32 @@
+operational,  and  transparency  requirements
+(Chode,  2025;  Savchenko  et  al.,  2024;
+Benmakhlouf & Chouaou, 2024).
+   Across sectors, digital archiving systems
+consistently  report  better retrieval  speed,
+storage    efficiency,    and    operational
+control than manual or paper-based approaches
+(Yulianti et al., 2025; Erin et al., 2025;
+Pratiwi et al., 2025). Manual systems are
+repeatedly  associated  with  slow  retrieval,
+misplaced  files,  redundancy,  damaged  paper
+records,  and  higher  administrative  burden
+(Justina et al., 2022; Kustiningsih et al.,
+2026).  Electronic  archivation  also  reduces
+physical storage needs and can cut storage costs
+substantially  through  automation  and  cloud
+technologies,   with   one   recent   study
+estimating 40–60% lower storage costs (Moaiyad,
+2025).  In  addition,  centralized  digital
+repositories support faster decision-making,
+smoother workflows, and better continuity after
+disruptive events such as fires or floods
+(Savchenko et al., 2024; Benmakhlouf & Chouaou,
+2024; Kustiningsih et al., 2026).
+   Recent literature also emphasizes that secure
+digital archiving depends on access control,
+encryption, backup, and audit functions rather
+than simple file storage alone (Qaddoumi, 2025;
+
+
+
+                                                       8

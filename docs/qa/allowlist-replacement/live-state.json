@@ -1,0 +1,58 @@
+{
+    "checked_utc": "2026-10-23T16:36:21+00:00",
+    "php_cli": "8.3.29",
+    "database_engine": "mysql",
+    "port": 3307,
+    "initial_ids_present": 38,
+    "initial_ids_active": 38,
+    "counts": {
+        "users": 37,
+        "summaries": 208,
+        "summary_artifacts": 199,
+        "feedback": 107,
+        "feedback_comments": 113,
+        "student_applications": 2,
+        "student_enrollment_registry": 38
+    },
+    "approved_student_accounts": 2,
+    "restricted_nonadministrator_accounts": 33,
+    "administrators_exempt": 2,
+    "active_summary_jobs": 0,
+    "reconciliation": {
+        "checked": 1,
+        "approved": 0,
+        "already_verified": 1,
+        "restricted": 0,
+        "conflicts": 0,
+        "administrators_exempt": 2,
+        "accounts_without_student_id": 33
+    },
+    "checks": [
+        {
+            "name": "initial authoritative list digest matches the private requested roster",
+            "passed": true
+        },
+        {
+            "name": "all 38 exact initial IDs remain active unexpired and conflict-free",
+            "passed": true
+        },
+        {
+            "name": "all 20 migrations are recorded",
+            "passed": true
+        },
+        {
+            "name": "privacy contact protection key and operator authorization remain configured",
+            "passed": true
+        },
+        {
+            "name": "administrator #2 retains existing access",
+            "passed": true
+        },
+        {
+            "name": "administrator #3 retains existing access",
+            "passed": true
+        }
+    ],
+    "passed": 6,
+    "failed": 0
+}

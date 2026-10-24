@@ -1,0 +1,38 @@
+  user_id               User ID       int(11)
+
+  created_at            Time the      timestamp
+                        folder
+                        was
+                        created
+  oid                   OID           int(11)
+
+
+
+
+     Table 6. folder_checklists Table
+
+
+Fields Name        Description      Type/Length     Constraint
+
+id                 Unique           int(11)         Primary
+                   Identifier                       key
+                   for each
+                   checklist
+folder_id          ID of the        int(11)         Foreign
+                   folder the                       Key
+                   checklist is
+                   in
+checklist_name     Name of the      varchar(255)
+                   checklist
+created_at         Date and         timestamp
+                   time
+                   checklist
+                   was created
+is_checkedd        Whether          tinyint(1)
+                   checklist is
+
+
+
+
+
+                                                              76

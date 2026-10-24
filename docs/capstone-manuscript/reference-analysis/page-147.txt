@@ -1,0 +1,53 @@
+   •   Click the “Send Reset Link” to receive a password
+       reset link through email.
+   •   Click “Back to Login” to go back to the Login
+       Page.
+
+
+
+C. Registration
+   •   To be registered into the system, kindly ask an
+       admin and send them your email.
+   •   An email will be sent to your email address that
+       contains your username and provided password.
+   •   Use your email and password to login to the
+       system afterwards.
+
+
+D. Dashboard Page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   •   Upon logging in, the system will display the
+       dashboard page.
+   •   Here you can see the Total Folders, Total Files,
+       Archived Items, Compliance Status, Pending
+       Documents, Required Files, and Accreditation
+       Readiness numbers and graphs.
+       -   Total Folders – the total number of folders in
+           the records
+
+
+
+                                                                   128

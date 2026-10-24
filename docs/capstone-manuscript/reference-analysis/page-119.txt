@@ -1,0 +1,32 @@
+   Table 18. Assessment of the end users on the
+Functional Suitability of the developed system
+ Software Product       Weighted Mean             Verbal
+    Categories                               Interpretation
+    Functional                3.2            Very Functional
+   Completeness
+    Functional                3.6            Very Functional
+    Correctness
+    Functional                3.6            Very Functional
+ Appropriateness
+    Functional                3.46           Very Functional
+    Suitability
+
+   The system is very functional, with nearly
+complete features, correct functionality, and
+appropriate characteristics for its intended
+use. These ratings suggest that the system
+effectively meets user needs and performs well
+in all key areas of functionality.
+
+   6.2 Performance Efficiency
+   Table 19 shows the performance efficiency of
+the developed AccredX: Record Management and
+Archiving System assessed by the end users that
+consist  of  three  (3)  sub-characteristics,
+namely: time behavior, resource utilization and
+capacity.
+
+
+
+
+                                                      100

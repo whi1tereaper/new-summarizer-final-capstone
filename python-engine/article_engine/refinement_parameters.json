@@ -1,0 +1,238 @@
+{
+  "core_parameters": {
+    "enabled": true,
+    "lead": 0,
+    "title": 0.6,
+    "centroid": 0.2,
+    "claim": 0.2
+  },
+  "selected_lambda": 0.95,
+  "development_only": true,
+  "selected_result": {
+    "core": {
+      "enabled": true,
+      "lead": 0,
+      "title": 0.6,
+      "centroid": 0.2,
+      "claim": 0.2
+    },
+    "lambda": 0.95,
+    "main": 59,
+    "units": 175,
+    "unit_total": 318,
+    "context_errors": 0,
+    "words": 4923,
+    "cases": 72
+  },
+  "trials": [
+    {
+      "core": {
+        "enabled": true,
+        "lead": 0.4,
+        "title": 0.3,
+        "centroid": 0.2,
+        "claim": 0.1
+      },
+      "lambda": 1,
+      "main": 48,
+      "units": 163,
+      "unit_total": 318,
+      "context_errors": 0,
+      "words": 4917,
+      "cases": 72
+    },
+    {
+      "core": {
+        "enabled": true,
+        "lead": 0.4,
+        "title": 0.3,
+        "centroid": 0.2,
+        "claim": 0.1
+      },
+      "lambda": 0.95,
+      "main": 48,
+      "units": 169,
+      "unit_total": 318,
+      "context_errors": 0,
+      "words": 4911,
+      "cases": 72
+    },
+    {
+      "core": {
+        "enabled": true,
+        "lead": 0.2,
+        "title": 0.4,
+        "centroid": 0.2,
+        "claim": 0.2
+      },
+      "lambda": 1,
+      "main": 55,
+      "units": 167,
+      "unit_total": 318,
+      "context_errors": 0,
+      "words": 4913,
+      "cases": 72
+    },
+    {
+      "core": {
+        "enabled": true,
+        "lead": 0.2,
+        "title": 0.4,
+        "centroid": 0.2,
+        "claim": 0.2
+      },
+      "lambda": 0.95,
+      "main": 55,
+      "units": 173,
+      "unit_total": 318,
+      "context_errors": 0,
+      "words": 4907,
+      "cases": 72
+    },
+    {
+      "core": {
+        "enabled": true,
+        "lead": 0.6,
+        "title": 0.2,
+        "centroid": 0.1,
+        "claim": 0.1
+      },
+      "lambda": 1,
+      "main": 45,
+      "units": 164,
+      "unit_total": 318,
+      "context_errors": 0,
+      "words": 4949,
+      "cases": 72
+    },
+    {
+      "core": {
+        "enabled": true,
+        "lead": 0.6,
+        "title": 0.2,
+        "centroid": 0.1,
+        "claim": 0.1
+      },
+      "lambda": 0.95,
+      "main": 45,
+      "units": 170,
+      "unit_total": 318,
+      "context_errors": 0,
+      "words": 4943,
+      "cases": 72
+    },
+    {
+      "core": {
+        "enabled": true,
+        "lead": 0,
+        "title": 0.6,
+        "centroid": 0.2,
+        "claim": 0.2
+      },
+      "lambda": 1,
+      "main": 59,
+      "units": 169,
+      "unit_total": 318,
+      "context_errors": 0,
+      "words": 4929,
+      "cases": 72
+    },
+    {
+      "core": {
+        "enabled": true,
+        "lead": 0,
+        "title": 0.6,
+        "centroid": 0.2,
+        "claim": 0.2
+      },
+      "lambda": 0.95,
+      "main": 59,
+      "units": 175,
+      "unit_total": 318,
+      "context_errors": 0,
+      "words": 4923,
+      "cases": 72
+    },
+    {
+      "core": {
+        "enabled": true,
+        "lead": 1,
+        "title": 0,
+        "centroid": 0,
+        "claim": 0
+      },
+      "lambda": 1,
+      "main": 45,
+      "units": 164,
+      "unit_total": 318,
+      "context_errors": 0,
+      "words": 4949,
+      "cases": 72
+    },
+    {
+      "core": {
+        "enabled": true,
+        "lead": 1,
+        "title": 0,
+        "centroid": 0,
+        "claim": 0
+      },
+      "lambda": 0.95,
+      "main": 45,
+      "units": 170,
+      "unit_total": 318,
+      "context_errors": 0,
+      "words": 4943,
+      "cases": 72
+    },
+    {
+      "core": {
+        "enabled": false,
+        "lead": 0,
+        "title": 0,
+        "centroid": 0,
+        "claim": 0
+      },
+      "lambda": 1,
+      "main": 19,
+      "units": 165,
+      "unit_total": 318,
+      "context_errors": 0,
+      "words": 4896,
+      "cases": 72
+    },
+    {
+      "core": {
+        "enabled": false,
+        "lead": 0,
+        "title": 0,
+        "centroid": 0,
+        "claim": 0
+      },
+      "lambda": 0.95,
+      "main": 19,
+      "units": 165,
+      "unit_total": 318,
+      "context_errors": 0,
+      "words": 4896,
+      "cases": 72
+    }
+  ],
+  "development_ids": [
+    "HO-RESEARCH-COMMUTE",
+    "HO-NEWS-BRIDGE",
+    "HO-TECH-QUEUE",
+    "HO-ESSAY-HOMEWORK",
+    "HO-AMBIGUOUS-TRIAL",
+    "dev-news",
+    "dev-research",
+    "dev-technical",
+    "dev-opinion",
+    "DEV-NARRATIVE-CORE",
+    "DEV-OPPOSITION-CORE",
+    "DEV-METHOD-FIRST"
+  ],
+  "development_sha256": "cf822cbbe19aa798109f84f17e627f0910939fec310e88b92b180eab56934f61",
+  "selection_rule": "min context errors, max main-idea checks, max unit checks, min words; ties prefer no MMR",
+  "human_verified": false
+}

@@ -1,0 +1,746 @@
+{
+  "all_excluded_from_new_evaluation": true,
+  "inventories": [
+    {
+      "path": "python-engine\\evaluation\\corpus\\heldout_documents.json",
+      "sha256": "880014959cd3291aed63bd1cc690cf2f37f15e1839c7fa3e188550f2321f3585",
+      "sources": [
+        {
+          "id": "HO-RESEARCH-COMMUTE",
+          "title": "Active Commuting and Self-Reported Wellbeing Among Office Workers",
+          "category": "research"
+        },
+        {
+          "id": "HO-NEWS-BRIDGE",
+          "title": "Harbor Bridge Closed After Inspectors Find Cable Corrosion",
+          "category": "news"
+        },
+        {
+          "id": "HO-TECH-QUEUE",
+          "title": "Migrating the Order Pipeline from Polling to a Message Queue",
+          "category": "technical"
+        },
+        {
+          "id": "HO-BUSINESS-COOP",
+          "title": "Greenfield Grocers Cooperative Annual Operating Review 2025",
+          "category": "business"
+        },
+        {
+          "id": "HO-ESSAY-HOMEWORK",
+          "title": "Why Homework Policy Should Follow the Evidence",
+          "category": "essay"
+        },
+        {
+          "id": "HO-AMBIGUOUS-TRIAL",
+          "title": "Mixed Results from Two Trials of a Herbal Sleep Supplement",
+          "category": "contradictory"
+        },
+        {
+          "id": "HO-POLICY-DATA",
+          "title": "Municipal Data Retention Policy for Traffic Camera Footage",
+          "category": "complex_grammar"
+        },
+        {
+          "id": "HO-SHORT-LIBRARY",
+          "title": "Library Extends Weekend Hours",
+          "category": "short"
+        },
+        {
+          "id": "HO-LONG-WATER",
+          "title": "Regional Water Supply Assessment: Drought Preparedness 2026",
+          "category": "long_report"
+        }
+      ]
+    },
+    {
+      "path": "python-engine\\evaluation\\corpus\\independent_article_pilot_20261013.json",
+      "sha256": "56a89c829b2b93cc6ffc3a4ab2560be186f1e8caf972550e09fff9b59111cc9d",
+      "sources": [
+        {
+          "id": "NASA-CRS35-HEALTH-RESEARCH",
+          "title": "NASA’s SpaceX CRS-35 Mission to Launch Health Research",
+          "source_url": "https://science.nasa.gov/missions/station/nasas-spacex-crs-35-mission-to-launch-health-research/",
+          "category": "news"
+        },
+        {
+          "id": "NASA-EARTH-OBSERVATORY-THAILAND-FLOODS",
+          "title": "Floodwaters Overwhelm Thailand",
+          "source_url": "https://science.nasa.gov/earth/earth-observatory/floodwaters-overwhelm-thailand/",
+          "category": "news"
+        }
+      ]
+    },
+    {
+      "path": "python-engine\\tests\\fixtures\\evaluation_challenges.json",
+      "sha256": "e29fb413e2529baed0c994e5cbfbb246ccad9f70d7d50fab5131a483f1f36292",
+      "sources": [
+        {
+          "id": "negation-retention",
+          "category": "negation"
+        },
+        {
+          "id": "negation-funding",
+          "category": "negation"
+        },
+        {
+          "id": "percent-growth",
+          "category": "percentages"
+        },
+        {
+          "id": "percent-not",
+          "category": "percentages"
+        },
+        {
+          "id": "decimal-dose",
+          "category": "decimal_values"
+        },
+        {
+          "id": "decimal-latency",
+          "category": "decimal_values"
+        },
+        {
+          "id": "date-launch",
+          "category": "dates"
+        },
+        {
+          "id": "date-iso",
+          "category": "dates"
+        },
+        {
+          "id": "units-distance",
+          "category": "units"
+        },
+        {
+          "id": "units-storage",
+          "category": "units"
+        },
+        {
+          "id": "entity-authority",
+          "category": "named_entities"
+        },
+        {
+          "id": "entity-agency",
+          "category": "named_entities"
+        },
+        {
+          "id": "qualifier-may",
+          "category": "qualifiers"
+        },
+        {
+          "id": "qualifier-approximate",
+          "category": "qualifiers"
+        },
+        {
+          "id": "comparison-lower",
+          "category": "comparisons"
+        },
+        {
+          "id": "comparison-bound",
+          "category": "comparisons"
+        },
+        {
+          "id": "significance-none",
+          "category": "statistical_significance"
+        },
+        {
+          "id": "significance-mortality",
+          "category": "statistical_significance"
+        },
+        {
+          "id": "causal-correlation",
+          "category": "causal_vs_correlational"
+        },
+        {
+          "id": "causal-warning",
+          "category": "causal_vs_correlational"
+        },
+        {
+          "id": "quantity-group",
+          "category": "quantities"
+        },
+        {
+          "id": "quantity-range",
+          "category": "quantities"
+        },
+        {
+          "id": "comparison-direction",
+          "category": "comparisons"
+        },
+        {
+          "id": "qualifier-preliminary",
+          "category": "qualifiers"
+        }
+      ]
+    },
+    {
+      "path": "python-engine\\tests\\fixtures\\evaluation_validation_documents.json",
+      "sha256": "e65d6e2e65bafdf96e022e8bbfc9d4dc6ed23cfd89d87d5d8814bab9997ac128",
+      "sources": [
+        {
+          "id": "USGS-SIR-2023-5136",
+          "title": "Water-quality characteristics of the Red River of the North and tributaries, 2019–22",
+          "source_url": "https://www.usgs.gov/publications/water-quality-characteristics-red-river-north-and-tributaries-fargo-moorhead",
+          "category": "academic"
+        },
+        {
+          "id": "NASA-RELEASE-25-002",
+          "title": "Temperatures Rising: NASA Confirms 2024 Warmest Year on Record",
+          "source_url": "https://www.nasa.gov/news-release/temperatures-rising-nasa-confirms-2024-warmest-year-on-record/",
+          "category": "news"
+        },
+        {
+          "id": "NIST-OUTLIERS-INTRO",
+          "title": "Detection of Outliers — Introduction",
+          "source_url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h.htm",
+          "category": "technical"
+        },
+        {
+          "id": "CENSUS-CB24-149",
+          "title": "Income, Poverty and Health Insurance Coverage in the United States: 2023",
+          "source_url": "https://www.census.gov/newsroom/press-releases/2024/income-poverty-health-insurance-coverage.html",
+          "category": "reports"
+        },
+        {
+          "id": "SYNTHETIC-REPEATED-PARAGRAPHS",
+          "title": "Synthetic repeated paragraph stress test",
+          "source_url": null,
+          "category": "reports"
+        },
+        {
+          "id": "SYNTHETIC-OCR-NOISE",
+          "title": "Synthetic OCR and hyphenation stress test",
+          "source_url": null,
+          "category": "technical"
+        }
+      ]
+    },
+    {
+      "path": "docs\\research\\external-source-candidates.json",
+      "sha256": "9721510d867fa1fe753bc200f57941029c538611d0eb30ac6cd749e9d3ad75fb",
+      "sources": [
+        {
+          "id": "EXT-CAND-NIST-CLOCK",
+          "title": "World’s Most Accurate and Precise Atomic Clock Pushes New Frontiers in Physics",
+          "url": "https://www.nist.gov/news-events/news/2024/07/worlds-most-accurate-and-precise-atomic-clock-pushes-new-frontiers-physics",
+          "category": "technical/science reporting"
+        },
+        {
+          "id": "EXT-CAND-USGS-WATER",
+          "title": "Millions in the U.S. may rely on groundwater contaminated with PFAS for drinking water supplies",
+          "url": "https://www.usgs.gov/news/national-news-release/millions-us-may-rely-groundwater-contaminated-pfas-drinking-water",
+          "category": "environmental research reporting"
+        },
+        {
+          "id": "EXT-CAND-NASA-NISAR",
+          "title": "NASA-ISRO Satellite Lifts Off to Track Earth’s Changing Surfaces",
+          "url": "https://www.nasa.gov/news-release/nasa-isro-satellite-lifts-off-to-track-earths-changing-surfaces/",
+          "category": "news/space technology"
+        },
+        {
+          "id": "EXT-CAND-EIA-GENERATION",
+          "title": "U.S. electricity generation in 2025 hit a record, again",
+          "url": "https://www.eia.gov/todayinenergy/detail.php?id=67284",
+          "category": "business/energy analysis"
+        },
+        {
+          "id": "EXT-CAND-USGS-SEDIMENT",
+          "title": "USGS-led Study: Sediment Management is Key to Preserving Puget Sound's Estuarine Habitats",
+          "url": "https://www.usgs.gov/programs/cmhrp/news/usgs-led-study-sediment-management-key-preserving-puget-sounds-estuarine",
+          "category": "environmental research reporting"
+        },
+        {
+          "id": "EXT-CAND-NIST-CHIPS",
+          "title": "CHIPS Incentives Awards with Corning, Edwards Vacuum, and Infinera",
+          "url": "https://www.nist.gov/news-events/news/2025/01/us-department-commerce-announces-chips-incentives-awards-corning-edwards",
+          "category": "business/technical policy reporting"
+        }
+      ]
+    },
+    {
+      "path": "docs\\research\\coverage-results.json",
+      "sha256": "6106722a3dd6980faa4dab77b3a1914bb86697ee0949d5ef0c08b47029709566",
+      "sources": [
+        {
+          "id": "HO-RESEARCH-COMMUTE",
+          "title": "Active Commuting and Self-Reported Wellbeing Among Office Workers",
+          "category": "research",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-NEWS-BRIDGE",
+          "title": "Harbor Bridge Closed After Inspectors Find Cable Corrosion",
+          "category": "news",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-TECH-QUEUE",
+          "title": "Migrating the Order Pipeline from Polling to a Message Queue",
+          "category": "technical",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-ESSAY-HOMEWORK",
+          "title": "Why Homework Policy Should Follow the Evidence",
+          "category": "essay",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-AMBIGUOUS-TRIAL",
+          "title": "Mixed Results from Two Trials of a Herbal Sleep Supplement",
+          "category": "contradictory",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "dev-news",
+          "category": "development",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "dev-research",
+          "category": "development",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "dev-technical",
+          "category": "development",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "dev-opinion",
+          "category": "development",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "CE-HO-NEWS",
+          "category": "news",
+          "provenance": "fresh_engineering_authored_synthetic_not_human_verified"
+        },
+        {
+          "id": "CE-HO-RESEARCH",
+          "category": "research",
+          "provenance": "fresh_engineering_authored_synthetic_not_human_verified"
+        },
+        {
+          "id": "CE-HO-TECH",
+          "category": "technical",
+          "provenance": "fresh_engineering_authored_synthetic_not_human_verified"
+        },
+        {
+          "id": "CE-HO-OPINION",
+          "category": "opinion",
+          "provenance": "fresh_engineering_authored_synthetic_not_human_verified"
+        },
+        {
+          "id": "CE-HO-SCIENCE",
+          "category": "educational",
+          "provenance": "fresh_engineering_authored_synthetic_not_human_verified"
+        },
+        {
+          "id": "CE-HO-BUSINESS",
+          "category": "business",
+          "provenance": "fresh_engineering_authored_synthetic_not_human_verified"
+        },
+        {
+          "id": "NASA-CRS35-HEALTH-RESEARCH",
+          "title": "NASA’s SpaceX CRS-35 Mission to Launch Health Research",
+          "source_url": "https://science.nasa.gov/missions/station/nasas-spacex-crs-35-mission-to-launch-health-research/",
+          "category": "news",
+          "provenance": "existing_real_article_snapshot"
+        },
+        {
+          "id": "NASA-EARTH-OBSERVATORY-THAILAND-FLOODS",
+          "title": "Floodwaters Overwhelm Thailand",
+          "source_url": "https://science.nasa.gov/earth/earth-observatory/floodwaters-overwhelm-thailand/",
+          "category": "news",
+          "provenance": "existing_real_article_snapshot"
+        },
+        {
+          "id": "heldout-educational",
+          "category": "educational",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "heldout-business",
+          "category": "business",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "heldout-feature",
+          "category": "feature",
+          "provenance": "engineering_authored_synthetic"
+        }
+      ]
+    },
+    {
+      "path": "docs\\research\\refinement-results.json",
+      "sha256": "9a9eb528ae83fc3456515ddb18cdb5f8e4d8cc56bd1404edaa003871f5a2f557",
+      "sources": [
+        {
+          "id": "CE-HO-NEWS",
+          "category": "news",
+          "provenance": "fresh_engineering_authored_synthetic_not_human_verified"
+        },
+        {
+          "id": "CE-HO-RESEARCH",
+          "category": "research",
+          "provenance": "fresh_engineering_authored_synthetic_not_human_verified"
+        },
+        {
+          "id": "CE-HO-TECH",
+          "category": "technical",
+          "provenance": "fresh_engineering_authored_synthetic_not_human_verified"
+        },
+        {
+          "id": "CE-HO-OPINION",
+          "category": "opinion",
+          "provenance": "fresh_engineering_authored_synthetic_not_human_verified"
+        },
+        {
+          "id": "CE-HO-SCIENCE",
+          "category": "educational",
+          "provenance": "fresh_engineering_authored_synthetic_not_human_verified"
+        },
+        {
+          "id": "CE-HO-BUSINESS",
+          "category": "business",
+          "provenance": "fresh_engineering_authored_synthetic_not_human_verified"
+        },
+        {
+          "id": "HO-RESEARCH-COMMUTE",
+          "title": "Active Commuting and Self-Reported Wellbeing Among Office Workers",
+          "category": "research",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-NEWS-BRIDGE",
+          "title": "Harbor Bridge Closed After Inspectors Find Cable Corrosion",
+          "category": "news",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-TECH-QUEUE",
+          "title": "Migrating the Order Pipeline from Polling to a Message Queue",
+          "category": "technical",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-ESSAY-HOMEWORK",
+          "title": "Why Homework Policy Should Follow the Evidence",
+          "category": "essay",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-AMBIGUOUS-TRIAL",
+          "title": "Mixed Results from Two Trials of a Herbal Sleep Supplement",
+          "category": "contradictory",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "NASA-CRS35-HEALTH-RESEARCH",
+          "title": "NASA’s SpaceX CRS-35 Mission to Launch Health Research",
+          "source_url": "https://science.nasa.gov/missions/station/nasas-spacex-crs-35-mission-to-launch-health-research/",
+          "category": "news",
+          "provenance": "existing_real_article_snapshot"
+        },
+        {
+          "id": "NASA-EARTH-OBSERVATORY-THAILAND-FLOODS",
+          "title": "Floodwaters Overwhelm Thailand",
+          "source_url": "https://science.nasa.gov/earth/earth-observatory/floodwaters-overwhelm-thailand/",
+          "category": "news",
+          "provenance": "existing_real_article_snapshot"
+        }
+      ]
+    },
+    {
+      "path": "docs\\research\\article-engine-results.json",
+      "sha256": "3f42b210756dbdfb344cc49ff8baadcd1f7be72e3073315b70ca0ed20c34e652",
+      "sources": [
+        {
+          "id": "HO-RESEARCH-COMMUTE",
+          "title": "Active Commuting and Self-Reported Wellbeing Among Office Workers",
+          "category": "research",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-NEWS-BRIDGE",
+          "title": "Harbor Bridge Closed After Inspectors Find Cable Corrosion",
+          "category": "news",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-TECH-QUEUE",
+          "title": "Migrating the Order Pipeline from Polling to a Message Queue",
+          "category": "technical",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-ESSAY-HOMEWORK",
+          "title": "Why Homework Policy Should Follow the Evidence",
+          "category": "essay",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-AMBIGUOUS-TRIAL",
+          "title": "Mixed Results from Two Trials of a Herbal Sleep Supplement",
+          "category": "contradictory",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "NASA-CRS35-HEALTH-RESEARCH",
+          "title": "NASA’s SpaceX CRS-35 Mission to Launch Health Research",
+          "source_url": "https://science.nasa.gov/missions/station/nasas-spacex-crs-35-mission-to-launch-health-research/",
+          "category": "news",
+          "provenance": "existing_real_article_snapshot"
+        },
+        {
+          "id": "NASA-EARTH-OBSERVATORY-THAILAND-FLOODS",
+          "title": "Floodwaters Overwhelm Thailand",
+          "source_url": "https://science.nasa.gov/earth/earth-observatory/floodwaters-overwhelm-thailand/",
+          "category": "news",
+          "provenance": "existing_real_article_snapshot"
+        },
+        {
+          "id": "heldout-educational",
+          "category": "educational",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "heldout-business",
+          "category": "business",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "heldout-feature",
+          "category": "feature",
+          "provenance": "engineering_authored_synthetic"
+        }
+      ]
+    },
+    {
+      "code_group": "v2_development",
+      "sources": [
+        {
+          "id": "HO-RESEARCH-COMMUTE",
+          "title": "Active Commuting and Self-Reported Wellbeing Among Office Workers",
+          "category": "research",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-NEWS-BRIDGE",
+          "title": "Harbor Bridge Closed After Inspectors Find Cable Corrosion",
+          "category": "news",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-TECH-QUEUE",
+          "title": "Migrating the Order Pipeline from Polling to a Message Queue",
+          "category": "technical",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-ESSAY-HOMEWORK",
+          "title": "Why Homework Policy Should Follow the Evidence",
+          "category": "essay",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-AMBIGUOUS-TRIAL",
+          "title": "Mixed Results from Two Trials of a Herbal Sleep Supplement",
+          "category": "contradictory",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "dev-news",
+          "category": "development",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "dev-research",
+          "category": "development",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "dev-technical",
+          "category": "development",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "dev-opinion",
+          "category": "development",
+          "provenance": "engineering_authored_synthetic"
+        }
+      ]
+    },
+    {
+      "code_group": "v2_synthetic_once_heldout_now_inspected",
+      "sources": [
+        {
+          "id": "CE-HO-NEWS",
+          "category": "news",
+          "provenance": "fresh_engineering_authored_synthetic_not_human_verified"
+        },
+        {
+          "id": "CE-HO-RESEARCH",
+          "category": "research",
+          "provenance": "fresh_engineering_authored_synthetic_not_human_verified"
+        },
+        {
+          "id": "CE-HO-TECH",
+          "category": "technical",
+          "provenance": "fresh_engineering_authored_synthetic_not_human_verified"
+        },
+        {
+          "id": "CE-HO-OPINION",
+          "category": "opinion",
+          "provenance": "fresh_engineering_authored_synthetic_not_human_verified"
+        },
+        {
+          "id": "CE-HO-SCIENCE",
+          "category": "educational",
+          "provenance": "fresh_engineering_authored_synthetic_not_human_verified"
+        },
+        {
+          "id": "CE-HO-BUSINESS",
+          "category": "business",
+          "provenance": "fresh_engineering_authored_synthetic_not_human_verified"
+        }
+      ]
+    },
+    {
+      "code_group": "v21_development",
+      "sources": [
+        {
+          "id": "HO-RESEARCH-COMMUTE",
+          "title": "Active Commuting and Self-Reported Wellbeing Among Office Workers",
+          "category": "research",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-NEWS-BRIDGE",
+          "title": "Harbor Bridge Closed After Inspectors Find Cable Corrosion",
+          "category": "news",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-TECH-QUEUE",
+          "title": "Migrating the Order Pipeline from Polling to a Message Queue",
+          "category": "technical",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-ESSAY-HOMEWORK",
+          "title": "Why Homework Policy Should Follow the Evidence",
+          "category": "essay",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-AMBIGUOUS-TRIAL",
+          "title": "Mixed Results from Two Trials of a Herbal Sleep Supplement",
+          "category": "contradictory",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "dev-news",
+          "category": "development",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "dev-research",
+          "category": "development",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "dev-technical",
+          "category": "development",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "dev-opinion",
+          "category": "development",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "DEV-NARRATIVE-CORE",
+          "provenance": "engineering_authored_adversarial_development_not_independent_review"
+        },
+        {
+          "id": "DEV-OPPOSITION-CORE",
+          "provenance": "engineering_authored_adversarial_development_not_independent_review"
+        },
+        {
+          "id": "DEV-METHOD-FIRST",
+          "provenance": "engineering_authored_adversarial_development_not_independent_review"
+        }
+      ]
+    },
+    {
+      "code_group": "historical_quality",
+      "sources": [
+        {
+          "id": "HO-RESEARCH-COMMUTE",
+          "title": "Active Commuting and Self-Reported Wellbeing Among Office Workers",
+          "category": "research",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-NEWS-BRIDGE",
+          "title": "Harbor Bridge Closed After Inspectors Find Cable Corrosion",
+          "category": "news",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-TECH-QUEUE",
+          "title": "Migrating the Order Pipeline from Polling to a Message Queue",
+          "category": "technical",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-ESSAY-HOMEWORK",
+          "title": "Why Homework Policy Should Follow the Evidence",
+          "category": "essay",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "HO-AMBIGUOUS-TRIAL",
+          "title": "Mixed Results from Two Trials of a Herbal Sleep Supplement",
+          "category": "contradictory",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "NASA-CRS35-HEALTH-RESEARCH",
+          "title": "NASA’s SpaceX CRS-35 Mission to Launch Health Research",
+          "source_url": "https://science.nasa.gov/missions/station/nasas-spacex-crs-35-mission-to-launch-health-research/",
+          "category": "news",
+          "provenance": "existing_real_article_snapshot"
+        },
+        {
+          "id": "NASA-EARTH-OBSERVATORY-THAILAND-FLOODS",
+          "title": "Floodwaters Overwhelm Thailand",
+          "source_url": "https://science.nasa.gov/earth/earth-observatory/floodwaters-overwhelm-thailand/",
+          "category": "news",
+          "provenance": "existing_real_article_snapshot"
+        },
+        {
+          "id": "heldout-educational",
+          "category": "educational",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "heldout-business",
+          "category": "business",
+          "provenance": "engineering_authored_synthetic"
+        },
+        {
+          "id": "heldout-feature",
+          "category": "feature",
+          "provenance": "engineering_authored_synthetic"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Source-first synthetic labels are implementer-authored, not independent review.",
+    "The calibration script name does not change its role: it tunes v2.1 on 12 development articles.",
+    "All existing pilots, detector fixtures and candidate nominations are inspected/excluded."
+  ]
+}

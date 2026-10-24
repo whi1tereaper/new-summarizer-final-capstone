@@ -1,0 +1,36 @@
+      accidental data loss. Admins can restore
+      or permanently delete items as needed.
+
+   •  Account Management Controls: Admins can
+      enable or disable user accounts, archive
+      inactive  users,  and  control  folder
+      assignments, ensuring that access rights
+      are always current and appropriate.
+These  security  features  address  the  risks
+identified in the existing Google Drive setup,
+where access was individually managed and lacked
+centralized oversight.
+2.3  Improvement  in  Overall  Efficiency  for
+Accreditation
+The  system  directly  supports  accreditation
+processes by:
+
+   •  Automated   Compliance   Tracking:   The
+      dashboard  displays  compliance  status
+      percentages, pending documents counts, and
+      accreditation  readiness  graphs,  giving
+      administrators real-time visibility into
+      preparation progress.
+
+   •  Checklist  Completion  Monitoring:  Each
+      accreditation folder can have checklists
+      with required file counts. As files are
+      uploaded   and   marked,   the   system
+      automatically updates completion status,
+      reducing manual verification work.
+
+
+
+
+
+                                                       39

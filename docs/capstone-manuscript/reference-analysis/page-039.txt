@@ -1,0 +1,39 @@
+   Role-Based Access Control (RBAC)         – a system
+security feature that grants or restricts access
+to documents based on the user's role (e.g.,
+admin, teacher, staff).
+
+   SDLC (Software Development Life Cycle)           –  a
+structured process for developing software that
+includes  phases  such  as  planning,  design,
+development,    testing,    deployment,    and
+maintenance.
+
+   System Evaluation – the process of assessing
+a system’s performance and usability based on
+specific standards or user feedback.
+
+   Version Control      –   a system feature that
+tracks changes to documents and maintains a
+history of previous versions, ensuring data
+consistency.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                       20

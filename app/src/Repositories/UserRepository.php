@@ -31,7 +31,17 @@ final class UserRepository
             'email' => $usernameOrEmail,
         ]);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
-
+        if (!$user) {
+            require_once __DIR__.'/../Services/StudentVerificationService.php';
+            try {
+                $number=\App\Src\Services\StudentVerificationService::normalizeNumber($usernameOrEmail);
+                $fingerprint=\App\Src\Services\StudentVerificationService::fingerprint($number);
+                $lookup=$this->db->prepare('SELECT u.id,u.username,u.email,u.password_hash,u.role,u.terms_accepted,u.terms_accepted_at FROM users u JOIN student_applications a ON a.user_id=u.id WHERE a.student_number_fingerprint=? AND u.active=1 LIMIT 1');
+                $lookup->execute([$fingerprint]);$user=$lookup->fetch(PDO::FETCH_ASSOC);
+            } catch (\InvalidArgumentException|\RuntimeException $e) {
+                // Invalid syntax or unavailable protected key cannot authenticate.
+            }
+        }
         return is_array($user) ? $user : null;
     }
 

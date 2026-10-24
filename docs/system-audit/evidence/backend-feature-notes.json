@@ -1,0 +1,3544 @@
+{
+  "audit_date": "2026-10-17",
+  "timezone": "Asia/Manila",
+  "limits": "Source evidence, metadata and stated synthetic fixtures only; no production-row reads or state mutations.",
+  "features": [
+    {
+      "id": "B01",
+      "name": "Account registration",
+      "actors": [
+        "guest"
+      ],
+      "actions": [
+        "register",
+        "validate email/password",
+        "create user"
+      ],
+      "source_paths": [
+        "app/src/Controllers/AuthController.php",
+        "app/src/Repositories/UserRepository.php",
+        "app/src/Utils/PasswordPolicy.php"
+      ],
+      "tables": [
+        "users"
+      ],
+      "evidence_status": "Source-confirmed; email/account production flow not executed."
+    },
+    {
+      "id": "B02",
+      "name": "Login and logout",
+      "actors": [
+        "user",
+        "admin"
+      ],
+      "actions": [
+        "authenticate password",
+        "regenerate session",
+        "logout"
+      ],
+      "source_paths": [
+        "app/src/Controllers/AuthController.php",
+        "app/src/Utils/SessionManager.php"
+      ],
+      "tables": [
+        "users",
+        "rate_limits"
+      ],
+      "evidence_status": "Source-confirmed; real sessions not created."
+    },
+    {
+      "id": "B03",
+      "name": "Administrator email OTP",
+      "actors": [
+        "admin"
+      ],
+      "actions": [
+        "request code",
+        "resend",
+        "verify",
+        "expire pending login"
+      ],
+      "source_paths": [
+        "app/src/Controllers/AuthController.php",
+        "app/src/Services/AdminSecurityService.php",
+        "app/src/Services/EmailService.php"
+      ],
+      "tables": [
+        "users",
+        "rate_limits",
+        "admin_audit_logs"
+      ],
+      "evidence_status": "Source-confirmed; current flow is email OTP, not legacy challenge question; SMTP unverified."
+    },
+    {
+      "id": "B04",
+      "name": "Password reset",
+      "actors": [
+        "guest",
+        "user"
+      ],
+      "actions": [
+        "request OTP",
+        "validate OTP",
+        "replace password",
+        "consume token"
+      ],
+      "source_paths": [
+        "app/src/Controllers/AuthController.php",
+        "app/src/Services/PasswordResetService.php"
+      ],
+      "tables": [
+        "password_resets",
+        "users"
+      ],
+      "evidence_status": "Source-confirmed; reset does not revoke persistent tokens; fresh-install schema drift."
+    },
+    {
+      "id": "B05",
+      "name": "Remembered login",
+      "actors": [
+        "user"
+      ],
+      "actions": [
+        "issue selector/validator",
+        "rotate validator",
+        "clear cookie"
+      ],
+      "source_paths": [
+        "app/src/Services/RememberMeService.php"
+      ],
+      "tables": [
+        "user_tokens",
+        "users"
+      ],
+      "evidence_status": "Source-confirmed; administrator autologin refused."
+    },
+    {
+      "id": "B06",
+      "name": "Terms acceptance",
+      "actors": [
+        "user",
+        "admin"
+      ],
+      "actions": [
+        "read terms",
+        "record acceptance",
+        "load session flag"
+      ],
+      "source_paths": [
+        "app/src/Services/TermsAcceptanceService.php",
+        "app/src/Utils/TermsContent.php"
+      ],
+      "tables": [
+        "users"
+      ],
+      "evidence_status": "Source-confirmed; route allowlist means not every processing endpoint is gated."
+    },
+    {
+      "id": "B07",
+      "name": "Guest lifecycle",
+      "actors": [
+        "guest",
+        "user"
+      ],
+      "actions": [
+        "create token",
+        "touch expiry",
+        "claim summaries/feedback",
+        "purge expired guest data"
+      ],
+      "source_paths": [
+        "app/src/Services/GuestSessionService.php",
+        "app/src/whitereaper.php"
+      ],
+      "tables": [
+        "guest_sessions",
+        "summaries",
+        "feedback"
+      ],
+      "evidence_status": "Source-confirmed; GET bootstrap mutates state; lifecycle incomplete for other stores."
+    },
+    {
+      "id": "B08",
+      "name": "Input and preference normalization",
+      "actors": [
+        "guest",
+        "user"
+      ],
+      "actions": [
+        "text input",
+        "URL input",
+        "PDF/DOCX input",
+        "eight analysis modes",
+        "six depths",
+        "output format"
+      ],
+      "source_paths": [
+        "app/src/Services/ArticleService.php",
+        "app/src/Controllers/ArticleController.php"
+      ],
+      "tables": [
+        "summary_jobs"
+      ],
+      "evidence_status": "Source-confirmed; current configured engine defaults legacy."
+    },
+    {
+      "id": "B09",
+      "name": "URL acquisition",
+      "actors": [
+        "guest",
+        "user"
+      ],
+      "actions": [
+        "validate destination",
+        "resolve and pin DNS",
+        "follow bounded redirects",
+        "extract HTML/PDF source"
+      ],
+      "source_paths": [
+        "app/src/Services/SourceResolver.php"
+      ],
+      "tables": [],
+      "evidence_status": "Source-confirmed SSRF/size/timeout controls; no live URL requests made by this audit."
+    },
+    {
+      "id": "B10",
+      "name": "Upload acceptance",
+      "actors": [
+        "guest",
+        "user"
+      ],
+      "actions": [
+        "check multipart origin",
+        "extension/MIME/magic check",
+        "DOCX package check",
+        "random storage filename"
+      ],
+      "source_paths": [
+        "app/src/Services/FileUploadService.php"
+      ],
+      "tables": [],
+      "evidence_status": "Source-confirmed; effective nominal limit30MiB also constrained by PHP."
+    },
+    {
+      "id": "B11",
+      "name": "Recoverable summary jobs",
+      "actors": [
+        "guest",
+        "user",
+        "CLI worker"
+      ],
+      "actions": [
+        "create/idempotency",
+        "claim",
+        "execute",
+        "poll",
+        "retry",
+        "cancel",
+        "expire payload"
+      ],
+      "source_paths": [
+        "app/src/Services/SummaryJobService.php",
+        "app/src/Controllers/ArticleController.php"
+      ],
+      "tables": [
+        "summary_jobs",
+        "summaries"
+      ],
+      "evidence_status": "Source-confirmed; polling can update stale state; end-to-end concurrency unverified."
+    },
+    {
+      "id": "B12",
+      "name": "Python integration",
+      "actors": [
+        "internal"
+      ],
+      "actions": [
+        "daemon dispatch",
+        "CLI dispatch",
+        "structured response",
+        "timeout",
+        "terminate child tree"
+      ],
+      "source_paths": [
+        "app/src/Services/LocalPythonBridge.php"
+      ],
+      "tables": [],
+      "evidence_status": "Source-confirmed; authenticated loopback protocol3; Python behavior separately audited."
+    },
+    {
+      "id": "B13",
+      "name": "Summary persistence",
+      "actors": [
+        "internal"
+      ],
+      "actions": [
+        "normalize worker contract",
+        "store summary",
+        "store source/artifact",
+        "attach metadata"
+      ],
+      "source_paths": [
+        "app/src/Services/ArticleService.php"
+      ],
+      "tables": [
+        "summaries",
+        "summary_artifacts"
+      ],
+      "evidence_status": "Source-confirmed; uploaded source word counts and processing time incomplete."
+    },
+    {
+      "id": "B14",
+      "name": "History and sharing",
+      "actors": [
+        "guest",
+        "user",
+        "share-token holder"
+      ],
+      "actions": [
+        "list recent summaries",
+        "get owner result",
+        "get bearer-share result"
+      ],
+      "source_paths": [
+        "app/src/Services/HistoryService.php",
+        "app/src/Repositories/HistoryRepository.php",
+        "app/src/Controllers/HistoryHandler.php"
+      ],
+      "tables": [
+        "summaries",
+        "summary_artifacts"
+      ],
+      "evidence_status": "Source-confirmed; history defaults to 10 summaries per page and 20 Nutshell records, with service maximum page size 50; share links grant bearer access."
+    },
+    {
+      "id": "B15",
+      "name": "Structured display",
+      "actors": [
+        "internal"
+      ],
+      "actions": [
+        "HTML paragraphs/bullets/hybrid",
+        "plain text",
+        "evidence/coverage",
+        "readability and reading-time estimate"
+      ],
+      "source_paths": [
+        "app/src/Utils/Formatter.php"
+      ],
+      "tables": [],
+      "evidence_status": "Source-confirmed; escaped HTML; reading time convention200words/minute not measured speed."
+    },
+    {
+      "id": "B16",
+      "name": "Document combination API",
+      "actors": [
+        "session context; owner enforcement missing"
+      ],
+      "actions": [
+        "create document/default",
+        "get document",
+        "get cached summary",
+        "generate combination",
+        "list",
+        "batch",
+        "stream"
+      ],
+      "source_paths": [
+        "app/src/Controllers/DocumentSummaryController.php",
+        "app/src/Services/DocumentSummaryService.php",
+        "app/src/Services/SummarizerPromptTemplate.php"
+      ],
+      "tables": [
+        "documents",
+        "document_summaries"
+      ],
+      "evidence_status": "Fixture-verified ownership defect; eight profiles/five lengths; noCSRF in dispatcher."
+    },
+    {
+      "id": "B17",
+      "name": "Audio generation and delivery",
+      "actors": [
+        "guest",
+        "user",
+        "share-token holder"
+      ],
+      "actions": [
+        "normalize text",
+        "generate/cache audio",
+        "issue access token",
+        "stream range"
+      ],
+      "source_paths": [
+        "app/src/Services/BarkTtsService.php",
+        "app/public/tts_audio.php"
+      ],
+      "tables": [],
+      "evidence_status": "Source-confirmed Piper integration despite Bark class name; suffix-range fixture fails; publiccacheheader concern."
+    },
+    {
+      "id": "B18",
+      "name": "Rating and comments",
+      "actors": [
+        "guest",
+        "user",
+        "share-token holder"
+      ],
+      "actions": [
+        "validate1to5",
+        "low-rating reasons",
+        "latest rating upsert",
+        "comment ledger",
+        "legacy impression feedback"
+      ],
+      "source_paths": [
+        "app/src/Services/FeedbackService.php",
+        "app/src/Repositories/FeedbackRepository.php",
+        "app/src/Controllers/FeedbackHandler.php"
+      ],
+      "tables": [
+        "feedback",
+        "feedback_comments",
+        "summaries"
+      ],
+      "evidence_status": "Source-confirmed; transactional ledger/upsert; aggregate values not read."
+    },
+    {
+      "id": "B19",
+      "name": "Usage analytics",
+      "actors": [
+        "user",
+        "admin"
+      ],
+      "actions": [
+        "summary/nutshell trend",
+        "input/profile/depth/format counts",
+        "preferred settings",
+        "landing conversion/dwell/scroll/LCP/device/referrer"
+      ],
+      "source_paths": [
+        "app/src/Controllers/AnalyticsController.php",
+        "app/src/Repositories/UserRepository.php"
+      ],
+      "tables": [
+        "summaries",
+        "nutshell_generations",
+        "landing_page_sessions",
+        "landing_page_events"
+      ],
+      "evidence_status": "Source-confirmed formulas; not research results and affected by missing summary metrics."
+    },
+    {
+      "id": "B20",
+      "name": "Account administration",
+      "actors": [
+        "admin"
+      ],
+      "actions": [
+        "list accounts",
+        "toggle status",
+        "deactivate",
+        "hard delete"
+      ],
+      "source_paths": [
+        "app/src/Controllers/AdminController.php",
+        "app/public/admin_dashboard.php"
+      ],
+      "tables": [
+        "users",
+        "admin_audit_logs"
+      ],
+      "evidence_status": "Source-confirmed; alternate toggle bypasses self/last-admin protections and success audit."
+    },
+    {
+      "id": "B21",
+      "name": "Storage administration",
+      "actors": [
+        "admin"
+      ],
+      "actions": [
+        "count uploads",
+        "delete aged uploads",
+        "delete all uploads"
+      ],
+      "source_paths": [
+        "app/src/Controllers/AdminController.php"
+      ],
+      "tables": [],
+      "evidence_status": "Source-confirmed destructive capability; age-only cleanup is not reference-aware orphan detection; not executed."
+    },
+    {
+      "id": "B22",
+      "name": "Evaluation dataset preparation",
+      "actors": [
+        "admin service caller",
+        "CLI maintainer"
+      ],
+      "actions": [
+        "create dataset",
+        "add document/provenance/split",
+        "add references",
+        "add content units",
+        "add challenge cases",
+        "activate/deactivate"
+      ],
+      "source_paths": [
+        "app/src/Services/EvaluationService.php",
+        "scripts/evaluation_import.php"
+      ],
+      "tables": [
+        "evaluation_datasets",
+        "evaluation_documents",
+        "evaluation_references",
+        "evaluation_content_units",
+        "evaluation_challenge_cases",
+        "evaluation_audit_log"
+      ],
+      "evidence_status": "Source-confirmed service/CLI; not evidence of reachable browser controls or completed research corpus."
+    },
+    {
+      "id": "B23",
+      "name": "Evaluation run control",
+      "actors": [
+        "admin service caller"
+      ],
+      "actions": [
+        "queue immutable snapshot",
+        "cancel",
+        "resume",
+        "code fingerprint",
+        "bounded combinations"
+      ],
+      "source_paths": [
+        "app/src/Services/EvaluationService.php"
+      ],
+      "tables": [
+        "evaluation_runs",
+        "evaluation_outputs",
+        "evaluation_audit_log"
+      ],
+      "evidence_status": "Source-confirmed; five lengths/eight profiles/five systems/ten ablations; optionalLLM may unavailable."
+    },
+    {
+      "id": "B24",
+      "name": "Offline evaluation worker",
+      "actors": [
+        "CLI maintainer"
+      ],
+      "actions": [
+        "single-database lock",
+        "generate outputs",
+        "persist metrics",
+        "record failures",
+        "refresh report"
+      ],
+      "source_paths": [
+        "scripts/evaluation_worker.php",
+        "app/src/Services/EvaluationPythonBridge.php",
+        "app/src/Services/EvaluationService.php"
+      ],
+      "tables": [
+        "evaluation_runs",
+        "evaluation_outputs",
+        "evaluation_metrics"
+      ],
+      "evidence_status": "Source-confirmed; production worker not run; missing metric statuses retained."
+    },
+    {
+      "id": "B25",
+      "name": "Blind evaluation assignments",
+      "actors": [
+        "admin service caller",
+        "assigned user"
+      ],
+      "actions": [
+        "assign reviewers",
+        "randomize order",
+        "get blind assignment",
+        "submit seven criteria",
+        "lock submission"
+      ],
+      "source_paths": [
+        "app/src/Services/EvaluationService.php",
+        "app/src/Services/EvaluationAccess.php",
+        "app/public/evaluate.php"
+      ],
+      "tables": [
+        "evaluation_assignments",
+        "evaluation_ratings"
+      ],
+      "evidence_status": "Source-confirmed; evaluator is assignment not database role; no participant scores collected."
+    },
+    {
+      "id": "B26",
+      "name": "Evaluation review and correction",
+      "actors": [
+        "admin service caller"
+      ],
+      "actions": [
+        "correct rating with reason",
+        "classify error",
+        "verify content unit representation"
+      ],
+      "source_paths": [
+        "app/src/Services/EvaluationService.php"
+      ],
+      "tables": [
+        "evaluation_ratings",
+        "evaluation_errors",
+        "evaluation_content_unit_reviews",
+        "evaluation_audit_log"
+      ],
+      "evidence_status": "Source-confirmed; source method existence does not establish current UI reachability."
+    },
+    {
+      "id": "B27",
+      "name": "Evaluation reports and export",
+      "actors": [
+        "admin"
+      ],
+      "actions": [
+        "descriptive statistics",
+        "input hash",
+        "JSON/CSV/HTML export",
+        "remove specified identifiers",
+        "CSV formula guard"
+      ],
+      "source_paths": [
+        "app/src/Services/EvaluationService.php",
+        "app/public/evaluation_export.php"
+      ],
+      "tables": [
+        "evaluation_runs",
+        "evaluation_outputs",
+        "evaluation_metrics",
+        "evaluation_ratings",
+        "evaluation_errors"
+      ],
+      "evidence_status": "Source-confirmed; free-textnotes requirereview; no empiricalresults manufactured."
+    },
+    {
+      "id": "B28",
+      "name": "Migration and installation",
+      "actors": [
+        "CLI maintainer"
+      ],
+      "actions": [
+        "import base schemas",
+        "apply migrations",
+        "migration ledger/status"
+      ],
+      "source_paths": [
+        "tools/import_schema.php",
+        "tools/migrate.php"
+      ],
+      "tables": [
+        "schema_migrations"
+      ],
+      "evidence_status": "Source-confirmed; status maywrite; passwordresetfreshinstalldrift; not executed."
+    },
+    {
+      "id": "B29",
+      "name": "Retention cleanup",
+      "actors": [
+        "CLI maintainer",
+        "bootstrap"
+      ],
+      "actions": [
+        "landing90day default",
+        "audit90day default",
+        "feedbackcomments90day default",
+        "expired job payloads",
+        "guest expiry"
+      ],
+      "source_paths": [
+        "scripts/cleanup_landing_analytics.php",
+        "scripts/cleanup_admin_audit_logs.php",
+        "scripts/cleanup_feedback_events.php",
+        "scripts/cleanup_summary_recovery.php"
+      ],
+      "tables": [
+        "landing_page_sessions",
+        "admin_audit_logs",
+        "feedback_comments",
+        "summary_jobs",
+        "guest_sessions"
+      ],
+      "evidence_status": "Source-confirmed; notproofscheduled; dryrunbootstrapcanwrite; no automaticbackupfound."
+    },
+    {
+      "id": "B30",
+      "name": "Windows worker supervision",
+      "actors": [
+        "CLI maintainer"
+      ],
+      "actions": [
+        "install logon task",
+        "healthcheck30seconds",
+        "hidden launch",
+        "selftest",
+        "verify process before stop",
+        "remove task"
+      ],
+      "source_paths": [
+        "scripts/install_nlp_worker_task.ps1",
+        "scripts/start_nlp_worker.ps1",
+        "scripts/monitor_nlp_worker.ps1",
+        "scripts/stop_stale_nlp_workers.ps1",
+        "scripts/remove_nlp_worker_task.ps1"
+      ],
+      "tables": [],
+      "evidence_status": "Source-confirmed; installed/runningtaskstate not inspected."
+    }
+  ],
+  "source_coverage": [
+    {
+      "path": "app/src/Controllers/AdminController.php",
+      "sha256": "093c1c8a6dcdb38fef50c97cbffc6ef0e89b9b646788c63aaa004a64b23f868f",
+      "lines": 320,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 22
+        },
+        {
+          "name": "ensureAdmin",
+          "visibility": "private",
+          "line": 28
+        },
+        {
+          "name": "audit",
+          "visibility": "private",
+          "line": 39
+        },
+        {
+          "name": "getAllUsers",
+          "visibility": "public",
+          "line": 49
+        },
+        {
+          "name": "getSystemStats",
+          "visibility": "public",
+          "line": 59
+        },
+        {
+          "name": "normalizeStatsRange",
+          "visibility": "private",
+          "line": 92
+        },
+        {
+          "name": "toggleUserStatus",
+          "visibility": "public",
+          "line": 112
+        },
+        {
+          "name": "getUploadOrphanStats",
+          "visibility": "public",
+          "line": 121
+        },
+        {
+          "name": "cleanOrphanedFiles",
+          "visibility": "public",
+          "line": 144
+        },
+        {
+          "name": "deleteAllFiles",
+          "visibility": "public",
+          "line": 175
+        },
+        {
+          "name": "purgeStaleGuestSummaries",
+          "visibility": "public",
+          "line": 206
+        },
+        {
+          "name": "hardDeleteUser",
+          "visibility": "public",
+          "line": 212
+        },
+        {
+          "name": "deactivateUser",
+          "visibility": "public",
+          "line": 262
+        },
+        {
+          "name": "getFeedbackStats",
+          "visibility": "public",
+          "line": 315
+        }
+      ]
+    },
+    {
+      "path": "app/src/Controllers/AnalyticsController.php",
+      "sha256": "3406edb1d0f79ad8b8b0670a228633ae4d7abfebd4f05a54919bfea1d79e89db",
+      "lines": 550,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 17
+        },
+        {
+          "name": "getKpis",
+          "visibility": "public",
+          "line": 35
+        },
+        {
+          "name": "calculateMedianLcp",
+          "visibility": "private",
+          "line": 73
+        },
+        {
+          "name": "getDeviceBreakdown",
+          "visibility": "public",
+          "line": 125
+        },
+        {
+          "name": "getScrollFunnel",
+          "visibility": "public",
+          "line": 155
+        },
+        {
+          "name": "getDailyTrend",
+          "visibility": "public",
+          "line": 185
+        },
+        {
+          "name": "getSidebarSnapshot",
+          "visibility": "public",
+          "line": 227
+        },
+        {
+          "name": "getUserSidebarStats",
+          "visibility": "public",
+          "line": 302
+        },
+        {
+          "name": "getDashboardData",
+          "visibility": "public",
+          "line": 330
+        },
+        {
+          "name": "normalizeDateRange",
+          "visibility": "private",
+          "line": 447
+        },
+        {
+          "name": "fillTimeBuckets",
+          "visibility": "private",
+          "line": 468
+        },
+        {
+          "name": "getTopReferrers",
+          "visibility": "public",
+          "line": 492
+        },
+        {
+          "name": "getUserPreferredSettings",
+          "visibility": "public",
+          "line": 519
+        }
+      ]
+    },
+    {
+      "path": "app/src/Controllers/ArticleController.php",
+      "sha256": "c32b63264c380f8c215f2798c9b5bddfb7785803d3206bce79e98592d12e9149",
+      "lines": 236,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 19
+        },
+        {
+          "name": "process",
+          "visibility": "public",
+          "line": 25
+        },
+        {
+          "name": "execute",
+          "visibility": "public",
+          "line": 69
+        },
+        {
+          "name": "status",
+          "visibility": "public",
+          "line": 84
+        },
+        {
+          "name": "retry",
+          "visibility": "public",
+          "line": 90
+        },
+        {
+          "name": "handleBackgroundJob",
+          "visibility": "public",
+          "line": 104
+        },
+        {
+          "name": "cancel",
+          "visibility": "public",
+          "line": 137
+        },
+        {
+          "name": "ownedRequestedJob",
+          "visibility": "private",
+          "line": 156
+        },
+        {
+          "name": "emitJobStatus",
+          "visibility": "private",
+          "line": 166
+        },
+        {
+          "name": "requireMutation",
+          "visibility": "private",
+          "line": 188
+        },
+        {
+          "name": "resolveViewerContext",
+          "visibility": "private",
+          "line": 198
+        },
+        {
+          "name": "wantsJson",
+          "visibility": "private",
+          "line": 206
+        },
+        {
+          "name": "json",
+          "visibility": "private",
+          "line": 211
+        },
+        {
+          "name": "emitFailure",
+          "visibility": "private",
+          "line": 219
+        },
+        {
+          "name": "preserveFormState",
+          "visibility": "private",
+          "line": 225
+        }
+      ]
+    },
+    {
+      "path": "app/src/Controllers/AuthController.php",
+      "sha256": "c14278e35066cd8973a1da1bb993d3464a5f4cd32c5f181bc9cb80bf03ae18fb",
+      "lines": 631,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 33
+        },
+        {
+          "name": "login",
+          "visibility": "public",
+          "line": 44
+        },
+        {
+          "name": "beginAdminLoginCode",
+          "visibility": "private",
+          "line": 101
+        },
+        {
+          "name": "verifyAdminLoginCode",
+          "visibility": "public",
+          "line": 165
+        },
+        {
+          "name": "register",
+          "visibility": "public",
+          "line": 240
+        },
+        {
+          "name": "establishAuthenticatedSession",
+          "visibility": "private",
+          "line": 307
+        },
+        {
+          "name": "logout",
+          "visibility": "public",
+          "line": 337
+        },
+        {
+          "name": "deactivateAccount",
+          "visibility": "public",
+          "line": 354
+        },
+        {
+          "name": "forgotPassword",
+          "visibility": "public",
+          "line": 409
+        },
+        {
+          "name": "resetPassword",
+          "visibility": "public",
+          "line": 453
+        },
+        {
+          "name": "getEmailService",
+          "visibility": "private",
+          "line": 510
+        },
+        {
+          "name": "maskEmailAddress",
+          "visibility": "private",
+          "line": 526
+        },
+        {
+          "name": "checkCsrf",
+          "visibility": "private",
+          "line": 535
+        },
+        {
+          "name": "redirectIfRateLimited",
+          "visibility": "private",
+          "line": 550
+        },
+        {
+          "name": "normalizeEmailOrRedirect",
+          "visibility": "private",
+          "line": 569
+        },
+        {
+          "name": "resetPasswordForUser",
+          "visibility": "private",
+          "line": 583
+        },
+        {
+          "name": "getLoginContext",
+          "visibility": "private",
+          "line": 609
+        },
+        {
+          "name": "redirectWithError",
+          "visibility": "private",
+          "line": 614
+        },
+        {
+          "name": "redirectWithSuccess",
+          "visibility": "private",
+          "line": 620
+        },
+        {
+          "name": "redirect",
+          "visibility": "private",
+          "line": 626
+        }
+      ]
+    },
+    {
+      "path": "app/src/Controllers/DocumentSummaryController.php",
+      "sha256": "654c553e84002dddfbb99de04cb61367735564885104c9580cf655e8ad291f7f",
+      "lines": 278,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 21
+        },
+        {
+          "name": "getLastStatusCode",
+          "visibility": "public",
+          "line": 26
+        },
+        {
+          "name": "dispatch",
+          "visibility": "public",
+          "line": 34
+        },
+        {
+          "name": "handleCreateDocument",
+          "visibility": "public",
+          "line": 115
+        },
+        {
+          "name": "handleGetOrGenerateSummary",
+          "visibility": "public",
+          "line": 142
+        },
+        {
+          "name": "handleGetSummaries",
+          "visibility": "public",
+          "line": 163
+        },
+        {
+          "name": "handleBatchSummaries",
+          "visibility": "public",
+          "line": 172
+        },
+        {
+          "name": "wantsStreaming",
+          "visibility": "private",
+          "line": 189
+        },
+        {
+          "name": "streamCreateDocumentResponse",
+          "visibility": "private",
+          "line": 204
+        },
+        {
+          "name": "readJsonBody",
+          "visibility": "private",
+          "line": 246
+        },
+        {
+          "name": "sendJson",
+          "visibility": "private",
+          "line": 264
+        }
+      ]
+    },
+    {
+      "path": "app/src/Controllers/FeedbackHandler.php",
+      "sha256": "bc249de91a4de3f8937f0065034e5e4dbd98be9e8d5c93d7d4f9b6e84a118379",
+      "lines": 86,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "submitFeedback",
+          "visibility": "public",
+          "line": 12
+        },
+        {
+          "name": "submitFullFeedback",
+          "visibility": "public",
+          "line": 24
+        },
+        {
+          "name": "getFullFeedbackForViewer",
+          "visibility": "public",
+          "line": 33
+        },
+        {
+          "name": "getFeedbackForViewer",
+          "visibility": "public",
+          "line": 41
+        },
+        {
+          "name": "getSummaryRatingStats",
+          "visibility": "public",
+          "line": 49
+        },
+        {
+          "name": "getCommentsForSummary",
+          "visibility": "public",
+          "line": 54
+        },
+        {
+          "name": "getSystemFeedbackStats",
+          "visibility": "public",
+          "line": 59
+        },
+        {
+          "name": "getAllFeedbackForAdmin",
+          "visibility": "public",
+          "line": 64
+        },
+        {
+          "name": "getFeedbackTelemetryBreakdown",
+          "visibility": "public",
+          "line": 69
+        },
+        {
+          "name": "getFeedbackHistoryForViewer",
+          "visibility": "public",
+          "line": 74
+        },
+        {
+          "name": "service",
+          "visibility": "private",
+          "line": 82
+        }
+      ]
+    },
+    {
+      "path": "app/src/Controllers/HistoryHandler.php",
+      "sha256": "7c4cb6fba3e049f813bdeb4d19b97148d5b23c8995152bf210ef8f7c2c861f65",
+      "lines": 31,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "getSummaryHistory",
+          "visibility": "public",
+          "line": 12
+        },
+        {
+          "name": "getSummaryById",
+          "visibility": "public",
+          "line": 17
+        },
+        {
+          "name": "getNutshellHistory",
+          "visibility": "public",
+          "line": 22
+        },
+        {
+          "name": "service",
+          "visibility": "private",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "path": "app/src/Database.php",
+      "sha256": "89f4856344262944fdb0cb4b5e4e50a1cdfff047074b7989bb626e335ed84137",
+      "lines": 52,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "private",
+          "line": 11
+        },
+        {
+          "name": "getInstance",
+          "visibility": "public",
+          "line": 38
+        },
+        {
+          "name": "getConnection",
+          "visibility": "public",
+          "line": 45
+        },
+        {
+          "name": "__clone",
+          "visibility": "private",
+          "line": 50
+        },
+        {
+          "name": "__wakeup",
+          "visibility": "public",
+          "line": 51
+        }
+      ]
+    },
+    {
+      "path": "app/src/Repositories/FeedbackRepository.php",
+      "sha256": "9a39112302dad7e820fd9a36c40e67c8ea508abd28eed5daa9f74aa98c594808",
+      "lines": 283,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 16
+        },
+        {
+          "name": "getSummaryRatingStats",
+          "visibility": "public",
+          "line": 21
+        },
+        {
+          "name": "getFullFeedbackForViewer",
+          "visibility": "public",
+          "line": 37
+        },
+        {
+          "name": "getCommentsForSummary",
+          "visibility": "public",
+          "line": 67
+        },
+        {
+          "name": "getSystemFeedbackStats",
+          "visibility": "public",
+          "line": 83
+        },
+        {
+          "name": "getAllFeedbackForAdmin",
+          "visibility": "public",
+          "line": 115
+        },
+        {
+          "name": "getFeedbackTelemetryBreakdown",
+          "visibility": "public",
+          "line": 183
+        },
+        {
+          "name": "getFeedbackHistoryForViewer",
+          "visibility": "public",
+          "line": 250
+        }
+      ]
+    },
+    {
+      "path": "app/src/Repositories/HistoryRepository.php",
+      "sha256": "6c336b9edaa87aaf53ea16f0bc4681652c67aa71f98e05fe87bce9c237992848",
+      "lines": 106,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 18
+        },
+        {
+          "name": "findSummaryById",
+          "visibility": "public",
+          "line": 23
+        },
+        {
+          "name": "findSummaryHistory",
+          "visibility": "public",
+          "line": 39
+        },
+        {
+          "name": "findNutshellHistory",
+          "visibility": "public",
+          "line": 70
+        },
+        {
+          "name": "isValidGuestToken",
+          "visibility": "private",
+          "line": 100
+        }
+      ]
+    },
+    {
+      "path": "app/src/Repositories/UserRepository.php",
+      "sha256": "11cb19e14c0effd9e178c246e2acfa17da28dcbdbea25ced41a8d4e302238ad4",
+      "lines": 186,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 16
+        },
+        {
+          "name": "findActiveByCredential",
+          "visibility": "public",
+          "line": 21
+        },
+        {
+          "name": "findActiveById",
+          "visibility": "public",
+          "line": 38
+        },
+        {
+          "name": "findIdByEmail",
+          "visibility": "public",
+          "line": 52
+        },
+        {
+          "name": "findProfileById",
+          "visibility": "public",
+          "line": 63
+        },
+        {
+          "name": "findActiveAccountForDeactivation",
+          "visibility": "public",
+          "line": 77
+        },
+        {
+          "name": "deactivateAccount",
+          "visibility": "public",
+          "line": 91
+        },
+        {
+          "name": "createPendingTermsAccount",
+          "visibility": "public",
+          "line": 143
+        },
+        {
+          "name": "updatePasswordHash",
+          "visibility": "public",
+          "line": 168
+        },
+        {
+          "name": "isUniqueConstraintViolation",
+          "visibility": "public",
+          "line": 179
+        }
+      ]
+    },
+    {
+      "path": "app/src/Services/AdminSecurityService.php",
+      "sha256": "89cad0aeff768fcd79e0d3117868aba74070df490f5a14f99321db146ae7746b",
+      "lines": 67,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "isVerifiedAdmin",
+          "visibility": "public",
+          "line": 11
+        },
+        {
+          "name": "requireVerifiedAdmin",
+          "visibility": "public",
+          "line": 17
+        },
+        {
+          "name": "requireVerifiedAdminApi",
+          "visibility": "public",
+          "line": 25
+        },
+        {
+          "name": "ensureAuditLogsTable",
+          "visibility": "private",
+          "line": 35
+        },
+        {
+          "name": "auditLog",
+          "visibility": "public",
+          "line": 40
+        }
+      ]
+    },
+    {
+      "path": "app/src/Services/ArticleService.php",
+      "sha256": "e89ddff27c7e93ebb29f134a162bac751dc4526e42ad4629ff4b152b049f6c3d",
+      "lines": 1373,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 45
+        },
+        {
+          "name": "buildPendingSummary",
+          "visibility": "public",
+          "line": 57
+        },
+        {
+          "name": "resolvePendingSummarySource",
+          "visibility": "public",
+          "line": 183
+        },
+        {
+          "name": "requestSummary",
+          "visibility": "public",
+          "line": 203
+        },
+        {
+          "name": "userExists",
+          "visibility": "public",
+          "line": 251
+        },
+        {
+          "name": "storeSummary",
+          "visibility": "public",
+          "line": 263
+        },
+        {
+          "name": "normalizeContractSummaryResult",
+          "visibility": "private",
+          "line": 431
+        },
+        {
+          "name": "cleanupTemporaryArtifacts",
+          "visibility": "public",
+          "line": 499
+        },
+        {
+          "name": "recordFailedSummary",
+          "visibility": "public",
+          "line": 506
+        },
+        {
+          "name": "countWords",
+          "visibility": "private",
+          "line": 529
+        },
+        {
+          "name": "resolveUploadedFilePath",
+          "visibility": "private",
+          "line": 540
+        },
+        {
+          "name": "normalizeSummaryLength",
+          "visibility": "public",
+          "line": 550
+        },
+        {
+          "name": "normalizeAnalysisMode",
+          "visibility": "public",
+          "line": 586
+        },
+        {
+          "name": "normalizeOutputFormat",
+          "visibility": "public",
+          "line": 605
+        },
+        {
+          "name": "normalizeSummaryCount",
+          "visibility": "private",
+          "line": 619
+        },
+        {
+          "name": "normalizeOriginalText",
+          "visibility": "private",
+          "line": 626
+        },
+        {
+          "name": "normalizeSummaryStyle",
+          "visibility": "private",
+          "line": 641
+        },
+        {
+          "name": "normalizeWorkerErrorMessage",
+          "visibility": "private",
+          "line": 650
+        },
+        {
+          "name": "summaryPreprocessingOptions",
+          "visibility": "private",
+          "line": 656
+        },
+        {
+          "name": "normalizeSummaryBlocks",
+          "visibility": "private",
+          "line": 698
+        },
+        {
+          "name": "normalizeKeywords",
+          "visibility": "private",
+          "line": 720
+        },
+        {
+          "name": "normalizeOverallSummaryBullets",
+          "visibility": "private",
+          "line": 730
+        },
+        {
+          "name": "normalizeImportantTerms",
+          "visibility": "private",
+          "line": 744
+        },
+        {
+          "name": "normalizeTextList",
+          "visibility": "private",
+          "line": 772
+        },
+        {
+          "name": "normalizePlainSummary",
+          "visibility": "private",
+          "line": 785
+        },
+        {
+          "name": "normalizeStructuredSummary",
+          "visibility": "private",
+          "line": 799
+        },
+        {
+          "name": "normalizeConclusion",
+          "visibility": "private",
+          "line": 827
+        },
+        {
+          "name": "normalizeReadabilityData",
+          "visibility": "private",
+          "line": 832
+        },
+        {
+          "name": "normalizeSummaryMethod",
+          "visibility": "private",
+          "line": 861
+        },
+        {
+          "name": "normalizeSourceMetadata",
+          "visibility": "private",
+          "line": 908
+        },
+        {
+          "name": "normalizeRetrievalMetadata",
+          "visibility": "private",
+          "line": 1177
+        },
+        {
+          "name": "normalizeEvidence",
+          "visibility": "private",
+          "line": 1211
+        },
+        {
+          "name": "normalizeCoverage",
+          "visibility": "private",
+          "line": 1295
+        },
+        {
+          "name": "normalizeArticleType",
+          "visibility": "private",
+          "line": 1331
+        },
+        {
+          "name": "normalizeParagraphSummaries",
+          "visibility": "private",
+          "line": 1336
+        }
+      ]
+    },
+    {
+      "path": "app/src/Services/BarkTtsService.php",
+      "sha256": "ae5d985388ed42a0097ce5d5dc38dd9bfd3ded828b8159be8fd789819b4406c4",
+      "lines": 319,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 19
+        },
+        {
+          "name": "normalizeText",
+          "visibility": "public",
+          "line": 31
+        },
+        {
+          "name": "normalizeLanguageCode",
+          "visibility": "public",
+          "line": 37
+        },
+        {
+          "name": "getLanguageLabel",
+          "visibility": "public",
+          "line": 46
+        },
+        {
+          "name": "buildCacheFileName",
+          "visibility": "public",
+          "line": 51
+        },
+        {
+          "name": "buildLegacyCacheFileName",
+          "visibility": "public",
+          "line": 57
+        },
+        {
+          "name": "matchesExpectedFileNameForText",
+          "visibility": "public",
+          "line": 62
+        },
+        {
+          "name": "validateText",
+          "visibility": "public",
+          "line": 72
+        },
+        {
+          "name": "validateFileName",
+          "visibility": "public",
+          "line": 81
+        },
+        {
+          "name": "generate",
+          "visibility": "public",
+          "line": 91
+        },
+        {
+          "name": "buildAudioProxyUrl",
+          "visibility": "public",
+          "line": 119
+        },
+        {
+          "name": "buildAudioAccessToken",
+          "visibility": "public",
+          "line": 135
+        },
+        {
+          "name": "verifyAudioAccessToken",
+          "visibility": "public",
+          "line": 150
+        },
+        {
+          "name": "fetchAudioStream",
+          "visibility": "public",
+          "line": 169
+        },
+        {
+          "name": "resolveAudioOutputDir",
+          "visibility": "private",
+          "line": 255
+        },
+        {
+          "name": "resolveAudioPublicUrl",
+          "visibility": "private",
+          "line": 287
+        },
+        {
+          "name": "appendQueryString",
+          "visibility": "private",
+          "line": 293
+        },
+        {
+          "name": "resolveAudioTokenSecret",
+          "visibility": "private",
+          "line": 303
+        }
+      ]
+    },
+    {
+      "path": "app/src/Services/DocumentSummaryService.php",
+      "sha256": "c886dd515ca5ac711e526e58314fe8ce687e5362ea12d8a1968ca80d0ac13091",
+      "lines": 374,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 31
+        },
+        {
+          "name": "createDocument",
+          "visibility": "public",
+          "line": 40
+        },
+        {
+          "name": "getDocument",
+          "visibility": "public",
+          "line": 62
+        },
+        {
+          "name": "validateProfileAndLength",
+          "visibility": "public",
+          "line": 78
+        },
+        {
+          "name": "isNonsenseRequest",
+          "visibility": "public",
+          "line": 101
+        },
+        {
+          "name": "countWords",
+          "visibility": "public",
+          "line": 122
+        },
+        {
+          "name": "calculateCompressionRatio",
+          "visibility": "public",
+          "line": 135
+        },
+        {
+          "name": "calculateReadingTimeSeconds",
+          "visibility": "public",
+          "line": 147
+        },
+        {
+          "name": "generateSummary",
+          "visibility": "public",
+          "line": 158
+        },
+        {
+          "name": "getOrGenerateSummary",
+          "visibility": "public",
+          "line": 216
+        },
+        {
+          "name": "createDocumentWithDefaultSummary",
+          "visibility": "public",
+          "line": 284
+        },
+        {
+          "name": "getSummaries",
+          "visibility": "public",
+          "line": 299
+        },
+        {
+          "name": "batchGetOrGenerateSummaries",
+          "visibility": "public",
+          "line": 323
+        },
+        {
+          "name": "formatSummaryResponse",
+          "visibility": "private",
+          "line": 352
+        }
+      ]
+    },
+    {
+      "path": "app/src/Services/EmailService.php",
+      "sha256": "e0d28d8cc6f30671c614c0f4d64c9e4b5532df1d0f0afb86bb265717294cf82b",
+      "lines": 104,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 11
+        },
+        {
+          "name": "configure",
+          "visibility": "private",
+          "line": 17
+        },
+        {
+          "name": "sendPasswordResetEmail",
+          "visibility": "public",
+          "line": 41
+        },
+        {
+          "name": "sendAdminLoginCodeEmail",
+          "visibility": "public",
+          "line": 75
+        }
+      ]
+    },
+    {
+      "path": "app/src/Services/EvaluationAccess.php",
+      "sha256": "5df23d4b5058e651dc27f923de099d58b6daf4b1c143fd042fde8cd9f44712d2",
+      "lines": 51,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "requireAdmin",
+          "visibility": "public",
+          "line": 11
+        },
+        {
+          "name": "requireEvaluator",
+          "visibility": "public",
+          "line": 20
+        },
+        {
+          "name": "requirePost",
+          "visibility": "public",
+          "line": 39
+        }
+      ]
+    },
+    {
+      "path": "app/src/Services/EvaluationPythonBridge.php",
+      "sha256": "b2b80229af9d300757e849b14ea69e3c596eb311df1c0939c1b9804c0754e8e3",
+      "lines": 93,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 17
+        },
+        {
+          "name": "request",
+          "visibility": "public",
+          "line": 19
+        },
+        {
+          "name": "start",
+          "visibility": "private",
+          "line": 56
+        },
+        {
+          "name": "close",
+          "visibility": "public",
+          "line": 80
+        },
+        {
+          "name": "__destruct",
+          "visibility": "public",
+          "line": 92
+        }
+      ]
+    },
+    {
+      "path": "app/src/Services/EvaluationService.php",
+      "sha256": "7ccecd018570b2b1a895633eed2ff0470b506ff67b93c654e6cfef4192b974e8",
+      "lines": 640,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 28
+        },
+        {
+          "name": "json",
+          "visibility": "public",
+          "line": 30
+        },
+        {
+          "name": "decode",
+          "visibility": "public",
+          "line": 35
+        },
+        {
+          "name": "storageJson",
+          "visibility": "private",
+          "line": 49
+        },
+        {
+          "name": "canonicalHash",
+          "visibility": "public",
+          "line": 59
+        },
+        {
+          "name": "codeFingerprint",
+          "visibility": "public",
+          "line": 69
+        },
+        {
+          "name": "countWords",
+          "visibility": "public",
+          "line": 79
+        },
+        {
+          "name": "text",
+          "visibility": "private",
+          "line": 85
+        },
+        {
+          "name": "rows",
+          "visibility": "private",
+          "line": 93
+        },
+        {
+          "name": "row",
+          "visibility": "private",
+          "line": 97
+        },
+        {
+          "name": "execute",
+          "visibility": "private",
+          "line": 98
+        },
+        {
+          "name": "transaction",
+          "visibility": "private",
+          "line": 108
+        },
+        {
+          "name": "audit",
+          "visibility": "private",
+          "line": 123
+        },
+        {
+          "name": "editableDataset",
+          "visibility": "private",
+          "line": 128
+        },
+        {
+          "name": "editableDocument",
+          "visibility": "private",
+          "line": 136
+        },
+        {
+          "name": "createDataset",
+          "visibility": "public",
+          "line": 144
+        },
+        {
+          "name": "addDocument",
+          "visibility": "public",
+          "line": 158
+        },
+        {
+          "name": "addReference",
+          "visibility": "public",
+          "line": 177
+        },
+        {
+          "name": "addContentUnit",
+          "visibility": "public",
+          "line": 191
+        },
+        {
+          "name": "addChallengeCase",
+          "visibility": "public",
+          "line": 202
+        },
+        {
+          "name": "listDatasets",
+          "visibility": "public",
+          "line": 216
+        },
+        {
+          "name": "listDocuments",
+          "visibility": "public",
+          "line": 217
+        },
+        {
+          "name": "getDocument",
+          "visibility": "public",
+          "line": 218
+        },
+        {
+          "name": "setDatasetActive",
+          "visibility": "public",
+          "line": 227
+        },
+        {
+          "name": "setDocumentActive",
+          "visibility": "public",
+          "line": 236
+        },
+        {
+          "name": "queueRun",
+          "visibility": "public",
+          "line": 245
+        },
+        {
+          "name": "insertOutput",
+          "visibility": "private",
+          "line": 289
+        },
+        {
+          "name": "listRuns",
+          "visibility": "public",
+          "line": 294
+        },
+        {
+          "name": "getRun",
+          "visibility": "public",
+          "line": 295
+        },
+        {
+          "name": "getOutputs",
+          "visibility": "public",
+          "line": 304
+        },
+        {
+          "name": "getOutputDetail",
+          "visibility": "public",
+          "line": 308
+        },
+        {
+          "name": "getMetrics",
+          "visibility": "public",
+          "line": 323
+        },
+        {
+          "name": "snapshotDocument",
+          "visibility": "private",
+          "line": 329
+        },
+        {
+          "name": "cancelRun",
+          "visibility": "public",
+          "line": 335
+        },
+        {
+          "name": "resumeRun",
+          "visibility": "public",
+          "line": 344
+        },
+        {
+          "name": "randomizedOrder",
+          "visibility": "public",
+          "line": 357
+        },
+        {
+          "name": "listEvaluatorCandidates",
+          "visibility": "public",
+          "line": 362
+        },
+        {
+          "name": "createAssignments",
+          "visibility": "public",
+          "line": 366
+        },
+        {
+          "name": "listAssignments",
+          "visibility": "public",
+          "line": 395
+        },
+        {
+          "name": "getBlindAssignment",
+          "visibility": "public",
+          "line": 399
+        },
+        {
+          "name": "validateRatings",
+          "visibility": "public",
+          "line": 408
+        },
+        {
+          "name": "submitRating",
+          "visibility": "public",
+          "line": 419
+        },
+        {
+          "name": "correctRating",
+          "visibility": "public",
+          "line": 435
+        },
+        {
+          "name": "getAssignmentsForRun",
+          "visibility": "public",
+          "line": 446
+        },
+        {
+          "name": "classifyError",
+          "visibility": "public",
+          "line": 450
+        },
+        {
+          "name": "verifyContentUnit",
+          "visibility": "public",
+          "line": 461
+        },
+        {
+          "name": "getRunReport",
+          "visibility": "public",
+          "line": 474
+        },
+        {
+          "name": "exportRun",
+          "visibility": "public",
+          "line": 481
+        },
+        {
+          "name": "nextRun",
+          "visibility": "public",
+          "line": 505
+        },
+        {
+          "name": "startRun",
+          "visibility": "public",
+          "line": 511
+        },
+        {
+          "name": "pendingOutputs",
+          "visibility": "public",
+          "line": 515
+        },
+        {
+          "name": "isCancelled",
+          "visibility": "public",
+          "line": 516
+        },
+        {
+          "name": "workerPayload",
+          "visibility": "public",
+          "line": 517
+        },
+        {
+          "name": "persistOutput",
+          "visibility": "public",
+          "line": 534
+        },
+        {
+          "name": "finiteMetric",
+          "visibility": "private",
+          "line": 565
+        },
+        {
+          "name": "failOutput",
+          "visibility": "public",
+          "line": 571
+        },
+        {
+          "name": "updateProgress",
+          "visibility": "private",
+          "line": 575
+        },
+        {
+          "name": "finishRun",
+          "visibility": "public",
+          "line": 581
+        },
+        {
+          "name": "statisticsPayload",
+          "visibility": "public",
+          "line": 589
+        },
+        {
+          "name": "saveReport",
+          "visibility": "public",
+          "line": 625
+        },
+        {
+          "name": "reportFailure",
+          "visibility": "public",
+          "line": 639
+        }
+      ]
+    },
+    {
+      "path": "app/src/Services/FeedbackService.php",
+      "sha256": "af38a0ebb98f19110b5225404c117a8acc57ad7f81a15aa627d5002179ea7c4f",
+      "lines": 371,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 16
+        },
+        {
+          "name": "submitFeedback",
+          "visibility": "public",
+          "line": 33
+        },
+        {
+          "name": "submitFullFeedback",
+          "visibility": "public",
+          "line": 148
+        },
+        {
+          "name": "getFullFeedbackForViewer",
+          "visibility": "public",
+          "line": 241
+        },
+        {
+          "name": "getFeedbackForViewer",
+          "visibility": "public",
+          "line": 252
+        },
+        {
+          "name": "getSummaryRatingStats",
+          "visibility": "public",
+          "line": 258
+        },
+        {
+          "name": "getCommentsForSummary",
+          "visibility": "public",
+          "line": 276
+        },
+        {
+          "name": "getSystemFeedbackStats",
+          "visibility": "public",
+          "line": 287
+        },
+        {
+          "name": "getAllFeedbackForAdmin",
+          "visibility": "public",
+          "line": 298
+        },
+        {
+          "name": "getFeedbackTelemetryBreakdown",
+          "visibility": "public",
+          "line": 309
+        },
+        {
+          "name": "getFeedbackHistoryForViewer",
+          "visibility": "public",
+          "line": 325
+        },
+        {
+          "name": "pruneFeedbackEvents",
+          "visibility": "public",
+          "line": 342
+        },
+        {
+          "name": "ensureTable",
+          "visibility": "private",
+          "line": 362
+        },
+        {
+          "name": "getSummaryHandler",
+          "visibility": "private",
+          "line": 367
+        }
+      ]
+    },
+    {
+      "path": "app/src/Services/FileUploadService.php",
+      "sha256": "e41cbb564185c1f334c99a024211f4e9a918aa51b640e24501d5a7ea6ebca0cc",
+      "lines": 151,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "iniBytes",
+          "visibility": "public",
+          "line": 21
+        },
+        {
+          "name": "effectiveUploadLimit",
+          "visibility": "public",
+          "line": 30
+        },
+        {
+          "name": "assertUploadedFile",
+          "visibility": "public",
+          "line": 37
+        },
+        {
+          "name": "validateUploadedFile",
+          "visibility": "public",
+          "line": 90
+        },
+        {
+          "name": "generateSafeFilename",
+          "visibility": "public",
+          "line": 103
+        },
+        {
+          "name": "saveUploadedFile",
+          "visibility": "public",
+          "line": 108
+        },
+        {
+          "name": "removeUploadedFile",
+          "visibility": "public",
+          "line": 143
+        }
+      ]
+    },
+    {
+      "path": "app/src/Services/GuestSessionService.php",
+      "sha256": "e774732d7707c795678234c9a48b7c4101fcf451f7248f42e13e916546aa6600",
+      "lines": 258,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 14
+        },
+        {
+          "name": "bootstrapCurrentVisitor",
+          "visibility": "public",
+          "line": 19
+        },
+        {
+          "name": "getCurrentGuestToken",
+          "visibility": "public",
+          "line": 38
+        },
+        {
+          "name": "getOrCreateGuestToken",
+          "visibility": "public",
+          "line": 48
+        },
+        {
+          "name": "claimGuestDataForUser",
+          "visibility": "public",
+          "line": 58
+        },
+        {
+          "name": "clearGuestIdentity",
+          "visibility": "public",
+          "line": 108
+        },
+        {
+          "name": "purgeExpiredGuests",
+          "visibility": "public",
+          "line": 118
+        },
+        {
+          "name": "ensureTable",
+          "visibility": "private",
+          "line": 189
+        },
+        {
+          "name": "touchGuest",
+          "visibility": "private",
+          "line": 194
+        },
+        {
+          "name": "deleteGuestSessionRecord",
+          "visibility": "private",
+          "line": 210
+        },
+        {
+          "name": "purgeExpiredOccasionally",
+          "visibility": "private",
+          "line": 218
+        },
+        {
+          "name": "clearLegacyGuestCookie",
+          "visibility": "private",
+          "line": 225
+        },
+        {
+          "name": "isValidGuestToken",
+          "visibility": "private",
+          "line": 236
+        },
+        {
+          "name": "requestIsHttps",
+          "visibility": "private",
+          "line": 241
+        }
+      ]
+    },
+    {
+      "path": "app/src/Services/HistoryService.php",
+      "sha256": "1488f1ee25bd8f13b50af98f79901f381e788d476264fde0df05c85fa89d671e",
+      "lines": 94,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 19
+        },
+        {
+          "name": "getSummaryHistory",
+          "visibility": "public",
+          "line": 24
+        },
+        {
+          "name": "getSummaryById",
+          "visibility": "public",
+          "line": 35
+        },
+        {
+          "name": "getNutshellHistory",
+          "visibility": "public",
+          "line": 56
+        },
+        {
+          "name": "normalizePagination",
+          "visibility": "private",
+          "line": 66
+        },
+        {
+          "name": "viewerOwnsSummary",
+          "visibility": "private",
+          "line": 75
+        },
+        {
+          "name": "viewerHasSharedAccess",
+          "visibility": "private",
+          "line": 87
+        }
+      ]
+    },
+    {
+      "path": "app/src/Services/LocalPythonBridge.php",
+      "sha256": "9a1721e928789604e6c8f21811e7cd013fd9795e1cba0656a4d0d2623f301275",
+      "lines": 841,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 21
+        },
+        {
+          "name": "summarize",
+          "visibility": "public",
+          "line": 31
+        },
+        {
+          "name": "summarizeV2",
+          "visibility": "public",
+          "line": 36
+        },
+        {
+          "name": "generateSummary",
+          "visibility": "public",
+          "line": 55
+        },
+        {
+          "name": "nutshell",
+          "visibility": "public",
+          "line": 64
+        },
+        {
+          "name": "extractPdfText",
+          "visibility": "public",
+          "line": 69
+        },
+        {
+          "name": "translate",
+          "visibility": "public",
+          "line": 85
+        },
+        {
+          "name": "generateTts",
+          "visibility": "public",
+          "line": 93
+        },
+        {
+          "name": "qa",
+          "visibility": "public",
+          "line": 101
+        },
+        {
+          "name": "runSelfTest",
+          "visibility": "public",
+          "line": 106
+        },
+        {
+          "name": "cancelJob",
+          "visibility": "public",
+          "line": 111
+        },
+        {
+          "name": "run",
+          "visibility": "private",
+          "line": 125
+        },
+        {
+          "name": "runWorker",
+          "visibility": "private",
+          "line": 142
+        },
+        {
+          "name": "execute",
+          "visibility": "private",
+          "line": 206
+        },
+        {
+          "name": "restrictWorkerOutputFile",
+          "visibility": "private",
+          "line": 331
+        },
+        {
+          "name": "runWindowsCommand",
+          "visibility": "private",
+          "line": 372
+        },
+        {
+          "name": "cleanupStaleWorkerOutputFiles",
+          "visibility": "private",
+          "line": 405
+        },
+        {
+          "name": "terminateProcessTree",
+          "visibility": "private",
+          "line": 427
+        },
+        {
+          "name": "openProcess",
+          "visibility": "private",
+          "line": 440
+        },
+        {
+          "name": "buildProcessFailure",
+          "visibility": "private",
+          "line": 507
+        },
+        {
+          "name": "workerFailure",
+          "visibility": "private",
+          "line": 536
+        },
+        {
+          "name": "resolveConfiguredPythonBinary",
+          "visibility": "private",
+          "line": 584
+        },
+        {
+          "name": "buildPythonCandidates",
+          "visibility": "private",
+          "line": 601
+        },
+        {
+          "name": "acquireLightEngineSlot",
+          "visibility": "private",
+          "line": 655
+        },
+        {
+          "name": "procOpenIsAvailable",
+          "visibility": "private",
+          "line": 679
+        },
+        {
+          "name": "commandStartsWithExplicitPath",
+          "visibility": "private",
+          "line": 694
+        },
+        {
+          "name": "isExplicitPath",
+          "visibility": "private",
+          "line": 699
+        },
+        {
+          "name": "tryExecuteViaDaemon",
+          "visibility": "private",
+          "line": 707
+        },
+        {
+          "name": "resolveWorkerToken",
+          "visibility": "private",
+          "line": 823
+        },
+        {
+          "name": "configuredSummaryTimeout",
+          "visibility": "private",
+          "line": 836
+        }
+      ]
+    },
+    {
+      "path": "app/src/Services/PasswordResetService.php",
+      "sha256": "40067c23c888f58a8d68eb48aa232531c96a6acbfbabeef58050915318f13e66",
+      "lines": 81,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 16
+        },
+        {
+          "name": "createToken",
+          "visibility": "public",
+          "line": 21
+        },
+        {
+          "name": "validateToken",
+          "visibility": "public",
+          "line": 37
+        },
+        {
+          "name": "markTokenUsed",
+          "visibility": "public",
+          "line": 51
+        },
+        {
+          "name": "invalidateActiveTokens",
+          "visibility": "private",
+          "line": 59
+        },
+        {
+          "name": "generateOtp",
+          "visibility": "private",
+          "line": 67
+        },
+        {
+          "name": "getLatestActiveToken",
+          "visibility": "private",
+          "line": 72
+        }
+      ]
+    },
+    {
+      "path": "app/src/Services/RateLimiter.php",
+      "sha256": "2cbb54156f5eb8e64cf009d0686a192a6e8f058827aa104c4ae14221db8f8376",
+      "lines": 181,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 28
+        },
+        {
+          "name": "isLimited",
+          "visibility": "public",
+          "line": 34
+        },
+        {
+          "name": "recordAttempt",
+          "visibility": "public",
+          "line": 64
+        },
+        {
+          "name": "resetAttempts",
+          "visibility": "public",
+          "line": 96
+        },
+        {
+          "name": "getRetryAfter",
+          "visibility": "public",
+          "line": 105
+        },
+        {
+          "name": "getActionConfig",
+          "visibility": "private",
+          "line": 127
+        },
+        {
+          "name": "purgeExpired",
+          "visibility": "public",
+          "line": 133
+        },
+        {
+          "name": "getClientIp",
+          "visibility": "public",
+          "line": 144
+        }
+      ]
+    },
+    {
+      "path": "app/src/Services/RememberMeService.php",
+      "sha256": "7424b84bad70f882cc085c63d3ce6e864e2ed5f31bf8dd868b02f14e00d18383",
+      "lines": 157,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "ensureSchema",
+          "visibility": "public",
+          "line": 15
+        },
+        {
+          "name": "createCookieForUser",
+          "visibility": "public",
+          "line": 23
+        },
+        {
+          "name": "clearCookie",
+          "visibility": "public",
+          "line": 55
+        },
+        {
+          "name": "loginFromCookie",
+          "visibility": "public",
+          "line": 83
+        }
+      ]
+    },
+    {
+      "path": "app/src/Services/SourceResolver.php",
+      "sha256": "5f962dcab496e67bf4ba7fc7f474a48d827a1ffcac15c16f482564210dc34b76",
+      "lines": 806,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 14
+        },
+        {
+          "name": "getText",
+          "visibility": "public",
+          "line": 21
+        },
+        {
+          "name": "getInputType",
+          "visibility": "public",
+          "line": 26
+        },
+        {
+          "name": "getFilePath",
+          "visibility": "public",
+          "line": 31
+        },
+        {
+          "name": "cleanup",
+          "visibility": "public",
+          "line": 36
+        },
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 60
+        },
+        {
+          "name": "resolve",
+          "visibility": "public",
+          "line": 66
+        },
+        {
+          "name": "validateUrl",
+          "visibility": "public",
+          "line": 87
+        },
+        {
+          "name": "resolvePdfUrl",
+          "visibility": "private",
+          "line": 92
+        },
+        {
+          "name": "resolveHtmlUrl",
+          "visibility": "private",
+          "line": 119
+        },
+        {
+          "name": "looksLikeStandaloneUrl",
+          "visibility": "private",
+          "line": 139
+        },
+        {
+          "name": "normalizeAndValidateUrl",
+          "visibility": "private",
+          "line": 144
+        },
+        {
+          "name": "assertAllowedHost",
+          "visibility": "private",
+          "line": 176
+        },
+        {
+          "name": "assertPublicIpTargets",
+          "visibility": "private",
+          "line": 185
+        },
+        {
+          "name": "isPublicIpAddress",
+          "visibility": "private",
+          "line": 227
+        },
+        {
+          "name": "isDirectPdfUrl",
+          "visibility": "private",
+          "line": 252
+        },
+        {
+          "name": "isHtmlLikeContentType",
+          "visibility": "private",
+          "line": 258
+        },
+        {
+          "name": "normalizeContentType",
+          "visibility": "private",
+          "line": 266
+        },
+        {
+          "name": "downloadBinaryWithRedirectValidation",
+          "visibility": "private",
+          "line": 277
+        },
+        {
+          "name": "downloadTextWithRedirectValidation",
+          "visibility": "private",
+          "line": 417
+        },
+        {
+          "name": "pinValidatedAddress",
+          "visibility": "private",
+          "line": 537
+        },
+        {
+          "name": "networkFailure",
+          "visibility": "private",
+          "line": 552
+        },
+        {
+          "name": "remoteStatusFailure",
+          "visibility": "private",
+          "line": 571
+        },
+        {
+          "name": "createTemporaryPdfPath",
+          "visibility": "private",
+          "line": 584
+        },
+        {
+          "name": "resolveCaBundlePath",
+          "visibility": "private",
+          "line": 605
+        },
+        {
+          "name": "resolveRedirectLocation",
+          "visibility": "private",
+          "line": 635
+        },
+        {
+          "name": "normalizeRelativePath",
+          "visibility": "private",
+          "line": 676
+        },
+        {
+          "name": "extractReadableHtmlText",
+          "visibility": "private",
+          "line": 697
+        },
+        {
+          "name": "normalizeWhitespace",
+          "visibility": "private",
+          "line": 802
+        }
+      ]
+    },
+    {
+      "path": "app/src/Services/SummarizerPromptTemplate.php",
+      "sha256": "d1b36f0daa651ae4dad6c2e70ba72c5e4935309793cdd31d0db17d900964742a",
+      "lines": 144,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "isAllowedProfile",
+          "visibility": "public",
+          "line": 77
+        },
+        {
+          "name": "isAllowedLength",
+          "visibility": "public",
+          "line": 82
+        },
+        {
+          "name": "getProfileInstruction",
+          "visibility": "public",
+          "line": 87
+        },
+        {
+          "name": "getLengthInstruction",
+          "visibility": "public",
+          "line": 93
+        },
+        {
+          "name": "renderPrompt",
+          "visibility": "public",
+          "line": 102
+        }
+      ]
+    },
+    {
+      "path": "app/src/Services/SummaryJobService.php",
+      "sha256": "bdd13c7c7e301b51ddf468c013a3315c8ec3d6e9da4578c7cb28658cc82f5093",
+      "lines": 329,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 17
+        },
+        {
+          "name": "ensureJobForPending",
+          "visibility": "public",
+          "line": 22
+        },
+        {
+          "name": "getJob",
+          "visibility": "public",
+          "line": 69
+        },
+        {
+          "name": "getJobForOwner",
+          "visibility": "public",
+          "line": 109
+        },
+        {
+          "name": "findByIdempotencyKey",
+          "visibility": "public",
+          "line": 128
+        },
+        {
+          "name": "markProcessing",
+          "visibility": "public",
+          "line": 136
+        },
+        {
+          "name": "completeJob",
+          "visibility": "public",
+          "line": 143
+        },
+        {
+          "name": "failJob",
+          "visibility": "public",
+          "line": 149
+        },
+        {
+          "name": "cancelJob",
+          "visibility": "public",
+          "line": 163
+        },
+        {
+          "name": "startBackgroundWorker",
+          "visibility": "public",
+          "line": 169
+        },
+        {
+          "name": "resolveCliPhpBinary",
+          "visibility": "private",
+          "line": 216
+        },
+        {
+          "name": "returnClaimToQueue",
+          "visibility": "private",
+          "line": 240
+        },
+        {
+          "name": "buildDetachedWindowsCommand",
+          "visibility": "private",
+          "line": 248
+        },
+        {
+          "name": "buildIdempotencyKey",
+          "visibility": "private",
+          "line": 258
+        },
+        {
+          "name": "failureForJob",
+          "visibility": "public",
+          "line": 279
+        },
+        {
+          "name": "canRetry",
+          "visibility": "public",
+          "line": 290
+        },
+        {
+          "name": "retryJob",
+          "visibility": "public",
+          "line": 301
+        },
+        {
+          "name": "purgeExpiredPayloads",
+          "visibility": "public",
+          "line": 309
+        }
+      ]
+    },
+    {
+      "path": "app/src/Services/TermsAcceptanceService.php",
+      "sha256": "72b61bb4af6c412468dcae66321b25b4c01bb48a49d6c50c153846f02dcceb27",
+      "lines": 182,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 13
+        },
+        {
+          "name": "ensureSchema",
+          "visibility": "public",
+          "line": 18
+        },
+        {
+          "name": "bootstrapCurrentUserSession",
+          "visibility": "public",
+          "line": 23
+        },
+        {
+          "name": "storeTermsStateInSession",
+          "visibility": "public",
+          "line": 55
+        },
+        {
+          "name": "acceptCurrentUserTerms",
+          "visibility": "public",
+          "line": 63
+        },
+        {
+          "name": "currentAuthenticatedUserHasAccepted",
+          "visibility": "public",
+          "line": 89
+        },
+        {
+          "name": "currentUserNeedsAcceptance",
+          "visibility": "public",
+          "line": 108
+        },
+        {
+          "name": "redirectAuthenticatedUserIfTermsPending",
+          "visibility": "public",
+          "line": 117
+        },
+        {
+          "name": "redirectAfterTermsAcceptance",
+          "visibility": "public",
+          "line": 162
+        }
+      ]
+    },
+    {
+      "path": "app/src/Services/UploadService.php",
+      "sha256": "828492e396aba0afcf124383174857268238fe247cdb2a05b907d34665c24d9e",
+      "lines": 70,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "saveUploadedFile",
+          "visibility": "public",
+          "line": 20
+        },
+        {
+          "name": "removeUploadedFile",
+          "visibility": "public",
+          "line": 61
+        }
+      ]
+    },
+    {
+      "path": "app/src/Support/config.php",
+      "sha256": "0fed7ae0b497ae6a80a84d7e27320432f307250c4e0855efcb2dc4a8bf7ce2ce",
+      "lines": 35,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "config",
+          "visibility": null,
+          "line": 8
+        }
+      ]
+    },
+    {
+      "path": "app/src/Support/Env.php",
+      "sha256": "edf7c8a5d0007e0027e98579d7fbe9f385a28068a014e498d5d5729d707b37a4",
+      "lines": 224,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "load",
+          "visibility": "public",
+          "line": 9
+        },
+        {
+          "name": "get",
+          "visibility": "public",
+          "line": 51
+        },
+        {
+          "name": "string",
+          "visibility": "public",
+          "line": 62
+        },
+        {
+          "name": "requireString",
+          "visibility": "public",
+          "line": 68
+        },
+        {
+          "name": "int",
+          "visibility": "public",
+          "line": 80
+        },
+        {
+          "name": "requireInt",
+          "visibility": "public",
+          "line": 95
+        },
+        {
+          "name": "bool",
+          "visibility": "public",
+          "line": 112
+        },
+        {
+          "name": "requireBool",
+          "visibility": "public",
+          "line": 131
+        },
+        {
+          "name": "boolString",
+          "visibility": "public",
+          "line": 151
+        },
+        {
+          "name": "requireBoolString",
+          "visibility": "public",
+          "line": 156
+        },
+        {
+          "name": "requirePath",
+          "visibility": "public",
+          "line": 161
+        },
+        {
+          "name": "optionalPath",
+          "visibility": "public",
+          "line": 171
+        },
+        {
+          "name": "exists",
+          "visibility": "private",
+          "line": 181
+        },
+        {
+          "name": "stripWrappingQuotes",
+          "visibility": "private",
+          "line": 187
+        },
+        {
+          "name": "projectRoot",
+          "visibility": "private",
+          "line": 200
+        },
+        {
+          "name": "resolvePath",
+          "visibility": "private",
+          "line": 205
+        },
+        {
+          "name": "isAbsolutePath",
+          "visibility": "private",
+          "line": 219
+        }
+      ]
+    },
+    {
+      "path": "app/src/Support/ProcessingError.php",
+      "sha256": "2f7458a259fa1aad9f33681ff09f5b37a56d679048c3891a2a3ef4f269881975",
+      "lines": 70,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "__construct",
+          "visibility": "public",
+          "line": 13
+        },
+        {
+          "name": "catalog",
+          "visibility": "public",
+          "line": 32
+        },
+        {
+          "name": "toArray",
+          "visibility": "public",
+          "line": 37
+        },
+        {
+          "name": "fromThrowable",
+          "visibility": "public",
+          "line": 46
+        },
+        {
+          "name": "fromWorker",
+          "visibility": "public",
+          "line": 52
+        },
+        {
+          "name": "log",
+          "visibility": "public",
+          "line": 64
+        }
+      ]
+    },
+    {
+      "path": "app/src/Support/RuntimePaths.php",
+      "sha256": "07d28f53e7796a91e0034ce68502a2fa92da7ade5b3a169f1b31b35c022ff062",
+      "lines": 76,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "projectRoot",
+          "visibility": "public",
+          "line": 10
+        },
+        {
+          "name": "storageRoot",
+          "visibility": "public",
+          "line": 15
+        },
+        {
+          "name": "uploadsDirectory",
+          "visibility": "public",
+          "line": 20
+        },
+        {
+          "name": "audioDirectory",
+          "visibility": "public",
+          "line": 25
+        },
+        {
+          "name": "logsDirectory",
+          "visibility": "public",
+          "line": 30
+        },
+        {
+          "name": "temporaryDirectory",
+          "visibility": "public",
+          "line": 35
+        },
+        {
+          "name": "uploadDirectories",
+          "visibility": "public",
+          "line": 46
+        },
+        {
+          "name": "ensureDirectory",
+          "visibility": "public",
+          "line": 51
+        },
+        {
+          "name": "ensureRequiredDirectories",
+          "visibility": "public",
+          "line": 60
+        }
+      ]
+    },
+    {
+      "path": "app/src/Utils/Formatter.php",
+      "sha256": "30ee989eb0bbecd62fde6ae1f0a76a547eb5c13f8ac69f4099a1a68db5b9750c",
+      "lines": 646,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "toHtml",
+          "visibility": "public",
+          "line": 20
+        },
+        {
+          "name": "toPlainTextFromStoredSummary",
+          "visibility": "public",
+          "line": 46
+        },
+        {
+          "name": "toOverallSummaryTextFromStoredSummary",
+          "visibility": "public",
+          "line": 73
+        },
+        {
+          "name": "extractKeywordsFromStoredSummary",
+          "visibility": "public",
+          "line": 87
+        },
+        {
+          "name": "extractImportantTermsFromStoredSummary",
+          "visibility": "public",
+          "line": 92
+        },
+        {
+          "name": "extractKeyPointsFromStoredSummary",
+          "visibility": "public",
+          "line": 120
+        },
+        {
+          "name": "extractOverviewFromStoredSummary",
+          "visibility": "public",
+          "line": 125
+        },
+        {
+          "name": "extractOverallSummaryBulletsFromStoredSummary",
+          "visibility": "public",
+          "line": 130
+        },
+        {
+          "name": "extractArticleTypeFromStoredSummary",
+          "visibility": "public",
+          "line": 135
+        },
+        {
+          "name": "extractProfileDataFromStoredSummary",
+          "visibility": "public",
+          "line": 145
+        },
+        {
+          "name": "extractRetrievalFromStoredSummary",
+          "visibility": "public",
+          "line": 166
+        },
+        {
+          "name": "extractEvidenceFromStoredSummary",
+          "visibility": "public",
+          "line": 178
+        },
+        {
+          "name": "extractCoverageFromStoredSummary",
+          "visibility": "public",
+          "line": 186
+        },
+        {
+          "name": "extractConclusionFromStoredSummary",
+          "visibility": "public",
+          "line": 194
+        },
+        {
+          "name": "extractParagraphSummariesFromStoredSummary",
+          "visibility": "public",
+          "line": 204
+        },
+        {
+          "name": "extractReadabilityFromStoredSummary",
+          "visibility": "public",
+          "line": 262
+        },
+        {
+          "name": "extractSourceMetadataFromStoredSummary",
+          "visibility": "public",
+          "line": 291
+        },
+        {
+          "name": "buildReadabilityInfo",
+          "visibility": "public",
+          "line": 388
+        },
+        {
+          "name": "extractStructuredSummaryFromStoredSummary",
+          "visibility": "public",
+          "line": 406
+        },
+        {
+          "name": "normalizeStructuredSummaryLabel",
+          "visibility": "private",
+          "line": 439
+        },
+        {
+          "name": "extractBlocksFromStoredSummary",
+          "visibility": "public",
+          "line": 452
+        },
+        {
+          "name": "textsAreSimilar",
+          "visibility": "public",
+          "line": 463
+        },
+        {
+          "name": "renderParagraph",
+          "visibility": "private",
+          "line": 477
+        },
+        {
+          "name": "renderBullets",
+          "visibility": "private",
+          "line": 492
+        },
+        {
+          "name": "renderHybrid",
+          "visibility": "private",
+          "line": 504
+        },
+        {
+          "name": "extractSummaryBlocksFromDecoded",
+          "visibility": "private",
+          "line": 523
+        },
+        {
+          "name": "normalizeBlocks",
+          "visibility": "private",
+          "line": 538
+        },
+        {
+          "name": "isListArray",
+          "visibility": "private",
+          "line": 549
+        },
+        {
+          "name": "normalizeWhitespace",
+          "visibility": "private",
+          "line": 566
+        },
+        {
+          "name": "countWords",
+          "visibility": "private",
+          "line": 572
+        },
+        {
+          "name": "estimateReadingTimeMinutes",
+          "visibility": "private",
+          "line": 578
+        },
+        {
+          "name": "containsSimilarText",
+          "visibility": "private",
+          "line": 587
+        },
+        {
+          "name": "hasHighTokenOverlap",
+          "visibility": "private",
+          "line": 598
+        },
+        {
+          "name": "normalizeComparableTokens",
+          "visibility": "private",
+          "line": 611
+        },
+        {
+          "name": "extractStringListFieldPublic",
+          "visibility": "public",
+          "line": 626
+        },
+        {
+          "name": "extractStringListField",
+          "visibility": "private",
+          "line": 631
+        }
+      ]
+    },
+    {
+      "path": "app/src/Utils/PasswordPolicy.php",
+      "sha256": "0a761b5cb25305d2fcd2cb1c43ffd46ffc26cd93c3af5d322439f3b34f0e24c1",
+      "lines": 55,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "validate",
+          "visibility": "public",
+          "line": 6
+        },
+        {
+          "name": "getStrength",
+          "visibility": "public",
+          "line": 31
+        },
+        {
+          "name": "hash",
+          "visibility": "public",
+          "line": 46
+        },
+        {
+          "name": "verify",
+          "visibility": "public",
+          "line": 51
+        }
+      ]
+    },
+    {
+      "path": "app/src/Utils/Privacy.php",
+      "sha256": "e79116442ce635d9e0a7fe88dbed0d4cc95214f5f4c7a761832823cde681a5aa",
+      "lines": 28,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "maskSensitiveText",
+          "visibility": "public",
+          "line": 7
+        }
+      ]
+    },
+    {
+      "path": "app/src/Utils/SessionManager.php",
+      "sha256": "f8410ec3b55ecf8438a941dbcac36c66e4f21d166e8a20e957940bbe81f870ec",
+      "lines": 83,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "start",
+          "visibility": "public",
+          "line": 6
+        },
+        {
+          "name": "destroy",
+          "visibility": "public",
+          "line": 35
+        },
+        {
+          "name": "regenerate",
+          "visibility": "public",
+          "line": 59
+        },
+        {
+          "name": "isHttps",
+          "visibility": "private",
+          "line": 66
+        }
+      ]
+    },
+    {
+      "path": "app/src/Utils/TermsContent.php",
+      "sha256": "7c37e97cde5dbcf61c8f1b624307ca8536f400d7347ffdeb33d1f9b30449c215",
+      "lines": 51,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "getSections",
+          "visibility": "public",
+          "line": 6
+        }
+      ]
+    },
+    {
+      "path": "app/src/Utils/validation.php",
+      "sha256": "571dce6af115b297a3dd3f3a0476d6d8f038f06dda17e01a8f2d5d38521dbd98",
+      "lines": 77,
+      "review": "full source read",
+      "methods": [
+        {
+          "name": "generateCsrfToken",
+          "visibility": null,
+          "line": 4
+        },
+        {
+          "name": "validateCsrfToken",
+          "visibility": null,
+          "line": 13
+        },
+        {
+          "name": "verifyCsrfToken",
+          "visibility": null,
+          "line": 22
+        },
+        {
+          "name": "rotateCsrfToken",
+          "visibility": null,
+          "line": 30
+        },
+        {
+          "name": "validateUsername",
+          "visibility": null,
+          "line": 35
+        },
+        {
+          "name": "isAcceptedCheckboxValue",
+          "visibility": null,
+          "line": 47
+        },
+        {
+          "name": "validateEmail",
+          "visibility": null,
+          "line": 65
+        }
+      ]
+    },
+    {
+      "path": "app/src/whitereaper.php",
+      "sha256": "3e669dc54c1fd68dab1270c0bc3984d07debf9d81c02cc4ba2205039ff704612",
+      "lines": 77,
+      "review": "full source read",
+      "methods": []
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+[
+  {
+    "name": "registration explains immediate activation without the old pending workflow",
+    "passed": true
+  },
+  {
+    "name": "anonymous registry access denied",
+    "passed": true
+  },
+  {
+    "name": "ordinary user registry access denied",
+    "passed": true
+  },
+  {
+    "name": "admin password alone does not bypass the login challenge",
+    "passed": true
+  },
+  {
+    "name": "authorized administrator completes second-factor login",
+    "passed": true
+  },
+  {
+    "name": "registry imports remain enabled",
+    "passed": true
+  },
+  {
+    "name": "unlisted ID rejected despite forged approval fields",
+    "passed": true
+  },
+  {
+    "name": "rejected signup retains no user application review-event or trial-link rows",
+    "passed": true
+  },
+  {
+    "name": "rejected signup has no continued access",
+    "passed": true
+  },
+  {
+    "name": "administrator imports active IDs successfully",
+    "passed": true
+  },
+  {
+    "name": "case-normalized matching signup commits verified not pending",
+    "passed": true
+  },
+  {
+    "name": "matching account immediately receives continued access",
+    "passed": true
+  },
+  {
+    "name": "verified page has no waiting heading or review-submit button",
+    "passed": true
+  },
+  {
+    "name": "duplicate ID rejected without another account",
+    "passed": true
+  },
+  {
+    "name": "activated student can sign in again with ID and unchanged password",
+    "passed": true
+  },
+  {
+    "name": "inactive ID rejected with no retained signup rows",
+    "passed": true
+  },
+  {
+    "name": "revoked ID rejected with no retained signup rows",
+    "passed": true
+  },
+  {
+    "name": "expired ID rejected with no retained signup rows",
+    "passed": true
+  },
+  {
+    "name": "existing unmatched account preserved without a review waiting screen",
+    "passed": true
+  },
+  {
+    "name": "failed existing-account activation preserves original application",
+    "passed": true
+  },
+  {
+    "name": "existing-account activation requires valid CSRF",
+    "passed": true
+  },
+  {
+    "name": "existing account activates immediately with imported corrected ID",
+    "passed": true
+  },
+  {
+    "name": "ordinary existing account without application remains restricted",
+    "passed": true
+  },
+  {
+    "name": "registry import still requires valid CSRF",
+    "passed": true
+  },
+  {
+    "name": "admin dashboard preserves legacy management without pending badge",
+    "passed": true
+  },
+  {
+    "name": "terms acceptance remains required",
+    "passed": true
+  },
+  {
+    "name": "registration requires valid CSRF",
+    "passed": true
+  },
+  {
+    "name": "valid imported ID with reused email reproduces the duplicate-account message",
+    "passed": true
+  },
+  {
+    "name": "valid imported ID with reused username reproduces the same message",
+    "passed": true
+  },
+  {
+    "name": "credential conflicts retain no extra account and do not claim the valid student ID",
+    "passed": true
+  },
+  {
+    "name": "credential conflicts do not alter or activate the existing account",
+    "passed": true
+  },
+  {
+    "name": "same valid ID registers and activates when duplicate optional credentials are omitted",
+    "passed": true
+  },
+  {
+    "name": "operator-repaired student ID signs into the original account through HTTP",
+    "passed": true
+  },
+  {
+    "name": "operator-repaired account renders verified without pending access",
+    "passed": true
+  },
+  {
+    "name": "obsolete mistyped ID does not sign into the repaired account",
+    "passed": true
+  }
+]

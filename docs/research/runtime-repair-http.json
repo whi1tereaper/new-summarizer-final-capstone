@@ -1,0 +1,303 @@
+{
+  "test_kind": "real_apache_http_guest_session",
+  "input": "text",
+  "depth": "brief",
+  "job_id": "2873a63533e19c26faf5eeab76dfb853",
+  "accept_http": 200,
+  "observations": [
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "2873a63533e19c26faf5eeab76dfb853",
+      "status": "completed",
+      "can_retry": false,
+      "redirect": "result.php?id=635"
+    }
+  ],
+  "seconds": 47.8596247999958,
+  "expected_original_file_match_not_assumed": true,
+  "result_http": 200,
+  "result_contains_title": true,
+  "completed": true
+}

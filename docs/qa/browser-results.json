@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "checks": [
+    "mobile student-ID form has no name or image requirements",
+    "mobile registration has no horizontal overflow",
+    "real browser password login",
+    "authenticated dashboard renders",
+    "history renders",
+    "browser login using student ID",
+    "existing audio button WAV fallback decoded by browser (Web Speech unavailable simulated)",
+    "browser admin login with captured email second factor and verification dashboard",
+    "browser 1000-ID preview and detected counter do not prematurely trust records",
+    "browser confirms 1000 records and database proves pending registry_match approval",
+    "mobile registry remains within viewport with scrollable tables",
+    "browser student-ID-only registration automatically verified without email or further approval",
+    "automatically approved student logs in using student ID and password",
+    "registry-approved browser student completes real NLP summary saved in MySQL",
+    "no browser script exceptions"
+  ]
+}

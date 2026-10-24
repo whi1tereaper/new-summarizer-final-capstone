@@ -1,0 +1,24 @@
+%% DFD Level 1: administration and research evaluation
+%% SOURCE-SUPPORTED design; operation is separately verified.
+flowchart TB
+    A["Administrator /<br/>assigned evaluator"]
+    P5("5.0 Administration and<br/>research evaluation")
+    D1@{ shape: datastore, label: "D1 Account / session stores<br/>users; password_resets;<br/>user_tokens; guest_sessions;<br/>rate_limits; PHP session state" }
+    D4@{ shape: datastore, label: "D4 Feedback / telemetry<br/>feedback; feedback_comments;<br/>landing_page_sessions;<br/>landing_page_events" }
+    D5@{ shape: datastore, label: "D5 Administration audit<br/>admin_audit_logs" }
+    D6@{ shape: datastore, label: "D6 Evaluation stores<br/>13 evaluation_* tables<br/>See complete data dictionary" }
+    A -->|"management / assessment<br/>request"| P5
+    P5 -->|"reports / assigned<br/>outputs"| A
+    P5 -->|"managed account changes"| D1
+    D1 -->|"account records"| P5
+    D4 -->|"feedback / telemetry"| P5
+    P5 -->|"audit entries"| D5
+    D5 -->|"audit history"| P5
+    P5 -->|"dataset / run / review<br/>records"| D6
+    D6 -->|"evaluation outputs /<br/>ratings"| P5
+    classDef process fill:#edf1f5,stroke:#222,color:#111;
+    classDef store fill:#f6f6f6,stroke:#222,color:#111;
+    classDef entity fill:#fff,stroke:#222,color:#111;
+    class P5 process;
+    class D1,D4,D5,D6 store;
+    class A entity;

@@ -1,0 +1,163 @@
+{
+  "seconds": 101.9918233999997,
+  "source_words": 22438,
+  "sentences": 4,
+  "metadata_performance": {
+    "wall_seconds": 101.893453,
+    "cpu_seconds": 87.28125,
+    "cpu_percent_one_core": 85.66,
+    "stages": {
+      "nlp_library_imports": {
+        "calls": 1,
+        "inclusive_seconds": 2.586215,
+        "exclusive_seconds": 2.586215
+      },
+      "pdf_extraction": {
+        "calls": 1,
+        "inclusive_seconds": 6.131953,
+        "exclusive_seconds": 6.131953
+      },
+      "source_extraction": {
+        "calls": 1,
+        "inclusive_seconds": 6.132725,
+        "exclusive_seconds": 0.000773
+      },
+      "ranking_linguistic_features": {
+        "calls": 36867,
+        "inclusive_seconds": 5.745196,
+        "exclusive_seconds": 5.745196
+      },
+      "text_normalization": {
+        "calls": 1,
+        "inclusive_seconds": 7.347743,
+        "exclusive_seconds": 2.680952
+      },
+      "spacy_initialization": {
+        "calls": 2040,
+        "inclusive_seconds": 5.852573,
+        "exclusive_seconds": 5.852573
+      },
+      "linguistic_annotations": {
+        "calls": 1967,
+        "inclusive_seconds": 31.372587,
+        "exclusive_seconds": 31.372587
+      },
+      "sentence_segmentation": {
+        "calls": 198,
+        "inclusive_seconds": 17.818864,
+        "exclusive_seconds": 0.079979
+      },
+      "sentence_completeness": {
+        "calls": 1969,
+        "inclusive_seconds": 19.720668,
+        "exclusive_seconds": 0.234413
+      },
+      "candidate_generation": {
+        "calls": 1,
+        "inclusive_seconds": 34.198253,
+        "exclusive_seconds": 0.645825
+      },
+      "tfidf_vectorization": {
+        "calls": 1,
+        "inclusive_seconds": 0.117833,
+        "exclusive_seconds": 0.117833
+      },
+      "topic_clustering": {
+        "calls": 1,
+        "inclusive_seconds": 0.512951,
+        "exclusive_seconds": 0.512951
+      },
+      "depth_budget": {
+        "calls": 1,
+        "inclusive_seconds": 9.1e-05,
+        "exclusive_seconds": 9.1e-05
+      },
+      "sentence_transformers_initialization": {
+        "calls": 1,
+        "inclusive_seconds": 9.483875,
+        "exclusive_seconds": 9.483875
+      },
+      "embedding_generation": {
+        "calls": 2,
+        "inclusive_seconds": 25.080294,
+        "exclusive_seconds": 15.596419
+      },
+      "sentence_ranking": {
+        "calls": 1,
+        "inclusive_seconds": 0.268857,
+        "exclusive_seconds": 0.268857
+      },
+      "candidate_selection": {
+        "calls": 1,
+        "inclusive_seconds": 3.186604,
+        "exclusive_seconds": 1.620216
+      },
+      "coherence_ordering": {
+        "calls": 1,
+        "inclusive_seconds": 0.000719,
+        "exclusive_seconds": 0.000719
+      },
+      "grammar_coherence_simplification": {
+        "calls": 1,
+        "inclusive_seconds": 0.000712,
+        "exclusive_seconds": 0.000692
+      },
+      "grammar_initialization": {
+        "calls": 1,
+        "inclusive_seconds": 2.499126,
+        "exclusive_seconds": 2.499126
+      },
+      "grammar_validation": {
+        "calls": 4,
+        "inclusive_seconds": 5.838538,
+        "exclusive_seconds": 5.838538
+      },
+      "format_rendering": {
+        "calls": 3,
+        "inclusive_seconds": 0.004941,
+        "exclusive_seconds": 0.004941
+      },
+      "paragraph_rendering": {
+        "calls": 1,
+        "inclusive_seconds": 4.002185,
+        "exclusive_seconds": 0.700075
+      },
+      "coherence_validation": {
+        "calls": 1,
+        "inclusive_seconds": 2.661734,
+        "exclusive_seconds": 0.958199
+      },
+      "factual_validation": {
+        "calls": 1,
+        "inclusive_seconds": 0.054131,
+        "exclusive_seconds": 0.054131
+      },
+      "mode_validation": {
+        "calls": 1,
+        "inclusive_seconds": 0.055094,
+        "exclusive_seconds": 0.000963
+      },
+      "summary_pipeline": {
+        "calls": 1,
+        "inclusive_seconds": 99.29977,
+        "exclusive_seconds": 8.897893
+      },
+      "result_serialization": {
+        "calls": 1,
+        "inclusive_seconds": 0.005416,
+        "exclusive_seconds": 0.005416
+      },
+      "summary_request": {
+        "calls": 1,
+        "inclusive_seconds": 101.893393,
+        "exclusive_seconds": 0.001992
+      }
+    },
+    "timing_note": "Exclusive times exclude instrumented children; inclusive times overlap and must not be summed.",
+    "rss_mb": 151.43,
+    "peak_rss_mb": 872.34
+  },
+  "keys": [
+    "performance"
+  ]
+}

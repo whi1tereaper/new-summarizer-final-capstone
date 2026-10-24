@@ -1,0 +1,10 @@
+              Figure 6. Use Case Diagram
+
+   The Use Case Diagram of the AccredX: Record
+Management and Archiving System illustrates the
+interaction between the system and its three
+main users    — the Admin, Teacher and Assistant
+(Which is grouped into Compliance Manager since
+
+
+                                                        50

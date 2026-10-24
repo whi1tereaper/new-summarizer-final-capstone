@@ -1,0 +1,35 @@
+Data Analysis Technique
+
+   After  gathering  the  required  data,  the
+researchers  employed  both  descriptive  and
+statistical techniques to analyze and interpret
+the results of the system evaluation.                For
+Statement of the Problem (SOP) numbers 1 and 2,
+the researchers applied qualitative description
+and narrative analysis to present the existing
+challenges in records management and to describe
+the development process of the proposed system.
+For SOP numbers 3, 4, 5, and 6, the researchers
+utilized frequency distribution and weighted
+mean to summarize and interpret the feedback of
+the respondents. The IT        consultants    evaluated
+the system in terms of functional suitability,
+performance     efficiency,             compatibility,
+usability,    reliability,            security       and
+portability, while the end-users assessed it
+mainly in terms of         functional suitability,
+performance efficiency and usability.
+
+   Percentage.
+      It is used to determine the          rate of the
+   responses for each question. To         compute the
+
+
+
+
+
+
+
+
+
+                                                       32

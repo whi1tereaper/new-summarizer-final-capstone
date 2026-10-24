@@ -1,0 +1,157 @@
+{
+  "dataset_version": "heldout-2026-10-12",
+  "dataset_split": "heldout_test",
+  "purpose": "Before/after comparison only. Frozen before quality-first engine changes; never used for weight tuning. Authored by the engineering team (not independently sourced), so it is not a substitute for blind human review on real documents.",
+  "annotation_rules": {
+    "key_units": "A key unit counts as covered when every token in all_of appears (prefix match on word starts, case-insensitive) inside ONE summary sentence.",
+    "critical_facts": "Literal spans checked with evaluation.facts.check_facts (source-aligned lexical screening).",
+    "prohibited": "Literal phrases that would indicate a distortion (e.g. causal upgrade). Any occurrence is a failure."
+  },
+  "documents": [
+    {
+      "id": "HO-RESEARCH-COMMUTE",
+      "category": "research",
+      "profile": "academic",
+      "title": "Active Commuting and Self-Reported Wellbeing Among Office Workers",
+      "source_text": "Active Commuting and Self-Reported Wellbeing Among Office Workers\n\nAbstract\nThis study examined whether commuting by bicycle or on foot is associated with higher self-reported wellbeing among office workers. A cross-sectional survey was distributed to employees of 14 firms in two mid-sized cities between March and June 2025. A total of 1,186 valid responses were analyzed.\n\nIntroduction\nUrban planners increasingly promote active travel as a way to reduce congestion. Earlier work has linked physical activity with mood, but few studies have compared commuting modes within the same workforce. The present study addresses that gap by comparing active commuters with car and public transport users.\n\nMethodology\nParticipants completed the WHO-5 Wellbeing Index and reported their usual commuting mode, commute duration, income band, and weekly exercise outside of commuting. Linear regression models adjusted for age, sex, income, and leisure-time exercise. Respondents with commutes longer than 90 minutes were excluded because the sample in that group was too small.\n\nResults\nActive commuters reported a mean WHO-5 score of 64.2, compared with 57.9 for car commuters and 58.6 for public transport users. After adjustment, active commuting remained associated with a 4.1-point higher wellbeing score (95% CI 2.3 to 5.9). Commute duration was not significantly associated with wellbeing among active commuters. Respondents who cycled reported slightly higher scores than those who walked, but the difference was not statistically significant.\n\nDiscussion\nThe association persisted after controlling for leisure-time exercise, which suggests that the benefit may not be explained by overall fitness alone. However, people who already feel well may be more likely to choose active travel. Because the design is cross-sectional, the results cannot establish that active commuting causes higher wellbeing.\n\nLimitations\nThe sample was drawn from office workers in two cities, so the findings may not generalize to shift workers or rural populations. Commuting mode was self-reported.\n\nConclusion\nActive commuting was associated with modestly higher wellbeing among office workers. Longitudinal studies are needed to determine whether switching to active travel improves wellbeing over time.",
+      "key_units": [
+        {"id": "purpose", "all_of": ["commut", "wellbeing"]},
+        {"id": "sample", "all_of": ["1,186"]},
+        {"id": "main_result", "all_of": ["4.1"]},
+        {"id": "causal_caveat", "all_of": ["cannot", "caus"]},
+        {"id": "conclusion", "all_of": ["associated", "modest"]}
+      ],
+      "critical_facts": ["1,186", "4.1", "64.2", "57.9", "not significantly", "cannot establish", "14 firms"],
+      "prohibited": ["active commuting causes higher wellbeing.", "improves wellbeing.", "proved"]
+    },
+    {
+      "id": "HO-NEWS-BRIDGE",
+      "category": "news",
+      "profile": "news",
+      "title": "Harbor Bridge Closed After Inspectors Find Cable Corrosion",
+      "source_text": "Harbor Bridge Closed After Inspectors Find Cable Corrosion\n\nThe Harbor Street Bridge in Port Alden was closed to all vehicle traffic on Monday after state inspectors found corrosion in two of its 48 suspension cables, the Department of Transportation said.\n\nThe bridge carries about 31,000 vehicles a day between the downtown district and the east shore. Pedestrians and cyclists will still be allowed to cross on the north walkway while engineers assess the damage.\n\nTransportation Commissioner Dana Whitfield said the closure was a precaution. \"We have no evidence that the structure is in immediate danger, but we are not willing to take chances with public safety,\" Whitfield said at a news conference.\n\nThe corrosion was discovered during a routine inspection that began on September 29. Officials said the affected cables had last been inspected in 2023 and showed no significant damage at that time.\n\nCity officials announced that three additional bus routes would run across the Lowell Avenue crossing during the closure. Mayor Victor Ruiz urged residents to allow extra travel time and to consider working from home where possible.\n\nThe department has not said how long the bridge will remain closed. An engineering firm is expected to deliver a repair estimate within three weeks. Local business owners on the east shore said they were worried about losing customers if the closure lasts more than a month.\n\nThe Harbor Street Bridge opened in 1968 and was last rehabilitated in 2009 at a cost of $22 million.",
+      "key_units": [
+        {"id": "event", "all_of": ["closed", "corrosion"]},
+        {"id": "scale", "all_of": ["31,000"]},
+        {"id": "precaution", "all_of": ["precaution"]},
+        {"id": "duration_unknown", "all_of": ["not", "how long"]},
+        {"id": "alternatives", "all_of": ["bus", "routes"]}
+      ],
+      "critical_facts": ["two of its 48", "31,000", "Dana Whitfield", "September 29", "three weeks", "1968", "$22 million"],
+      "prohibited": ["in immediate danger.", "will reopen"]
+    },
+    {
+      "id": "HO-TECH-QUEUE",
+      "category": "technical",
+      "profile": "technical",
+      "title": "Migrating the Order Pipeline from Polling to a Message Queue",
+      "source_text": "Migrating the Order Pipeline from Polling to a Message Queue\n\nOverview\nThe order service currently polls the orders table every five seconds to find new records. This design produces constant database load even when no orders arrive, and it delays order confirmation by up to five seconds. This document describes the migration to a RabbitMQ-based message queue.\n\nCurrent Problems\nDuring the November 2025 sale, polling queries accounted for 38 percent of all primary database reads. Two worker instances occasionally processed the same order because the row-locking strategy relied on a status column that was updated after processing began. This caused 214 duplicate confirmation emails in a single day.\n\nProposed Architecture\nThe checkout service will publish an order.created event after the database transaction commits. A consumer group of order workers will subscribe to the order.created queue. Each message carries the order ID and an idempotency key. Workers acknowledge a message only after the order has been fully processed, so unacknowledged messages are redelivered if a worker crashes.\n\nIdempotency\nBecause RabbitMQ provides at-least-once delivery, a message can be delivered more than once. Workers must therefore record each processed idempotency key in a dedicated table with a unique constraint. A worker that encounters an existing key skips the order without sending a second email.\n\nRollout\nThe migration will run in shadow mode for two weeks, with both polling and queue consumers active but only the polling path sending emails. If the queue path processes at least 99.9 percent of orders correctly during shadow mode, polling will be disabled.\n\nRisks\nThe queue introduces a new operational dependency. If the RabbitMQ cluster is unavailable, checkout will still succeed, but order confirmation will be delayed until the cluster recovers. The team has not yet load-tested the cluster above 2,000 messages per second.",
+      "key_units": [
+        {"id": "problem_load", "all_of": ["38"]},
+        {"id": "duplicates", "all_of": ["214", "duplicate"]},
+        {"id": "architecture", "all_of": ["order.created"]},
+        {"id": "idempotency", "all_of": ["idempotency", "key"]},
+        {"id": "rollout", "all_of": ["shadow"]},
+        {"id": "risk", "all_of": ["2,000"]}
+      ],
+      "critical_facts": ["five seconds", "38 percent", "214", "at-least-once", "two weeks", "99.9 percent", "2,000 messages per second"],
+      "prohibited": ["exactly-once", "has been load-tested"]
+    },
+    {
+      "id": "HO-BUSINESS-COOP",
+      "category": "business",
+      "profile": "executive",
+      "title": "Greenfield Grocers Cooperative Annual Operating Review 2025",
+      "source_text": "Greenfield Grocers Cooperative Annual Operating Review 2025\n\nExecutive Summary\nGreenfield Grocers Cooperative recorded total sales of $48.6 million in fiscal 2025, up 6.2 percent from $45.8 million in fiscal 2024. Net income fell to $0.9 million from $1.4 million because of higher wage and energy costs. Membership grew to 21,400 households.\n\nSales by Department\nFresh produce: $14.1 million (up 9.0 percent)\nPrepared foods: $7.3 million (up 15.4 percent)\nPackaged groceries: $19.8 million (up 1.1 percent)\nBulk and wellness: $7.4 million (down 2.6 percent)\n\nCosts\nWages rose 11 percent after the board approved a minimum starting rate of $19 per hour in February. Energy costs increased by $310,000, mainly due to refrigeration upgrades at the Elm Street store, which were completed in August.\n\nStrategic Decisions\nThe board approved opening a third store in the Riverside district in 2027, subject to securing a lease below $32 per square foot. Management decided to close the bulk section at the Elm Street store because its sales have declined for three consecutive years.\n\nRisks and Outlook\nManagement expects sales growth of 4 to 5 percent in fiscal 2026, but warned that a new national chain store opening within two miles of the Oak Avenue location could reduce sales there. The cooperative has not yet completed its analysis of how much the new competitor might affect revenue.",
+      "key_units": [
+        {"id": "sales", "all_of": ["48.6"]},
+        {"id": "net_income", "all_of": ["net income", "0.9"]},
+        {"id": "costs", "all_of": ["wage"]},
+        {"id": "new_store", "all_of": ["third store"]},
+        {"id": "outlook", "all_of": ["4 to 5"]}
+      ],
+      "critical_facts": ["$48.6 million", "6.2 percent", "$0.9 million", "21,400", "$19 per hour", "2027", "$32 per square foot"],
+      "prohibited": ["net income rose", "will open a third store in 2027."]
+    },
+    {
+      "id": "HO-ESSAY-HOMEWORK",
+      "category": "essay",
+      "profile": "general",
+      "title": "Why Homework Policy Should Follow the Evidence",
+      "source_text": "Why Homework Policy Should Follow the Evidence\n\nFew school policies generate as much argument at the dinner table as homework. Parents worry that too much of it crowds out sleep and family time, while others fear that too little leaves children unprepared. This essay argues that homework policy should be set by age group and grounded in research, rather than by tradition or by the loudest voices in a school community.\n\nThe research on homework is more nuanced than either side tends to admit. For secondary school students, moderate amounts of homework are generally associated with higher achievement, although the benefit appears to level off after roughly two hours per night. For primary school students, the relationship between homework and achievement is weak, and some reviews have found no clear benefit at all.\n\nThis difference matters. A single school-wide rule, such as thirty minutes of homework per subject, may be reasonable for a sixteen-year-old but excessive for an eight-year-old. Schools that apply one standard to every grade are ignoring what the evidence actually shows.\n\nCritics of reduced homework argue that practice at home builds discipline and independent study habits. That concern is legitimate, but discipline can also be built through reading for pleasure, household responsibilities, and structured activities that do not require worksheets.\n\nTherefore, schools should adopt age-specific limits, review them regularly against student outcomes, and explain the reasoning to parents. Homework should be a tool chosen for a purpose, not a habit inherited from previous generations.",
+      "key_units": [
+        {"id": "thesis", "all_of": ["age", "research"]},
+        {"id": "secondary_evidence", "all_of": ["secondary", "achievement"]},
+        {"id": "primary_evidence", "all_of": ["primary", "weak"]},
+        {"id": "recommendation", "all_of": ["age-specific"]}
+      ],
+      "critical_facts": ["two hours", "no clear benefit", "thirty minutes"],
+      "prohibited": ["homework causes", "homework has no benefit for secondary"]
+    },
+    {
+      "id": "HO-AMBIGUOUS-TRIAL",
+      "category": "contradictory",
+      "profile": "scientific",
+      "title": "Mixed Results from Two Trials of a Herbal Sleep Supplement",
+      "source_text": "Mixed Results from Two Trials of a Herbal Sleep Supplement\n\nTwo randomized trials have tested whether a valerian-based supplement improves sleep in adults with mild insomnia, and their results disagree.\n\nThe first trial, conducted in Norway with 212 participants, reported that the supplement reduced the time needed to fall asleep by an average of 11 minutes compared with placebo. The researchers described this effect as modest but clinically meaningful.\n\nThe second trial, conducted in Canada with 340 participants, found no significant difference between the supplement and placebo in time to fall asleep or total sleep duration. The Canadian team used a lower dose and measured sleep with wrist-worn devices rather than sleep diaries.\n\nExperts noted that the differences in dose and measurement method could explain the conflicting results. Sleep diaries rely on participants' own reports and may be more sensitive to expectation effects, while wrist-worn devices may underestimate small changes in sleep onset.\n\nNeither trial reported serious side effects, although about 7 percent of participants in both trials reported mild stomach discomfort. The supplement manufacturer funded the Norwegian trial but was not involved in the Canadian trial.\n\nBased on the current evidence, it remains unclear whether the supplement is effective. A larger trial using both diaries and devices would help resolve the question.",
+      "key_units": [
+        {"id": "disagreement", "all_of": ["results", "disagree"]},
+        {"id": "trial1", "all_of": ["11 minutes"]},
+        {"id": "trial2", "all_of": ["no significant difference"]},
+        {"id": "unclear", "all_of": ["unclear"]},
+        {"id": "funding", "all_of": ["manufacturer", "funded"]}
+      ],
+      "critical_facts": ["212", "11 minutes", "340", "no significant difference", "7 percent", "remains unclear"],
+      "prohibited": ["supplement is effective.", "proven", "improves sleep."]
+    },
+    {
+      "id": "HO-POLICY-DATA",
+      "category": "complex_grammar",
+      "profile": "legal",
+      "title": "Municipal Data Retention Policy for Traffic Camera Footage",
+      "source_text": "Municipal Data Retention Policy for Traffic Camera Footage\n\nPurpose and Scope\nThis policy, which applies to every traffic camera operated by or on behalf of the City of Marlowe, establishes how long recorded footage may be retained, who may access it, and under what conditions it may be disclosed to third parties.\n\nRetention\nFootage that is not associated with a recorded traffic violation, a reported collision, or an active investigation shall be deleted no later than 30 days after the date of recording. Footage associated with a recorded violation shall be retained for 18 months or until any appeal is finally resolved, whichever occurs later.\n\nAccess\nAccess to retained footage is limited to authorized personnel of the Traffic Enforcement Division, except where a court order requires disclosure or where the City Attorney determines in writing that disclosure is necessary to defend the City in litigation. No employee may access footage for personal reasons, and every access shall be recorded in an audit log that is reviewed quarterly.\n\nDisclosure to Third Parties\nFootage shall not be sold, licensed, or otherwise provided to commercial entities under any circumstances. Requests from law enforcement agencies outside the City must be accompanied by a warrant, unless the request concerns an imminent threat to life, in which case the Chief of Police may approve disclosure and must report the disclosure to the City Council within 10 business days.\n\nNon-Compliance\nEmployees who violate this policy may be subject to disciplinary action up to and including termination. Unauthorized disclosure may also be referred for criminal investigation where state law applies.",
+      "key_units": [
+        {"id": "retention_30", "all_of": ["30 days"]},
+        {"id": "retention_18", "all_of": ["18 months"]},
+        {"id": "access", "all_of": ["access", "authorized"]},
+        {"id": "no_sale", "all_of": ["not", "sold"]},
+        {"id": "warrant", "all_of": ["warrant"]}
+      ],
+      "critical_facts": ["30 days", "18 months", "whichever occurs later", "shall not be sold", "warrant", "10 business days"],
+      "prohibited": ["may be sold", "deleted after 18 months"]
+    },
+    {
+      "id": "HO-SHORT-LIBRARY",
+      "category": "short",
+      "profile": "general",
+      "title": "Library Extends Weekend Hours",
+      "source_text": "Library Extends Weekend Hours\n\nThe Westbrook Public Library will open from 9 a.m. to 6 p.m. on Sundays starting November 2, adding four hours to its weekend schedule. The change follows a survey in which 62 percent of 900 respondents asked for longer Sunday hours. The extra hours will be funded by a one-year state grant of $85,000. Library director Ana Pereira said the schedule would be reviewed next autumn, and that Sunday hours could return to the current schedule if the grant is not renewed.",
+      "key_units": [
+        {"id": "change", "all_of": ["sunday"]},
+        {"id": "survey", "all_of": ["62 percent"]},
+        {"id": "funding", "all_of": ["grant"]}
+      ],
+      "critical_facts": ["November 2", "62 percent", "900", "$85,000", "Ana Pereira"],
+      "prohibited": ["permanently"]
+    },
+    {
+      "id": "HO-LONG-WATER",
+      "category": "long_report",
+      "profile": "general",
+      "title": "Regional Water Supply Assessment: Drought Preparedness 2026",
+      "source_text": "Regional Water Supply Assessment: Drought Preparedness 2026\n\nIntroduction\nThe Calder Valley Water Authority supplies drinking water to approximately 640,000 residents across nine municipalities. This assessment reviews the condition of the region's water sources, forecasts demand through 2040, and evaluates options for improving resilience to drought. It was prepared at the request of the Authority's board following the dry summers of 2022 and 2024.\n\nCurrent Supply\nThe region draws about 58 percent of its water from the Calder Reservoir, 30 percent from groundwater wells, and 12 percent from purchased supply through an interconnection with the neighboring Fenwick district. The reservoir has a storage capacity of 94 billion liters. During the 2024 drought, storage fell to 41 percent of capacity in late September, the lowest level since the reservoir was completed in 1979.\n\nGroundwater levels in the northern wellfield have declined by an average of 0.6 meters per year since 2012. Hydrologists attribute most of the decline to increased agricultural pumping outside the Authority's control, although reduced recharge during dry years also contributes. Two wells in the northern wellfield were taken out of service in 2025 because of rising nitrate concentrations.\n\nDemand Forecast\nAverage daily demand was 232 million liters in 2025. Under the baseline growth scenario, demand is projected to reach 268 million liters per day by 2040. The forecast assumes that per-person use will continue to decline slowly, as it has for the past decade, due to more efficient appliances and the conservation pricing introduced in 2019. If per-person use stops declining, demand could reach 290 million liters per day by 2040.\n\nPeak summer demand is about 1.4 times the annual average. Outdoor irrigation accounts for most of the summer increase. Residential customers in the newer southern suburbs, where lot sizes are larger, use about 35 percent more water per household in summer than customers in older neighborhoods.\n\nDrought Risk\nClimate projections for the valley indicate that multi-year dry periods are likely to become more frequent, although the projections differ considerably on how much annual rainfall will change. The assessment modeled a repeat of the 2022 to 2024 sequence under 2040 demand. In that scenario, reservoir storage would fall below 25 percent, the level at which mandatory restrictions are triggered, in four out of ten simulated years.\n\nOptions Evaluated\nThe assessment evaluated five options. Expanding the Fenwick interconnection would add up to 20 million liters per day at relatively low cost, but Fenwick faces the same drought conditions and may not be able to supply water when it is most needed. A water recycling plant for non-potable irrigation use would provide about 15 million liters per day and would reduce summer peaks, at an estimated capital cost of $140 million. Rehabilitating the northern wellfield with nitrate treatment would restore about 9 million liters per day for $38 million. An expanded leak detection and pipe replacement program could recover an estimated 11 million liters per day currently lost to leaks. A seawater desalination plant was also considered but was rejected because the nearest suitable coastal site is 70 kilometers away and the energy cost would be high.\n\nRecommendations\nThe assessment recommends a combined approach. In the near term, the Authority should expand leak detection, extend conservation pricing to the highest summer usage tiers, and rehabilitate the northern wellfield. Over the longer term, it should begin design work on the recycling plant so that construction can start by 2030 if demand follows the baseline scenario. The assessment does not recommend relying on the Fenwick interconnection as a primary drought supply.\n\nUncertainties\nThe estimates of leak recovery are based on a sample audit of 8 percent of the distribution network and may not hold across the whole system. The cost of the recycling plant could change substantially once detailed design begins. The assessment also notes that agricultural pumping regulations, which are set by the state, could either ease or worsen groundwater decline.\n\nConclusion\nThe region's water supply is adequate under normal conditions but vulnerable during multi-year droughts. Without additional measures, mandatory restrictions would likely become much more common by 2040. A combination of demand reduction, loss reduction, and new local supply offers the most reliable path to drought resilience.",
+      "key_units": [
+        {"id": "scope", "all_of": ["640,000"]},
+        {"id": "reservoir_low", "all_of": ["41 percent"]},
+        {"id": "groundwater", "all_of": ["groundwater", "declin"]},
+        {"id": "demand", "all_of": ["268"]},
+        {"id": "drought_risk", "all_of": ["four out of ten"]},
+        {"id": "recycling", "all_of": ["recycling", "plant"]},
+        {"id": "recommendation", "all_of": ["recommend"]},
+        {"id": "conclusion", "all_of": ["vulnerable"]}
+      ],
+      "critical_facts": ["640,000", "58 percent", "41 percent", "0.6 meters", "268 million liters", "four out of ten", "$140 million", "$38 million", "8 percent"],
+      "prohibited": ["desalination plant is recommended", "fenwick interconnection as a primary drought supply is recommended"]
+    }
+  ]
+}

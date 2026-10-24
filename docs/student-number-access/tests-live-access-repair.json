@@ -1,0 +1,54 @@
+{
+  "recorded_utc": "2026-10-23T03:39:38.314Z",
+  "live_localhost": true,
+  "nlp_executed": false,
+  "account_writes": false,
+  "checks": [
+    {
+      "name": "dark theme initialized consistently",
+      "passed": true
+    },
+    {
+      "name": "setup failure absent",
+      "passed": true
+    },
+    {
+      "name": "three-success guest counter visible",
+      "passed": true
+    },
+    {
+      "name": "summarization form restored",
+      "passed": true
+    },
+    {
+      "name": "all six summary depths preserved",
+      "passed": true
+    },
+    {
+      "name": "actual Apache status endpoint succeeds",
+      "passed": true
+    },
+    {
+      "name": "refresh does not debit allowance",
+      "passed": true
+    },
+    {
+      "name": "quota identifier remains HttpOnly",
+      "passed": true
+    },
+    {
+      "name": "mobile form visible",
+      "passed": true
+    },
+    {
+      "name": "mobile layout has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "form visible without JavaScript",
+      "passed": true
+    }
+  ],
+  "passed": 11,
+  "failed": 0
+}

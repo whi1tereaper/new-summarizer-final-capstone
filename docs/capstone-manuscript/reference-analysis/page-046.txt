@@ -1,0 +1,33 @@
+Research Respondents
+
+   The researchers identify two (2) sets of
+respondents involved in this study. These are:
+(1) the IT    consultants    who will evaluate the
+technical aspects of the developed system based
+on software quality standards; and (2) the end-
+users who will evaluate the usability and
+functionality of the developed system.
+
+   The first set of respondents consists of ten
+(10) IT   consultants, selected based on their
+expertise in software development and system
+analysis. Their role is to assess the technical
+and functional quality of the system.
+
+   The second set of respondents consists of
+twenty-three (23) end-users, composed of three
+(3) administrative staff, five (5) teachers, and
+fifteen (15)    assistants. These end-users will
+provide feedback based on their experience in
+using   the   system   in   an   academic   or
+administrative setting.
+
+   Table 1 below shows the distribution of the
+respondents   for   the   developed   system’s
+evaluation according to its category.
+
+
+
+
+
+                                                       27

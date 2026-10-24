@@ -1,0 +1,39 @@
+   Once  the  user's  credentials  have  been
+successfully verified, the system proceeds to
+2.2 Generate Session Tokens. In this process,
+the system creates and assigns a session token
+that maintains the user's authenticated session
+while using the platform. This helps ensure
+secure access to system resources and prevents
+unauthorized use during active sessions.
+   The 2.3 Process Password Reset process allows
+users who have forgotten their passwords to
+request account recovery. The system verifies
+the user's account information using the records
+stored  in  the        Users  (D1)      database  and
+facilitates the password reset procedure. Once
+the password has been successfully updated, the
+new credentials are stored in the database and
+can be used for future logins.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      Figure 11. Level 2 – Profile Management
+
+                                                       60

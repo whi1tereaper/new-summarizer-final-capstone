@@ -1,0 +1,11 @@
+                 Figure 8. DFD Level 1
+
+   Figure 8 illustrates       the Level 1 Data Flow
+Diagram (DFD) of the AccredX: Record Management
+and Archiving System. The diagram illustrates
+the major processes performed by the system and
+
+
+
+
+                                                        54

@@ -1,0 +1,101 @@
+{
+  "test_kind": "real_apache_http_guest_session",
+  "input": "url",
+  "base": "http://127.0.0.1/app/public/",
+  "fixture_nonarticle": false,
+  "depth": "brief",
+  "job_id": "005295e781831dc7f7685fee84b99503",
+  "accept_http": 200,
+  "observations": [
+    {
+      "success": true,
+      "job_id": "005295e781831dc7f7685fee84b99503",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "005295e781831dc7f7685fee84b99503",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "005295e781831dc7f7685fee84b99503",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "005295e781831dc7f7685fee84b99503",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "005295e781831dc7f7685fee84b99503",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "005295e781831dc7f7685fee84b99503",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "005295e781831dc7f7685fee84b99503",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "005295e781831dc7f7685fee84b99503",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "005295e781831dc7f7685fee84b99503",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "005295e781831dc7f7685fee84b99503",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "005295e781831dc7f7685fee84b99503",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "005295e781831dc7f7685fee84b99503",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "005295e781831dc7f7685fee84b99503",
+      "status": "processing",
+      "can_retry": false
+    },
+    {
+      "success": true,
+      "job_id": "005295e781831dc7f7685fee84b99503",
+      "status": "completed",
+      "can_retry": false,
+      "redirect": "result.php?id=717"
+    }
+  ],
+  "seconds": 13.606457200003206,
+  "expected_original_file_match_not_assumed": true,
+  "result_http": 200,
+  "result_contains_title": true,
+  "completed": true
+}

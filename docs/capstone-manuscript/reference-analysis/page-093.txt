@@ -1,0 +1,36 @@
+is_system_account     Whether or       tinyint(1)
+                      not user is
+                      system
+                      account or
+                      not
+
+
+
+
+       Table 5. folders Table
+
+
+    Fields Name          Descripti      Type/Leng     Constrai
+                         on             th            nt
+
+    id                   Unique         int(11)       Primary
+                         Identifie                    key
+                         r
+                         for each
+                         folder
+    name                 Name of        varchar(2
+                         the            55)
+                         folder
+    parent_id            Parent ID      int(11)
+                         of the
+                         folder
+    created_by           User that      varchar(2
+                         created        55)
+                         the
+                         folder
+    last_viewed_by       Which          varchar(2
+                         user last      55)
+                         viewed
+
+
+                                                                74

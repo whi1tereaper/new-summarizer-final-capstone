@@ -1,0 +1,10 @@
+erDiagram
+    direction TB
+    documents {
+        int id PK
+    }
+    document_summaries {
+        int id PK
+        int document_id FK
+    }
+    documents ||--o{ document_summaries : "document_id"
