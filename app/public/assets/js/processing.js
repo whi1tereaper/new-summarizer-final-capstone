@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         stop();
         const failure = errors.render(document.getElementById('processing-error'), value);
         card.dataset.state = 'error';
-        document.title = `${failure.title} — LIGHT`;
+        document.title = `${failure.title} — DEPENDED`;
         const draft = errors.draft.read();
         if (draft) {
             // Only definitive failures may receive a new submission token on return.

@@ -43,39 +43,18 @@ function ev_select(string $name, string $label, array $values, string $selected 
     }
     echo '</select></div>';
 }
-function ev_submit(string $label): void { echo '<div class="evaluation-actions"><button class="btn-auth" type="submit">' . ev_h($label) . '</button></div></form>'; }
+function ev_submit(string $label): void { echo '<div class="evaluation-actions"><button class="btn btn--primary btn-auth" type="submit">' . ev_h($label) . '</button></div></form>'; }
 function ev_checks(string $name, string $legend, array $values, array $checked = []): void {
     echo '<fieldset><legend>' . ev_h($legend) . '</legend><div class="evaluation-checks">';
     foreach ($values as $value) { echo '<label class="evaluation-check"><input type="checkbox" name="' . ev_h($name) . '[]" value="' . ev_h($value) . '"' . (in_array($value, $checked, true) ? ' checked' : '') . '>' . ev_h(ev_label($value)) . '</label>'; }
     echo '</div></fieldset>';
 }
-function ev_header(string $title, bool $admin = true, string $tab = ''): void {
-    ?><!doctype html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><title><?= ev_h($title) ?> — LIGHT</title>
-    <link rel="icon" type="image/png" href="assets/images/poc-neust-logo.png"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/css/design-tokens.css"><link rel="stylesheet" href="assets/css/style.css?v=<?= filemtime(dirname(__DIR__) . '/assets/css/style.css') ?>"><link rel="stylesheet" href="assets/css/analytics.css"><link rel="stylesheet" href="assets/css/evaluation.css"><link rel="stylesheet" href="assets/css/site-nav.css"><link rel="stylesheet" href="assets/css/site-footer.css"><link rel="stylesheet" href="assets/css/global-button-effects.css"></head><body class="analytics-page evaluation-page">
+function ev_header(string $title, string $tab = ''): void {
+    ?><!doctype html><html lang="en"><head><meta charset="UTF-8">
+    <?php require_once __DIR__ . '/design-system-head.php'; ?><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><title><?= ev_h($title) ?> — DEPENDED</title>
+    <link rel="stylesheet" href="assets/css/style.css?v=<?= filemtime(dirname(__DIR__) . '/assets/css/style.css') ?>"><link rel="stylesheet" href="assets/css/analytics.css"><link rel="stylesheet" href="assets/css/evaluation.css"><link rel="stylesheet" href="assets/css/site-nav.css?v=<?= filemtime(dirname(__DIR__) . '/assets/css/site-nav.css') ?>"></head><body class="analytics-page evaluation-page">
     <?php require __DIR__ . '/site-nav.php'; ?>
-    <main class="analytics-shell"><div class="analytics-heading"><div><p class="eyebrow"><?= $admin ? 'Research workspace' : 'Independent review' ?></p><h1><?= ev_h($title) ?></h1><p><?= $admin ? 'Traceable measurements, independent ratings, and reproducible experiments.' : 'Read the source and assess each assigned summary using the same rubric.' ?></p></div></div>
-    <?php if ($admin): ?><nav class="evaluation-tabs" aria-label="Evaluation sections"><?php foreach (['overview' => 'Overview', 'datasets' => 'Datasets', 'runs' => 'Runs & ablations', 'assignments' => 'Human evaluation', 'reports' => 'Reports'] as $key => $label): ?><a href="evaluation.php?tab=<?= $key ?>"<?= $key === $tab ? ' aria-current="page"' : '' ?>><?= $label ?></a><?php endforeach; ?></nav><?php endif;
+    <main class="analytics-shell"><div class="analytics-heading"><div><p class="eyebrow">Research workspace</p><h1><?= ev_h($title) ?></h1><p>Traceable measurements and reproducible experiments.</p></div></div>
+    <nav class="evaluation-tabs" aria-label="Evaluation sections"><?php foreach (['overview' => 'Overview', 'datasets' => 'Datasets', 'runs' => 'Runs & ablations', 'reports' => 'Reports'] as $key => $label): ?><a href="evaluation.php?tab=<?= $key ?>"<?= $key === $tab ? ' aria-current="page"' : '' ?>><?= $label ?></a><?php endforeach; ?></nav><?php
 }
 function ev_footer(): void { echo '</main>'; require __DIR__ . '/site-footer.php'; echo '</body></html>'; }
-
-function ev_criteria(): array {
-    return [
-        'relevance' => ['Relevance', 'How well does the summary focus on information important to the document’s purpose?'],
-        'factual_consistency' => ['Factual consistency', 'Are all claims supported by the source, with numbers, negations, and qualifications preserved?'],
-        'coverage' => ['Coverage', 'Does it include the essential information appropriate to its displayed length?'],
-        'coherence' => ['Coherence', 'Do sentences connect logically, with clear references and a sensible order?'],
-        'readability' => ['Readability / fluency', 'Is the wording grammatical, complete, and easy to understand?'],
-        'conciseness' => ['Conciseness', 'Does it convey useful information without unnecessary detail?'],
-        'non_redundancy' => ['Non-redundancy', 'Does each sentence add information without repeating other sentences?'],
-    ];
-}
-function ev_rating_fields(array $values = []): void {
-    foreach (ev_criteria() as $key => [$title, $description]) {
-        $helpId = ev_field_id($key);
-        echo '<fieldset class="evaluation-rating"><legend>' . ev_h($title) . '</legend><p id="help-' . ev_h($helpId) . '" class="evaluation-note">' . ev_h($description) . '</p><div class="evaluation-checks">';
-        foreach ([1 => 'Very poor', 2 => 'Poor', 3 => 'Acceptable', 4 => 'Good', 5 => 'Excellent'] as $score => $label) {
-            echo '<label class="evaluation-check"><input type="radio" name="ratings[' . $key . ']" value="' . $score . '" required aria-describedby="help-' . ev_h($helpId) . '"' . ((int) ($values[$key] ?? 0) === $score ? ' checked' : '') . '>' . $score . ' · ' . $label . '</label>';
-        }
-        echo '</div></fieldset>';
-    }
-}

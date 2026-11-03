@@ -1,0 +1,663 @@
+{
+    "passed": 164,
+    "failed": 0,
+    "initial_ids_tested": 38,
+    "checks": [
+        {
+            "name": "runtime is the required PHP 8.3",
+            "passed": true
+        },
+        {
+            "name": "private runtime input contains exactly the requested 38 distinct IDs",
+            "passed": true
+        },
+        {
+            "name": "migration 020 replays without duplicate policy rows",
+            "passed": true
+        },
+        {
+            "name": "manual approval without a registry claim no longer bypasses access",
+            "passed": true
+        },
+        {
+            "name": "initial list is established once with 38 active exact string records",
+            "passed": true
+        },
+        {
+            "name": "older out-of-list IDs are disabled without deletion",
+            "passed": true
+        },
+        {
+            "name": "old unapproved account is restricted while its password and account survive",
+            "passed": true
+        },
+        {
+            "name": "administrator access is exempt from student matching",
+            "passed": true
+        },
+        {
+            "name": "unlisted original user is not automatically approved",
+            "passed": true
+        },
+        {
+            "name": "registration service rejects a missing email without an account",
+            "passed": true
+        },
+        {
+            "name": "registration service rejects malformed email without an account",
+            "passed": true
+        },
+        {
+            "name": "registration service cannot store a plaintext password",
+            "passed": true
+        },
+        {
+            "name": "form feedback contains no password confirmation role or other arbitrary input",
+            "passed": true
+        },
+        {
+            "name": "safe ID and email feedback are available exactly once",
+            "passed": true
+        },
+        {
+            "name": "expired form values are discarded rather than displayed",
+            "passed": true
+        },
+        {
+            "name": "initial ID 1 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 1 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 1 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 2 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 2 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 2 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 3 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 3 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 3 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 4 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 4 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 4 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 5 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 5 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 5 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 6 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 6 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 6 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 7 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 7 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 7 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 8 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 8 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 8 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 9 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 9 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 9 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 10 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 10 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 10 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 11 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 11 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 11 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 12 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 12 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 12 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 13 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 13 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 13 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 14 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 14 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 14 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 15 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 15 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 15 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 16 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 16 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 16 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 17 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 17 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 17 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 18 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 18 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 18 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 19 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 19 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 19 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 20 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 20 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 20 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 21 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 21 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 21 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 22 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 22 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 22 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 23 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 23 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 23 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 24 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 24 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 24 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 25 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 25 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 25 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 26 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 26 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 26 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 27 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 27 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 27 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 28 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 28 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 28 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 29 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 29 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 29 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 30 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 30 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 30 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 31 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 31 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 31 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 32 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 32 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 32 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 33 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 33 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 33 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 34 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 34 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 34 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 35 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 35 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 35 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 36 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 36 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 36 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 37 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 37 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 37 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "initial ID 38 is exact active and has preserved zeros",
+            "passed": true
+        },
+        {
+            "name": "initial ID 38 registers and approves without any secondary verification",
+            "passed": true
+        },
+        {
+            "name": "initial ID 38 resolves its same account and password",
+            "passed": true
+        },
+        {
+            "name": "duplicate claimed ID rejects and rolls back its new account",
+            "passed": true
+        },
+        {
+            "name": "unimported negative ID 1 rejects without an account",
+            "passed": true
+        },
+        {
+            "name": "unimported negative ID 2 rejects without an account",
+            "passed": true
+        },
+        {
+            "name": "unimported negative ID 3 rejects without an account",
+            "passed": true
+        },
+        {
+            "name": "unimported negative ID 4 rejects without an account",
+            "passed": true
+        },
+        {
+            "name": "PEN prefix alone and malformed suffixes are rejected",
+            "passed": true
+        },
+        {
+            "name": "wrong PEN year is not treated as a known ID",
+            "passed": true
+        },
+        {
+            "name": "student names photos documents and OTP are not requested by validation",
+            "passed": true
+        },
+        {
+            "name": "legacy manual review and resubmission methods cannot approve",
+            "passed": true
+        },
+        {
+            "name": "ordinary users cannot manage imports or policy",
+            "passed": true
+        },
+        {
+            "name": "new administrator import automatically reconciles a matching existing pending account",
+            "passed": true
+        },
+        {
+            "name": "repeat initialization preserves later authorized administrator additions",
+            "passed": true
+        },
+        {
+            "name": "revoked registry ID blocks an existing session immediately",
+            "passed": true
+        },
+        {
+            "name": "explicit registry reauthorization restores the exact account without another identity step",
+            "passed": true
+        },
+        {
+            "name": "inactive listed ID rejects registration",
+            "passed": true
+        },
+        {
+            "name": "expired listed ID rejects registration",
+            "passed": true
+        },
+        {
+            "name": "3000 valid IDs import without duplicates",
+            "passed": true
+        },
+        {
+            "name": "repeat bulk imports skip all existing IDs",
+            "passed": true
+        },
+        {
+            "name": "preview validates duplicates and invalid rows without approving IDs",
+            "passed": true
+        },
+        {
+            "name": "confirmed preview inserts only valid unique rows",
+            "passed": true
+        },
+        {
+            "name": "reconfirming a committed batch is idempotent",
+            "passed": true
+        },
+        {
+            "name": "oversized and malformed binary imports are rejected",
+            "passed": true
+        },
+        {
+            "name": "mid-import failure rolls back every earlier ID in the batch",
+            "passed": true
+        },
+        {
+            "name": "eight concurrent registrations claim exactly one ID once",
+            "passed": true
+        },
+        {
+            "name": "conflicting historical claims approve neither account and preserve both",
+            "passed": true
+        },
+        {
+            "name": "conflict flag blocks a third account from claiming the disputed ID",
+            "passed": true
+        },
+        {
+            "name": "active eligible statistics exclude disputed claims",
+            "passed": true
+        },
+        {
+            "name": "guest starts with exactly three shared attempts",
+            "passed": true
+        },
+        {
+            "name": "failed processing does not consume an attempt",
+            "passed": true
+        },
+        {
+            "name": "fourth guest request is blocked while completed history remains readable",
+            "passed": true
+        },
+        {
+            "name": "eight concurrent guest requests complete at most exactly three",
+            "passed": true
+        },
+        {
+            "name": "management statistics come from actual database state",
+            "passed": true
+        },
+        {
+            "name": "none of the requested negative IDs were ever imported",
+            "passed": true
+        },
+        {
+            "name": "pre-existing original password hashes are unchanged",
+            "passed": true
+        },
+        {
+            "name": "pre-existing summary and feedback counts are unchanged",
+            "passed": true
+        }
+    ]
+}

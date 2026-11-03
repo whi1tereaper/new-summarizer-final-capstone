@@ -1,0 +1,300 @@
+{
+  "summary.json": {
+    "passed": 30,
+    "failed": 0,
+    "nested": {
+      "service": {
+        "passed": 22,
+        "failed": 0
+      },
+      "browser": {
+        "passed": 17,
+        "failed": 0
+      }
+    },
+    "live_migrations_applied": false,
+    "authentication_scope": "private QA sessions for protected HTTP workflows; login/OTP not re-tested"
+  },
+  "checks.json": [
+    {
+      "name": "test credentials are denied production access",
+      "passed": true
+    },
+    {
+      "name": "anonymous cannot read the unified audit trail",
+      "passed": true
+    },
+    {
+      "name": "ordinary user cannot read the unified audit trail",
+      "passed": true
+    },
+    {
+      "name": "administrator reads audit events with no-store and no-referrer",
+      "passed": true
+    },
+    {
+      "name": "the audit GET does not modify or copy ledger records",
+      "passed": true
+    },
+    {
+      "name": "audit viewer rejects POST without changing ledger records",
+      "passed": true
+    },
+    {
+      "name": "invalid HTTP filter source[]=admin is safely rejected",
+      "passed": true
+    },
+    {
+      "name": "invalid HTTP filter source=unknown is safely rejected",
+      "passed": true
+    },
+    {
+      "name": "invalid HTTP filter admin_id=-1 is safely rejected",
+      "passed": true
+    },
+    {
+      "name": "invalid HTTP filter date_from=2026-02-30 is safely rejected",
+      "passed": true
+    },
+    {
+      "name": "invalid HTTP filter date_from=2026-10-24&date_to=2026-10-23 is safely rejected",
+      "passed": true
+    },
+    {
+      "name": "invalid HTTP filter page=999999999999999999999999 is safely rejected",
+      "passed": true
+    },
+    {
+      "name": "Student ID registry HMACs do not appear in the viewer",
+      "passed": true
+    },
+    {
+      "name": "actual HTTP deactivation toggle writes a distinct actor/target transition event",
+      "passed": true
+    },
+    {
+      "name": "repeated no-op toggle does not fabricate another change",
+      "passed": true
+    },
+    {
+      "name": "actual HTTP activation records the opposite transition",
+      "passed": true
+    },
+    {
+      "name": "explicit deactivation no longer uses the deletion event code",
+      "passed": true
+    },
+    {
+      "name": "repeated explicit deactivation is not recorded as another change",
+      "passed": true
+    },
+    {
+      "name": "actual HTTP deletion retains its own explicit audit event",
+      "passed": true
+    },
+    {
+      "name": "toggle_status rolls back account and summary relationships when audit persistence fails",
+      "passed": true
+    },
+    {
+      "name": "deactivate_user rolls back account and summary relationships when audit persistence fails",
+      "passed": true
+    },
+    {
+      "name": "delete_user rolls back account and summary relationships when audit persistence fails",
+      "passed": true
+    },
+    {
+      "name": "invalid CSRF blocks mutation and records a bounded denial event",
+      "passed": true
+    },
+    {
+      "name": "denial logging excludes arbitrary request action text",
+      "passed": true
+    },
+    {
+      "name": "malformed action/CSRF arrays do not produce fatal errors",
+      "passed": true
+    },
+    {
+      "name": "service filtering authorization metadata timezone and partial-ledger contracts",
+      "passed": true
+    },
+    {
+      "name": "real browser filters pagination escaping legacy labels and responsive themes",
+      "passed": true
+    },
+    {
+      "name": "existing security analytics lifecycle feedback and history regressions",
+      "passed": true
+    },
+    {
+      "name": "live passwords accounts summaries and feedback preserved",
+      "passed": true
+    },
+    {
+      "name": "isolated QA schemas and credentials removed",
+      "passed": true
+    }
+  ],
+  "browser.json": [
+    {
+      "name": "real audit page shows labelled filters and a capped 50-event page",
+      "passed": true
+    },
+    {
+      "name": "source filter exposes real Student ID events without identity fingerprints",
+      "passed": true
+    },
+    {
+      "name": "combined source and event filters display the actual rejection count",
+      "passed": true
+    },
+    {
+      "name": "Next page preserves filters and has no repeated same-second events",
+      "passed": true
+    },
+    {
+      "name": "stored HTML/script content is escaped and cannot execute",
+      "passed": true
+    },
+    {
+      "name": "legacy deletion and deactivation labels differ and browser details open by keyboard",
+      "passed": true
+    },
+    {
+      "name": "empty-filter results have a clear recovery message",
+      "passed": true
+    },
+    {
+      "name": "invalid date filters return an accessible validation error",
+      "passed": true
+    },
+    {
+      "name": "light audit layout at 1506px keeps wide rows locally scrollable without page overflow",
+      "passed": true
+    },
+    {
+      "name": "light audit layout at 768px keeps wide rows locally scrollable without page overflow",
+      "passed": true
+    },
+    {
+      "name": "light audit layout at 390px keeps wide rows locally scrollable without page overflow",
+      "passed": true
+    },
+    {
+      "name": "light audit layout at 320px keeps wide rows locally scrollable without page overflow",
+      "passed": true
+    },
+    {
+      "name": "dark audit layout at 1506px keeps wide rows locally scrollable without page overflow",
+      "passed": true
+    },
+    {
+      "name": "dark audit layout at 768px keeps wide rows locally scrollable without page overflow",
+      "passed": true
+    },
+    {
+      "name": "dark audit layout at 390px keeps wide rows locally scrollable without page overflow",
+      "passed": true
+    },
+    {
+      "name": "dark audit layout at 320px keeps wide rows locally scrollable without page overflow",
+      "passed": true
+    },
+    {
+      "name": "filter navigation and responsive layouts have no JavaScript exceptions",
+      "passed": true
+    }
+  ],
+  "service.json": [
+    {
+      "name": "unified counts equal the two original ledgers",
+      "passed": true
+    },
+    {
+      "name": "admin source filter returns only its original ledger",
+      "passed": true
+    },
+    {
+      "name": "registry source filter returns only its original ledger",
+      "passed": true
+    },
+    {
+      "name": "stable pagination separates 61 same-second events into 50 and 11",
+      "passed": true
+    },
+    {
+      "name": "out-of-range page safely clamps to the last page",
+      "passed": true
+    },
+    {
+      "name": "unknown action does not broaden the query",
+      "passed": true
+    },
+    {
+      "name": "actor filter applies to both sources",
+      "passed": true
+    },
+    {
+      "name": "invalid filter case 1 is rejected without SQL ambiguity",
+      "passed": true
+    },
+    {
+      "name": "invalid filter case 2 is rejected without SQL ambiguity",
+      "passed": true
+    },
+    {
+      "name": "invalid filter case 3 is rejected without SQL ambiguity",
+      "passed": true
+    },
+    {
+      "name": "invalid filter case 4 is rejected without SQL ambiguity",
+      "passed": true
+    },
+    {
+      "name": "invalid filter case 5 is rejected without SQL ambiguity",
+      "passed": true
+    },
+    {
+      "name": "invalid filter case 6 is rejected without SQL ambiguity",
+      "passed": true
+    },
+    {
+      "name": "invalid filter case 7 is rejected without SQL ambiguity",
+      "passed": true
+    },
+    {
+      "name": "service denies non-administrator actor 0",
+      "passed": true
+    },
+    {
+      "name": "service denies non-administrator actor 2",
+      "passed": true
+    },
+    {
+      "name": "legacy deactivation is labelled without rewriting its action",
+      "passed": true
+    },
+    {
+      "name": "unrecorded connection metadata and identity fingerprints are not invented or returned",
+      "passed": true
+    },
+    {
+      "name": "date range includes both boundary sources with UTC database and Manila application dates",
+      "passed": true
+    },
+    {
+      "name": "audit metadata is bounded and invalid IP/control characters are excluded",
+      "passed": true
+    },
+    {
+      "name": "missing registry ledger produces an explicit incomplete-view warning",
+      "passed": true
+    },
+    {
+      "name": "missing both ledgers fails instead of fabricating an empty success",
+      "passed": true
+    }
+  ]
+}

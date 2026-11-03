@@ -1,0 +1,16 @@
+{
+  "passed": 26,
+  "failed": 0,
+  "findings": [
+    {
+      "severity": "warning",
+      "finding": "SMTP failure is ignored by forgotPassword: the session still says a code was sent, although no message was delivered."
+    },
+    {
+      "severity": "ui",
+      "finding": "The reset page does not render the success flash set by the recovery request."
+    }
+  ],
+  "real_messages_sent": 0,
+  "real_passwords_changed": 0
+}

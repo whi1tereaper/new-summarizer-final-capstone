@@ -159,7 +159,7 @@ def main():
     api=guest.post(BASE+"api/documents",json={"csrf_token":t,"text":SOURCE})
     check("alternate document API enforces exhausted quota",api.status_code==403 and api.json().get("failure",{}).get("code")=="GUEST_LIMIT_REACHED")
     nutshell=guest.post(BASE+"nutshell_generate.php",data={"csrf_token":t,"text":SOURCE,"request_key":secrets.token_hex(16)})
-    check("anonymous Nutshell retains account requirement",nutshell.status_code==401 and nutshell.json().get("error")=="registration_required",{"http":nutshell.status_code,"response_code":nutshell.json().get("error")})
+    check("anonymous Nutshell shares the exhausted trial quota",nutshell.status_code==403 and nutshell.json().get("failure",{}).get("code")=="GUEST_LIMIT_REACHED",{"http":nutshell.status_code,"response_code":nutshell.json().get("failure",{}).get("code")})
     pending_data={"student_number":"PEN2025-09876","password":"QaStrong123!","confirm_password":"QaStrong123!","terms_accept":"1","csrf_token":token(guest,"register.php")}
     registration=guest.post(BASE+"auth.php?action=register",data=pending_data,allow_redirects=False)
     check("registering after trial exhaustion preserves zero quota",registration.headers.get("Location")=="student_verification.php" and guest.get(BASE+"access_status.php").json()["remaining"]==0)

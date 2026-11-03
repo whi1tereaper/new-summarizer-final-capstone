@@ -186,6 +186,25 @@ final class UserRepository
         ]);
     }
 
+    /** Reuse only an explicitly unclaimed, never-activated credential-free row. */
+    public function claimStudentPlaceholder(int $userId,string $email,string $passwordHash): array
+    {
+        if(!$this->db->inTransaction())throw new \LogicException('Placeholder claiming requires the registration transaction.');
+        $q=$this->db->prepare('SELECT u.*,a.account_claim_state,a.status AS student_status FROM users u JOIN student_applications a ON a.user_id=u.id WHERE u.id=? FOR UPDATE');
+        $q->execute([$userId]);$user=$q->fetch(PDO::FETCH_ASSOC);
+        if(!$user||$user['account_claim_state']!=='unclaimed'||$user['role']!=='user'||(int)$user['active']!==0||$user['password_hash']!==''||(int)$user['terms_accepted']!==0||$user['terms_accepted_at']!==null||!in_array($user['student_status'],['pending','resubmission_required'],true))
+            throw new \InvalidArgumentException(\App\Src\Services\StudentVerificationService::UNAVAILABLE_ID);
+        // An existing credential or recovery history is not an unclaimed shell.
+        $q=$this->db->prepare("SELECT EXISTS(SELECT 1 FROM user_tokens WHERE user_id=?) OR EXISTS(SELECT 1 FROM password_resets WHERE user_id=?) OR EXISTS(SELECT 1 FROM student_registry_events WHERE affected_user_id=? AND action IN ('registration_created','placeholder_claimed'))");
+        $q->execute([$userId,$userId,$userId]);
+        if((bool)$q->fetchColumn())throw new \InvalidArgumentException(\App\Src\Services\StudentVerificationService::UNAVAILABLE_ID);
+        if(password_get_info($passwordHash)['algoName']==='unknown')throw new \InvalidArgumentException('A securely hashed password is required.');
+        $q=$this->db->prepare("UPDATE users SET email=?,password_hash=?,active=1 WHERE id=? AND role='user' AND active=0 AND password_hash='' AND terms_accepted=0 AND terms_accepted_at IS NULL");
+        $q->execute([$email,$passwordHash,$userId]);
+        if($q->rowCount()!==1)throw new \InvalidArgumentException(\App\Src\Services\StudentVerificationService::UNAVAILABLE_ID);
+        return ['id'=>$userId,'username'=>$user['username'],'email'=>$email,'role'=>'user','terms_accepted'=>0,'terms_accepted_at'=>null];
+    }
+
     public static function isUniqueConstraintViolation(PDOException $exception): bool
     {
         $sqlState = (string)$exception->getCode();

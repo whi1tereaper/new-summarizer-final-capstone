@@ -47,7 +47,7 @@ final class SourceResolution
 class SourceResolver
 {
     // URL fetching is intentionally conservative because this code accepts untrusted user input.
-    private const USER_AGENT = 'AI Summarizer SourceResolver/1.0';
+    private const USER_AGENT = 'DEPENDED Summarizer SourceResolver/1.0';
     private const MAX_REDIRECTS = 3;
     private const CONNECT_TIMEOUT_SECONDS = 10;
     private const REQUEST_TIMEOUT_SECONDS = 20;
@@ -126,6 +126,15 @@ class SourceResolver
         }
 
         $body = (string)($htmlFetch['body'] ?? '');
+        $finalUrl=(string)($htmlFetch['final_url']??$url);
+        if($this->isScribdDocumentViewer($finalUrl)){
+            // The viewer's title/AI description is not the uploaded document.
+            // Accept only actual, publicly delivered document text. Never fetch
+            // hidden page assets, execute scripts or work around a paywall.
+            $readableText=$this->extractPublicScribdText($body);
+            if($readableText==='')throw new ProcessingError('URL_DOCUMENT_VIEWER');
+            return new SourceResolution($readableText,'url');
+        }
         $readableText = $contentType === 'text/plain'
             ? trim($body)
             : $this->extractReadableHtmlText($body);
@@ -134,6 +143,44 @@ class SourceResolver
         }
 
         return new SourceResolution($readableText, 'url');
+    }
+
+    private function isScribdDocumentViewer(string $url): bool
+    {
+        $host=rtrim(strtolower((string)parse_url($url,PHP_URL_HOST)),'.');
+        $path=(string)parse_url($url,PHP_URL_PATH);
+        return ($host==='scribd.com'||str_ends_with($host,'.scribd.com'))
+            && preg_match('~^/(?:document|doc|embeds)/[0-9]+(?:/|$)~i',$path)===1;
+    }
+
+    private function extractPublicScribdText(string $html): string
+    {
+        if(trim($html)==='')return '';
+        $document=new \DOMDocument('1.0','UTF-8');
+        $previous=libxml_use_internal_errors(true);
+        try{$loaded=$document->loadHTML($html,LIBXML_NONET|LIBXML_NOWARNING|LIBXML_NOERROR);}
+        catch(\Throwable $failure){return '';}
+        finally{libxml_clear_errors();libxml_use_internal_errors($previous);}
+        if(!$loaded)return '';
+        $xpath=new \DOMXPath($document);
+        foreach($xpath->query('//script') as $script){
+            // Only explicit view restrictions, not download-credit settings or
+            // a phrase in the document, establish this access-control failure.
+            if(preg_match('/["\x27](?:is_view_restricted_archive|show_archive_paywall|is_view_restricted)["\x27]\s*:\s*true\b/i',(string)$script->textContent))
+                throw new ProcessingError('URL_ACCESS_RESTRICTED');
+        }
+        $container=$xpath->query('//*[@id="document_container"]')->item(0);
+        if(!($container instanceof \DOMElement))return '';
+        if($container->hasAttribute('hidden')||strtolower($container->getAttribute('aria-hidden'))==='true')return '';
+        foreach($xpath->query('.//*[@hidden or @aria-hidden="true" or contains(concat(" ",normalize-space(@class)," ")," blurred ") or contains(concat(" ",normalize-space(@class)," ")," blur ")]',$container) as $hidden)$hidden->parentNode?->removeChild($hidden);
+        foreach($xpath->query('self::*[@style] | .//*[@style]',$container) as $styled){
+            if(!($styled instanceof \DOMElement))continue;
+            if(preg_match('/(?:^|;)\s*(?:display\s*:\s*none|visibility\s*:\s*hidden|filter\s*:\s*blur\s*\()/i',$styled->getAttribute('style'))){
+                if($styled->isSameNode($container))return '';
+                $styled->parentNode?->removeChild($styled);
+            }
+        }
+        return $this->extractReadableHtmlText('<html><body>'.($document->saveHTML($container)?:'').'</body></html>');
     }
 
     private function looksLikeStandaloneUrl(string $value): bool

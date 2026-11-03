@@ -1,0 +1,181 @@
+{
+  "summary.json": {
+    "passed": 15,
+    "failed": 1,
+    "nested": {
+      "service": {
+        "passed": 19,
+        "failed": 0
+      },
+      "browser": {
+        "passed": 3,
+        "failed": 1
+      }
+    },
+    "live_migrations_applied": false,
+    "live_cleanup_executed": false,
+    "http_server": "isolated PHP 8.3 server; not live Apache authenticated session"
+  },
+  "checks.json": [
+    {
+      "name": "QA credentials cannot access production MySQL",
+      "passed": true
+    },
+    {
+      "name": "service metrics authorization safe path and partial measurement contracts",
+      "passed": true
+    },
+    {
+      "name": "anonymous cannot access storage measurements",
+      "passed": true
+    },
+    {
+      "name": "ordinary user cannot access storage measurements",
+      "passed": true
+    },
+    {
+      "name": "authenticated endpoint connects to actual MySQL and storage",
+      "passed": true
+    },
+    {
+      "name": "GET measurement does not mutate existing accounts documents jobs or runtime files",
+      "passed": true
+    },
+    {
+      "name": "sensitive status responses are JSON no-store and no-referrer",
+      "passed": true
+    },
+    {
+      "name": "HEAD supports status checks without returning a body",
+      "passed": true
+    },
+    {
+      "name": "POST cannot turn read-only refresh into file deletion",
+      "passed": true
+    },
+    {
+      "name": "JSON exposes neither absolute paths nor document filenames or contents",
+      "passed": true
+    },
+    {
+      "name": "existing admin dashboard renders the connected partial and assets",
+      "passed": true
+    },
+    {
+      "name": "real browser refresh failure handling keyboard and responsive themes",
+      "passed": false
+    },
+    {
+      "name": "stale administrator cookie cannot bypass live active-account enforcement",
+      "passed": true
+    },
+    {
+      "name": "security analytics lifecycle feedback and history regressions",
+      "passed": true
+    },
+    {
+      "name": "live accounts passwords summaries and feedback preserved",
+      "passed": true
+    },
+    {
+      "name": "restricted QA databases and credentials removed",
+      "passed": true
+    }
+  ],
+  "browser.json": [
+    {
+      "name": "dashboard renders real MySQL counts six measured categories and usable refresh control",
+      "passed": true
+    },
+    {
+      "name": "keyboard refresh fetches changed MySQL and nested file counts without reloading",
+      "passed": true
+    },
+    {
+      "name": "refresh also reflects files removed by the system",
+      "passed": true
+    },
+    {
+      "name": "storage browser: Expected values to be strictly equal:\n\n2 !== 1\n",
+      "passed": false
+    }
+  ],
+  "service.json": [
+    {
+      "name": "summary and Nutshell counts exclude failed records",
+      "passed": true
+    },
+    {
+      "name": "job states come from actual MySQL rows",
+      "passed": true
+    },
+    {
+      "name": "MySQL allocation is measured as a positive estimate",
+      "passed": true
+    },
+    {
+      "name": "nested and extensionless uploads count but server metadata does not",
+      "passed": true
+    },
+    {
+      "name": "configured audio aliases are not counted three times",
+      "passed": true
+    },
+    {
+      "name": "runtime totals cover the six real configured categories",
+      "passed": true
+    },
+    {
+      "name": "output does not disclose paths filenames or source contents",
+      "passed": true
+    },
+    {
+      "name": "service rejects non-admin actor 0",
+      "passed": true
+    },
+    {
+      "name": "service rejects non-admin actor 2",
+      "passed": true
+    },
+    {
+      "name": "inactive administrator is denied despite stale session",
+      "passed": true
+    },
+    {
+      "name": "unavailable DB metric stays null rather than misleading zero",
+      "passed": true
+    },
+    {
+      "name": "unavailable job table does not fabricate empty healthy queue",
+      "passed": true
+    },
+    {
+      "name": "missing storage folder produces explicit partial measurement",
+      "passed": true
+    },
+    {
+      "name": "broad root configuration guard 1",
+      "passed": true
+    },
+    {
+      "name": "broad root configuration guard 2",
+      "passed": true
+    },
+    {
+      "name": "entry scan budget stops safely with explicit partial status",
+      "passed": true
+    },
+    {
+      "name": "elapsed scan budget stops safely with explicit partial status",
+      "passed": true
+    },
+    {
+      "name": "overlapping storage paths are counted once and explicitly flagged",
+      "passed": true
+    },
+    {
+      "name": "byte formatting distinguishes unavailable from true zero",
+      "passed": true
+    }
+  ]
+}

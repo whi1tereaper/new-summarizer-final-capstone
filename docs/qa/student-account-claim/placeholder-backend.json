@@ -1,0 +1,222 @@
+{
+    "passed": 54,
+    "failed": 0,
+    "checks": [
+        {
+            "name": "all preexisting student records default conservatively to claimed",
+            "passed": true
+        },
+        {
+            "name": "additive migration 021 can replay without changing records",
+            "passed": true
+        },
+        {
+            "name": "claim state database constraint rejects unknown states",
+            "passed": true
+        },
+        {
+            "name": "Case A registry-only ID creates one immediately active account",
+            "passed": true
+        },
+        {
+            "name": "Case A stores the chosen normalized email and secure password",
+            "passed": true
+        },
+        {
+            "name": "Case C established new account cannot be claimed a second time",
+            "passed": true
+        },
+        {
+            "name": "Case B claims the existing user and application without duplicate records",
+            "passed": true
+        },
+        {
+            "name": "placeholder claim preserves username and original account creation date",
+            "passed": true
+        },
+        {
+            "name": "placeholder claim stores student-chosen email hashed password and accepted terms",
+            "passed": true
+        },
+        {
+            "name": "placeholder becomes active verified and linked to the approved registry",
+            "passed": true
+        },
+        {
+            "name": "placeholder claim preserves existing summaries records byte-for-byte",
+            "passed": true
+        },
+        {
+            "name": "placeholder claim preserves existing artifacts records byte-for-byte",
+            "passed": true
+        },
+        {
+            "name": "placeholder claim preserves existing feedback records byte-for-byte",
+            "passed": true
+        },
+        {
+            "name": "placeholder claim preserves existing trial records byte-for-byte",
+            "passed": true
+        },
+        {
+            "name": "claimed account resolves by login credential 1",
+            "passed": true
+        },
+        {
+            "name": "claimed account resolves by login credential 2",
+            "passed": true
+        },
+        {
+            "name": "claimed account resolves by login credential 3",
+            "passed": true
+        },
+        {
+            "name": "successful placeholder claim records exactly one privacy-safe transactional audit",
+            "passed": true
+        },
+        {
+            "name": "a successfully claimed placeholder cannot be reclaimed",
+            "passed": true
+        },
+        {
+            "name": "empty credentials and inactive status alone do not establish an unclaimed placeholder",
+            "passed": true
+        },
+        {
+            "name": "an unclaimed marker cannot overwrite any existing valid password",
+            "passed": true
+        },
+        {
+            "name": "malformed but nonempty legacy credentials are never treated as blank",
+            "passed": true
+        },
+        {
+            "name": "placeholder with active cannot be claimed",
+            "passed": true
+        },
+        {
+            "name": "placeholder with accepted terms cannot be claimed",
+            "passed": true
+        },
+        {
+            "name": "placeholder with terms timestamp cannot be claimed",
+            "passed": true
+        },
+        {
+            "name": "placeholder with administrator role cannot be claimed",
+            "passed": true
+        },
+        {
+            "name": "reconciliation never approves even a wrongly active unclaimed record",
+            "passed": true
+        },
+        {
+            "name": "central access rejects an unclaimed marker even with stale active verified flags",
+            "passed": true
+        },
+        {
+            "name": "historical verified account cannot be reopened as a placeholder",
+            "passed": true
+        },
+        {
+            "name": "historical declined account cannot be reopened as a placeholder",
+            "passed": true
+        },
+        {
+            "name": "historical suspended account cannot be reopened as a placeholder",
+            "passed": true
+        },
+        {
+            "name": "historical expired account cannot be reopened as a placeholder",
+            "passed": true
+        },
+        {
+            "name": "authentication token history blocks placeholder claiming",
+            "passed": true
+        },
+        {
+            "name": "password recovery history blocks placeholder claiming",
+            "passed": true
+        },
+        {
+            "name": "completed registration audit blocks placeholder claiming",
+            "passed": true
+        },
+        {
+            "name": "duplicate chosen email rolls back the entire placeholder claim",
+            "passed": true
+        },
+        {
+            "name": "invalid chosen email does not change the placeholder",
+            "passed": true
+        },
+        {
+            "name": "SQL injection in a Student ID does not alter the registry or placeholder",
+            "passed": true
+        },
+        {
+            "name": "failure after credentials update rolls back the original email password and activation",
+            "passed": true
+        },
+        {
+            "name": "a rolled-back claim can safely retry on the exact same record",
+            "passed": true
+        },
+        {
+            "name": "inactive registry entry cannot activate a placeholder",
+            "passed": true
+        },
+        {
+            "name": "revoked registry entry cannot activate a placeholder",
+            "passed": true
+        },
+        {
+            "name": "expired registry entry cannot activate a placeholder",
+            "passed": true
+        },
+        {
+            "name": "Case D an unlisted placeholder cannot authorize itself",
+            "passed": true
+        },
+        {
+            "name": "rejected unlisted placeholder never inserts an approved registry entry",
+            "passed": true
+        },
+        {
+            "name": "retention erases old visible details but retains the protected unclaimed owner identifier",
+            "passed": true
+        },
+        {
+            "name": "a retained credential-free placeholder still claims the same account",
+            "passed": true
+        },
+        {
+            "name": "administrator reconciliation cannot activate or suspend an explicitly unclaimed inactive shell",
+            "passed": true
+        },
+        {
+            "name": "reconciliation leaves a safe shell claimable through normal registration",
+            "passed": true
+        },
+        {
+            "name": "unreconciled conflicting historical raw-ID owners block a third claim",
+            "passed": true
+        },
+        {
+            "name": "historical raw-ID conflict also preserves the other owner",
+            "passed": true
+        },
+        {
+            "name": "eight concurrent placeholder claims produce exactly one success and seven denials",
+            "passed": true
+        },
+        {
+            "name": "concurrent claiming retains the original user application and all history",
+            "passed": true
+        },
+        {
+            "name": "concurrent claiming commits one audit event only",
+            "passed": true
+        }
+    ]
+}

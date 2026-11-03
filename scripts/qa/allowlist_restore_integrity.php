@@ -25,10 +25,27 @@ try{
     foreach($pipes as $pipe){stream_get_contents($pipe);fclose($pipe);}if(proc_close($process)!==0)throw new RuntimeException('Baseline could not be restored into isolation.');
     $restored=new PDO('mysql:host=127.0.0.1;port=3307;dbname='.$target.';charset=utf8mb4',config('database.username'),config('database.password'),[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]);
     $checks=[];
-    foreach(['users','summaries','summary_artifacts','feedback','feedback_comments','documents','document_summaries','nutshell_generations','evaluation_runs','evaluation_outputs','evaluation_metrics','evaluation_assignments','evaluation_ratings','evaluation_references','evaluation_documents','evaluation_datasets','evaluation_errors','evaluation_content_units','evaluation_content_unit_reviews','evaluation_challenge_cases'] as $table){
-        $original=$restored->query('SELECT * FROM `'.$table.'`')->fetchAll(PDO::FETCH_ASSOC);$current=$live->query('SELECT * FROM `'.$table.'`')->fetchAll(PDO::FETCH_ASSOC);
+    $tables=['users','summaries','summary_artifacts','feedback','feedback_comments','documents','document_summaries','nutshell_generations','evaluation_runs','evaluation_outputs','evaluation_metrics','evaluation_references','evaluation_documents','evaluation_datasets','evaluation_errors','evaluation_content_units','evaluation_content_unit_reviews','evaluation_challenge_cases'];
+    $accountClaim=($argv[4]??'')==='--account-claim';
+    if($accountClaim)$tables=array_merge($tables,['student_applications','student_enrollment_registry','student_trial_links','student_review_events','student_registry_batches','student_registry_events','student_registry_policy']);
+    foreach($tables as $table){
+        // An additive claim-state column must not hide changes to original data.
+        $columns=$restored->query('SHOW COLUMNS FROM `'.$table.'`')->fetchAll(PDO::FETCH_COLUMN);
+        $projection=$accountClaim?implode(',',array_map(static fn($c)=>'`'.str_replace('`','``',$c).'`',$columns)):'*';
+        $original=$restored->query('SELECT * FROM `'.$table.'`')->fetchAll(PDO::FETCH_ASSOC);$current=$live->query('SELECT '.$projection.' FROM `'.$table.'`')->fetchAll(PDO::FETCH_ASSOC);
         $hash=static fn($row)=>hash('sha256',json_encode($row,JSON_INVALID_UTF8_SUBSTITUTE));$old=array_map($hash,$original);$now=array_map($hash,$current);
         $detail=['table'=>$table,'original_rows'=>count($old),'current_rows'=>count($now),'passed'=>array_diff($old,$now)===[]];
+        if($table==='users'&&!$detail['passed']){
+            $byId=array_column($current,null,'id');$changes=[];
+            foreach($original as $row){$new=$byId[$row['id']]??null;if($new===null){$changes[]=['user_id'=>(int)$row['id'],'missing'=>true];continue;}
+                $different=array_keys(array_filter($row,static fn($value,$column)=>$value!==$new[$column],ARRAY_FILTER_USE_BOTH));
+                if($different){$change=['user_id'=>(int)$row['id'],'changed_columns'=>$different];
+                    if(in_array('password_hash',$different,true))$change['password_algorithms_only']=['before'=>password_get_info($row['password_hash']),'after'=>password_get_info($new['password_hash'])];
+                    $changes[]=$change;
+                }
+            }
+            $detail['changes_without_values']=$changes;
+        }
         if($table==='summaries'){
             $currentIds=array_column($current,'id');$missing=array_filter($original,fn($row)=>!in_array($row['id'],$currentIds,true));
             $detail['missing_rows']=count($missing);$detail['missing_account_owned']=count(array_filter($missing,fn($row)=>$row['user_id']!==null));

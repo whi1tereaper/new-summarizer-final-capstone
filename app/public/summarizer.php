@@ -12,30 +12,39 @@ $canUseRegisteredFeatures = $userId !== null && (int)$userId > 0;
 
 require_once '../src/Utils/validation.php';
 require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../src/Services/CampusAccessService.php';
 
+$trialService = new \App\Src\Services\CampusAccessService();
+$trialToken = $trialService->visitorToken();
+$trialStatus = null;
+$trialError = '';
+try {
+    $trialStatus = $trialService->status($userId !== null ? (int)$userId : null, $trialToken);
+} catch (\Throwable $e) {
+    $trialError = 'Summarization access is unavailable until the access-control setup is complete.';
+}
+$trialExhausted = $trialStatus !== null && !$trialStatus['continued'] && $trialStatus['remaining'] === 0;
+$totalAllowed = \App\Src\Services\CampusAccessService::FREE_LIMIT;
+$remainingCount = $trialStatus !== null && isset($trialStatus['remaining']) ? (int)$trialStatus['remaining'] : 0;
+$usedCount = max(0, min($totalAllowed, $totalAllowed - $remainingCount));
 
 $csrf_token = generateCsrfToken();
 ?>
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <?php require_once __DIR__ . '/partials/design-system-head.php'; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Summarizer — LIGHT</title>
+    <title><?= $trialExhausted ? 'Workspace Access — DEPENDED' : 'DEPENDED Workspace — DEPENDED' ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@600;700;900&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="assets/images/poc-neust-logo.png">
-
-    <!-- Design tokens and stylesheets -->
-    <link rel="stylesheet" href="assets/css/design-tokens.css">
-    <link rel="stylesheet" href="assets/css/style.css?v=<?= filemtime(__DIR__ . '/assets/css/style.css') ?>">
-    <link rel="stylesheet" href="assets/css/site-footer.css?v=nex-8">
-    <link rel="stylesheet" href="assets/css/nex-landing.css?v=<?= filemtime(__DIR__ . '/assets/css/nex-landing.css') ?>">
-    <link rel="stylesheet" href="assets/css/global-button-effects.css?v=3">
+    <!-- Shared theme tokens; workspace styles are isolated from other pages. -->
+    <link rel="stylesheet" href="assets/css/summarizer-workspace.css?v=<?= filemtime(__DIR__ . '/assets/css/summarizer-workspace.css') ?>">
 </head>
 
-<body class="nex-landing nex-workspace-page<?= $isAdmin ? ' page-summary-layout--admin' : '' ?>">
+<body class="light-workspace dee-workspace depended-workspace nex-workspace-page<?= $isAdmin ? ' page-summary-layout--admin' : '' ?><?= $trialExhausted ? ' trial-exhausted-active' : '' ?>">
+    <a class="workspace-skip-link" href="#main-content">Skip to workspace</a>
 
     <!-- ================================================================
          GLOBAL SITE HEADER
@@ -45,18 +54,17 @@ $csrf_token = generateCsrfToken();
     <!-- ================================================================
          SUMMARIZER WORKSPACE
     ================================================================ -->
-    <main class="nex-summarize-page" id="main-content">
+    <main class="nex-summarize-page<?= $trialExhausted ? ' nex-summarize-page--trial-exhausted' : '' ?>" id="main-content">
         <div class="nex-summarize-page__inner">
 
             <div class="nex-summarize-page__main">
                 <div class="nex-section-header">
                     <span class="nex-section-num">01</span>
-                    <span class="nex-section-label">Summarize</span>
+                    <span class="nex-section-label" id="workspace-header-label"><?= $trialExhausted ? 'WORKSPACE ACCESS' : 'DEPENDED Workspace' ?></span>
                 </div>
 
-                <h1 class="nex-summarize__headline">
-                    DROP YOUR<br>DOCUMENT.
-                </h1>
+                <h1 class="nex-summarize__headline" id="workspace-headline"><?= $trialExhausted ? 'Your DEPENDED workspace' : 'DEPENDED Workspace' ?></h1>
+                <p class="workspace-subtitle" id="workspace-subtitle"><?= $trialExhausted ? 'Your free trial is complete. Choose how you’d like to continue using DEPENDED.' : 'Transform documents, articles, and text into clear and meaningful summaries.' ?></p>
 
                 <div class="nex-form-shell" id="nex-form-wrapper">
                     <?php require __DIR__ . '/partials/summarizer-form.php'; ?>
@@ -66,10 +74,9 @@ $csrf_token = generateCsrfToken();
         </div>
     </main>
 
-    <!-- Editorial Footer (Matches landing page) -->
-    <?php require __DIR__ . '/partials/nex-footer.php'; ?>
+    <?php require __DIR__ . '/partials/site-footer.php'; ?>
 
     <?php require __DIR__ . '/partials/summarizer-scripts.php'; ?>
-    <script src="assets/js/nex-landing.js?v=<?= filemtime(__DIR__ . '/assets/js/nex-landing.js') ?>" defer></script>
+    <script src="assets/js/summarizer-workspace.js?v=<?= filemtime(__DIR__ . '/assets/js/summarizer-workspace.js') ?>" defer></script>
 </body>
 </html>

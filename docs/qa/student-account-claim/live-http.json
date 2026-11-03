@@ -1,0 +1,23 @@
+{
+  "mutating_requests_sent": false,
+  "passed": 4,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "live Apache registration is available without a new workflow",
+      "passed": true
+    },
+    {
+      "name": "live registration retains the fixed PEN prefix and required email",
+      "passed": true
+    },
+    {
+      "name": "existing Sign In and password recovery link remain available",
+      "passed": true
+    },
+    {
+      "name": "live Student ID management denies anonymous visitors",
+      "passed": true
+    }
+  ]
+}

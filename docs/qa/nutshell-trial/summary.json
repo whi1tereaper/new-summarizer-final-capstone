@@ -1,0 +1,6 @@
+{
+  "passed": 40,
+  "failed": 0,
+  "controlled_worker_cases_are_not_real_nlp": true,
+  "live_database_migrations_applied": false
+}

@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-26",
+  "release_verdict": "READY",
+  "main_browser": { "passed": 45, "failed": 0 },
+  "supplementary_browser": { "passed": 12, "failed": 0 },
+  "source_error_contract": { "passed": 145, "failed": 0 },
+  "summarizer_intelligence": { "passed": 36, "failed": 0 },
+  "total_passed": 238,
+  "total_failed": 0,
+  "real_backend": ["pasted text", "PDF", "DOCX", "public NASA article URL", "Nutshell", "shared guest trial exhaustion"],
+  "mocked_success_responses": false,
+  "viewports": [360, 390, 768, 1024, 1280, 1440],
+  "themes": ["light", "dark"],
+  "production_database_migrations": false,
+  "test_database": "restricted synthetic MySQL schema, removed after testing",
+  "production_core_rows_preserved": true,
+  "unrelated_live_database_activity_observed": true,
+  "owned_test_processes_stopped": true,
+  "remaining_defects": [],
+  "verification_limits": [
+    "Accessibility checks cover labels, headings, live regions, source states, keyboard focus, mobile navigation, sampled contrast, and responsive layout; no manual screen-reader audit was performed.",
+    "Authenticated navigation uses private sessions for seeded synthetic accounts; password login and second-factor delivery are outside this UI change's browser coverage.",
+    "The optional external AI synthesis integration is disabled in the test configuration and was not sent to an external provider."
+  ]
+}

@@ -61,6 +61,28 @@ return [
         'trusted_proxies' => $trustedProxies,
     ],
 
+    'brand' => [
+        'name' => 'DEPENDED',
+        'full_meaning' => 'Data Extractor and Phrase-level Engine for Neural-speech, Dual-translation, and Extractive Decoding',
+        'acronym' => [
+            'D' => 'Data',
+            'E' => 'Extractor',
+            'P' => 'Phrase-level',
+            'E' => 'Engine',
+            'N' => 'Neural-speech',
+            'D' => 'Dual-translation',
+            'E' => 'Extractive',
+            'D' => 'Decoding',
+        ],
+        'product_name' => 'DEPENDED Summarizer',
+        'technical_designation' => 'DEPENDED NLP Engine',
+        'pipeline_name' => 'DEPENDED NLP Engine',
+        'description' => 'An intelligent document processing and summarization platform designed to transform complex information into clear, structured, and meaningful content.',
+        'supporting_description' => 'Transform lengthy documents and complex information into meaningful summaries through intelligent natural language processing.',
+        'primary_tagline' => 'Beyond reading: summarized, translated, and heard.',
+        'secondary_tagline' => 'Transform complex information into clear, structured, and meaningful content.',
+    ],
+
     'app' => [
         'name' => Env::requireString('APP_NAME'),
         'env' => Env::requireString('APP_ENV'),
@@ -84,6 +106,7 @@ return [
         'bin' => Env::requireString('LOCAL_PYTHON_BIN'),
         'script' => Env::requirePath('LOCAL_PYTHON_SCRIPT'),
         'timeout' => Env::requireInt('LOCAL_PYTHON_TIMEOUT'),
+        'nutshell_timeout' => Env::int('NUTSHELL_TIMEOUT_SECONDS', 90),
         'nltk_data' => Env::requireString('NLTK_DATA'),
         'tesseract_cmd' => Env::requireString('TESSERACT_CMD'),
         'poppler_path' => Env::requireString('POPPLER_PATH'),

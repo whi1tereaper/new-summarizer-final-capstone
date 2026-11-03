@@ -26,7 +26,7 @@ final class StudentRetentionService
                 $q=$this->db->prepare('SELECT * FROM student_applications WHERE id=? FOR UPDATE');$q->execute([$candidate['id']]);$r=$q->fetch(PDO::FETCH_ASSOC);
                 if($r && !$r['details_erased_epoch'] && (int)$r['details_delete_epoch']<=$now){
                     $status=$r['status']==='pending'?'resubmission_required':$r['status'];
-                    $keep=$r['status']==='verified'||$r['evidence_kind']!==null;
+                    $keep=$r['status']==='verified'||$r['evidence_kind']!==null||($r['account_claim_state']??'claimed')==='unclaimed';
                     $q=$this->db->prepare('UPDATE student_applications SET full_name=NULL,student_number=NULL,normalized_student_number=NULL,evidence_reference=NULL,ownership_reference=NULL,review_reason=NULL,student_number_fingerprint=?,status=?,details_erased_epoch=?,updated_epoch=?,version=version+1 WHERE id=?');
                     $q->execute([$keep?$r['student_number_fingerprint']:null,$status,$now,$now,$r['id']]);$result['applications_erased']+=$q->rowCount();
                 }

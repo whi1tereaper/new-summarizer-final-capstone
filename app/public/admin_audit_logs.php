@@ -1,563 +1,114 @@
 <?php
-require_once __DIR__ . '/../src/whitereaper.php';
-require_once __DIR__ . '/../src/Database.php';
-require_once __DIR__ . '/../src/Services/AdminSecurityService.php';
+require_once __DIR__.'/../src/whitereaper.php';
+require_once __DIR__.'/../src/Services/AdminSecurityService.php';
+require_once __DIR__.'/../src/Services/AuditTrailService.php';
 
-use App\Src\Database;
 use App\Src\Services\AdminSecurityService;
+use App\Src\Services\AuditTrailService;
 
 AdminSecurityService::requireVerifiedAdmin('login.php?context=admin');
-
-$page = max(1, (int)($_GET['page'] ?? 1));
-$perPage = 50;
-$offset = ($page - 1) * $perPage;
-
-$filterAction = $_GET['action'] ?? '';
-$filterAdminId = $_GET['admin_id'] ?? '';
-$filterDateFrom = $_GET['date_from'] ?? '';
-$filterDateTo = $_GET['date_to'] ?? '';
-
-$where = [];
-$params = [];
-
-if ($filterAction !== '') {
-    $where[] = "a.action = :action";
-    $params['action'] = $filterAction;
+header('Cache-Control: no-store');
+header('Referrer-Policy: no-referrer');
+if(!in_array($_SERVER['REQUEST_METHOD']??'GET',['GET','HEAD'],true)){
+    header('Allow: GET, HEAD');http_response_code(405);exit('Method not allowed.');
 }
-if ($filterAdminId !== '') {
-    $where[] = "a.admin_id = :admin_id";
-    $params['admin_id'] = $filterAdminId;
-}
-if ($filterDateFrom !== '') {
-    $where[] = "a.created_at >= :date_from";
-    $params['date_from'] = $filterDateFrom . ' 00:00:00';
-}
-if ($filterDateTo !== '') {
-    $where[] = "a.created_at <= :date_to";
-    $params['date_to'] = $filterDateTo . ' 23:59:59';
-}
-
-$whereClause = $where ? 'WHERE ' . implode(' AND ', $where) : '';
-
-$logs = [];
-$totalRows = 0;
-$totalPages = 1;
-$dbError = null;
-
-try {
-    $pdo = Database::getInstance()->getConnection();
-
-    // Check if table exists securely
-    $tableExists = $pdo->query("SHOW TABLES LIKE 'admin_audit_logs'")->rowCount()>0;
-
-    if ($tableExists) {
-        $countSql = "SELECT COUNT(*) FROM admin_audit_logs a $whereClause";
-        $stmtCount = $pdo->prepare($countSql);
-        $stmtCount->execute($params);
-        $totalRows = (int)$stmtCount->fetchColumn();
-        $totalPages = max(1, ceil($totalRows / $perPage));
-
-        $sql = "
-            SELECT a.*, u.username, u.email 
-            FROM admin_audit_logs a
-            LEFT JOIN users u ON a.admin_id = u.id
-            $whereClause 
-            ORDER BY a.created_at DESC 
-            LIMIT :limit OFFSET :offset
-        ";
-
-        // Bind params safely
-        $stmt = $pdo->prepare($sql);
-        foreach ($params as $key => $val) {
-            $stmt->bindValue(":$key", $val);
-        }
-        $stmt->bindValue(':limit', $perPage, PDO::PARAM_INT);
-        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-        $stmt->execute();
-        $logs = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        // Get unique actions for filter dropdown
-        $actionsStmt = $pdo->query("SELECT DISTINCT action FROM admin_audit_logs ORDER BY action ASC");
-        $allActions = $actionsStmt->fetchAll(PDO::FETCH_COLUMN);
-    } else {
-        $dbError = "Audit log table is currently missing. Waiting for the first log to be generated.";
-        $allActions = [];
+$escape=static fn($value)=>htmlspecialchars((string)$value,ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8');
+$filters=['source'=>'','action'=>'','admin_id'=>'','date_from'=>'','date_to'=>'','page'=>1];
+$result=['rows'=>[],'total'=>0,'counts'=>['admin'=>0,'registry'=>0],'page'=>1,'pages'=>1,'per_page'=>50,'actions'=>[],'warnings'=>[]];
+$error='';
+try{
+    $filters=AuditTrailService::filters($_GET);
+    $result=(new AuditTrailService())->browse((int)$_SESSION['user_id'],$filters);$filters=$result['filters'];
+}catch(InvalidArgumentException $exception){
+    http_response_code(400);$error=$exception->getMessage();
+    // Keep safe fields so correcting one filter does not discard the others.
+    foreach(['source','action','admin_id','date_from','date_to'] as $key){
+        $value=$_GET[$key]??'';
+        if(is_string($value)&&mb_check_encoding($value,'UTF-8')&&mb_strlen($value)<=100&&!preg_match('/[\x00-\x1f\x7f]/',$value))$filters[$key]=trim($value);
     }
-} catch (\Throwable $e) {
-    error_log("Admin audit logs viewer error: " . $e->getMessage());
-    $dbError = "An error occurred while fetching audit logs.";
-    $allActions = [];
 }
+catch(Throwable $exception){
+    error_log('[AuditTrail] View unavailable: '.get_class($exception));
+    http_response_code($exception instanceof App\Src\Support\ProcessingError?$exception->httpStatus:503);
+    $error='Audit events could not be loaded. Check the database connection and existing audit migrations.';
+}
+$pageLink=static function(int $page)use($filters):string{
+    return '?'.http_build_query(array_filter(array_replace($filters,['page'=>$page]),static fn($value)=>$value!==''));
+};
+$targetLabels=['user'=>'Account','upload'=>'Uploads','student_registry'=>'Student ID record','registry_import'=>'Import batch'];
+$from=$result['total']?($result['page']-1)*$result['per_page']+1:0;
+$to=min($result['page']*$result['per_page'],$result['total']);
 ?>
-<!DOCTYPE html>
-<html lang="en" data-theme="light">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Audit Logs</title>
-    <script src="assets/js/theme-toggle.js?v=2"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css?v=<?= filemtime(__DIR__ . '/assets/css/style.css') ?>">
-    <link rel="stylesheet" href="assets/css/theme-toggle.css?v=2">
-    <style>
-        body {
-            background: var(--color-bg);
-            color: var(--color-text);
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .admin-logs-page {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 20px 20px 80px;
-        }
-
-        .admin-logs-wrapper {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 0;
-            background: transparent;
-            border: 0;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .admin-logs-header {
-            margin: 0;
-            padding-top: 8px;
-            padding-bottom: 18px;
-            margin-bottom: 18px;
-            border-bottom: 2px solid var(--color-accent);
-        }
-
-        .admin-logs-header h1 {
-            margin: 0;
-            font-family: 'Outfit', 'Inter', sans-serif;
-            font-weight: 700;
-            letter-spacing: -0.08em;
-            color: #000;
-            font-size: clamp(2rem, 5.5vw, 6rem);
-            line-height: 0.74;
-            text-transform: none;
-        }
-
-        [data-theme="dark"] .admin-logs-header h1 {
-            color: #fff;
-        }
-
-        .admin-logs-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin: 18px 0 0;
-            color: var(--color-primary-dark);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            text-transform: none;
-            letter-spacing: 0.01em;
-        }
-
-        .filter-panel {
-            background: transparent;
-            border: 1px solid var(--color-border);
-            padding: 18px 16px 14px;
-            margin-top: 10px;
-            display: grid;
-            gap: 12px;
-        }
-
-        .filter-form {
-            display: grid;
-            grid-template-columns: minmax(180px, 1.1fr) minmax(150px, 0.9fr) minmax(320px, 1.8fr) auto;
-            gap: 12px;
-            align-items: end;
-            margin: 0;
-        }
-
-        .filter-form > * {
-            min-width: 0;
-        }
-
-        .filter-form label {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            color: var(--color-text-muted);
-            font-size: 0.72rem;
-            font-weight: 600;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-        }
-
-        .filter-form input,
-        .filter-form select,
-        .filter-form button,
-        .filter-form .clear-link {
-            min-height: 42px;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font: inherit;
-            box-sizing: border-box;
-            margin-top: 0;
-        }
-
-        .date-input-wrap {
-            position: relative;
-            width: 100%;
-        }
-
-        .date-input-wrap::after {
-            content: "";
-            position: absolute;
-            right: 14px;
-            top: 50%;
-            width: 18px;
-            height: 18px;
-            transform: translateY(-50%);
-            pointer-events: none;
-            opacity: 0.8;
-            background-color: var(--color-text-secondary);
-            -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='16' rx='2'/%3E%3Cpath d='M8 3v4M16 3v4M3 10h18'/%3E%3C/svg%3E") center / contain no-repeat;
-            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='16' rx='2'/%3E%3Cpath d='M8 3v4M16 3v4M3 10h18'/%3E%3C/svg%3E") center / contain no-repeat;
-        }
-
-        .filter-form input,
-        .filter-form select {
-            min-width: 160px;
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            color: var(--color-text);
-        }
-
-        .filter-form .date-input {
-            padding-right: 42px;
-            background-color: var(--color-surface);
-            background-repeat: no-repeat;
-            background-position: right 14px center;
-            background-size: 18px 18px;
-        }
-
-        .date-range {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            align-items: end;
-            gap: 10px;
-            min-width: 0;
-        }
-
-        .date-range-field {
-            display: grid;
-            gap: 4px;
-            min-width: 0;
-        }
-
-        .date-range-field label {
-            color: var(--color-text-muted);
-            font-size: 0.65rem;
-            font-weight: 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-
-        .date-range .date-input-wrap,
-        .date-range .date-input {
-            min-width: 0;
-        }
-
-        .filter-form input[type="date"]::-webkit-calendar-picker-indicator {
-            opacity: 0;
-            position: absolute;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-        }
-
-        .filter-form button {
-            background: var(--color-accent);
-            color: var(--color-on-accent);
-            border: 1px solid var(--color-accent);
-            cursor: pointer;
-            font-weight: 600;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-        }
-
-        .filter-form .clear-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--color-border);
-            background: transparent;
-            color: var(--color-text);
-            text-decoration: none;
-        }
-
-        .filter-form button:focus-visible,
-        .filter-form input:focus-visible,
-        .filter-form select:focus-visible,
-        .filter-form .clear-link:focus-visible {
-            outline: 2px solid var(--color-focus);
-            outline-offset: 2px;
-        }
-
-        .filter-compact {
-            display: flex;
-            align-items: end;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .filter-date {
-            min-width: 150px;
-        }
-
-        table {
-            width: 100%;
-            min-width: 1280px;
-            border-collapse: collapse;
-            font-size: 0.9em;
-            margin-top: 22px;
-            table-layout: fixed;
-            background: transparent;
-        }
-
-        th, td {
-            border: 1px solid var(--color-border);
-            padding: 18px 12px;
-            text-align: left;
-            vertical-align: top;
-        }
-
-        td {
-            overflow-wrap: anywhere;
-        }
-
-        th {
-            background: var(--color-bg-secondary);
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--color-text-muted);
-        }
-
-        tbody tr:nth-child(even) {
-            background: rgba(255,255,255,0.14);
-        }
-
-        .table-wrap {
-            display: block;
-            max-width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            margin-top: 18px;
-            border: 1px solid var(--color-border);
-            background: rgba(255,255,255,0.02);
-        }
-
-        .pagination {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .pagination a {
-            padding: 8px 12px;
-            border: 1px solid var(--color-primary-dark);
-            text-decoration: none;
-            color: var(--color-primary-dark);
-        }
-
-        .pagination a.active {
-            background: var(--color-primary-dark);
-            color: var(--color-on-accent);
-        }
-
-        @media (max-width: 900px) {
-            .filter-form {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .filter-form .date-range {
-                grid-column: 1 / -1;
-            }
-
-            .filter-form button {
-                justify-self: start;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .admin-logs-page {
-                padding-left: 14px;
-                padding-right: 14px;
-            }
-
-            .filter-form {
-                display: grid;
-                grid-template-columns: minmax(0, 1fr);
-                align-items: stretch;
-            }
-
-            .filter-form > * {
-                width: 100%;
-                min-width: 0;
-            }
-
-            .filter-form .date-range {
-                grid-column: auto;
-            }
-
-            .filter-form button {
-                width: 100%;
-            }
-
-            .date-range {
-                width: 100%;
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .filter-compact {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .admin-logs-page {
-                padding: 16px 12px 48px;
-            }
-
-            .admin-logs-header {
-                padding-bottom: 14px;
-                margin-bottom: 14px;
-            }
-
-            .admin-logs-header h1 {
-                font-size: clamp(1.8rem, 9vw, 2.6rem);
-                line-height: 0.95;
-                letter-spacing: -0.06em;
-            }
-
-            th, td {
-                padding: 12px 10px;
-            }
-        }
-    </style>
+    <meta charset="utf-8">
+    <?php require_once __DIR__ . '/partials/design-system-head.php'; ?>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Audit Logs — DEPENDED</title>
+    <link rel="stylesheet" href="assets/css/style.css?v=<?= filemtime(__DIR__.'/assets/css/style.css') ?>">
+    <link rel="stylesheet" href="assets/css/admin-audit.css?v=<?= filemtime(__DIR__.'/assets/css/admin-audit.css') ?>">
 </head>
-<body style="background:var(--color-bg); color:var(--color-text); margin:0; padding:0;">
-    <?php require __DIR__ . '/partials/site-nav.php'; ?>
-    <main class="admin-logs-page">
-        <div class="admin-logs-wrapper">
-            <header class="admin-logs-header">
-                <h1>Admin Audit Logs</h1>
-            </header>
+<body>
+<?php require __DIR__.'/partials/site-nav.php'; ?>
+<main class="audit-page">
+    <header class="audit-header">
+        <div><span class="audit-eyebrow">Administration</span><h1>Audit logs</h1>
+        <p>Administrative actions and Student ID activity in one chronological trail.</p></div>
+        <span class="audit-access-label">Administrator access only</span>
+    </header>
 
-        <?php if ($dbError): ?>
-            <div style="color:var(--color-danger); background:var(--color-danger-soft); border:1px solid var(--color-danger); padding:15px; margin-bottom:20px;">
-                <?= htmlspecialchars($dbError) ?>
-            </div>
-        <?php else: ?>
+    <section class="audit-panel" aria-label="Audit filters and results">
+        <form class="audit-filters" method="get" action="admin_audit_logs.php" aria-label="Filter audit events">
+            <label for="audit-source">Source<select id="audit-source" name="source"><option value="">All sources</option>
+                <?php foreach(AuditTrailService::SOURCES as $value=>$label): ?><option value="<?= $value ?>" <?= $filters['source']===$value?'selected':'' ?>><?= $escape($label) ?></option><?php endforeach; ?>
+            </select></label>
+            <label for="audit-action">Event<select id="audit-action" name="action"><option value="">All events</option>
+                <?php foreach($result['actions'] as $action): ?><option value="<?= $escape($action) ?>" <?= $filters['action']===$action?'selected':'' ?>><?= $escape(AuditTrailService::label($action)) ?> (<?= $escape($action) ?>)</option><?php endforeach; ?>
+            </select></label>
+            <label for="audit-actor">Actor ID<input id="audit-actor" type="number" name="admin_id" min="1" max="2147483647" inputmode="numeric" placeholder="Any account" value="<?= $escape($filters['admin_id']) ?>"></label>
+            <label for="audit-from">From date<input id="audit-from" type="date" name="date_from" value="<?= $escape($filters['date_from']) ?>"></label>
+            <label for="audit-to">To date<input id="audit-to" type="date" name="date_to" value="<?= $escape($filters['date_to']) ?>"></label>
+            <div class="audit-filter-actions"><button class="btn btn--primary" type="submit">Apply filters</button><a href="admin_audit_logs.php">Reset</a></div>
+        </form>
 
-            <form method="GET" class="filter-form">
-                <select name="action" aria-label="Filter by action" style="width: 100%; background: var(--color-surface); color: var(--color-text); border: 1px solid var(--color-border); border-radius: 6px; padding: 14px 16px; font-size: 1rem; appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--color-text-secondary) 50%), linear-gradient(135deg, var(--color-text-secondary) 50%, transparent 50%); background-position: calc(100% - 18px) calc(50% - 3px), calc(100% - 12px) calc(50% - 3px); background-size: 6px 6px, 6px 6px; background-repeat: no-repeat;">
-                    <option value="">All Actions</option>
-                    <?php foreach ($allActions as $act): ?>
-                        <option value="<?= htmlspecialchars($act) ?>" <?= $filterAction === $act ? 'selected' : '' ?>>
-                            <?= htmlspecialchars($act) ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-                <input type="number" name="admin_id" placeholder="Admin ID" value="<?= htmlspecialchars($filterAdminId) ?>" style="width: 100%; background: var(--color-surface); color: var(--color-text); border: 1px solid var(--color-border); border-radius: 6px; padding: 14px 16px; font-size: 1rem;">
-                <div class="date-range">
-                    <div class="date-range-field">
-                        <label for="date-from">Start date</label>
-                        <div class="date-input-wrap"><input id="date-from" class="date-input" type="date" name="date_from" value="<?= htmlspecialchars($filterDateFrom) ?>" title="From Date" style="width: 100%; background: var(--color-surface); color: var(--color-text); border: 1px solid var(--color-border); border-radius: 6px; padding: 14px 16px; font-size: 1rem;"></div>
-                    </div>
-                    <div class="date-range-field">
-                        <label for="date-to">End date</label>
-                        <div class="date-input-wrap"><input id="date-to" class="date-input" type="date" name="date_to" value="<?= htmlspecialchars($filterDateTo) ?>" title="To Date" style="width: 100%; background: var(--color-surface); color: var(--color-text); border: 1px solid var(--color-border); border-radius: 6px; padding: 14px 16px; font-size: 1rem;"></div>
-                    </div>
-                </div>
-                <button type="submit" style="padding: 14px 22px; min-width: 110px; background: var(--color-accent); border: 1px solid var(--color-accent); color: var(--color-on-accent); border-radius: 6px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;">Filter</button>
-            </form>
-
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Date</th>
-                            <th>Admin</th>
-                            <th>Action</th>
-                            <th>Target</th>
-                            <th>IP / User Agent</th>
-                            <th>Details</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($logs as $log): ?>
-                        <tr>
-                            <td><?= (int)$log['id'] ?></td>
-                            <td style="white-space:nowrap;"><?= htmlspecialchars($log['created_at']) ?></td>
-                            <td>
-                                <?php if ($log['admin_id']): ?>
-                                    ID: <?= (int)$log['admin_id'] ?><br>
-                                    <small><?= htmlspecialchars($log['username'] ?? 'Unknown') ?></small>
-                                <?php else: ?>
-                                    <em>System / CLI</em>
-                                <?php endif; ?>
-                            </td>
-                            <td><strong><?= htmlspecialchars($log['action']) ?></strong></td>
-                            <td>
-                                <?php if ($log['entity_type'] !== null || $log['entity_id'] !== null): ?>
-                                    <?= htmlspecialchars($log['entity_type'] ?? 'Entity') ?>
-                                    <?php if ($log['entity_id'] !== null): ?> #<?= (int)$log['entity_id'] ?><?php endif; ?>
-                                <?php else: ?>
-                                    <em>&mdash;</em>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <small>IP: <?= htmlspecialchars($log['ip_address'] ?? '') ?></small><br>
-                                <small style="color:var(--color-text-muted);"><?= htmlspecialchars(mb_strimwidth($log['user_agent'] ?? '', 0, 50, '...')) ?></small>
-                            </td>
-                            <td style="max-width:300px; word-wrap:break-word;">
-                                <small><?= htmlspecialchars($log['details'] ?? '') ?></small>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                        <?php if (empty($logs)): ?>
-                        <tr>
-                            <td colspan="7" style="text-align:center; padding:20px;">No logs found matching criteria.</td>
-                        </tr>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
-            </div>
-
-            <?php if ($totalPages > 1): ?>
-                <div class="pagination">
-                    <?php if ($page > 1): ?>
-                        <a href="?page=<?= $page - 1 ?>&action=<?= urlencode($filterAction) ?>&admin_id=<?= urlencode($filterAdminId) ?>&date_from=<?= urlencode($filterDateFrom) ?>&date_to=<?= urlencode($filterDateTo) ?>">Previous</a>
-                    <?php endif; ?>
-                    
-                    <a href="#" class="active">Page <?= $page ?> of <?= $totalPages ?></a>
-                    
-                    <?php if ($page < $totalPages): ?>
-                        <a href="?page=<?= $page + 1 ?>&action=<?= urlencode($filterAction) ?>&admin_id=<?= urlencode($filterAdminId) ?>&date_from=<?= urlencode($filterDateFrom) ?>&date_to=<?= urlencode($filterDateTo) ?>">Next</a>
-                    <?php endif; ?>
-                </div>
-            <?php endif; ?>
-
-        <?php endif; ?>
+        <?php if($error): ?><div class="audit-notice" role="alert"><?= $escape($error) ?></div><?php endif; ?>
+        <?php foreach($result['warnings'] as $warning): ?><p class="audit-notice" role="status"><?= $escape($warning) ?></p><?php endforeach; ?>
+        <div class="audit-results-meta">
+            <p id="audit-result-count" role="status"><?= $result['total']?number_format($from).'–'.number_format($to).' of '.number_format($result['total']).' events':'0 matching events' ?></p>
+            <div class="audit-source-counts" aria-label="Matching events by source"><span>Administration <strong><?= number_format($result['counts']['admin']) ?></strong></span><span>Student IDs <strong><?= number_format($result['counts']['registry']) ?></strong></span></div>
         </div>
-    </main>
-    <?php require __DIR__ . '/partials/site-footer.php'; ?>
+
+        <div class="audit-table-scroll" role="region" aria-label="Audit event results; scroll horizontally on small screens" tabindex="0">
+            <table class="audit-table">
+                <caption class="visually-hidden">Recorded administrative and Student ID registry events, newest first. Times use <?= $escape(date_default_timezone_get()) ?>.</caption>
+                <thead><tr><th scope="col">Date &amp; time</th><th scope="col">Actor</th><th scope="col">Event</th><th scope="col">Target</th><th scope="col">Connection</th><th scope="col">Details</th></tr></thead>
+                <tbody>
+                <?php foreach($result['rows'] as $log): ?>
+                    <tr data-audit-source="<?= $escape($log['source']) ?>" data-audit-id="<?= (int)$log['event_id'] ?>">
+                        <td class="audit-date"><time datetime="<?= $escape(date('c',(int)$log['event_epoch'])) ?>"><?= $escape(date('M j, Y',(int)$log['event_epoch'])) ?><span><?= $escape(date('H:i:s',(int)$log['event_epoch'])) ?></span></time></td>
+                        <td><?php if($log['actor_id']!==null): ?><strong><?= $escape($log['actor_name']??'Unavailable account') ?></strong><span class="audit-muted">Account #<?= (int)$log['actor_id'] ?></span><?php else: ?><span>System / unavailable</span><span class="audit-muted">Actor not recorded</span><?php endif; ?></td>
+                        <td><span class="audit-source audit-source--<?= $escape($log['source']) ?>"><?= $log['source']==='admin'?'Administration':'Student IDs' ?></span><strong class="audit-event-label"><?= $escape(AuditTrailService::label($log['action'],(string)$log['details'])) ?></strong><span class="audit-event-code"><?= $escape($log['action']) ?> &middot; #<?= (int)$log['event_id'] ?></span></td>
+                        <td><?php if($log['entity_type']!==null): ?><?= $escape($targetLabels[$log['entity_type']]??$log['entity_type']) ?><?= $log['entity_id']!==null?' #'.(int)$log['entity_id']:'' ?><?php else: ?><span class="audit-muted">Not recorded</span><?php endif; ?><?php if($log['affected_user_id']!==null&&$log['entity_type']!=='user'): ?><span class="audit-muted">Account #<?= (int)$log['affected_user_id'] ?></span><?php endif; ?></td>
+                        <td><?php if($log['ip_address']): ?><span class="audit-ip"><?= $escape($log['ip_address']) ?></span><?php else: ?><span class="audit-muted">Not recorded</span><?php endif; ?><?php if($log['user_agent']): ?><details class="audit-browser"><summary>Browser details</summary><p><?= $escape($log['user_agent']) ?></p></details><?php endif; ?></td>
+                        <td class="audit-details"><?= trim((string)$log['details'])!==''?$escape($log['details']):'<span class="audit-muted">No additional details.</span>' ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                <?php if(!$result['rows']): ?><tr><td colspan="6" class="audit-empty"><strong><?= $error?'Audit events are unavailable.':'No matching events.' ?></strong><p><?= $error?'Resolve the message above and reload this page.':'Try another date range or reset the filters. Events appear here when supported actions occur.' ?></p></td></tr><?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+        <footer class="audit-results-footer">
+            <p>Times: <?= $escape(date_default_timezone_get()) ?>. Connection details appear only when originally recorded.</p>
+            <nav class="audit-pagination" aria-label="Audit event pages">
+                <?php if($result['page']>1): ?><a rel="prev" href="<?= $escape($pageLink($result['page']-1)) ?>">&larr; Previous</a><?php endif; ?>
+                <span>Page <?= $result['page'] ?> of <?= $result['pages'] ?></span>
+                <?php if($result['page']<$result['pages']): ?><a rel="next" href="<?= $escape($pageLink($result['page']+1)) ?>">Next &rarr;</a><?php endif; ?>
+            </nav>
+        </footer>
+    </section>
+    <p class="audit-coverage">This view combines existing admin and Student ID registry ledgers. Historical events are not rewritten. It is not a complete login, password-reset or summarization history.</p>
+</main>
+<?php require __DIR__.'/partials/site-footer.php'; ?>
 </body>
 </html>

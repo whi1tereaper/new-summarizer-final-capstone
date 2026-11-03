@@ -39,7 +39,7 @@ class EmailService
         $this->mailer->Port = (int)config('smtp.port', 587);
         
         $fromEmail = config('smtp.from', $smtpUser);
-        $this->mailer->setFrom($fromEmail, 'POC: Article Summarizer Security');
+        $this->mailer->setFrom($fromEmail, 'DEPENDED Summarizer');
         
         // avoid hanging the reset flow if SMTP stalls
         $this->mailer->Timeout = 15;
@@ -52,13 +52,13 @@ class EmailService
             $this->mailer->clearAllRecipients();
             $this->mailer->addAddress($to);
             $this->mailer->isHTML(true);
-            $this->mailer->Subject = 'Your Password Reset OTP';
+            $this->mailer->Subject = 'Your DEPENDED Password Reset OTP';
             
             $safeOtp = htmlspecialchars($otp, ENT_QUOTES, 'UTF-8');
 
             $this->mailer->Body = "
                 <div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333;'>
-                    <h2 style='color: #1a1a1a;'>Password Reset Request</h2>
+                    <h2 style='color: #1a1a1a;'>DEPENDED Password Reset Request</h2>
                     <p>We received a request to reset your password. Here is your One-Time Password (OTP):</p>
                     <div style='background: #f4f4f4; padding: 15px; text-align: center; font-size: 26px; font-weight: bold; letter-spacing: 5px; margin: 25px 0;'>
                         {$safeOtp}
@@ -69,7 +69,7 @@ class EmailService
                 </div>
             ";
             
-            $this->mailer->AltBody = "Your Password Reset OTP is: {$safeOtp}.\nIt expires in 15 minutes.";
+            $this->mailer->AltBody = "Your DEPENDED Password Reset OTP is: {$safeOtp}.\nIt expires in 15 minutes.";
             
             $this->mailer->send();
             return true;
@@ -86,13 +86,13 @@ class EmailService
             $this->mailer->clearAllRecipients();
             $this->mailer->addAddress($to);
             $this->mailer->isHTML(true);
-            $this->mailer->Subject = 'Your LIGHT administrator sign-in code';
+            $this->mailer->Subject = 'Your DEPENDED administrator sign-in code';
 
             $safeCode = htmlspecialchars($code, ENT_QUOTES, 'UTF-8');
             $this->mailer->Body = "
                 <div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333;'>
-                    <h2 style='color: #1a1a1a;'>Administrator sign-in</h2>
-                    <p>Use this one-time code to finish signing in to your LIGHT administrator account:</p>
+                    <h2 style='color: #1a1a1a;'>DEPENDED Administrator sign-in</h2>
+                    <p>Use this one-time code to finish signing in to your DEPENDED administrator account:</p>
                     <div style='background: #f4f4f4; padding: 15px; text-align: center; font-size: 26px; font-weight: bold; letter-spacing: 5px; margin: 25px 0;'>
                         {$safeCode}
                     </div>
@@ -100,7 +100,7 @@ class EmailService
                     <p>If you did not attempt to sign in, you can ignore this email.</p>
                 </div>
             ";
-            $this->mailer->AltBody = "Your LIGHT administrator sign-in code is {$safeCode}. It expires in 10 minutes and can only be used once.";
+            $this->mailer->AltBody = "Your DEPENDED administrator sign-in code is {$safeCode}. It expires in 10 minutes and can only be used once.";
             $this->mailer->send();
             return true;
         } catch (Exception $e) {

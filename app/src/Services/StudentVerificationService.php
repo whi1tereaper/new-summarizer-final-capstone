@@ -14,7 +14,7 @@ final class StudentVerificationService
 {
     public const TERMS_VERSION='terms-registration-2026-10-v2';
     public const PRIVACY_VERSION='privacy-registration-2026-10-v2';
-    public const UNKNOWN_ID='Your Student ID is not included in the approved NEUST Peñaranda Off-Campus student registry. Please verify your Student ID or contact the system administrator.';
+    public const UNKNOWN_ID='Your Student ID is not included in the approved NEUST Peñaranda Off-Campus student registry. Please verify your Student ID or contact support.';
     public const UNAVAILABLE_ID='These registration details are unavailable. Sign in to your existing account or contact the system administrator. No other account details can be disclosed.';
     public const STATUSES=['pending','verified','declined','resubmission_required','suspended','expired'];
     public const EVIDENCE=[]; // Historical schema compatibility; no manual approval path.
@@ -81,14 +81,30 @@ final class StudentVerificationService
             // One full-ID registry/claim lookup. The same locked result is used
             // for approval; no regex, legacy evidence or client status can approve.
             $match=$registry->registrationMatch($data['normalized']);
-            if($match['claimed_user_id']!==null||$match['claim_conflict'])throw new \InvalidArgumentException(self::UNAVAILABLE_ID);
-            $user=(new UserRepository($this->db))->createPendingTermsAccount($username,$email,$hash);
+            if($match['claim_conflict'])throw new \InvalidArgumentException(self::UNAVAILABLE_ID);
+            $repository=new UserRepository($this->db);$placeholder=$match['claimed_user_id']!==null;
+            if($placeholder){
+                $q=$this->db->prepare('SELECT * FROM student_applications WHERE user_id=? FOR UPDATE');$q->execute([(int)$match['claimed_user_id']]);$existing=$q->fetch(PDO::FETCH_ASSOC);
+                if(!$existing||($existing['account_claim_state']??'claimed')!=='unclaimed'||$existing['campus']!=='NEUST_PENARANDA')throw new \InvalidArgumentException(self::UNAVAILABLE_ID);
+                if($existing['registry_id']!==null&&(int)$existing['registry_id']!==(int)$match['id'])throw new \InvalidArgumentException(self::UNAVAILABLE_ID);
+                if($existing['student_number_fingerprint']!==null&&!hash_equals($match['student_number_fingerprint'],$existing['student_number_fingerprint']))throw new \InvalidArgumentException(self::UNAVAILABLE_ID);
+                $stored=$existing['normalized_student_number']??$existing['student_number'];
+                if($stored!==null&&self::normalizeNumber($stored)!==$data['normalized'])throw new \InvalidArgumentException(self::UNAVAILABLE_ID);
+                if($stored===null&&(int)$existing['registry_id']!==(int)$match['id']&&$existing['student_number_fingerprint']===null)throw new \InvalidArgumentException(self::UNAVAILABLE_ID);
+                $user=$repository->claimStudentPlaceholder((int)$existing['user_id'],$email,$hash);
+            }else $user=$repository->createPendingTermsAccount($username,$email,$hash);
             $now=time();
+            if($placeholder){
+                $q=$this->db->prepare("UPDATE student_applications SET student_number=?,normalized_student_number=?,student_number_fingerprint=?,registry_id=?,account_claim_state='claimed',terms_version=?,privacy_version=?,consent_epoch=?,details_delete_epoch=?,details_erased_epoch=NULL,updated_epoch=?,version=version+1 WHERE user_id=? AND account_claim_state='unclaimed'");
+                $q->execute([$data['normalized'],$data['normalized'],$match['student_number_fingerprint'],$match['id'],self::TERMS_VERSION,self::PRIVACY_VERSION,$now,$now+259200,$now,$user['id']]);
+                if($q->rowCount()!==1)throw new \InvalidArgumentException(self::UNAVAILABLE_ID);
+            }else{
             $this->db->prepare("INSERT INTO student_applications(application_ref,user_id,student_number,normalized_student_number,student_number_fingerprint,campus,status,submitted_epoch,created_epoch,updated_epoch,details_delete_epoch,terms_version,privacy_version,consent_epoch) VALUES(?,?,?,?,?,'NEUST_PENARANDA','pending',?,?,?,?,?,?,?)")
                 ->execute([bin2hex(random_bytes(16)),$user['id'],$data['normalized'],$data['normalized'],$match['student_number_fingerprint'],$now,$now,$now,$now+259200,self::TERMS_VERSION,self::PRIVACY_VERSION,$now]);
+            }
             $this->db->prepare('UPDATE users SET terms_accepted=1,terms_accepted_at=CURRENT_TIMESTAMP WHERE id=?')->execute([$user['id']]);
             if(!$registry->approveSubmission((int)$user['id'],$match))throw new \InvalidArgumentException(self::UNKNOWN_ID);
-            $registry->recordRegistrationCreated((int)$user['id'],$match);
+            $registry->recordRegistrationCreated((int)$user['id'],$match,$placeholder);
             (new CampusAccessService($this->db))->trialSubject((int)$user['id'],$visitor);
             $this->db->commit();$user['terms_accepted']=1;$user['terms_accepted_at']=gmdate('Y-m-d H:i:s');return $user;
         }catch(\Throwable $e){

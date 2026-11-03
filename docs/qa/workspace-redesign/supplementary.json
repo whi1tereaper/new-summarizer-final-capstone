@@ -1,0 +1,50 @@
+[
+  {
+    "name": "supplementary desktop screenshot",
+    "passed": true
+  },
+  {
+    "name": "supplementary tablet screenshot",
+    "passed": true
+  },
+  {
+    "name": "supplementary mobile screenshot",
+    "passed": true
+  },
+  {
+    "name": "supplementary dark screenshot",
+    "passed": true
+  },
+  {
+    "name": "administrator screenshot includes complete authorized navigation",
+    "passed": true
+  },
+  {
+    "name": "restored Focus expands and dashboard depth override normalizes both legacy depth fields and sentence count",
+    "passed": true
+  },
+  {
+    "name": "invalid file feedback survives preference changes and removal clears its error state",
+    "passed": true
+  },
+  {
+    "name": "real guest Nutshell generation updates shared remaining allowance to 2",
+    "passed": true
+  },
+  {
+    "name": "real guest Nutshell generation updates shared remaining allowance to 1",
+    "passed": true
+  },
+  {
+    "name": "real guest Nutshell generation updates shared remaining allowance to 0",
+    "passed": true
+  },
+  {
+    "name": "real three-use exhaustion hides generation controls, keeps result copyable and fits mobile",
+    "passed": true
+  },
+  {
+    "name": "no browser script exceptions",
+    "passed": true
+  }
+]

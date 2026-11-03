@@ -56,8 +56,9 @@ final class CampusAccessService
         if(!$account)return false;
         if($account['role']==='admin')return true;
         try {
-            $q=$this->db->prepare("SELECT a.id FROM student_applications a JOIN student_enrollment_registry r ON r.id=a.registry_id AND r.student_number_fingerprint=a.student_number_fingerprint WHERE a.user_id=? AND a.campus='NEUST_PENARANDA' AND a.status='verified' AND a.approval_method='registry_match' AND r.eligibility_status='active' AND r.claim_conflict=0 AND r.eligible_until_epoch>?".($lock?' FOR UPDATE':''));
-            $q->execute([$id,time()]);return $q->fetchColumn()!==false;
+            $q=$this->db->prepare("SELECT a.* FROM student_applications a JOIN student_enrollment_registry r ON r.id=a.registry_id AND r.student_number_fingerprint=a.student_number_fingerprint WHERE a.user_id=? AND a.campus='NEUST_PENARANDA' AND a.status='verified' AND a.approval_method='registry_match' AND r.eligibility_status='active' AND r.claim_conflict=0 AND r.eligible_until_epoch>?".($lock?' FOR UPDATE':''));
+            $q->execute([$id,time()]);$application=$q->fetch(PDO::FETCH_ASSOC);
+            return $application!==false&&($application['account_claim_state']??'claimed')==='claimed';
         }catch(\PDOException $e){throw new ProcessingError('ACCESS_SETUP_REQUIRED',$e);}
     }
     /** A returning restricted account keeps its original trial subject on any browser. */

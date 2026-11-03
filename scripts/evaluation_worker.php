@@ -65,7 +65,7 @@ try {
             $statisticsPayload=$service->statisticsPayload($id);
             $inputHash=EvaluationService::canonicalHash($statisticsPayload);
             $report=$bridge->request('statistics',$statisticsPayload,$timeout);
-            if (!isset($report['automatic'],$report['human'],$report['agreement'])) throw new RuntimeException('Statistics worker returned an invalid report.');
+            if (!isset($report['automatic'],$report['comparisons'],$report['methodology'])) throw new RuntimeException('Statistics worker returned an invalid report.');
             if (!hash_equals($workerCodeFingerprint,EvaluationService::codeFingerprint())) throw new RuntimeException('Evaluation source changed while statistics were running. Start a fresh report calculation.');
             $report['reproducibility']=['computed_at_utc'=>gmdate('c'),'input_sha256'=>$inputHash,'analysis_code_fingerprint'=>$workerCodeFingerprint];
             $service->saveReport($id,$report,$inputHash); echo "Run {$id}: descriptive report stored.\n";

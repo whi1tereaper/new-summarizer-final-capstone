@@ -1,0 +1,74 @@
+[
+  {
+    "name": "real audit page shows labelled filters and a capped 50-event page",
+    "passed": true
+  },
+  {
+    "name": "source filter exposes real Student ID events without identity fingerprints",
+    "passed": true
+  },
+  {
+    "name": "combined source and event filters display the actual rejection count",
+    "passed": true
+  },
+  {
+    "name": "Next page preserves filters and has no repeated same-second events",
+    "passed": true
+  },
+  {
+    "name": "stored HTML/script content is escaped and cannot execute",
+    "passed": true
+  },
+  {
+    "name": "legacy deletion and deactivation labels differ and browser details open by keyboard",
+    "passed": true
+  },
+  {
+    "name": "empty-filter results have a clear recovery message",
+    "passed": true
+  },
+  {
+    "name": "invalid date filters return an accessible validation error",
+    "passed": true
+  },
+  {
+    "name": "validation errors preserve the other safe filter selections",
+    "passed": true
+  },
+  {
+    "name": "light audit layout at 1506px keeps wide rows locally scrollable without page overflow",
+    "passed": true
+  },
+  {
+    "name": "light audit layout at 768px keeps wide rows locally scrollable without page overflow",
+    "passed": true
+  },
+  {
+    "name": "light audit layout at 390px keeps wide rows locally scrollable without page overflow",
+    "passed": true
+  },
+  {
+    "name": "light audit layout at 320px keeps wide rows locally scrollable without page overflow",
+    "passed": true
+  },
+  {
+    "name": "dark audit layout at 1506px keeps wide rows locally scrollable without page overflow",
+    "passed": true
+  },
+  {
+    "name": "dark audit layout at 768px keeps wide rows locally scrollable without page overflow",
+    "passed": true
+  },
+  {
+    "name": "dark audit layout at 390px keeps wide rows locally scrollable without page overflow",
+    "passed": true
+  },
+  {
+    "name": "dark audit layout at 320px keeps wide rows locally scrollable without page overflow",
+    "passed": true
+  },
+  {
+    "name": "filter navigation and responsive layouts have no JavaScript exceptions",
+    "passed": true
+  }
+]

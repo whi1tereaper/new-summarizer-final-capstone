@@ -1,0 +1,33 @@
+{
+  "summary.json": {
+    "passed": 3,
+    "failed": 0,
+    "nested": {
+      "service": {
+        "passed": 0,
+        "failed": 0
+      },
+      "browser": {
+        "passed": 0,
+        "failed": 0
+      }
+    },
+    "live_migrations_applied": false,
+    "live_cleanup_executed": false,
+    "http_server": "isolated PHP 8.3 server; not live Apache authenticated session"
+  },
+  "checks.json": [
+    {
+      "name": "QA credentials cannot access production MySQL",
+      "passed": true
+    },
+    {
+      "name": "live accounts passwords summaries and feedback preserved",
+      "passed": true
+    },
+    {
+      "name": "restricted QA databases and credentials removed",
+      "passed": true
+    }
+  ]
+}

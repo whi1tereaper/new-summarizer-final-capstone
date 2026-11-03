@@ -19,7 +19,9 @@ try{
     $q=$db->prepare('SELECT normalized_student_number,eligibility_status,eligible_until_epoch,claim_conflict FROM student_enrollment_registry WHERE normalized_student_number IN ('.implode(',',array_fill(0,38,'?')).')');$q->execute($parsed['ids']);$initial=$q->fetchAll(PDO::FETCH_ASSOC);
     $eligible=array_filter($initial,fn($r)=>$r['eligibility_status']==='active'&&(int)$r['eligible_until_epoch']>time()&&(int)$r['claim_conflict']===0);
     $check('all 38 exact initial IDs remain active unexpired and conflict-free',count($initial)===38&&count($eligible)===38);
-    $check('all 20 migrations are recorded',(int)$db->query('SELECT COUNT(*) FROM schema_migrations')->fetchColumn()===20&&(int)$db->query("SELECT COUNT(*) FROM schema_migrations WHERE migration='020_registry_only_allowlist.sql'")->fetchColumn()===1);
+    $expected=array_map('basename',glob(__DIR__.'/../database/migrations/*.sql'));sort($expected);
+    $applied=$db->query('SELECT migration FROM schema_migrations')->fetchAll(PDO::FETCH_COLUMN);sort($applied);
+    $check('all current migrations are recorded',$expected===$applied);
     $check('privacy contact protection key and operator authorization remain configured',App\Src\Services\StudentVerificationService::configurationError()===null);
     $counts=[];foreach(['users','summaries','summary_artifacts','feedback','feedback_comments','student_applications','student_enrollment_registry'] as $table)$counts[$table]=(int)$db->query('SELECT COUNT(*) FROM `'.$table.'`')->fetchColumn();
     $access=new Access($db);$approved=0;$admins=0;$restricted=0;

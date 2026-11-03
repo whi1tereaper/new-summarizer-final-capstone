@@ -66,6 +66,7 @@ switch ($action) {
     header('Retry-After: 30');
     header('Referrer-Policy: no-referrer');
     ?>
-    <!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Registration unavailable — LIGHT</title><link rel="stylesheet" href="assets/css/design-tokens.css"><link rel="stylesheet" href="assets/css/student-access.css"></head><body><main class="student-shell"><section class="student-access"><h1>Registration temporarily unavailable</h1><p role="alert"><?= htmlspecialchars(\App\Src\Support\StudentRegistrationForm::UNAVAILABLE,ENT_QUOTES,'UTF-8') ?></p><a href="register.php">Return to Create Account</a> · <a href="login.php">Sign In</a></section></main></body></html>
+    <!doctype html><html lang="en"><head><meta charset="UTF-8">
+    <?php require_once __DIR__ . '/partials/design-system-head.php'; ?><meta name="viewport" content="width=device-width,initial-scale=1"><title>Registration unavailable — DEPENDED</title><link rel="stylesheet" href="assets/css/student-access.css"></head><body><main class="student-shell"><section class="student-access"><h1>Registration temporarily unavailable</h1><p role="alert"><?= htmlspecialchars(\App\Src\Support\StudentRegistrationForm::UNAVAILABLE,ENT_QUOTES,'UTF-8') ?></p><a href="register.php">Return to Create Account</a> · <a href="login.php">Sign In</a></section></main></body></html>
     <?php
 }

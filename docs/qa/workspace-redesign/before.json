@@ -1,0 +1,22 @@
+[
+  {
+    "name": "before desktop screenshot",
+    "passed": true
+  },
+  {
+    "name": "before tablet screenshot",
+    "passed": true
+  },
+  {
+    "name": "before mobile screenshot",
+    "passed": true
+  },
+  {
+    "name": "before dark screenshot",
+    "passed": true
+  },
+  {
+    "name": "no browser script exceptions",
+    "passed": true
+  }
+]

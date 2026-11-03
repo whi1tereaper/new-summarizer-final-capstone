@@ -31,10 +31,10 @@ final class StudentEnrollmentRegistryService
     {
         if(!$this->db->inTransaction())throw new \LogicException('Registry matching must share the account transaction.');
         $number=StudentVerificationService::normalizeNumber($number);
-        $q=$this->db->prepare("SELECT r.*,a.user_id AS owner_by_key,b.user_id AS owner_by_registry,c.user_id AS owner_by_number FROM student_enrollment_registry r LEFT JOIN student_applications a ON a.student_number_fingerprint=r.student_number_fingerprint LEFT JOIN student_applications b ON b.registry_id=r.id LEFT JOIN student_applications c ON c.normalized_student_number=r.normalized_student_number WHERE r.normalized_student_number=? AND r.eligibility_status='active' AND r.eligible_until_epoch>? FOR UPDATE");
-        $q->execute([$number,time()]);$row=$q->fetch(PDO::FETCH_ASSOC);
-        if(!$row)throw new \InvalidArgumentException(StudentVerificationService::UNKNOWN_ID);
-        $owners=array_values(array_unique(array_filter([$row['owner_by_key'],$row['owner_by_registry'],$row['owner_by_number']],static fn($v)=>$v!==null)));
+        $q=$this->db->prepare("SELECT r.*,a.user_id AS linked_user_id FROM student_enrollment_registry r LEFT JOIN student_applications a ON (a.registry_id=r.id OR a.student_number_fingerprint=r.student_number_fingerprint OR a.normalized_student_number=r.normalized_student_number OR UPPER(TRIM(a.student_number))=r.normalized_student_number) WHERE r.normalized_student_number=? AND r.eligibility_status='active' AND r.eligible_until_epoch>? FOR UPDATE");
+        $q->execute([$number,time()]);$rows=$q->fetchAll(PDO::FETCH_ASSOC);
+        if(!$rows)throw new \InvalidArgumentException(StudentVerificationService::UNKNOWN_ID);
+        $row=$rows[0];$owners=array_values(array_unique(array_filter(array_column($rows,'linked_user_id'),static fn($v)=>$v!==null)));
         $row['claimed_user_id']=count($owners)===1?(int)$owners[0]:null;$row['claim_conflict']=(int)($row['claim_conflict']??0)===1||count($owners)>1;
         return $row;
     }
@@ -45,10 +45,10 @@ final class StudentEnrollmentRegistryService
         $allowed=['unknown_or_inactive','account_details_unavailable','unavailable','validation_failed'];
         $this->audit(null,null,null,null,'registration_rejected',$fingerprint,in_array($reason,$allowed,true)?$reason:'unavailable');
     }
-    public function recordRegistrationCreated(int $user,array $match): void
+    public function recordRegistrationCreated(int $user,array $match,bool $placeholder=false): void
     {
         if(!$this->db->inTransaction())throw new \LogicException('Registration audit must share the account transaction.');
-        $this->audit(null,(int)$match['id'],null,$user,'registration_created',$match['student_number_fingerprint'],'Student-created account activated by an eligible registry match.');
+        $this->audit(null,(int)$match['id'],null,$user,$placeholder?'placeholder_claimed':'registration_created',$match['student_number_fingerprint'],$placeholder?'Explicitly unclaimed credential-free student record claimed; existing account and history retained.':'Student-created account activated by an eligible registry match.');
     }
     /** Bounded streaming parser. CSV is IDs only, not an arbitrary spreadsheet. */
     public static function parse($stream): array
@@ -149,7 +149,7 @@ final class StudentEnrollmentRegistryService
         $owner=$owners[0];
         $q=$this->db->prepare('SELECT id,role,active FROM users WHERE id=? FOR UPDATE');$q->execute([$owner]);$user=$q->fetch(PDO::FETCH_ASSOC);
         $q=$this->db->prepare('SELECT * FROM student_applications WHERE user_id=? FOR UPDATE');$q->execute([$owner]);$app=$q->fetch(PDO::FETCH_ASSOC);
-        if($registry['eligibility_status']!=='active'||(int)$registry['eligible_until_epoch']<=time()||!$user||(int)$user['active']!==1||$user['role']==='admin')return 'restricted';
+        if($registry['eligibility_status']!=='active'||(int)$registry['eligible_until_epoch']<=time()||!$user||(int)$user['active']!==1||$user['role']==='admin'||($app['account_claim_state']??'claimed')==='unclaimed')return 'restricted';
         $canonical=null;
         if($app['normalized_student_number']!==null){try{$canonical=StudentVerificationService::normalizeNumber($app['normalized_student_number']);}catch(\InvalidArgumentException $ignored){}}
         elseif($app['student_number']!==null){try{$canonical=StudentVerificationService::normalizeNumber($app['student_number']);}catch(\InvalidArgumentException $ignored){}}
@@ -297,6 +297,9 @@ final class StudentEnrollmentRegistryService
             $q=$this->db->prepare('SELECT a.*,u.role,u.active FROM student_applications a JOIN users u ON u.id=a.user_id WHERE a.user_id>? ORDER BY a.user_id LIMIT 500');$q->execute([$last]);$rows=$q->fetchAll(PDO::FETCH_ASSOC);
             foreach($rows as $app){
                 $last=(int)$app['user_id'];if($app['role']==='admin')continue;$summary['checked']++;$registry=null;
+                // Unclaimed shells are not enrolled accounts yet. Keep inactive
+                // ones claimable; never activate or approve them in maintenance.
+                if(($app['account_claim_state']??'claimed')==='unclaimed'){$summary['restricted']++;continue;}
                 $raw=$app['normalized_student_number']??$app['student_number'];
                 if($raw!==null){try{$number=StudentVerificationService::normalizeNumber($raw);$find->execute([$number]);$registry=$find->fetch(PDO::FETCH_ASSOC);}catch(\InvalidArgumentException $ignored){}}
                 elseif($app['student_number_fingerprint']!==null){$byKey->execute([$app['student_number_fingerprint']]);$registry=$byKey->fetch(PDO::FETCH_ASSOC);}

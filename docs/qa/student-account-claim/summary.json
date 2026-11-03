@@ -1,0 +1,49 @@
+{
+  "functional_passed": 522,
+  "functional_failed": 0,
+  "orchestration_passed": 13,
+  "orchestration_failed": 0,
+  "suites": [
+    {
+      "suite": "backend-results.json",
+      "passed": 164,
+      "failed": 0
+    },
+    {
+      "suite": "placeholder-backend.json",
+      "passed": 54,
+      "failed": 0
+    },
+    {
+      "suite": "http-results.json",
+      "passed": 79,
+      "failed": 0
+    },
+    {
+      "suite": "registration-http.json",
+      "passed": 27,
+      "failed": 0
+    },
+    {
+      "suite": "placeholder-http.json",
+      "passed": 32,
+      "failed": 0
+    },
+    {
+      "suite": "browser-results.json",
+      "passed": 25,
+      "failed": 0
+    },
+    {
+      "suite": "nlp-results.json",
+      "passed": 6,
+      "failed": 0
+    },
+    {
+      "suite": "core-results.json",
+      "passed": 135,
+      "failed": 0
+    }
+  ],
+  "live_deployment": "Migration 021 intentionally pending operator direction after an unrecognized live recovery event; see original-backup integrity and audit receipts."
+}

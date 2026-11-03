@@ -1,0 +1,42 @@
+[
+  {
+    "name": "HTTP 504 non-JSON reply is classified as PROCESSING_TIMEOUT, not a connection error",
+    "passed": true
+  },
+  {
+    "name": "not-found status preserves the same idempotency key on manual retry",
+    "passed": true
+  },
+  {
+    "name": "HTTP 502 non-JSON reply is classified as WORKER_UNAVAILABLE, not a connection error",
+    "passed": true
+  },
+  {
+    "name": "HTTP 200 non-JSON reply is classified as PROCESSING_FAILED, not a connection error",
+    "passed": true
+  },
+  {
+    "name": "completed result recovered after gateway response loss with one generation and one charge",
+    "passed": true
+  },
+  {
+    "name": "completed result recovered after disconnect response loss with one generation and one charge",
+    "passed": true
+  },
+  {
+    "name": "confirmed failed generation retries using a fresh key instead of replaying its failure forever",
+    "passed": true
+  },
+  {
+    "name": "in-flight status offers read-only recovery without resubmitting source or starting another job",
+    "passed": true
+  },
+  {
+    "name": "last trial response loss leaves Check status available despite zero remaining uses",
+    "passed": true
+  },
+  {
+    "name": "Nutshell recovery browser exception: locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#nutshell-retry-btn')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" id=\"nutshell-retry-btn\" class=\"nutshell-error__retry-btn\">Che",
+    "passed": false
+  }
+]

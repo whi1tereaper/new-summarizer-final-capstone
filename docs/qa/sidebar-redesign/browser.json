@@ -1,0 +1,230 @@
+[
+  {
+    "name": "shared sidebar replaces horizontal application navigation and preserves workspace heading",
+    "passed": true
+  },
+  {
+    "name": "real authenticated profile appears directly below LIGHT branding with actual role",
+    "passed": true
+  },
+  {
+    "name": "account keyboard arrows and Escape manage menu and focus",
+    "passed": true
+  },
+  {
+    "name": "profile menu exposes real profile and theme actions and closes on outside click",
+    "passed": true
+  },
+  {
+    "name": "existing theme control works in account menu and persists across routes",
+    "passed": true
+  },
+  {
+    "name": "collapse persists and expands content while retaining named icon links and profile menu",
+    "passed": true
+  },
+  {
+    "name": "light 360px expanded/drawer: no overlap or overflow",
+    "passed": true
+  },
+  {
+    "name": "light 390px expanded/drawer: no overlap or overflow",
+    "passed": true
+  },
+  {
+    "name": "light 768px expanded/drawer: no overlap or overflow",
+    "passed": true
+  },
+  {
+    "name": "light 1024px expanded/drawer: no overlap or overflow",
+    "passed": true
+  },
+  {
+    "name": "light 1024px collapsed: no overlap or overflow",
+    "passed": true
+  },
+  {
+    "name": "light 1280px expanded/drawer: no overlap or overflow",
+    "passed": true
+  },
+  {
+    "name": "light 1280px collapsed: no overlap or overflow",
+    "passed": true
+  },
+  {
+    "name": "light 1440px expanded/drawer: no overlap or overflow",
+    "passed": true
+  },
+  {
+    "name": "light 1440px collapsed: no overlap or overflow",
+    "passed": true
+  },
+  {
+    "name": "dark 360px expanded/drawer: no overlap or overflow",
+    "passed": true
+  },
+  {
+    "name": "dark 390px expanded/drawer: no overlap or overflow",
+    "passed": true
+  },
+  {
+    "name": "dark 768px expanded/drawer: no overlap or overflow",
+    "passed": true
+  },
+  {
+    "name": "dark 1024px expanded/drawer: no overlap or overflow",
+    "passed": true
+  },
+  {
+    "name": "dark 1024px collapsed: no overlap or overflow",
+    "passed": true
+  },
+  {
+    "name": "dark 1280px expanded/drawer: no overlap or overflow",
+    "passed": true
+  },
+  {
+    "name": "dark 1280px collapsed: no overlap or overflow",
+    "passed": true
+  },
+  {
+    "name": "dark 1440px expanded/drawer: no overlap or overflow",
+    "passed": true
+  },
+  {
+    "name": "dark 1440px collapsed: no overlap or overflow",
+    "passed": true
+  },
+  {
+    "name": "mobile drawer focuses inside, isolates background, traps Tab and restores scroll/focus",
+    "passed": true
+  },
+  {
+    "name": "mobile drawer explicit close and backdrop dismissal work",
+    "passed": true
+  },
+  {
+    "name": "mobile logout retains confirmation and cancellation restores visible focus",
+    "passed": true
+  },
+  {
+    "name": "admin sidebar uses actual account and permission-aware management destinations",
+    "passed": true
+  },
+  {
+    "name": "admin destination route, active state and responsive layout: profile.php",
+    "passed": true
+  },
+  {
+    "name": "admin destination route, active state and responsive layout: summarizer.php",
+    "passed": true
+  },
+  {
+    "name": "admin destination route, active state and responsive layout: history.php",
+    "passed": true
+  },
+  {
+    "name": "admin destination route, active state and responsive layout: analytics.php",
+    "passed": true
+  },
+  {
+    "name": "admin destination route, active state and responsive layout: admin_dashboard.php",
+    "passed": true
+  },
+  {
+    "name": "admin destination route, active state and responsive layout: admin_student_registry.php",
+    "passed": true
+  },
+  {
+    "name": "admin destination route, active state and responsive layout: admin_audit_logs.php",
+    "passed": true
+  },
+  {
+    "name": "admin destination route, active state and responsive layout: admin_dashboard.php#storage-maintenance",
+    "passed": true
+  },
+  {
+    "name": "admin destination route, active state and responsive layout: evaluate.php",
+    "passed": true
+  },
+  {
+    "name": "storage deep link selects Storage without also selecting Admin Dashboard",
+    "passed": true
+  },
+  {
+    "name": "admin routes contain no new browser script exceptions",
+    "passed": true
+  },
+  {
+    "name": "user sidebar uses actual account and permission-aware management destinations",
+    "passed": true
+  },
+  {
+    "name": "user destination route, active state and responsive layout: profile.php",
+    "passed": true
+  },
+  {
+    "name": "user destination route, active state and responsive layout: summarizer.php",
+    "passed": true
+  },
+  {
+    "name": "user destination route, active state and responsive layout: history.php",
+    "passed": true
+  },
+  {
+    "name": "user destination route, active state and responsive layout: dashboard.php",
+    "passed": true
+  },
+  {
+    "name": "user destination route, active state and responsive layout: evaluate.php",
+    "passed": true
+  },
+  {
+    "name": "server still denies direct admin access for ordinary account",
+    "passed": true
+  },
+  {
+    "name": "user routes contain no new browser script exceptions",
+    "passed": true
+  },
+  {
+    "name": "public landing and authentication screens remain outside sidebar layout",
+    "passed": true
+  },
+  {
+    "name": "document toolbar still preserves exclusive sources, settings and Focus",
+    "passed": true
+  },
+  {
+    "name": "after expanded-desktop screenshot",
+    "passed": true
+  },
+  {
+    "name": "after collapsed-desktop screenshot",
+    "passed": true
+  },
+  {
+    "name": "after dark screenshot",
+    "passed": true
+  },
+  {
+    "name": "after mobile-workspace screenshot",
+    "passed": true
+  },
+  {
+    "name": "real existing text generation succeeds with sidebar",
+    "passed": true
+  },
+  {
+    "name": "real existing nutshell generation succeeds with sidebar",
+    "passed": true
+  },
+  {
+    "name": "real logout confirmation completes existing session logout",
+    "passed": true
+  },
+  {
+    "name": "main interactions contain no new browser script exceptions",
+    "passed": true
+  }
+]

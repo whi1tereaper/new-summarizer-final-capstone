@@ -1,0 +1,29 @@
+#storage-maintenance .storage-panel { border: var(--border-width) solid var(--color-border); border-radius: var(--radius-card); background: var(--color-surface); overflow: hidden; }
+#storage-maintenance .storage-header { display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); padding: var(--space-6); }
+#storage-maintenance h3 { margin: 0 0 var(--space-2); font-family: var(--font-heading); font-size: var(--font-size-lg); letter-spacing: var(--letter-spacing-heading); }
+#storage-maintenance .storage-header p { margin: 0; max-width: 680px; color: var(--color-text-secondary); font-size: var(--font-size-sm); line-height: var(--line-height-body); }
+#storage-refresh { flex-shrink: 0; cursor: pointer; }
+#storage-refresh:disabled { cursor: wait; }
+#storage-maintenance :focus-visible { outline: var(--focus-ring-width) solid var(--color-focus); outline-offset: var(--focus-ring-offset); }
+#storage-maintenance .storage-message { margin: 0 var(--space-6) var(--space-5); color: var(--color-text-secondary); font-size: var(--font-size-sm); line-height: var(--line-height-body); }
+#storage-maintenance .storage-message[data-state="warning"],#storage-maintenance .storage-message[data-state="error"] { padding: var(--space-3) var(--space-3-5); border-left: 3px solid var(--color-warning); background: var(--color-warning-soft); color: var(--color-text); }
+#storage-maintenance .storage-metrics { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); border-block: 1px solid var(--color-border); background: var(--color-bg-secondary); }
+#storage-maintenance .storage-metric { min-width: 0; padding: var(--space-6); border-right: var(--border-width) solid var(--color-border); display: flex; flex-direction: column; gap: var(--space-2-5); }
+#storage-maintenance .storage-metric:last-child { border-right: 0; }
+#storage-maintenance .storage-metric>span { color: var(--color-text-secondary); font-size: var(--font-size-xs); font-weight: var(--weight-semibold); letter-spacing: .06em; text-transform: uppercase; }
+#storage-maintenance .storage-metric strong { font-family: var(--font-heading); font-size: var(--fs-heading-lg); font-weight: var(--weight-semibold); letter-spacing: var(--letter-spacing-heading); line-height: 1.2; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+#storage-maintenance .storage-metric small { color: var(--color-text-secondary); font-size: var(--font-size-xs); line-height: var(--line-height-body); }
+#storage-maintenance .storage-health { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3); padding: var(--space-4-5) var(--space-6); font-size: var(--font-size-xs); color: var(--color-text-secondary); }
+#storage-maintenance .storage-health>span:first-child { font-weight: var(--weight-semibold); color: var(--color-text); }
+#storage-maintenance .storage-table-scroll { width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+#storage-maintenance .storage-table { border-collapse: collapse; width: 100%; min-width: 550px; font-size: var(--font-size-sm); text-align: left; }
+#storage-maintenance .storage-table thead th { padding: var(--space-3) var(--space-6); border-block: 1px solid var(--color-border); background: var(--color-bg-secondary); color: var(--color-text-secondary); font-size: var(--font-size-2xs); text-transform: uppercase; letter-spacing: .06em; }
+#storage-maintenance .storage-table tbody th,#storage-maintenance .storage-table td { padding: var(--space-4) var(--space-6); border-bottom: var(--border-width) solid var(--color-border); font-variant-numeric: tabular-nums; }
+#storage-maintenance .storage-table tbody th { font-weight: var(--weight-medium); }
+#storage-maintenance .storage-table td { color: var(--color-text-secondary); }
+#storage-maintenance .storage-footer { padding: var(--space-4-5) var(--space-6); color: var(--color-text-secondary); font-size: var(--font-size-xs); line-height: 1.65; }
+#storage-maintenance .storage-footer p { margin: 0 0 var(--space-2-5); }
+#storage-maintenance .storage-footer p:last-child { margin-bottom: 0; }
+@media(max-width:900px) { #storage-maintenance .storage-metrics { grid-template-columns: repeat(2,minmax(0,1fr)); }#storage-maintenance .storage-metric:nth-child(2) { border-right: 0; }#storage-maintenance .storage-metric:nth-child(-n+2) { border-bottom: var(--border-width) solid var(--color-border); } }
+@media(max-width:600px) { #storage-maintenance .storage-header { align-items: stretch; flex-direction: column; padding: var(--space-4-5); gap: var(--space-4-5); }#storage-maintenance .storage-message { margin-inline: var(--space-4-5); }#storage-maintenance .storage-metric { padding: var(--space-4-5); }#storage-maintenance .storage-health,#storage-maintenance .storage-footer { padding: var(--space-4-5); }#storage-maintenance .storage-table thead th,#storage-maintenance .storage-table tbody th,#storage-maintenance .storage-table td { padding-inline: var(--space-4-5); } }
+@media(max-width:360px) { #storage-maintenance .storage-metrics { grid-template-columns: minmax(0,1fr); }#storage-maintenance .storage-metric { border-right: 0; border-bottom: var(--border-width) solid var(--color-border); }#storage-maintenance .storage-metric:last-child { border-bottom: 0; } }

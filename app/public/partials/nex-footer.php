@@ -3,7 +3,6 @@
 $footerPrivacyContact=(string)config('student_access.privacy_contact','');
 ?>
 <link rel="stylesheet" href="assets/css/site-footer.css?v=<?= filemtime(__DIR__ . '/../assets/css/site-footer.css') ?>">
-
 <footer class="nex-footer" data-nav-theme="light" role="contentinfo">
     <div class="nex-footer__inner">
 
@@ -50,17 +49,10 @@ $footerPrivacyContact=(string)config('student_access.privacy_contact','');
 
         </div>
 
-        <!-- Giant Brand Title -->
-        <div class="nex-footer__brand-wrap">
-            <div class="nex-footer__giant-brand" id="footer-light-brand" aria-label="LIGHT">
-                LIGHT
-            </div>
-        </div>
-
         <!-- Bottom Copyright Rule -->
         <div class="nex-footer__bottom">
             <p class="nex-footer__copyright">
-                &copy; <?= date('Y') ?> Light Summarizer &mdash; All rights reserved.
+                &copy; <?= date('Y') ?> DEPENDED &mdash; Data Extractor and Phrase-level Engine for Neural-speech, Dual-translation, and Extractive Decoding. All rights reserved.
             </p>
             <a href="#top" class="nex-footer__back js-back-top" aria-label="Back to top" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
                 BACK TO TOP &uarr;

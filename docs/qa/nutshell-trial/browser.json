@@ -1,0 +1,26 @@
+[
+  {
+    "name": "anonymous mobile visitor starts with three shared attempts",
+    "passed": true
+  },
+  {
+    "name": "guest Nutshell stays on the page and updates remaining attempts to 2",
+    "passed": true
+  },
+  {
+    "name": "guest Nutshell stays on the page and updates remaining attempts to 1",
+    "passed": true
+  },
+  {
+    "name": "guest Nutshell stays on the page and updates remaining attempts to 0",
+    "passed": true
+  },
+  {
+    "name": "exhaustion hides generation controls but preserves readable copyable Nutshell",
+    "passed": true
+  },
+  {
+    "name": "trial limit and result fit the mobile viewport",
+    "passed": true
+  }
+]

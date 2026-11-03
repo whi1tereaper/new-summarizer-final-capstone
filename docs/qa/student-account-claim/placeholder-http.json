@@ -1,0 +1,130 @@
+[
+  {
+    "name": "HTTP fixture is explicitly unclaimed inactive and without a password",
+    "passed": true
+  },
+  {
+    "name": "invalid CSRF cannot modify placeholder credentials",
+    "passed": true
+  },
+  {
+    "name": "invalid email safely rejects a placeholder claim without mutations",
+    "passed": true
+  },
+  {
+    "name": "duplicate email safely rejects a placeholder claim without mutations",
+    "passed": true
+  },
+  {
+    "name": "mismatched passwords safely rejects a placeholder claim without mutations",
+    "passed": true
+  },
+  {
+    "name": "SQL injection cannot claim a placeholder",
+    "passed": true
+  },
+  {
+    "name": "existing Create Account POST safely claims a matching placeholder",
+    "passed": true
+  },
+  {
+    "name": "HTTP claim keeps the original account and application identity",
+    "passed": true
+  },
+  {
+    "name": "chosen email and hashed password are usable immediately",
+    "passed": true
+  },
+  {
+    "name": "HTTP claim grants only student registry-match access despite client role fields",
+    "passed": true
+  },
+  {
+    "name": "HTTP claim retains all original summaries",
+    "passed": true
+  },
+  {
+    "name": "HTTP claim retains all original artifacts",
+    "passed": true
+  },
+  {
+    "name": "HTTP claim retains all original feedback",
+    "passed": true
+  },
+  {
+    "name": "HTTP claim retains all original trial",
+    "passed": true
+  },
+  {
+    "name": "HTTP claim records exactly one committed audit event",
+    "passed": true
+  },
+  {
+    "name": "successful claim returns the existing Sign In success screen without auto-login",
+    "passed": true
+  },
+  {
+    "name": "incorrect chosen-account password is still denied",
+    "passed": true
+  },
+  {
+    "name": "claimed student signs in immediately by credential 1",
+    "passed": true
+  },
+  {
+    "name": "login rotates the session for credential 1",
+    "passed": true
+  },
+  {
+    "name": "claimed account can retrieve existing history",
+    "passed": true
+  },
+  {
+    "name": "claimed student remains blocked from administrator registry management",
+    "passed": true
+  },
+  {
+    "name": "claimed student logout removes continued authenticated access",
+    "passed": true
+  },
+  {
+    "name": "claimed student signs in immediately by credential 2",
+    "passed": true
+  },
+  {
+    "name": "login rotates the session for credential 2",
+    "passed": true
+  },
+  {
+    "name": "claimed student logout removes continued authenticated access",
+    "passed": true
+  },
+  {
+    "name": "claimed student signs in immediately by credential 3",
+    "passed": true
+  },
+  {
+    "name": "login rotates the session for credential 3",
+    "passed": true
+  },
+  {
+    "name": "claimed student logout removes continued authenticated access",
+    "passed": true
+  },
+  {
+    "name": "claim-state request forgery cannot overwrite an established account",
+    "passed": true
+  },
+  {
+    "name": "two actual concurrent HTTP claims allow one success and one denial",
+    "passed": true
+  },
+  {
+    "name": "concurrent HTTP claim reuses the same user and commits a single claim audit",
+    "passed": true
+  },
+  {
+    "name": "concurrent HTTP claiming preserves summaries artifacts feedback and trial links",
+    "passed": true
+  }
+]

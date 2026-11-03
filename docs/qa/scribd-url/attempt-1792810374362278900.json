@@ -1,0 +1,82 @@
+{
+  "summary.json": {
+    "passed": 8,
+    "failed": 1,
+    "checks": [
+      {
+        "name": "QA credentials are denied access to live application data",
+        "passed": true
+      },
+      {
+        "name": "existing source and transport contracts plus public/restricted Scribd fixtures",
+        "passed": false
+      },
+      {
+        "name": "supplied live Scribd page is recognized as access restricted, not an empty article",
+        "passed": true
+      },
+      {
+        "name": "actual Nutshell endpoint returns structured Scribd access guidance",
+        "passed": true
+      },
+      {
+        "name": "failed Scribd Nutshell request does not consume a guest attempt",
+        "passed": true
+      },
+      {
+        "name": "real browser Scribd source failure and recovery workflow",
+        "passed": true
+      },
+      {
+        "name": "failed Scribd jobs store no summary, release quota and erase source payloads",
+        "passed": true
+      },
+      {
+        "name": "live accounts passwords summaries and feedback are preserved",
+        "passed": true
+      },
+      {
+        "name": "isolated QA schemas and credentials are removed",
+        "passed": true
+      }
+    ],
+    "browser_passed": 5,
+    "browser_failed": 0,
+    "original_restricted_document_not_extracted": true,
+    "no_access_controls_bypassed": true
+  },
+  "browser.json": [
+    {
+      "name": "actual Scribd URL follows the real form, queued job and processing failure workflow",
+      "passed": true
+    },
+    {
+      "name": "processing UI explains source access restrictions and the permitted upload/paste alternative",
+      "passed": true
+    },
+    {
+      "name": "source access failure keeps all three trial uses and does not suggest automatic retries",
+      "passed": true
+    },
+    {
+      "name": "Back to settings preserves the entered URL for correction or replacement",
+      "passed": true
+    },
+    {
+      "name": "mobile recovery workflow has no JavaScript exceptions or page overflow",
+      "passed": true
+    }
+  ],
+  "database.json": {
+    "summaries": 0,
+    "active_reservations": 0,
+    "job_results": [
+      {
+        "state": "failed",
+        "has_result": false,
+        "failure_code": "URL_ACCESS_RESTRICTED",
+        "payload_erased": true
+      }
+    ]
+  }
+}

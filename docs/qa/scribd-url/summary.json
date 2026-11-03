@@ -1,0 +1,46 @@
+{
+  "passed": 9,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "QA credentials are denied access to live application data",
+      "passed": true
+    },
+    {
+      "name": "existing source and transport contracts plus public/restricted Scribd fixtures",
+      "passed": true
+    },
+    {
+      "name": "supplied live Scribd page is recognized as access restricted, not an empty article",
+      "passed": true
+    },
+    {
+      "name": "actual Nutshell endpoint returns structured Scribd access guidance",
+      "passed": true
+    },
+    {
+      "name": "failed Scribd Nutshell request does not consume a guest attempt",
+      "passed": true
+    },
+    {
+      "name": "real browser Scribd source failure and recovery workflow",
+      "passed": true
+    },
+    {
+      "name": "failed Scribd jobs store no summary, release quota and erase source payloads",
+      "passed": true
+    },
+    {
+      "name": "live accounts passwords summaries and feedback are preserved",
+      "passed": true
+    },
+    {
+      "name": "isolated QA schemas and credentials are removed",
+      "passed": true
+    }
+  ],
+  "browser_passed": 5,
+  "browser_failed": 0,
+  "original_restricted_document_not_extracted": true,
+  "no_access_controls_bypassed": true
+}

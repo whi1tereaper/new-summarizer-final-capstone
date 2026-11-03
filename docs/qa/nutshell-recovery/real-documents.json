@@ -1,0 +1,62 @@
+[
+  {
+    "input": ".pdf",
+    "seconds": 0.66,
+    "http_status": 200,
+    "status": "completed",
+    "failure_code": null,
+    "generation": {
+      "id": 32,
+      "status": "completed",
+      "format": "paragraph",
+      "content": "The survey found that 58 percent of respondents wanted access after normal working hours. Officials said the extended hours could improve access, but they have not promised that attendance will increase.",
+      "word_count": 31,
+      "source_word_count": 148,
+      "primary_summary_word_count": 0,
+      "compression_ratio": 0.2095,
+      "processing_time_ms": 231,
+      "algorithm_version": "nutshell-extractive-v2",
+      "cached": false
+    }
+  },
+  {
+    "input": ".docx",
+    "seconds": 0.73,
+    "http_status": 200,
+    "status": "completed",
+    "failure_code": null,
+    "generation": {
+      "id": 33,
+      "status": "completed",
+      "format": "paragraph",
+      "content": "The survey found that 58 percent of respondents wanted access after normal working hours. Officials said the extended hours could improve access, but they have not promised that attendance will increase.",
+      "word_count": 31,
+      "source_word_count": 148,
+      "primary_summary_word_count": 0,
+      "compression_ratio": 0.2095,
+      "processing_time_ms": 412,
+      "algorithm_version": "nutshell-extractive-v2",
+      "cached": false
+    }
+  },
+  {
+    "input": "scanned PDF (real OCR)",
+    "seconds": 3.64,
+    "http_status": 200,
+    "status": "completed",
+    "failure_code": null,
+    "generation": {
+      "id": 34,
+      "status": "completed",
+      "format": "paragraph",
+      "content": "The survey found that 58 percent of respondents wanted access after normal working hours. Officials said the extended hours could improve access, but they have not promised that attendance will increase.",
+      "word_count": 31,
+      "source_word_count": 148,
+      "primary_summary_word_count": 0,
+      "compression_ratio": 0.2095,
+      "processing_time_ms": 3301,
+      "algorithm_version": "nutshell-extractive-v2",
+      "cached": false
+    }
+  }
+]

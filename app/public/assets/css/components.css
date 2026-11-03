@@ -1,0 +1,221 @@
+/* Shared components. Page styles own layout; this file owns their appearance. */
+.btn,
+:where(.btn-auth, .confirmation-modal__button, .feedback-submit-btn) {
+  --_button-bg: var(--button-secondary-bg);
+  --_button-fg: var(--button-secondary-text);
+  --_button-border: var(--button-outline-border);
+  --_button-hover-bg: var(--button-secondary-hover-bg);
+  --_button-hover-fg: var(--button-secondary-text);
+  --_button-hover-border: var(--color-border-strong);
+  --_button-active-bg: var(--color-bg-tertiary);
+  --_button-height: var(--control-height);
+  --_button-padding: var(--control-padding-inline);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--control-gap);
+  min-width: 0;
+  min-height: var(--_button-height);
+  max-width: 100%;
+  padding: var(--control-padding-block) var(--_button-padding);
+  border: var(--border-width) solid var(--_button-border);
+  border-radius: var(--control-radius);
+  background: var(--_button-bg);
+  color: var(--_button-fg);
+  font-family: var(--font-ui);
+  font-size: var(--button-font-size);
+  font-weight: var(--button-font-weight);
+  line-height: var(--line-height-ui);
+  letter-spacing: normal;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  vertical-align: middle;
+  cursor: pointer;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: none;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+.btn--primary,
+:where(.btn-auth:not(.btn-auth-secondary)) {
+  --_button-bg: var(--button-primary-bg);
+  --_button-fg: var(--button-primary-text);
+  --_button-border: var(--button-primary-bg);
+  --_button-hover-bg: var(--button-primary-hover-bg);
+  --_button-hover-fg: var(--button-primary-text);
+  --_button-hover-border: var(--button-primary-hover-bg);
+  --_button-active-bg: var(--button-primary-active-bg);
+}
+.btn--secondary { --_button-bg: var(--button-secondary-bg); --_button-fg: var(--button-secondary-text); --_button-border: var(--button-outline-border); }
+.btn--outline,
+:where(.btn-auth-secondary, .confirmation-modal__button-secondary) {
+  --_button-bg: transparent;
+  --_button-fg: var(--color-text);
+  --_button-border: var(--button-outline-border);
+  --_button-hover-bg: var(--color-accent-soft);
+  --_button-hover-fg: var(--color-accent-strong);
+  --_button-hover-border: var(--color-accent);
+  --_button-active-bg: var(--color-accent-soft);
+}
+.btn--ghost {
+  --_button-bg: transparent;
+  --_button-fg: var(--color-text-secondary);
+  --_button-border: transparent;
+  --_button-hover-bg: var(--button-ghost-hover-bg);
+  --_button-hover-fg: var(--color-text);
+  --_button-hover-border: transparent;
+  --_button-active-bg: var(--color-bg-tertiary);
+}
+.btn--destructive,
+:where(.confirmation-modal__button-primary) {
+  --_button-bg: var(--button-danger-bg);
+  --_button-fg: var(--button-danger-text);
+  --_button-border: var(--button-danger-bg);
+  --_button-hover-bg: var(--button-danger-hover-bg);
+  --_button-hover-fg: var(--button-danger-text);
+  --_button-hover-border: var(--button-danger-hover-bg);
+  --_button-active-bg: var(--button-danger-active-bg);
+}
+.btn--sm { --_button-height: var(--control-height-sm); --_button-padding: var(--space-3); font-size: var(--font-size-xs); padding-block: var(--space-1-5); }
+.btn--lg { --_button-height: var(--control-height-lg); --_button-padding: var(--space-6); }
+.btn--block { width: 100%; }
+.btn--icon { width: var(--_button-height); min-width: var(--_button-height); height: var(--_button-height); padding: 0; flex-shrink: 0; }
+.btn :where(svg, .btn-icon) { width: var(--space-5); height: var(--space-5); flex-shrink: 0; }
+.btn:where(:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"]):not(.is-loading):not(.is-submitting)):hover,
+:where(.btn-auth, .confirmation-modal__button, .feedback-submit-btn):where(:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"])):hover {
+  background: var(--_button-hover-bg);
+  color: var(--_button-hover-fg);
+  border-color: var(--_button-hover-border);
+}
+.btn:where(:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"]):not(.is-loading):not(.is-submitting)):active { background: var(--_button-active-bg); }
+.btn:focus-visible,
+:where(.btn-auth, .confirmation-modal__button, .feedback-submit-btn):focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--focus-ring-offset);
+}
+.btn:is(.is-active, .is-current, [aria-pressed="true"], [aria-selected="true"], [aria-current="page"]):not(.btn--primary):not(.btn--destructive) {
+  --_button-bg: var(--surface-selected);
+  --_button-fg: var(--text-selected);
+  --_button-border: var(--color-accent-border);
+}
+.btn[aria-expanded="true"]:not(.btn--primary):not(.btn--destructive) {
+  --_button-bg: var(--button-ghost-hover-bg);
+  --_button-fg: var(--color-text);
+}
+.btn:is(:disabled, [aria-disabled="true"]),
+:where(.btn-auth, .confirmation-modal__button, .feedback-submit-btn):is(:disabled, [aria-disabled="true"]) {
+  --_button-bg: var(--color-disabled-bg);
+  --_button-fg: var(--color-disabled-text);
+  --_button-border: var(--color-border);
+  cursor: not-allowed;
+  opacity: 1;
+  box-shadow: none;
+}
+.btn:is([aria-busy="true"], .is-loading, .is-submitting) { cursor: wait; color: transparent; }
+.btn:is([aria-busy="true"], .is-loading, .is-submitting) > * { opacity: 0; }
+.btn:is([aria-busy="true"], .is-loading, .is-submitting)::after {
+  content: '';
+  position: absolute;
+  width: var(--space-4);
+  height: var(--space-4);
+  inset: 0;
+  margin: auto;
+  border: var(--border-width-strong) solid var(--_button-fg);
+  border-right-color: transparent;
+  border-radius: var(--radius-full);
+  animation: ds-spin .8s linear infinite;
+}
+@keyframes ds-spin { to { transform: rotate(360deg); } }
+
+/* Compact row actions: the text is quiet; the full target remains accessible. */
+.table-actions {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.table-actions > form { display: inline-flex; flex: 0 0 auto; margin: 0; }
+.table-actions__divider {
+  flex: 0 0 var(--border-width);
+  width: var(--border-width);
+  height: var(--space-4);
+  margin-inline: var(--space-2);
+  background: var(--color-border-strong);
+}
+.text-action {
+  --_text-action-color: var(--color-text-secondary);
+  --_text-action-hover: var(--color-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1-5);
+  min-width: var(--touch-min);
+  min-height: var(--touch-min);
+  margin: 0;
+  padding: var(--space-1);
+  border: 0;
+  border-radius: var(--radius-none);
+  background: transparent;
+  color: var(--_text-action-color);
+  box-shadow: none;
+  font-family: var(--font-ui);
+  font-size: var(--font-size-sm);
+  font-weight: var(--weight-medium);
+  line-height: var(--line-height-ui);
+  text-decoration: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  cursor: pointer;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: color var(--transition-fast);
+}
+.text-action--danger { --_text-action-color: var(--color-danger); --_text-action-hover: var(--color-danger-hover); }
+.text-action > svg { width: var(--space-4); height: var(--space-4); flex-shrink: 0; }
+.text-action:where(:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"]):not(.is-loading):not(.is-submitting)):is(:hover, :active) {
+  color: var(--_text-action-hover);
+  text-decoration: underline;
+  text-underline-offset: var(--space-1);
+  text-decoration-thickness: var(--border-width);
+}
+.text-action:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus); outline-offset: var(--focus-ring-offset); }
+.text-action:is(:disabled, [aria-disabled="true"]) { color: var(--color-disabled-text); cursor: not-allowed; }
+.text-action:is([aria-busy="true"], .is-loading, .is-submitting) { color: var(--color-text-muted); cursor: wait; }
+
+/* Form controls use the same boundaries, spacing, and state colors everywhere. */
+:where(input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):not([type="submit"]):not([type="button"]), select, textarea) {
+  min-height: var(--control-height);
+  min-width: 0;
+  max-width: 100%;
+  padding: var(--control-padding-block) var(--control-padding-inline);
+  border: var(--border-width) solid var(--input-border);
+  border-radius: var(--control-radius);
+  background: var(--input-bg);
+  color: var(--input-text);
+  font-family: var(--font-ui);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-ui);
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+:where(input, textarea)::placeholder { color: var(--input-placeholder); opacity: 1; }
+:where(input, select, textarea):focus-visible { border-color: var(--color-focus); outline: var(--focus-ring-width) solid var(--color-focus); outline-offset: var(--focus-ring-offset); }
+:where(input, select, textarea)[aria-invalid="true"] { border-color: var(--color-danger); }
+:where(input, select, textarea):disabled { background: var(--color-disabled-bg); color: var(--color-disabled-text); cursor: not-allowed; }
+:where(input[type="checkbox"], input[type="radio"]) { accent-color: var(--color-accent); }
+
+/* Shared surfaces and feedback, available without page-specific styling. */
+.card { background: var(--color-surface); color: var(--color-text); border: var(--border-width) solid var(--color-border); border-radius: var(--radius-card); padding: var(--space-6); box-shadow: var(--shadow-xs); }
+.alert { padding: var(--space-3) var(--space-4); border: var(--border-width) solid var(--color-info-border); border-radius: var(--radius-control); background: var(--color-info-soft); color: var(--color-info); }
+.alert--success { background: var(--color-success-soft); border-color: var(--color-success-border); color: var(--color-success); }
+.alert--warning { background: var(--color-warning-soft); border-color: var(--color-warning-border); color: var(--color-warning); }
+.alert--danger { background: var(--color-danger-soft); border-color: var(--color-danger-border); color: var(--color-danger); }
+@media (pointer: coarse), (max-width: 768px) {
+  .btn--sm { --_button-height: var(--touch-min); }
+  :where(input, select, textarea) { font-size: var(--font-size-md); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn:is([aria-busy="true"], .is-loading, .is-submitting)::after { animation: none; border-style: dotted; }
+}

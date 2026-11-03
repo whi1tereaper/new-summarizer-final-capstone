@@ -96,24 +96,19 @@ $hasData = (int)$kpis['summaries'] > 0;
 $formatSeconds = static fn(mixed $value): string => $value === null ? 'N/A' : number_format((float)$value, 2) . ' s';
 ?>
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <?php require_once __DIR__ . '/partials/design-system-head.php'; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analytics — LIGHT</title>
-    <script>try{var t=localStorage.getItem('light-results-theme');if(t!=='light'&&t!=='dark')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t;}catch(e){}</script>
+    <title>Analytics — DEPENDED</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="assets/images/poc-neust-logo.png">
-    <link rel="stylesheet" href="assets/css/design-tokens.css?v=<?= filemtime(__DIR__ . '/assets/css/design-tokens.css') ?>">
     <link rel="stylesheet" href="assets/css/style.css?v=navbar-2-<?= filemtime(__DIR__ . '/assets/css/style.css') ?>">
     <link rel="stylesheet" href="assets/css/index.css?v=navbar-2">
     <link rel="stylesheet" href="assets/css/analytics.css?v=<?= filemtime(__DIR__ . '/assets/css/analytics.css') ?>">
-    <link rel="stylesheet" href="assets/css/site-nav.css?v=3">
-    <link rel="stylesheet" href="assets/css/site-footer.css?v=nex-8">
-    <link rel="stylesheet" href="assets/css/global-button-effects.css?v=2">
-</head>
+    <link rel="stylesheet" href="assets/css/site-nav.css?v=<?= filemtime(__DIR__ . '/assets/css/site-nav.css') ?>">
+    </head>
 <body class="analytics-page">
 <?php $showLightBrand = true; ?>
 <?php require __DIR__ . '/partials/site-nav.php'; ?>
@@ -122,10 +117,10 @@ $formatSeconds = static fn(mixed $value): string => $value === null ? 'N/A' : nu
         <form class="date-filter" method="get" aria-label="Analytics date filter">
             <div class="filter-presets">
                 <?php foreach (['7d' => 'Last 7 days', '30d' => 'Last 30 days', '3m' => 'Last 3 months', 'year' => 'This year'] as $key => $label): ?>
-                    <button type="submit" name="period" value="<?= $key ?>" class="<?= $period === $key ? 'is-active' : '' ?>"><?= $label ?></button>
+                    <button type="submit" name="period" value="<?= $key ?>" class="btn btn--primary <?= $period === $key ? 'is-active' : '' ?>"><?= $label ?></button>
                 <?php endforeach; ?>
             </div>
-            <div class="custom-filter"><label>From <input type="date" name="from" value="<?= $h($fromDate->format('Y-m-d')) ?>"></label><label>To <input type="date" name="to" value="<?= $h($toDate->format('Y-m-d')) ?>"></label><button type="submit" name="period" value="custom">Apply filter</button></div>
+            <div class="custom-filter"><label>From <input type="date" name="from" value="<?= $h($fromDate->format('Y-m-d')) ?>"></label><label>To <input type="date" name="to" value="<?= $h($toDate->format('Y-m-d')) ?>"></label><button class="btn btn--primary" type="submit" name="period" value="custom">Apply filter</button></div>
         </form>
     </div>
     <?php if ($loadError): ?><div class="analytics-alert">Analytics data could not be loaded. Please try again.</div><?php endif; ?>

@@ -755,7 +755,7 @@ class LocalPythonBridge
             throw new \RuntimeException('Local Python supervisor failed its authenticated health check.');
         }
         if ((int)($health['protocol'] ?? 0) !== 3 || empty($health['supervised'])) {
-            throw new \RuntimeException('Local Python supervisor is outdated. Restart the LIGHT NLP worker.');
+            throw new \RuntimeException('Local Python supervisor is outdated. Restart the DEPENDED NLP worker.');
         }
 
         $jsonPayload = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
@@ -769,7 +769,7 @@ class LocalPythonBridge
         $daemonDeadline = (float)($health['execution_deadline_seconds'] ?? 0);
         if (!$isCancellation && $daemonDeadline < $effectiveTimeout) {
             throw new \RuntimeException(sprintf(
-                'Local Python supervisor deadline is %d seconds, below this request budget. Restart the LIGHT NLP worker.',
+                'Local Python supervisor deadline is %d seconds, below this request budget. Restart the DEPENDED NLP worker.',
                 (int)$daemonDeadline
             ));
         }

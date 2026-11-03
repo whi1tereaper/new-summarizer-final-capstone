@@ -69,18 +69,14 @@ if (config('summarizer.llm_available', false)) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <?php require_once __DIR__ . '/partials/design-system-head.php'; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preparing your summary — LIGHT</title>
-    <script src="assets/js/theme-toggle.js?v=2"></script>
+    <title>Preparing your summary — DEPENDED</title>
     <link rel="preload" href="assets/fonts/satoshi-700.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="icon" type="image/png" href="assets/images/poc-neust-logo.png">
-    <link rel="stylesheet" href="assets/css/design-tokens.css?v=<?= filemtime(__DIR__ . '/assets/css/design-tokens.css') ?>">
-    <link rel="stylesheet" href="assets/css/theme-toggle.css?v=2">
     <link rel="stylesheet" href="assets/css/processing.css?v=<?= filemtime(__DIR__ . '/assets/css/processing.css') ?>">
-    <link rel="stylesheet" href="assets/css/global-button-effects.css?v=4">
     <?php require __DIR__ . '/partials/error-support.php'; ?>
     <script src="assets/js/processing.js?v=<?= filemtime(__DIR__ . '/assets/js/processing.js') ?>" defer></script>
     <noscript><style>.loader, .processing-activity { display: none; }</style></noscript>
@@ -90,7 +86,7 @@ if (config('summarizer.llm_available', false)) {
         <?php require __DIR__ . '/partials/theme-toggle-button.php'; ?>
     </div>
     <main class="processing-shell" aria-label="Summary processing">
-        <div class="processing-brand" aria-label="LIGHT Article summarizer">LIGHT<span>Article summarizer</span></div>
+        <div class="processing-brand" aria-label="DEPENDED Summarizer">DEPENDED<span>Summarizer</span></div>
         <section class="processing-card" id="processing-card" data-state="working" data-source-type="<?= htmlspecialchars($sourceType, ENT_QUOTES, 'UTF-8') ?>" data-csrf-token="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>" data-job-id="<?= htmlspecialchars((string)($pending['job_id'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" aria-label="Summary processing">
             <!-- From Uiverse.io by alexruix -->
             <div class="loader" aria-hidden="true">
@@ -119,13 +115,13 @@ if (config('summarizer.llm_available', false)) {
                 </dl>
             </section>
             <div class="processing-activity" id="processing-activity">
-                <button type="button" class="processing-cancel-action" id="processing-cancel-button">Cancel</button>
+                <button type="button" class="btn btn--secondary processing-cancel-action" id="processing-cancel-button">Cancel</button>
             </div>
             <div class="processing-recovery" id="processing-recovery" hidden>
                 <div class="light-error" id="processing-error" role="alert" tabindex="-1" hidden></div>
                 <p id="processing-recovery-note" role="status" aria-live="polite"></p>
-                <div class="light-recovery-actions"><button type="button" id="processing-retry" hidden>Retry summary</button></div>
-                <a href="summarizer.php" class="processing-button global-button-effect" id="processing-return">Back to summary settings<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5"/></svg></a>
+                <div class="light-recovery-actions"><button class="btn btn--secondary" type="button" id="processing-retry" hidden>Retry summary</button></div>
+                <a href="summarizer.php" class="btn btn--secondary processing-button global-button-effect" id="processing-return">Back to summary settings<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5"/></svg></a>
             </div>
             <noscript><p class="processing-noscript">JavaScript is needed to start your summary. Enable it, then reload this page, or <a href="summarizer.php">return to summary settings</a>.</p></noscript>
         </section>

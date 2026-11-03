@@ -1,0 +1,16 @@
+{
+  "passed": 30,
+  "failed": 0,
+  "nested": {
+    "service": {
+      "passed": 22,
+      "failed": 0
+    },
+    "browser": {
+      "passed": 18,
+      "failed": 0
+    }
+  },
+  "live_migrations_applied": false,
+  "authentication_scope": "private QA sessions for protected HTTP workflows; login/OTP not re-tested"
+}

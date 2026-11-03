@@ -1,0 +1,287 @@
+{
+  "summary.json": {
+    "passed": 57,
+    "failed": 1,
+    "controlled_worker_cases_are_not_real_nlp": true,
+    "live_database_migrations_applied": false
+  },
+  "checks.json": [
+    {
+      "name": "test credentials are denied production access",
+      "passed": true
+    },
+    {
+      "name": "isolated PHP 8.3 Apache configuration is valid",
+      "passed": true
+    },
+    {
+      "name": "guest starts with exactly three trial uses",
+      "passed": true
+    },
+    {
+      "name": "read-only unknown status lookup does not start NLP or charge quota",
+      "passed": true
+    },
+    {
+      "name": "status lookup requires CSRF",
+      "passed": true
+    },
+    {
+      "name": "Nutshell GET is rejected with JSON",
+      "passed": true
+    },
+    {
+      "name": "unknown Nutshell action is rejected",
+      "passed": true
+    },
+    {
+      "name": "guest Nutshell requires CSRF without consuming a use",
+      "passed": true
+    },
+    {
+      "name": "empty source does not consume a use or start NLP",
+      "passed": true
+    },
+    {
+      "name": "short source does not consume a use or start NLP",
+      "passed": true
+    },
+    {
+      "name": "invalid key does not consume a use or start NLP",
+      "passed": true
+    },
+    {
+      "name": "invalid uploaded document does not consume trial",
+      "passed": true
+    },
+    {
+      "name": "failure processing leaves all three attempts and no held reservation",
+      "passed": true
+    },
+    {
+      "name": "invalid processing leaves all three attempts and no held reservation",
+      "passed": true
+    },
+    {
+      "name": "not_needed processing leaves all three attempts and no held reservation",
+      "passed": true
+    },
+    {
+      "name": "worker receives the configured bounded 90-second extraction budget",
+      "passed": true
+    },
+    {
+      "name": "anonymous Nutshell completes and consumes exactly one shared use",
+      "passed": true
+    },
+    {
+      "name": "completed guest Nutshell persists privately without a user account",
+      "passed": true
+    },
+    {
+      "name": "idempotent retry reuses the same result without charge or NLP",
+      "passed": true
+    },
+    {
+      "name": "lost reply can be recovered without source or quota charge",
+      "passed": true
+    },
+    {
+      "name": "in-flight reservation is reported without generating a second Nutshell",
+      "passed": true
+    },
+    {
+      "name": "different guests cannot share an idempotency result",
+      "passed": true
+    },
+    {
+      "name": "status lookup cannot disclose another guest result with the same key",
+      "passed": true
+    },
+    {
+      "name": "guest-owned history storage retrieves its own Nutshell",
+      "passed": true
+    },
+    {
+      "name": "the existing account requirement for the History page is unchanged",
+      "passed": true
+    },
+    {
+      "name": "another guest cannot request a Nutshell for an unowned summary",
+      "passed": true
+    },
+    {
+      "name": "a guest can generate a Nutshell for its own saved summary",
+      "passed": true
+    },
+    {
+      "name": "third successful guest generation reaches zero",
+      "passed": true
+    },
+    {
+      "name": "fourth direct Nutshell request blocks before NLP",
+      "passed": true
+    },
+    {
+      "name": "ordinary summarization shares Nutshell exhaustion",
+      "passed": true
+    },
+    {
+      "name": "trial exhaustion does not delete existing Nutshell history",
+      "passed": true
+    },
+    {
+      "name": "previous completed request remains readable after quota exhaustion",
+      "passed": true
+    },
+    {
+      "name": "read-only recovery remains available at zero trial uses",
+      "passed": true
+    },
+    {
+      "name": "worker timeout is structured JSON and releases the unused trial reservation",
+      "passed": true
+    },
+    {
+      "name": "timeout status preserves a confirmed failure without running NLP again",
+      "passed": true
+    },
+    {
+      "name": "fresh retry key after a confirmed timeout succeeds without a permanent failure loop",
+      "passed": true
+    },
+    {
+      "name": "controlled 48-second extraction survives the former 45-second cutoff",
+      "passed": true
+    },
+    {
+      "name": "two ordinary completion reservations leave one Nutshell use",
+      "passed": true
+    },
+    {
+      "name": "Nutshell uses that last shared attempt",
+      "passed": true
+    },
+    {
+      "name": "persistence failure rolls back the result and quota charge",
+      "passed": true
+    },
+    {
+      "name": "guest-specific rate limit rejects before NLP without charge",
+      "passed": true
+    },
+    {
+      "name": "eight concurrent HTTP guest requests complete exactly three Nutshells",
+      "passed": true
+    },
+    {
+      "name": "race leaves exactly three charges and no live reservations",
+      "passed": true
+    },
+    {
+      "name": "sign-in transfers guest Nutshell history to the same account",
+      "passed": true
+    },
+    {
+      "name": "unverified account sign-in does not reset the trial",
+      "passed": true
+    },
+    {
+      "name": "existing 24-hour guest retention deletes expired guest Nutshells only",
+      "passed": true
+    },
+    {
+      "name": "verified student can generate beyond the anonymous three-use limit",
+      "passed": true
+    },
+    {
+      "name": "mobile browser guest Nutshell and live counter workflow",
+      "passed": true
+    },
+    {
+      "name": "browser lost-response status recovery and error classification",
+      "passed": false
+    },
+    {
+      "name": "actual existing Python NLP completes a guest Nutshell",
+      "passed": true
+    },
+    {
+      "name": "real NLP guest result is stored and consumes one attempt",
+      "passed": true
+    },
+    {
+      "name": "real .pdf upload completes through Apache PHP and existing Python",
+      "passed": true
+    },
+    {
+      "name": "real .pdf result persists in MySQL and status recovery avoids repeat charge",
+      "passed": true
+    },
+    {
+      "name": "real .docx upload completes through Apache PHP and existing Python",
+      "passed": true
+    },
+    {
+      "name": "real .docx result persists in MySQL and status recovery avoids repeat charge",
+      "passed": true
+    },
+    {
+      "name": "existing security analytics database feedback and history regressions",
+      "passed": true
+    },
+    {
+      "name": "live account passwords summaries and feedback preserved",
+      "passed": true
+    },
+    {
+      "name": "isolated databases and credentials removed",
+      "passed": true
+    }
+  ],
+  "browser.json": [
+    {
+      "name": "anonymous mobile visitor starts with three shared attempts",
+      "passed": true
+    },
+    {
+      "name": "guest Nutshell stays on the page and updates remaining attempts to 2",
+      "passed": true
+    },
+    {
+      "name": "guest Nutshell stays on the page and updates remaining attempts to 1",
+      "passed": true
+    },
+    {
+      "name": "guest Nutshell stays on the page and updates remaining attempts to 0",
+      "passed": true
+    },
+    {
+      "name": "exhaustion hides generation controls but preserves readable copyable Nutshell",
+      "passed": true
+    },
+    {
+      "name": "trial limit and result fit the mobile viewport",
+      "passed": true
+    }
+  ],
+  "real-nlp.json": {
+    "seconds": 18.11,
+    "http_status": 200,
+    "status": "completed",
+    "failure_code": null,
+    "generation": {
+      "id": 31,
+      "status": "completed",
+      "format": "paragraph",
+      "content": "The survey found that 58 percent of respondents wanted access after normal working hours. Officials said the extended hours could improve access, but they have not promised that attendance will increase.",
+      "word_count": 31,
+      "source_word_count": 148,
+      "primary_summary_word_count": 0,
+      "compression_ratio": 0.2095,
+      "processing_time_ms": 17720,
+      "algorithm_version": "nutshell-extractive-v2",
+      "cached": false
+    }
+  }
+}

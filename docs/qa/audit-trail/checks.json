@@ -1,0 +1,122 @@
+[
+  {
+    "name": "test credentials are denied production access",
+    "passed": true
+  },
+  {
+    "name": "anonymous cannot read the unified audit trail",
+    "passed": true
+  },
+  {
+    "name": "ordinary user cannot read the unified audit trail",
+    "passed": true
+  },
+  {
+    "name": "administrator reads audit events with no-store and no-referrer",
+    "passed": true
+  },
+  {
+    "name": "the audit GET does not modify or copy ledger records",
+    "passed": true
+  },
+  {
+    "name": "audit viewer rejects POST without changing ledger records",
+    "passed": true
+  },
+  {
+    "name": "invalid HTTP filter source[]=admin is safely rejected",
+    "passed": true
+  },
+  {
+    "name": "invalid HTTP filter source=unknown is safely rejected",
+    "passed": true
+  },
+  {
+    "name": "invalid HTTP filter admin_id=-1 is safely rejected",
+    "passed": true
+  },
+  {
+    "name": "invalid HTTP filter date_from=2026-02-30 is safely rejected",
+    "passed": true
+  },
+  {
+    "name": "invalid HTTP filter date_from=2026-10-24&date_to=2026-10-23 is safely rejected",
+    "passed": true
+  },
+  {
+    "name": "invalid HTTP filter page=999999999999999999999999 is safely rejected",
+    "passed": true
+  },
+  {
+    "name": "Student ID registry HMACs do not appear in the viewer",
+    "passed": true
+  },
+  {
+    "name": "actual HTTP deactivation toggle writes a distinct actor/target transition event",
+    "passed": true
+  },
+  {
+    "name": "repeated no-op toggle does not fabricate another change",
+    "passed": true
+  },
+  {
+    "name": "actual HTTP activation records the opposite transition",
+    "passed": true
+  },
+  {
+    "name": "explicit deactivation no longer uses the deletion event code",
+    "passed": true
+  },
+  {
+    "name": "repeated explicit deactivation is not recorded as another change",
+    "passed": true
+  },
+  {
+    "name": "actual HTTP deletion retains its own explicit audit event",
+    "passed": true
+  },
+  {
+    "name": "toggle_status rolls back account and summary relationships when audit persistence fails",
+    "passed": true
+  },
+  {
+    "name": "deactivate_user rolls back account and summary relationships when audit persistence fails",
+    "passed": true
+  },
+  {
+    "name": "delete_user rolls back account and summary relationships when audit persistence fails",
+    "passed": true
+  },
+  {
+    "name": "invalid CSRF blocks mutation and records a bounded denial event",
+    "passed": true
+  },
+  {
+    "name": "denial logging excludes arbitrary request action text",
+    "passed": true
+  },
+  {
+    "name": "malformed action/CSRF arrays do not produce fatal errors",
+    "passed": true
+  },
+  {
+    "name": "service filtering authorization metadata timezone and partial-ledger contracts",
+    "passed": true
+  },
+  {
+    "name": "real browser filters pagination escaping legacy labels and responsive themes",
+    "passed": true
+  },
+  {
+    "name": "existing security analytics lifecycle feedback and history regressions",
+    "passed": true
+  },
+  {
+    "name": "live passwords accounts summaries and feedback preserved",
+    "passed": true
+  },
+  {
+    "name": "isolated QA schemas and credentials removed",
+    "passed": true
+  }
+]

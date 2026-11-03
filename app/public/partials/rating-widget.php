@@ -62,7 +62,7 @@ $statsAvg = $ratingStats['avg'] ?? null;
                     <span id="feedback-counter" class="feedback-counter hidden" aria-live="polite"></span>
                 </div>
             </div>
-            <button type="button" id="feedback-submit-btn" class="feedback-submit-btn">Submit feedback</button>
+            <button type="button" id="feedback-submit-btn" class="btn btn--primary feedback-submit-btn">Submit feedback</button>
             <div id="feedback-msg" class="result-feedback-msg hidden" role="status" aria-live="polite"></div>
         </div>
     </div>
@@ -73,7 +73,7 @@ $statsAvg = $ratingStats['avg'] ?? null;
         <?php if ($hasExistingRating && !empty($existingFeedback['comment'])): ?>
             <p class="feedback-confirmed-comment">&ldquo;<?= htmlspecialchars((string)$existingFeedback['comment'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>&rdquo;</p>
         <?php endif; ?>
-        <button type="button" id="feedback-edit-btn" class="feedback-edit-toggle">Update feedback</button>
+        <button type="button" id="feedback-edit-btn" class="btn btn--ghost feedback-edit-toggle">Update feedback</button>
     </div>
 </section>
 

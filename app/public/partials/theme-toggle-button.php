@@ -1,6 +1,6 @@
 <button
     type="button"
-    class="result-theme-toggle"
+    class="btn btn--ghost result-theme-toggle"
     data-theme-toggle
     aria-label="Switch to dark mode"
     aria-pressed="false"

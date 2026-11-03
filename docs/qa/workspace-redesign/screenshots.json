@@ -1,0 +1,22 @@
+[
+  {
+    "name": "screenshots desktop screenshot",
+    "passed": true
+  },
+  {
+    "name": "screenshots tablet screenshot",
+    "passed": true
+  },
+  {
+    "name": "screenshots mobile screenshot",
+    "passed": true
+  },
+  {
+    "name": "screenshots dark screenshot",
+    "passed": true
+  },
+  {
+    "name": "no browser script exceptions",
+    "passed": true
+  }
+]

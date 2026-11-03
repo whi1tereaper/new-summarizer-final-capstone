@@ -1,0 +1,30 @@
+{
+  "checks": [
+    {
+      "name": "QA database credentials are denied production access",
+      "passed": true
+    },
+    {
+      "name": "fixture uses 38 synthetic approved IDs, 8 accounts and 18 rejection events",
+      "passed": true
+    },
+    {
+      "name": "desktop/mobile light/dark browser layout and existing access guards",
+      "passed": true
+    },
+    {
+      "name": "live account passwords summaries and feedback are preserved",
+      "passed": true
+    },
+    {
+      "name": "scoped QA schemas and database credentials are removed",
+      "passed": true
+    }
+  ],
+  "passed": 5,
+  "failed": 0,
+  "browser_passed": 18,
+  "browser_failed": 0,
+  "data": "synthetic isolated MySQL only",
+  "authentication_note": "pre-created private QA sessions exercise layout and role guards, not sign-in/OTP"
+}

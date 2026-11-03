@@ -1,0 +1,70 @@
+[
+  {
+    "name": "dashboard renders real MySQL counts six measured categories and usable refresh control",
+    "passed": true
+  },
+  {
+    "name": "keyboard refresh fetches changed MySQL and nested file counts without reloading",
+    "passed": true
+  },
+  {
+    "name": "refresh also reflects files removed by the system",
+    "passed": true
+  },
+  {
+    "name": "in-flight refresh is disabled accessible and cannot send repeated requests",
+    "passed": true
+  },
+  {
+    "name": "network interruption preserves last known values and timestamp with a retryable error",
+    "passed": true
+  },
+  {
+    "name": "expired session is distinguished from a healthy zero measurement",
+    "passed": true
+  },
+  {
+    "name": "malformed response cannot erase the last known measurements",
+    "passed": true
+  },
+  {
+    "name": "partial metrics stay explicit and warning content cannot execute HTML",
+    "passed": true
+  },
+  {
+    "name": "light storage panel at 1506px confines wide rows to its accessible scroll region",
+    "passed": true
+  },
+  {
+    "name": "light storage panel at 768px confines wide rows to its accessible scroll region",
+    "passed": true
+  },
+  {
+    "name": "light storage panel at 390px confines wide rows to its accessible scroll region",
+    "passed": true
+  },
+  {
+    "name": "light storage panel at 320px confines wide rows to its accessible scroll region",
+    "passed": true
+  },
+  {
+    "name": "dark storage panel at 1506px confines wide rows to its accessible scroll region",
+    "passed": true
+  },
+  {
+    "name": "dark storage panel at 768px confines wide rows to its accessible scroll region",
+    "passed": true
+  },
+  {
+    "name": "dark storage panel at 390px confines wide rows to its accessible scroll region",
+    "passed": true
+  },
+  {
+    "name": "dark storage panel at 320px confines wide rows to its accessible scroll region",
+    "passed": true
+  },
+  {
+    "name": "dashboard and all refresh states produce no JavaScript exceptions",
+    "passed": true
+  }
+]

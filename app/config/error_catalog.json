@@ -1,14 +1,84 @@
 {
-  "GUEST_LIMIT_REACHED": {"category":"auth","http_status":403,"retryable":false,"title":"You've used all 3 free summaries!","explanation":"Continued summarization requires a verified NEUST Peñaranda Off-Campus student account. Your existing summaries remain available.","recovery":"Register as a student, check Student Verification, or log in to your verified account."},
-  "ACCESS_BUSY": {"category":"auth","http_status":429,"retryable":true,"title":"Your summary requests are processing.","explanation":"Your available processing slots are already reserved. Failed requests do not consume a free summary.","recovery":"Wait for a running request to finish or cancel it before trying again."},
-  "ACCESS_SETUP_REQUIRED": {"category":"service","http_status":503,"retryable":false,"title":"Access checks are temporarily unavailable.","explanation":"The student-access database setup is not available. No free summary has been consumed.","recovery":"Contact the operator to complete the access-control migration, then try again."},
-  "TITLE_TOO_LONG": {"category":"input","http_status":422,"retryable":false,"title":"Shorten the document title.","explanation":"Document titles can contain up to 255 characters.","recovery":"Use a shorter title or leave the title blank."},
-  "REQUEST_EXPIRED": {"category":"input","http_status":410,"retryable":false,"title":"This request has expired.","explanation":"The recovery period ended and the retained source was removed.","recovery":"Return to the form and submit your source again."},
-  "TERMS_REQUIRED": {"category":"auth","http_status":403,"retryable":false,"title":"Accept the terms to continue.","explanation":"This action requires acceptance of the Terms and Conditions.","recovery":"Review and accept the terms, then return to your request."},
-  "SUMMARY_INELIGIBLE": {"category":"input","http_status":409,"retryable":false,"title":"This summary cannot be used yet.","explanation":"This action requires a completed summary with readable source text and a readable result.","recovery":"Choose a completed summary or submit a new source."},
-  "RESULT_UNAVAILABLE": {"category":"auth","http_status":404,"retryable":false,"title":"This result is not available.","explanation":"The result could not be found or is not accessible in your current session.","recovery":"Return to your summary history or submit a source in this session."},
-  "URL_TLS_FAILED": {"category":"network","http_status":502,"retryable":false,"title":"A secure connection could not be established.","explanation":"LIGHT could not verify a secure connection to the source website.","recovery":"Use another accessible source or paste text you can access."},
-  "URL_TOO_LARGE": {"category":"input","http_status":413,"retryable":false,"title":"This web source is too large.","explanation":"The response exceeds LIGHT’s supported download size.","recovery":"Use a smaller source or paste the relevant article text."},
+  "GUEST_LIMIT_REACHED": {
+    "category": "auth",
+    "http_status": 403,
+    "retryable": false,
+    "title": "You've used all 3 free summaries!",
+    "explanation": "Continued summarization requires a verified NEUST Pe\u00f1aranda Off-Campus student account. Your existing summaries remain available.",
+    "recovery": "Register as a student, check Student Verification, or log in to your verified account."
+  },
+  "ACCESS_BUSY": {
+    "category": "auth",
+    "http_status": 429,
+    "retryable": true,
+    "title": "Your summary requests are processing.",
+    "explanation": "Your available processing slots are already reserved. Failed requests do not consume a free summary.",
+    "recovery": "Wait for a running request to finish or cancel it before trying again."
+  },
+  "ACCESS_SETUP_REQUIRED": {
+    "category": "service",
+    "http_status": 503,
+    "retryable": false,
+    "title": "Access checks are temporarily unavailable.",
+    "explanation": "The student-access database setup is not available. No free summary has been consumed.",
+    "recovery": "Contact the operator to complete the access-control migration, then try again."
+  },
+  "TITLE_TOO_LONG": {
+    "category": "input",
+    "http_status": 422,
+    "retryable": false,
+    "title": "Shorten the document title.",
+    "explanation": "Document titles can contain up to 255 characters.",
+    "recovery": "Use a shorter title or leave the title blank."
+  },
+  "REQUEST_EXPIRED": {
+    "category": "input",
+    "http_status": 410,
+    "retryable": false,
+    "title": "This request has expired.",
+    "explanation": "The recovery period ended and the retained source was removed.",
+    "recovery": "Return to the form and submit your source again."
+  },
+  "TERMS_REQUIRED": {
+    "category": "auth",
+    "http_status": 403,
+    "retryable": false,
+    "title": "Accept the terms to continue.",
+    "explanation": "This action requires acceptance of the Terms and Conditions.",
+    "recovery": "Review and accept the terms, then return to your request."
+  },
+  "SUMMARY_INELIGIBLE": {
+    "category": "input",
+    "http_status": 409,
+    "retryable": false,
+    "title": "This summary cannot be used yet.",
+    "explanation": "This action requires a completed summary with readable source text and a readable result.",
+    "recovery": "Choose a completed summary or submit a new source."
+  },
+  "RESULT_UNAVAILABLE": {
+    "category": "auth",
+    "http_status": 404,
+    "retryable": false,
+    "title": "This result is not available.",
+    "explanation": "The result could not be found or is not accessible in your current session.",
+    "recovery": "Return to your summary history or submit a source in this session."
+  },
+  "URL_TLS_FAILED": {
+    "category": "network",
+    "http_status": 502,
+    "retryable": false,
+    "title": "A secure connection could not be established.",
+    "explanation": "DEPENDED could not verify a secure connection to the source website.",
+    "recovery": "Use another accessible source or paste text you can access."
+  },
+  "URL_TOO_LARGE": {
+    "category": "input",
+    "http_status": 413,
+    "retryable": false,
+    "title": "This web source is too large.",
+    "explanation": "The response exceeds DEPENDED\u2019s supported download size.",
+    "recovery": "Use a smaller source or paste the relevant article text."
+  },
   "INPUT_EMPTY": {
     "category": "input",
     "http_status": 422,
@@ -22,7 +92,7 @@
     "http_status": 400,
     "retryable": false,
     "title": "Check your input.",
-    "explanation": "LIGHT could not read the submitted source fields.",
+    "explanation": "DEPENDED could not read the submitted source fields.",
     "recovery": "Choose one source method and enter your source again."
   },
   "INPUT_TOO_SHORT": {
@@ -94,7 +164,7 @@
     "http_status": 413,
     "retryable": false,
     "title": "This PDF has too many pages.",
-    "explanation": "The PDF exceeds the processing engine’s supported page limit.",
+    "explanation": "The PDF exceeds the processing engine\u2019s supported page limit.",
     "recovery": "Upload a smaller selection of relevant pages."
   },
   "FILE_CORRUPTED": {
@@ -118,7 +188,7 @@
     "http_status": 422,
     "retryable": false,
     "title": "No readable document text was found.",
-    "explanation": "LIGHT could not obtain readable text. The document may contain images or unsupported text encoding.",
+    "explanation": "DEPENDED could not obtain readable text. The document may contain images or unsupported text encoding.",
     "recovery": "Try a text-based copy or paste its text. An image-only document may need OCR first."
   },
   "UPLOAD_INCOMPLETE": {
@@ -126,7 +196,7 @@
     "http_status": 400,
     "retryable": true,
     "title": "The upload did not finish.",
-    "explanation": "Only part of the file reached LIGHT.",
+    "explanation": "Only part of the file reached DEPENDED.",
     "recovery": "Check your connection, select the file again, and retry."
   },
   "UPLOAD_FAILED": {
@@ -134,7 +204,7 @@
     "http_status": 503,
     "retryable": true,
     "title": "The file could not be received.",
-    "explanation": "LIGHT could not store the uploaded file for processing.",
+    "explanation": "DEPENDED could not store the uploaded file for processing.",
     "recovery": "Wait a moment, then select the file again and retry."
   },
   "URL_INVALID": {
@@ -150,7 +220,7 @@
     "http_status": 502,
     "retryable": true,
     "title": "The website could not be reached.",
-    "explanation": "LIGHT could not connect to the article website.",
+    "explanation": "DEPENDED could not connect to the article website.",
     "recovery": "Check the address and try again later, or paste text you can access."
   },
   "URL_TIMEOUT": {
@@ -167,14 +237,14 @@
     "retryable": false,
     "title": "The website restricted access.",
     "explanation": "The source website refused access or requires authorization.",
-    "recovery": "Open the source yourself and paste text you are allowed to use, or choose an accessible source."
+    "recovery": "Open the source yourself. If you have authorized access and downloading is permitted, upload its PDF/DOCX here, or paste text you are allowed to use."
   },
   "URL_RATE_LIMITED": {
     "category": "access",
     "http_status": 429,
     "retryable": true,
     "title": "The website is limiting requests.",
-    "explanation": "The source website asked LIGHT to slow down.",
+    "explanation": "The source website asked DEPENDED to slow down.",
     "recovery": "Wait before retrying, or paste the article text you can access."
   },
   "URL_CONTENT_UNAVAILABLE": {
@@ -185,12 +255,20 @@
     "explanation": "The link did not return a readable article or the requested document.",
     "recovery": "Check the article link, use another accessible source, or paste its text."
   },
+  "URL_DOCUMENT_VIEWER": {
+    "category": "content",
+    "http_status": 422,
+    "retryable": false,
+    "title": "This link opens a document viewer.",
+    "explanation": "The website did not provide readable document text that DEPENDED can retrieve directly.",
+    "recovery": "If the website permits downloading, upload the PDF/DOCX here, or paste text you are allowed to use. DEPENDED cannot bypass sign-in, subscription or download restrictions."
+  },
   "URL_UNSAFE": {
     "category": "access",
     "http_status": 422,
     "retryable": false,
     "title": "This address cannot be fetched.",
-    "explanation": "LIGHT only retrieves sources from permitted public website addresses.",
+    "explanation": "DEPENDED only retrieves sources from permitted public website addresses.",
     "recovery": "Use a public HTTP or HTTPS article URL, or paste the text."
   },
   "DOCUMENT_EXTRACTION_FAILED": {
@@ -222,7 +300,7 @@
     "http_status": 422,
     "retryable": false,
     "title": "No usable summary passages were found.",
-    "explanation": "LIGHT could not identify suitable passages in the available text.",
+    "explanation": "DEPENDED could not identify suitable passages in the available text.",
     "recovery": "Include complete sentences and relevant context, or choose a clearer source."
   },
   "SUMMARY_QUALITY_FAILED": {
@@ -230,7 +308,7 @@
     "http_status": 422,
     "retryable": false,
     "title": "A reliable summary could not be produced.",
-    "explanation": "The available text did not produce a summary that passed LIGHT’s quality checks.",
+    "explanation": "The available text did not produce a summary that passed DEPENDED\u2019s quality checks.",
     "recovery": "Try clearer source text or include more relevant context."
   },
   "WORKER_UNAVAILABLE": {
@@ -238,7 +316,7 @@
     "http_status": 503,
     "retryable": true,
     "title": "Processing is temporarily unavailable.",
-    "explanation": "LIGHT could not start or reach its processing service.",
+    "explanation": "DEPENDED could not start or reach its processing service.",
     "recovery": "Wait a moment and retry. Your source and settings can be reused where available."
   },
   "TRANSLATION_RATE_LIMITED": {
@@ -262,7 +340,7 @@
     "http_status": 503,
     "retryable": true,
     "title": "Translation is temporarily unavailable.",
-    "explanation": "LIGHT could not connect to the translation service. Your original summary is safe.",
+    "explanation": "DEPENDED could not connect to the translation service. Your original summary is safe.",
     "recovery": "Check your connection and try again later."
   },
   "TRANSLATION_UNAVAILABLE": {
@@ -278,7 +356,7 @@
     "http_status": 502,
     "retryable": true,
     "title": "Translation could not be verified.",
-    "explanation": "The translation service returned a response LIGHT could not verify. Your original summary is safe.",
+    "explanation": "The translation service returned a response DEPENDED could not verify. Your original summary is safe.",
     "recovery": "Try again later."
   },
   "TRANSLATION_VALIDATION_ERROR": {
@@ -286,7 +364,7 @@
     "http_status": 502,
     "retryable": false,
     "title": "Translation could not be verified.",
-    "explanation": "LIGHT could not verify a complete Filipino translation. Your original summary is safe.",
+    "explanation": "DEPENDED could not verify a complete Filipino translation. Your original summary is safe.",
     "recovery": "Keep using your original English summary."
   },
   "TRANSLATION_WORKER_FAILURE": {
@@ -294,7 +372,7 @@
     "http_status": 503,
     "retryable": true,
     "title": "Translation is temporarily unavailable.",
-    "explanation": "LIGHT could not complete translation processing. Your original summary is safe.",
+    "explanation": "DEPENDED could not complete translation processing. Your original summary is safe.",
     "recovery": "Wait a moment and retry."
   },
   "PROCESSING_TIMEOUT": {
@@ -302,7 +380,7 @@
     "http_status": 504,
     "retryable": true,
     "title": "Processing took too long.",
-    "explanation": "LIGHT did not finish within the processing time limit.",
+    "explanation": "DEPENDED did not finish within the processing time limit.",
     "recovery": "Try a shorter source, or retry once processing is available."
   },
   "PROCESSING_FAILED": {
@@ -310,7 +388,7 @@
     "http_status": 500,
     "retryable": false,
     "title": "This request could not be completed.",
-    "explanation": "LIGHT encountered a problem, but could not determine its exact cause.",
+    "explanation": "DEPENDED encountered a problem, but could not determine its exact cause.",
     "recovery": "Return to your settings. If the problem continues, share the reference below with support."
   },
   "PROCESSING_CANCELLED": {
@@ -358,7 +436,7 @@
     "http_status": 503,
     "retryable": true,
     "title": "The connection was interrupted.",
-    "explanation": "LIGHT could not confirm the latest request status. Processing may still be running.",
+    "explanation": "DEPENDED could not confirm the latest request status. Processing may still be running.",
     "recovery": "Check your connection, then check this request again."
   }
 }

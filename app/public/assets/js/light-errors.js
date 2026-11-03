@@ -11,7 +11,7 @@
         const code = value && typeof value === 'object' && catalog[value.code] ? value.code : fallback;
         const entry = catalog[code] || catalog.PROCESSING_FAILED || {
             title: 'We could not complete this request.',
-            explanation: 'LIGHT could not confirm why this request failed.',
+            explanation: 'DEPENDED could not confirm why this request failed.',
             recovery: 'Return to your source and settings to review the request.',
             retryable: false,
         };

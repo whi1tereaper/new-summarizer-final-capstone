@@ -113,14 +113,16 @@ void main() {
     constructor(wrapperEl, options = {}) {
       if (!wrapperEl) return;
       this.wrapper = wrapperEl;
-      this.text = options.text || wrapperEl.getAttribute('data-text') || 'LIGHT';
+      this.text = options.text || wrapperEl.getAttribute('data-text') || 'DEPENDED';
       this.force = 4.2; // Generous responsive force for visible deformation
       this.colorSplit = options.colorSplit !== false;
-      this.customColors = [
-        [1.0, 0.0, 0.5],   // neon magenta (#ff007f)
-        [0.0, 0.95, 1.0],  // electric cyan (#00f0ff)
-        [0.55, 0.0, 1.0]   // vivid violet (#8c00ff)
-      ];
+      this.explicitColors = Array.isArray(options.customColors) ? options.customColors : null;
+      this.updatePalette();
+      this.onThemeChange = () => {
+        this.updatePalette();
+        this.rebuildTexSync();
+      };
+      window.addEventListener('themechange', this.onThemeChange);
 
       this.canvas = wrapperEl.querySelector('canvas.nex-mesh-text__canvas');
       this.measureEl = wrapperEl.querySelector('.nex-mesh-text__measure');
@@ -299,16 +301,26 @@ void main() {
       this.rafId = requestAnimationFrame(this.tick2D.bind(this));
     }
 
+    updatePalette() {
+      const tokens = getComputedStyle(document.documentElement);
+      this.paletteColors = ['--color-accent', '--color-info', '--color-success'].map(name => tokens.getPropertyValue(name).trim());
+      this.customColors = this.explicitColors || this.paletteColors.map(color => {
+        const value = color.replace('#', '');
+        const number = Number.parseInt(value.length === 3 ? value.split('').map(char => char + char).join('') : value, 16);
+        return [((number >> 16) & 255) / 255, ((number >> 8) & 255) / 255, (number & 255) / 255];
+      });
+    }
+
     getTypography() {
       // Read style from parent element (h2) so we get the real text color and font
       const parent = this.wrapper.parentElement || this.wrapper;
       const comp = window.getComputedStyle(parent);
       let color = comp.color;
       if (!color || color === 'transparent' || color === 'rgba(0, 0, 0, 0)') {
-        color = '#080808';
+        color = getComputedStyle(document.documentElement).getPropertyValue('--color-text').trim();
       }
       return {
-        fontFamily: comp.fontFamily || "'Satoshi', 'Outfit', 'Inter', sans-serif",
+        fontFamily: comp.fontFamily || getComputedStyle(document.documentElement).getPropertyValue('--font-display').trim(),
         fontWeight: comp.fontWeight || '900',
         fontSize: parseFloat(comp.fontSize) || 96,
         letterSpacing: comp.letterSpacing !== 'normal' ? comp.letterSpacing : '-0.05em',
@@ -329,7 +341,7 @@ void main() {
       const realSize = typo.fontSize * dpr;
 
       const c2 = renderTextToCanvas(
-        String(this.text || 'LIGHT'),
+        String(this.text || 'DEPENDED'),
         typo.color,
         typo.fontFamily,
         typo.fontWeight,
@@ -638,10 +650,10 @@ void main() {
 
       // Chromatic separation fringe
       if (Math.hypot(this.disp2DX, this.disp2DY) > 0.5) {
-        ctx.fillStyle = '#ff007f';
+        ctx.fillStyle = this.paletteColors[0];
         ctx.fillText(this.text, w / 2 + this.disp2DX + 4, h / 2 + this.disp2DY);
 
-        ctx.fillStyle = '#00f0ff';
+        ctx.fillStyle = this.paletteColors[1];
         ctx.fillText(this.text, w / 2 + this.disp2DX - 4, h / 2 + this.disp2DY);
       }
 
@@ -654,6 +666,7 @@ void main() {
 
     destroy() {
       this.destroyed = true;
+      window.removeEventListener('themechange', this.onThemeChange);
       this.running = false;
       if (this.rafId) cancelAnimationFrame(this.rafId);
       if (this.ro) this.ro.disconnect();
@@ -681,10 +694,10 @@ void main() {
       if (!el._nexMeshHover) {
         el.classList.add('nex-mesh-text');
         if (!el.getAttribute('data-text')) {
-          el.setAttribute('data-text', (el.textContent || 'LIGHT').trim());
+          el.setAttribute('data-text', (el.textContent || 'DEPENDED').trim());
         }
         el._nexMeshHover = new MeshTextHover(el, {
-          text: el.getAttribute('data-text') || 'LIGHT',
+          text: el.getAttribute('data-text') || 'DEPENDED',
         });
       }
     });

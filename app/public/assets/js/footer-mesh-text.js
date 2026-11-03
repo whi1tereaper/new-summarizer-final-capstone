@@ -5,7 +5,7 @@
  * Characteristics:
  * - 96 x 40 deformation grid
  * - GPU displacement with Spring & Damping physics
- * - Chromatic edge split during displacement; identical solid black (#080808) at rest
+ * - Chromatic edge split during displacement; the inherited text color at rest
  * - Pointer events strictly isolated to the visible LIGHT canvas bounds
  * - Dynamic high-DPI canvas texture generation matching fallback typography
  * - Semantic & visual fallback to standard typography if WebGL2 is unavailable
@@ -86,10 +86,18 @@
             this.indices = new Uint16Array((GRID_W - 1) * (GRID_H - 1) * 6);
             this.uniforms = null;
 
-            this.colorA = hexToRgb('#7F00FF'); // Accent purple
-            this.colorB = hexToRgb('#3ecfbf'); // Accent cyan
-
+            this.onThemeChange = () => {
+                const tokens = getComputedStyle(document.documentElement);
+                this.colorA = hexToRgb(tokens.getPropertyValue('--color-accent').trim());
+                this.colorB = hexToRgb(tokens.getPropertyValue('--color-info').trim());
+                this.createTextTexture();
+                this.render();
+            };
+            const tokens = getComputedStyle(document.documentElement);
+            this.colorA = hexToRgb(tokens.getPropertyValue('--color-accent').trim());
+            this.colorB = hexToRgb(tokens.getPropertyValue('--color-info').trim());
             this.init();
+            window.addEventListener('themechange', this.onThemeChange);
         }
 
         init() {
@@ -354,11 +362,11 @@ void main() {
             ctx.clearRect(0, 0, this.textCanvas.width, this.textCanvas.height);
 
             const computed = this.fallback ? window.getComputedStyle(this.fallback) : null;
-            const family = computed ? computed.fontFamily : "'Satoshi', 'Outfit', 'Inter', system-ui, sans-serif";
+            const family = computed ? computed.fontFamily : getComputedStyle(document.documentElement).getPropertyValue('--font-display').trim();
             const weight = computed ? computed.fontWeight : '900';
             const style = computed ? computed.fontStyle : 'normal';
             const rawFontSize = computed ? parseFloat(computed.fontSize) : 160;
-            const color = computed ? computed.color : '#080808';
+            const color = computed ? computed.color : getComputedStyle(document.documentElement).getPropertyValue('--color-text').trim();
 
             const fittedFontSize = Math.max(1, Math.round(rawFontSize * dpr));
             ctx.font = `${style} ${weight} ${fittedFontSize}px ${family}`;
@@ -373,7 +381,8 @@ void main() {
                 }
             }
 
-            ctx.fillText('LIGHT', this.textCanvas.width / 2, this.textCanvas.height / 2);
+            const brandText = (this.element.getAttribute('data-text') || this.element.textContent || 'DEPENDED').trim() || 'DEPENDED';
+            ctx.fillText(brandText, this.textCanvas.width / 2, this.textCanvas.height / 2);
 
             if (this.gl && this.texture) {
                 const gl = this.gl;
@@ -519,6 +528,7 @@ void main() {
 
         destroy() {
             this.destroyed = true;
+            window.removeEventListener('themechange', this.onThemeChange);
             this.stopLoop();
             if (this.resizeObserver) {
                 this.resizeObserver.disconnect();

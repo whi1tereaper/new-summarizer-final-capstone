@@ -1,0 +1,90 @@
+[
+    {
+        "name": "unified counts equal the two original ledgers",
+        "passed": true
+    },
+    {
+        "name": "admin source filter returns only its original ledger",
+        "passed": true
+    },
+    {
+        "name": "registry source filter returns only its original ledger",
+        "passed": true
+    },
+    {
+        "name": "stable pagination separates 61 same-second events into 50 and 11",
+        "passed": true
+    },
+    {
+        "name": "out-of-range page safely clamps to the last page",
+        "passed": true
+    },
+    {
+        "name": "unknown action does not broaden the query",
+        "passed": true
+    },
+    {
+        "name": "actor filter applies to both sources",
+        "passed": true
+    },
+    {
+        "name": "invalid filter case 1 is rejected without SQL ambiguity",
+        "passed": true
+    },
+    {
+        "name": "invalid filter case 2 is rejected without SQL ambiguity",
+        "passed": true
+    },
+    {
+        "name": "invalid filter case 3 is rejected without SQL ambiguity",
+        "passed": true
+    },
+    {
+        "name": "invalid filter case 4 is rejected without SQL ambiguity",
+        "passed": true
+    },
+    {
+        "name": "invalid filter case 5 is rejected without SQL ambiguity",
+        "passed": true
+    },
+    {
+        "name": "invalid filter case 6 is rejected without SQL ambiguity",
+        "passed": true
+    },
+    {
+        "name": "invalid filter case 7 is rejected without SQL ambiguity",
+        "passed": true
+    },
+    {
+        "name": "service denies non-administrator actor 0",
+        "passed": true
+    },
+    {
+        "name": "service denies non-administrator actor 2",
+        "passed": true
+    },
+    {
+        "name": "legacy deactivation is labelled without rewriting its action",
+        "passed": true
+    },
+    {
+        "name": "unrecorded connection metadata and identity fingerprints are not invented or returned",
+        "passed": true
+    },
+    {
+        "name": "date range includes both boundary sources with UTC database and Manila application dates",
+        "passed": true
+    },
+    {
+        "name": "audit metadata is bounded and invalid IP\/control characters are excluded",
+        "passed": true
+    },
+    {
+        "name": "missing registry ledger produces an explicit incomplete-view warning",
+        "passed": true
+    },
+    {
+        "name": "missing both ledgers fails instead of fabricating an empty success",
+        "passed": true
+    }
+]

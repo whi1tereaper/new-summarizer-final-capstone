@@ -1,0 +1,66 @@
+[
+  {
+    "name": "QA credentials cannot access production MySQL",
+    "passed": true
+  },
+  {
+    "name": "service metrics authorization safe path and partial measurement contracts",
+    "passed": true
+  },
+  {
+    "name": "anonymous cannot access storage measurements",
+    "passed": true
+  },
+  {
+    "name": "ordinary user cannot access storage measurements",
+    "passed": true
+  },
+  {
+    "name": "authenticated endpoint connects to actual MySQL and storage",
+    "passed": true
+  },
+  {
+    "name": "GET measurement does not mutate existing accounts documents jobs or runtime files",
+    "passed": true
+  },
+  {
+    "name": "sensitive status responses are JSON no-store and no-referrer",
+    "passed": true
+  },
+  {
+    "name": "HEAD supports status checks without returning a body",
+    "passed": true
+  },
+  {
+    "name": "POST cannot turn read-only refresh into file deletion",
+    "passed": true
+  },
+  {
+    "name": "JSON exposes neither absolute paths nor document filenames or contents",
+    "passed": true
+  },
+  {
+    "name": "existing admin dashboard renders the connected partial and assets",
+    "passed": true
+  },
+  {
+    "name": "real browser refresh failure handling keyboard and responsive themes",
+    "passed": true
+  },
+  {
+    "name": "stale administrator cookie cannot bypass live active-account enforcement",
+    "passed": true
+  },
+  {
+    "name": "security analytics lifecycle feedback and history regressions",
+    "passed": true
+  },
+  {
+    "name": "live accounts passwords summaries and feedback preserved",
+    "passed": true
+  },
+  {
+    "name": "restricted QA databases and credentials removed",
+    "passed": true
+  }
+]

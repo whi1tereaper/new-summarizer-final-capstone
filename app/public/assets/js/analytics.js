@@ -5,45 +5,22 @@
     if (typeof Chart === 'undefined') { if (error) error.hidden = false; return; }
 
     function getThemePalette() {
-        let isDark = false;
-        try {
-            const domTheme = document.documentElement.dataset.theme || (document.body ? document.body.dataset.theme : '');
-            if (domTheme === 'dark') {
-                isDark = true;
-            } else if (domTheme === 'light') {
-                isDark = false;
-            } else {
-                const saved = localStorage.getItem('light-results-theme');
-                if (saved === 'dark') {
-                    isDark = true;
-                } else if (saved === 'light') {
-                    isDark = false;
-                } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                    isDark = true;
-                }
-            }
-        } catch (e) {
-            isDark = document.documentElement.dataset.theme === 'dark';
-        }
-
         const style = getComputedStyle(document.documentElement);
-
-        const accent      = (style.getPropertyValue('--color-accent') || (isDark ? '#9d87f5' : '#7F00FF')).trim();
-        const tickColor   = isDark ? '#f1f2ee' : '#475569';
-        const legendColor = isDark ? '#f1f2ee' : '#1e293b';
-        const gridColor   = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)';
-        const nutshell    = isDark ? '#38bdf8' : '#0284c7';
-        const nutshellBg  = isDark ? 'rgba(56, 189, 248, 0.22)' : 'rgba(2, 132, 199, 0.12)';
-
-        const colors = isDark
-            ? [accent, '#38bdf8', '#34d399', '#fbbf24', '#f472b6', '#a78bfa']
-            : [accent, '#0284c7', '#059669', '#d97706', '#db2777', '#7c3aed'];
-
-        return { isDark, accent, tickColor, legendColor, gridColor, nutshell, nutshellBg, colors };
+        const token = name => style.getPropertyValue(name).trim();
+        const accent = token('--color-accent');
+        const tickColor = token('--color-chart-label');
+        const legendColor = token('--color-text');
+        const gridColor = token('--color-chart-grid');
+        const colors = Array.from({ length: 6 }, (_, index) => token(`--color-chart-${index + 1}`));
+        const nutshell = colors[1];
+        return { accent, tickColor, legendColor, gridColor, nutshell,
+            nutshellBg: withAlpha(nutshell, 0.16), colors,
+            tooltipBg: token('--color-surface'), tooltipText: token('--color-text'),
+            tooltipBorder: token('--color-border') };
     }
 
     function withAlpha(color, a) {
-        if (!color) return `rgba(127, 0, 255, ${a})`;
+        if (!color) color = getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim();
         color = color.trim();
         if (color.startsWith('#')) {
             let hex = color.slice(1);
@@ -82,7 +59,7 @@
         const p = getThemePalette();
         const style = getComputedStyle(document.documentElement);
 
-        Chart.defaults.font.family = style.getPropertyValue('--font-body').trim() || 'Inter, system-ui, sans-serif';
+        Chart.defaults.font.family = style.getPropertyValue('--font-body').trim();
         Chart.defaults.color = p.tickColor;
         Chart.defaults.borderColor = p.gridColor;
 
@@ -96,14 +73,14 @@
                         boxWidth: 8,
                         pointStyleWidth: 8,
                         color: p.legendColor,
-                        font: { size: 11, weight: '600', family: 'Inter, system-ui, sans-serif' }
+                        font: { size: 11, weight: '600', family: style.getPropertyValue('--font-body').trim() }
                     }
                 },
                 tooltip: {
-                    backgroundColor: p.isDark ? '#242723' : '#1e293b',
-                    titleColor: '#ffffff',
-                    bodyColor: '#f1f2ee',
-                    borderColor: p.isDark ? '#3d4339' : '#cbd5e1',
+                    backgroundColor: p.tooltipBg,
+                    titleColor: p.tooltipText,
+                    bodyColor: p.tooltipText,
+                    borderColor: p.tooltipBorder,
                     borderWidth: 1,
                     padding: 8,
                     cornerRadius: 4,
@@ -126,7 +103,7 @@
                     grid: { color: p.gridColor, drawBorder: false, ...(xOpts.grid || {}) },
                     ticks: {
                         color: p.tickColor,
-                        font: { size: 10, weight: '500', family: 'Inter, system-ui, sans-serif' },
+                        font: { size: 10, weight: '500', family: style.getPropertyValue('--font-body').trim() },
                         maxRotation: 45,
                         autoSkip: true,
                         maxTicksLimit: 12,
@@ -142,7 +119,7 @@
                     grid: { color: p.gridColor, drawBorder: false, ...(yOpts.grid || {}) },
                     ticks: {
                         color: p.tickColor,
-                        font: { size: 10, weight: '500', family: 'Inter, system-ui, sans-serif' },
+                        font: { size: 10, weight: '500', family: style.getPropertyValue('--font-body').trim() },
                         ...(yOpts.ticks || {})
                     },
                     ...yOpts
@@ -264,8 +241,8 @@
                     {
                         label: 'Original',
                         data: [Number(data.words.original_words || 0)],
-                        backgroundColor: p.isDark ? 'rgba(255, 255, 255, 0.25)' : 'rgba(8, 8, 8, 0.25)',
-                        borderColor: p.isDark ? 'rgba(255, 255, 255, 0.5)' : 'rgba(8, 8, 8, 0.4)',
+                        backgroundColor: withAlpha(p.tickColor, 0.25),
+                        borderColor: withAlpha(p.tickColor, 0.45),
                         borderWidth: 1,
                         borderRadius: 4,
                         borderSkipped: false
@@ -329,9 +306,4 @@
         renderAllCharts();
     });
 
-    if (window.matchMedia) {
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-            renderAllCharts();
-        });
-    }
 }());

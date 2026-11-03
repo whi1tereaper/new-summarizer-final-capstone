@@ -22,10 +22,10 @@ $analyticsActiveRange = !empty($isAdmin) ? (string)($adminStatsRange ?? 'all') :
         </div>
 
         <div class="analytics-sidebar__filters" role="group" aria-label="Analytics range">
-            <button type="button" class="analytics-range global-button-effect <?= $analyticsActiveRange === '30' ? 'is-active' : '' ?>" data-range="30" aria-pressed="<?= $analyticsActiveRange === '30' ? 'true' : 'false' ?>">30d</button>
-            <button type="button" class="analytics-range global-button-effect <?= $analyticsActiveRange === '7' ? 'is-active' : '' ?>" data-range="7" aria-pressed="<?= $analyticsActiveRange === '7' ? 'true' : 'false' ?>">7d</button>
-            <button type="button" class="analytics-range global-button-effect <?= $analyticsActiveRange === '90' ? 'is-active' : '' ?>" data-range="90" aria-pressed="<?= $analyticsActiveRange === '90' ? 'true' : 'false' ?>">90d</button>
-            <button type="button" class="analytics-range global-button-effect <?= $analyticsActiveRange === 'all' ? 'is-active' : '' ?>" data-range="all" aria-pressed="<?= $analyticsActiveRange === 'all' ? 'true' : 'false' ?>">All</button>
+            <button type="button" class="btn btn--secondary btn--sm analytics-range global-button-effect <?= $analyticsActiveRange === '30' ? 'is-active' : '' ?>" data-range="30" aria-pressed="<?= $analyticsActiveRange === '30' ? 'true' : 'false' ?>">30d</button>
+            <button type="button" class="btn btn--secondary btn--sm analytics-range global-button-effect <?= $analyticsActiveRange === '7' ? 'is-active' : '' ?>" data-range="7" aria-pressed="<?= $analyticsActiveRange === '7' ? 'true' : 'false' ?>">7d</button>
+            <button type="button" class="btn btn--secondary btn--sm analytics-range global-button-effect <?= $analyticsActiveRange === '90' ? 'is-active' : '' ?>" data-range="90" aria-pressed="<?= $analyticsActiveRange === '90' ? 'true' : 'false' ?>">90d</button>
+            <button type="button" class="btn btn--secondary btn--sm analytics-range global-button-effect <?= $analyticsActiveRange === 'all' ? 'is-active' : '' ?>" data-range="all" aria-pressed="<?= $analyticsActiveRange === 'all' ? 'true' : 'false' ?>">All</button>
         </div>
 
         <div class="analytics-sidebar__metrics" aria-live="polite">

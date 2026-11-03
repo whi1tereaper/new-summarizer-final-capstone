@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const appViewer = window.appViewer || {};
-
     // ── Summary length slider & Form handling ────────────────────────────────
     const form = document.getElementById('summarize-form');
     const capabilities = form ? JSON.parse(form.dataset.capabilities || '{}') : {};
@@ -12,8 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const sourceError = document.getElementById('source-error');
     const submitStatus = document.getElementById('submit-status');
     const sentenceCount = document.getElementById('sentence_count');
+    const depthSentenceCounts = { very_brief: 1, brief: 3, short: 5, balanced: 8, detailed: 11, comprehensive: 15 };
     const errors = window.LightErrors;
-    const draftFields = ['document_title', 'original_text', 'source_url', 'source_type', 'analysis_mode', 'output_format', 'summary_depth', 'summary_length', 'sentence_count', 'summary_style', 'use_llm_synthesis', 'request_token'];
+    const draftFields = ['document_title', 'original_text', 'source_url', 'source_type', 'analysis_mode', 'output_format', 'summary_depth', 'summary_length', 'sentence_count', 'summary_style', 'focus_query', 'use_llm_synthesis', 'request_token'];
     const initialFailure = form ? JSON.parse(form.dataset.initialFailure || 'null') : null;
     const savedDraft = errors?.draft.read();
     let currentFailure = savedDraft && savedDraft.savedAt > Number(capabilities.serverSavedAt || 0) ? savedDraft.failure || null : initialFailure;
@@ -22,7 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let uncertainSubmission = savedDraft?.uncertainSubmission === true;
     const fileIdentity = file => file ? `${file.name}|${file.size}|${file.lastModified}` : '';
     let submitting = false;
+    let nutshellSubmitting = false;
     let nutshellRequestKey = null;
+    let nutshellNeedsStatusCheck = Boolean(savedDraft?.nutshellRequestKey) && savedDraft?.nutshellNeedsStatusCheck !== false;
     const newToken = () => Array.from(crypto.getRandomValues(new Uint8Array(16)), byte => byte.toString(16).padStart(2, '0')).join('');
     if (form && savedDraft?.fields) {
         const preferences = new URLSearchParams(location.search);
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const field = form.elements.namedItem(name);
             if (field) fields[name] = field.type === 'checkbox' ? (field.checked ? '1' : '') : field.value;
         }
-        return errors.draft.write({ fields, fileName: fileInput?.files?.[0]?.name || restoredFileName, fileIdentity: fileIdentity(fileInput?.files?.[0]) || restoredFileIdentity, uncertainSubmission, failure: currentFailure, nutshellRequestKey });
+        return errors.draft.write({ fields, fileName: fileInput?.files?.[0]?.name || restoredFileName, fileIdentity: fileIdentity(fileInput?.files?.[0]) || restoredFileIdentity, uncertainSubmission, failure: currentFailure, nutshellRequestKey, nutshellNeedsStatusCheck });
     }
     function sourceChanged(event) {
         if (!form) return;
@@ -50,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             uncertainSubmission = false;
         }
         nutshellRequestKey = null;
+        nutshellNeedsStatusCheck = false;
         currentFailure = null;
         if (sourceError) sourceError.hidden = true;
         const titleError = document.getElementById('document-title-error');
@@ -116,11 +118,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         document.getElementById('summary_depth').value = depth;
         document.getElementById('summary_length').value = depth;
-        if (sentenceCount) sentenceCount.value = ({ very_brief: 1, brief: 3, short: 5, balanced: 8, detailed: 11, comprehensive: 15 })[depth] || 8;
+        if (sentenceCount) sentenceCount.value = depthSentenceCounts[depth] || 8;
         document.getElementById('depth_description').textContent = description?.description || '';
         sourceChanged();
     }));
-    const restoredDepth = document.getElementById('summary_depth')?.value;
+    const depthInput = document.getElementById('summary_depth');
+    const restoredDepth = (capabilities.depths || []).some(item => item.value === depthInput?.value) ? depthInput.value : 'balanced';
+    if (depthInput) depthInput.value = restoredDepth;
+    const legacyDepthInput = document.getElementById('summary_length');
+    if (legacyDepthInput) legacyDepthInput.value = restoredDepth;
+    if (sentenceCount) sentenceCount.value = depthSentenceCounts[restoredDepth] || 8;
     document.querySelectorAll('[data-depth]').forEach(button => { const active = button.dataset.depth === restoredDepth; button.classList.toggle('is-active', active); button.setAttribute('aria-pressed', String(active)); });
     if (restoredDepth && document.getElementById('depth_description')) document.getElementById('depth_description').textContent = (capabilities.depths || []).find(item => item.value === restoredDepth)?.description || '';
 
@@ -175,18 +182,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     function setSubmitting(busy) {
         submitting = busy;
+        const operationBusy = busy || nutshellSubmitting;
         const submitButton = form.querySelector('.summary-submit-button');
-        if (submitButton) { submitButton.disabled = busy; submitButton.textContent = busy ? 'Starting summary…' : 'Summarize Document'; }
+        if (submitButton) {
+            submitButton.disabled = operationBusy;
+            const label = submitButton.querySelector('.summary-action-label') || submitButton;
+            label.textContent = busy ? 'Starting summary…' : 'Summarize Document';
+        }
         const nutshellButton = document.getElementById('btn-nutshell-action');
-        if (nutshellButton) nutshellButton.disabled = busy;
+        if (nutshellButton) nutshellButton.disabled = operationBusy;
         const retry = document.getElementById('source-retry');
-        if (retry) retry.disabled = busy;
-        form.setAttribute('aria-busy', String(busy));
+        if (retry) retry.disabled = operationBusy;
+        form.setAttribute('aria-busy', String(operationBusy));
+        form.dataset.workspaceOperation = busy ? 'summary' : nutshellSubmitting ? 'nutshell' : '';
+        form.dispatchEvent(new Event('light:workspace-state'));
         if (submitStatus) submitStatus.textContent = busy ? 'Preparing your document for summarization…' : '';
     }
     if (form) form.addEventListener('submit', async event => {
         event.preventDefault();
-        if (submitting || !validateSource()) return;
+        if (submitting || nutshellSubmitting || !validateSource()) return;
         currentFailure = null;
         uncertainSubmission = true;
         restoredFileIdentity = fileIdentity(fileInput?.files?.[0]) || restoredFileIdentity;
@@ -256,16 +270,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (nutshellCopyBtn) nutshellCopyBtn.style.display = 'none';
         const failure = errors.failure(value);
+        nutshellPanel.dataset.errorCode = failure.code;
         const title = nutshellError?.querySelector('.nutshell-error__title');
         if (title) title.textContent = failure.title;
         if (nutshellErrorMessage) nutshellErrorMessage.textContent = `${failure.explanation} ${failure.recovery}${failure.reference ? ` Reference: ${failure.reference}` : ''}`;
-        if (nutshellRetryBtn) nutshellRetryBtn.hidden = !failure.retryable;
+        if (nutshellRetryBtn) {
+            nutshellRetryBtn.hidden = !failure.retryable;
+            nutshellRetryBtn.textContent = nutshellNeedsStatusCheck ? 'Check status' : 'Try again';
+        }
+        nutshellPanel.dataset.pending = nutshellNeedsStatusCheck ? '1' : '0';
         if (nutshellError) nutshellError.style.display = 'flex';
     }
 
     function resetNutshellState() {
         if (!nutshellPanel) return;
         nutshellPanel.classList.remove('nutshell-panel--error');
+        delete nutshellPanel.dataset.errorCode;
         if (nutshellError) {
             nutshellError.style.display = 'none';
             if (nutshellErrorMessage) nutshellErrorMessage.textContent = '';
@@ -280,17 +300,62 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (nutshellRetryBtn && nutshellBtn) {
         nutshellRetryBtn.addEventListener('click', () => {
-            nutshellBtn.click();
+            if (nutshellNeedsStatusCheck && nutshellBtn.disabled) {
+                // The trial may be exhausted by the reply we lost. A read-only
+                // status lookup must remain available even then.
+                nutshellBtn.dispatchEvent(new Event('click', { cancelable: true }));
+            } else nutshellBtn.click();
         });
+    }
+
+    function nutshellHttpFailure(status) {
+        if ([408, 504, 524].includes(status)) return 'PROCESSING_TIMEOUT';
+        if ([502, 503].includes(status)) return 'WORKER_UNAVAILABLE';
+        if (status === 429) return 'RATE_LIMITED';
+        if (status === 401) return 'AUTH_REQUIRED';
+        if (status === 403) return 'ACCESS_DENIED';
+        if (status === 413) return 'INPUT_TOO_LARGE';
+        return 'PROCESSING_FAILED';
+    }
+
+    function nutshellStatusFields() {
+        const data = new FormData();
+        data.append('action', 'status');
+        data.append('request_key', nutshellRequestKey || '');
+        data.append('csrf_token', document.querySelector('input[name="csrf_token"]')?.value || '');
+        return data;
+    }
+
+    async function sendNutshellRequest(fields, recover = true) {
+        let response;
+        let transportFailed = false;
+        try {
+            response = await fetch('nutshell_generate.php', { method: 'POST', body: fields, credentials: 'same-origin' });
+            const body = await response.text();
+            let data;
+            try { data = JSON.parse(body); } catch { data = null; }
+            if (data && typeof data === 'object' && typeof data.success === 'boolean') return data;
+        } catch { transportFailed = true; }
+        // A missing/HTML response is not proof that generation failed. Lookup
+        // the same owner-scoped key; never auto-generate a second Nutshell here.
+        if (recover && nutshellRequestKey) {
+            const prior = await sendNutshellRequest(nutshellStatusFields(), false);
+            if (['completed', 'failed', 'processing'].includes(prior.request_state)) return prior;
+            if (prior.request_state === 'not_found') nutshellNeedsStatusCheck = false;
+        }
+        const code = response?.status >= 400 ? nutshellHttpFailure(response.status)
+            : transportFailed ? 'NETWORK_INTERRUPTED' : 'PROCESSING_FAILED';
+        return { success: false, request_state: 'unknown', failure: { code } };
     }
 
     if (nutshellBtn && nutshellPanel) {
         nutshellBtn.addEventListener('click', async (e) => {
             e.preventDefault();
+            if (submitting || nutshellSubmitting) return;
 
-            if (appViewer.requiresRegistrationForNutshell) {
-                saveDraft();
-                window.location.href = appViewer.registerUrl || 'register.php';
+            const checking = nutshellNeedsStatusCheck && Boolean(nutshellRequestKey);
+            if (document.getElementById('student-trial')?.dataset.blocked === '1' && !checking) {
+                document.getElementById('student-trial')?.scrollIntoView({ block: 'nearest' });
                 return;
             }
 
@@ -303,37 +368,42 @@ document.addEventListener('DOMContentLoaded', () => {
             const originalText = method === 'url' ? (urlInput?.value.trim() || '') : (textInput?.value.trim() || '');
             const hasFile = method === 'file' && fileInput && fileInput.files && fileInput.files.length > 0;
 
-            if (!validateSource()) return;
+            if (!checking && !validateSource()) return;
 
             // Reveal nutshell panel & loading state
             nutshellPanel.style.display = 'block';
-            nutshellPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            nutshellPanel.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest' });
             resetNutshellState();
             if (nutshellLoading) nutshellLoading.style.display = 'flex';
-            nutshellBtn.disabled = true;
+            nutshellSubmitting = true;
+            setSubmitting(false);
 
             const formData = new FormData();
             if (csrfInput) formData.append('csrf_token', csrfInput.value);
-            nutshellRequestKey ||= (window.crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`).replace(/[^A-Za-z0-9_-]/g, '');
-            saveDraft();
-            formData.append('request_key', nutshellRequestKey);
             formData.append('analysis_mode', analysisMode);
             formData.append('source_type', method);
             if (originalText) formData.append('original_text', originalText);
             if (hasFile) formData.append('pdf_file', fileInput.files[0]);
 
             try {
-                const response = await fetch('nutshell_generate.php', {
-                    method: 'POST',
-                    body: formData,
-                });
-
-                const rawText = await response.text();
                 let data = null;
-                try {
-                    data = JSON.parse(rawText);
-                } catch (parseErr) {
-                    data = null;
+                if (checking) {
+                    data = await sendNutshellRequest(nutshellStatusFields(), false);
+                    if (data.request_state === 'not_found' || (data.request_state === 'failed' && errors.failure(data.failure).retryable)) {
+                        if (data.request_state === 'failed') nutshellRequestKey = null;
+                        nutshellNeedsStatusCheck = false;
+                        saveDraft();
+                        if (!validateSource()) return;
+                        data = null;
+                    }
+                }
+                if (!data) {
+                    nutshellRequestKey ||= (window.crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`).replace(/[^A-Za-z0-9_-]/g, '');
+                    nutshellNeedsStatusCheck = true;
+                    nutshellPanel.dataset.pending = '1';
+                    saveDraft();
+                    formData.append('request_key', nutshellRequestKey);
+                    data = await sendNutshellRequest(formData);
                 }
 
                 if (data && data.redirect) {
@@ -345,10 +415,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 if (nutshellLoading) nutshellLoading.style.display = 'none';
-                nutshellBtn.disabled = false;
 
                 if (data && data.success && data.nutshell) {
                     nutshellRequestKey = null;
+                    nutshellNeedsStatusCheck = false;
                     errors.draft.clear();
                     resetNutshellState();
                     if (nutshellText) {
@@ -358,19 +428,41 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (nutshellCopyBtn) nutshellCopyBtn.style.display = 'inline-flex';
                 } else if (data && data.status === 'not_needed') {
                     nutshellRequestKey = null;
+                    nutshellNeedsStatusCheck = false;
+                    saveDraft();
                     resetNutshellState();
                     if (nutshellText) { nutshellText.textContent = 'The primary summary is already concise.'; nutshellText.style.display = 'block'; }
+                } else if (data?.request_state === 'processing') {
+                    nutshellNeedsStatusCheck = true;
+                    saveDraft();
+                    setNutshellErrorState({ code: 'ACCESS_BUSY' });
                 } else if (data?.failure) {
+                    if (data.request_state === 'failed') {
+                        nutshellNeedsStatusCheck = false;
+                        nutshellRequestKey = null;
+                    }
+                    saveDraft();
                     setNutshellErrorState(data.failure);
                 } else {
-                    setNutshellErrorState({ code: data ? 'PROCESSING_FAILED' : 'NETWORK_INTERRUPTED' });
+                    setNutshellErrorState({ code: 'PROCESSING_FAILED' });
                 }
             } catch (err) {
+                saveDraft();
+                setNutshellErrorState({ code: 'PROCESSING_FAILED' });
+            } finally {
+                nutshellPanel.dataset.pending = nutshellNeedsStatusCheck ? '1' : '0';
                 if (nutshellLoading) nutshellLoading.style.display = 'none';
-                nutshellBtn.disabled = false;
-                setNutshellErrorState({ code: 'NETWORK_INTERRUPTED' });
+                nutshellSubmitting = false;
+                setSubmitting(false);
+                window.dispatchEvent(new Event('light:access-changed'));
             }
         });
+    }
+
+    if (nutshellNeedsStatusCheck && nutshellRequestKey && nutshellPanel) {
+        nutshellPanel.style.display = 'block';
+        setNutshellErrorState({ code: 'NETWORK_INTERRUPTED' });
+        window.dispatchEvent(new Event('light:access-changed'));
     }
 
     if (nutshellCopyBtn && nutshellText) {

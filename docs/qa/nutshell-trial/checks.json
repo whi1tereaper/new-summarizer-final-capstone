@@ -1,0 +1,162 @@
+[
+  {
+    "name": "test credentials are denied production access",
+    "passed": true
+  },
+  {
+    "name": "isolated PHP 8.3 Apache configuration is valid",
+    "passed": true
+  },
+  {
+    "name": "guest starts with exactly three trial uses",
+    "passed": true
+  },
+  {
+    "name": "guest Nutshell requires CSRF without consuming a use",
+    "passed": true
+  },
+  {
+    "name": "empty source does not consume a use or start NLP",
+    "passed": true
+  },
+  {
+    "name": "short source does not consume a use or start NLP",
+    "passed": true
+  },
+  {
+    "name": "invalid key does not consume a use or start NLP",
+    "passed": true
+  },
+  {
+    "name": "invalid uploaded document does not consume trial",
+    "passed": true
+  },
+  {
+    "name": "failure processing leaves all three attempts and no held reservation",
+    "passed": true
+  },
+  {
+    "name": "invalid processing leaves all three attempts and no held reservation",
+    "passed": true
+  },
+  {
+    "name": "not_needed processing leaves all three attempts and no held reservation",
+    "passed": true
+  },
+  {
+    "name": "anonymous Nutshell completes and consumes exactly one shared use",
+    "passed": true
+  },
+  {
+    "name": "completed guest Nutshell persists privately without a user account",
+    "passed": true
+  },
+  {
+    "name": "idempotent retry reuses the same result without charge or NLP",
+    "passed": true
+  },
+  {
+    "name": "different guests cannot share an idempotency result",
+    "passed": true
+  },
+  {
+    "name": "guest-owned history storage retrieves its own Nutshell",
+    "passed": true
+  },
+  {
+    "name": "the existing account requirement for the History page is unchanged",
+    "passed": true
+  },
+  {
+    "name": "another guest cannot request a Nutshell for an unowned summary",
+    "passed": true
+  },
+  {
+    "name": "a guest can generate a Nutshell for its own saved summary",
+    "passed": true
+  },
+  {
+    "name": "third successful guest generation reaches zero",
+    "passed": true
+  },
+  {
+    "name": "fourth direct Nutshell request blocks before NLP",
+    "passed": true
+  },
+  {
+    "name": "ordinary summarization shares Nutshell exhaustion",
+    "passed": true
+  },
+  {
+    "name": "trial exhaustion does not delete existing Nutshell history",
+    "passed": true
+  },
+  {
+    "name": "previous completed request remains readable after quota exhaustion",
+    "passed": true
+  },
+  {
+    "name": "two ordinary completion reservations leave one Nutshell use",
+    "passed": true
+  },
+  {
+    "name": "Nutshell uses that last shared attempt",
+    "passed": true
+  },
+  {
+    "name": "persistence failure rolls back the result and quota charge",
+    "passed": true
+  },
+  {
+    "name": "guest-specific rate limit rejects before NLP without charge",
+    "passed": true
+  },
+  {
+    "name": "eight concurrent HTTP guest requests complete exactly three Nutshells",
+    "passed": true
+  },
+  {
+    "name": "race leaves exactly three charges and no live reservations",
+    "passed": true
+  },
+  {
+    "name": "sign-in transfers guest Nutshell history to the same account",
+    "passed": true
+  },
+  {
+    "name": "unverified account sign-in does not reset the trial",
+    "passed": true
+  },
+  {
+    "name": "existing 24-hour guest retention deletes expired guest Nutshells only",
+    "passed": true
+  },
+  {
+    "name": "verified student can generate beyond the anonymous three-use limit",
+    "passed": true
+  },
+  {
+    "name": "mobile browser guest Nutshell and live counter workflow",
+    "passed": true
+  },
+  {
+    "name": "actual existing Python NLP completes a guest Nutshell",
+    "passed": true
+  },
+  {
+    "name": "real NLP guest result is stored and consumes one attempt",
+    "passed": true
+  },
+  {
+    "name": "existing security analytics database feedback and history regressions",
+    "passed": true
+  },
+  {
+    "name": "live account passwords summaries and feedback preserved",
+    "passed": true
+  },
+  {
+    "name": "isolated databases and credentials removed",
+    "passed": true
+  }
+]

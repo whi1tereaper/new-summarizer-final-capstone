@@ -1,0 +1,647 @@
+{
+  "recorded_at": "2026-10-27T03:25:09.478Z",
+  "pages": 96,
+  "button_instances": 520,
+  "action_conflicts": 0,
+  "passed": 110,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "landing light 1440px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "about light 1440px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "terms light 1440px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "accept-terms light 1440px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "login light 1440px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "admin-login light 1440px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "register light 1440px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "forgot-password light 1440px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "reset-password light 1440px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "workspace-guest light 1440px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "workspace-user light 1440px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "workspace-admin light 1440px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "dashboard-user light 1440px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "dashboard-admin light 1440px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "history light 1440px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "profile-settings light 1440px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "profile-admin light 1440px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "analytics light 1440px",
+      "passed": true,
+      "background": "#f7f6f2",
+      "text": "#16171c"
+    },
+    {
+      "name": "student-registry light 1440px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "audit-logs light 1440px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "storage light 1440px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "result light 1440px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "processing light 1440px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "evaluation-report light 1440px",
+      "passed": true,
+      "background": "#f7f6f2",
+      "text": "#16171c"
+    },
+    {
+      "name": "landing light 390px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "about light 390px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "terms light 390px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "accept-terms light 390px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "login light 390px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "admin-login light 390px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "register light 390px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "forgot-password light 390px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "reset-password light 390px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "workspace-guest light 390px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "workspace-user light 390px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "workspace-admin light 390px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "dashboard-user light 390px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "dashboard-admin light 390px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "history light 390px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "profile-settings light 390px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "profile-admin light 390px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "analytics light 390px",
+      "passed": true,
+      "background": "#f7f6f2",
+      "text": "#16171c"
+    },
+    {
+      "name": "student-registry light 390px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "audit-logs light 390px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "storage light 390px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "result light 390px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "processing light 390px",
+      "passed": true,
+      "background": "#eeedea",
+      "text": "#16171c"
+    },
+    {
+      "name": "evaluation-report light 390px",
+      "passed": true,
+      "background": "#f7f6f2",
+      "text": "#16171c"
+    },
+    {
+      "name": "landing dark 1440px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "about dark 1440px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "terms dark 1440px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "accept-terms dark 1440px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "login dark 1440px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "admin-login dark 1440px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "register dark 1440px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "forgot-password dark 1440px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "reset-password dark 1440px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "workspace-guest dark 1440px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "workspace-user dark 1440px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "workspace-admin dark 1440px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "dashboard-user dark 1440px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "dashboard-admin dark 1440px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "history dark 1440px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "profile-settings dark 1440px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "profile-admin dark 1440px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "analytics dark 1440px",
+      "passed": true,
+      "background": "#202127",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "student-registry dark 1440px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "audit-logs dark 1440px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "storage dark 1440px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "result dark 1440px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "processing dark 1440px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "evaluation-report dark 1440px",
+      "passed": true,
+      "background": "#202127",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "landing dark 390px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "about dark 390px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "terms dark 390px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "accept-terms dark 390px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "login dark 390px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "admin-login dark 390px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "register dark 390px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "forgot-password dark 390px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "reset-password dark 390px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "workspace-guest dark 390px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "workspace-user dark 390px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "workspace-admin dark 390px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "dashboard-user dark 390px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "dashboard-admin dark 390px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "history dark 390px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "profile-settings dark 390px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "profile-admin dark 390px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "analytics dark 390px",
+      "passed": true,
+      "background": "#202127",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "student-registry dark 390px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "audit-logs dark 390px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "storage dark 390px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "result dark 390px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "processing dark 390px",
+      "passed": true,
+      "background": "#17181d",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "evaluation-report dark 390px",
+      "passed": true,
+      "background": "#202127",
+      "text": "#f2f1f6"
+    },
+    {
+      "name": "Major page backgrounds change between light and dark tokens",
+      "passed": true
+    },
+    {
+      "name": "System theme resolves before body paint and follows live system changes",
+      "passed": true
+    },
+    {
+      "name": "Explicit preference updates all controls, charts and components without reload",
+      "passed": true
+    },
+    {
+      "name": "Preference persists across navigation and reload with no wrong-theme body",
+      "passed": true
+    },
+    {
+      "name": "Theme choice synchronizes between tabs and reset restores system mode",
+      "passed": true
+    },
+    {
+      "name": "Shared theme control activates once and updates accessible state",
+      "passed": true
+    },
+    {
+      "name": "One semantic token updates every shared surface and primary button live",
+      "passed": true
+    },
+    {
+      "name": "Shared button variants/states/contrast light",
+      "passed": true
+    },
+    {
+      "name": "Shared button variants/states/contrast dark",
+      "passed": true
+    },
+    {
+      "name": "Workspace source selection, preferences, sidebar and profile interactions remain functional",
+      "passed": true
+    },
+    {
+      "name": "Result copy action and export controls remain connected",
+      "passed": true
+    },
+    {
+      "name": "Dashboard charts update shared colors immediately on a theme event",
+      "passed": true
+    },
+    {
+      "name": "Existing invalid-CSRF protection still rejects generation before work begins",
+      "passed": true
+    },
+    {
+      "name": "Blocked browser storage preserves system detection and in-page theme controls",
+      "passed": true
+    }
+  ],
+  "synthetic_fixture": true,
+  "processing_network": "Controlled pending response; no NLP request executed.",
+  "fonts": "External Google font stylesheets replaced with empty CSS; bundled/system font fallbacks used.",
+  "desktop_width": 1440,
+  "mobile_width": 390
+}

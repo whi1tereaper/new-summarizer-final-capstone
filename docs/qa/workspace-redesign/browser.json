@@ -1,0 +1,182 @@
+[
+  {
+    "name": "single page heading and both generation actions disabled without a source",
+    "passed": true
+  },
+  {
+    "name": "guest navigation hides administrative destinations",
+    "passed": true
+  },
+  {
+    "name": "real guest access indicator shows shared three-use allowance",
+    "passed": true
+  },
+  {
+    "name": "real backend still rejects invalid CSRF tokens before generation",
+    "passed": true
+  },
+  {
+    "name": "light 360px: expected columns, no viewport overflow or clipped controls",
+    "passed": true
+  },
+  {
+    "name": "light 390px: expected columns, no viewport overflow or clipped controls",
+    "passed": true
+  },
+  {
+    "name": "light 768px: expected columns, no viewport overflow or clipped controls",
+    "passed": true
+  },
+  {
+    "name": "light 1024px: expected columns, no viewport overflow or clipped controls",
+    "passed": true
+  },
+  {
+    "name": "light 1280px: expected columns, no viewport overflow or clipped controls",
+    "passed": true
+  },
+  {
+    "name": "light 1440px: expected columns, no viewport overflow or clipped controls",
+    "passed": true
+  },
+  {
+    "name": "dark 360px: expected columns, no viewport overflow or clipped controls",
+    "passed": true
+  },
+  {
+    "name": "dark 390px: expected columns, no viewport overflow or clipped controls",
+    "passed": true
+  },
+  {
+    "name": "dark 768px: expected columns, no viewport overflow or clipped controls",
+    "passed": true
+  },
+  {
+    "name": "dark 1024px: expected columns, no viewport overflow or clipped controls",
+    "passed": true
+  },
+  {
+    "name": "dark 1280px: expected columns, no viewport overflow or clipped controls",
+    "passed": true
+  },
+  {
+    "name": "dark 1440px: expected columns, no viewport overflow or clipped controls",
+    "passed": true
+  },
+  {
+    "name": "real theme button switches and persists across reload",
+    "passed": true
+  },
+  {
+    "name": "Preferences focuses the one existing configuration panel with visible keyboard outline",
+    "passed": true
+  },
+  {
+    "name": "form controls have labels and status/errors have live-region semantics",
+    "passed": true
+  },
+  {
+    "name": "pasted text enables actions, updates live count and expands editor",
+    "passed": true
+  },
+  {
+    "name": "existing UTF-8 text size limit rejects excessive input while editor growth remains bounded",
+    "passed": true
+  },
+  {
+    "name": "source switching retains text, URL and title while submitting only the active source",
+    "passed": true
+  },
+  {
+    "name": "invalid URL receives inline feedback and disables generation",
+    "passed": true
+  },
+  {
+    "name": "all 5 output_format options preserve exact backend field values",
+    "passed": true
+  },
+  {
+    "name": "all 8 analysis_mode options preserve exact backend field values",
+    "passed": true
+  },
+  {
+    "name": "all six depth buttons update both backend fields, one selected state and contextual description",
+    "passed": true
+  },
+  {
+    "name": "unsupported upload rejected near input before submission",
+    "passed": true
+  },
+  {
+    "name": "upload above effective PHP size limit rejected before submission",
+    "passed": true
+  },
+  {
+    "name": "PDF selection shows extension and size; removal clears source and disables actions",
+    "passed": true
+  },
+  {
+    "name": "DOCX file-ready state retains actual file binding",
+    "passed": true
+  },
+  {
+    "name": "drag enter/leave resets upload feedback",
+    "passed": true
+  },
+  {
+    "name": "mobile menu opens, closes by Escape and restores keyboard focus",
+    "passed": true
+  },
+  {
+    "name": "real backend rejects local-network URL safely and retains inputs for recovery",
+    "passed": true
+  },
+  {
+    "name": "real QA account sessions preserve administrator-only navigation",
+    "passed": true
+  },
+  {
+    "name": "existing logout confirmation remains a modal and cancels with Escape",
+    "passed": true
+  },
+  {
+    "name": "browser desktop screenshot",
+    "passed": true
+  },
+  {
+    "name": "browser tablet screenshot",
+    "passed": true
+  },
+  {
+    "name": "browser mobile screenshot",
+    "passed": true
+  },
+  {
+    "name": "browser dark screenshot",
+    "passed": true
+  },
+  {
+    "name": "real text source completes existing processing/result flow with one submission",
+    "passed": true
+  },
+  {
+    "name": "real pdf source completes existing processing/result flow with one submission",
+    "passed": true
+  },
+  {
+    "name": "real docx source completes existing processing/result flow with one submission",
+    "passed": true
+  },
+  {
+    "name": "real url source completes existing processing/result flow with one submission",
+    "passed": true
+  },
+  {
+    "name": "real Python NLP Nutshell succeeds, stays inline, enables copy and charges one shared use",
+    "passed": true
+  },
+  {
+    "name": "no browser script exceptions",
+    "passed": true
+  }
+]

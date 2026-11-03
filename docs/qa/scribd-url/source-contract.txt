@@ -1,0 +1,147 @@
+PASS: blank source [INPUT_EMPTY]
+PASS: blank source has safe public text
+PASS: short plain text remains available for engine validation
+PASS: invalid URL structure  [URL_INVALID]
+PASS: invalid URL structure  has safe public text
+PASS: invalid URL structure https [URL_INVALID]
+PASS: invalid URL structure https has safe public text
+PASS: invalid URL structure ftp [URL_INVALID]
+PASS: invalid URL structure ftp has safe public text
+PASS: invalid URL structure https [URL_INVALID]
+PASS: invalid URL structure https has safe public text
+PASS: unsafe URL blocked before fetching [URL_UNSAFE]
+PASS: unsafe URL blocked before fetching has safe public text
+PASS: unsafe URL blocked before fetching [URL_UNSAFE]
+PASS: unsafe URL blocked before fetching has safe public text
+PASS: unsafe URL blocked before fetching [URL_UNSAFE]
+PASS: unsafe URL blocked before fetching has safe public text
+PASS: unsafe URL blocked before fetching [URL_UNSAFE]
+PASS: unsafe URL blocked before fetching has safe public text
+PASS: unsafe URL blocked before fetching [URL_UNSAFE]
+PASS: unsafe URL blocked before fetching has safe public text
+PASS: unsafe URL blocked before fetching [URL_UNSAFE]
+PASS: unsafe URL blocked before fetching has safe public text
+PASS: unsafe URL blocked before fetching [URL_UNSAFE]
+PASS: unsafe URL blocked before fetching has safe public text
+PASS: DNS failure is not invalid syntax [URL_UNREACHABLE]
+PASS: DNS failure is not invalid syntax has safe public text
+PASS: remote HTTP 401 [URL_ACCESS_RESTRICTED]
+PASS: remote HTTP 401 has safe public text
+PASS: remote HTTP 403 [URL_ACCESS_RESTRICTED]
+PASS: remote HTTP 403 has safe public text
+PASS: remote HTTP 451 [URL_ACCESS_RESTRICTED]
+PASS: remote HTTP 451 has safe public text
+PASS: remote HTTP 404 [URL_CONTENT_UNAVAILABLE]
+PASS: remote HTTP 404 has safe public text
+PASS: remote HTTP 410 [URL_CONTENT_UNAVAILABLE]
+PASS: remote HTTP 410 has safe public text
+PASS: remote HTTP 429 [URL_RATE_LIMITED]
+PASS: remote HTTP 429 has safe public text
+PASS: remote HTTP 503 [URL_UNREACHABLE]
+PASS: remote HTTP 503 has safe public text
+PASS: network failure 28 [URL_TIMEOUT]
+PASS: network failure 28 has safe public text
+PASS: network failure 7 [URL_UNREACHABLE]
+PASS: network failure 7 has safe public text
+PASS: network failure 60 [URL_TLS_FAILED]
+PASS: network failure 60 has safe public text
+PASS: unsafe redirect is revalidated [URL_UNSAFE]
+PASS: unsafe redirect is revalidated has safe public text
+PASS: non-HTTP redirect rejected [URL_UNSAFE]
+PASS: non-HTTP redirect rejected has safe public text
+PASS: wrong URL content type [URL_CONTENT_UNAVAILABLE]
+PASS: wrong URL content type has safe public text
+PASS: unreadable webpage [URL_CONTENT_UNAVAILABLE]
+PASS: unreadable webpage has safe public text
+PASS: HTML fetch limit [URL_TOO_LARGE]
+PASS: HTML fetch limit has safe public text
+PASS: Scribd uses only public document text, not metadata
+PASS: Scribd archive paywall is respected even if text is present [URL_ACCESS_RESTRICTED]
+PASS: Scribd archive paywall is respected even if text is present has safe public text
+PASS: Scribd paywall UI flag is respected [URL_ACCESS_RESTRICTED]
+PASS: Scribd paywall UI flag is respected has safe public text
+PASS: script-only Scribd pages have actionable viewer guidance [URL_DOCUMENT_VIEWER]
+PASS: script-only Scribd pages have actionable viewer guidance has safe public text
+PASS: Scribd handling never follows hidden page assets or downloader endpoints
+PASS: Scribd descriptions are not summarized as the document [URL_DOCUMENT_VIEWER]
+PASS: Scribd descriptions are not summarized as the document has safe public text
+PASS: public localized Scribd text is not confused with download-credit restrictions
+PASS: hidden Scribd text is not retrieved as public document content [URL_DOCUMENT_VIEWER]
+PASS: hidden Scribd text is not retrieved as public document content has safe public text
+PASS: hidden or masked Scribd root is not exposed [URL_DOCUMENT_VIEWER]
+PASS: hidden or masked Scribd root is not exposed has safe public text
+PASS: hidden or masked Scribd root is not exposed [URL_DOCUMENT_VIEWER]
+PASS: hidden or masked Scribd root is not exposed has safe public text
+PASS: hidden or masked Scribd root is not exposed [URL_DOCUMENT_VIEWER]
+PASS: hidden or masked Scribd root is not exposed has safe public text
+PASS: Scribd hostname lookalikes do not trigger host-specific behavior
+PASS: valid short article selects article text
+PASS: cURL pins the validated DNS address
+PASS: proxy environment cannot bypass destination validation
+PASS: TLS verification remains enabled
+PASS: short text/plain source is preserved
+PASS: PDF signature mismatch [URL_CONTENT_UNAVAILABLE]
+PASS: PDF signature mismatch has safe public text
+PASS: PDF extraction preserves FILE_CORRUPTED [FILE_CORRUPTED]
+PASS: PDF extraction preserves FILE_CORRUPTED has safe public text
+PASS: failed PDF extraction removes temporary download
+PASS: PDF extraction preserves FILE_ENCRYPTED [FILE_ENCRYPTED]
+PASS: PDF extraction preserves FILE_ENCRYPTED has safe public text
+PASS: failed PDF extraction removes temporary download
+PASS: PDF extraction preserves FILE_TEXT_UNAVAILABLE [FILE_TEXT_UNAVAILABLE]
+PASS: PDF extraction preserves FILE_TEXT_UNAVAILABLE has safe public text
+PASS: failed PDF extraction removes temporary download
+PASS: PDF extraction preserves DOCUMENT_EXTRACTION_FAILED [DOCUMENT_EXTRACTION_FAILED]
+PASS: PDF extraction preserves DOCUMENT_EXTRACTION_FAILED has safe public text
+PASS: failed PDF extraction removes temporary download
+PASS: PDF extraction preserves WORKER_UNAVAILABLE [WORKER_UNAVAILABLE]
+PASS: PDF extraction preserves WORKER_UNAVAILABLE has safe public text
+PASS: failed PDF extraction removes temporary download
+PASS: PDF extraction preserves PROCESSING_TIMEOUT [PROCESSING_TIMEOUT]
+PASS: PDF extraction preserves PROCESSING_TIMEOUT has safe public text
+PASS: failed PDF extraction removes temporary download
+PASS: PDF extraction success preserved
+PASS: successful source keeps download through processing
+PASS: successful source cleanup removes download
+PASS: unknown worker exception does not invent infrastructure cause
+PASS: legacy daemon timeout classification
+PASS: daemon admission failure classification
+PASS: internal worker authentication does not ask the user to sign in
+PASS: legacy v2 extraction code survives upgrade
+PASS: stdout source failure beats stderr diagnostics
+PASS: typed stderr error survives warnings and generic stdout diagnostics
+PASS: missing worker dependency is infrastructure
+PASS: real CLI transport preserves FILE_ENCRYPTED [FILE_ENCRYPTED]
+PASS: real CLI transport preserves FILE_ENCRYPTED has safe public text
+PASS: CLI diagnostic reference preserved
+PASS: real CLI transport preserves FILE_CORRUPTED [FILE_CORRUPTED]
+PASS: real CLI transport preserves FILE_CORRUPTED has safe public text
+PASS: CLI diagnostic reference preserved
+PASS: real CLI transport preserves SUMMARY_QUALITY_FAILED [SUMMARY_QUALITY_FAILED]
+PASS: real CLI transport preserves SUMMARY_QUALITY_FAILED has safe public text
+PASS: CLI diagnostic reference preserved
+PASS: real CLI preserves failure after library diagnostics [FILE_CORRUPTED]
+PASS: real CLI preserves failure after library diagnostics has safe public text
+PASS: real CLI execution deadline [PROCESSING_TIMEOUT]
+PASS: real CLI execution deadline has safe public text
+PASS: real CLI successful response
+PASS: Nutshell endpoint and saved failure mapping anonymous [ACCESS_DENIED]
+PASS: Nutshell endpoint and saved failure mapping anonymous has safe public text
+PASS: Nutshell endpoint and saved failure mapping method [REQUEST_INVALID]
+PASS: Nutshell endpoint and saved failure mapping method has safe public text
+PASS: Nutshell endpoint and saved failure mapping csrf [ACCESS_DENIED]
+PASS: Nutshell endpoint and saved failure mapping csrf has safe public text
+PASS: local fixture daemon ready
+PASS: real daemon HTTP transport preserves extraction failure [FILE_ENCRYPTED]
+PASS: real daemon HTTP transport preserves extraction failure has safe public text
+PASS: daemon diagnostic reference preserved
+PASS: local fixture daemon ready
+PASS: authenticated daemon cancel_success returns precise best-effort result
+PASS: local fixture daemon ready
+PASS: authenticated daemon cancel_miss returns precise best-effort result
+PASS: local fixture daemon ready
+PASS: authenticated daemon cancel_failure returns precise best-effort result
+PASS: offline daemon cancellation returns false without starting a worker
+PASS: invalid cancellation job ID is rejected
+
+All 145 source and bridge checks passed. HTTP source fixtures are deterministic; no external site restrictions were bypassed.

@@ -37,12 +37,13 @@ def main():
         results.append(result);(REPORT/'results.json').write_text(json.dumps(results,indent=2),encoding='utf8')
         print(('PASS ' if result['exit']==0 else 'FAIL ')+name,flush=True)
         return result['exit']==0
-    if not step('isolated MySQL schema 001-020 and preserved live baseline',[PHP,'scripts/qa/control.php','setup-benchmark',str(folder)]):return 1
+    if not step('isolated current MySQL schema and preserved live baseline',[PHP,'scripts/qa/control.php','setup-benchmark',str(folder)]):return 1
     env=os.environ.copy();env.update(json.loads((folder/'config.json').read_text())['env'])
     env.update(QA_PRIVATE_DIR=str(folder),QA_INITIAL_LIST_FILE=str(folder/'initial-list.json'),QA_REGISTRY_REPORT=str(REPORT),LIGHT_TEST_URL='http://127.0.0.1:58139/')
     try:
         step('restricted credentials deny production',[PHP,'scripts/qa/isolation.php'],env)
         if not step('38-ID registry-only backend, reconciliation and race acceptance',[PHP,'scripts/student-access/test_registry_only.php'],env,180):return 1
+        if not step('safe placeholder claiming takeover prevention preservation and eight-way race',[PHP,'scripts/student-access/test_placeholder_claims.php'],env,180):return 1
         if args.backend_only:raise BackendOnlyComplete()
         nlp_log=(folder/'nlp.log').open('wb')
         nlp=subprocess.Popen([str(ROOT/'.venv-nlp/Scripts/python.exe'),'python-engine/worker_daemon.py','--port','58149','--deadline','600'],cwd=ROOT,env=env,stdout=nlp_log,stderr=nlp_log)
@@ -99,6 +100,7 @@ php_admin_value error_log "{private}/php-error.log"
         time.sleep(2)
         step('PHP 8.3 real HTTP registration, login, admin imports and authorization',[str(ROOT/'.venv-nlp/Scripts/python.exe'),'scripts/qa/allowlist_http.py'],env,180)
         step('required-email registration, safe errors and database failure HTTP acceptance',[str(ROOT/'.venv-nlp/Scripts/python.exe'),'scripts/qa/registration_http.py'],env,180)
+        step('existing-form placeholder claiming login history CSRF and concurrent HTTP acceptance',[str(ROOT/'.venv-nlp/Scripts/python.exe'),'scripts/qa/placeholder_http.py'],env,180)
         step('mobile and desktop browser acceptance',['node','scripts/qa/allowlist_browser.cjs'],env,180)
         step('existing PHP core security and data regression',[PHP,'scripts/qa/allowlist_core.php'],env,600)
         step('real Python NLP and MySQL summary persistence',[str(ROOT/'.venv-nlp/Scripts/python.exe'),'scripts/qa/allowlist_nlp.py'],env,900)

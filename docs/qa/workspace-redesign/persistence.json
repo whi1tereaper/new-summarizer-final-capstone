@@ -1,0 +1,30 @@
+{
+    "focused_summary_saved": true,
+    "optional_title_saved": true,
+    "focused_text_saved": true,
+    "summary_status": "completed",
+    "completed_sources": [
+        {
+            "input_type": "text",
+            "total": 1
+        },
+        {
+            "input_type": "pdf",
+            "total": 2
+        },
+        {
+            "input_type": "docx",
+            "total": 1
+        },
+        {
+            "input_type": "url",
+            "total": 1
+        }
+    ],
+    "real_nutshell_algorithms": [
+        {
+            "algorithm_version": "nutshell-extractive-v2",
+            "completed": 4
+        }
+    ]
+}

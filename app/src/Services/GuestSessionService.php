@@ -88,6 +88,12 @@ class GuestSessionService
             ]);
             $migratedFeedback = $feedbackStatement->rowCount();
 
+            $nutshellStatement = $this->db->prepare(
+                'UPDATE nutshell_generations SET user_id = :user_id, guest_token = NULL
+                 WHERE user_id IS NULL AND guest_token = :guest_token'
+            );
+            $nutshellStatement->execute(['user_id' => $userId, 'guest_token' => $guestToken]);
+
             $this->deleteGuestSessionRecord($guestToken);
             $this->db->commit();
 
@@ -135,6 +141,12 @@ class GuestSessionService
                 $feedbackStatement->execute($expiredTokens);
                 $deletedFeedback = $feedbackStatement->rowCount();
 
+                $nutshellStatement = $this->db->prepare(
+                    "DELETE FROM nutshell_generations
+                     WHERE user_id IS NULL AND guest_token IN ($placeholders)"
+                );
+                $nutshellStatement->execute($expiredTokens);
+
                 $summaryStatement = $this->db->prepare(
                     "DELETE FROM summaries
                      WHERE user_id IS NULL AND guest_token IN ($placeholders)"
@@ -168,6 +180,13 @@ class GuestSessionService
             );
             $legacySummaryStatement->execute([$legacyCutoff]);
             $deletedLegacySummaries = $legacySummaryStatement->rowCount();
+
+            $legacyNutshellStatement = $this->db->prepare(
+                "DELETE FROM nutshell_generations
+                 WHERE user_id IS NULL AND (guest_token IS NULL OR guest_token = '')
+                   AND created_at < ?"
+            );
+            $legacyNutshellStatement->execute([$legacyCutoff]);
 
             $this->db->commit();
 

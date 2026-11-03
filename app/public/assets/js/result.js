@@ -4,22 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    const themeToggle = document.getElementById('result-theme-toggle');
-    function applyResultTheme(theme) {
-        const dark = theme === 'dark';
-        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-        if (themeToggle) {
-            themeToggle.setAttribute('aria-pressed', String(dark));
-            themeToggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
-        }
-    }
-    applyResultTheme(document.documentElement.dataset.theme || 'light');
-    themeToggle?.addEventListener('click', () => {
-        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-        try { localStorage.setItem('light-results-theme', next); } catch (e) { /* storage may be unavailable */ }
-        applyResultTheme(next);
-    });
-
     // ── Page data ────────────────────────────────────────────────────
     const summaryText = page.dataset.summaryText || '';
     const summaryId   = Number(page.dataset.summaryId || 0);

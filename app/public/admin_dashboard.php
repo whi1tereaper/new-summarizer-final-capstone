@@ -29,6 +29,8 @@ use App\Src\Controllers\FeedbackHandler;
 // Explicit admin action dispatcher
 $action = $_GET['action'] ?? ($_POST['action'] ?? null);
 if ($action !== null) {
+    if(!is_string($action)){http_response_code(400);exit('Invalid admin action.');}
+    $auditAction=in_array($action,['toggle_status','clean_files','delete_files','delete_user','deactivate_user'],true)?$action:'unsupported_action';
     $auditSvc = new AdminSecurityService();
     $callerAdminId = isset($_SESSION['user_id']) ? (int)$_SESSION['user_id'] : null;
 
@@ -43,7 +45,7 @@ if ($action !== null) {
         $auditSvc->auditLog(
             $callerAdminId,
             'admin_action_denied',
-            'Unauthorized session attempted admin action: ' . htmlspecialchars((string)$action),
+            'Unauthorized session attempted admin action: ' . $auditAction,
             null,
             null
         );
@@ -53,11 +55,11 @@ if ($action !== null) {
 
     // Gate 3: CSRF token validation
     $csrfToken = $_POST['csrf_token'] ?? '';
-    if (!verifyCsrfToken($csrfToken)) {
+    if (!is_string($csrfToken) || !verifyCsrfToken($csrfToken)) {
         $auditSvc->auditLog(
             $callerAdminId,
             'admin_action_denied',
-            'Invalid CSRF token for action: ' . htmlspecialchars((string)$action),
+            'Invalid CSRF token for action: ' . $auditAction,
             null,
             null
         );
@@ -137,7 +139,8 @@ $adminStatsFrom = $adminStatsRange === 'all'
 $analyticsStatsFrom = $adminStatsFrom ?? '1970-01-01';
 $users = $admin->getAllUsers();
 $stats = $admin->getSystemStats($adminStatsFrom, $adminStatsRange === 'all' ? null : $adminStatsTo);
-$orphanStats = $admin->getUploadOrphanStats();
+$storageSnapshot=null;$storageError='';
+try{$storageSnapshot=$admin->getStorageMaintenanceStats();}catch(Throwable $error){$storageError='Storage status is temporarily unavailable. Refresh to check again.';}
 $feedbackStats = FeedbackHandler::getSystemFeedbackStats($adminStatsFrom, $adminStatsRange === 'all' ? null : $adminStatsTo);
 $fbFilterRating  = isset($_GET['fb_rating']) && is_numeric($_GET['fb_rating']) ? (int)$_GET['fb_rating'] : null;
 $fbFilterComment = isset($_GET['fb_comment']) && $_GET['fb_comment'] !== '' ? ($_GET['fb_comment'] === '1') : null;
@@ -178,409 +181,35 @@ try {
 
 ?>
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <?php require_once __DIR__ . '/partials/design-system-head.php'; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="assets/images/poc-neust-logo.png">
+    <title>Admin Dashboard — DEPENDED</title>
     <link rel="stylesheet" href="assets/css/style.css?v=navbar-3-<?= filemtime(__DIR__ . '/assets/css/style.css') ?>">
     <link rel="stylesheet" href="assets/css/dashboard-charts.css?v=<?= file_exists(__DIR__ . '/assets/css/dashboard-charts.css') ? filemtime(__DIR__ . '/assets/css/dashboard-charts.css') : '1' ?>">
-    <style>
-        .admin-section { margin-bottom: 60px; }
-        .admin-section h2 {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.85em;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--color-muted);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-        }
-        .admin-section h2::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: var(--color-border);
-            margin-left: 20px;
-        }
-        #admin-feedback-section .feedback-filters {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin: 0;
-        }
-        #admin-feedback-section .feedback-filters label {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin: 0;
-            line-height: 1;
-            white-space: nowrap;
-        }
-        #admin-feedback-section .feedback-filters select,
-        #admin-feedback-section .feedback-filters button,
-        #admin-feedback-section .feedback-filters .feedback-reset {
-            box-sizing: border-box;
-            min-height: 28px;
-            margin: 0;
-            line-height: 1.2;
-        }
-        #admin-feedback-section .feedback-filters button {
-            align-self: center;
-        }
-        #admin-feedback-section .feedback-filters .feedback-reset {
-            display: inline-flex;
-            align-items: center;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-        .stat-card {
-            background: var(--color-bg-secondary);
-            border: 1px solid var(--color-border);
-            padding: 25px;
-            box-shadow: var(--shadow-soft);
-            min-height: 180px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .stat-card .stat-value {
-            font-family: 'Outfit', 'Inter', sans-serif;
-            font-size: 2.5em;
-            font-weight: 700;
-            letter-spacing: -0.05em;
-            color: var(--color-text);
-            line-height: 1;
-        }
-        .stat-card .stat-label {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.7em;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--color-muted);
-            margin-top: 5px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.85em;
-        }
-        th {
-            text-align: left;
-            font-size: 0.75em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--color-text-muted);
-            border-bottom: 2px solid var(--color-accent);
-            padding: 10px 12px;
-        }
-        td {
-            padding: 12px;
-            border-bottom: 1px solid var(--color-border);
-            color: var(--color-text);
-        }
-        tr:hover td { background: var(--color-bg-tertiary); }
-
-        .role-badge {
-            display: inline-block;
-            padding: 3px 10px;
-            font-size: 0.75em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-        .role-admin { background: var(--color-accent); color: var(--color-bg); }
-        .role-user { background: var(--color-accent-soft); color: var(--color-accent); }
-
-        .status-active { color: var(--color-accent); }
-        .status-inactive { color: var(--color-danger); }
-
-        .admin-toolbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-            border-bottom: 2px solid var(--color-accent);
-            margin-bottom: 50px;
-            padding-bottom: 15px;
-        }
-        .admin-toolbar h1 {
-            border-bottom: none;
-            margin: 0;
-            padding: 0;
-            color: var(--color-text);
-        }
-        .hard-refresh-btn {
-            background: var(--gradient-button);
-            color: #fff;
-            border: none;
-            padding: 10px 15px;
-            text-transform: uppercase;
-            font-size: 0.75em;
-            letter-spacing: 1px;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-        }
-        @media (max-width: 640px) {
-            .admin-toolbar {
-                align-items: flex-start;
-                flex-direction: column;
-            }
-        }
-
-        /* ─── Admin Responsive ─── */
-        .table-responsive {
-            width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .admin-user-filters {
-            display: grid;
-            grid-template-columns: minmax(220px, 2fr) repeat(2, minmax(150px, 1fr)) auto;
-            align-items: end;
-            gap: 12px;
-            padding: 16px;
-            margin-bottom: 14px;
-            background: var(--color-bg-secondary, #fcfbf9);
-            border: 1px solid var(--color-border);
-        }
-
-        .admin-user-filters__field {
-            display: grid;
-            gap: 6px;
-            min-width: 0;
-        }
-
-        .admin-user-filters__field label {
-            color: var(--color-text-muted);
-            font: 600 0.7em 'Inter', sans-serif;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-
-        .admin-user-filters__field input,
-        .admin-user-filters__field select {
-            width: 100%;
-            min-height: 40px;
-            padding: 8px 10px;
-            color: var(--color-text);
-            background: var(--color-bg, #fff);
-            border: 1px solid var(--color-border);
-            border-radius: 4px;
-            font: 0.85em 'Inter', sans-serif;
-        }
-
-        .admin-user-filters__field input:focus-visible,
-        .admin-user-filters__field select:focus-visible,
-        .admin-user-filters__clear:focus-visible {
-            outline: 2px solid var(--color-focus, var(--color-accent));
-            outline-offset: 2px;
-        }
-
-        .admin-user-filters__clear {
-            min-height: 40px;
-            padding: 8px 14px;
-            color: var(--color-text);
-            background: transparent;
-            border: 1px solid var(--color-border);
-            cursor: pointer;
-            font: 600 0.78em 'Inter', sans-serif;
-        }
-
-        .admin-user-filters__clear:hover {
-            color: var(--color-accent-strong, var(--color-accent));
-            border-color: var(--color-accent);
-        }
-
-        .admin-user-filters__count {
-            margin: 0 0 10px;
-            color: var(--color-text-muted);
-            font: 0.78em 'Inter', sans-serif;
-        }
-
-        .admin-stats-range {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: flex-end;
-            gap: 14px;
-            margin: -5px 0 18px;
-        }
-
-        .admin-stats-range label {
-            display: grid;
-            gap: 8px;
-            color: var(--color-text-muted);
-            margin: 0;
-            font: 600 0.7em 'Inter', sans-serif;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-
-        .admin-stats-range select {
-            min-height: 42px;
-            min-width: 170px;
-            padding: 8px 10px;
-            color: var(--color-text);
-            background: var(--color-bg, #fff);
-            border: 1px solid var(--color-border);
-            border-radius: 4px;
-            font: 0.85em 'Inter', sans-serif;
-        }
-
-        .admin-stats-range button {
-            min-height: 42px;
-            padding: 8px 18px;
-            border: 1px solid var(--color-accent);
-            color: var(--color-bg, #fff);
-            background: var(--color-accent);
-            cursor: pointer;
-            font: 600 0.78em 'Inter', sans-serif;
-            align-self: flex-end;
-        }
-
-        .admin-stats-range button:focus-visible,
-        .admin-stats-range select:focus-visible {
-            outline: 2px solid var(--color-focus, var(--color-accent));
-            outline-offset: 2px;
-        }
-
-        .admin-stats-range__caption {
-            align-self: flex-end;
-            margin: 0;
-            padding-bottom: 4px;
-            color: var(--color-text-muted);
-            font: 0.78em 'Inter', sans-serif;
-        }
-
-        @media (max-width: 700px) {
-            .admin-user-filters {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .admin-user-filters__field--search {
-                grid-column: 1 / -1;
-            }
-        }
-
-        @media (max-width: 420px) {
-            .admin-user-filters {
-                grid-template-columns: 1fr;
-            }
-
-            .admin-user-filters__field--search {
-                grid-column: auto;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .stats-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                gap: 18px;
-            }
-
-            .stat-card {
-                padding: 20px;
-            }
-
-            .stat-card .stat-value {
-                font-size: 2em;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .admin-toolbar h1 {
-                font-size: 1.5em;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 14px;
-            }
-
-            .stat-card {
-                padding: 16px;
-            }
-
-            .stat-card .stat-value {
-                font-size: 1.6em;
-            }
-
-            table {
-                font-size: 0.78em;
-            }
-
-            th, td {
-                padding: 8px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .admin-toolbar h1 {
-                font-size: 1.25em;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
-
-            .stat-card {
-                padding: 14px;
-            }
-
-            .stat-card .stat-value {
-                font-size: 1.4em;
-            }
-
-            .stat-card .stat-label {
-                font-size: 0.65em;
-            }
-
-            table {
-                font-size: 0.72em;
-                min-width: 600px;
-            }
-
-            th, td {
-                padding: 6px 8px;
-                white-space: nowrap;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/student-access.css?v=<?= filemtime(__DIR__ . '/assets/css/student-access.css') ?>">
+    <link rel="stylesheet" href="assets/css/admin-storage.css?v=<?= filemtime(__DIR__ . '/assets/css/admin-storage.css') ?>">
+    <link rel="stylesheet" href="assets/css/admin-dashboard.css?v=<?= filemtime(__DIR__ . '/assets/css/admin-dashboard.css') ?>">
 </head>
 <body class="admin-dashboard-page">
 <?php $showLightBrand = true; ?>
 <?php require __DIR__ . '/partials/site-nav.php'; ?>
-    <div class="editorial-layout">
-        <nav style="margin-bottom: 40px; display:flex; gap:20px; flex-wrap:wrap;">
-            <a href="index.php" style="text-decoration:none; font-size:0.8em; color:var(--color-muted); font-family:'Inter'; text-transform:uppercase; letter-spacing:1px;">&larr; Dashboard</a>
-        </nav>
-
+    <main class="editorial-layout">
         <div class="admin-toolbar">
             <h1>Administrative Console</h1>
         </div>
 
         <?php if (isset($_SESSION['flash_success'])): ?>
-            <div style="background:var(--color-accent-soft); color:var(--color-accent-strong); padding:15px; margin-bottom:20px; font-family:'Inter'; font-size:0.85em; border-left:4px solid var(--color-accent);">
+            <div style="background:var(--color-accent-soft); color:var(--color-accent-strong); padding:15px; margin-bottom:20px; font-family:var(--font-body); font-size:0.85em; border-left:4px solid var(--color-accent);">
                 <?= htmlspecialchars($_SESSION['flash_success']) ?>
             </div>
             <?php unset($_SESSION['flash_success']); ?>
         <?php endif; ?>
-        
+
         <?php if (isset($_SESSION['flash_error'])): ?>
-            <div style="background:var(--color-danger-soft); color:var(--color-danger); padding:15px; margin-bottom:20px; font-family:'Inter'; font-size:0.85em; border-left:4px solid var(--color-danger);">
+            <div style="background:var(--color-danger-soft); color:var(--color-danger); padding:15px; margin-bottom:20px; font-family:var(--font-body); font-size:0.85em; border-left:4px solid var(--color-danger);">
                 <?= htmlspecialchars($_SESSION['flash_error']) ?>
             </div>
             <?php unset($_SESSION['flash_error']); ?>
@@ -602,7 +231,7 @@ try {
                         <input type="hidden" name="<?= htmlspecialchars($preservedFilter, ENT_QUOTES, 'UTF-8') ?>" value="<?= htmlspecialchars((string)$_GET[$preservedFilter], ENT_QUOTES, 'UTF-8') ?>">
                     <?php endif; ?>
                 <?php endforeach; ?>
-                <button type="submit">Apply period</button>
+                <button class="btn btn--primary" type="submit">Apply period</button>
                 <p class="admin-stats-range__caption">Overview totals and analytics use <?= htmlspecialchars($adminStatsRanges[$adminStatsRange], ENT_QUOTES, 'UTF-8') ?>.</p>
             </form>
             <div class="stats-grid">
@@ -631,24 +260,7 @@ try {
 
         <?php require __DIR__ . '/partials/analytics-graphs-card.php'; ?>
 
-        <div class="admin-section">
-            <h2>Storage & Maintenance</h2>
-            
-
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-value"><?= $orphanStats['size_mb'] ?> MB</div>
-                    <div class="stat-label">Uploads Folder Size</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value"><?= $orphanStats['count'] ?></div>
-                    <div class="stat-label">Total Uploaded Files</div>
-                </div>
-            </div>
-            
-
-        </div>
+        <?php require __DIR__.'/partials/admin-storage-maintenance.php'; ?>
 
         <div class="admin-section">
             <h2>User Management</h2>
@@ -673,7 +285,7 @@ try {
                         <option value="inactive">Inactive</option>
                     </select>
                 </div>
-                <button type="button" class="admin-user-filters__clear" id="admin-user-filters-clear">Clear filters</button>
+                <button type="button" class="btn btn--secondary admin-user-filters__clear" id="admin-user-filters-clear">Clear filters</button>
             </div>
             <p class="admin-user-filters__count" id="admin-user-filter-count" role="status" aria-live="polite" aria-atomic="true"></p>
             <div class="table-responsive">
@@ -713,26 +325,29 @@ try {
                             <?php elseif ($isAdmin): ?>
                                 <span style="font-size:0.72em; color:var(--color-muted); text-transform:uppercase; letter-spacing:1px;">Admin</span>
                             <?php else: ?>
+                                <div class="table-actions" role="group" aria-label="Account actions for <?= htmlspecialchars((string)$user['username'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>">
                                 <?php if ($user['active']): ?>
-                                    <form method="POST" action="admin_dashboard.php?action=deactivate_user" style="display:inline;">
+                                    <form method="POST" action="admin_dashboard.php?action=deactivate_user"
+                                        onsubmit="return confirm(<?= htmlspecialchars(json_encode('Deactivate user ' . $user['username'] . '? They will be locked out but their data is kept.', JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>);">
                                         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
                                         <input type="hidden" name="user_id" value="<?= (int)$user['id'] ?>">
-                                        <button type="submit"
-                                            onclick="return confirm('Deactivate user <?= htmlspecialchars(addslashes($user['username'])) ?>? They will be locked out but their data is kept.');"
-                                            style="background:transparent; color:var(--color-primary-dark); border:none; text-transform:uppercase; font-size:0.72em; letter-spacing:1px; font-weight:600; cursor:pointer; padding:0; margin-right:10px; text-decoration:underline;">
-                                            Deactivate
+                                        <button class="text-action" type="submit" aria-label="Deactivate account <?= htmlspecialchars((string)$user['username'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>
+                                            <span>Deactivate</span>
                                         </button>
                                     </form>
+                                    <span class="table-actions__divider" aria-hidden="true"></span>
                                 <?php endif; ?>
-                                <form method="POST" action="admin_dashboard.php?action=delete_user" style="display:inline;">
+                                <form method="POST" action="admin_dashboard.php?action=delete_user"
+                                    onsubmit="return confirm(<?= htmlspecialchars(json_encode('WARNING: Permanently delete user ' . $user['username'] . ' and ALL their data? This cannot be undone.', JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>);">
                                     <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
                                     <input type="hidden" name="user_id" value="<?= (int)$user['id'] ?>">
-                                    <button type="submit"
-                                        onclick="return confirm('WARNING: Permanently delete user <?= htmlspecialchars(addslashes($user['username'])) ?> and ALL their data? This cannot be undone.');"
-                                        style="background:transparent; color:var(--color-danger); border:none; text-transform:uppercase; font-size:0.72em; letter-spacing:1px; font-weight:600; cursor:pointer; padding:0; text-decoration:underline;">
-                                        Delete
+                                    <button class="text-action text-action--danger" type="submit" aria-label="Permanently delete account <?= htmlspecialchars((string)$user['username'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18M9 6V4h6v2M5 6l1 14h12l1-14M10 10v6m4-6v6"/></svg>
+                                        <span>Delete</span>
                                     </button>
                                 </form>
+                                </div>
                             <?php endif; ?>
                         </td>
                     </tr>
@@ -800,7 +415,7 @@ try {
                     ?>
                     <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.82em;">
                         <?php foreach ($feedbackTelemetry['reasons_counts'] as $rKey => $rCount): ?>
-                        <li style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid rgba(0,0,0,0.04);">
+                        <li style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--color-border);">
                             <span style="color: var(--color-text);"><?= htmlspecialchars($allowedLabels[$rKey] ?? $rKey) ?></span>
                             <span style="font-weight: 600; color: var(--color-danger);"><?= (int)$rCount ?> report<?= $rCount > 1 ? 's' : '' ?></span>
                         </li>
@@ -846,8 +461,8 @@ try {
                         </select>
                     </label>
 
-                    <button type="submit" style="padding: 4px 10px; font-size: 0.8em; background: var(--color-primary-dark); color: var(--color-on-accent); border: none; cursor: pointer;">Filter</button>
-                    <a href="admin_dashboard.php#admin-feedback-section" class="feedback-reset" style="font-size: 0.8em; color: var(--color-muted); text-decoration: underline;">Reset</a>
+                    <button class="btn btn--primary" type="submit" >Filter</button>
+                    <a href="admin_dashboard.php#admin-feedback-section" class="btn btn--ghost feedback-reset" >Reset</a>
                 </form>
             </div>
 
@@ -891,7 +506,7 @@ try {
                             <?php endif; ?>
                         </td>
                         <td>
-                            <span style="font-weight: 700; color: <?= $ratingVal <= 2 ? 'var(--color-danger)' : ($ratingVal >= 4 ? '#059669' : '#d97706') ?>;">
+                            <span style="font-weight: 700; color: <?= $ratingVal <= 2 ? 'var(--color-danger)' : ($ratingVal >= 4 ? 'var(--color-success)' : 'var(--color-warning)') ?>;">
                                 ★ <?= $ratingVal > 0 ? $ratingVal : '-' ?>
                             </span>
                         </td>
@@ -899,7 +514,7 @@ try {
                             <?php if (!empty($reasonsList)): ?>
                                 <div style="display: flex; flex-wrap: wrap; gap: 4px;">
                                     <?php foreach ($reasonsList as $rl): ?>
-                                    <span style="font-size: 0.72em; background: rgba(220, 38, 38, 0.08); color: var(--color-danger); border: 1px solid rgba(220, 38, 38, 0.2); padding: 2px 6px; border-radius: 999px;">
+                                    <span style="font-size: 0.72em; background: var(--color-danger-soft); color: var(--color-danger); border: 1px solid var(--color-danger-border); padding: 2px 6px; border-radius: 999px;">
                                         <?= htmlspecialchars($rl) ?>
                                     </span>
                                     <?php endforeach; ?>
@@ -932,7 +547,7 @@ try {
 
         <div class="admin-section">
             <h2>Feedback Comments Repository (Anonymous)</h2>
-            <div class="comments-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+            <div class="comments-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: var(--space-5);">
                 <?php 
                 $allowedLabels = \App\Src\Services\FeedbackService::ALLOWED_REASONS;
                 foreach ($allFeedback as $fb): 
@@ -954,7 +569,7 @@ try {
                                 <strong style="display: block; font-size: 1em; color: var(--color-text);">Anonymous User</strong>
                                 <span style="font-size: 0.75em; color: var(--color-muted); text-transform: uppercase;"><?= date('M d, Y', strtotime($fb['created_at'])) ?></span>
                             </div>
-                            <span style="font-size: 0.75em; font-weight: 700; color: <?= $ratingVal <= 2 ? 'var(--color-danger)' : ($ratingVal >= 4 ? 'var(--color-success)' : 'var(--color-warning, #d97706)') ?>; background: var(--color-bg-tertiary); padding: 4px 8px; border-radius: 4px;">
+                            <span style="font-size: 0.75em; font-weight: 700; color: <?= $ratingVal <= 2 ? 'var(--color-danger)' : ($ratingVal >= 4 ? 'var(--color-success)' : 'var(--color-warning)') ?>; background: var(--color-bg-tertiary); padding: 4px 8px; border-radius: 4px;">
                                 ★ <?= $ratingVal > 0 ? $ratingVal . ' / 5' : 'No rating' ?>
                             </span>
                         </div>
@@ -962,7 +577,7 @@ try {
                         <?php if (!empty($reasonsList)): ?>
                         <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px;">
                             <?php foreach ($reasonsList as $rl): ?>
-                            <span style="font-size: 0.7em; background: rgba(220, 38, 38, 0.08); color: var(--color-danger); border: 1px solid rgba(220, 38, 38, 0.15); padding: 2px 6px; border-radius: 999px;">
+                            <span style="font-size: 0.7em; background: var(--color-danger-soft); color: var(--color-danger); border: 1px solid var(--color-danger-border); padding: 2px 6px; border-radius: 999px;">
                                 <?= htmlspecialchars($rl) ?>
                             </span>
                             <?php endforeach; ?>
@@ -1001,13 +616,13 @@ try {
             </div>
         </div>
         <div style="border-top: 1px solid var(--color-border); padding-top: 20px; margin-top: 40px;">
-            <a href="index.php" style="font-family:'Inter'; font-size:0.8em; color:var(--color-primary-dark); text-decoration:underline; text-transform:uppercase; letter-spacing:1px;">Return to Dashboard</a>
+            <a href="index.php" style="font-family:var(--font-body); font-size:0.8em; color:var(--color-primary-dark); text-decoration:underline; text-transform:uppercase; letter-spacing:1px;">Return to Dashboard</a>
         </div>
 
         <?php if (!$analyticsAvailable): ?>
         <div class="admin-section">
             <h2>Landing Page Analytics</h2>
-            <p style="font-family:'Inter'; font-size:0.85em; color:var(--color-muted); padding:20px; border:1px dashed var(--color-border); text-align:center;">
+            <p style="font-family:var(--font-body); font-size:0.85em; color:var(--color-muted); padding:20px; border:1px dashed var(--color-border); text-align:center;">
                 Analytics tables not yet installed. Run <code>database/analytics_schema.sql</code> to enable this section.
             </p>
         </div>
@@ -1129,13 +744,13 @@ try {
                          xmlns="http://www.w3.org/2000/svg" class="sparkline-svg" aria-hidden="true">
                         <defs>
                             <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%"   stop-color="#977DFF" stop-opacity="0.25"/>
-                                <stop offset="100%" stop-color="#977DFF" stop-opacity="0"/>
+                                <stop offset="0%"   stop-color="var(--color-chart-1)" stop-opacity="0.25"/>
+                                <stop offset="100%" stop-color="var(--color-chart-1)" stop-opacity="0"/>
                             </linearGradient>
                         </defs>
                         <path d="<?= $areaPath ?>" fill="url(#sparkGrad)"/>
                         <polyline points="<?= $polyline ?>" fill="none"
-                                  stroke="#7F63F4" stroke-width="2" stroke-linejoin="round"/>
+                                  stroke="var(--color-chart-1)" stroke-width="2" stroke-linejoin="round"/>
                     </svg>
                     <div class="sparkline-dates">
                         <span><?= date('M j', strtotime($analyticsTrend[0]['date'])) ?></span>
@@ -1163,7 +778,7 @@ try {
                     <tbody>
                         <?php foreach ($analyticsReferrers as $ref): ?>
                         <tr>
-                            <td style="font-family:monospace; font-size:0.88em;"><?= $ref['domain'] ?></td>
+                            <td style="font-family:var(--font-mono); font-size:0.88em;"><?= $ref['domain'] ?></td>
                             <td><?= $ref['sessions'] ?></td>
                             <td><?= $ref['conversions'] ?></td>
                             <td><?= $ref['sessions'] > 0 ? round($ref['conversions'] / $ref['sessions'] * 100, 1) . '%' : 'N/A' ?></td>
@@ -1178,152 +793,16 @@ try {
         </div><!-- /#landing-analytics -->
         <?php endif; ?>
 
-        <style>
-            /* ── Analytics-specific styles ──────────────────────────────────── */
-            .lcp-good  { color: #1a7f47; }
-            .lcp-needs-improvement { color: #b45309; }
-            .lcp-poor  { color: var(--color-danger); }
-            html[data-theme="dark"] .lcp-good { color: var(--color-success); }
-            html[data-theme="dark"] .lcp-needs-improvement { color: var(--color-warning); }
-            html[data-theme="dark"] .lcp-poor { color: var(--color-danger); }
 
-            .analytics-two-col {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 24px;
-                margin-bottom: 30px;
-            }
-            @media (max-width: 720px) {
-                .analytics-two-col { grid-template-columns: 1fr; }
-            }
-
-            .analytics-panel {
-                background: var(--color-surface);
-                border: 1px solid var(--color-border);
-                padding: 22px 24px;
-                box-shadow: var(--shadow-soft);
-            }
-            .analytics-panel__title {
-                font-family: 'Inter', sans-serif;
-                font-size: 0.72em;
-                font-weight: 600;
-                text-transform: uppercase;
-                letter-spacing: 1.5px;
-                color: var(--color-muted);
-                margin: 0 0 18px;
-            }
-
-            /* Device bars */
-            .device-row {
-                display: grid;
-                grid-template-columns: 68px 1fr 40px;
-                align-items: center;
-                gap: 10px;
-                margin-bottom: 12px;
-            }
-            .device-row__label {
-                font-family: 'Inter', sans-serif;
-                font-size: 0.78em;
-                color: var(--color-text);
-                font-weight: 600;
-            }
-            .device-row__bar-wrap {
-                background: var(--color-bg-tertiary);
-                height: 8px;
-                border-radius: 4px;
-                overflow: hidden;
-            }
-            .device-row__bar {
-                height: 100%;
-                background: var(--color-accent);
-                border-radius: 4px;
-                transition: width 0.4s ease;
-            }
-            .device-row__pct {
-                font-family: 'Inter', sans-serif;
-                font-size: 0.75em;
-                color: var(--color-muted);
-                text-align: right;
-            }
-
-            /* Scroll funnel columns */
-            .funnel-steps {
-                display: flex;
-                align-items: flex-end;
-                gap: 14px;
-                height: 110px;
-            }
-            .funnel-step {
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                height: 100%;
-                justify-content: flex-end;
-            }
-            .funnel-step__bar-wrap {
-                width: 100%;
-                background: var(--color-bg-tertiary);
-                height: 72px;
-                display: flex;
-                align-items: flex-end;
-                overflow: hidden;
-                border-radius: 4px 4px 0 0;
-            }
-            .funnel-step__bar {
-                width: 100%;
-                background: var(--color-accent);
-                min-height: 2px;
-                transition: height 0.4s ease;
-                border-radius: 4px 4px 0 0;
-            }
-            .funnel-step__pct {
-                font-family: 'Merriweather', serif;
-                font-size: 0.95em;
-                font-weight: 700;
-                color: var(--color-accent);
-                margin-top: 6px;
-            }
-            html[data-theme="light"] .funnel-step__pct {
-                color: var(--color-primary-dark);
-            }
-            .funnel-step__label {
-                font-family: 'Inter', sans-serif;
-                font-size: 0.62em;
-                text-transform: uppercase;
-                letter-spacing: 0.8px;
-                color: var(--color-muted);
-                text-align: center;
-                margin-top: 4px;
-            }
-
-            /* Sparkline */
-            .sparkline-wrap {
-                width: 100%;
-                overflow: hidden;
-            }
-            .sparkline-svg {
-                width: 100%;
-                height: 80px;
-                display: block;
-            }
-            .sparkline-dates {
-                display: flex;
-                justify-content: space-between;
-                font-family: 'Inter', sans-serif;
-                font-size: 0.7em;
-                color: var(--color-muted);
-                margin-top: 4px;
-            }
-        </style>
 
         <div style="border-top: 1px solid var(--color-border); padding-top: 20px; margin-top: 40px;">
-            <a href="index.php" style="font-family:'Inter'; font-size:0.8em; color:var(--color-primary-dark); text-decoration:underline; text-transform:uppercase; letter-spacing:1px;">Return to Dashboard</a>
+            <a href="index.php" style="font-family:var(--font-body); font-size:0.8em; color:var(--color-primary-dark); text-decoration:underline; text-transform:uppercase; letter-spacing:1px;">Return to Dashboard</a>
         </div>
-    </div>
+    </main>
     <script src="assets/js/vendor/chart.umd.min.js"></script>
     <script src="assets/js/dashboard-charts.js?v=<?= file_exists(__DIR__ . '/assets/js/dashboard-charts.js') ? filemtime(__DIR__ . '/assets/js/dashboard-charts.js') : '1' ?>"></script>
     <script src="assets/js/admin-user-filters.js?v=<?= file_exists(__DIR__ . '/assets/js/admin-user-filters.js') ? filemtime(__DIR__ . '/assets/js/admin-user-filters.js') : '1' ?>"></script>
+    <script src="assets/js/admin-storage.js?v=<?= filemtime(__DIR__ . '/assets/js/admin-storage.js') ?>"></script>
     <script src="assets/js/index.js?v=<?= filemtime(__DIR__ . '/assets/js/index.js') ?>"></script>
 <?php require __DIR__ . '/partials/site-footer.php'; ?>
 </body>

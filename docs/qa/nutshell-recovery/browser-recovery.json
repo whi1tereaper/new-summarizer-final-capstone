@@ -1,0 +1,46 @@
+[
+  {
+    "name": "HTTP 504 non-JSON reply is classified as PROCESSING_TIMEOUT, not a connection error",
+    "passed": true
+  },
+  {
+    "name": "not-found status preserves the same idempotency key on manual retry",
+    "passed": true
+  },
+  {
+    "name": "HTTP 502 non-JSON reply is classified as WORKER_UNAVAILABLE, not a connection error",
+    "passed": true
+  },
+  {
+    "name": "HTTP 200 non-JSON reply is classified as PROCESSING_FAILED, not a connection error",
+    "passed": true
+  },
+  {
+    "name": "completed result recovered after gateway response loss with one generation and one charge",
+    "passed": true
+  },
+  {
+    "name": "completed result recovered after disconnect response loss with one generation and one charge",
+    "passed": true
+  },
+  {
+    "name": "confirmed failed generation retries using a fresh key instead of replaying its failure forever",
+    "passed": true
+  },
+  {
+    "name": "in-flight status offers read-only recovery without resubmitting source or starting another job",
+    "passed": true
+  },
+  {
+    "name": "last trial response loss leaves Check status available despite zero remaining uses",
+    "passed": true
+  },
+  {
+    "name": "reload restores uncertain request key and recovers the third result without reupload or extra charge",
+    "passed": true
+  },
+  {
+    "name": "recovery workflows have no browser JavaScript exceptions",
+    "passed": true
+  }
+]

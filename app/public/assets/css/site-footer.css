@@ -5,37 +5,20 @@
    Fully scoped and self-contained to render identically on all pages.
    ==================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap');
-
 /* Display font preloads / definitions */
-@font-face {
-  font-family: 'Satoshi';
-  src: url('../fonts/satoshi-700.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Satoshi';
-  src: url('../fonts/satoshi-900.woff2') format('woff2');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
 /* ── Universal Footer Surface ────────────────────────────────────── */
 .nex-footer,
 .site-footer {
-  background: var(--color-bg, #EEEDEA) !important;
-  color: var(--color-text, #080808) !important;
-  border-top: 1px solid rgba(var(--color-text-rgb, 8, 8, 8), 0.14) !important;
-  padding: clamp(64px, 8vw, 112px) clamp(24px, 4vw, 64px) 36px !important;
-  position: relative !important;
-  overflow: hidden !important;
-  box-sizing: border-box !important;
-  font-family: 'Outfit', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  width: 100% !important;
-  margin: 0 !important;
+  background: var(--color-bg);
+  color: var(--color-text);
+  border-top: var(--border-width) solid color-mix(in srgb, var(--color-text) 14%, transparent);
+  padding: clamp(var(--space-16), 8vw, 112px) clamp(var(--space-6), 4vw, var(--space-16)) var(--space-9);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  font-family: var(--font-heading);
+  width: 100%;
+  margin: 0;
 }
 
 .nex-footer *,
@@ -46,163 +29,161 @@
 /* ── Inner Constrained Container ─────────────────────────────────── */
 .nex-footer__inner,
 .site-footer__inner {
-  max-width: none !important;
-  margin: 0 !important;
-  width: 100% !important;
-  padding: 0 !important;
-  display: block !important;
+  max-width: none;
+  margin: 0;
+  width: 100%;
+  padding: 0;
+  display: block;
 }
 
 /* ── 3-Column Editorial Grid ─────────────────────────────────────── */
 .nex-footer__grid {
-  display: grid !important;
-  grid-template-columns: minmax(0, 1.8fr) repeat(2, minmax(0, 1fr)) !important;
-  gap: clamp(32px, 6vw, 112px) !important;
-  align-items: start !important;
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) repeat(2, minmax(0, 1fr));
+  gap: clamp(var(--space-8), 6vw, 112px);
+  align-items: start;
 }
 
 @media (max-width: 860px) {
   .nex-footer__grid {
-    grid-template-columns: 1fr !important;
-    gap: 40px !important;
-  }
+  grid-template-columns: 1fr;
+  gap: var(--space-10);
+}
 }
 
 .nex-footer__col {
-  display: flex !important;
-  flex-direction: column !important;
-  min-width: 0 !important;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 /* ── Column Headers (Clean hairline divider ABOVE title) ─────────── */
 .nex-footer__col-head {
-  border-top: 1px solid rgba(var(--color-text-rgb, 8, 8, 8), 0.14) !important;
-  border-bottom: none !important;
-  padding-top: 14px !important;
-  padding-bottom: 0 !important;
-  margin-bottom: 22px !important;
+  border-top: var(--border-width) solid color-mix(in srgb, var(--color-text) 14%, transparent);
+  border-bottom: none;
+  padding-top: var(--space-3-5);
+  padding-bottom: 0;
+  margin-bottom: 22px;
 }
 
 .nex-footer__col-title {
-  font-family: 'Outfit', 'Inter', system-ui, sans-serif !important;
-  font-size: 0.6875rem !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.14em !important;
-  text-transform: uppercase !important;
-  color: var(--color-text-muted, rgba(8, 8, 8, 0.48)) !important;
-  display: block !important;
-  line-height: 1.2 !important;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  display: block;
+  line-height: 1.2;
 }
 
 /* ── Column 1: Email & Tagline ───────────────────────────────────── */
 .nex-footer__email {
-  font-family: 'Outfit', 'Inter', system-ui, sans-serif !important;
-  font-size: clamp(1.0625rem, 1.35vw, 1.375rem) !important;
-  font-weight: 600 !important;
-  color: var(--color-text, #080808) !important;
-  text-decoration: none !important;
-  display: inline-block !important;
-  letter-spacing: -0.01em !important;
-  margin-bottom: 20px !important;
-  transition: color 200ms ease, transform 200ms ease !important;
+  font-family: var(--font-heading);
+  font-size: var(--fs-heading-md);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+  text-decoration: none;
+  display: inline-block;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-5);
+  transition: color 200ms ease, transform 200ms ease;
 }
 
 .nex-footer__email:hover,
 .nex-footer__email:focus-visible {
-  color: var(--color-accent, #7F00FF) !important;
-  transform: translateX(4px) !important;
+  color: var(--color-accent);
+  transform: translateX(4px);
 }
 
 .nex-footer__email:focus-visible,
 .nex-footer__link:focus-visible,
 .nex-footer__back:focus-visible {
-  outline: 2px solid var(--color-focus, #7F00FF) !important;
-  outline-offset: 3px !important;
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--focus-ring-offset);
 }
 
 .nex-footer__tagline {
-  font-family: 'Outfit', 'Inter', system-ui, sans-serif !important;
-  font-size: clamp(1.125rem, 1.45vw, 1.375rem) !important;
-  font-weight: 500 !important;
-  line-height: 1.4 !important;
-  color: var(--color-text-secondary, rgba(8, 8, 8, 0.68)) !important;
-  max-width: 500px !important;
-  margin: 0 !important;
+  font-family: var(--font-heading);
+  font-size: var(--fs-heading-md);
+  font-weight: var(--weight-medium);
+  line-height: 1.4;
+  color: var(--color-text-secondary);
+  max-width: 500px;
+  margin: 0;
 }
 
 .nex-footer__tagline strong {
-  font-weight: 800 !important;
-  color: var(--color-accent, #7F00FF) !important;
+  font-weight: var(--weight-heavy);
+  color: var(--color-accent);
 }
 
 /* ── Column 2 & 3: Link Lists (Never bulleted) ───────────────────── */
 .nex-footer__links {
-  list-style: none !important;
-  list-style-type: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 14px !important;
+  list-style: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3-5);
 }
 
 .nex-footer__links li {
-  list-style: none !important;
-  list-style-type: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  list-style: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 .nex-footer__link {
-  font-family: 'Outfit', 'Inter', system-ui, sans-serif !important;
-  font-size: 0.9375rem !important;
-  font-weight: 500 !important;
-  color: var(--color-text, #080808) !important;
-  text-decoration: none !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  min-height: 28px !important;
-  transition: color 200ms ease, transform 200ms ease !important;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-md);
+  font-weight: var(--weight-medium);
+  color: var(--color-text);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  transition: color 200ms ease, transform 200ms ease;
 }
 
 .nex-footer__link:hover,
 .nex-footer__link:focus-visible {
-  color: var(--color-accent, #7F00FF) !important;
-  transform: translateX(4px) !important;
+  color: var(--color-accent);
+  transform: translateX(4px);
 }
 
 /* ── Giant Brand Typography ("LIGHT") ────────────────────────────── */
 .nex-footer__brand-wrap {
-  margin-top: clamp(48px, 6vw, 96px) !important;
-  margin-bottom: clamp(28px, 4vw, 48px) !important;
-  line-height: 0.8 !important;
-  overflow: hidden !important;
-  text-align: left !important;
+  margin-top: clamp(var(--space-12), 6vw, var(--space-24));
+  margin-bottom: clamp(var(--space-7), 4vw, var(--space-12));
+  line-height: 0.8;
+  overflow: hidden;
+  text-align: left;
 }
 
 .nex-footer__giant-brand,
 #footer-light-brand {
-  display: inline-block !important;
-  width: -moz-fit-content !important;
-  width: fit-content !important;
-  max-width: 100% !important;
-  position: relative !important;
-  font-family: 'Satoshi', 'Outfit', 'Inter', system-ui, -apple-system, sans-serif !important;
-  font-size: clamp(5.5rem, 24vw, 24rem) !important;
-  font-weight: 900 !important;
-  letter-spacing: -0.05em !important;
-  line-height: 0.8 !important;
-  text-transform: uppercase !important;
-  color: var(--color-text, #080808) !important;
-  cursor: default !important;
-  user-select: none !important;
-  -webkit-user-select: none !important;
-  isolation: isolate !important;
-  touch-action: pan-y !important;
-  margin: 0 !important;
-  padding: 0 !important;
-
-  /* Custom property defaults for spring / mesh text physics */
+  display: inline-block;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 100%;
+  position: relative;
+  font-family: var(--font-heading);
+  font-size: var(--fs-display-xl);
+  font-weight: var(--weight-heavy);
+  letter-spacing: var(--letter-spacing-heading);
+  line-height: 0.8;
+  text-transform: uppercase;
+  color: var(--color-text);
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+  isolation: isolate;
+  touch-action: pan-y;
+  margin: 0;
+  padding: 0;
   --mesh-origin-x: 50%;
   --mesh-origin-y: 50%;
   --mesh-tx: 0px;
@@ -214,7 +195,6 @@
   --mesh-cx: 0px;
   --mesh-cy: 0px;
   --mesh-ca: 0;
-
   transform-origin: var(--mesh-origin-x) var(--mesh-origin-y);
   -webkit-transform-origin: var(--mesh-origin-x) var(--mesh-origin-y);
   transform: translate3d(var(--mesh-tx), var(--mesh-ty), 0)
@@ -229,17 +209,15 @@
 /* Individual letter spans for localized spring hover deformation */
 .nex-footer__giant-brand .mesh-letter,
 #footer-light-brand .mesh-letter {
-  display: inline-block !important;
-  position: relative !important;
+  display: inline-block;
+  position: relative;
   will-change: transform;
   transform-origin: 50% 65%;
   -webkit-transform-origin: 50% 65%;
-
   --letter-dx: 0px;
   --letter-dy: 0px;
   --letter-scale: 1;
   --letter-skew: 0deg;
-
   transform: translate3d(var(--letter-dx), var(--letter-dy), 0)
              scale(var(--letter-scale))
              skewX(var(--letter-skew));
@@ -252,48 +230,49 @@
 .nex-footer__giant-brand::after,
 #footer-light-brand::before,
 #footer-light-brand::after {
-  display: none !important;
-  content: none !important;
+  display: none;
+  content: none;
 }
 
 /* ── Bottom Bar: Copyright & Back To Top ─────────────────────────── */
 .nex-footer__bottom {
-  border-top: 1px solid rgba(var(--color-text-rgb, 8, 8, 8), 0.14) !important;
-  padding-top: 24px !important;
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  gap: 16px !important;
-  flex-wrap: wrap !important;
+  border-top: var(--border-width) solid color-mix(in srgb, var(--color-text) 14%, transparent);
+  margin-top: clamp(var(--space-10), 6vw, var(--space-16));
+  padding-top: var(--space-6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
 }
 
 .nex-footer__copyright {
-  font-family: 'Outfit', 'Inter', system-ui, sans-serif !important;
-  font-size: 0.75rem !important;
-  font-weight: 500 !important;
-  color: var(--color-text-muted, rgba(8, 8, 8, 0.48)) !important;
-  margin: 0 !important;
-  letter-spacing: 0.02em !important;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xs);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+  margin: 0;
+  letter-spacing: 0.02em;
 }
 
 .nex-footer__back {
-  font-family: 'Outfit', 'Inter', system-ui, sans-serif !important;
-  font-size: 0.75rem !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.08em !important;
-  text-transform: uppercase !important;
-  color: var(--color-text, #080808) !important;
-  text-decoration: none !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  transition: color 200ms ease, transform 200ms ease !important;
-  cursor: pointer !important;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--letter-spacing-label);
+  text-transform: uppercase;
+  color: var(--color-text);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: color 200ms ease, transform 200ms ease;
+  cursor: pointer;
 }
 
 .nex-footer__back:hover,
 .nex-footer__back:focus-visible {
-  color: var(--color-accent, #7F00FF) !important;
-  transform: translateY(-2px) !important;
+  color: var(--color-accent);
+  transform: translateY(-2px);
 }
 
 /* ── Accessibility & Reduced Motion ──────────────────────────────── */
@@ -301,15 +280,15 @@
   .nex-footer__email,
   .nex-footer__link,
   .nex-footer__back {
-    transition: none !important;
-    transform: none !important;
-  }
+  transition: none !important;
+  transform: none !important;
+}
   .nex-footer__giant-brand,
   #footer-light-brand,
   .nex-footer__giant-brand .mesh-letter,
   #footer-light-brand .mesh-letter {
-    animation: none !important;
-    transition: none !important;
-    transform: none !important;
-  }
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+}
 }

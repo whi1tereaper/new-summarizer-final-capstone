@@ -6,19 +6,16 @@ require_once __DIR__ . '/../src/Utils/validation.php';
 $csrf_token = generateCsrfToken();
 ?>
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <?php require_once __DIR__ . '/partials/design-system-head.php'; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recover Password — LIGHT</title>
+    <title>Recover Password — DEPENDED</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="assets/images/poc-neust-logo.png">
-    <link rel="stylesheet" href="assets/css/design-tokens.css">
     <link rel="stylesheet" href="assets/css/style.css?v=<?= filemtime(__DIR__ . '/assets/css/style.css') ?>">
-    <link rel="stylesheet" href="assets/css/site-footer.css?v=nex-8">
-</head>
+    </head>
 <body class="page-auth-layout">
     <?php require __DIR__ . '/partials/site-nav.php'; ?>
 
@@ -56,7 +53,7 @@ $csrf_token = generateCsrfToken();
                             <input type="email" id="email" name="email" required autofocus placeholder="name@example.com">
                         </div>
 
-                        <button type="submit" class="btn-auth">Send OTP</button>
+                        <button type="submit" class="btn btn--primary btn-auth">Send OTP</button>
                     </form>
 
                     <div class="auth-nav-links">

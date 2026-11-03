@@ -1,0 +1,74 @@
+[
+  {
+    "name": "actual administrator dashboard loads cache-busted registry styles and grid layout",
+    "passed": true
+  },
+  {
+    "name": "all seven cards display the unchanged isolated MySQL statistics with proper definition labels",
+    "passed": true
+  },
+  {
+    "name": "section is labelled and Manage Student IDs has visible keyboard focus",
+    "passed": true
+  },
+  {
+    "name": "light layout at 1506px: aligned cards, accessible action target and no panel overflow",
+    "passed": true
+  },
+  {
+    "name": "light layout at 1024px: aligned cards, accessible action target and no panel overflow",
+    "passed": true
+  },
+  {
+    "name": "light layout at 768px: aligned cards, accessible action target and no panel overflow",
+    "passed": true
+  },
+  {
+    "name": "light layout at 390px: aligned cards, accessible action target and no panel overflow",
+    "passed": true
+  },
+  {
+    "name": "light layout at 320px: aligned cards, accessible action target and no panel overflow",
+    "passed": true
+  },
+  {
+    "name": "dark layout at 1506px: aligned cards, accessible action target and no panel overflow",
+    "passed": true
+  },
+  {
+    "name": "dark layout at 1024px: aligned cards, accessible action target and no panel overflow",
+    "passed": true
+  },
+  {
+    "name": "dark layout at 768px: aligned cards, accessible action target and no panel overflow",
+    "passed": true
+  },
+  {
+    "name": "dark layout at 390px: aligned cards, accessible action target and no panel overflow",
+    "passed": true
+  },
+  {
+    "name": "dark layout at 320px: aligned cards, accessible action target and no panel overflow",
+    "passed": true
+  },
+  {
+    "name": "zero and large synthetic display values remain readable on mobile",
+    "passed": true
+  },
+  {
+    "name": "Manage Student IDs opens the existing protected import/search page with matching real database totals",
+    "passed": true
+  },
+  {
+    "name": "dashboard and registry UI produce no JavaScript exceptions",
+    "passed": true
+  },
+  {
+    "name": "anonymous remains unable to access dashboard or registry",
+    "passed": true
+  },
+  {
+    "name": "ordinary user remains unable to access dashboard or registry",
+    "passed": true
+  }
+]

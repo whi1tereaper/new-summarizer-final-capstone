@@ -1,0 +1,106 @@
+[
+  {
+    "name": "QA credentials cannot access the production database",
+    "passed": true
+  },
+  {
+    "name": "isolated XAMPP Apache and PHP 8.3 configuration validates",
+    "passed": true
+  },
+  {
+    "name": "student creates their own account and email through real registration",
+    "passed": true
+  },
+  {
+    "name": "Forgot Password is linked from Sign In and both recovery pages open",
+    "passed": true
+  },
+  {
+    "name": "reset requests require valid CSRF",
+    "passed": true
+  },
+  {
+    "name": "invalid email is rejected without sending a code",
+    "passed": true
+  },
+  {
+    "name": "unknown email has generic feedback without outgoing mail or token rows",
+    "passed": true
+  },
+  {
+    "name": "the code is addressed to the normalized user-provided email",
+    "passed": true
+  },
+  {
+    "name": "the code is hashed and expires in approximately 15 minutes",
+    "passed": true
+  },
+  {
+    "name": "repeat email requests are rate limited",
+    "passed": true
+  },
+  {
+    "name": "incorrect code cannot change the password",
+    "passed": true
+  },
+  {
+    "name": "non-numeric codes are rejected",
+    "passed": true
+  },
+  {
+    "name": "password confirmation mismatch is rejected",
+    "passed": true
+  },
+  {
+    "name": "weak replacement passwords are rejected",
+    "passed": true
+  },
+  {
+    "name": "a code cannot reset another email account",
+    "passed": true
+  },
+  {
+    "name": "a new recovery request invalidates the previous code",
+    "passed": true
+  },
+  {
+    "name": "password replacement itself requires CSRF",
+    "passed": true
+  },
+  {
+    "name": "a valid email and code update only the QA password and consume the code",
+    "passed": true
+  },
+  {
+    "name": "a consumed code cannot be reused",
+    "passed": true
+  },
+  {
+    "name": "the recovered email and new password sign in successfully",
+    "passed": true
+  },
+  {
+    "name": "the old password no longer authenticates",
+    "passed": true
+  },
+  {
+    "name": "an expired code cannot change the password",
+    "passed": true
+  },
+  {
+    "name": "five wrong attempts block further verification in the current window",
+    "passed": true
+  },
+  {
+    "name": "mail transport failure does not change the password or send a message",
+    "passed": true
+  },
+  {
+    "name": "original production user passwords summaries and feedback are preserved",
+    "passed": true
+  },
+  {
+    "name": "isolated databases and credentials are removed",
+    "passed": true
+  }
+]

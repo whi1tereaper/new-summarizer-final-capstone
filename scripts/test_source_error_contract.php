@@ -15,6 +15,7 @@ namespace App\Src\Services {
     {
         return match ($host) {
             'article.example' => [['ip' => '93.184.216.34']],
+            'www.scribd.com','es.scribd.com','scribd.com.article.example' => [['ip' => '93.184.216.34']],
             'mixed.example' => [['ip' => '93.184.216.34'], ['ip' => '127.0.0.1']],
             default => [],
         };
@@ -66,7 +67,9 @@ namespace {
         $_SERVER['REQUEST_METHOD'] = $scenario === 'method' ? 'GET' : 'POST';
         $_SESSION = $scenario === 'csrf' ? ['user_id' => 1] : [];
         require __DIR__ . '/../app/public/nutshell_generate.php';
-        $expectedStatus = match ($scenario) { 'method' => 405, 'csrf' => 403, default => 401 };
+        // Guests now share the three-use trial; missing CSRF is denied before
+        // any quota reservation, rather than requiring an account up front.
+        $expectedStatus = match ($scenario) { 'method' => 405, default => 403 };
         if (http_response_code() !== $expectedStatus) { echo "\nUNEXPECTED_HTTP_STATUS"; exit(1); }
         // Also inspect the actual helpers without requiring a privileged user or
         // a database fixture; legacy keys and precise failure types must coexist.
@@ -206,6 +209,32 @@ namespace {
     queueResponse(['headers' => ['content-type' => 'text/html', 'content-length' => 5 * 1024 * 1024 + 1]]);
     expectCode(fn() => $resolver->resolve('https://article.example/story'), 'URL_TOO_LARGE', 'HTML fetch limit');
 
+    $scribdUrl='https://www.scribd.com/document/123456/public-fixture';
+    $scribdDocument='The public library extended its evening opening hours to support students and working residents. Three branches will join a six month pilot with published monthly usage reports. The council will review staffing costs and feedback before approving a permanent schedule.';
+    $scribdBody='<html><body><p>Unrelated AI metadata must never replace the actual document.</p><main><div id="document_container"><p>'.$scribdDocument.'</p></div></main></body></html>';
+    queueResponse(['body'=>$scribdBody]);
+    check($resolver->resolve($scribdUrl)->getText()===$scribdDocument,'Scribd uses only public document text, not metadata');
+    queueResponse(['body'=>str_replace('</body>','<script>var access={"is_view_restricted_archive":true};</script></body>',$scribdBody)]);
+    expectCode(fn()=>$resolver->resolve($scribdUrl),'URL_ACCESS_RESTRICTED','Scribd archive paywall is respected even if text is present');
+    queueResponse(['body'=>str_replace('</body>','<script>var access={"show_archive_paywall":true};</script></body>',$scribdBody)]);
+    expectCode(fn()=>$resolver->resolve($scribdUrl),'URL_ACCESS_RESTRICTED','Scribd paywall UI flag is respected');
+    queueResponse(['body'=>'<html><body><p>A useful sounding AI description is not the original document.</p><main><div id="document_container"><script>docManager.addPage({pageNum:1});</script></div></main></body></html>']);
+    $requestsBefore=count(SourceHttpFixture::$requests);
+    expectCode(fn()=>$resolver->resolve($scribdUrl),'URL_DOCUMENT_VIEWER','script-only Scribd pages have actionable viewer guidance');
+    check(count(SourceHttpFixture::$requests)===$requestsBefore+1,'Scribd handling never follows hidden page assets or downloader endpoints');
+    queueResponse(['body'=>'<html><body><article><p>This article is only a title and description outside the reader.</p></article></body></html>']);
+    expectCode(fn()=>$resolver->resolve($scribdUrl),'URL_DOCUMENT_VIEWER','Scribd descriptions are not summarized as the document');
+    queueResponse(['body'=>str_replace('</body>','<script>var access={"show_archive_paywall":false,"is_credit_restricted":true};</script></body>',$scribdBody)]);
+    check($resolver->resolve('https://es.scribd.com/doc/123456/public-fixture')->getText()===$scribdDocument,'public localized Scribd text is not confused with download-credit restrictions');
+    queueResponse(['body'=>'<html><body><div id="document_container"><div aria-hidden="true"><p>'.$scribdDocument.'</p></div></div></body></html>']);
+    expectCode(fn()=>$resolver->resolve($scribdUrl),'URL_DOCUMENT_VIEWER','hidden Scribd text is not retrieved as public document content');
+    foreach(['hidden','style="display:none"','style="filter: blur(5px)"'] as $hiddenAttribute){
+        queueResponse(['body'=>'<html><body><div id="document_container" '.$hiddenAttribute.'><p>'.$scribdDocument.'</p></div></body></html>']);
+        expectCode(fn()=>$resolver->resolve($scribdUrl),'URL_DOCUMENT_VIEWER','hidden or masked Scribd root is not exposed');
+    }
+    queueResponse(['body'=>'<html><body><article><p>'.$scribdDocument.'</p></article><script>{"show_archive_paywall":true}</script></body></html>']);
+    check($resolver->resolve('https://scribd.com.article.example/document/123456/example')->getText()===$scribdDocument,'Scribd hostname lookalikes do not trigger host-specific behavior');
+
     $article = 'The town library reopened after completing essential building repairs.';
     queueResponse(['body' => '<html><body><p>Unrelated page chrome should stay outside the article text.</p><article><p>' . $article . '</p></article></body></html>']);
     check($resolver->resolve('https://article.example/story')->getText() === $article, 'valid short article selects article text');
@@ -254,7 +283,7 @@ namespace {
     expectCode(fn() => $execute->invoke($bridge, [PHP_BINARY, __FILE__, '--worker-fixture', 'noisy_corrupted'], [], 5), 'FILE_CORRUPTED', 'real CLI preserves failure after library diagnostics');
     expectCode(fn() => $execute->invoke($bridge, [PHP_BINARY, __FILE__, '--worker-fixture', 'sleep'], [], 1), 'PROCESSING_TIMEOUT', 'real CLI execution deadline');
     check($execute->invoke($bridge, [PHP_BINARY, __FILE__, '--worker-fixture', 'success'], [], 5)['raw_text'] === 'Readable text returned successfully.', 'real CLI successful response');
-    foreach (['anonymous' => 'AUTH_REQUIRED', 'method' => 'REQUEST_INVALID', 'csrf' => 'ACCESS_DENIED'] as $scenario => $code) {
+    foreach (['anonymous' => 'ACCESS_DENIED', 'method' => 'REQUEST_INVALID', 'csrf' => 'ACCESS_DENIED'] as $scenario => $code) {
         expectCode(fn() => $execute->invoke($bridge, [PHP_BINARY, __FILE__, '--nutshell-fixture', $scenario], [], 5), $code, 'Nutshell endpoint and saved failure mapping ' . $scenario);
     }
 

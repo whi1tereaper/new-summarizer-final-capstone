@@ -1,0 +1,340 @@
+{
+  "captures": [
+    {
+      "name": "analytics-user",
+      "section": "admin",
+      "context": "user",
+      "theme": "light",
+      "width": 1440,
+      "route": "analytics.php",
+      "state": "default",
+      "full": "screenshots/analytics-user-light-1440-full.png",
+      "viewport": "screenshots/analytics-user-light-1440-viewport.png",
+      "controlled_response": false,
+      "status": 200,
+      "finalURL": "analytics.php",
+      "metrics": {
+        "height": 2705,
+        "viewportWidth": 1440,
+        "scrollWidth": 1440,
+        "overflow": false,
+        "rootTheme": "light",
+        "headings": [
+          "Workspace",
+          "Account",
+          "Analytics",
+          "Summaries Generated Over Time",
+          "Nutshell Usage Over Time",
+          "Output Style Distribution",
+          "Summary Length Usage",
+          "Original vs Summary Words",
+          "Uploaded File Types",
+          "Processing Performance",
+          "Recent Activity",
+          "Log out?"
+        ],
+        "bodyFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "fontStatus": "loaded",
+        "fonts": [
+          {
+            "family": "Inter",
+            "weight": "400",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "weight": "500",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "weight": "600",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "weight": "700",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "weight": "800",
+            "status": "loaded"
+          },
+          {
+            "family": "JetBrains Mono",
+            "weight": "400",
+            "status": "loaded"
+          },
+          {
+            "family": "JetBrains Mono",
+            "weight": "600",
+            "status": "loaded"
+          },
+          {
+            "family": "Satoshi",
+            "weight": "700",
+            "status": "loaded"
+          },
+          {
+            "family": "Satoshi",
+            "weight": "900",
+            "status": "loaded"
+          }
+        ]
+      }
+    },
+    {
+      "name": "analytics-user",
+      "section": "admin",
+      "context": "user",
+      "theme": "light",
+      "width": 390,
+      "route": "analytics.php",
+      "state": "default",
+      "full": "screenshots/analytics-user-light-390-full.png",
+      "viewport": "screenshots/analytics-user-light-390-viewport.png",
+      "controlled_response": false,
+      "status": 200,
+      "finalURL": "analytics.php",
+      "metrics": {
+        "height": 4316,
+        "viewportWidth": 390,
+        "scrollWidth": 390,
+        "overflow": false,
+        "rootTheme": "light",
+        "headings": [
+          "Workspace",
+          "Account",
+          "Analytics",
+          "Summaries Generated Over Time",
+          "Nutshell Usage Over Time",
+          "Output Style Distribution",
+          "Summary Length Usage",
+          "Original vs Summary Words",
+          "Uploaded File Types",
+          "Processing Performance",
+          "Recent Activity",
+          "Log out?"
+        ],
+        "bodyFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "fontStatus": "loaded",
+        "fonts": [
+          {
+            "family": "Inter",
+            "weight": "400",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "weight": "500",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "weight": "600",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "weight": "700",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "weight": "800",
+            "status": "loaded"
+          },
+          {
+            "family": "JetBrains Mono",
+            "weight": "400",
+            "status": "loaded"
+          },
+          {
+            "family": "JetBrains Mono",
+            "weight": "600",
+            "status": "loaded"
+          },
+          {
+            "family": "Satoshi",
+            "weight": "700",
+            "status": "loaded"
+          },
+          {
+            "family": "Satoshi",
+            "weight": "900",
+            "status": "loaded"
+          }
+        ]
+      }
+    },
+    {
+      "name": "analytics-user",
+      "section": "admin",
+      "context": "user",
+      "theme": "dark",
+      "width": 1440,
+      "route": "analytics.php",
+      "state": "default",
+      "full": "screenshots/analytics-user-dark-1440-full.png",
+      "viewport": "screenshots/analytics-user-dark-1440-viewport.png",
+      "controlled_response": false,
+      "status": 200,
+      "finalURL": "analytics.php",
+      "metrics": {
+        "height": 2705,
+        "viewportWidth": 1440,
+        "scrollWidth": 1440,
+        "overflow": false,
+        "rootTheme": "dark",
+        "headings": [
+          "Workspace",
+          "Account",
+          "Analytics",
+          "Summaries Generated Over Time",
+          "Nutshell Usage Over Time",
+          "Output Style Distribution",
+          "Summary Length Usage",
+          "Original vs Summary Words",
+          "Uploaded File Types",
+          "Processing Performance",
+          "Recent Activity",
+          "Log out?"
+        ],
+        "bodyFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "fontStatus": "loaded",
+        "fonts": [
+          {
+            "family": "Inter",
+            "weight": "400",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "weight": "500",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "weight": "600",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "weight": "700",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "weight": "800",
+            "status": "loaded"
+          },
+          {
+            "family": "JetBrains Mono",
+            "weight": "400",
+            "status": "loaded"
+          },
+          {
+            "family": "JetBrains Mono",
+            "weight": "600",
+            "status": "loaded"
+          },
+          {
+            "family": "Satoshi",
+            "weight": "700",
+            "status": "loaded"
+          },
+          {
+            "family": "Satoshi",
+            "weight": "900",
+            "status": "loaded"
+          }
+        ]
+      }
+    },
+    {
+      "name": "analytics-user",
+      "section": "admin",
+      "context": "user",
+      "theme": "dark",
+      "width": 390,
+      "route": "analytics.php",
+      "state": "default",
+      "full": "screenshots/analytics-user-dark-390-full.png",
+      "viewport": "screenshots/analytics-user-dark-390-viewport.png",
+      "controlled_response": false,
+      "status": 200,
+      "finalURL": "analytics.php",
+      "metrics": {
+        "height": 4316,
+        "viewportWidth": 390,
+        "scrollWidth": 390,
+        "overflow": false,
+        "rootTheme": "dark",
+        "headings": [
+          "Workspace",
+          "Account",
+          "Analytics",
+          "Summaries Generated Over Time",
+          "Nutshell Usage Over Time",
+          "Output Style Distribution",
+          "Summary Length Usage",
+          "Original vs Summary Words",
+          "Uploaded File Types",
+          "Processing Performance",
+          "Recent Activity",
+          "Log out?"
+        ],
+        "bodyFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "fontStatus": "loaded",
+        "fonts": [
+          {
+            "family": "Inter",
+            "weight": "400",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "weight": "500",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "weight": "600",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "weight": "700",
+            "status": "loaded"
+          },
+          {
+            "family": "Inter",
+            "weight": "800",
+            "status": "loaded"
+          },
+          {
+            "family": "JetBrains Mono",
+            "weight": "400",
+            "status": "loaded"
+          },
+          {
+            "family": "JetBrains Mono",
+            "weight": "600",
+            "status": "loaded"
+          },
+          {
+            "family": "Satoshi",
+            "weight": "700",
+            "status": "loaded"
+          },
+          {
+            "family": "Satoshi",
+            "weight": "900",
+            "status": "loaded"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -51,7 +51,7 @@
 /* Hard error fallback only if all canvas contexts fail */
 .nex-mesh-text.is-hard-error .nex-mesh-text__measure {
   visibility: visible !important;
-  color: var(--nex-light-text, #080808) !important;
+  color: var(--color-text);
 }
 
 .nex-mesh-text.is-hard-error .nex-mesh-text__canvas {

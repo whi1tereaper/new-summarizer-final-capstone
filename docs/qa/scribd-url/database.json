@@ -1,0 +1,12 @@
+{
+  "summaries": 0,
+  "active_reservations": 0,
+  "job_results": [
+    {
+      "state": "failed",
+      "has_result": false,
+      "failure_code": "URL_ACCESS_RESTRICTED",
+      "payload_erased": true
+    }
+  ]
+}

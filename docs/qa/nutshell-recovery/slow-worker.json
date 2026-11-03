@@ -1,0 +1,6 @@
+{
+  "controlled_worker": true,
+  "seconds": 48.14,
+  "http_status": 200,
+  "worker_deadline": 90.0
+}

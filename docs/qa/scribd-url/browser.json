@@ -1,0 +1,22 @@
+[
+  {
+    "name": "actual Scribd URL follows the real form, queued job and processing failure workflow",
+    "passed": true
+  },
+  {
+    "name": "processing UI explains source access restrictions and the permitted upload/paste alternative",
+    "passed": true
+  },
+  {
+    "name": "source access failure keeps all three trial uses and does not suggest automatic retries",
+    "passed": true
+  },
+  {
+    "name": "Back to settings preserves the entered URL for correction or replacement",
+    "passed": true
+  },
+  {
+    "name": "mobile recovery workflow has no JavaScript exceptions or page overflow",
+    "passed": true
+  }
+]

@@ -4,23 +4,28 @@ $navGuestToken = $_SESSION['guest_token'] ?? null;
 $navUsername = $_SESSION['username'] ?? 'GUEST';
 $navIsAdmin = !empty($navUserId) && ($_SESSION['role'] ?? 'user') === 'admin';
 $navCurrentPage = basename((string)($_SERVER['SCRIPT_NAME'] ?? ''));
+$showPublicNavigation = empty($hidePublicNavigation);
+$appNavigation = require __DIR__ . '/app-navigation.php';
+if (in_array($navCurrentPage, $appNavigation['pages'], true)) {
+    require __DIR__ . '/app-sidebar.php';
+    return;
+}
 $isLanding = ($navCurrentPage === 'index.php' || $navCurrentPage === '');
 ?>
-<link rel="stylesheet" href="assets/css/site-nav.css?v=nex-13">
+<link rel="stylesheet" href="assets/css/site-nav.css?v=<?= filemtime(__DIR__ . '/../assets/css/site-nav.css') ?>">
 <script src="assets/js/logout-confirmation.js?v=<?= filemtime(__DIR__ . '/../assets/js/logout-confirmation.js') ?>" defer></script>
-<?php if (!$isLanding): ?>
-<link rel="stylesheet" href="assets/css/theme-toggle.css?v=<?= filemtime(__DIR__ . '/../assets/css/theme-toggle.css') ?>">
-<script src="assets/js/theme-toggle.js?v=<?= filemtime(__DIR__ . '/../assets/js/theme-toggle.js') ?>"></script>
-<?php endif; ?>
-<header class="nex-header site-header" id="nex-site-header" data-active-theme="light" aria-label="LIGHT navigation">
-    <a href="index.php" class="nex-brand" aria-label="LIGHT home">LIGHT</a>
+<header class="nex-header site-header" id="nex-site-header" aria-label="DEPENDED navigation">
+    <a href="index.php" class="nex-brand" aria-label="DEPENDED home">DEPENDED</a>
 
+    <?php if ($showPublicNavigation): ?>
     <!-- Mobile Navigation Toggle -->
-    <button type="button" class="nex-menu-toggle" id="nex-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nex-nav-menu">
+    <button type="button" class="btn btn--ghost btn--icon nex-menu-toggle" id="nex-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nex-nav-menu">
         <span class="nex-menu-toggle__bar"></span>
         <span class="nex-menu-toggle__bar"></span>
     </button>
+    <?php endif; ?>
 
+    <?php if ($showPublicNavigation): ?>
     <nav class="nex-header-right site-actions" id="nex-nav-menu" role="navigation" aria-label="Site navigation">
         <a href="summarizer.php" class="nex-nav__link<?= $navCurrentPage === 'summarizer.php' ? ' nex-nav__link--active' : '' ?>">Summarize</a>
 
@@ -39,10 +44,17 @@ $isLanding = ($navCurrentPage === 'index.php' || $navCurrentPage === '');
             <a href="login.php" class="nex-nav__link<?= $navCurrentPage === 'login.php' ? ' nex-nav__link--active' : '' ?>">Login</a>
             <a href="register.php" class="nex-nav__link<?= $navCurrentPage === 'register.php' ? ' nex-nav__link--active' : '' ?>">Register</a>
         <?php endif; ?>
-        <?php if (!$isLanding): ?>
+        <?php if (!$isLanding && empty($hideThemeToggle)): ?>
             <?php require __DIR__ . '/theme-toggle-button.php'; ?>
         <?php endif; ?>
     </nav>
+    <?php else: ?>
+    <div class="nex-header-right site-actions site-actions--utility" aria-label="Appearance settings">
+        <?php if (!$isLanding && empty($hideThemeToggle)): ?>
+            <?php require __DIR__ . '/theme-toggle-button.php'; ?>
+        <?php endif; ?>
+    </div>
+    <?php endif; ?>
 </header>
 <script>
 (function() {

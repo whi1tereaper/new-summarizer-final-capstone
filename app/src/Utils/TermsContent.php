@@ -17,7 +17,7 @@ class TermsContent
             [
                 'id'=>'student-privacy',
                 'heading'=>'Student Privacy Notice',
-                'body'=>'For enrollment matching and access control, LIGHT processes your official/normalized student number, a protected keyed duplicate-check identifier, account email, authentication data, status, policy versions, enrollment period, approval method, administrator identity and audit timestamps. Authorized administrators separately import official student numbers into a private enrollment registry; student submissions never populate it. New registrations require email for sign-in and account recovery, but do not require email confirmation. Existing account emails are not rewritten. Names and ID photographs are not requested. Registry lists are administrator-only and are not exposed in public analytics or notifications. Registration is optional and unused guest allowance remains available. The operator must establish its actual legal basis, authorized campus source, privacy authority and retention policy before processing real enrollment records.',
+                'body'=>'For enrollment matching and access control, DEPENDED processes your official/normalized student number, a protected keyed duplicate-check identifier, account email, authentication data, status, policy versions, enrollment period, approval method, administrator identity and audit timestamps. Authorized administrators separately import official student numbers into a private enrollment registry; student submissions never populate it. New registrations require email for sign-in and account recovery, but do not require email confirmation. Existing account emails are not rewritten. Names and ID photographs are not requested. Registry lists are administrator-only and are not exposed in public analytics or notifications. Registration is optional and unused guest allowance remains available. The operator must establish its actual legal basis, authorized campus source, privacy authority and retention policy before processing real enrollment records.',
             ],
             [
                 'heading'=>'Three-Day Retention and Minimal Approval Records',
@@ -29,7 +29,7 @@ class TermsContent
             ],
             [
                 'heading'=>'Privacy Rights and Contact',
-                'body'=>'Request access, correction, withdrawal, deletion or an explanation of retention through the AI Summarizer System Administrator / Privacy Contact: '.(filter_var(config('student_access.privacy_contact',''),FILTER_VALIDATE_EMAIL)?config('student_access.privacy_contact',''):'not configured; registration is closed until the operator publishes a designated contact').'. This contact is not represented as the official NEUST Data Protection Officer. Your required registration email remains private and supports normal sign-in/recovery; no email confirmation is required. Student access status appears on the existing Profile page; there is no secondary verification page or decision-email requirement. Normal password-recovery codes and administrator second-factor login remain security features, not student-ID verification. Registry eligibility withdrawal may end continued student access. Rights and exceptions must follow applicable policy and law; software alone does not establish compliance.',
+                'body'=>'Request access, correction, withdrawal, deletion or an explanation of retention through the DEPENDED System Administrator / Privacy Contact: '.(filter_var(config('student_access.privacy_contact',''),FILTER_VALIDATE_EMAIL)?config('student_access.privacy_contact',''):'not configured; registration is closed until the operator publishes a designated contact').'. This contact is not represented as the official NEUST Data Protection Officer. Your required registration email remains private and supports normal sign-in/recovery; no email confirmation is required. Student access status appears on the existing Profile page; there is no secondary verification page or decision-email requirement. Normal password-recovery codes and administrator second-factor login remain security features, not student-ID verification. Registry eligibility withdrawal may end continued student access. Rights and exceptions must follow applicable policy and law; software alone does not establish compliance.',
             ],
             [
                 'heading'=>'Guest Usage and Cookie Retention',
@@ -37,7 +37,7 @@ class TermsContent
             ],
             [
                 'heading' => 'Agreement',
-                'body' => 'By using this Article Summarization Software, you agree to follow these Terms and Conditions. If you do not agree, please do not use the system.',
+                'body' => 'By using DEPENDED Summarizer, you agree to follow these Terms and Conditions. If you do not agree, please do not use the system.',
             ],
             [
                 'heading' => 'Purpose of the Software',

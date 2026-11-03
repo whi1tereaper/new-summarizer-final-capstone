@@ -1,0 +1,17 @@
+{
+  "name": "DEPENDED Summarizer",
+  "short_name": "DEPENDED",
+  "description": "An intelligent document processing and summarization platform designed to transform complex information into clear, structured, and meaningful content.",
+  "start_url": "index.php",
+  "display": "standalone",
+  "background_color": "#eeedea",
+  "theme_color": "#7f00ff",
+  "icons": [
+    {
+      "src": "assets/images/depended-mark.svg",
+      "sizes": "32x32 48x48 72x72 96x96 128x128 256x256",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

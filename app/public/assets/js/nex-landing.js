@@ -27,61 +27,24 @@
   }
 
   /* ----------------------------------------------------------------
-     1. Header nav-theme switching
-     Watches each section with data-nav-theme="light|dark|accent" and
-     sets data-active-theme on .nex-header.
+     1. Header nav-theme switching & scroll surface state
   ---------------------------------------------------------------- */
   function initHeaderTheme() {
+    window.LightTheme?.refresh();
+
     const header = document.querySelector('.nex-header');
     if (!header) return;
 
-    const sections = document.querySelectorAll('[data-nav-theme]');
-    if (!sections.length) return;
-
-    // We use a map keyed by section element → its theme
-    const themeMap = new WeakMap();
-    const visible = new Set();
-
-    sections.forEach(function (section) {
-      themeMap.set(section, section.dataset.navTheme || 'light');
-    });
-
-    function applyTheme() {
-      // Pick the theme of the topmost visible section
-      let theme = 'light';
-      let smallestTop = Infinity;
-      visible.forEach(function (el) {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < smallestTop) {
-          smallestTop = rect.top;
-          theme = themeMap.get(el) || 'light';
-        }
-      });
-      if (header.dataset.activeTheme !== theme) {
-        header.dataset.activeTheme = theme;
+    function onScroll() {
+      if (window.scrollY > 24) {
+        header.classList.add('is-scrolled');
+      } else {
+        header.classList.remove('is-scrolled');
       }
     }
 
-    const observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            visible.add(entry.target);
-          } else {
-            visible.delete(entry.target);
-          }
-        });
-        applyTheme();
-      },
-      { threshold: 0, rootMargin: '-1px 0px -1px 0px' }
-    );
-
-    sections.forEach(function (section) {
-      observer.observe(section);
-    });
-
-    // Initial state
-    applyTheme();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   }
 
   /* ----------------------------------------------------------------

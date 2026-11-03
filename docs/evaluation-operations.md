@@ -1,5 +1,7 @@
 # Evaluation installation and operations
 
+**27 October 2026 update:** Assigned Summary reviews have been removed, including the reviewer page, assignment/rating APIs, report scores, and exports. Migration `022_remove_summary_reviews.sql` drops `evaluation_ratings` and `evaluation_assignments` and clears cached reports for rebuilding from remaining metrics. Back up the database, inspect pending migrations, then apply the reviewed plan with `php tools/migrate.php --allow-destructive`. The runner applies every pending migration. The older assignment and human-rating instructions below are historical and no longer available in the application. Automated evaluation, source annotations, and ordinary result feedback remain available.
+
 Framework version: `1.0.0`. This feature extends the existing PHP/MySQL/Python installation. It does not replace production summarization, history, authentication or analytics. Run commands from the repository root with the existing `.env` configuration. The examples use PowerShell and the project's Python 3.11 environment; use the interpreter configured by `LOCAL_PYTHON_BIN` if different.
 
 ## Database migration

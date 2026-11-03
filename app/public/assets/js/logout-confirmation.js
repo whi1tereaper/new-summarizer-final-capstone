@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 Are you sure you want to log out of your current session?
             </p>
             <div class="confirmation-modal__actions">
-                <button type="button" class="confirmation-modal__button confirmation-modal__button-secondary">Cancel</button>
-                <button type="button" class="confirmation-modal__button confirmation-modal__button-primary">Log out</button>
+                <button type="button" class="btn btn--secondary confirmation-modal__button confirmation-modal__button-secondary">Cancel</button>
+                <button type="button" class="btn btn--destructive confirmation-modal__button confirmation-modal__button-primary">Log out</button>
             </div>
         </div>
     `;

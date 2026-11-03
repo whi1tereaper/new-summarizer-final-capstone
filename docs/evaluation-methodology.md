@@ -1,5 +1,7 @@
 # Reproducible summarizer evaluation protocol
 
+**27 October 2026 update:** The application no longer assigns or collects independent Summary reviews. Assignment/rating records and their application report pipeline were retired by migration `022_remove_summary_reviews.sql`. Human-evaluation procedures below describe an external research protocol, not an available application feature; automated evaluation and ordinary result feedback remain separate.
+
 Protocol version: **1.0**, recorded **2026-10-02** (Asia/Manila). Statistical implementation: `evaluation-statistics/1.0.0`. This protocol defines measurements and analysis decisions; it contains **no research results**. Generated scores, human assessments and conclusions must come from identified evaluation runs. Software validation fixtures are not a completed capstone experiment.
 
 ## Architecture and scope

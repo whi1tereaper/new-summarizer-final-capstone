@@ -95,6 +95,8 @@ $expectedMigrations = [
     '018_password_reset_contract.sql',
     '019_student_enrollment_registry.sql',
     '020_registry_only_allowlist.sql',
+    '021_student_placeholder_claims.sql',
+    '022_remove_summary_reviews.sql',
 ];
 
 $actualBasenames = array_map('basename', $migrationFiles);
@@ -253,6 +255,11 @@ try {
     $tempTables = array_map('strtolower', $tempPdo->query("SHOW TABLES")->fetchAll(PDO::FETCH_COLUMN));
     $tempTablesMap = array_fill_keys($tempTables, true);
     $missingInTemp = array_filter($requiredTables, fn($t) => !isset($tempTablesMap[$t]));
+
+    assertPhase4(
+        "Fresh install: Retired summary review tables are absent",
+        !isset($tempTablesMap['evaluation_assignments']) && !isset($tempTablesMap['evaluation_ratings'])
+    );
 
     assertPhase4(
         "Fresh install: Temporary database contains all required tables",

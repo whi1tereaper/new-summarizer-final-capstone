@@ -1,0 +1,170 @@
+{
+  "host": "www.scribd.com",
+  "content_type": "text/html; charset=utf-8",
+  "response_bytes": 1291239,
+  "element_counts": {
+    "articles": 0,
+    "main": 1,
+    "paragraphs": 3,
+    "page_text": 0,
+    "text_layer": 0,
+    "pages": 0,
+    "scripts": 29,
+    "iframes": 1,
+    "password_inputs": 0,
+    "document_body": 0
+  },
+  "extracted_bytes": 0,
+  "extracted_words": 0,
+  "resolution_code": "URL_ACCESS_RESTRICTED",
+  "challenge_markers": [
+    "Just a moment"
+  ],
+  "body_element_classes": [],
+  "text_containers": [
+    {
+      "tag": "body",
+      "id": "",
+      "class": "",
+      "text_bytes": 272829
+    },
+    {
+      "tag": "main",
+      "id": "pdf_document_scroll_container",
+      "class": "_2iLSdL document_scroller carousel_scroll_parent _2P_-2J",
+      "text_bytes": 70100
+    },
+    {
+      "tag": "div",
+      "id": "document_container",
+      "class": "document_container",
+      "text_bytes": 69847
+    },
+    {
+      "tag": "div",
+      "id": "",
+      "class": "outer_page_container",
+      "text_bytes": 52995
+    },
+    {
+      "tag": "div",
+      "id": "content",
+      "class": "",
+      "text_bytes": 40862
+    },
+    {
+      "tag": "p",
+      "id": "",
+      "class": "truncatedText__content truncatedText__content--mode_clamp truncatedText__content--withToggle_false truncatedText__content--arrayText_false",
+      "text_bytes": 56
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "class": "ButtonCore-module_wrapper_MkTb9s TextButton-module_wrapper_ZwW-wM TextButton-module_default_ekglbr",
+      "text_bytes": 37
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": "ButtonCore-module_content_8zyAJv",
+      "text_bytes": 37
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "class": "ButtonCore-module_wrapper_MkTb9s TextButton-module_wrapper_ZwW-wM TextButton-module_default_ekglbr",
+      "text_bytes": 37
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": "ButtonCore-module_content_8zyAJv",
+      "text_bytes": 37
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "class": "ButtonCore-module_wrapper_MkTb9s TextButton-module_wrapper_ZwW-wM TextButton-module_default_ekglbr",
+      "text_bytes": 35
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": "ButtonCore-module_content_8zyAJv",
+      "text_bytes": 35
+    },
+    {
+      "tag": "p",
+      "id": "",
+      "class": "aiEnhancedTag__badgeText",
+      "text_bytes": 33
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": "ButtonCore-module_content_8zyAJv",
+      "text_bytes": 26
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": "ButtonCore-module_children_8a9B71 ButtonCore-module_leftAlignedText_hoMVqd",
+      "text_bytes": 26
+    },
+    {
+      "tag": "button",
+      "id": "",
+      "class": "ButtonCore-module_wrapper_MkTb9s TextButton-module_wrapper_ZwW-wM TextButton-module_default_ekglbr SkipLink-module_skipLink_TpPvF4 ScribdTopBar-module_skipLink_",
+      "text_bytes": 20
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": "ButtonCore-module_content_8zyAJv",
+      "text_bytes": 20
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": "ButtonCore-module_content_8zyAJv",
+      "text_bytes": 20
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "class": "TextButton-module_wrapper__ZwW-w SocialLink-module_wrapper__7Rvvt",
+      "text_bytes": 19
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": "TextButton-module_content__6x-Ra",
+      "text_bytes": 19
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": "TextButton-module_children__HwxUl",
+      "text_bytes": 19
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "class": "TextButton-module_wrapper__ZwW-w SocialLink-module_wrapper__7Rvvt",
+      "text_bytes": 19
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": "TextButton-module_content__6x-Ra",
+      "text_bytes": 19
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": "TextButton-module_children__HwxUl",
+      "text_bytes": 19
+    }
+  ]
+}

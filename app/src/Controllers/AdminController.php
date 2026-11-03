@@ -21,7 +21,7 @@ class AdminController {
 
     public function __construct() {
         $this->db = Database::getInstance()->getConnection();
-        $this->auditSvc = new AdminSecurityService();
+        $this->auditSvc = new AdminSecurityService($this->db);
         $this->ensureAdmin();
     }
 
@@ -115,8 +115,28 @@ class AdminController {
             $_SESSION['flash_error'] = 'Invalid status value.';
             return false;
         }
-        $stmt = $this->db->prepare("UPDATE users SET active = :status WHERE id = :id");
-        return $stmt->execute(['status' => $status, 'id' => $userId]);
+        $auditTransaction=false;
+        try {
+            $this->db->beginTransaction();
+            $auditTransaction=true;
+            $stmt=$this->db->prepare('SELECT active FROM users WHERE id=? FOR UPDATE');$stmt->execute([$userId]);$previous=$stmt->fetchColumn();
+            if($previous===false){$this->db->rollBack();$this->audit('admin_status_change_failed','Account not found.','user',$userId);return false;}
+            if((int)$previous!==$status){
+                $this->db->prepare('UPDATE users SET active=? WHERE id=?')->execute([$status,$userId]);
+                $this->auditSvc->recordAudit((int)$_SESSION['user_id'],$status===1?'admin_user_activated':'admin_user_deactivated',
+                    'Account status: '.((int)$previous===1?'active':'inactive').' -> '.($status===1?'active':'inactive').'.','user',$userId);
+            }
+            $this->db->commit();return true;
+        }catch(\Throwable $exception){
+            if($auditTransaction&&$this->db->inTransaction())$this->db->rollBack();
+            $this->audit('admin_status_change_failed','Account status update could not be committed.','user',$userId);
+            $_SESSION['flash_error']='The account status could not be saved. No changes were made.';return false;
+        }
+    }
+
+    public function getStorageMaintenanceStats(): array {
+        require_once __DIR__.'/../Services/StorageMaintenanceService.php';
+        return (new \App\Src\Services\StorageMaintenanceService($this->db))->snapshot((int)($_SESSION['user_id']??0));
     }
 
     public function getUploadOrphanStats() {
@@ -220,12 +240,16 @@ class AdminController {
             return;
         }
 
+        $auditTransaction=false;
         try {
-            $stmt = $this->db->prepare("SELECT role, username FROM users WHERE id = :id LIMIT 1");
+            $this->db->beginTransaction();
+            $auditTransaction=true;
+            $stmt = $this->db->prepare("SELECT role, username FROM users WHERE id = :id LIMIT 1 FOR UPDATE");
             $stmt->execute(['id' => $userId]);
             $user = $stmt->fetch();
 
             if (!$user) {
+                $this->db->rollBack();
                 $this->audit('admin_delete_failed', 'User not found', 'user', $userId);
                 $_SESSION['flash_error'] = 'User not found.';
                 return;
@@ -233,6 +257,7 @@ class AdminController {
 
             // Rule 2: Admin accounts cannot be hard-deleted at all. Deactivate instead.
             if ($user['role'] === 'admin') {
+                $this->db->rollBack();
                 $this->audit('admin_delete_denied', 'Attempted to hard-delete an admin account', 'user', $userId);
                 $_SESSION['flash_error'] = 'Action Denied: Admin accounts cannot be deleted. Use deactivation instead.';
                 return;
@@ -242,15 +267,18 @@ class AdminController {
             $stmt->execute(['id' => $userId]);
 
             if ($stmt->rowCount() === 0) {
+                $this->db->rollBack();
                 $this->audit('admin_delete_failed', 'DELETE affected 0 rows', 'user', $userId);
                 $_SESSION['flash_error'] = 'Delete failed: user may have already been removed.';
                 return;
             }
 
-            $this->audit('admin_deleted_user', "Hard deleted user: {$user['username']}", 'user', $userId);
+            $this->auditSvc->recordAudit($callerAdminId,'admin_user_deleted','Account permanently deleted.','user',$userId);
+            $this->db->commit();
             $_SESSION['flash_success'] = "User ID {$userId} ({$user['username']}) has been permanently deleted.";
         } catch (\Throwable $e) {
-            error_log('[AdminController] hardDeleteUser error: ' . $e->getMessage());
+            if($auditTransaction&&$this->db->inTransaction())$this->db->rollBack();
+            error_log('[AdminController] Account deletion unavailable: ' . get_class($e));
             $this->audit('admin_delete_failed', 'Database error during user delete', 'user', $userId);
             $_SESSION['flash_error'] = 'Delete failed due to a server error.';
         }
@@ -270,12 +298,16 @@ class AdminController {
             return;
         }
 
+        $auditTransaction=false;
         try {
-            $stmt = $this->db->prepare("SELECT role, username, active FROM users WHERE id = :id LIMIT 1");
+            $this->db->beginTransaction();
+            $auditTransaction=true;
+            $stmt = $this->db->prepare("SELECT role, username, active FROM users WHERE id = :id LIMIT 1 FOR UPDATE");
             $stmt->execute(['id' => $userId]);
             $user = $stmt->fetch();
 
             if (!$user) {
+                $this->db->rollBack();
                 $this->audit('admin_delete_failed', 'Deactivation target user not found', 'user', $userId);
                 $_SESSION['flash_error'] = 'User not found.';
                 return;
@@ -290,6 +322,7 @@ class AdminController {
                 $otherActiveAdmins = (int)$cntStmt->fetchColumn();
 
                 if ($otherActiveAdmins === 0) {
+                    $this->db->rollBack();
                     $this->audit(
                         'admin_delete_denied',
                         'Attempted to deactivate the last active admin account',
@@ -301,13 +334,16 @@ class AdminController {
                 }
             }
 
+            if((int)$user['active']===0){$this->db->commit();$_SESSION['flash_success']='This account is already inactive.';return;}
             $stmt = $this->db->prepare("UPDATE users SET active = 0 WHERE id = :id");
             $stmt->execute(['id' => $userId]);
 
-            $this->audit('admin_deleted_user', "Deactivated user: {$user['username']}", 'user', $userId);
+            $this->auditSvc->recordAudit($callerAdminId,'admin_user_deactivated','Account status: active -> inactive.','user',$userId);
+            $this->db->commit();
             $_SESSION['flash_success'] = "User ID {$userId} ({$user['username']}) has been deactivated.";
         } catch (\Throwable $e) {
-            error_log('[AdminController] deactivateUser error: ' . $e->getMessage());
+            if($auditTransaction&&$this->db->inTransaction())$this->db->rollBack();
+            error_log('[AdminController] Account deactivation unavailable: ' . get_class($e));
             $this->audit('admin_delete_failed', 'Database error during user deactivation', 'user', $userId);
             $_SESSION['flash_error'] = 'Deactivation failed due to a server error.';
         }

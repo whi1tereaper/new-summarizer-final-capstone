@@ -1,0 +1,57 @@
+====================================================
+LIGHT SUMMARIZER INTELLIGENCE & CAPABILITIES TEST
+====================================================
+
+--- GROUP 1: Mode, Depth, Format Contract Integrity ---
+[PASS] ALLOWED_ANALYSIS_MODES includes 'legal'
+[PASS] ALLOWED_ANALYSIS_MODES includes 'scientific'
+[PASS] ALLOWED_OUTPUT_FORMATS includes 'key_takeaways'
+[PASS] ALLOWED_SUMMARY_DEPTHS includes 'very_brief'
+[PASS] normalizeAnalysisMode handles 'legal'
+[PASS] normalizeAnalysisMode handles 'scientific'
+[PASS] normalizeAnalysisMode falls back to 'general' on invalid
+[PASS] normalizeOutputFormat handles 'key_takeaways'
+[PASS] normalizeOutputFormat falls back to 'paragraph' on invalid
+[PASS] normalizeSummaryLength handles 'very_brief'
+
+--- GROUP 2: SummarizerPromptTemplate Consistency ---
+[PASS] SummarizerPromptTemplate supports 'legal' profile
+[PASS] SummarizerPromptTemplate supports 'scientific' profile
+[PASS] SummarizerPromptTemplate supports 'very_brief' length
+
+--- GROUP 3: Focus Query Staging & Validation ---
+[PASS] buildPendingSummary preserves analysis_mode 'scientific'
+[PASS] buildPendingSummary preserves summary_depth 'very_brief'
+[PASS] buildPendingSummary preserves output_format 'key_takeaways'
+[PASS] buildPendingSummary sanitizes focus_query (strips tags & trims) - Result: What is the risk of high model capacity?
+
+--- GROUP 4: LocalPythonBridge Q&A Verification ---
+[PASS] Independent LIGHT engine returns a versioned result
+[PASS] Independent LIGHT engine identifies itself in result metadata
+[PASS] Independent LIGHT engine returns source-traceable sentences
+[PASS] Independent LIGHT engine reports its semantic ranking status
+[PASS] Independent LIGHT engine loads the configured local semantic model
+[PASS] Independent LIGHT engine returns an explicit grammar-check status
+[PASS] LocalPythonBridge::qa() returns valid array with found key
+[PASS] LocalPythonBridge::qa() finds grounded answer
+[PASS] LocalPythonBridge::qa() answer cites launch date December 25, 2021 - Answer: The James Webb Space Telescope (JWST) was launched on December 25, 2021.
+[PASS] LocalPythonBridge::qa() provides cited passages
+[PASS] LocalPythonBridge::qa() returns valid response on out-of-scope query
+[PASS] LocalPythonBridge::qa() honestly reports 'found' is false
+[PASS] LocalPythonBridge::qa() provides factual disclaimer instead of hallucinating - Answer: The document does not contain information directly addressing this question.
+
+--- GROUP 5: api/qa.php Endpoint Integrity ---
+[PASS] api/qa.php rejects GET requests with 405
+[PASS] api/qa.php rejects empty POST with 400
+
+--- GROUP 6: Article Extraction & Adaptive Metadata ---
+[PASS] Article HTML extraction retains title and section headings
+[PASS] Article HTML extraction retains source paragraphs
+[PASS] Article HTML extraction excludes navigation, cookie, ads, and related content
+[PASS] PHP persistence normalization retains adaptive and validation metadata
+
+====================================================
+TEST RESULTS: 36 PASSED, 0 FAILED
+====================================================
+
+STDERR

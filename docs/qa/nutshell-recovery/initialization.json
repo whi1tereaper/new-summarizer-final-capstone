@@ -1,0 +1,10 @@
+[
+  {
+    "name": "database initialization failure returns safe JSON with HTTP 503",
+    "passed": true
+  },
+  {
+    "name": "database initialization failure does not disclose SQL credentials or file paths",
+    "passed": true
+  }
+]

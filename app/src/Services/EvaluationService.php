@@ -14,12 +14,11 @@ use RuntimeException;
 /** Evaluation repository. Web callers MUST pass EvaluationAccess before calling management methods. */
 final class EvaluationService
 {
-    public const VERSION = '1.1.0';
+    public const VERSION = '1.2.0';
     public const MODES = SummarizerPromptTemplate::ALLOWED_LENGTHS;
     public const PROFILES = SummarizerPromptTemplate::ALLOWED_PROFILES;
     public const SYSTEMS = ['proposed', 'hybrid_llm', 'lead_n', 'tfidf', 'textrank'];
     public const ABLATIONS = ['title_similarity', 'section_weighting', 'sentence_position', 'paragraph_position', 'profile_weighting', 'article_type_relevance', 'redundancy_filtering', 'qualifier_protection', 'negation_protection', 'numerical_fact_protection'];
-    public const CRITERIA = ['relevance', 'factual_consistency', 'coverage', 'coherence', 'readability', 'conciseness', 'non_redundancy'];
     public const ERROR_CATEGORIES = ['important_information_omitted', 'irrelevant_information_included', 'duplicated_information', 'sentence_fragment', 'coherence_failure', 'incorrect_section_prioritization', 'numerical_value_altered', 'numerical_value_omitted', 'negation_lost', 'qualifier_lost', 'named_entity_error', 'preprocessing_ocr_issue', 'excessive_compression', 'insufficient_compression', 'baseline_anomaly', 'unknown_other'];
     public const EXPECTED_METRICS = ['rouge_1', 'rouge_2', 'rouge_l', 'bertscore', 'compression_ratio', 'compression_percentage', 'redundancy', 'critical_fact_preservation', 'factual_consistency', 'content_unit_coverage', 'challenge'];
     private PDO $db;
@@ -314,7 +313,6 @@ final class EvaluationService
         $out['document'] = $doc; $out['source_text'] = $doc['source_text']; $out['title'] = $doc['title'];
         $out['references'] = $doc['references']; $out['content_units'] = $doc['content_units'];
         $out['metrics'] = $this->getMetrics($id);
-        $out['ratings'] = $this->rows('SELECT r.*,a.evaluator_code FROM evaluation_ratings r JOIN evaluation_assignments a ON a.id=r.assignment_id WHERE a.output_id=? ORDER BY a.evaluator_code', [$id]);
         $out['errors'] = $this->rows('SELECT id,category,notes,created_at FROM evaluation_errors WHERE output_id=? ORDER BY id', [$id]);
         $out['content_unit_reviews'] = $this->rows('SELECT unit_id,represented,notes,created_at FROM evaluation_content_unit_reviews WHERE output_id=?', [$id]);
         $out['warnings'] = self::decode($out['warnings_json']); $out['timings'] = self::decode($out['timings_json']);
@@ -354,99 +352,6 @@ final class EvaluationService
         });
     }
 
-    public static function randomizedOrder(array $ids, string $seed): array
-    {
-        usort($ids, static fn($a,$b) => strcmp(hash_hmac('sha256', (string)$a, $seed), hash_hmac('sha256', (string)$b, $seed)) ?: ($a <=> $b));
-        return $ids;
-    }
-    public function listEvaluatorCandidates(): array
-    {
-        return $this->rows("SELECT id AS user_id,CONCAT('Account ',id) AS pseudonym FROM users WHERE active=1 ORDER BY id LIMIT 1000");
-    }
-    public function createAssignments(int $runId, array $userIds, int $actorId, array $documentIds = []): int
-    {
-        $userIds = array_values(array_unique(array_map('intval', $userIds)));
-        if (!$userIds || count($userIds) > 30 || min($userIds) < 1) throw new InvalidArgumentException('Choose 1–30 active evaluators.');
-        return $this->transaction(function () use ($runId,$userIds,$actorId,$documentIds) {
-            $run = $this->row('SELECT status FROM evaluation_runs WHERE id=? FOR UPDATE', [$runId]);
-            if (!$run || !in_array($run['status'], ['completed','completed_with_errors'], true)) throw new InvalidArgumentException('Assign outputs after the run completes.');
-            $outputs = $this->rows("SELECT id,document_id FROM evaluation_outputs WHERE run_id=? AND status IN ('completed','completed_with_errors') AND summary_text IS NOT NULL AND summary_text<>'' ORDER BY id", [$runId]);
-            if ($documentIds) $outputs = array_values(array_filter($outputs, static fn($o) => in_array((int)$o['document_id'], array_map('intval', $documentIds), true)));
-            if (!$outputs) throw new InvalidArgumentException('No valid outputs match the selection.');
-            $inserted = 0;
-            foreach ($userIds as $userId) {
-                if (!$this->row('SELECT id FROM users WHERE id=? AND active=1', [$userId])) throw new InvalidArgumentException('An evaluator account is unavailable.');
-                $existing = $this->row('SELECT evaluator_code,randomization_seed FROM evaluation_assignments WHERE run_id=? AND evaluator_user_id=? LIMIT 1', [$runId,$userId]);
-                $seed = $existing['randomization_seed'] ?? bin2hex(random_bytes(32));
-                $n = $this->row('SELECT COUNT(DISTINCT evaluator_user_id) AS n FROM evaluation_assignments WHERE run_id=?', [$runId]);
-                $code = $existing['evaluator_code'] ?? ('E' . str_pad((string)((int)$n['n'] + 1), 2, '0', STR_PAD_LEFT));
-                $ordered = self::randomizedOrder(array_column($outputs, 'id'), $seed);
-                foreach ($ordered as $position => $outputId) {
-                    if ($this->row('SELECT id FROM evaluation_assignments WHERE output_id=? AND evaluator_user_id=?', [$outputId,$userId])) continue;
-                    $this->execute('INSERT INTO evaluation_assignments (assignment_token,run_id,output_id,evaluator_user_id,evaluator_code,blind_label,presentation_order,randomization_seed) VALUES (?,?,?,?,?,?,?,?)', [bin2hex(random_bytes(24)),$runId,$outputId,$userId,$code,'Summary ' . ($position + 1),$position + 1,$seed]);
-                    $inserted++;
-                }
-            }
-            $this->execute('UPDATE evaluation_runs SET report_pending=1 WHERE id=?', [$runId]);
-            $this->audit($actorId, 'assignments_created', 'run', $runId, null, ['count'=>$inserted,'evaluators'=>count($userIds)]);
-            return $inserted;
-        });
-    }
-    public function listAssignments(int $userId): array
-    {
-        return $this->rows('SELECT a.assignment_token,a.blind_label,a.presentation_order,a.status,d.title FROM evaluation_assignments a JOIN evaluation_outputs o ON o.id=a.output_id JOIN evaluation_documents d ON d.id=o.document_id JOIN users u ON u.id=a.evaluator_user_id AND u.active=1 WHERE a.evaluator_user_id=? ORDER BY a.run_id,a.presentation_order', [$userId]);
-    }
-    public function getBlindAssignment(string $token, int $userId): ?array
-    {
-        if (!preg_match('/^[a-f0-9]{48}$/D', $token) || $userId < 1) return null;
-        $assignment = $this->row('SELECT a.*,o.summary_text,o.document_id FROM evaluation_assignments a JOIN evaluation_outputs o ON o.id=a.output_id JOIN users u ON u.id=a.evaluator_user_id AND u.active=1 WHERE a.assignment_token=? AND a.evaluator_user_id=?', [$token,$userId]);
-        if (!$assignment) return null;
-        $doc = $this->snapshotDocument($this->getRun((int)$assignment['run_id']), (int)$assignment['document_id']);
-        // Deliberate allowlist: no internal output/run IDs, metric scores, system names, profiles or references.
-        return ['assignment_token'=>$assignment['assignment_token'],'blind_label'=>$assignment['blind_label'],'presentation_order'=>(int)$assignment['presentation_order'],'status'=>$assignment['status'],'title'=>$doc['title'],'source_text'=>$doc['source_text'],'summary_text'=>$assignment['summary_text'],'content_units'=>array_map(static fn($u)=>['id'=>$u['id'],'text'=>$u['unit_text']],$doc['content_units'])];
-    }
-    public static function validateRatings(array $ratings): array
-    {
-        $validated = [];
-        foreach (array_merge(self::CRITERIA,['overall_usefulness']) as $criterion) {
-            $value = $ratings[$criterion] ?? null;
-            if ($criterion === 'overall_usefulness' && ($value === null || $value === '')) { $validated[$criterion]=null; continue; }
-            if (!(is_int($value) || (is_string($value) && preg_match('/^[1-5]$/D',$value))) || (int)$value < 1 || (int)$value > 5) throw new InvalidArgumentException('Each required criterion needs an integer rating from 1 to 5.');
-            $validated[$criterion]=(int)$value;
-        }
-        return $validated;
-    }
-    public function submitRating(string $token, int $userId, array $ratings, string $comment = ''): int
-    {
-        $validated = self::validateRatings($ratings); $comment = self::text($comment,'Comments',5000,false);
-        if (!preg_match('/^[a-f0-9]{48}$/D',$token)) throw new InvalidArgumentException('Assignment was not found.');
-        return $this->transaction(function () use ($token,$userId,$validated,$comment) {
-            $a = $this->row('SELECT a.* FROM evaluation_assignments a JOIN users u ON u.id=a.evaluator_user_id AND u.active=1 WHERE assignment_token=? AND evaluator_user_id=? FOR UPDATE',[$token,$userId]);
-            if (!$a) throw new DomainException('Assignment was not found.',403);
-            if ($a['status'] !== 'assigned') throw new DomainException('This assessment has already been submitted and is locked.',409);
-            $this->execute('INSERT INTO evaluation_ratings (assignment_id,relevance,factual_consistency,coverage,coherence,readability,conciseness,non_redundancy,overall_usefulness,comments) VALUES (?,?,?,?,?,?,?,?,?,?)', array_merge([(int)$a['id']],array_values($validated),[$comment]));
-            $id=(int)$this->db->lastInsertId();
-            $this->execute("UPDATE evaluation_assignments SET status='submitted',submitted_at=UTC_TIMESTAMP() WHERE id=?",[$a['id']]);
-            $this->execute('UPDATE evaluation_runs SET report_pending=1 WHERE id=?',[$a['run_id']]);
-            $this->audit($userId,'rating_submitted_locked','rating',$id);
-            return $id;
-        });
-    }
-    public function correctRating(int $ratingId, array $ratings, string $reason, int $actorId): void
-    {
-        $validated=self::validateRatings($ratings); $reason=self::text($reason,'Correction reason',5000);
-        $this->transaction(function () use ($ratingId,$validated,$reason,$actorId) {
-            $old=$this->row('SELECT r.*,a.run_id FROM evaluation_ratings r JOIN evaluation_assignments a ON a.id=r.assignment_id WHERE r.id=? FOR UPDATE',[$ratingId]);
-            if (!$old) throw new InvalidArgumentException('Submitted rating was not found.');
-            $this->audit($actorId,'rating_admin_correction','rating',$ratingId,$old,$validated,$reason);
-            $this->execute('UPDATE evaluation_ratings SET relevance=?,factual_consistency=?,coverage=?,coherence=?,readability=?,conciseness=?,non_redundancy=?,overall_usefulness=?,corrected_at=UTC_TIMESTAMP() WHERE id=?',array_merge(array_values($validated),[$ratingId]));
-            $this->execute('UPDATE evaluation_runs SET report_pending=1 WHERE id=?',[$old['run_id']]);
-        });
-    }
-    public function getAssignmentsForRun(int $runId): array
-    {
-        return $this->rows('SELECT a.id,a.evaluator_code,a.blind_label,a.status,a.output_id,r.id AS rating_id,r.relevance,r.factual_consistency,r.coverage,r.coherence,r.readability,r.conciseness,r.non_redundancy,r.overall_usefulness,r.comments,r.corrected_at FROM evaluation_assignments a LEFT JOIN evaluation_ratings r ON r.assignment_id=a.id WHERE a.run_id=? ORDER BY a.evaluator_code,a.presentation_order',[$runId]);
-    }
     public function classifyError(int $outputId, string $category, string $notes, int $actorId): int
     {
         if (!in_array($category,self::ERROR_CATEGORIES,true)) throw new InvalidArgumentException('Unknown error category.');
@@ -496,9 +401,7 @@ final class EvaluationService
             foreach (['timings','configuration','provenance','warnings'] as $field) $safe[$field]=self::decode($out[$field.'_json']);
             $safe['metrics']=$this->getMetrics((int)$out['id']); $outputs[]=$safe;
         }
-        $ratings=$this->getAssignmentsForRun($runId);
-        foreach ($ratings as &$rating) { unset($rating['id'],$rating['comments'],$rating['rating_id'],$rating['blind_label']); }
-        return ['export_version'=>self::VERSION,'run'=>$safeRun,'documents'=>$documents,'outputs'=>$outputs,'ratings'=>$ratings,'errors'=>$this->rows('SELECT e.output_id,e.category,e.notes,e.created_at FROM evaluation_errors e JOIN evaluation_outputs o ON o.id=e.output_id WHERE o.run_id=?',[$runId]),'report'=>$this->getRunReport($runId),'privacy_note'=>'Evaluator identities, reference authors, free-text rating comments, private source references and audit actor IDs are excluded. Researcher-authored error notes must be reviewed before public publication.'];
+        return ['export_version'=>self::VERSION,'run'=>$safeRun,'documents'=>$documents,'outputs'=>$outputs,'errors'=>$this->rows('SELECT e.output_id,e.category,e.notes,e.created_at FROM evaluation_errors e JOIN evaluation_outputs o ON o.id=e.output_id WHERE o.run_id=?',[$runId]),'report'=>$this->getRunReport($runId),'privacy_note'=>'Reference authors, private source references and audit actor IDs are excluded. Researcher-authored error notes must be reviewed before public publication.'];
     }
 
     /** Offline worker methods. No HTTP handler calls these methods. */
@@ -590,7 +493,7 @@ final class EvaluationService
     {
         $run=$this->getRun($runId);
         if (!$run) throw new InvalidArgumentException('Run was not found.');
-        $metricRows=[]; $ratingRows=[];
+        $metricRows=[];
         $observedVersions=[];
         foreach ($this->rows("SELECT DISTINCT m.metric_name,m.metric_version FROM evaluation_metrics m JOIN evaluation_outputs o ON o.id=m.output_id WHERE o.run_id=? AND (m.error_message IS NULL OR m.error_message<>'Metric was not returned by the worker.')",[$runId]) as $observed) $observedVersions[$observed['metric_name']][]=$observed['metric_version'];
         $missingVersion=static function (string $name) use ($observedVersions): string {
@@ -617,10 +520,8 @@ final class EvaluationService
             $expected=count($doc['content_units']);
             $complete=$expected>0 && count($reviews)===$expected;
             $metricRows[]=array_merge($base,['metric'=>'human_verified_content_coverage','value'=>$complete ? array_sum(array_column($reviews,'represented'))/$expected : null,'status'=>$complete ? 'ok' : ($expected ? 'unavailable':'not_applicable')]);
-            $ratings=$this->rows('SELECT a.evaluator_code,r.* FROM evaluation_assignments a LEFT JOIN evaluation_ratings r ON r.assignment_id=a.id WHERE a.output_id=?',[$out['id']]);
-            foreach ($ratings as $rating) foreach (array_merge(self::CRITERIA,['overall_usefulness']) as $criterion) $ratingRows[]=array_merge($base,['evaluator_id'=>$rating['evaluator_code'],'criterion'=>$criterion,'rating'=>$rating[$criterion]===null ? null : (int)$rating[$criterion]]);
         }
-        return ['metric_rows'=>$metricRows,'rating_rows'=>$ratingRows,'seed'=>$run['configuration']['seed'],'bootstrap_samples'=>2000];
+        return ['metric_rows'=>$metricRows,'seed'=>$run['configuration']['seed'],'bootstrap_samples'=>2000];
     }
     public function saveReport(int $runId,array $report,?string $inputHash=null): void
     {

@@ -14,22 +14,17 @@ final class EvaluationAccess
             if (PHP_SAPI !== 'cli') http_response_code(403);
             throw new \RuntimeException('Administrator access is required.', 403);
         }
-        return self::requireEvaluator();
-    }
-
-    public static function requireEvaluator(): int
-    {
         $id = filter_var($_SESSION['user_id'] ?? null, FILTER_VALIDATE_INT);
         if (!$id || $id < 1) {
             if (PHP_SAPI !== 'cli') http_response_code(403);
-            throw new \RuntimeException('Sign in to access assigned evaluations.', 403);
+            throw new \RuntimeException('Administrator access is required.', 403);
         }
         // Revoked/disabled accounts must not retain evaluation access through a stale session.
         $db = \App\Src\Database::getInstance()->getConnection();
         $stmt = $db->prepare('SELECT active, role FROM users WHERE id = ?');
         $stmt->execute([$id]);
         $user = $stmt->fetch(\PDO::FETCH_ASSOC);
-        if (!$user || !(bool)$user['active'] || (AdminSecurityService::isVerifiedAdmin() && $user['role'] !== 'admin')) {
+        if (!$user || !(bool)$user['active'] || $user['role'] !== 'admin') {
             if (PHP_SAPI !== 'cli') http_response_code(403);
             throw new \RuntimeException('Evaluation access is unavailable.', 403);
         }

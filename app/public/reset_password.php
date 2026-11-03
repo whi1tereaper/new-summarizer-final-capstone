@@ -7,19 +7,16 @@ $csrf_token = generateCsrfToken();
 $prefilledEmail = $_SESSION['reset_email'] ?? '';
 ?>
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <?php require_once __DIR__ . '/partials/design-system-head.php'; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reset Password — LIGHT</title>
+    <title>Reset Password — DEPENDED</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="assets/images/poc-neust-logo.png">
-    <link rel="stylesheet" href="assets/css/design-tokens.css">
     <link rel="stylesheet" href="assets/css/style.css?v=<?= filemtime(__DIR__ . '/assets/css/style.css') ?>">
-    <link rel="stylesheet" href="assets/css/site-footer.css?v=nex-8">
-</head>
+    </head>
 <body class="page-auth-layout">
     <?php require __DIR__ . '/partials/site-nav.php'; ?>
 
@@ -58,7 +55,7 @@ $prefilledEmail = $_SESSION['reset_email'] ?? '';
                         <label for="password">New Password:</label>
                         <div class="pw-input-wrap">
                             <input type="password" id="password" name="password" required placeholder="8+ chars, incl. numbers" autocomplete="new-password">
-                            <button type="button" class="pw-toggle" id="toggle-password" aria-label="Show password" tabindex="-1">
+                            <button type="button" class="btn btn--ghost btn--icon pw-toggle" id="toggle-password" aria-label="Show password" tabindex="-1">
                                 <svg class="pw-icon pw-icon--show" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                                 <svg class="pw-icon pw-icon--hide" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
                             </button>
@@ -75,14 +72,14 @@ $prefilledEmail = $_SESSION['reset_email'] ?? '';
                         <label for="confirm_password">Confirm Password:</label>
                         <div class="pw-input-wrap">
                             <input type="password" id="confirm_password" name="confirm_password" required placeholder="Retype new password" autocomplete="new-password">
-                            <button type="button" class="pw-toggle" id="toggle-confirm" aria-label="Show password" tabindex="-1">
+                            <button type="button" class="btn btn--ghost btn--icon pw-toggle" id="toggle-confirm" aria-label="Show password" tabindex="-1">
                                 <svg class="pw-icon pw-icon--show" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                                 <svg class="pw-icon pw-icon--hide" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
                             </button>
                         </div>
                     </div>
 
-                    <button type="submit" class="btn-auth">Update Password</button>
+                    <button type="submit" class="btn btn--primary btn-auth">Update Password</button>
                 </form>
 
                 <div class="auth-nav-links">

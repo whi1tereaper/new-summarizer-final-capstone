@@ -23,8 +23,6 @@ $createdAt = is_array($profile)
     ? (new DateTimeImmutable((string)$profile['created_at']))->format('F j, Y')
     : '';
 $isAdmin = ($_SESSION['role'] ?? 'user') === 'admin';
-$workspaceHref = $isAdmin ? 'admin_dashboard.php' : 'dashboard.php';
-$workspaceLabel = $isAdmin ? 'Admin dashboard' : 'Dashboard';
 $studentApplication=null;$studentContinued=false;
 if(!$isAdmin&&$profile!==null){
     require_once __DIR__.'/../src/Services/StudentVerificationService.php';
@@ -32,17 +30,15 @@ if(!$isAdmin&&$profile!==null){
 }
 ?>
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="utf-8">
+    <?php require_once __DIR__ . '/partials/design-system-head.php'; ?>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Profile — LIGHT</title>
-    <meta name="description" content="View your LIGHT account information.">
-    <script>try{var t=localStorage.getItem('light-results-theme');if(t!=='light'&&t!=='dark')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t;}catch(e){}</script>
-    <link rel="stylesheet" href="assets/css/design-tokens.css">
+    <title>Profile — DEPENDED</title>
+    <meta name="description" content="View your DEPENDED account information.">
     <link rel="stylesheet" href="assets/css/style.css?v=<?= filemtime(__DIR__ . '/assets/css/style.css') ?>">
-    <link rel="stylesheet" href="assets/css/site-nav.css">
-    <link rel="stylesheet" href="assets/css/site-footer.css?v=nex-8">
+    <link rel="stylesheet" href="assets/css/site-nav.css?v=<?= filemtime(__DIR__ . '/assets/css/site-nav.css') ?>">
     <link rel="stylesheet" href="assets/css/profile.css?v=<?= filemtime(__DIR__ . '/assets/css/profile.css') ?>">
 </head>
 <body class="profile-page">
@@ -53,17 +49,6 @@ if(!$isAdmin&&$profile!==null){
         <h1 class="profile-page__title">Profile</h1>
 
         <div class="profile-layout">
-            <aside class="profile-sidebar" aria-label="Account sidebar">
-                <p class="profile-sidebar__heading">Account</p>
-                <nav class="profile-sidebar__nav" aria-label="Account navigation">
-                    <a class="profile-sidebar__link" href="<?= htmlspecialchars($workspaceHref, ENT_QUOTES, 'UTF-8') ?>">
-                        <?= htmlspecialchars($workspaceLabel, ENT_QUOTES, 'UTF-8') ?>
-                    </a>
-                    <a class="profile-sidebar__link" href="history.php">History</a>
-                    <a class="profile-sidebar__link is-active" href="profile.php" aria-current="page">Profile</a>
-                </nav>
-            </aside>
-
             <?php if ($profile !== null): ?>
                 <div class="profile-main">
                     <?php if (!empty($_SESSION['error'])): ?>
@@ -100,6 +85,17 @@ if(!$isAdmin&&$profile!==null){
 
                     <?php if(!$isAdmin): ?><section class="profile-card" aria-labelledby="student-access-title"><h2 id="student-access-title">Student access</h2><p data-student-status="<?= $studentContinued?'verified':'restricted' ?>"><?= $studentContinued?'Approved — your Student ID has an active database match.':'Restricted — there is no active approved Student ID match for this account. Your account and summaries are preserved.' ?></p><?php if($studentApplication): ?><p>Student ID: <?= htmlspecialchars(\App\Src\Services\StudentVerificationService::masked($studentApplication['student_number']),ENT_QUOTES,'UTF-8') ?></p><?php endif; ?><p>Student ID eligibility is managed by the system administrator. No additional verification form, document, student OTP or manual approval is required.</p></section><?php endif; ?>
 
+                    <section class="profile-card" aria-labelledby="profile-appearance-title">
+                        <h2 id="profile-appearance-title">Appearance</h2>
+                        <label for="appearance-theme">Theme</label>
+                        <select id="appearance-theme" data-theme-preference aria-describedby="appearance-theme-help">
+                            <option value="system">Use device setting</option>
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                        </select>
+                        <p id="appearance-theme-help">Your theme applies across DEPENDED and is saved in this browser.</p>
+                    </section>
+
                     <section class="profile-card profile-deactivation" aria-labelledby="profile-deactivation-title">
                         <h2 id="profile-deactivation-title" class="profile-deactivation__title">Deactivate account</h2>
                         <p class="profile-deactivation__description">
@@ -120,13 +116,13 @@ if(!$isAdmin&&$profile!==null){
                                         maxlength="72"
                                         required
                                     >
-                                    <button class="pw-toggle" type="button" aria-label="Show password" aria-pressed="false">
+                                    <button class="btn btn--ghost btn--icon pw-toggle" type="button" aria-label="Show password" aria-pressed="false">
                                         <svg class="pw-icon pw-icon--show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                                         <svg class="pw-icon pw-icon--hide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
                                     </button>
                                 </div>
                             </div>
-                            <button class="profile-deactivation__button" type="submit">Deactivate account</button>
+                            <button class="btn btn--destructive profile-deactivation__button" type="submit">Deactivate account</button>
                         </form>
                     </section>
                 </div>

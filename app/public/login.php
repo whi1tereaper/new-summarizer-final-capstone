@@ -25,22 +25,19 @@ $navGuestToken = $_SESSION['guest_token'] ?? null;
 $navUserId = $_SESSION['user_id'] ?? null;
 ?>
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <?php require_once __DIR__ . '/partials/design-system-head.php'; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In — LIGHT</title>
-    <meta name="description" content="Sign in to LIGHT Article summarizer to access your AI summaries, custom profiles, and history.">
+    <title>Sign In — DEPENDED</title>
+    <meta name="description" content="Sign in to DEPENDED Summarizer to access your summaries, custom profiles, and history.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="assets/images/poc-neust-logo.png">
-    <link rel="stylesheet" href="assets/css/design-tokens.css">
     <link rel="stylesheet" href="assets/css/style.css?v=<?= filemtime(__DIR__ . '/assets/css/style.css') ?>">
-    <link rel="stylesheet" href="assets/css/site-footer.css?v=nex-8">
-</head>
+    </head>
 <body class="page-auth-layout">
-    <?php require __DIR__ . '/partials/site-nav.php'; ?>
+    <?php $hidePublicNavigation = true; require __DIR__ . '/partials/site-nav.php'; ?>
 
     <main class="auth-page-shell">
         <section class="auth-panel" aria-label="Sign in form">
@@ -49,14 +46,14 @@ $navUserId = $_SESSION['user_id'] ?? null;
 
                     <?php if (!$isAdminCodeStep): ?>
                         <nav class="auth-segmented-switch" aria-label="Account access options">
-                            <span class="auth-switch-tab auth-switch-tab--active" aria-current="page">Sign In</span>
-                            <a href="register.php" class="auth-switch-tab">Create Account</a>
+                            <span class="btn btn--ghost auth-switch-tab auth-switch-tab--active" aria-current="page">Sign In</span>
+                            <a href="register.php" class="btn btn--ghost auth-switch-tab">Create Account</a>
                         </nav>
                     <?php endif; ?>
 
                     <!-- Card Header -->
                     <div class="auth-card-header">
-                        <h1 class="auth-card-title"><?= $isAdminCodeStep ? 'Email verification' : 'Sign in to LIGHT' ?></h1>
+                        <h1 class="auth-card-title"><?= $isAdminCodeStep ? 'Email verification' : 'Sign in to DEPENDED' ?></h1>
                         <p class="auth-card-desc">
                             <?php if ($isAdminCodeStep): ?>
                                 Enter the one-time code sent to <?= htmlspecialchars((string)$pendingAdminLogin['email_hint'], ENT_QUOTES, 'UTF-8') ?>.
@@ -110,7 +107,7 @@ $navUserId = $_SESSION['user_id'] ?? null;
                                 >
                                 <p class="auth-code-hint" id="admin-code-hint">Enter the 6-digit code. It can only be used once.</p>
                             </div>
-                            <button type="submit" class="btn-auth btn-auth-enhanced">
+                            <button type="submit" class="btn btn--primary btn-auth btn-auth-enhanced">
                                 <span class="btn-auth__text">Verify code</span>
                                 <span class="btn-auth__icon" aria-hidden="true">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg>
@@ -135,16 +132,13 @@ $navUserId = $_SESSION['user_id'] ?? null;
                             </div>
 
                             <div class="form-group">
-                                <div class="pw-label-row">
-                                    <label for="password">Password</label>
-                                    <a href="forgot_password.php" class="pw-forgot-link">Forgot password?</a>
-                                </div>
+                                <label for="password">Password</label>
                                 <div class="auth-input-group pw-input-wrap">
                                     <span class="auth-input-icon" aria-hidden="true">
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                                     </span>
                                     <input type="password" id="password" name="password" required placeholder="Enter your password" autocomplete="current-password">
-                                    <button type="button" class="pw-toggle" id="toggle-password" aria-label="Toggle password visibility" tabindex="-1">
+                                    <button type="button" class="btn btn--ghost btn--icon pw-toggle" id="toggle-password" aria-label="Toggle password visibility" tabindex="-1">
                                         <svg class="pw-icon pw-icon--show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                                         <svg class="pw-icon pw-icon--hide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
                                     </button>
@@ -160,7 +154,7 @@ $navUserId = $_SESSION['user_id'] ?? null;
                                 </div>
                             <?php endif; ?>
 
-                            <button type="submit" class="btn-auth btn-auth-enhanced" id="btn-submit-auth">
+                            <button type="submit" class="btn btn--primary btn-auth btn-auth-enhanced" id="btn-submit-auth">
                                 <span class="btn-auth__text">Sign In</span>
                                 <span class="btn-auth__icon" aria-hidden="true">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>

@@ -1,6 +1,6 @@
 # Appendix F — User Manual
 
-This manual describes LIGHT, the document summarization application found in the audited source. It distinguishes guest, registered-account, administrator, and assigned-reviewer access. The instructions describe implemented controls; successful submission, authentication, email delivery, worker operation, and data persistence still require an approved end-to-end demonstration.
+This manual describes LIGHT, the document summarization application found in the audited source. It distinguishes guest, registered-account, and administrator access. The instructions describe implemented controls; successful submission, authentication, email delivery, worker operation, and data persistence still require an approved end-to-end demonstration.
 
 **Screenshot evidence limitation.** Every screenshot in this appendix was captured from the original application templates in an isolated browser renderer on 17 October 2026. Anonymous or synthetic account sessions and empty/synthetic records were supplied to avoid altering the existing application database. A black provenance banner identifies that condition. The displayed account, summary, zero counters, and empty lists are examples, not actual usage or research results. External fonts and service requests were blocked. These screenshots explain the interface; they do not prove a working deployment or successful authentication. Capture URLs, desktop/mobile versions, and exact checks appear in `screenshots/README.md` and `../system-audit/browser-readonly-results.json`.
 
@@ -9,9 +9,8 @@ Table 53. Available access contexts and interface boundaries.
 | Access context | Available interface |
 |---|---|
 | Guest | Public information and account forms, summary workspace, accessible results, and permitted result actions. Nutshell, history, and analytics direct guests toward registration. |
-| Registered account | Summary workspace, Nutshell, dashboard, own history/analytics, profile, and accessible results. An active account is required for assigned reviews. |
+| Registered account | Summary workspace, Nutshell, dashboard, own history/analytics, profile, and accessible results. |
 | Administrator | Administrative console, system-wide analytics, user-management actions, audit logs, and protected diagnostics/exports. Administrators can also use summary-related interfaces. |
-| Assigned reviewer | An active account receives access to its assigned blinded summary reviews. Assignment access is separate from merely having an account. |
 
 Table 53 presents available access contexts and interface boundaries. The stated status and qualifications govern its interpretation.
 
@@ -316,29 +315,11 @@ Select **Audit Logs** from the administrative console. Figure 71 shows filters f
 
 Available rows show timestamp, administrator, action, request metadata, and details. Treat these records as administrative information. A missing-table message is distinct from a valid empty result; another isolated capture records the missing-table branch. The current filter controls lack explicit accessible labels and require remediation. No actual administrator activity record was read.
 
-## S. Assigned Independent Reviews
-
-![No assigned reviews](screenshots/ui-evaluation-empty-desktop.png)
-
-Figure 72. Assigned-review page with an active synthetic account and no assignments.
-
-The review page allows an active account to assess assigned summaries independently. Figure 72 shows the empty state, which instructs the reader to await assignments. Anonymous access produces a sign-in-required response. Merely signing in does not supply a review assignment.
-
-When an assignment is available:
-
-1. Open its **Review summary** link while using the assigned account.
-2. Read the source document and blinded summary together.
-3. Rate relevance, factual consistency, coverage, coherence, readability/fluency, conciseness, and non-redundancy separately.
-4. Use the displayed five-level rubric: Very poor, Poor, Acceptable, Good, and Excellent.
-5. Optionally add specific comments, then select **Submit assessment**.
-
-The interface explains that submission locks the assessment and that corrections require the research administrator. Submitted items are marked accordingly. No assignment, score, or comment was created in the audit. This content-quality review instrument is separate from the capstone's proposed system-quality questionnaires and cannot substitute for actual IT-consultant or end-user responses.
-
 ## T. Evaluation Reports, Compatibility Routes, and Diagnostics
 
-The code contains an administrator-protected evaluation export endpoint for an existing run in JSON, CSV, or HTML format. Its report template presents dataset/run context, metric availability, system/mode comparisons, human-rating coverage, agreement, paired comparisons, error classifications, challenge measurements, and limitations. Unavailable measurements are explicitly distinct from measured zero values. No existing run was exported or represented as a completed research evaluation in this audit; a live report screenshot is **UNAVAILABLE EVIDENCE**.
+The code contains an administrator-protected evaluation export endpoint for an existing run in JSON, CSV, or HTML format. Its report template presents dataset/run context, metric availability, system/mode comparisons, paired comparisons, error classifications, challenge measurements, and limitations. Unavailable measurements are explicitly distinct from measured zero values. No existing run was exported or represented as a completed research evaluation in this audit; a live report screenshot is **UNAVAILABLE EVIDENCE**.
 
-The current `evaluation.php` route redirects administrators to the administrative console. Older tabs and links that target that route's dataset/run/assignment/output views therefore do not provide a working management screen. The associated source partial includes controls for content-unit verification, error classification, and audited rating correction, but its presence is not proof of an accessible current UI. The operator must resolve the route/navigation gap before those procedures can be documented as an operational browser workflow. Obtain run identifiers and assignment links through the project's supported research administration process; no such complete UI process was verified here.
+The current `evaluation.php` route redirects administrators to the administrative console. Older tabs and links that target that route's dataset/run/output views therefore do not provide a working management screen. The associated source partial includes controls for content-unit verification and error classification, but its presence is not proof of an accessible current UI. The operator must resolve the route/navigation gap before those procedures can be documented as an operational browser workflow. Obtain run identifiers through the project's supported research administration process; no such complete UI process was verified here.
 
 The database-health and feedback-feed addresses are administrator diagnostics returning JSON. The public health address returns a static service status and cannot establish database or model-worker readiness. Document Q&A and document/multi-document operations exist as API companions; the current normal result and source forms do not expose a chat widget or multi-file selector. Those API interfaces belong in the technical integration documentation rather than being presented as buttons a new user can find.
 
@@ -355,7 +336,6 @@ Table 57. Common recovery situations and user guidance.
 | Result unavailable | Return to settings or obtain an authorized result link. |
 | History/analytics asks for registration | Create or sign in to an active account before using registered-only features. |
 | Audio or translation unavailable | Read the displayed message and retry only as directed; the service may require operator attention. |
-| Review assignment unavailable | Use the correct account and supplied assignment link; contact the research administrator for assignment or correction needs. |
 | Terms or sign-in interrupts navigation | Complete the requested prerequisite and continue through the permitted destination. |
 
 Table 57 presents common recovery situations and user guidance. The stated status and qualifications govern its interpretation.

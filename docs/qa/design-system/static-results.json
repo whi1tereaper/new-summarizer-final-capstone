@@ -1,0 +1,297 @@
+{
+  "css_files": 27,
+  "undefined_tokens": [],
+  "page_palette_definitions": [
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 18,
+      "token": "--color-bg",
+      "value": "#eeedea"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 19,
+      "token": "--color-bg-secondary",
+      "value": "#f7f6f2"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 20,
+      "token": "--color-bg-tertiary",
+      "value": "#e5e4de"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 21,
+      "token": "--color-surface",
+      "value": "#ffffff"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 22,
+      "token": "--color-text",
+      "value": "#16171c"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 23,
+      "token": "--color-text-secondary",
+      "value": "#51535e"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 24,
+      "token": "--color-text-muted",
+      "value": "#636572"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 27,
+      "token": "--color-border",
+      "value": "#d9d8d4"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 28,
+      "token": "--color-border-strong",
+      "value": "#81838e"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 31,
+      "token": "--color-accent",
+      "value": "#7f00ff"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 32,
+      "token": "--color-accent-hover",
+      "value": "#6800d4"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 33,
+      "token": "--color-accent-active",
+      "value": "#5700b1"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 34,
+      "token": "--color-accent-soft",
+      "value": "#f0e7ff"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 35,
+      "token": "--color-accent-strong",
+      "value": "#6800d4"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 36,
+      "token": "--color-accent-border",
+      "value": "#b68de5"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 37,
+      "token": "--color-on-accent",
+      "value": "#ffffff"
+    }
+  ],
+  "literal_colors_outside_tokens": [
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 18,
+      "color": "#eeedea",
+      "context": "--color-bg:              #eeedea;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 19,
+      "color": "#f7f6f2",
+      "context": "--color-bg-secondary:    #f7f6f2;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 20,
+      "color": "#e5e4de",
+      "context": "--color-bg-tertiary:     #e5e4de;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 21,
+      "color": "#ffffff",
+      "context": "--color-surface:         #ffffff;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 22,
+      "color": "#16171c",
+      "context": "--color-text:            #16171c;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 23,
+      "color": "#51535e",
+      "context": "--color-text-secondary:  #51535e;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 24,
+      "color": "#636572",
+      "context": "--color-text-muted:      #636572;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 27,
+      "color": "#d9d8d4",
+      "context": "--color-border:          #d9d8d4;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 28,
+      "color": "#81838e",
+      "context": "--color-border-strong:   #81838e;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 31,
+      "color": "#7f00ff",
+      "context": "--color-accent:          #7f00ff;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 32,
+      "color": "#6800d4",
+      "context": "--color-accent-hover:    #6800d4;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 33,
+      "color": "#5700b1",
+      "context": "--color-accent-active:   #5700b1;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 34,
+      "color": "#f0e7ff",
+      "context": "--color-accent-soft:     #f0e7ff;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 35,
+      "color": "#6800d4",
+      "context": "--color-accent-strong:   #6800d4;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 36,
+      "color": "#b68de5",
+      "context": "--color-accent-border:   #b68de5;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 37,
+      "color": "#ffffff",
+      "context": "--color-on-accent:       #ffffff;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 40,
+      "color": "#16171c",
+      "context": "--ink:        #16171c;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 41,
+      "color": "#51535e",
+      "context": "--ink-muted:  #51535e;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 42,
+      "color": "#636572",
+      "context": "--ink-faint:  #636572;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 43,
+      "color": "#d9d8d4",
+      "context": "--line:       #d9d8d4;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 44,
+      "color": "#eeedea",
+      "context": "--canvas:     #eeedea;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 45,
+      "color": "#7f00ff",
+      "context": "--accent:     #7f00ff;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 776,
+      "color": "#3ecfbf",
+      "context": "(#3ecfbf bg / #050e0d text) regardless of the global accent token."
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 776,
+      "color": "#050e0d",
+      "context": "(#3ecfbf bg / #050e0d text) regardless of the global accent token."
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 782,
+      "color": "#3ecfbf",
+      "context": "--cta-bg:      #3ecfbf;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 783,
+      "color": "#050e0d",
+      "context": "--cta-text:    #050e0d;"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 784,
+      "color": "rgba(5, 14, 13, 0.55)",
+      "context": "--cta-muted:   rgba(5, 14, 13, 0.55);"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 785,
+      "color": "rgba(5, 14, 13, 0.22)",
+      "context": "--cta-border:  rgba(5, 14, 13, 0.22);"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 849,
+      "color": "#050e0d",
+      "context": "-webkit-text-stroke: 2px var(--cta-text, #050e0d);"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 853,
+      "color": "#050e0d",
+      "context": "@supports not (-webkit-text-stroke: 2px #050e0d) {"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 855,
+      "color": "#050e0d",
+      "context": "color: var(--cta-text, #050e0d);"
+    },
+    {
+      "file": "app/public/assets/css/nex-landing.css",
+      "line": 886,
+      "color": "rgba(127, 0, 255, 0.35)",
+      "context": "box-shadow: 0 12px 32px rgba(127, 0, 255, 0.35);"
+    }
+  ],
+  "structural_errors": []
+}

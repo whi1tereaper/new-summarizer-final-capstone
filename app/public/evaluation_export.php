@@ -36,21 +36,18 @@ try {
             }, $row);
             fputcsv($stream, $row, ',', '"', '');
         };
-        $write(['record_type','run_uuid','dataset_version','split','document_id','output_id','system','mode','ablation','metric_or_criterion','version','status','value','precision','recall','f1','summary_words','target_words','evaluator_code','note']);
+        $write(['record_type','run_uuid','dataset_version','split','document_id','output_id','system','mode','ablation','metric','version','status','value','precision','recall','f1','summary_words','target_words','note']);
         foreach ($data['outputs'] as $output) {
             $prefix = [$data['run']['run_uuid'],$data['run']['dataset_version'],$data['run']['dataset_split'],$output['document_id'],$output['id'],$output['system_name'],$output['mode'],$output['ablation']];
-            $write(array_merge(['output'], $prefix, ['', '', $output['status'], '', '', '', '', $output['word_count'], $output['target_words'], '', $output['error_message']]));
-            foreach ($output['metrics'] as $metric) { $write(array_merge(['metric'], $prefix, [$metric['name'],$metric['version'],$metric['status'],$metric['value'],$metric['precision'],$metric['recall'],$metric['f1'],$output['word_count'],$output['target_words'],'',$metric['error']])); }
+            $write(array_merge(['output'], $prefix, ['', '', $output['status'], '', '', '', '', $output['word_count'], $output['target_words'], $output['error_message']]));
+            foreach ($output['metrics'] as $metric) { $write(array_merge(['metric'], $prefix, [$metric['name'],$metric['version'],$metric['status'],$metric['value'],$metric['precision'],$metric['recall'],$metric['f1'],$output['word_count'],$output['target_words'],$metric['error']])); }
         }
-        foreach ($data['ratings'] as $rating) {
-            foreach (EvaluationService::CRITERIA as $criterion) { $write(['rating',$data['run']['run_uuid'],$data['run']['dataset_version'],$data['run']['dataset_split'],'',$rating['output_id'],'','','',$criterion,'Likert-1-5',$rating['status'],$rating[$criterion] ?? null,'','','','','',$rating['evaluator_code'],'']); }
-        }
-        foreach ($data['errors'] as $error) { $write(['error',$data['run']['run_uuid'],$data['run']['dataset_version'],$data['run']['dataset_split'],'',$error['output_id'],'','','',$error['category'],'','reviewed','','','','','','','',$error['notes']]); }
+        foreach ($data['errors'] as $error) { $write(['error',$data['run']['run_uuid'],$data['run']['dataset_version'],$data['run']['dataset_split'],'',$error['output_id'],'','','',$error['category'],'','reviewed','','','','','','',$error['notes']]); }
         fclose($stream);
     } else {
         $selectedRun = $service->getRun($runId);
         $report = $data['report'];
-        ev_header('Evaluation report', true, 'reports');
+        ev_header('Evaluation report', 'reports');
         require __DIR__ . '/partials/evaluation-report.php';
         ev_footer();
     }

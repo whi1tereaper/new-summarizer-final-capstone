@@ -1,0 +1,30 @@
+{
+  "light": {
+    "muted_on_upload": 4.83,
+    "muted_on_surface": 5.37,
+    "control_border_on_surface": 3.14,
+    "selected_source_text": 6.07,
+    "tokens": {
+      "--color-text-muted": "#626b7c",
+      "--color-accent-soft": "#f5f1ff",
+      "--color-surface": "#ffffff",
+      "--color-border-strong": "#8992a2",
+      "--color-accent": "#7536e9",
+      "--color-on-accent": "#ffffff"
+    }
+  },
+  "dark": {
+    "muted_on_upload": 6.16,
+    "muted_on_surface": 6.77,
+    "control_border_on_surface": 4.16,
+    "selected_source_text": 7.77,
+    "tokens": {
+      "--color-text-muted": "#a0a4b9",
+      "--color-accent-soft": "#292238",
+      "--color-surface": "#1c1d28",
+      "--color-border-strong": "#777e99",
+      "--color-accent": "#b59aff",
+      "--color-on-accent": "#191326"
+    }
+  }
+}

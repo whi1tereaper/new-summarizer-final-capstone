@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const chartInstances = [];
 
     function _alpha(color, a) {
-        if (!color) return `rgba(127, 0, 255, ${a})`;
+        if (!color) color = getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim();
         color = color.trim();
         if (color.startsWith('#')) {
             let hex = color.slice(1);
@@ -71,16 +71,16 @@ document.addEventListener('DOMContentLoaded', () => {
         chartInstances.splice(0).forEach(chart => chart.destroy());
         if (empty) return;
 
-        const isDark  = document.documentElement.dataset.theme === 'dark';
-        const _style  = getComputedStyle(document.documentElement);
-        const _accent = (_style.getPropertyValue('--color-accent')         || (isDark ? '#9d87f5' : '#7F00FF')).trim();
-        const _inkSec = (_style.getPropertyValue('--color-text-secondary') || (isDark ? '#cdd1c9' : '#4f554d')).trim();
-        const _muted  = (_style.getPropertyValue('--color-text-muted')     || (isDark ? '#a6afa1' : '#6e756b')).trim();
-        const _border = (_style.getPropertyValue('--color-border')         || (isDark ? '#3d4339' : '#c8c5bb')).trim();
-        const _grid   = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(8, 8, 8, 0.05)';
-        const chartColors = isDark
-            ? [_accent, '#38bdf8', '#34d399', '#fbbf24', '#f472b6']
-            : [_accent, '#3B82F6', '#10B981', '#F59E0B', '#8B5CF6'];
+        const _style = getComputedStyle(document.documentElement);
+        const token = name => _style.getPropertyValue(name).trim();
+        const _accent = token('--color-accent');
+        const _inkSec = token('--color-chart-label');
+        const _muted = token('--color-text-muted');
+        const _border = token('--color-border');
+        const _grid = token('--color-chart-grid');
+        const chartColors = Array.from({ length: 6 }, (_, index) => token(`--color-chart-${index + 1}`));
+        Chart.defaults.font.family = token('--font-body');
+        Chart.defaults.color = _inkSec;
 
         const base = {
             responsive: true,
@@ -88,15 +88,15 @@ document.addEventListener('DOMContentLoaded', () => {
             plugins: {
                 legend: { display: false },
                 tooltip: {
-                    backgroundColor: isDark ? '#242723' : '#080808',
-                    titleColor: '#ffffff',
-                    bodyColor: '#ffffff',
+                    backgroundColor: token('--color-surface'),
+                    titleColor: token('--color-text'),
+                    bodyColor: token('--color-text'),
                     borderColor: _border,
-                    borderWidth: isDark ? 1 : 0,
+                    borderWidth: 1,
                     padding: 8,
                     cornerRadius: 4,
-                    titleFont: { size: 10, family: 'Inter, sans-serif', weight: '600' },
-                    bodyFont: { size: 10, family: 'Inter, sans-serif' }
+                    titleFont: { size: 10, family: token('--font-body'), weight: '600' },
+                    bodyFont: { size: 10, family: token('--font-body') }
                 }
             }
         };
@@ -123,12 +123,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     ...base,
                     scales: {
                         x: {
-                            ticks: { maxTicksLimit: 6, maxRotation: 0, color: _muted, font: { size: 9, family: 'Inter, sans-serif' } },
+                            ticks: { maxTicksLimit: 6, maxRotation: 0, color: _muted, font: { size: 9, family: token('--font-body') } },
                             grid: { display: false }
                         },
                         y: {
                             beginAtZero: true,
-                            ticks: { precision: 0, color: _muted, font: { size: 9, family: 'Inter, sans-serif' } },
+                            ticks: { precision: 0, color: _muted, font: { size: 9, family: token('--font-body') } },
                             grid: { color: _grid }
                         }
                     }
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 data: {
                     labels: ['Words'],
                     datasets: [
-                        { label: 'Original', data: [Number(data.words_comparison.original_words || 0)], backgroundColor: isDark ? 'rgba(255, 255, 255, 0.22)' : 'rgba(8, 8, 8, 0.25)', borderRadius: 3, borderSkipped: false },
+                        { label: 'Original', data: [Number(data.words_comparison.original_words || 0)], backgroundColor: _alpha(_muted, 0.25), borderRadius: 3, borderSkipped: false },
                         { label: 'Summary', data: [Number(data.words_comparison.summary_words || 0)], backgroundColor: _accent, borderRadius: 3, borderSkipped: false }
                     ]
                 },
@@ -151,11 +151,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     ...base,
                     plugins: {
                         ...base.plugins,
-                        legend: { display: true, labels: { boxWidth: 8, boxHeight: 8, color: _muted, font: { size: 10, family: 'Inter, sans-serif' } } }
+                        legend: { display: true, labels: { boxWidth: 8, boxHeight: 8, color: _muted, font: { size: 10, family: token('--font-body') } } }
                     },
                     scales: {
-                        x: { ticks: { color: _muted, font: { size: 9, family: 'Inter, sans-serif' } }, grid: { display: false } },
-                        y: { beginAtZero: true, ticks: { color: _muted, font: { size: 9, family: 'Inter, sans-serif' } }, grid: { color: _grid } }
+                        x: { ticks: { color: _muted, font: { size: 9, family: token('--font-body') } }, grid: { display: false } },
+                        y: { beginAtZero: true, ticks: { color: _muted, font: { size: 9, family: token('--font-body') } }, grid: { color: _grid } }
                     }
                 }
             }));
@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ...base,
                     plugins: {
                         ...base.plugins,
-                        legend: { display: true, position: 'bottom', labels: { boxWidth: 8, boxHeight: 8, color: _muted, font: { size: 9, family: 'Inter, sans-serif' } } }
+                        legend: { display: true, position: 'bottom', labels: { boxWidth: 8, boxHeight: 8, color: _muted, font: { size: 9, family: token('--font-body') } } }
                     },
                     cutout: '68%'
                 }
@@ -192,8 +192,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     ...base,
                     indexAxis: 'y',
                     scales: {
-                        x: { beginAtZero: true, ticks: { precision: 0, color: _muted, font: { size: 9, family: 'Inter, sans-serif' } }, grid: { color: _grid } },
-                        y: { ticks: { color: _muted, font: { size: 9, family: 'Inter, sans-serif' } }, grid: { display: false } }
+                        x: { beginAtZero: true, ticks: { precision: 0, color: _muted, font: { size: 9, family: token('--font-body') } }, grid: { color: _grid } },
+                        y: { ticks: { color: _muted, font: { size: 9, family: token('--font-body') } }, grid: { display: false } }
                     }
                 }
             }));

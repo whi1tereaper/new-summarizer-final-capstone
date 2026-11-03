@@ -1,0 +1,78 @@
+[
+    {
+        "name": "summary and Nutshell counts exclude failed records",
+        "passed": true
+    },
+    {
+        "name": "job states come from actual MySQL rows",
+        "passed": true
+    },
+    {
+        "name": "MySQL allocation is measured as a positive estimate",
+        "passed": true
+    },
+    {
+        "name": "nested and extensionless uploads count but server metadata does not",
+        "passed": true
+    },
+    {
+        "name": "configured audio aliases are not counted three times",
+        "passed": true
+    },
+    {
+        "name": "runtime totals cover the six real configured categories",
+        "passed": true
+    },
+    {
+        "name": "output does not disclose paths filenames or source contents",
+        "passed": true
+    },
+    {
+        "name": "service rejects non-admin actor 0",
+        "passed": true
+    },
+    {
+        "name": "service rejects non-admin actor 2",
+        "passed": true
+    },
+    {
+        "name": "inactive administrator is denied despite stale session",
+        "passed": true
+    },
+    {
+        "name": "unavailable DB metric stays null rather than misleading zero",
+        "passed": true
+    },
+    {
+        "name": "unavailable job table does not fabricate empty healthy queue",
+        "passed": true
+    },
+    {
+        "name": "missing storage folder produces explicit partial measurement",
+        "passed": true
+    },
+    {
+        "name": "broad root configuration guard 1",
+        "passed": true
+    },
+    {
+        "name": "broad root configuration guard 2",
+        "passed": true
+    },
+    {
+        "name": "entry scan budget stops safely with explicit partial status",
+        "passed": true
+    },
+    {
+        "name": "elapsed scan budget stops safely with explicit partial status",
+        "passed": true
+    },
+    {
+        "name": "overlapping storage paths are counted once and explicitly flagged",
+        "passed": true
+    },
+    {
+        "name": "byte formatting distinguishes unavailable from true zero",
+        "passed": true
+    }
+]

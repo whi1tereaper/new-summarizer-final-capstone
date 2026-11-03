@@ -20,13 +20,13 @@
         constructor(options = {}) {
             this.options = Object.assign({
                 text: 'MESH',
-                color: '#ffffff',
-                fontFamily: 'Inter',
+                color: null,
+                fontFamily: null,
                 fontSize: 160,
                 fontWeight: 700,
                 fontStyle: 'normal',
                 colorSplit: true,
-                customColors: ['#ff40c0', '#40ff80'],
+                customColors: null,
                 force: 18,
             }, options);
 
@@ -76,9 +76,10 @@
             }
 
             this.element = root;
+            this.readTheme();
             this.element.classList.add('mesh-text');
             this.element.setAttribute('data-mesh-ready', 'true');
-            this.element.setAttribute('aria-label', this.options.text || this.element.dataset.text || 'LIGHT');
+            this.element.setAttribute('aria-label', this.options.text || this.element.dataset.text || 'DEPENDED');
             this.element.textContent = '';
             this.element.style.color = 'transparent';
             this.element.style.textShadow = 'none';
@@ -100,6 +101,7 @@
             this.fallback.setAttribute('aria-hidden', 'true');
             this.fallback.style.display = 'none';
             this.element.appendChild(this.fallback);
+            this.readTheme();
 
             this.createMeshGeometry();
             this.bindPointerEvents();
@@ -107,8 +109,26 @@
             this.setupWebGL();
             this.resize();
             this.setupResizeObserver();
+            this.onThemeChange = () => {
+                this.readTheme();
+                this.createTextTexture();
+                this.render();
+            };
+            window.addEventListener('themechange', this.onThemeChange);
 
             return this;
+        }
+
+        readTheme() {
+            const tokens = getComputedStyle(document.documentElement);
+            const typography = getComputedStyle(this.element.parentElement || this.element);
+            this.themeTextColor = typography.color || tokens.getPropertyValue('--color-text').trim();
+            this.themeFontFamily = getComputedStyle(this.element).fontFamily || tokens.getPropertyValue('--font-display').trim();
+            this.themeColors = ['--color-accent', '--color-info'].map(name => tokens.getPropertyValue(name).trim());
+            if (this.fallback) {
+                this.fallback.style.color = this.options.color || this.themeTextColor;
+                this.fallback.style.fontFamily = this.options.fontFamily || this.themeFontFamily;
+            }
         }
 
         setupReducedMotion() {
@@ -342,7 +362,7 @@
 
             const rect = this.element.getBoundingClientRect();
             const text = this.options.text || 'MESH';
-            const family = this.options.fontFamily || 'Inter';
+            const family = this.options.fontFamily || this.themeFontFamily;
             const style = this.options.fontStyle || 'normal';
             const weight = this.options.fontWeight || 700;
 
@@ -354,7 +374,7 @@
             const isBrand = this.element.classList.contains('mesh-text--brand');
             ctx.textAlign = isBrand ? 'left' : 'center';
             ctx.textBaseline = 'middle';
-            ctx.fillStyle = this.options.color || '#ffffff';
+            ctx.fillStyle = this.options.color || this.themeTextColor;
             const fittedFontSize = Math.max(1, Math.min(360, rect.height * 1.18));
             ctx.font = `${style} ${weight} ${fittedFontSize}px ${family}`;
             if ('letterSpacing' in ctx) {
@@ -462,7 +482,7 @@
 
             const colors = Array.isArray(this.options.customColors) && this.options.customColors.length >= 2
                 ? this.options.customColors
-                : ['#ff40c0', '#40ff80'];
+                : this.themeColors;
             gl.uniform3fv(this.uniforms.colorA, hexToRgb(colors[0]));
             gl.uniform3fv(this.uniforms.colorB, hexToRgb(colors[1]));
             gl.uniform1f(this.uniforms.chroma, this.options.colorSplit === false ? 0 : CHROMA);
@@ -538,6 +558,7 @@
 
         destroy() {
             this.destroyed = true;
+            window.removeEventListener('themechange', this.onThemeChange);
             if (this.animationFrame) {
                 window.cancelAnimationFrame(this.animationFrame);
                 this.animationFrame = null;
@@ -575,7 +596,7 @@
             const text = (node.dataset.text || '').trim();
             const brandName = (node.dataset.brand || '').trim();
             const isFooterBrand = Boolean(node.closest('.site-footer'));
-            return isFooterBrand && (brandName.toLowerCase() === 'light' || text.toUpperCase() === 'LIGHT');
+            return isFooterBrand && (['depended', 'dee', 'light'].includes(brandName.toLowerCase()) || ['DEPENDED', 'DEE', 'LIGHT'].includes(text.toUpperCase()));
         });
 
         targets.forEach((node) => {
@@ -586,12 +607,12 @@
             const options = {
                 target: node,
                 text: node.dataset.text || node.textContent.trim() || 'MESH',
-                color: node.dataset.color || '#ffffff',
-                fontFamily: node.dataset.fontFamily || 'Inter',
+                color: node.dataset.color || null,
+                fontFamily: node.dataset.fontFamily || null,
                 fontSize: Number(node.dataset.fontSize || 160),
                 fontWeight: Number(node.dataset.fontWeight || 700),
                 fontStyle: node.dataset.fontStyle || 'normal',
-                customColors: node.dataset.customColors ? node.dataset.customColors.split(',') : ['#ff40c0', '#40ff80'],
+                customColors: node.dataset.customColors ? node.dataset.customColors.split(',') : null,
                 force: Number(node.dataset.force || 18),
             };
 

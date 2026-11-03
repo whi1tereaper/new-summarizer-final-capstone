@@ -1,0 +1,22 @@
+{
+    "public_files_compared": 107,
+    "frontend_manifest_sha256": "cd920c623a6c9ffd5dcbfe905f2b35764b942a6047d3a4aa86a3ab32b3b3e550",
+    "backup_bytes": 28813836,
+    "backup_sha256": "916ea127b936b528f9299fee598269a58b8d1035d6d926ebd97bf9d754866c4f",
+    "passed": 3,
+    "failed": 0,
+    "checks": [
+        {
+            "name": "all public frontend files byte-identical to the pre-change snapshot",
+            "passed": true
+        },
+        {
+            "name": "private rollback SQL size and SHA-256 verified",
+            "passed": true
+        },
+        {
+            "name": "baseline full SQL restore was verified in isolation",
+            "passed": true
+        }
+    ]
+}

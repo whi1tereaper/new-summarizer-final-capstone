@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 48" width="280" height="48" fill="none">
+  <style>
+    :root { color-scheme: light dark; }
+    .dee-primary { fill: #16171c; }
+    .dee-accent  { fill: #7f00ff; }
+    .dee-muted   { fill: #636572; }
+    @media (prefers-color-scheme: dark) {
+      .dee-primary { fill: #f2f1f6; }
+      .dee-accent  { fill: #b59aff; }
+      .dee-muted   { fill: #aaa9b9; }
+    }
+  </style>
+  <!-- Monogram Mark -->
+  <g transform="translate(6, 6) scale(1.125)">
+    <path class="dee-primary" fill-rule="evenodd" clip-rule="evenodd" d="M4 4h12c6.627 0 12 5.373 12 12s-5.373 12-12 12H4V4zm6 5h5.5c3.038 0 5.5 2.015 5.5 4.5H10V9zm0 9.5h11c0 2.485-2.462 4.5-5.5 4.5H10v-4.5z"/>
+    <rect class="dee-accent" x="10" y="14" width="11" height="4" rx="1"/>
+  </g>
+  <!-- Brand Wordmark Typography -->
+  <text class="dee-primary" x="52" y="27" font-family="'Satoshi', 'Outfit', 'Inter', system-ui, sans-serif" font-size="22" font-weight="900" letter-spacing="0.1em">DEPENDED</text>
+  <text class="dee-muted" x="53" y="39" font-family="'Satoshi', 'Outfit', 'Inter', system-ui, sans-serif" font-size="7.5" font-weight="700" letter-spacing="0.14em">SUMMARIZER &middot; NLP ENGINE</text>
+</svg>
